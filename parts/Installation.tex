@@ -269,7 +269,16 @@ the \texttt{Exec=cin} line to be
 
 The preceding directions for doing a single-user build may work
 without being root on some distros except for the \texttt{bld\_prepare.sh}
-and creating the desktop icon.
+and creating the desktop icon. For example in Arch Linux installing without being root
+works using the following steps:
+
+\begin{lstlisting}[style=sh]
+git clone --depth 1 "git://git.cinelerra-gg.org/goodguy/cinelerra.git" cinelerra5
+cd /home/user/cinelerra5/cinelerra-5.1
+./autogen.sh
+./configure --prefix=/usr --without-oss --with-single-user --with-booby
+make &&  make install 2>&1 | tee /tmp/cin5.log]
+\end{lstlisting}
 
 
 \subsection{Notable Options and Caveats}%
