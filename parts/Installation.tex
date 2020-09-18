@@ -43,8 +43,7 @@ from the \texttt{./tars} subdirectory and unpack as indicated below:
 	cd /path
 	mkdir cin
 	cd cin
-	tar -xJf /src/path/cinelerra-5.1-*.txz  # for the *,
-	# substitute your distro tarball name
+	tar -xJf /src/path/cinelerra-5.1-*.txz  # for the *, substitute your distro tarball name
 \end{lstlisting}
 
 \emph{Do not download the LEAP 10-bit version unless you specifically want to
@@ -273,11 +272,11 @@ and creating the desktop icon. For example in Arch Linux installing without bein
 works using the following steps:
 
 \begin{lstlisting}[style=sh]
-git clone --depth 1 "git://git.cinelerra-gg.org/goodguy/cinelerra.git" cinelerra5
-cd /home/user/cinelerra5/cinelerra-5.1
-./autogen.sh
-./configure --prefix=/usr --without-oss --with-single-user --with-booby
-make &&  make install 2>&1 | tee /tmp/cin5.log]
+$ git clone --depth 1 "git://git.cinelerra-gg.org/goodguy/cinelerra.git" cinelerra5
+$ cd /home/USER/cinelerra5/cinelerra-5.1
+$ ./autogen.sh
+$ ./configure --prefix=/usr --with-single-user --with-booby
+$ make 2>&1 | tee /tmp/cin5.log &&  make install
 \end{lstlisting}
 
 

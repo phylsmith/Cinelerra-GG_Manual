@@ -615,7 +615,7 @@ As you would expect, whenever the video is zoomed so that only part of the image
 in the window, scrollbars are automatically added as needed on the bottom, the right hand 
 side, or both.
 Other options include \emph{Reset camera} and \emph{Reset projector} which obviously are used
-to reset the camera and the projector. 
+to reset the camera and the projector (reference~\ref{sub:camera_and_projector}).
 The \emph{Hide controls/Show controls} option is great for hiding the left hand toolbar and
 bottom set of controls for a cleaner look. 
 
@@ -657,12 +657,12 @@ Once you have set the zoom to the desired size, use the vertical and horizontal 
 As mentioned earlier, this
 variety of zoom only affects the video and not the resizing of the Compositor window.  After
 utilizing this slider bar for zooming around, you may want to switch back to \textit{Auto} 
-using the Controls on the bottom of the window.
+using the controls on the bottom of the window.
 This slider bar is also displayed
 when you click on the icons for \textit{Adjust camera automation} or \textit{Adjust projector automation}.  
 
 The Compositor window image in figure~\ref{fig:zoom_slider} shows the zoom slider bar with rectangular shaped slider about in the middle.  Note that the magnifying glass is enabled which
-automatically pops-up the slider and the Protect video from changes is disabled.  Also note that
+automatically pops-up the slider and the \textit{Protect video from changes} is disabled.  Also note that
 there is a scroll bar on the bottom and right side of the image since the image at this magnification
 does not fit in the window.
 The Controls zoom textbox shows $\times0.82$ size.  
@@ -701,17 +701,22 @@ subsequent section~\ref{sub:camera_and_projector}.
     \item[Crop a layer or output]  this is a cropping tool used to reduce the visible picture area.
 More detail for usage is provided in a 
 subsequent paragraph (\ref{sub:cropping}).  There is also a Crop \& Position plugin that provides
-a different set of capabilities~\ref{sub:crop_position}.
+a different set of capabilities described in~\ref{sub:crop_position}.
+    Enable \textit{Show tool info} to get the menu to popup if it does not come
+up automatically.
     \item[Get color / eyedropper]  brings up the eyedropper used to detect the color at a
 particular spot.  Enable the \textit{Show tool info} if the Color popup menu does not come up 
 automatically or if that menu was accidentally dismissed.  Click on a specific color in the video
 output with the LMB to see the selected color. You can then use that color's 
-value to be applied to some effects depending on how the effect handles the eyedropper.
+value to be applied to some effects depending on how the effect handles the eyedropper.  If you set the \textit{Radius} to a larger number, a square appears
+around the cross cursor and an average value of the color will be the result.
+If you \textit{Use maximum}, instead of an average value of the color, the result
+will be the maximum of all values within that square.
     \item[Show tool info]  this tool button is used in conjunction with the other tools on the
 compositor's toolbar. You only need to click on this if one of these tools popup menu does not
 come up or has been dismissed - Mask, Ruler, Camera, Projector, Crop, or Eyedropper tools.
 You can also use it when highlighted to dismiss the highlighted tool's dialog box.
-It is not needed for Protect video from changes, Zoom view, and Show safe regions since they have
+It is not needed for \textit{Protect video from changes}, \textit{Zoom view}, and \textit{Show safe regions} since they have
 no dialog popup menus.
 
 \begin{figure}[htpb]
@@ -773,7 +778,7 @@ cropped.
 The \textit{Track size} is used to define the temporary size with each track having a different size (viewports). It also serves to conform the input media to a chosen format (aspect ratio). So each track can have a different format (viewport).
 You can see or set the track size by RMB click on a track and then select \emph{Resize Track} to resize
 the track to any size. Or select \emph{Match output size} to make the track the same size as the
-output. Or from the Resources window, RMB on a video media and choose \textit{Info} and then \textit{Resize}. When a track is resized what it looks like on the compositor changes.  The relationship
+output. Or from the Resources window, RMB on a video media and choose \textit{Info} and then \textit{Resize}. When a track is resized then what it looks like on the compositor changes.  The relationship
 between the track and the project's output size makes it possible to magnify or reduce the size of
 a track in regards to the final output. This feature means you can create visual effects such as different aspect ratios, adjust split screens, zooms, and pans in the compositor.
 

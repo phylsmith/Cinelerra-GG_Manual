@@ -24,7 +24,7 @@ Scenario setup consists of making one hour video using 3 different cameras:
 	\item \textit{Footage 1:} A person uses camera 1 to shoot a general view of the subject.
 	\begin{enumerate}
 		\item[a)] Barcelona (e.g. a jazz group concert)
-		\item[b)] Lisbon (e.g. spanish concert)
+		\item[b)] Lisbon (e.g. Spanish concert)
 	\end{enumerate}
 	\item \textit{Footage 2:} Another person uses camera 2 to film a detail of a specific subject.
 	\begin{enumerate}
@@ -169,3 +169,51 @@ Once converted to nest to media the clips disappear from the clips folder to end
 
 See \href{https://youtu.be/bfYaBqVbdCo}{Video 4} (using French locale).
 
+\section{Workflow with multi-cam and external audio\protect\footnote{credit Armandux.}}%
+\label{sec:workflow_multicam_external_audio}
+
+More on the multi-cam can be found in section \nameref{sec:multicamera_mixer}
+
+Let's take the case of a professional magician filmed in multicam while performing. Camera 1 records the magician's face; camera 2 the whole person and camera 3 the detail of the hands. There is also an external audio recorder to record the artist's voice in mono. So we will have three video tracks with their respective embedded audio tracks, plus an external audio track of good quality.
+
+You can find the files to test the workflow that is described next at the following address: \small{\url{https://cinelerra-gg.org/download/testing/cinelerra-forum.zip}}
+
+[Media files are licensed under a \href{https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode}{CC 4.0 BY, NC, SA license}.]
+
+Start \CGG{} to create an empty video track and two audio tracks (default). If you want you can create a new project (using the shortcut "n") with the desired settings or change the default one (\texttt{Settings $\rightarrow$ Format}).
+
+\begin{enumerate}
+	\item Load multimedia files ("o").
+	\item \texttt{Settings $\rightarrow$ proxy settings}; mark \textit{use scale}, select scale 1/2, and check \textit{Auto proxy/scale loads}.
+	\item Wait until the progress bar at bottom right of the main window finishes to create and load proxy clips in \texttt{Resources $\rightarrow$ proxy}.
+	\item Move to the Resources and Multimedia sources window. Next select the sources, RMB click and \textit{open mixers}. This creates new tracks and loads it. Be sure that the Proxy clips are in use by checking that the word "proxy" is included on the Timeline title bar.
+	\item \texttt{Audio $\rightarrow$ add track} (my master audio track is mono, because there are only voices and no music). Let us suppose this new track is audio 9.
+	\item Drag your master audio track to the new audio track (audio 9).
+	\item Open \texttt{Windows $\rightarrow$ mixers $\rightarrow$ Mixer Viewer}.
+	\item Click in the new mixer to select it (you will see a white box drawn inside that window) and afterwards expand the master audio track (audio 9).
+	\item Click into the expanded track (audio 9) and, while maintaining the new created mixer selected, click on the arrow on the left (\textit{Mixer}) that appears when expanding the track, and click on it to get it pointing upwards. That hooks the new mixer with the audio 9 track (in our example). Next lock this track.
+	\item Select with the In/Out points tool ("[]") an audio fragment in audio 9 and afterwards click on "a" to select all the tracks.
+	\item With all the tracks selected (only the three top ones that are empty are disarmed),\texttt{ Windows $\rightarrow$ mixers $\rightarrow$ align mixers}.
+	\item Select as master track your main audio track (audio 9 in our example). It is important to note the position of this track because you want to move all the other clips to the right to get aligned with the main audio track (9). In short: the selected fragment should be more to the right than the rest of this same fragment on the other clips/tracks. Move this track to the right if you need to. The idea behind this is to allow the other tracks to move to the right in order to get them aligned.
+	\item In the align mixer dialog select first \textit{adjust}. Wait for the program do its work. You can see the progress bar at the bottom right of the main window.
+	\item Check the correctness of the alignment from column \textit{R}; the values of the various tracks must be close to 1. Then click on the \textit{apply} button. The tracks will move to the right and align.
+	\item In the main timeline in the audio 9 track, click on the \textit{Play Track} button that is beside the \textit{Arm track} button to enable it (if it is not already). Then enable audio and you can hear the audio while editing.
+	\item Position the windows mixers in a position you are comfortable with and next in the main window move the cursor to the beginning of the timeline. We can also resize the Mixers windows to your liking.
+	\item Click on play (space bar) and stop when you want to insert the portion of the track you want in the main track. You do this by double clicking in the mixer.
+	\item Go on starting, stopping and double clicking to insert new portions of the clips in the main track.
+	\item When you finish, arm only the main video track and your main audio 9 track.
+	\item Go to \texttt{tracks $\rightarrow$ delete tracks} and you will have only one video track and one audio track (in this example, the main audio track is mono).
+\end{enumerate}
+
+And that is it.
+
+One more useful thing to keep in mind is that you can edit the new main track and adjust the beginning or ending of every clip (Trim) without disturbing the audio and the position of the other clips.
+For example, if you are not happy with the cut between the three and the fourth clip.
+
+So perhaps you want to have five more frames in clip three and five less in the fourth clip. Position the cursor arrow between the two clips and when the arrows shows, click the middle button of your mouse and drag in the direction you want to enlarge that particular clip and shorten the other one (trim mode: \textit{Slip}). If you also press the shift button, in the Compositor window you see a double view of the neighboring edits on which the trim acts allowing for greater precision and usability.
+
+To render, do not forget to uncheck the P (proxy) button in the main program window.
+
+\paragraph{Note:} If our files have Jam-syncing timecodes, we can speed up the workflow (steps 4 - 15) with the simple command : \texttt{Tracks $\rightarrow$ Align Timecodes}.
+
+More info can be found in \nameref{sub:align_timecodes}.
