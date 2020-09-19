@@ -1934,36 +1934,36 @@ The \textit{motion tracker} is almost a complete application in itself. The moti
 
 Motion tracker works by using one region of the frame as the region to track (Match Box). It compares this region between $2$ frames to calculate the motion. This region can be defined anywhere on the screen. Once the motion between $2$ frames has been calculated, a number of things can be done with that \textit{motion vector}. It can be scaled by a user value and clamped to a maximum range. It can be thrown away or accumulated with all the motion vectors leading up to the current position.
 
-To save time the motion result can be saved in a file for later reuse, recalled from a previous calculation, or discarded. The motion tracker has a notion of $2$ tracks, the \textit{master} layer and the \textit{target} layer. The master layer is where the comparison between $2$ frames takes place. The target layer is where motion is applied either to track or compensate for the motion in the master layer.
+To save time the motion result can be saved in a file for later reuse, recalled from a previous calculation, or discarded. The motion tracker has a notion of $2$ tracks, the \textit{master} layer and the \textit{target} layer. The \textit{master} layer is where the comparison between $2$ frames takes place. The \textit{target} layer is where motion is applied either to track or compensate for the motion in the \textit{master} layer.
 
 Motion tracking parameters:
 
 \begin{description}
-    \item[Track translation] Enables translation operations. The motion tracker tracks $X$ and $Y$ motion in the master layer and adjusts $X$ and $Y$ motion in the target layer.
+    \item[Track translation] Enables translation operations. The motion tracker tracks $X$ and $Y$ motion in the \textit{master} layer and adjusts $X$ and $Y$ motion in the \textit{target} layer.
 
     \item[Translation block size] For the translation operations, a block is compared to a number of neighboring blocks to find the one with the least difference. The size of the Match Box to search for is given by this parameter.
     \item[Translation search radius] The size of the area to scan for the translation block.
-    \item[Translation search steps] Ideally the search operation would compare the translation block with every other pixel in the translation search radius. To speed this operation up, a subset of the total positions is searched. Then the search area is narrowed and re-scanned by the same number of search steps until the motion is known to $\frac{1}{4}$ pixel accuracy.
+    \item[Translation search steps] Ideally the search operation would compare the translation block with every other pixel in the \textit{Translation search radius}. To speed this operation up, a subset of the total positions is searched. Then the search area is narrowed and re-scanned by the same number of search steps until the motion is known to $\frac{1}{4}$ pixel accuracy.
     \item[Translation direction] Tracking translation is possible in any direction, or in horizontal or vertical direction only, depending on this selection.
     \item[Block X, Y] These coordinates determine the center of the translation block based on percentages of the width and height of the image. The center of the block should be part of the image which is visible at all times.
     \item[Maximum absolute offset] The amount of motion detected by the motion tracker is unlimited if this is $100$. If it is under $100$ the amount of motion is limited by that percentage of the image size.
-    \item[Settling speed] The motion detected between every frame can be accumulated to form an absolute motion vector. Settling speed determines how fast the accumulated translation fades away, and the image resettles to its actual appearance. If the settling speed is 0\% the total absolute vector is added to the next frame. So every frame that is processed accumulates the whole motion of the past. If the settling speed is 100\% the absolute vector is cancelled completely, adding no past translation to the next frame. If the settling speed is intermediate between 0\% and 100\% the absolute vector is downscaled by (100 $-$ settling amount) before being added to the next frame.
-    \item[Track rotation] Enables rotation operations. The motion tracker tracks rotation in the master layer and adjusts rotation in the target layer.
+    \item[Motion settling speed] The motion detected between every frame can be accumulated to form an absolute motion vector. Settling speed determines how fast the accumulated translation fades away, and the image resettles to its actual appearance. If the settling speed is 0\% the total absolute vector is added to the next frame. So every frame that is processed accumulates the whole motion of the past. If the settling speed is 100\% the absolute vector is cancelled completely, adding no past translation to the next frame. If the settling speed is intermediate between 0\% and 100\% the absolute vector is downscaled by (100 $-$ settling amount) before being added to the next frame.
+    \item[Track rotation] Enables rotation operations. The motion tracker tracks rotation in the \textit{master} layer and adjusts rotation in the \textit{target} layer.
     \item[Rotation block size] For rotation operations a single block is compared to
     equally sized blocks, each rotated by a different amount.  This is the size
-    of the rotation block.  In this implementation of the Motion plugin the same
+    of the rotation block.  In this implementation of the \textit{Motion} plugin the same
     block is used to track both translation and rotation, and this parameter is
-    not used.  However, in some other implementations, like MotionCV, rotation
-    block size is specified explicitly via this extra parameter.
-    \item[Rotation search radius] This is the maximum angle of rotation from the starting frame the rotation scanner can detect. The rotation scan is from this angle counterclockwise to this angle clockwise. Thus the rotation search radius is half the total range scanned.
-    \item[Rotation search steps] Ideally every possible angle would be tested to get the rotation. To speed up the rotation search, the rotation search radius is divided into a finite number of angles and only those angles compared to the starting frame. Then the search radius is narrowed and an equal number of angles is compared in the smaller radius until the highest possible accuracy is achieved. Normally you need one search step for every degree scanned. Since the rotation scanner scans the rotation search radius in two directions, you need two steps for every degree in the search radius to search the complete range.
+    not used.  However, in some other implementations, like \hyperref[sub:motioncv]{MotionCV}, \textit{Rotation
+    block size} is specified explicitly via this extra parameter.
+    \item[Rotation search radius] This is the maximum angle of rotation from the starting frame the rotation scanner can detect. The rotation scan is from this angle counterclockwise to this angle clockwise. Thus the \textit{Rotation search radius} is half the total range scanned.
+    \item[Rotation search steps] Ideally every possible angle would be tested to get the rotation. To speed up the rotation search, the \textit{Rotation search radius} is divided into a finite number of angles and only those angles compared to the starting frame. Then the search radius is narrowed and an equal number of angles is compared in the smaller radius until the highest possible accuracy is achieved. Normally you need one search step for every degree scanned. Since the rotation scanner scans the \textit{Rotation search radius} in two directions, you need two steps for every degree in the search radius to search the complete range.
     \item[Rotation center] Usually this parameter is zero, and the rotation search
     range is $+/-$ \textit{Rotation search radius}.  Otherwise, it shifts the rotation search range to the area of angles between (\textit{Rotation center} $-$ \textit{Rotation search radius}) and (\textit{Rotation center} $+$ \textit{Rotation search radius}).
     \item[Maximum angle offset] The total accumulated amount of rotation is unlimited
     if this is 90 degrees.  If it is under 90, the total amount of rotation is
     limited by the given maximum angle.
     \item[Rotation settling speed] This parameter determines how fast the accumulated
-    rotation fades away.  Analogously to the motion settling speed, if it is 0\%,
+    rotation fades away.  Analogously to the \textit{Motion settling speed}, if it is 0\%,
     the total accumulated rotation is added to the next frame, and every frame
     accumulates the whole rotation of the past.  If the settling speed is 100\%,
     no past rotation is added to the next frame.  If the settling speed is
@@ -1980,7 +1980,7 @@ Motion tracking parameters:
     of all examined match block positions.  From all such positions whose
     difference is found below noise level, that one is chosen which has the
     shortest translation relative to the reference frame.
-    \item[Rotation noise level] This parameter has similar meaning to the motion noise level.  It influences rotation tracking.  If set to 0\% (its normal value),
+    \item[Rotation noise level] This parameter has similar meaning to the \textit{Motion noise level}.  It influences rotation tracking.  If set to 0\% (its normal value),
     it is not taken into account.  The 100\% setting completely suppresses
     rotation detection.  An intermediate value between 0\% and 100\% defines the
     proportional noise level between minimum and maximum difference of all
@@ -1988,16 +1988,16 @@ Motion tracking parameters:
     rotation angles whose match block differences are found below noise level,
     that one is chosen which has the minimum rotation angle relative to the
     reference frame.    
-    \item[Draw vectors] When translation is enabled, $2$ boxes are drawn on the frame. One box represents the translation block. Another box outside the translation block represents the extent of the translation search radius. In the center of these boxes is an arrow showing the translation between the $2$ master frames. When rotation is enabled, a single box the size of the rotation block is drawn rotated by the amount of rotation detected.
+    \item[Draw vectors] When translation is enabled, $2$ boxes are drawn on the frame. One box represents the translation block. Another box outside the translation block represents the extent of the \textit{Translation search radius}. In the center of these boxes is an arrow showing the translation between the $2$ master frames. When rotation is enabled, a single box the size of the rotation block is drawn rotated by the amount of rotation detected.
     \item[Two pass tracking] Although this parameter can be enabled at any time, it is useful only while simultaneous tracking both translation and rotation, when
     the rotation amount is large.  The normal tracking algorithm firstly
     examines translation, then rotation.  However, comparison of a strongly
     tilted picture with the reference one can lead to rather inaccurate
     determination of the translation vector.  The subsequent determination of
-    rotation will also inexact because of the preceding translation error.  The
+    rotation will be also inexact because of the preceding translation error.  The
     second tracking pass, if enabled, refines translation and rotation.
     
-    If motion and/or rotation noise level is set above 0\% and two pass tracking
+    If motion and/or rotation noise level is set above 0\% and \textit{Two pass tracking}
     is enabled, then both noise levels affect the first tracking pass only.
     During the second tracking pass of two pass tracking both noise levels are
     ignored.
@@ -2011,82 +2011,82 @@ Motion tracking parameters:
     with the accuracy reduced to 1 degree.
     \item[Track single frame] When this option is used the motion between a single
     starting frame and the frame currently under the insertion point is
-    calculated.  The starting frame is specified in the Frame number box.  The
+    calculated.  The starting frame is specified in the \textit{Frame number} box.  The
     motion calculated this way is taken as the absolute motion vector.  The
     absolute motion vector for each frame replaces the absolute motion vector
-    for the previous frame.  Settling speed has no effect on it since it does
+    for the previous frame.  \textit{Settling speed} has no effect on it since it does
     not contain any previous motion vectors.  Playback can start anywhere on the
     timeline since there is no dependence on previous results.  We talk about
-    Keep shape and it is the most precise way to calculate the motion vector;
+    \textit{Keep shape} and it is the most precise way to calculate the motion vector;
     but it only works well when the object to be traced does not change along
     the clip, remaining identical in shape, size and luminance.
     
     Strong rotation of the picture can also have a bad impact on the tracking
     accuracy.  If it is the case, accuracy can be significantly improved by
-    enabling two pass tracking.
+    enabling \textit{Two pass tracking}.
     
-    Frame number The number of the reference frame used for motion tracking in
-    the \textit{Track single frame mode} is specified in this input field.  Frame
+    \item[Frame number] The number of the reference frame used for motion tracking in
+    the \textit{Track single frame} mode is specified in this input field.  Frame
     number is set as the 0-based absolute number starting from the very
     beginning of the whole timeline.  Instead of manual calculating, it is
-    possible to get frame number directly from the current cursor position by
+    possible to get \textit{Frame number} directly from the current cursor position by
     pressing the \textit{Get current} button.
     
-    Get current Pressing this handy button provides a convenient way to set the
-    Frame number parameter to the value of the current cursor position.
+    \item[Get current] Pressing this handy button provides a convenient way to set the
+    \textit{Frame number} parameter to the value of the current cursor position.
     
-    Add (loaded) offset from tracked frame This toggle can help when the tracked
+    \item[Add (loaded) offset from tracked frame] This toggle can help when the tracked
     object changes shape, leaves the screen area or becomes obscured by other
-    objects somewhere in the middle of the motion effect.  Sometimes it can help
+    objects somewhere in the middle of the \textit{Motion} effect.  Sometimes it can help
     also if a strong rotation causes the motion tracker to miss the right
     tracked object and wildly spring away.
     
     To overcome this problem, one has to define two keyframes: the first one at
-    the start of the motion effect, the second shortly before the problematic
-    location in the clip.  At the first keyframe one defines the motion effect
+    the start of the \textit{Motion} effect, the second shortly before the problematic
+    location in the clip.  At the first keyframe one defines the \textit{Motion} effect
     parameters as usual, the \textit{Add offset} toggle being switched off.  At the
     second keyframe the match block can be redefined to cover another region of
     the picture which remains visible during the following part of the effect.
     The \textit{Frame number} parameter should be set several frames before position of this second keyframe, and the \textit{Add offset} toggle switched on.
     
     After defining the two keyframes (even more can be added in the similar way)
-    one switches at all the defined keyframes Calculation mode to \textit{Save coords
-    to tracking file}, Action mode to \textit{Do Nothing}, rewinds the timeline cursor
-    to the beginning of the motion effect, and starts playback.  The determined
+    one switches at all the defined keyframes \textit{Calculation} mode to \textit{Save coords
+    to tracking file}, \textit{Action} mode to \textit{Do Nothing}, rewinds the timeline cursor
+    to the beginning of the \textit{Motion} effect, and starts playback.  The determined
     motion vectors will be written to the tracking file, the \textit{Add offset}
-    parameter having no effect during the save stage.
+    parameter having no effect during the \textit{save} stage.
     
     After playback finishes and all the relevant motion vectors are saved in the
-    tracking file, one switches at all the defined keyframes Calculation mode to
-    \textit{Load coords from tracking file}, Action mode to whatever one needs, rewinds again to the beginning of the motion effect and starts playback or
+    tracking file, one switches at all the defined keyframes \textit{Calculation} mode to
+    \textit{Load coords from tracking file}, \textit{Action} mode to whatever one needs, rewinds again to the beginning of the \textit{Motion} effect and starts playback or
     rendering.  After reaching the second keyframe, where \textit{Add offset} was
     switched on, the program continues to follow the second object adding the
     total motion and rotation, accumulated so far.
     
-    Of course, the \textit{Add offset} toggle can be used in the \textit{Track single fram}e mode only.  In the other tracking modi such a technics is unnecessary.
+    Of course, the \textit{Add offset} toggle can be used in the \textit{Track single frame} mode only.  In the other tracking modi such a technics is unnecessary.
     \item[Track previous frame] Causes only the motion between the previous frame and
-    the current frame to be calculated (Follow shape).  This is added to an
+    the current frame to be calculated (\textit{Follow shape}).  This is added to an
     absolute motion vector to get the new motion from the start of the sequence
     to the current position.  After every frame processed this way, the block
     position is shifted to always cover the same region of the image.  Playback
-    must be started from the start of the motion effect in order to accumulate
+    must be started from the start of the \textit{Motion} effect in order to accumulate
     all the necessary motion vectors.  This method is less precise because you
     have error propagation between frames.  However, it is essential when the
     object changes shape, size or luminance.  Possible inaccuracies caused by
-    rotation of the picture can partly be reduced by enabling two pass tracking
-    \item[Previous frame same block] This is useful for stabilizing jerky camcorder footage. In this mode the motion between the previous frame and the current frame is calculated. Instead of adjusting the block position to reflect the new location of the image, like Track Previous Frame does, the block position is unchanged between each frame. Thus a new region is compared for each frame.
+    rotation of the picture can partly be reduced by enabling \textit{Two pass tracking}
+    \item[Previous frame same block] This is useful for stabilizing jerky camcorder footage. In this mode the motion between the previous frame and the current frame is calculated. Instead of adjusting the block position to reflect the new location of the image, like \textit{Track Previous Frame} does, the block position is unchanged between each frame. Thus a new region is compared for each frame.
     \item[Master layer] This determines the track which supplies the frames for the
-    motion calculation.  If it is Bottom the bottom track of all the tracks
-    sharing this effect is the master layer.  Then the top track of all the
-    tracks is the target layer.  And vice versa, if the master layer is Top,
-    then the target layer is bottom.
+    motion calculation.  If it is \textit{Bottom} the bottom track of all the tracks
+    sharing this effect is the \textit{master} layer.  Then the top track of all the
+    tracks is the \textit{target} layer.  And vice versa, if the \textit{master} layer is \textit{Top},
+    then the \textit{target} layer is bottom.
     \item[Calculation] This determines whether to calculate the motion at all and
-    whether to save it to disk.  If it is \textit{Don't Calculate} the motion calculation is skipped.  If it is \textit{Recalculate} the motion calculation is performed every  time each frame is rendered.  If it is \textit{Load coords from tracking file}, the motion vectors are loaded  from a previous save calculation.  If the previous save calculation does not provide the data for the currently processed frames, a new motion  calculation is performed for that frames.  If the Calculation mode is \textit{Save coords to tracking file} the motion vectors can be still loaded from disk if the previously
+    whether to save it to disk.  If it is \textit{Don't Calculate} the motion calculation is skipped.  If it is \textit{Recalculate} the motion calculation is performed every  time each frame is rendered.  If it is \textit{Load coords from tracking file}, the motion vectors are loaded  from a previous \textit{save} calculation.  If the previous \textit{save} calculation does not provide the data for the currently processed frames, a new motion  calculation is performed for that frames.  If \textit{Calculation} mode is \textit{Save coords to tracking file} the motion vectors can be still loaded from disk if the previously
     calculated data exist.  Otherwise, a new motion calculation is performed,
-    and the calculated motion vectors are saved. \textit{Load$\dots$}, the motion calculation is loaded from a previous save calculation. If there is no previous save calculation on disk, a new motion calculation is performed.
+    and the calculated motion vectors are saved.
     \item[Tracking file] This parameter determines the name of the file where the
     motion data are saved and/or loaded from.  By default it is \texttt{/tmp/motion}
-    but it can have any name and reside anywhere on the disk.  Tracking file is
+    but it can have any name and reside anywhere on the disk.  \textit{Tracking file} is
     a text file where each line contains four numbers: the absolute frame number
     (0-based integer), the X and Y translation displacements of subpixel
     precision (a subpixel is $\frac{1}{4}$ pixel in size, and to give integer values of X and Y these subpixel coords are multiplied by 4), and the rotation angle in
@@ -2109,7 +2109,7 @@ Motion tracking parameters:
     As protection against accident clearing tracking file contents, right before
     clearing the program ensures closing the current tracking file and renames
     it to the same name with the suffix \texttt{.old}.  This way, the user can undo an erroneous clearing action by manual restoring the saved file.
-    \item[Action] Once the motion vector is known this determines whether to move the target layer opposing the motion vector or following the motion vector. If it is \textit{Do Nothing} the target layer is untouched. If it is \textit{Track\dots} the target layer is moved by the same amount as the master layer. This is useful for matching titles to objects in the frame. If it is \textit{Stabilize\dots} the target layer is moved opposite to the motion vector. This is useful for stabilizing an object in the frame. The motion operations can be accurate to single pixels or subpixels by changing the action setting.
+    \item[Action] Once the motion vector is known this determines whether to move the \textit{target} layer opposing the motion vector or following the motion vector. If it is \textit{Do Nothing} the \textit{target} layer is untouched. If it is \textit{Track\dots} the \textit{target} layer is moved by the same amount as the \textit{master} layer. This is useful for matching titles to objects in the frame. If it is \textit{Stabilize\dots} the \textit{target} layer is moved opposite to the motion vector. This is useful for stabilizing an object in the frame. The \textit{Motion} operations can be accurate to single pixels or subpixels by changing the \textit{Action} setting.
 \end{description}
 
 As motion tracking works consistently only in the \textit{Play every frame} mode,
@@ -2120,13 +2120,13 @@ Preferences dialog of \CGG{} main window.
 \subsubsection*{Secrets of motion tracking}
 \label{ssub:secrets_motion_tracking}
 
-Since it is a very slow effect, there is a method to applying the motion tracker to get the most out of it. First disable playback for the track to do motion tracking on. Then drop the effect on a region of video with some motion to track. Then rewind the insertion point to the start of the region. Set \textit{Action $\rightarrow$ Do Nothing}; set \textit{Calculation $\rightarrow$ Don't calculate}; Enable \textit{Draw vectors}. Then enable playback of the track to see the motion tracking areas.
+Since it is a very slow effect, there is a method to applying the motion tracker to get the most out of it. First disable playback for the track to do motion tracking on. Then drop the effect on a region of video with some motion to track. Then rewind the insertion point to the start of the region. Set \textit{Action $\rightarrow$ Do Nothing}; set \textit{Calculation $\rightarrow$ Don't calculate}; enable \textit{Draw vectors}. Then enable playback of the track to see the motion tracking areas.
 
-Enable which of translation motion or rotation motion vectors you want to track. By watching the compositor window and adjusting the \textit{Block x,y} settings, center the block on the part of the image you want to track. It is advisable to choose elements that have evident edges in the $x$ and $y$ directions because the calculations are made on these coordinates. Then set \textit{search radius}, \textit{block size} and \textit{block coordinates} for translation and rotation.
+Enable which of translation motion or rotation motion vectors you want to track. By watching the compositor window and adjusting the \textit{Block X, Y} settings, center the block on the part of the image you want to track. It is advisable to choose elements that have evident edges in the $x$ and $y$ directions because the calculations are made on these coordinates. Then set \textit{search radius}, \textit{block size} and \textit{block coordinates} for translation and rotation.
 
-Once this is configured, set the calculation to \textit{Save coords} and do test runs through the sequence to see if the motion tracker works and to save the motion vectors. Next, disable \textit{Draw vectors}, set the motion action to perform on the target layer and change the calculation to \textit{Load coords}.
+Once this is configured, set \textit{Calculation} to \textit{Save coords} and do test runs through the sequence to see if the motion tracker works and to save the motion vectors. Next, disable \textit{Draw vectors}, set the motion \textit{Action} to perform on the \textit{target} layer and change \textit{Calculation} to \textit{Load coords}.
 
-When using a single starting frame to calculate the motion of a sequence (Keep Shape), the starting frame should be a single frame with the least motion to any of the other frames. This is rarely frame $0$. Usually it is a frame near the middle of the sequence. This way the search radius need only reach halfway to the full extent of the motion in the sequence. The suitable reference frame number can be defined conveniently via the \textit{Get current} pushbutton.
+When using a single starting frame to calculate the motion of a sequence (\textit{Keep Shape}), the starting frame should be a single frame with the least motion to any of the other frames. This is rarely frame $0$. Usually it is a frame near the middle of the sequence. This way the search radius need only reach halfway to the full extent of the motion in the sequence. The suitable reference frame number can be defined conveniently via the \textit{Get current} pushbutton.
 
 Summarizing:
 
@@ -2137,13 +2137,13 @@ Summarizing:
 		\item \textit{Action}: Do Nothing
 		\item \textit{Calculation}: Save coords to Tracking File
 	\end{itemize}
-	\item Clone the track, which becomes the Target Layer. The Motion plugin will also be copied.
+	\item Clone the track, which becomes the Target Layer. The \textit{Motion} plugin will also be copied.
 		\begin{itemize}
 			\item \textit{Draw vectors}: unchecked
 			\item \textit{Action}: Do Nothing
 			\item \textit{Calculation}: Load coords from Tracking File
 		\end{itemize}
-	\item Add a third track to place the video of the object to be superimposed. Add the shared effects of the motion plugin taken from the Master Layer.
+	\item Add a third track to place the video of the object to be superimposed. Add the shared effects of the \textit{Motion} plugin taken from the Master Layer.
 		\begin{itemize}
 			\item \textit{Draw vectors}: unchecked
 			\item \textit{Action}: Track Subpixel
@@ -2151,12 +2151,12 @@ Summarizing:
 		\end{itemize}
 \end{enumerate}
 
-If the motion tracker is used on a render farm, Save coords and previous frame mode will not work. The results of the save coords operation are saved to the hard drives on the render nodes, not the master node. Future rendering operations on these nodes will process different frames and read the wrong coordinates from the node filesystems. The fact that render nodes only visualize a portion of the timeline also prevents previous frame from working since it depends on calculating an absolute motion vector starting on frame $0$.
+If the motion tracker is used on a render farm, \textit{Save coords} and \textit{Previous frame} mode will not work. The results of the \textit{Save coords} operation are saved to the hard drives on the render nodes, not the master node. Future rendering operations on these nodes will process different frames and read the wrong coordinates from the node filesystems. The fact that render nodes only visualize a portion of the timeline also prevents \textit{Previous frame} from working since it depends on calculating an absolute motion vector starting on frame $0$.
 
 \subsubsection*{2 step motion tracking}
 \label{ssub:2_step_motion_tracking}
 
-The method described above is \textit{two-step motion tracking}. One pass is used just to calculate the motion vectors. A second pass is used to apply the motion vectors to the footage. This is faster than a single pass because errors in the motion vector calculation can be discovered quickly. This also allows the motion tracking to use a less demanding colormodel like \textit{RGB888} in the scanning step and a more demanding colormodel like \textit{RGB Float} in the action step. The scanning step takes much longer than action. This has the disadvantage of not being practical for extremely long sequences where some error is acceptable and the picture quality is low to begin with, like stabilizing camcorder footage.
+The method described above is \textit{two-step motion tracking}. One step is used just to calculate the motion vectors. A second step is used to apply the motion vectors to the footage. This is faster than a single pass because errors in the motion vector calculation can be discovered quickly. This also allows the motion tracking to use a less demanding colormodel like \textit{RGB888} in the scanning step and a more demanding colormodel like \textit{RGB Float} in the action step. The scanning step takes much longer than action. This has the disadvantage of not being practical for extremely long sequences where some error is acceptable and the picture quality is low to begin with, like stabilizing camcorder footage.
 
 The slower method is to calculate the motion vectors and apply them simultaneously. This method can use one track as the motion vector calculation track and another track as the target track for motion vector actions. This is useful for long sequences where some error is acceptable.
 
@@ -2164,20 +2164,20 @@ The slower method is to calculate the motion vectors and apply them simultaneous
 \label{ssub:pre_processing_shot}
 
 \begin{enumerate}
-    \item The motion plugin uses \textit{luminance} to do its own calculations, so we can edit the clip to enhance contrast and make it easier to calculate motion vectors. You can even create a copy of the monochrome clip and optimize it for the plugin. It lengthens the time but minimizes errors. The saved file can then be used for the original clip.
+    \item The \textit{Motion} plugin uses \textit{luminance} to do its own calculations, so we can edit the clip to enhance contrast and make it easier to calculate motion vectors. You can even create a copy of the monochrome clip and optimize it for the plugin. It lengthens the time but minimizes errors. The saved file can then be used for the original clip.
     \item  Correct lens distortion, especially if the object to be tracked moves to the edges of the frame.
-    \item Study the entire shot well: if necessary, divide it into many edits, each with its own Motion plugin. For example, if the object to be tracked leaves the frame or is covered by some other element or changes in shape, size or rotation. You can try to use the \textit{Offset Tracking} technique described below.
+    \item Study the entire shot well: if necessary, divide it into many edits, each with its own \textit{Motion} plugin. For example, if the object to be tracked leaves the frame or is covered by some other element or changes in shape, size or rotation. You can try to use the \textit{Offset Tracking} technique described below.
 \end{enumerate}
 
 \subsubsection*{Using blur to improve motion tracking}
 \label{ssub:blur_improve_motion_tracking}
 
-With extremely noisy or interlaced footage, applying a blur effect before the motion tracking can improve accuracy. Either save the motion vectors in a tracking pass and disable the blur for the action pass or apply the blur just to the master layer. You can even use a copy of the track formed only by the channels of Red + Green, because the channel of Blue is the noisiest. Another trick is to enlarge the Match Box to minimize the effect of noise.
+With extremely noisy or interlaced footage, applying a blur effect before the motion tracking can improve accuracy. Either save the motion vectors in a tracking pass and disable the blur for the action pass or apply the blur just to the \textit{master} layer. You can even use a copy of the track formed only by the channels of Red + Green, because the channel of Blue is the noisiest. Another trick is to enlarge the Match Box to minimize the effect of noise.
 
 \subsubsection*{Using histogram to improve motion tracking}
 \label{ssub:histogram_improve_motion_tracking}
 
-A histogram is almost always applied before motion tracking to clamp out noise in the darker pixels. Either save the motion vectors in a tracking pass and disable the histogram for the action pass or apply the histogram just to the master layer. Finally, you can use the histogram to increase contrast.
+A histogram is almost always applied before motion tracking to clamp out noise in the darker pixels. Either save the motion vectors in a tracking pass and disable the histogram for the action pass or apply the histogram just to the \textit{master} layer. Finally, you can use the histogram to increase contrast.
 
 \subsubsection*{Using two pass tracking to improve accuracy and stability}
 \label{ssub:two_pass_improve_accuracy}
@@ -2189,20 +2189,20 @@ an algorithm would be unacceptably slow.  Therefore the program finds for
 each frame the translation vector first, and then the rotation angle.  A
 strong rotation can prevent motion tracker from finding accurate translation
 displacements.  Then the subsequent rotation search will be also inaccurate
-because translation has been estimated not sufficiently well.  In the two
-pass tracking algorithm the first, coarse estimation of translation and
-rotation is followed by the second, refinement step yielding more exact
+because translation has been estimated not sufficiently well.  In the \textit{Two
+pass tracking} algorithm the first, coarse estimation of translation and
+rotation is followed by the second, refinement pass yielding more exact
 motion vectors.
 
 Sometimes, particularly if the amount of rotation is large, the translation
 tracker can lose its right object and wildly spring away.  Then the
 following strategy may help.
 
-Firstly switch \textit{two pass tracking} off, \textit{Track rotation} off, set \textit{Motion noise level} to zero.  Switch \textit{Draw vectors} on, \textit{Action: Do Nothing}, \textit{Calculation: Save coords to tracking file}.  Start playback and watch if the motion tracker has problems finding the right displacements (you can also examine the tracking file afterwards on the existence of discontinuities in coordinates).  If there are such, try to increase Motion noise level, let's say, to 10\% or 20\%, \textit{clear tracking file contents}, repeat playback and look if tracker does not spring away any more.  A single pass translation tracking can be relatively fast, while tracking rotation is expensive.
+Firstly switch \textit{Two pass tracking} off, \textit{Track rotation} off, set \textit{Motion noise level} to zero.  Switch \textit{Draw vectors} on, \textit{Action: Do Nothing}, \textit{Calculation: Save coords to tracking file}.  Start playback and watch if the motion tracker has problems finding the right displacements (you can also examine the tracking file afterwards on the existence of discontinuities in coordinates).  If there are such, try to increase \textit{Motion noise level}, let's say, to 10\% or 20\%, \textit{clear tracking file contents}, repeat playback and look if tracker does not spring away any more.  A single pass translation tracking can be relatively fast, while tracking rotation is expensive.
 
-When a sufficient motion noise level is found, switch Track rotation on, Two
-pass tracking on, clear tracking file contents and perform the complete
-translation + rotation tracking pass.  As the refinement step uses
+When a sufficient motion noise level is found, switch \textit{Track rotation} on, \textit{Two
+pass tracking} on, \textit{clear tracking file contents} and perform the complete
+translation + rotation tracking pass.  As the refinement pass uses
 restricted search area and ignores the noise level parameters, the result
 should be more stable and accurate.
 
@@ -2224,15 +2224,15 @@ should be more stable and accurate.
 
 This is an explanation of how to stabilize a video as in the case of a video taken from a vehicle.
 
-First select on the timeline the part of the footage you want to stabilize, using the in and out points. Then apply the motion effect on that part of the video. Select the \textit{Previous frame same block} option. That option is recommended for stabilizing jerky camcorder footage. Its goal is not to \textit{follow} an object. The block stays exactly at the same place during all the effect length.
+First select on the timeline the part of the footage you want to stabilize, using the in and out points. Then apply the \textit{Motion} effect on that part of the video. Select the \textit{Previous frame same block} option. That option is recommended for stabilizing jerky camcorder footage. Its goal is not to \textit{follow} an object. The block stays exactly at the same place during all the effect length.
 
-Enlarge the block and select almost half the size of the video. Select the \textit{Stabilize subpixel} option as it will give a finer stabilization. Reduce the \textit{Maximum absolute offset} value to limit the stabilization amplitude. You probably prefer to get a non-perfect stabilization on some places on the video rather than having a very large black border on one side of the picture during big shakes. Set the \textit{Translation search steps} value to $128$. Increasing that value will not give a better result and only considerably increases the rendering time. Make sure the \textit{Draw vectors} option is selected, and render the part of the video where the motion effect is applied.
+Enlarge the block and select almost half the size of the video. Select the \textit{Stabilize subpixel} option as it will give a finer stabilization. Reduce the \textit{Maximum absolute offset} value to limit the stabilization amplitude. You probably prefer to get a non-perfect stabilization on some places on the video rather than having a very large black border on one side of the picture during big shakes. Set the \textit{Translation search steps} value to $128$. Increasing that value will not give a better result and only considerably increases the rendering time. Make sure the \textit{Draw vectors} option is selected, and render the part of the video where the \textit{Motion} effect is applied.
 
 If the result is good, deselect the \textit{Draw vectors} option so that the block and vectors are not drawn anymore on the video. Then, render your video to a \texttt{.dv} file, and import it into your project. You will notice the video is stabilized but there are black borders which appear on sides of the frame. You have to \textit{zoom in} and define projector keyframes to move the projector around the screen, in order to remove those black borders. The more your footage is jerky, the more you have to zoom in to discard the black borders. That is why the result is better with HDV footage than with DV footage.
 
-An interesting side note about \textit{add offset} usage is explained next\protect\footnote{credit Pierre Marc Dumuid}
+An interesting side note about \textit{Add offset} usage is explained next\protect\footnote{credit Pierre Marc Dumuid}
 
-To stabilize video, the motion plugin uses a \textit{tracking frame} to which to track to and a region within that frame to track (generally an object in the background) in the current frame.  When the region is obscured, often by something in the foreground or by leaving the screen, then the motion compensation would fail, and the video jumps all over the place.
+To stabilize video, the \textit{Motion} plugin uses a \textit{tracking frame} to which to track to and a region within that frame to track (generally an object in the background) in the current frame.  When the region is obscured, often by something in the foreground or by leaving the screen, then the motion compensation would fail, and the video jumps all over the place.
 
 You set a second region to track, and then \textit{add offset}.
 
