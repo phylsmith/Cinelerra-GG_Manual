@@ -18,7 +18,7 @@ and pointers to the media so that the media is not modified. The EDL is describe
 
 The main window is called the \textit{Program} window and is often just referred to as the \textit{timeline}.  Here is where you enter the main menu operations.  
 This timeline consists of a vertical stack of tracks with time represented horizontally on the track. 
-It is the output of the rendering operations and this is what is saved when you run the File pulldown, Save command.
+It is the output of the rendering operations and this is what is saved when you run the \textit{File} pulldown, Save command.
 Immediately to the left of the timeline is the patchbay. The patchbay contains options that affect each track.  
 These options are described in great detail in \nameref{sec:patchbay}.
 
@@ -334,14 +334,14 @@ function to delete them all. The same precedence rules apply to this operation a
 is, if both In/Out points are set and there is a highlighted area also set, the highlighted area's 
 labels will be cleared and not those between the In/Out points.
 
-If you enable \emph{Edit labels} in the Settings pulldown menu or disable the \emph{Lock labels from moving}
+If you enable \emph{Edit labels} in the \textit{Settings} pulldown menu or disable the \emph{Lock labels from moving}
 button on the Transport and Buttons bar, labels will be cut, copied or pasted along with the selected
 area of the first armed track. 
 In the same manner, if a selected area of media is spliced from the viewer to the timeline in a position 
 before labels, the labels will be moved to the right on the timebar so that the label maintains its 
 relative position to its edit. 
 To prevent labels from moving on the timebar, enable the \emph{Lock labels from moving} icon or
-disable the \emph{Edit labels} option under the Settings pulldown.
+disable the \emph{Edit labels} option under the \textit{Settings} pulldown.
 
 \subsection{Color Title Bars and Assets}%
 \label{sub:color_title_bars_and_assets}
@@ -426,7 +426,7 @@ Proxy and Transcode (\ref{sec:proxy_settings}), as well as the others.
 \label{sub:window_layouts}
 
 If you like to use different window layouts than the default for certain scenarios, you can setup, save, and load 4 variations.   
-First, position your \CGG{} windows where you want them to be and then use the Window pulldown and choose \emph{Save layout}. Note the words \emph{Save layout} highlighted in Figure~\ref{fig:window_layouts}a with 4 names shown to the right and below of that highlight. 
+First, position your \CGG{} windows where you want them to be and then use the \textit{Window} pulldown and choose \emph{Save layout}. Note the words \emph{Save layout} highlighted in Figure~\ref{fig:window_layouts}a with 4 names shown to the right and below of that highlight. 
 To use the default name of \textit{Layout \#}, when the popup comes up, just click the green checkmark OK on the Layout popup menu.  
 If you would like a specific name for your layout so you can remember what its best use case is,
 keyin 1-8 english characters that are meaningful to you (english characters mean you can not use the German umlaut, the French accent, or the Spanish ñ). 
@@ -451,7 +451,7 @@ To rename a currently existing layout, use the \emph{Save layout} option again o
 
 The files containing the coordinates for your layouts will automatically be saved in the \texttt{\$HOME/.bcast5} directory as \texttt{layout\#\_rc} or \texttt{layout\#\_8chars\_rc}.
 
-To use the desired layout, keyin the shortcut or use the Window pulldown and choose \emph{Load layout} and then make your choice. It is very beneficial to 
+To use the desired layout, keyin the shortcut or use the \textit{Window} pulldown and choose \emph{Load layout} and then make your choice. It is very beneficial to 
 learn the the associated shortcut layouts (Ctrl+Shift+Fx where x is 1,2,3, or 4)
 because they can be executed from any of the 4 windows instead of just the main
 timeline window.
@@ -459,7 +459,7 @@ timeline window.
 \subsection{Multi-Pane Support}%
 \label{sub:multipane_support}
 
-The main \CGG{} edit window holds the Track Canvas which can be divided into 4 panes of track data: 1 or 2 vertical panes and/or 1 or 2 horizontal panes.  To split the track, use the Window pulldown, and then click on \textit{Split X} or \textit{Split Y} depending on how you wish to split the track.  Alternatively, the canvas pane types can be changed using keys \textit{<Ctrl-1>} for toggle split horizontal or \textit{<Ctrl-2>} for toggle split vertical.  Or the track can be split into panes by using the \textit{+ widget} in the lower right hand corner of the track canvas.  Once the track has been divided, you can use the + widget shortcut or the drag bars to change the size of the panes.
+The main \CGG{} edit window holds the Track Canvas which can be divided into 4 panes of track data: 1 or 2 vertical panes and/or 1 or 2 horizontal panes.  To split the track, use the \textit{Window} pulldown, and then click on \textit{Split X} or \textit{Split Y} depending on how you wish to split the track.  Alternatively, the canvas pane types can be changed using keys \textit{<Ctrl-1>} for toggle split horizontal or \textit{<Ctrl-2>} for toggle split vertical.  Or the track can be split into panes by using the \textit{+ widget} in the lower right hand corner of the track canvas.  Once the track has been divided, you can use the + widget shortcut or the drag bars to change the size of the panes.
 
 Multi-Pane, or split screen, allows you to look at the first part of a movie at the same time as a part that is a long ways away on the timeline which would have been off the screen.  By having multiple panes, you can see the 2 parts you want to look at simultaneously and drag/drop easily between the 2.  Also, the \textit{X pane split} is extremely convenient for laptop users and computer monitors with small screens since it can be used with horizontal scrolling with the mouse wheel + Ctrl.  The \textit{Y-pane split} makes it easy to see 2 simultaneous drag and drop zones when you have lots of tracks (figure~\ref{fig:multi-pane01}).
 
@@ -1041,7 +1041,7 @@ The \textit{Enable} row of masks makes it so you can enable all or none of the m
 
 There are 4 shapes that are automatically available for usage as masks – square, circle, triangle, and oval.  In addition, the next 3 symbols in this section are for the purpose of loading, saving, and deleting your own customized shapes.  The first symbol, \textit{Load} preset, will bring up a list of your previously saved presets.  Clicking on \textit{Save} preset brings up a popup window allowing you to provide a name used to identify the preset you want to save, along with a pulldown to see the names of your other saved presets.   Clicking on \textit{Delete} preset also brings up a textbox with a pulldown to choose which one to delete.  There is a file, called \texttt{mask\_rc}, in \texttt{\$HOME/.bcast5} that records your custom masks.  
 
-When you click \textit{Load} preset, keep in mind that it will write the mask number that you have selected so if you already have a mask at that location, it will write over it – just \textit{Undo mask} under the main window Edit pulldown (shortcut `z') to revert to the previous if you made this mistake.
+When you click \textit{Load} preset, keep in mind that it will write the mask number that you have selected so if you already have a mask at that location, it will write over it – just \textit{Undo mask} under the main window \textit{Edit} pulldown (shortcut `z'or `Ctrl-z') to revert to the previous if you made this mistake.
 
 \subsubsection*{Position \& Scale section}%
 \label{ssub:position_scale_section}
@@ -1075,7 +1075,7 @@ background colors are at a transparency value of zero. So the largest transparen
 \paragraph{Case 2, Negative Fade:} When the program computes the background color for any number of masks that includes negative
 mask(s), it uses the largest transparency number as the determining factor for the background. Only 1 of the masks can be largest, and wins for the background transparency result.
 
-\vspace{3ex}\textit{Feather}: works in a similar manner to a \textit{gradient Fade} aligned on the mask boundary but is a logical function instead of a mathematical function so will be faster.  The \textit{Gang feather} symbol also works in a similar fashion and is surrounded by a gold colored background when it is in effect.
+\vspace{3ex}\textit{Feather}: works in a similar manner to a \textit{gradient Fade} aligned on the mask boundary but is a logical function instead of a mathematical function so will be faster.  The \textit{Gang feather} symbol also works in a similar fashion and is surrounded by a colored background when it is in effect.
 
 \subsubsection*{Mask Points section}%
 \label{ssub:masks_points_section}
@@ -1104,7 +1104,7 @@ A \textit{gang} symbol on the right hand side of this section, tooltip of \texti
 
 The \textit{X:} and \textit{Y:} coordinates mark the value of the current \textit{Pivot Point} used for rotation, scaling, and translation.  You can either directly key in numerical values or use the tumblers to change the values as long as the \textit{Focus} checkbox is checked.
 
-The \textit{Focus} checkbox is used in case you want to set a different point in the Compositor for pivoting instead.  And the \textit{Gang} symbol for rotate/scale/translate means that these operations will be performed on all points of the enabled masks.  The gang symbol is surrounded by a gold colored background when it is in effect.  When performing a rotate operation on a mask with the mouse wheel, \textit{acceleration} is in effect -- this means the faster you wheel, the more space is covered so that you do not have to wheel dozens of time to make a full rotation.  Then when you wheel around slower, you can fine tune the result.
+The \textit{Focus} checkbox is used in case you want to set a different point in the Compositor for pivoting instead.  And the \textit{Gang} symbol for rotate/scale/translate means that these operations will be performed on all points of the enabled masks.  The gang symbol is surrounded by a colored background when it is in effect.  When performing a rotate operation on a mask with the mouse wheel, \textit{acceleration} is in effect -- this means the faster you wheel, the more space is covered so that you do not have to wheel dozens of time to make a full rotation.  Then when you wheel around slower, you can fine tune the result.
 Note that in order to be able to rotate/scale around pointer, the Focus checkbox must be unchecked.
 
 \subsubsection*{Other sections}%
@@ -2005,7 +2005,7 @@ This could affect performance on slower systems
 \label{sub:show_overlays}
 
 Color Coded Keyframe Curves are a big feature in the \textit{Show Overlays} window because by changing the colors to suit the user, it helps to remove confusion from multiple curves on the track canvas.  
-They can be viewed from the pulldown menu of \texttt{Window $\rightarrow$ Show overlays} but they will operate the same as when used from the View pulldown menu.  
+They can be viewed from the pulldown menu of \texttt{Window $\rightarrow$ Show overlays} but they will operate the same as when used from the \textit{View} pulldown menu.  
 The \textit{Color Coded Keyframe Curves} have distinct colors associated with each type for ease of identification.  
 By clicking LMB on the \textit{Color Ball} to the right of any keyframe type in the \textit{Show overlays} menu you have the ability to change the colors to whatever works best for your video.  
 The color ball changes made will be retained across sessions.
@@ -2035,7 +2035,7 @@ The slider is in the same color as the color coded keyframe type line which is t
 
 Overlays Window Nuances:
 
-The Overlays window is an alternative to the main track canvas View pulldown, and thus the order is mostly maintained to match each other.  
+The Overlays window is an alternative to the main track canvas \textit{View} pulldown, and thus the order is mostly maintained to match each other.  
 To make it easier to get a quick temporary look at a specific option, there is a shortcut of Shift-LMB (left mouse button) that can be used as opposed to having to uncheck everything that is currently checked and then having to recheck them on when done.  
 Here is a list of how they work.  Keep in mind that if the Expander on the patchbay is enabled, you still see the track.
 
@@ -2071,7 +2071,7 @@ Here is a list of how they work.  Keep in mind that if the Expander on the patch
 
 \begin{itemize}
     \item  Shift+LMB on a non-\textit{hot} spot will simply check or uncheck a box and there is no previous state.
-    \item This all works in conjunction with the View pulldown menu which, of course, has no hot spots.
+    \item This all works in conjunction with the \textit{View} pulldown menu which, of course, has no hot spots.
     \item  Caveat \#1 - Shift+LMB on the top 4 choices of Assets, Titles, Transitions, Plugin Keyframes will turn
         off all of the checkboxes below because it makes sense to do so.
     \item  Caveat \#2 - Shift+LMB on the Autos will not turn off Assets, Titles, Transitions, or Plugin Keyframes
@@ -2085,7 +2085,7 @@ Here is a list of how they work.  Keep in mind that if the Expander on the patch
 \subsection{Sound Level Meters Window}%
 \label{sub:sound_level_meters_window}
 
-An additional window, the levels window, can be brought up from the Window pulldown.  
+An additional window, the levels window, can be brought up from the \textit{Window} pulldown.  
 The levels window displays the output audio levels after all mixing is done.  
 The visible range of the sound level meters is configurable in \texttt{Settings $\rightarrow$ Preferences, Interface tab} under the Operations section.
 

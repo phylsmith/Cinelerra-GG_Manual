@@ -12,12 +12,12 @@ track. \includegraphics[height=\baselineskip]{auto.png} Auto
 $\leftarrow$ Keyframe $\rightarrow$ Plugin
 \includegraphics[height=\baselineskip]{plugin.png}
 
-\section{Automation Keyframes,/\,Autos}%
+\section{Automation Keyframes /\,Autos}%
 \label{sec:automation_keyframes_autos}
 
 The \textit{autos} are created by clicking on an \textit{automation curve} to establish the time position for the new keyframe anchor point.  The basic nature of these simple auto values make them primitive operations that are easy to apply when needed.
 
-There are many automation curve types, and most are not normally visible or clickable.  To make them visible, use the \texttt{View} pulldown, or open the \texttt{Window $\rightarrow$ Show Overlays}. This window allows toggling of the parameters in the View pulldown but is more convenient because you can leave the window up to change values quickly.  If all of the automation curves are turned on, the timeline will be quite cluttered, and so usually only the parameters of interest are enabled during use.  When keyframes are selected, they are drawn on the timeline over the tracks to which they apply.  The keyframe is represented on the timeline as a little square on the curve, for example as in fade, or as a symbol as in a mask.  This square, timeline attachment point, can be used for positioning by clicking on a keyframe anchor and using drag and drop to set the new position.
+There are many automation curve types, and most are not normally visible or clickable.  To make them visible, use the \texttt{View} pulldown, or open the \texttt{Window $\rightarrow$ Show Overlays}. This window allows toggling of the parameters in the \textit{View} pulldown but is more convenient because you can leave the window up to change values quickly.  If all of the automation curves are turned on, the timeline will be quite cluttered, and so usually only the parameters of interest are enabled during use.  When keyframes are selected, they are drawn on the timeline over the tracks to which they apply.  The keyframe is represented on the timeline as a little square on the curve, for example as in fade, or as a symbol as in a mask.  This square, timeline attachment point, can be used for positioning by clicking on a keyframe anchor and using drag and drop to set the new position.
 
 The automation keyframes include:
 
@@ -25,7 +25,7 @@ mute/play audio; camera translation x,y and zoom; projector translation x,y and 
 
 Except for the mask auto, the values are all simple numbers.  Mute is different from the other autos in that it is simply a toggle of either on or off.  Mute keyframes determine where the track is processed but not rendered to the output.  An example usage would be to use auto keyframes to fade in a clip by setting the transparency to $100\%$ at the first keyframe and adding another keyframe 5 seconds later in the timeline with a transparency of $0\%$.
 
-The Keyframes pulldown on the main timeline is used for Cut, Copy, Paste, Clear, Change to linear, Change to smooth, Create curve type of Smooth, Linear, Tangent, or Disjoint, Copy default keyframe or Paste default keyframe.  If you right click on a curve keyframe on the timeline, a set of options popup including the choices \textit{keyframe type} (such as Fade, Speed, etc.), Hide keyframe type, Delete keyframe, Copy keyframe, smooth curve, linear segments, tangent edit, or disjoint edit.
+The \textit{Keyframes} pulldown on the main timeline is used for Cut, Copy, Paste, Clear, Change to linear, Change to smooth, Create curve type of Smooth, Linear, Tangent, or Disjoint, Copy default keyframe or Paste default keyframe.  If you right click on a curve keyframe on the timeline, a set of options popup including the choices \textit{keyframe type} (such as Fade, Speed, etc.), Hide keyframe type, Delete keyframe, Copy keyframe, smooth curve, linear segments, tangent edit, or disjoint edit.
 
 Usually, the use of the keyframe values are more pleasing when the data varies smoothly between keyframe anchors on the timeline.  This is useful in many cases that are familiar, like a video fade in/out, or audio pan between channels.  To make the auto value change smoothly as the media is played, the keyframes auto values are points on curves that are created according to the design of the effect.  Most of the primitive types can create anchor points on curves that are piecewise linear, smooth, sloped, or broken at the keyframe anchor points.
 
@@ -52,7 +52,7 @@ To make it easier to navigate curve keyframes, since there is not much room on t
     keyframe on each of the tracks in the exact same position.
     \item Left mouse click on a keyframe position will show the numerical value in a yellow tooltip-like box.
     \item Right mouse click on the curve type line will bring up the option of \textit{Hide keyframe type}.   This
-    provides the same functionality as disabling the keyframe type in the View pulldown menu.  Often it
+    provides the same functionality as disabling the keyframe type in the \textit{View} pulldown menu.  Often it
     helps to use this in order to be able to see other things on the timeline once it gets cluttered.
     \item Fade and speed allow for setting a specific value for the keyframe using the following:
     \begin{enumerate}
@@ -242,7 +242,7 @@ is usually due to the nature of the keyframe parameter data.  For example, it do
 For plugins, there is a special hidden keyframe, called the \textit{default keyframe}, that is used when no previous keyframe exists.  It is like keyframe zero on the timeline, and it is persistent and shared on
 all sessions.  The intent is to make a parameter set that is likely to be reused on all initial instances of the plugin.  An example may be to color correct a set of media that was taken in low light, or needs resampling to be played correctly.  The default keyframe is \textit{off the bar on the left side} of the plugin title bar and can not be seen.  It is used when there is no \textit{previous} keyframe for its default values.
 
-It may be useful to create a default keyframe which has specific desirable values for later use.  To do this, set the timeline to position 0 and be sure to disable \textit{generate keyframes while tweaking}.  This will create a default keyframe at the beginning of the timeline which contains global parameters for the entire duration.  Or if you have copied a non-default keyframe via Keyframes pulldown \textit{copy default keyframe}, it can be stored as the default keyframe by calling \texttt{keyframes $\rightarrow$ paste default keyframe}.  After using paste default keyframe to convert a non-default keyframe into a default keyframe, you will not see the value of the default keyframe reflected until all the non-default keyframes are removed.
+It may be useful to create a default keyframe which has specific desirable values for later use.  To do this, set the timeline to position 0 and be sure to disable \textit{generate keyframes while tweaking}.  This will create a default keyframe at the beginning of the timeline which contains global parameters for the entire duration.  Or if you have copied a non-default keyframe via \textit{Keyframes} pulldown \textit{copy default keyframe}, it can be stored as the default keyframe by calling \texttt{keyframes $\rightarrow$ paste default keyframe}.  After using paste default keyframe to convert a non-default keyframe into a default keyframe, you will not see the value of the default keyframe reflected until all the non-default keyframes are removed.
 
 The \texttt{keyframes $\rightarrow$ copy default keyframe} and \\
 \texttt{keyframes $\rightarrow$ paste default keyframe} allow conversion of the default key-frame to a non-default keyframe.
@@ -250,7 +250,7 @@ The \texttt{keyframes $\rightarrow$ copy default keyframe} and \\
 \texttt{Keyframes $\rightarrow$ copy default keyframe} copies the default keyframe to the clipboard, no matter what region of the timeline is selected.
 The \texttt{keyframes $\rightarrow$ paste} \texttt{keyframes} function may then be used to paste the clipboard as a non-default keyframe.
 
-\textit{Typeless keyframes} enabled under the Settings pulldown allow keyframes from any track to be pasted on either audio or video tracks.  Ordinarily audio keyframes can only be pasted to another audio track and video keyframes can only be pasted to another video track.
+\textit{Typeless keyframes} enabled under the \textit{Settings} pulldown allow keyframes from any track to be pasted on either audio or video tracks.  Ordinarily audio keyframes can only be pasted to another audio track and video keyframes can only be pasted to another video track.
 
 \section{Keyframe \textit{Edit Params} for Plugins}%
 \label{sec:keyframe_edit_params_plugin}
@@ -269,7 +269,7 @@ Keyframe values can be set using the various plugin \textit{show controls} (magn
 
 Tweaking is defined as changing a parameter while playing -- it can be small changes or small motion increments performed in a series.  These changes are recorded as a series of new keyframes on the timeline.  Enable automatic keyframe mode by enabling the automatic keyframe toggle, that is \textit{Generate keyframes while tweaking}.  In automatic keyframe mode, every time you tweak a key-framable parameter it creates a keyframe on the timeline.  Since keyframes affect playback, you should enable generate keyframes just before you need a keyframe and disable when your parameter changes are complete.  So turn on when ready to make changes and turn off when done!
 
-Also, before making a change, be sure to check the View pulldown and make the desired parameter visible with the enable checkmark.  The location where the automatic keyframe is generated is under the insertion point.  If the timeline is playing back during a tweak, several automatic keyframes may be generated as you change the parameter.  When automatic keyframe mode is disabled, adjusting a parameter adjusts the keyframe immediately preceding the insertion point.  For example, if two fade keyframes exist and the insertion point is between them, changing the fader changes the first keyframe.
+Also, before making a change, be sure to check the \textit{View} pulldown and make the desired parameter visible with the enable checkmark.  The location where the automatic keyframe is generated is under the insertion point.  If the timeline is playing back during a tweak, several automatic keyframes may be generated as you change the parameter.  When automatic keyframe mode is disabled, adjusting a parameter adjusts the keyframe immediately preceding the insertion point.  For example, if two fade keyframes exist and the insertion point is between them, changing the fader changes the first keyframe.
 
 \section{Compositor Keyframes}%
 \label{sec:compositor_keyframes}

@@ -97,12 +97,14 @@ The BIGGEST gain from using this is if you have media that is not \textit{seekab
 
 To edit EDL that is included with your project as Clips, Nested
 Clips, Referenced File, or Xml you can use the option \textit{Open
-	EDL} in the Resources window for the highlighted media.  Then with
-a simple button click you can return to your main timeline project.
+	EDL} in the Resources window for the highlighted media.  Then
+with a simple button click you can return to your main timeline project.
 For example, if you have a nested clip that originally had several
 plugins added to it before it was nested, you can edit those plugin
 parameter values. Previously to make any changes to these types of
-EDL you had to remake the whole clip from scratch.
+EDL you had to remake the whole clip from scratch.  The program is 
+actually "opening" the file as it currently exists for that particular
+media so that it can be edited separately from the project EDL.  
 
 Here is how this works. In the Clip or Media folder or on a timeline
 EDL edit, the option \textit{Open EDL} for the highlighted clip or
@@ -773,7 +775,7 @@ and choose one of the options as described here.
 	\item Fullscreen / Windowed - will bring up a fullscreen display of that window or revert to the original size.
 	\item Resize Window - allows for resizing the window to a choice of different sizes.
 	\item Tile Mixers - makes it easy to get all of the mixers nicely tiled to a standard size.
-	This is also available in the Window pulldown.
+	This is also available in the \textit{Window} pulldown.
 	\item Playable - enabled by default so that you will see a checkmark next to it in the 
 	popup.  The benefit of making a mixer window not playable is to save cpu time. When a specific
 	mixer window is unchecked, so not Playable, a white cross appears in the upper left hand corner
@@ -793,7 +795,7 @@ and choose one of the options as described here.
 \subsection{Recover Mixer Windows}%
 \label{sub:recover_mixer_windows}
 
-It is a hazard that you might accidentally \textit{undo} (\texttt{z}) too far and lose your mixer windows.  Here are the steps to recover.  It is recommended that you make a backup of your project before performing the recovery steps just in case there are other problems.
+It is a hazard that you might accidentally \textit{undo} (\texttt{z or Ctrl-z}) too far and lose your mixer windows.  Here are the steps to recover.  It is recommended that you make a backup of your project before performing the recovery steps just in case there are other problems.
 
 In the patchbay box to the left of the main timeline, there is a right pointing arrow on the right side.  This is called the \textit{Expander} (figure~\ref{fig:mixer-patchbay01}).  When you click on each expander, another line appears below that expander arrow and the timeline track height is slightly increased.  If you Shift-click on a single expander, the patchbay will expand for all of the tracks.
 
@@ -806,7 +808,7 @@ In the patchbay box to the left of the main timeline, there is a right pointing 
 
 \begin{enumerate}
 	\item Expand all of the patchbay lines, either one by one, or Shift-click on one to do them all. This is so you can see the \textit{mixer} right pointing arrow on the second expanded line.    
-	\item Use the Window pulldown and choose \textit{Mixer Viewer} to bring up a new mixer window.  Now you will be making an association between the mixer viewer and the track’s video.
+	\item Use the \textit{Window} pulldown and choose \textit{Mixer Viewer} to bring up a new mixer window.  Now you will be making an association between the mixer viewer and the track’s video.
 	\item Click on the new mixer window to make sure it is highlighted with a white border. This designates it as the \textit{in use} mixer viewer.
 	\item Set your play to the beginning of the video using the \textit{Home} key or \textit{Home} transport button.
 	\item In the patchbay for a video track click on the \textit{mixer} arrow on the expanded $2^{nd}$ line which is a right facing arrow.  Now the arrow will point up.  If there are audio tracks with that video, click on each of its audio tracks \textit{mixer} arrow until they point up also.

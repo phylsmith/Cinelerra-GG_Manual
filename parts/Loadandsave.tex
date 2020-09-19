@@ -151,7 +151,7 @@ The final screenshot showing the Resources Asset Info displaying the File format
 \section{Loading Files}%
 \label{sec:loading_files}
 
-All data that you work with in \CGG{} is acquired either by loading from disk or recording from a device. This section describes loading.  To bring up the Load window go to the File pulldown and choose Load Files  (figure~\ref{fig:load}).  Next \textit{Select files to load}, and click ok (the green checkmark) or \textit{Apply}. When you use the Apply button, the Load window remains active for easily loading more files later.  Depending on the setting of the Insertion Strategy list box, your file will be either loaded directly on the Program window or in the Resources Media window.  If the file is a still image, the project's attributes are not changed and the first frame of the track becomes the image. \CGG{} usually builds an index file if one does not already exist, in order to speed up drawing. You can edit and play the file while the index is being built.
+All data that you work with in \CGG{} is acquired either by loading from disk or recording from a device. This section describes loading.  To bring up the Load window go to the \textit{File} pulldown and choose Load Files  (figure~\ref{fig:load}).  Next \textit{Select files to load}, and click ok (the green checkmark) or \textit{Apply}. When you use the Apply button, the Load window remains active for easily loading more files later.  Depending on the setting of the Insertion Strategy list box, your file will be either loaded directly on the Program window or in the Resources Media window.  If the file is a still image, the project's attributes are not changed and the first frame of the track becomes the image. \CGG{} usually builds an index file if one does not already exist, in order to speed up drawing. You can edit and play the file while the index is being built.
 
 \begin{figure}[htpb]
     \centering
@@ -222,7 +222,7 @@ This behavior is available in most listboxes.   It is an especially useful metho
 \subsection{Sort within Sort in File Load Dialog}%
 \label{sub:sort_within_sort_file_load_dialog}
 
-When you use the File pulldown to load files, you can do a sort within a sort when you click on the labeled header box (figure~\ref{fig:load-sort}).  This is useful, for example, when you want to find the smallest file for a specific extension.   In the screenshots below, the first illustrates the default \textit{File} sorted alphabetically; the second shows the \textit{Size} is now sorted; the third shows how after sorting on Size, you sort on Ext.  The size sort is maintained within the extension sort so that \textit{c.d} comes before \textit{a.d} in the File header box because the size is smaller.
+When you use the \textit{File} pulldown to load files, you can do a sort within a sort when you click on the labeled header box (figure~\ref{fig:load-sort}).  This is useful, for example, when you want to find the smallest file for a specific extension.   In the screenshots below, the first illustrates the default \textit{File} sorted alphabetically; the second shows the \textit{Size} is now sorted; the third shows how after sorting on Size, you sort on Ext.  The size sort is maintained within the extension sort so that \textit{c.d} comes before \textit{a.d} in the File header box because the size is smaller.
 
 \begin{figure}[htpb]
     \centering
@@ -299,7 +299,7 @@ You can save your work as a project, which is what is loaded in \CGG{} now, or a
 \subsection{Saving Project Files}%
 \label{sub:saving_project_files}
 
-Saving  XML files is useful to save the current state of \CGG{} before quitting an editing session. \CGG{} saves projects as XML files. There are a few options you can use to save your work via the File pulldown menu: \textit{Save}, \textit{Save as\dots}, \textit{Export project}, \textit{Save backup}.  You can either overwrite an existing file or enter a new filename. \CGG{} automatically concatenates \texttt{.xml} to the filename if no \texttt{.xml} extension is given.
+Saving  XML files is useful to save the current state of \CGG{} before quitting an editing session. \CGG{} saves projects as XML files. There are a few options you can use to save your work via the \textit{File} pulldown menu: \textit{Save}, \textit{Save as\dots}, \textit{Export project}, \textit{Save backup}.  You can either overwrite an existing file or enter a new filename. \CGG{} automatically concatenates \texttt{.xml} to the filename if no \texttt{.xml} extension is given.
 
 When \CGG{} saves a file, it saves the EDL of the current project but does not save any media, instead just pointers to the original media files. For each media file, the XML file stores either an absolute path or just the relative path. If the media is in the same directory as the XML file, a relative path is saved. If it is in a different directory, an absolute path is saved.
 
@@ -321,7 +321,7 @@ Real-time effects in an XML file have to be re-created every time you play it ba
     \label{fig:export}
 \end{figure}
 
-A File pulldown called \textit{Export Project\dots} is also available (figure~\ref{fig:export}).  Although, it can be used in the same manner as the other \textit{save} options, it is very useful when it is necessary to move a project to another computer that may have a different top level directory structure or if you want to include subdirectories to better organize your files.  
+A \textit{File} pulldown called \textit{Export Project\dots} is also available (figure~\ref{fig:export}).  Although, it can be used in the same manner as the other \textit{save} options, it is very useful when it is necessary to move a project to another computer that may have a different top level directory structure or if you want to include subdirectories to better organize your files.  
 
 Originally, the easiest way to maintain a project for moving to another computer, was to put all of the files in a single directory with no subdirectories along with the EDL saved \texttt{.xml} file.   This is commonly called a \textit{flat} file structure.  So if the media was in the same directory as the XML file, a relative path was saved.  If it was in a different directory, an absolute path was saved.
 
