@@ -294,15 +294,15 @@ Restart cin by changing \texttt{Settings$\rightarrow$ Preferences$\rightarrow$ A
 
 The \textit{Visibility} tool in the Resources window (figure~\ref{fig:visibility01}) gives you the ability to turn off or on any of several sets of plugins. If you left-click the Visibility box, you will see the various categories of plugins, such as \textit{ladspa}, \textit{ffmpeg}, \textit{audio}, \textit{lv2}, and \textit{video} (figure~\ref{fig:visibility02}).
 
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.6\linewidth]{visibility02.png}
+	\caption{Screenshot showing the Visibility categories of plugins with all toggled on and audio highlighted.}
+	\label{fig:visibility02}
+\end{figure}
+
 Highlight the set you want to turn on and a check mark appears to show it is active. Highlight again to toggle it off. See the next screenshot which illustrates that all of the plugins are turned off (not visible) except for audio. There is also the ability to add your own personal directory of plugins which will show up here. All you have to do to have these plugins become visible is to create a directory, with some name that is meaningful to you, and put your .png files in your: \\
 \texttt{cinelerra\_path bin/plugins/<your\_directory\_name>}.
-
-\begin{figure}[htpb]
-    \centering
-    \includegraphics[width=0.6\linewidth]{visibility02.png}
-    \caption{Screenshot showing the Visibility categories of plugins with all toggled on and audio highlighted.}
-    \label{fig:visibility02}
-\end{figure}
 
 \subsection{Expanders for Plugin Subtrees in the Resources Window}%
 \label{sub:expanders_plugin_subtrees}
@@ -313,11 +313,18 @@ If there are recommendations for other relevant categories, they can be added. T
 
 The \texttt{expanders.txt} file has very specific requirements. The most specific is that there are no blanks -- you must use tabs only. A \# (pound sign) can be used in column 1 to indicate a comment. Here is a short example:
 
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\linewidth]{expander.png}
+	\caption{$\triangledown$,$\triangleright$ = expander; "-" = options}
+	\label{fig:expander}
+\end{figure}
+
 \begin{lstlisting}[style=sh]
 Video Effects
     - Color_Correction
         Blue Banana
-#\qquad \qquad Color 3 Way
+			  Color 3 Way
         Color Balance
 Audio Effects
     - Calf
@@ -326,13 +333,6 @@ Audio Effects
         L2_Calf Monosynth
         L2_Calf Fluidsynth
 \end{lstlisting}
-
-\begin{figure}[htpb]
-    \centering
-    \includegraphics[width=0.8\linewidth]{expander.png}
-    \caption{$\triangledown$,$\triangleright$ = expander; "-" = options}
-    \label{fig:expander}
-\end{figure}
 
 \subsection{Speed-up of Ffmpeg plugin usage with OPTS files}%
 \label{sub:speedup_ffmpeg_plugin_opts}

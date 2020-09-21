@@ -225,14 +225,16 @@ In the mask window, check the box \textit{Disable OpenGL masking} to use softwar
 \section{Menu Bar Shell Commands}%
 \label{menu_bar_shell_commands}
 
-In order to provide some types of help, the Menu Bar Shell Commands are available for customization purposes. In the
-main window on the top line containing the \textit{File}, \textit{Edit}, {\dots} \textit{Window} pulldown menus, all the way to the right hand
-side is the \textit{shell cmds} icon. You might see a small gold-color bordered box with the $>\_.\_$ inside
-and if you mouse over it, the tooltip says \textit{shell cmds}. This is a configurable popup which gives you the ability to
-see a table of Shortcuts in html format, refer to the reference manual or execute a pre-defined script to perform a
-specific task, such as some type of post processing which you plan on performing on a repeat basis. Unless redirected
-elsewhere, the output from executing any script-type commands will be displayed in the window from where you started
-\CGG{}.
+In order to provide some types of help, the Menu Bar Shell Commands are available for customization purposes (figure~\ref{fig:trouble-img001}).
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=1.0\linewidth]{trouble-img001.png} 
+	\caption{Some windows used to manipulate Shell Commands scripts}
+	\label{fig:trouble-img001}
+\end{figure}
+
+In the main window on the top line containing the \textit{File}, \textit{Edit}, {\dots} \textit{Window} pulldown menus, all the way to the right hand side is the \textit{shell cmds} icon. You might see a small white-color bordered box with the "\texttt{i}" inside and if you mouse over it, the tooltip says \textit{shell cmds}. This is a configurable popup which gives you the ability to see a table of Shortcuts in html format, refer to the reference manual or execute a pre-defined script to perform a specific task, such as some type of post processing which you plan on performing on a repeat basis. Unless redirected elsewhere, the output from executing any script-type commands will be displayed in the window from where you started \CGG{}.
 
 The Shell Cmds popup menu items are configured in:
 
@@ -304,13 +306,6 @@ There are some Help features currently included in the Shell Cmds menu. Those av
 	\item \textit{Shortcuts} html file for easily looking up a particular shortcut.
 	\item \textit{RenderMux} shell script to use ffmpeg concatenate to copy files such as \textit{look.mp4001}, \textit{look.mp4002}, \textit{look.mp4005}{\dots} that were rendered using \textit{Create new file at each label} or with the Render Farm.
 \end{enumerate}
-
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=1.0\linewidth]{trouble-img001.png} 
-	\caption{Some windows used to manipulate Shell Commands scripts}
-	\label{fig:shell_script_manupulation}
-\end{figure}
 
 \section{\CGG{} Command Line -h}%
 \label{cha:cinelerra_command_line_-h}
