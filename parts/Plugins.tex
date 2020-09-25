@@ -1698,6 +1698,33 @@ Enable the \textit{Automatic} toggle to have the histogram calculate an automati
 \textit{Split output} is a checkbox that enables a diagonal split showing in the compositor.
 \textit{Reset} returns the four curves to their initial state (neutral) as well as the Value/RGB histogram buttons.
 
+The histogram plugin ordinarily applies a value for a single frame.  A
+new feature modifies histogram to show values for a selection of frames.
+You use several frames in a video that you want to use the \textit{average}
+color to determine the color you want the rest of the video to be.  When
+there is a large light or color variation within a range of a few frames,
+you spend a lot of time correcting each frame when it would be better to
+just get an average value to use.  If you want, then you can make a LUT for
+that set of frames instead of each frame. A practical case may be the shooting of a room illuminated by a lamp and then with the light off. We can choose only the range of illuminated frames and then we will have the whole shot illuminated. Or we can choose only the dark frames and so we will have all the dark shot.
+
+It works by selecting the area on the timeline for
+which you would like to see the Histogram averaged and then click on the
+\textit{Frames} button in the Histogram plugin.
+The parameters are:
+\textit{Linear to Log} slider: frequency in Linear range to Log range; default is
+50\%, but if you want it to be the same as the Videoscope or Histogram Bezier, set the slider
+all the way to Log.  The variation is by 10\% steps.  Linear generally represents what
+the eye sees in the real world.  Log is an exponential look where the small numbers are
+represented more - that is, the leading digit. 
+\textit{Frames} button: if a Selection is set on the timeline, the number of frames
+will be calculated and shown in the box next to it.
+\textit{Frame Count box}: type in the number of frames you want to be looked at
+starting at the insert marker or use the up/down counter.
+\textit{Clear Frames} icon: reset the frame count to the default value of 0.
+
+A side note: by using a number of frames, you can get a \textit{dissolve-like
+transition effect}.
+
 \subsection{Histogram Bezier / Curves}%
 \label{sub:histogram_bezier_curves}
 
@@ -1884,7 +1911,8 @@ Every time a keyframe is set in a loop effect, the keyframe becomes the beginnin
 \subsection{Motion51}%
 \label{sub:motion51}
 
-This plugin compensates for unwanted motion and stabilizes the picture. The \textit{Motion51} Plugin simplifies motion stabilization so that without a lot of tweaking you can easily achieve reasonable results, either by using the defaults or varying a single parameter. Since the motion in every clip is specific, there are some additional parameters useful to adjust the settings accordingly. Alternatively, the \textit{MotionCV} and \textit{MotionHV} plugins can still be used as the originals, if more control over specific parameters is needed. The Motion51 plugin uses different methods for tracking than the other motion plugins. Motion Stabilization is very useful if you have jittery video, for example when taken from a car window, or while walking.
+This plugin compensates for unwanted motion and stabilizes the picture. The \textit{Motion51} Plugin simplifies motion stabilization so that without a lot of tweaking you can easily achieve reasonable results, either by using the defaults or varying a single parameter. Since the motion in every clip is specific, there are some additional parameters useful to adjust the settings accordingly. 
+The Motion51 plugin uses different methods for tracking than the other motion plugins. Motion Stabilization is very useful if you have jittery video, for example when taken from a car window, or while walking.
 
 The better results require more samples. Setting the \textit{sample set size} is probably the most important setup change. Also, when computing motion compensation, the entire history of the image motion is important, and so it is desirable to enable the playback setting \textit{play every frame} in order to get good results. When every frame has to be processed, it can be time-consuming. Reasonable results are possible with small sample sets. After setup, the sample size can be increased to produce a high quality rendered result.
 
@@ -1934,7 +1962,14 @@ The \textit{motion tracker} is almost a complete application in itself. The moti
 
 Motion tracker works by using one region of the frame as the region to track (Match Box). It compares this region between $2$ frames to calculate the motion. This region can be defined anywhere on the screen. Once the motion between $2$ frames has been calculated, a number of things can be done with that \textit{motion vector}. It can be scaled by a user value and clamped to a maximum range. It can be thrown away or accumulated with all the motion vectors leading up to the current position.
 
-To save time the motion result can be saved in a file for later reuse, recalled from a previous calculation, or discarded. The motion tracker has a notion of $2$ tracks, the \textit{master} layer and the \textit{target} layer. The \textit{master} layer is where the comparison between $2$ frames takes place. The \textit{target} layer is where motion is applied either to track or compensate for the motion in the \textit{master} layer.
+To save time the motion result can be saved in a file for later reuse, recalled from a previous calculation, or discarded. The motion tracker has a notion of $2$ tracks, the \textit{master} layer and the \textit{target} layer. The \textit{master} layer is where the comparison between $2$ frames takes place. The \textit{target} layer is where motion is applied either to track or compensate for the motion in the \textit{master} layer (figure~\ref{fig:motion}).
+
+% \begin{figure}[ht]
+% 	\centering
+% 	\includegraphics[width=0.9\linewidth]{motion.png}
+% 	\caption{Motion plugin GUI}
+% 	\label{fig:motion}
+% \end{figure}
 
 Motion tracking parameters:
 
@@ -1948,13 +1983,7 @@ Motion tracking parameters:
     \item[Block X, Y] These coordinates determine the center of the translation block based on percentages of the width and height of the image. The center of the block should be part of the image which is visible at all times.
     \item[Maximum absolute offset] The amount of motion detected by the motion tracker is unlimited if this is $100$. If it is under $100$ the amount of motion is limited by that percentage of the image size.
     \item[Motion settling speed] The motion detected between every frame can be accumulated to form an absolute motion vector. Settling speed determines how fast the accumulated translation fades away, and the image resettles to its actual appearance. If the settling speed is 0\% the total absolute vector is added to the next frame. So every frame that is processed accumulates the whole motion of the past. If the settling speed is 100\% the absolute vector is cancelled completely, adding no past translation to the next frame. If the settling speed is intermediate between 0\% and 100\% the absolute vector is downscaled by (100 $-$ settling amount) before being added to the next frame.
-    \item[Track rotation] Enables rotation operations. The motion tracker tracks rotation in the \textit{master} layer and adjusts rotation in the \textit{target} layer.
-    \item[Rotation block size] For rotation operations a single block is compared to
-    equally sized blocks, each rotated by a different amount.  This is the size
-    of the rotation block.  In this implementation of the \textit{Motion} plugin the same
-    block is used to track both translation and rotation, and this parameter is
-    not used.  However, in some other implementations, like \hyperref[sub:motioncv]{MotionCV}, \textit{Rotation
-    block size} is specified explicitly via this extra parameter.
+    \item[Track rotation] Enables rotation operations. The motion tracker tracks rotation in the \textit{master} layer and adjusts rotation in the \textit{target} layer.    
     \item[Rotation search radius] This is the maximum angle of rotation from the starting frame the rotation scanner can detect. The rotation scan is from this angle counterclockwise to this angle clockwise. Thus the \textit{Rotation search radius} is half the total range scanned.
     \item[Rotation search steps] Ideally every possible angle would be tested to get the rotation. To speed up the rotation search, the \textit{Rotation search radius} is divided into a finite number of angles and only those angles compared to the starting frame. Then the search radius is narrowed and an equal number of angles is compared in the smaller radius until the highest possible accuracy is achieved. Normally you need one search step for every degree scanned. Since the rotation scanner scans the \textit{Rotation search radius} in two directions, you need two steps for every degree in the search radius to search the complete range.
     \item[Rotation center] Usually this parameter is zero, and the rotation search
@@ -2275,16 +2304,6 @@ Uses X/Y camera automation vectors to apply a linear blur trailing camera direct
     \item[Length] distance between original image and final blur step; corresponds to the distance of the fields.
     \item[Steps] number of blur steps to be used in the calculation. Increasing the number takes more CPU.
 \end{description}
-
-\subsection{MotionCV}%
-\label{sub:motioncv}
-
-Extended motion tracking/stabilization from the community version of \CGG{}. For theory and explanations refer to the \hyperref[sub:motion]{Motion} plugin.
-
-\subsection{MotionHV}%
-\label{sub:motionhv}
-
-Updated motion tracking/stabilization of 2017 from the original author of \CGG{}. For theory and explanations refer to the \hyperref[sub:motion]{Motion} plugin.
 
 \subsection{Oil painting}%
 \label{sub:oil_painting}
@@ -3274,17 +3293,17 @@ Modify the 411 yuv to look like 420 color space instead. If the edit to which th
 \subsection{YUVShift}%
 \label{sub:yuvshift}
 
+\begin{figure}[hbtp]
+	\centering
+	\includegraphics[width=0.8\linewidth]{yuvshift.png}
+	\caption{Before and after YUVShift adjusting}
+	\label{fig:yuvshift}
+\end{figure}
+
 This effect is used for YUV input video from older cameras using $3$ sensors. It is possible to have misalignment of the $3$ sets of numbers: \textit{Y}, which represents the luminance or brightness component, and for \textit{U} and \textit{V} representing the chrominance (color) components. If they were misaligned in the video, you can use \textit{YUVShift} to realign. To move a specific component up/down, modify the \textit{dy} value using the slider bar in the RGBShift window. To move a component left/right, modify the corresponding \textit{dx} value. With the Clear buttons we can bring the slider to default values without affecting the other parameters. If you are using an RGB color space, you will want to use the \textit{RGBShift} effect instead.
 
 Figure~\ref{fig:yuvshift} (top) shows the blue \textit{U} component aligned too far to the left. And the red \textit{V} component is misaligned too far to the right. Note the \textit{U\_dx} current slider bar set to $0$ as shown by the yellow box value in the YUVShift plugin window. All components are currently at zero.
 A corrected video image is shown in the bottom. Now the red and blue colors are correctly aligned. Note how \textit{U\_dx} is now at $+20$ and \textit{V\_dx} is now negative to realign the image.
-
-\begin{figure}[hbtp]
-    \centering
-    \includegraphics[width=0.8\linewidth]{yuvshift.png}
-    \caption{Before and after YUVShift adjusting}
-    \label{fig:yuvshift}
-\end{figure}
 
 \subsection{Zoom Blur}%
 \label{sub:zoom_blur}
