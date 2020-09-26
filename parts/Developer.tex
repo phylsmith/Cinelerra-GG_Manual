@@ -697,7 +697,7 @@ The theme plugin contains a \textit{new\_theme} function, that allocates and con
 
 When a theme is constructed by \texttt{NameMain::new\_theme()}, it sets a pointer to a
 block of data created in the plugin build that contains all of the png data
-files in the \texttt{plugins/theme\_name/data} directory.  These images may define or override the appearance of gui images, such as \textit{ok.png} (the ok button).  There are usually a large number of images that need to be defined.  The theme plugin adds them to the theme image data in the \texttt{theme $\rightarrow$ initialize()} function.  The best list of theme image setup is probably in SUV (\texttt{plugins/theme\_suv/suv.[Ch]}).
+files in the \texttt{plugins/theme\_name/data} directory.  These images may define or override the appearance of gui images, such as \textit{ok.png} (the ok button).  There are usually a large number of images that need to be defined.  The theme plugin adds them to the theme image data in the \texttt{theme $\rightarrow$ initialize()} function.  The best list of theme image setup is probably in SUV (\texttt{plugins/theme\_suv/suv.})
 
 The easy way to create a new theme is to copy an existing theme and change
 its name to \textit{ThemeName}, and be sure to \texttt{change plugin\_title()} to the new name, then tweak the definitions until you are happy with the results.   The file
