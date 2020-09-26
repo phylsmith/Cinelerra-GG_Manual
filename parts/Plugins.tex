@@ -1705,17 +1705,13 @@ color to determine the color you want the rest of the video to be.  When
 there is a large light or color variation within a range of a few frames,
 you spend a lot of time correcting each frame when it would be better to
 just get an average value to use.  If you want, then you can make a LUT for
-that set of frames instead of each frame. A practical case may be the shooting of a room illuminated by a lamp and then with the light off. We can choose only the range of illuminated frames and then we will have the whole shot illuminated. Or we can choose only the dark frames and so we will have all the dark shot.
+that set of frames instead of each frame.
 
 It works by selecting the area on the timeline for
 which you would like to see the Histogram averaged and then click on the
 \textit{Frames} button in the Histogram plugin.
 The parameters are:
-\textit{Linear to Log} slider: frequency in Linear range to Log range; default is
-50\%, but if you want it to be the same as the Videoscope or Histogram Bezier, set the slider
-all the way to Log.  The variation is by 10\% steps.  Linear generally represents what
-the eye sees in the real world.  Log is an exponential look where the small numbers are
-represented more - that is, the leading digit. 
+\textit{Linear to Log} slider: frequency in Linear range to Log range; default is 50\%, but if you want it to be the same as the Videoscope or Histogram Bezier, set the slider all the way to Log.  The variation is by 10\% steps.  Linear generally represents what the eye sees in the real world.  Log is an exponential look where the small numbers are represented more - that is, the leading digit.
 \textit{Frames} button: if a Selection is set on the timeline, the number of frames
 will be calculated and shown in the box next to it.
 \textit{Frame Count box}: type in the number of frames you want to be looked at
@@ -1965,7 +1961,7 @@ Motion tracker works by using one region of the frame as the region to track (Ma
 To save time the motion result can be saved in a file for later reuse, recalled from a previous calculation, or discarded. The motion tracker has a notion of $2$ tracks, the \textit{master} layer and the \textit{target} layer. The \textit{master} layer is where the comparison between $2$ frames takes place. The \textit{target} layer is where motion is applied either to track or compensate for the motion in the \textit{master} layer (figure~\ref{fig:motion}).
 
 \begin{figure}[ht]
- 	\centering
+	\centering
  	\includegraphics[width=0.9\linewidth]{motion.png}
  	\caption{Motion plugin GUI}
  	\label{fig:motion}
@@ -2294,7 +2290,7 @@ C - has only object2 visible
 \subsection{Motion 2 Point}%
 \label{sub:motion_2_point}
 
-Motion stabilization using 2 pass tracking. For theory and explanations refer to the \hyperref[sub:motion]{Motion} plugin.
+Motion plugin using 2 \textit{Match box} for tracking. For theory and explanations refer to the \hyperref[sub:motion]{Motion} plugin.
 
 \subsection{Motion Blur}%
 \label{sub:motion_blur}

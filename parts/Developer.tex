@@ -643,21 +643,21 @@ The summary line above in Bold represents the User time, System time, Real time 
 
 So why use a Profiler? Because it is the ``ls'' for executable functions!!
 
-\section{How to create your own theme}
+\section{How to Create a new Theme}
 \label{sec:how_create_theme}
 
-A Theme is a base class object that is created and customized as \textit{ThemeName}.
+A \textit{Theme} is a base class object that is created and customized as \textit{ThemeName}.
 It is constructed during program initialization in a theme plugin
 \texttt{PluginTClient},
-defined in a \texttt{plugins/theme\_name} source directory.
+defined in \texttt{plugins/theme\_name} source directory.
 
 \texttt{theme\_name.C} and \texttt{theme\_name.h} are derived \textit{Theme} class object constructors.
 
-A Theme is constructed during initialization in \texttt{init\_theme} (\texttt{mwindow.C}). The theme plugin is accessed using the \textit{name} from preferences, and that theme plugin is loaded, and it contains the code to construct that theme.  A Theme object has functions and data that \CGG{} uses to do a variety of customizations, such as \texttt{default\_window\_positions}, and it can modify GUI defaults, like \\
-\texttt{default\_text\_color}, when it is initialized.
+A \textit{Theme} is constructed during initialization in \texttt{init\_theme} (\texttt{mwindow.C}). The theme plugin is accessed using the \textit{name} from preferences and then the theme plugin is loaded which contains the code to construct the theme.  A \textit{Theme} object has functions and data that \CGG{} uses to do a variety of customizations, such as \texttt{default\_window\_positions}, and it can modify GUI defaults like \\
+\texttt{default\_text\_color} when it is initialized.
 
-The theme plugin contains a \textit{new\_theme} function, that allocates and constructs a
-\textit{ThemeName} object, with a base classes of \textit{BC\_Theme} (gui setup), \textit{Theme} (\CGG{} defaults), and \textit{ThemeName}, with definitions and overrides that create the custom theme. To create a new theme, a new plugin is needed:
+The theme plugin contains a \textit{new\_theme} function that allocates and constructs a
+\textit{ThemeName} object with base classes of \textit{BC\_Theme} (gui setup), \textit{Theme} (\CGG{} defaults), and \textit{ThemeName}, with definitions and overrides that create the custom theme. To create a new theme, a new plugin is needed:
 
 \begin{lstlisting}[numbers=none]
 	#include "header files.h"
@@ -697,19 +697,19 @@ The theme plugin contains a \textit{new\_theme} function, that allocates and con
 
 When a theme is constructed by \texttt{NameMain::new\_theme()}, it sets a pointer to a
 block of data created in the plugin build that contains all of the png data
-files in the \texttt{plugins/theme\_name/data} directory.  These images may define or override the appearance of gui images, such as \textit{ok.png} (the ok button).  There are usually a large number of images that need to be defined.  The theme plugin adds them to the theme image data in the \texttt{theme $\rightarrow$ initialize()} function.  The best list of theme image setup is probably in SUV (\texttt{plugins/theme\_suv/suv.})
+files in the \texttt{plugins/theme\_name/data} directory.  These images may define or override the appearance of gui images, such as \textit{ok.png} (the ok button).  There are usually a large number of images that need to be defined.  The theme plugin adds them to the theme image data in the \texttt{theme $\rightarrow$ initialize()} function.  The best list of theme image setup is probably in SUV (\texttt{plugins/theme\_suv/suv}).
 
 The easy way to create a new theme is to copy an existing theme and change
-its name to \textit{ThemeName}, and be sure to \texttt{change plugin\_title()} to the new name, then tweak the definitions until you are happy with the results.   The file
-names and Makefile also need to be updated to the new theme \textit{name}.  The source
-can by manually rebuilt by invoking make in the \texttt{plugins/theme\_name}
+its name to \textit{ThemeName}, change \texttt{plugin\_title()} to the new name, and then tweak the definitions until you are happy with the results.   The file
+names and Makefile also need to be updated to the new theme name.  The source
+can by manually rebuilt by invoking \textit{make} in the \texttt{plugins/theme\_name}
 directory.
 
-Once it is built into the plugin library, it will be discovered by the plugin probe,
-and it will become an available theme in the \textit{Preferences}.
+Once the new theme is built into the plugin library, it will automatically be discovered by the plugin probe
+and it will become an available theme in \textit{Preferences}.
 
 If you are ready to add it to the main build, then \textit{theme\_name} should be
-included in the DIRS targets of the \texttt{plugins/Makefile}, and the \texttt{plugin\_defs} needs \textit{theme\_name} in the themes list.
+included in the DIRS targets of the \texttt{plugins/Makefile}, and \texttt{plugin\_defs} needs \textit{theme\_name} in the themes list.
 
 Themes usually require considerable time to create from scratch.  For
 example, the SUV theme has over 800 lines in the initialize function, and has over
