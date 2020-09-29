@@ -609,13 +609,17 @@ will be using the default \textit{Auto} option.  The window size is not changed,
 the size of the video itself. In addition there are many shortcuts for zooming that you
 will find in the Shortcuts chapter (\ref{cha:shortcuts}).
 
-To resize the entire window instead of just the video, use a RMB click in the compositor
-window which brings up a menu with all the zoom levels, zoom auto mode, and some other options. 
+Using a RMB click in the compositor window brings up a menu with several options.  One of these
+is \emph{Resize Window} which allows for resizing the entire window instead of just the video
+and if you highlight that, you can choose from several variations for the window size. 
+Other available options include self-explanatory ones of \emph{Fullscreen} with "f" as a toggle
+to go to fullscreen and to revert to non-fullscreen and \emph{Zoom Auto}. 
 As you would expect, whenever the video is zoomed so that only part of the image is visible
 in the window, scrollbars are automatically added as needed on the bottom, the right hand 
 side, or both.
 Other options include \emph{Reset camera} and \emph{Reset projector} which obviously are used
-to reset the camera and the projector (reference~\ref{sub:camera_and_projector}).
+to reset the camera and the projector (reference~\ref{sub:camera_and_projector}).  And
+\emph{Camera/Projector keyframe} will create a keyframe at that point on the timeline.
 The \emph{Hide controls/Show controls} option is great for hiding the left hand toolbar and
 bottom set of controls for a cleaner look. 
 
@@ -1197,7 +1201,7 @@ the actual cropping take affect.
 There are 3 choices of crop methods to choose in the menu pulldown on the bottom right side.
 \begin{enumerate}
      \item Reformat - Reformat Session crops and changes the Format for the entire session. 
-Because the Format is changed, this is applied to all tracks in the project.
+Because the Format is changed, this is applied to all tracks in the project. 
 The part of the image outside the rectangle will be cut off and the projector will make the video fit.
 The  \texttt{Settings $\rightarrow$ Format} window will show the new project Width and Height values and
 the projector tool window will show the new $X, Y$ values. Track size remains unchanged.
@@ -1333,35 +1337,32 @@ at least temporarily, is so that you can quickly review your video before a rend
 \subsection{Timebar + Preview Region Usage in the Compositor and Viewer}%
 \label{sub:timebar_preview_region_usage_in_the_compositor_and_viewer}
 
-The Viewer and Compositor each have a timebar control area with an indicator line below the video
-output. The \textit{timebar} shows the whole time covered by the program. When a video asset
-is loaded in the main window and you move in the compositor, the insertion pointer in the main
-window will reflect those movements.  However, this is not the case with the viewer.  In the viewer
-only that specific media is shown and there is no corresponding movement on the timeline.
-
-Both the Compositor and Viewer support labels and in/out pointer which are displayed in the timebar.
-And as with the movements, when you use the labels or in/out pointer in the compositor timebar,
-the result will also be reflected in the main window timebar.  Along with that, of course, when
-you move to a label or in/out pointer in the compositor, the insertion point in the program window
-will go to that position.
-
-The timebar in the compositor and the viewer can be used to define a region known as the \textit{preview region}.  
-This preview region is the region of the timeline which the slider affects.  
-By using a preview region inside the entire program and using the slider inside the preview region you can very precisely and relatively quickly seek in the compositor and viewer.  
-The preview region can be especially handy when you have large pieces of media by previewing one section, then move to the next section.  
-
-The active preview region is the zone between the edge bars.  
-The full range of the window slider pointer action is down-scaled to the active preview region.   
-To use this, set the preview active region as a media time region of interest.  
-Now addressing the timebar with the mouse only operates as if the timebar is zoomed to the scale of the active preview zone.  
-This has the effect of magnifying the interesting media in terms of the mouse pointer addressing, for fine-tuning.
+The Viewer and Compositor each have a timebar control area with a red indicator
+line below the video output. The timebar shows the whole time covered by the
+resource. When a video resource is loaded in the main window and you move in the
+compositor, the insertion pointer in the main window will reflect those movements.
+But in the viewer only that specific media
+is shown and there is no corresponding movement on the timeline.
 
 \begin{figure}[htpb]
-    \centering
-    \includegraphics[width=1.0\linewidth]{timebar1.png}
-    \caption{The arrow above the green colored “play forward” transport button is on the timebar.}
-    \label{fig:timebar1}
+	\centering
+	\includegraphics[width=1.0\linewidth]{timebar1.png}
+	\caption{The mouse cursor, above the green colored “play forward” transport button, is on the timebar. Further to the right we see the red "indicator line".}
+	\label{fig:timebar1}
 \end{figure}
+
+Both the Compositor and Viewer support labels and in/out pointer which are dis-
+played in the timebar. And as with the movements, when you use the labels or
+in/out pointer in the compositor timebar, the result will also be reflected in the
+main window timebar. Along with that, of course, when you move to a label or
+in/out pointer in the compositor, the insertion point in the program window will
+go to that position.
+
+The timebar in the compositor and the viewer covers the whole length of the resource
+loaded in there. Moving the mouse with the LMB pressed moves the position in the
+resources as indicated by the indicator line. A complete mouse movement between left and right edges of the window moves the indicator line by default along the whole timebar. With long resources it can be difficult to precisely locate sections in the resource. To make this easier, you can limit the effect of the same window-wide mouse movement to a smaller area of the timebar, this area is defined as the preview region. This region can also be moved along the timebar.
+
+For instance, if you need to get a few 10 second clips from an 60 minute video, you could define a one-minute preview region, move it approximately to a place where a clip needs to be taken, and easily select with the mouse in and out points within the region, because the whole window mouse movement now covers 1 minute instead of 60 minutes.
 
 To create and use a preview region, hold down the right mouse button inside the timebar on either end of the timebar close to the edge until you see the resize pointer.  
 While continuously holding the right mouse button down, drag the arrow away from the end towards the middle of the timebar until you have the desired area outlined.  
@@ -1378,8 +1379,7 @@ There are either a left or right resize pointer and you can click and drag in ei
 \begin{figure}[htpb]
     \centering
     \includegraphics[width=1.0\linewidth]{timebar3.png}
-    \caption{Here you can see the right-facing arrow used to drag the other end of the slider bar.  
-        The black area between is the actual preview area.}
+    \caption{Here you can see the right-facing arrow used to drag the other end of the slider bar. The black area is the actual preview area.}
     \label{fig:timebar3}
 \end{figure}
 
@@ -1387,25 +1387,19 @@ You can slide the preview zone left or right by holding the right mouse button o
 The selected area will move left or right as you drag and still retains the same size.
 
 \begin{figure}[htpb]
-    \centering
-    \includegraphics[width=1.0\linewidth]{timebar4.png}
-    \caption{Note the double-headed fat arrow in the preview area used  to move the selection over.}
-    \label{fig:timebar4}
+	\centering
+	\includegraphics[width=1.0\linewidth]{timebar4.png}
+	\caption{Note the double-headed fat arrow in the black preview area used to move the selection over.}
+	\label{fig:timebar4}
 \end{figure}
 
 Settings:
 
 \begin{enumerate}
-    \item  If no preview region is set, increasing the length of the media on the timeline by inserting media or
-        appending, has no effect on the non-selected preview region.  That is, you will not see the blue slider
-        suddenly mysteriously appear.
-    \item  If the preview region is set, when you replace the current project or file,  the preview region is
-        automatically disabled.
-    \item  If the preview region is set, when you append data or change the size of the current project, the
-        preview region may appear to either move, shrink, or grow depending on the new length of the
-        media on the timeline.  
-    \item  To disable the preview region, you will have to drag both the right and the left blue slider bars
-        completely to their corresponding end so that there is no longer any visible red slider.
+    \item  If no preview region is set, increasing the length of the media on the timeline by inserting media or appending, has no effect on the non-selected preview region.  That is, you will not see the reddish slider bar suddenly mysteriously appear.
+    \item  If the preview region is set, when you replace the current project or file,  the preview region is automatically disabled.
+    \item  If the preview region is set, when you append data or change the size of the current project, the preview region may appear to either move, shrink, or grow depending on the new length of the media on the timeline.  
+    \item  To disable the preview region, you will have to drag both the right and the left blue slider bars completely to their corresponding end so that there is no longer any visible red slider.
 \end{enumerate}
 
 A good method for taking advantage of the preview region is described here.  
@@ -1415,7 +1409,7 @@ Now in the compositor window, right mouse drag from the left side of the edge of
 Back in the main track canvas, move to the location of the area you want to end looking and again you will see the red indicator line in the compositor.  
 Use the right mouse drag from the right to stop at that end point.  Using this method is often easier than continuous usage of the single frame move which can be tedious.
 
-One last interesting item of note -- sometimes you may wish to see just a little more that is outside the preview region and you can do so!  You can actually move outside the compositor or viewer window space and view more, at least until you hit the end of the monitor space.
+One last interesting item of note -- sometimes you may wish to see just a little more that is outside the preview region and you can do so!  You can actually move outside the compositor or viewer window space and view more, at least until you hit the end of the screen space.
 
 \section{Resources Window}%
 \label{sec:resources_window}
@@ -1525,7 +1519,7 @@ Below are steps illustrating an easy way to set up a folder.
                 \centering
                 \includegraphics[width=0.9\linewidth]{folder_resources.png}
                 \caption{Highlight, then click “New Media or Clips”.
-                    “Modify folder” can be used to   change the name of a folder.
+                    “Modify folder” can be used to change the name of a folder.
                     “Delete folder” in the popup can be used to delete a folder.
                 }
                 \label{fig:folder_resources}
