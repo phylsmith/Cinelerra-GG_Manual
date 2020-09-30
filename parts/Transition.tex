@@ -11,11 +11,10 @@ the usual result is that the first edit's output immediately is followed by the 
     \label{fig:transition}
 \end{figure}
 
-Note the colored bar above the \textit{Shape Wipe} transition.
-This bar near the transition symbol shows the position and the length of the transition.
+Note the bluish colored bar above the \textit{Shape Wipe} transition.
+This bar near the transition symbol shows the position and the length of the transition. We can extend or reduce the length of the bar (and therefore the duration of the transition) by simply dragging the right edge of the bar to the desired position.
 
-Transitions only apply to the matching track type; that is audio transitions only apply to audio tracks
-and video transitions only apply to video tracks.
+Transitions only apply to the matching track type; that is audio transitions only apply to audio tracks and video transitions only apply to video tracks.
 
 An example usage of a transition follows:
 \begin{enumerate}
@@ -26,7 +25,14 @@ The beginning of the edit will be covered by the transition, if the insertion po
 Some Transitions have parameters that can be modified. To see these, move the pointer over the transition and right click which brings up a menu. A \texttt{Show} option will pop up a window if there are parameters that you can change to different values. 
 An \textit{On} option makes it possible to turn off the transition so that it will not be in effect in case you want to only enable it under certain conditions.  The default value for this will be checked On.
 A \textit{Length} option lets you adjust the length in seconds of the time that the transition will be in play.  Values modified in the Show or Length will be saved for use the next time that transition is used until changed again. 
-The \textit{Detach} option deletes the transition from the timeline. When you drag and drop a different transition on top of an existing transition on the timeline, it replaces the previous one.
+The \textit{Detach} option deletes the transition from the timeline. When you drag and drop a different transition on top of an existing transition on the timeline, it replaces the previous one (see figure~\ref{fig:transition01}).
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\linewidth]{transition01.png}
+	\caption{GUI for Wipe transition}
+	\label{fig:transition01}
+\end{figure}
 
 There are some shortcuts to alleviate the dragging and dropping of transitions when you want to do a lot of them in various places on the timeline. After you have established the parameter values for a transition that you have dragged from the Resources window, you can use "U" and "u" keys to paste the same transition;
 the "U" key pastes the last video transition while the "u" key pastes the last audio transition on all recordable tracks. 
@@ -42,7 +48,7 @@ When playing transitions, software rendering is used.  This means that if you ar
     
 When \textit{Info on} is enabled via the right mouse button over an empty space in the Resources window (or the shortcut of the letter “i” is used), a short description will be provided in the lower right hand corner of that window for the current transition that the mouse is on.
 
-Once you have dragged and dropped a transition to the timeline, right mouse click on the transition and a pop-up menu will appear which provides an opportunity to make some changes.  These are described next for all video and audio transitions. 
+Once you have dragged and dropped a transition to the timeline, right mouse click on the transition and a pop-up menu will appear which provides an opportunity to make some changes.  These are described next for all video and audio transitions (see figure~\ref{fig:transition01}). 
 
 \begin{description}
     \item[Show] If available, clicking on this will pop up a transition specific menu.

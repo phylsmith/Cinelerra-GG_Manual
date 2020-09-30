@@ -902,19 +902,16 @@ The camera and projector have shortcut operations that do not appear in the popu
 These are accessed in the \emph{Show tool info} window.
 Most operations in the Compositor window have a tool window which is enabled by activating the question mark icon (figure~\ref{fig:camera_tool}).
 
-\begin{wrapfigure}[10]{O}{0.45\linewidth} 
-	%\vspace{1ex}
-    \includegraphics[width=1.0\linewidth]{camera_tool.png}
-    \caption{Camera and Projector tool}
-    \label{fig:camera_tool}
-\end{wrapfigure}
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\linewidth]{camera_tool.png}
+	\caption{Camera and Projector tool}
+	\label{fig:camera_tool}
+\end{figure}
 
-In the case of the camera and projector, the tool window shows $x$, $y$, and $z$ coordinates. 
-By either tumbling or entering text directly, the camera and projector can be precisely positioned.  
-Justification types are also defined for easy access. 
-A popular justification operation is upper left projection after image reduction. 
-This is used when reducing the size of video with aspect ratio adjustment.  
-In the last figure you see the choices for justification as the location of the line in the 6 boxes in the order of left, center horizontal, right, top, center vertical, and bottom.
+In the \textit{Position} section you can act on the $X$, $Y$ and $Z$ coordinates. By either tumbling or entering text directly or by using the slider, the camera and projector can be precisely positioned. There is also a reference to the color of the curve as we see it on the timeline. You can also define the \textit{range} of action which by default is [-100 to 100]. By pressing the Reset button for each coordinate, or the global Reset button, the range is automatically brought to the project size value (HD; 4k; etc), which are usually the most useful limits. Note that the range can also be changed in the \textit{Program} window, in the \textit{zoom bar}, where there are similar input fields to enter the chosen limits.
+
+In the \textit{Justify} section we can use automatic positioning in the 6 standard coordinates: Left, Horizontal, Right, Top, Center and Bottom.
 
 The translation effect allows simultaneous aspect ratio conversion and reduction but is easier to use if the reduced video is put in the upper left of the \textit{temporary} instead of in the center. 
 The track size is set to the original size of the video and the camera is centered. 
@@ -922,23 +919,21 @@ The output size is set to the reduced size of the video.
 Without any effects, this produces just the cropped center portion of the video in the output.
 
 The translation effect is dropped onto the video track. The input dimensions of the translation effect are set to the original size and the output dimensions are set to the reduced size. 
-To put the reduced video in the center subsection that the projector shows would require offsetting out $x$ and out $y$ by a complicated calculation. 
-Instead, we leave out $x$ and out $y$ at 0 and use the projector's tool window. 
+To put the reduced video in the center subsection that the projector shows would require offsetting out $X$ and out $Y$ by a complicated calculation. 
+Instead, we leave out $X$ and out $Y$ at 0 and use the projector's tool window. 
 By selecting left justify and top justify, the projector displays the reduced image from the top left corner of the \textit{temporary} in the center of the output.
 
-\paragraph{Note:} To change the limits of the slider X, Y and Z, which by default are $-100 / +100$, we must intervene on the zoom bar at the bottom of the Program window. Select Zoom for Z; or X and Y and enter the desired values. Now the Camera/Projector tool will assume the new limits.
-
-Other buttons cover the 5 modes of curves interpolation: smooth, linear, tangent, free, bump.
+In the \textit{Curve type} section we can choose between various interpolation algorithms that determine the curve type:
 
 \begin{description}
 	\item[smooth:] bezier interpolation which are flat at the endpts
 	\item[linear:] piecewise linear curve.
 	\item[tangent:] bezier interpolation with collinear endpts in a specified line.
-	\item[disjoint:] piecewise bezier, if there is such a thing.
+	\item[free:] piecewise bezier, if there is such a thing.
 	\item[bump:] has 2 values, one viewed from the left/right, discontinuous.
 \end{description}
 
-Finally there are the 2 buttons for the bump curves: settings on Right/Left Edges and Span (see \nameref{sec:bump_autos}).
+In the \textit{Keyframe} section we can create new keyframes and set them as Bump autos (\textit{Right/Left edges} and \textit{Span} buttons). For further details see \nameref{sec:bump_autos}.
 
 \subsubsection*{Reset to Default}%
 \label{ssub:reset_default}
@@ -1341,8 +1336,7 @@ The Viewer and Compositor each have a timebar control area with a red indicator
 line below the video output. The timebar shows the whole time covered by the
 resource. When a video resource is loaded in the main window and you move in the
 compositor, the insertion pointer in the main window will reflect those movements.
-But in the viewer only that specific media
-is shown and there is no corresponding movement on the timeline.
+But in the viewer only that specific media is shown and there is no corresponding movement on the timeline.
 
 \begin{figure}[htpb]
 	\centering
@@ -1359,8 +1353,7 @@ in/out pointer in the compositor, the insertion point in the program window will
 go to that position.
 
 The timebar in the compositor and the viewer covers the whole length of the resource
-loaded in there. Moving the mouse with the LMB pressed moves the position in the
-resources as indicated by the indicator line. A complete mouse movement between left and right edges of the window moves the indicator line by default along the whole timebar. With long resources it can be difficult to precisely locate sections in the resource. To make this easier, you can limit the effect of the same window-wide mouse movement to a smaller area of the timebar, this area is defined as the preview region. This region can also be moved along the timebar.
+loaded in there. Moving the mouse with the LMB pressed moves the position in the resources as indicated by the indicator line. A complete mouse movement between left and right edges of the window moves the indicator line by default along the whole timebar. With long resources it can be difficult to precisely locate sections in the resource. To make this easier, you can limit the effect of the same window-wide mouse movement to a smaller area of the timebar, this area is defined as the preview region. This region can also be moved along the timebar.
 
 For instance, if you need to get a few 10 second clips from an 60 minute video, you could define a one-minute preview region, move it approximately to a place where a clip needs to be taken, and easily select with the mouse in and out points within the region, because the whole window mouse movement now covers 1 minute instead of 60 minutes.
 
