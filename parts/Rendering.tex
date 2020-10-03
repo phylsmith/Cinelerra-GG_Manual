@@ -137,40 +137,46 @@ repeatedly.  It also allows for \CGG{} to be run by external
 programs, with no need for the user to manually interact with the
 user interface (figure~\ref{fig:batch01}).
 
+\begin{figure}[htpb] \centering
+	\includegraphics[width=1.0\linewidth]{batch01.png}
+	\caption{Example of the Batch Render menu}
+	\label{fig:batch01}
+\end{figure}
+
 If you want to render many projects to media files without having to
 constantly set up the render dialog for each one, batch rendering is
-a more efficient method of rendering.  In the Batch Render menu, you
-specify one or more \CGG{} project XML files, the EDL, to render and
-unique output files for each. (The EDL is the Edit Decision List or
-the set of changes to be applied to the project and media files.)
-Then \CGG{} loads each project file and renders it
-automatically. The project XML files, combined with the settings for
-rendering an output file, are called a batch.  This allows a large
-amount of media to be processed without user intervention.
+a more efficient method of rendering. To use this feature you need to 
+understand certain concepts.
 
-\begin{figure}[htpb] \centering
-  \includegraphics[width=1.0\linewidth]{batch01.png}
-  \caption{Example of the Batch Render menu}
-  \label{fig:batch01}
-\end{figure}
+\begin{enumerate}
+	\item You must define a list of Batches (\textit{Job}) before starting the rendering. This is created using the \textit{New} button and displayed in \textit{Batches to Render} dialog.
+	\item Each batch consists of a source project already created in \CGG{}, e.g. \texttt{aaa.xml}, to which we assign the rendering parameters.
+	\begin{itemize}
+		\item to associate \texttt{aaa.xml} to the batch we use the \textit{EDL Path} input field.
+		\item we decide a name and path for the output file.
+		\item let's set the \textit{File Format} of the output file.
+		\item We configure the file with the Audio/Video \textit{wrench}.
+		\item we decide whether to create different files for each \textit{label} and whether to use a \textit{Render farm}.
+	\end{itemize}
+	\item Created the first batch, we will see it appear in the dialog \textit{Batches to Render}.
+	\item Using the \textit{New} button again we create a second batch for another source project (\texttt{bbb.xml}) and configure it at will.
+	\item We continue with the source projects \texttt{ccc.xml}, \texttt{ddd.xml}, etc. until we run out of projects that we want to render in batch.
+	\item Note that each batch has its own name, path and rendering parameters.
+	\item Now we have our \textit{Job}, a list of batches. We can still configure it or modify it if we want to change something. In addition we can delete a batch from the list or we can disable it in the \textit{Enabled} field so that it is not taken into account during rendering, but without deleting it.
+	\item Finally we start batch rendering with the \textit{Start} button.
+\end{enumerate}
+
+Let's see in detail how to set the Batch Rendering.
 
 The first thing to do when preparing to do batch rendering is to
 create one or more \CGG{} projects to be rendered and save them as a
-normal project, such as \texttt{ProjectA.xml}.  The batch renderer
+normal project, such as \texttt{aaa.xml}.  The batch renderer
 requires a separate project file for every batch to be rendered.
 You can use the same \CGG{} project file if you are rendering to
 different output files, as in an example where you might be creating
 the same output video in different file formats.
 
-To create a project file which can be used in batch render, set up
-your project and define the region to be rendered either by
-highlighting it, setting in/out points around it, or positioning the
-insertion point before it. Then save the project as usual to your
-\texttt{project.xm}l file. Define as many projects as needed this
-way.  The batch renderer takes the active region from the EDL file
-for rendering. If we have not set active regions, it is better to
-bring the insertion point to the beginning of the timeline to avoid
-possible problems with the rendering.
+You do not have to render an entire projects. We can limit ourselves to an \textit{active region} that we can set through a selection in Cut and Paste mode, with labels or In/Out Points. Or the rendering will start from the Insert Point position until the end of the project. Remember: if we want to render the entire project (and not just one active region) it is important to bring the Insertion Point to the beginning of the timeline. This is the only way we are sure to include the whole project.
 
 With all the \CGG{} xml project files prepared with active regions,
 go to \texttt{File $\rightarrow$ Batch Render}. This brings up the
@@ -187,7 +193,7 @@ Set the \textit{Output path}, \textit{File format}, \textit{Audio},
 parameters as if you were rendering a single file.  These parameters
 apply to only one batch.  In addition to the standard rendering
 parameters, you must select the \textit{EDL Path} to be the project
-file (such as \texttt{ProjectA.xml}) that will be used in the batch
+file (such as \texttt{aaa.xml}) that will be used in the batch
 job.  In this case, \textit{EDL Path} is not related in anyway with
 the EDL files as created by \texttt{File/Export EDL}.  In batch
 render mode the program will not overwrite an existing output file
@@ -195,18 +201,18 @@ and will simply fail, so make sure that no files with the same name
 as the output files exist before starting.
 
 If the batches to render list is empty or nothing is highlighted,
-click \texttt{New} to create a new batch. The new batch will contain
-all the parameters you just set.  Repeatedly press the \texttt{New}
+click \textit{New} to create a new batch. The new batch will contain
+all the parameters you just set.  Repeatedly press the \textit{New}
 button to create more batches with the same parameters.  When you
 highlight any batch, you can edit the configuration on the top of
 the batch render window. The highlighted batch is always
 synchronized to the information displayed.  You can easily change
 the order in which the batch jobs are rendered, by clicking and
-dragging a batch to a different position.  Hit \texttt{Delete} to
+dragging a batch to a different position.  Hit \textit{Delete} to
 permanently remove a highlighted batch. In the list box is a column
 which enables or disables the batch with an \texttt{X} meaning the
 batch job is enabled and will be run.  This way batches can be
-skipped without being deleted.  Click on the \texttt{Enabled} column
+skipped without being deleted.  Click on the \textit{Enabled} column
 in the list box to enable or disable a batch.
 
 The description of each of the columns in the batch list are as
@@ -216,26 +222,27 @@ follows:
 \item[Enabled:] an X in this column means the batch job will be run.
 \item[Labeled:] an \texttt{X} in this column goes hand in hand with
   create new file at each label.
+\item[Farmed:] to use or not the render farm.
 \item[Output:] path and filename for the generated output.
 \item[EDL:] the path and filename of the source EDL for the batch
   job.
 \item[Elapsed:] the amount of time taken to render the batch if
   finished.  If field is empty, it did not run.
 \end{description} To start rendering from the first enabled batch,
-hit \texttt{Start}.  Once rendering, the main window shows the
+hit \textit{Start}.  Once rendering, the main window shows the
 progress of the batch. After each batch finishes, the elapsed column
 in the batch list is updated and the next batch is rendered until
 all the enabled batches are finished.  The currently rendering batch
 is always highlighted red.  To stop rendering before the batches are
-finished without closing the batch render dialog, hit \texttt{Stop}.
+finished without closing the batch render dialog, hit \textit{Stop}.
 To stop rendering before the batches are finished and close the
-batch render dialog, hit \texttt{Close}.  Or you can exit the batch
+batch render dialog, hit \textit{Close}.  Or you can exit the batch
 render dialog whether or not anything is being rendered, by hitting
-\texttt{Close}.
+\textit{Close}.
 
 You can automate \CGG{} batch renders from other programs.  In the
 batch render dialog, once you have created your list of batch render
-jobs, you can click the button \texttt{Save Jobs} and choose a file
+jobs, you can click the button \textit{Save Jobs} and choose a file
 to save your batch render list to.  Once you have created this file,
 you can start up a batch render without needing to interact with the
 \CGG{} user interface.  From a shell prompt, from a script, or other

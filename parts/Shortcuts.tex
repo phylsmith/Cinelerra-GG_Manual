@@ -1,11 +1,24 @@
 \chapter{Shortcuts}%
 \label{cha:shortcuts}
 
-Almost every \CGGI{} command has its own keyboard and mouse shortcuts. Here
-they are listed organized by window and type.  If a desktop window manager and operating
-system is already using a specific key for its own purpose then that key will not be available
-for use as a shortcut in \CGG{}. An example might be the Alt key. Some specific alternatives
-are listed in~\ref{ssub:key_alternatives} in the "Key Alternatives" paragraph.
+In \CGGI{} a lot of shortcuts are defined for various operations.
+Although it is quite possible to do everything with the mouse, the extensive
+use of shortcuts can make the editing process much more convenient and
+efficient. However, with so large a variety of shortcuts it is not uncommon
+that some of them may interfere with assignments of the same shortcuts in
+the user's desktop environment, keyboard language switcher, etc. For
+example in KDE, the Alt-Tab and Shift-Alt-Tab shortcuts are commonly assigned to
+switch between different desktop applications, and if so, these keystrokes
+would not be available to \CGGI{}. Another example, in Arch linux KDE: the combination Alt+LMB does not translate the mask, but the entire Compositor window. To translate the mask we must use Ctrl+Alt+LMB.
+
+When having problems with some shortcut in \CGGI{}, it is recommended
+first to examine which set of shortcuts is assigned to the desktop
+environment and, if necessary, resolve the conflict. A special X11 application
+\texttt{xev} (or \texttt{xorg-xev}) can also help to test the keystrokes functionality (see \texttt{man xev}).
+Otherwise, \CGGI{} is completely desktop-neutral and has no
+requirements of some special window manager's support.
+
+Here the shortcuts are listed organized by window and type. Some specific alternatives are listed in~\ref{ssub:key_alternatives} in the "Key Alternatives" paragraph.
 
 \section{Main window }%
 \label{sec:main_window}
@@ -91,8 +104,10 @@ The Main window (also called the program window) consists of pulldown menus, but
   & Attach Effect\dots &  & Open video effect selection for insert at edit boundary. \\
   & Render Effect\dots &  & Open video render select to render from select as pcm. \\
   \midrule
-  \textcolor{CinBlueText}{Tracks} & Move tracks up & Shift-Up & Circulate tracks up. \\
-  & Move trks down & Shift-Down & Circulate tracks down. \\
+  \textcolor{CinBlueText}{Tracks} & Move tracks up & Shift-Up & Swap tracks up. \\
+  & Move trks down & Shift-Down & Swap tracks down. \\
+  & Roll tracks up & Ctrl-Shift-Up & Circulate tracks up. \\
+  & Roll trks down & Ctrl-Shift-Down & Circulate tracks down. \\
   & Delete tracks &  & Delete all tracks. \\
   & Delete last track & Ctrl-d & Delete last track. \\
   & Delete first track & Shift-D & Delete first track. \\
@@ -298,6 +313,8 @@ The Main window (also called the program window) consists of pulldown menus, but
   &  & Shift+click & Over edit causes highlight section to extend to cursor. \\
   &  & Shift+click & Over boundary of effect, trims only that effect. \\
   &  & Shift+click & Over Hard Edge of Blade Cut, toggles marker. \\
+  &  & Shift+click & Between labels, highlights selection. \\
+  &  & Shift+click & Over Automation Range values, changes value. \\
   & Toggle single trk & Tab & Toggle single track arming status. \\
   & Toggle other trks & Shift-tab & Toggle all of the other tracks arming status. \\
   &  & Double click & On plugin title bar, selects that area. \\
