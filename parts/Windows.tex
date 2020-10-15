@@ -621,7 +621,9 @@ in the window, scrollbars are automatically added as needed on the bottom, the r
 side, or both.
 Other options include \emph{Reset camera} and \emph{Reset projector} which obviously are used
 to reset the camera and the projector (reference~\ref{sub:camera_and_projector}).  And
-\emph{Camera/Projector keyframe} will create a keyframe at that point on the timeline.
+\emph{Camera/Projector keyframe} will create a keyframe at that point on the timeline for
+X,Y, and Z without the requirement of being in \textit{Automatic Keyframe Mode}.  More 
+information is described in the section \nameref{sec:compositor_keyframes}.
 The \emph{Hide controls/Show controls} option is great for hiding the left hand toolbar and
 bottom set of controls for a cleaner look. 
 
@@ -1095,12 +1097,13 @@ The next 6 symbols in 2 columns represent \textit{Smooth} and \textit{Linear} bu
 
 \textit{smooth curve}	$\rightarrow$ smooth all points on a mask edge curve.
 
-\textit{smooth all} 	$\rightarrow$ smooth all active masks.
+\textit{smooth all} 	$\rightarrow$ smooth all enabled masks on this track.
 
 Linear buttons of \textit{linear point}, \textit{linear curve}, and \textit{linear all}, perform the inverse of the smooth functions.
 The control point vectors on the bezier endpoints are set to zero magnitude.
 
-In addition there is a \textit{Markers} and a \textit{Boundary} checkbox which come in handy to turn off the display of the points and the outline of the mask.  Turning off \textit{Markers} is very useful when you have a lot of control points that clutter the display and make it more difficult to see the actual mask.  A helpful feature is available by disabling \textit{Markers} and enabling \textit{Boundary} which results in all masks being displayed in the viewer; for example you can then see mask 0, mask 1 \dots at the same time.
+In addition there is a \textit{Markers} and a \textit{Boundary} checkbox which come in handy to turn off the display of the points and the outline of the mask.  Turning off \textit{Markers} is very useful when you have a lot of control points that clutter the display and make it more difficult to see the actual mask.  A helpful feature is available by disabling \textit{Markers} and enabling \textit{Boundary} which results in all masks being displayed in the viewer
+even if they are not enabled; for example you can then see mask 0, mask 1 \dots at the same time.
 
 A \textit{gang} symbol on the right hand side of this section, tooltip of \textit{Gang points}, is another useful feature that makes it easy to drag a mask to an exact coordinate using the \textit{X} or \textit{Y} textbox for numerical input or the associated tumblers.  This works like the \texttt{Alt+LMB drag} translate but provides the ability to be precise.
 
