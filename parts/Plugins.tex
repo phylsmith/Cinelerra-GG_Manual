@@ -1721,6 +1721,57 @@ starting at the insert marker or use the up/down counter.
 A side note: by using a number of frames, you can get a \textit{dissolve-like
 transition effect}.
 
+\paragraph{Theory:} 
+
+A histogram is a bunch of \textit{bins} (accumulators) that count the number of times a particular pixel channel intensity occurs in an image. Dim are on the left, bright on the right.
+
+The number of bins used depends on the color model bit depth:
+
+\begin{description}
+	\item[Histogram:] 256 for rgb8 and 65536 for all others.
+	\item[Bezier:] 256 for rgb8/yuv8 and 65536 for all others.
+	\item[Scopes:] always uses 65536
+\end{description}
+
+All of the bins are scanned when the graph is plotted.  What is shown
+depends on which plugin is used:
+
+\begin{description}
+	\item[Histogram:] was max of the bins in the pixel range, now is the sum
+	\item[Bezier:] is the max of the bins in the pixel range
+	\item[Scopes:] is the max of the bins in the pixel range
+\end{description}
+
+When the color space and the bin size are the same, all of the values
+increment the indexed bins.  When the color is the result of yuv $\rightarrow$ rgb conversion, the results \textit{spread} if there are more bins than colors.  This is the same effect you see when you turn on \textit{smoothing} in the vectorscope histogram.
+
+The \textit{total} pixels for each value is approximately the same, but the \textit{max} value depends on the color quantization.  More colors increment more bins.  Fewer colors increment fewer bins.  In both cases, the image size has the same
+number of pixels.  The fewer color case increments the used bins, and skips the
+unused bins.  This sums all of the pixels into fewer bins, and the bins have
+higher values. That is the \textit{rgb} vs \textit{yuv} case, fewer vs more bins are used.
+
+To report something more consistent, has been changed the reported value to
+the \textit{sum} of the accumulated counts for the bins reporting a pixel bar on the
+graph. The effect of this is to do this:
+
+\begin{center}
+	\begin{tabular}{ l l c r r }
+		\hline
+		1 &  & & & \\
+		1 &  & & 1 & \\
+		000100 & 3 pixels & vs & 001000& 3 pixels \\
+		\hline
+	\end{tabular}
+\end{center}
+
+On the left, the course color model piles all 3 pixels into one bin.  max
+value 3
+
+On the right, the fine color model puts the counts into 2 bins, max 2, sum 3
+
+So, by reporting the sum the shape of the results are more similar.
+
+
 \subsection{Histogram Bezier / Curves}%
 \label{sub:histogram_bezier_curves}
 
@@ -1763,19 +1814,18 @@ the beginning, to fix their values and prevent clipping.
 
 Curves are generally adjusted by introducing several control points, some to be kept fixed (as anchors) to prevent curve modification beyond them, and others to be dragged to make the desired correction. The power of the curves lies in being able to circumscribe a small interval at will and intervene only on this without involving the remaining parts of the frame. The precision with which you can work is such that you can almost arrive at a secondary color correction.
 
-\begin{figure}[htpb]
-    \centering
-    \includegraphics[width=0.8\linewidth]{ex-bezier.png}
-    \caption{Gain Up/Down; clamp; S-Shaped curve and Luma Key}
-    \label{fig:ex-bezier}
-\end{figure}
-
-
 The most used type of modification is to create a \textit{S curve}. There can be a lot of shapes that use the S curve; the simplest is to create a control point in the shadows, one in the midtones (anchors) and one in the highlights. Moving the highlight point upwards and the shadow point downwards increases the contrast, making the image sharper and improving the color rendering. With the type of \textit{linear} curve you can make hard adjustments, similar to the result of the use of \textit{Color 3 Way}, even if this acts on the color wheel (Hue) while the curves act on individual RGB channels.
 
 The \textit{Polynomial} and \textit{Bézier} types introduce \textit{control handles} that allow for more sophisticated and smoother adjustments. The quality of the result is much better, but they require more experience for their optimal use. Extending the handles away from the control point increases the \textit{radius} of the curve at that point. By varying the angle of the handles we change the \textit{tangent} and thus the curvature of the curve below. The difference between Polynomial and Bézier lies in the underlying mathematics, but for practical purposes the use is similar.
 
 Some examples of the use of curves to demonstrate the variety of possible interventions (figure~\ref{fig:ex-bezier}):
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\linewidth]{ex-bezier.png}
+	\caption{Gain Up/Down; clamp; S-Shaped curve and Luma Key}
+	\label{fig:ex-bezier}
+\end{figure}
 
 \begin{itemize}
     \item Scale the image values by increasing the white point or decreasing the white point (gain up and gain down).
@@ -2794,6 +2844,11 @@ Inside the time average effect is an accumulation buffer and a divisor. A number
     \item[Don’t buffer frames] in order to represent the accumulation of only the specified number of frames, the time average retains all the previous frames in memory and subtracts them out as it plays forward. It would run out of memory if it had to accumulate thousands of frames. By disabling subtraction the previous frames are not stored in memory and only the average function is affected by the frame count.
 \end{description}
 
+\subsection{TimeBlur}%
+\label{sub:timeblur}
+
+The TimeBlur plugin provides a way to blur a number of \textit{Frames}.
+
 \subsection{Timefront}%
 \label{sub:timefront}
 
@@ -2861,9 +2916,9 @@ If the video is displayed on a consumer TV, the outer border is going to be crop
 \label{ssub:some_recently_added_options}
 
 \begin{description}
-    \item[Drag] initial default checkbox is \textit{off} so that the Title plugin will work as it always has.
+    \item[Drag] initial default checkbox is \textit{off} so that the Title plugin will work as it always has. With Drag active, we can create a box that works as a region to the title; we can resize and translate it as we wish, and we can add a background image to it. See later how to use the background image.
     \begin{description}
-        \item[Anchors] When you turn on the Drag feature, nine different anchors/handles will appear on compositor window. The \textit{middle anchor} allows you to drag your title wherever you want in the compositor window ($X, Y$ coordinates). The other 8 handles, drawn as arrows in each corner and in the middle of each side, let you change the size of the drag area box so that your title is within that area if it fits and as it is directed.  If you need to clear the Drag enabled, you can easily do this with \textit{Allow keyframe spanning} whose use is described in \nameref{sec:allow_keyframes_spanning}.
+        \item[Anchors] When you turn on the Drag feature, nine different anchors/handles will appear on compositor window. The \textit{middle anchor} allows you to drag your title wherever you want in the compositor window ($X, Y$ coordinates). The other 8 handles, drawn as arrows in each corner and in the middle of each side, let you change the size of the drag area box so that your title is within that area if it fits and as it is directed.  If you need to clear the Drag enabled, you can easily do this with \textit{Allow keyframe spanning} whose use is described in \nameref{sec:allow_keyframes_spanning}. Another way to reset the box to default, i.e. the entire frame, is to set X and Y to 0 and W and H to the frame resolution (e.g. 1920x1080 for FullHD).
         \item[W/H] the values in these 2 boxes specify the size of the drag area box measured in pixels as shown in the compositor window. You can set these manually and if you can't see the location of your box or find your handles, set them to zero because $0$ sets it to the same as the width/height of the media.
         The Drag effect ignores all boundaries, including the \textit{Title Safe Region} of the Compositor so that if you drag your titles off the screen, it will look like they disappeared completely. Reset X and Y to reasonable values to have it reappear. The Title \textit{text}, \textit{background}, and \textit{pngs} are applied on a single layer so that they will drag together as an entity. All of the Title capabilities work in conjunction with dragging so if you want to justify the title, you can still use the \textit{Left/Center/Right/Top/Mid/Bottom} within the drag area. Be sure to turn off Drag when rendering or the box will show in the video; keep in mind that drag bars do not appear until there is some text in the text box and you can not actually drag until the Title window controls are available.
     \end{description}
@@ -2952,7 +3007,7 @@ Figure~\ref{fig:title03}.
 \paragraph{Special Characters (< > / \textbackslash \#)} Besides the previously described <, >, and / characters, there are two special characters: backslash “\textbackslash”, and the pound sign “\#”. The backslash character is used for two things. With the advent of the attribute name and value, your line may become quite long so you can use “\textbackslash” followed by the carriage return to continue on the next line as if it is just a single line. It also can be used to designate that the following character does not represent the beginning of an attribute. For example, if you want to use the opening angle character “<“ as a title character, precede it with the backslash character. The pound sign, “\#”, designates the whole line as a comment or if in the middle of the line, then the rest of the line is a comment (this includes the carriage return).
 
 \begin{description}
-    \item[Background] in this box you can keyin the name of a file of the type that \CGG{} accepts and use that file as a background for your Title characters. This will be seen in the compositor window on top of the video that is loaded in the main track canvas. Besides typing in the filename, you must also check the checkbox. This makes it easy to turn it \textit{On} and \textit{Off} to see what it looks like. Next to the background box is a \textit{Loop} checkbox. If the background file takes less time than the main track canvas video to run, you can turn on the loop checkbox so that it runs over and over again to match the time size of your video.
+    \item[Background] in this box you can keyin the name of a file of the type that \CGG{} accepts and use that file as a background for your Title characters (media video or image). This will be seen in the compositor window on top of the video that is loaded in the main track canvas. Besides typing in the filename, you must also check the checkbox. This makes it easy to turn it \textit{On} and \textit{Off} to see what it looks like. Next to the background box is a \textit{Loop} checkbox. If the background file takes less time than the main track canvas video to run, you can turn on the loop checkbox so that it runs over and over again to match the time size of your video. By default the background image will occupy the whole frame, but if we activate drag mode and create a box of the desired size, the image will occupy only the box leaving the rest of the frame visible.
     \item[Stroker] to add \textit{pen strokes} to the text letters, adjust the stroke width numerically. This looks particularly nice on certain fonts and with a negative adjustment of the \textit{Drop shadow}.
     \item[Unicode Insertion] if you want to enter a special character like the mathematical \textit{summation} symbol, you can use the unicode equivalent to do so. Press Ctrl-Shift-U followed by $2022$ and a carriage return is an example of the bullet. Refer to section \hyperref[sec:textbox_non_std_character_unicode]{17.5} for details.
     \item[Popup Helper] put your cursor where you want to add an attribute, then right mouse will bring up a list of the available attributes for you to choose, along with a submenu to choose from. The program will insert that attribute for you and all you have to add is a value when required! (see figure~\ref{fig:title02}).
