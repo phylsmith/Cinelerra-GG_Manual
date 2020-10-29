@@ -68,6 +68,67 @@ the keyboard to navigate.  Many of the key equivalences are listed in each of th
 navigation (\nameref{cha:shortcuts}). This includes, for example, shortcuts like the \texttt{Home} and \texttt{End} keys to go to the beginning or end of the timeline.  
 Another example is in the default cut and paste mode, hold down \texttt{Shift} while pressing \texttt{Home} or \texttt{End} in order to select the region of the timeline between the insertion point and the key pressed.
 
+\subsection{Transport and Buttons Bar}%
+\label{sub:transport_buttons}
+
+This is a short description of what is contained on the \textit{Transport and Buttons Bar} as seen in
+figure~\ref{fig:insertion-points}.
+Each of the symbols has an associated tooltip as an easy reminder of its function.  The usage of
+several is described in a little more detail in other areas of this manual. 
+
+\vspace{2ex}
+\begin{tabular}{ll}
+   \hline
+	First set of 3 symbols & Move in the reverse direction on the timeline \\
+        4th symbol & Stop play \\
+	Third set of 3 symbols & Move in the forward direction on the timeline \\
+	Next 2 symbols & Set editing mode \\
+	Generate keyframes while tweaking & Explained in \ref{sec:generate_keyframe_tweaking}\\
+	Allow keyframe spanning & Explained in \ref{sec:allow_keyframes_spanning}\\
+	Lock labels from moving with edits & Toggle to lock or not lock labels from moving \\
+	Next 2 are In and Out pointers & Set or unset In and Out to define an area \\
+	To Clip & Create a clip of the designated area \\
+	Split / Cut & Split/Cut at insertion or selected area \\
+	Next 2 symbols & Usual Copy and Paste functions \\
+	Next 3 symbols & Label manipulation functions  \\
+	Next 2 symbols & Used to move to other edits  \\
+	Next 2 symbols & Fitting video to the display  \\
+	Next 2 symbols & Undo and Redo last operation  \\
+	Manual Go To & Explanation after this table  \\
+	Set Timecode & Explained in \ref{sub:align_timecodes}  \\
+	Gang Modes & Explained in \ref{sub:displaying_tracks_ganged} \\
+   \hline
+\end{tabular}
+
+The \textit{Manual Go To} menu is quite versatile as you can see in figure~\ref{fig:goto_menu}.  The
+options of \textit{=} represents goto the position indicated in the textbox; \textit{+} indicates
+to goto forward the additional number in the textbox; and \textit{-} means to go in the reverse
+direction the number in the textbox.  The pulldown arrow to the right of the textbox sets the
+\textit{Time Format} for the units to be used for position changing.  This lets you change the units
+without having to modify your Preference. 
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=0.4\linewidth]{goto.png}
+    \caption{Goto position menu}
+    \label{fig:goto_menu}
+\end{figure}
+
+\textit{Time Format} options are:
+
+\begin{tabular}{ll}
+   \hline
+        h:mm:ss.sss & hours minutes seconds milliseconds  \\
+        h:mm:ss:ff & hours minutes seconds frames  \\
+        timecode  \\
+        video frames  \\ 
+        audio samples  \\
+        audio samples (hex)  \\
+        ssss.sss & milliseconds.xx  \\
+        video frames (feet)  \\
+   \hline
+\end{tabular}
+
 \subsection{Zoom Panel}%
 \label{sub:zoom_panel}
 
