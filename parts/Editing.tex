@@ -364,6 +364,8 @@ NOTES:
 	\item When in \textit{Gang Channels} or \textit{Gang Media} mode, if the first audio track is not disarmed, but 	any of its connected channel tracks are, the disarm of those channels are ignored and all channels are treated as being armed. This is to be consistent with the purpose of using this mode; the purpose being that any edits to the first master track are automatically propagated to all other channels.
 	\item It may be better when using the \textit{Gang Channels} or \textit{Gang Media} mode to make any changes
 	to the first audio channel to be automatically duplicated before reverting to the \textit{Gang None} mode to make other changes. Once you start changing individual channels (that is, audio tracks) so that they are no longer coordinated in their edits/plugins, it may be more difficult to switch back to \textit{Gang Channels} mode and get the desired results since the channels may no longer be lined up.
+	\item Gang modes should not be used with Multi-camera/Mixers because they have very specific
+operational capabilities which are not compatible with the way that Ganging works.
 \end{itemize}
 
 \section{Two Screen Editing}%
@@ -829,7 +831,9 @@ provided below.
                                   ones that have the red lines
                                   around them.\\
                                   
-    Select Edits & Ctrl-Alt-a & Select all edits within an highlighted area of the timeline \\
+    Select Edits & Ctrl-Alt-' & Select all edits within a highlighted area of the timeline \\
+    
+    Deselect Edits & & Deselect all edits within a highlighted area of the timeline \\
 
     Copy & Ctrl-c & Copy the selected edits into the copy buffer.\\
 
@@ -1110,11 +1114,27 @@ Summarizing: to select multiple edits/clips on the timeline you can simply use L
 There is also a faster way:
 
 \begin{enumerate}
-	\item Arm the tracks you want to be used
+	\item Arm the tracks you want to be used.
 	\item Highlight the area as usually you do with \textit{I-beam} mode (or use \textit{In/Out Points}; or position \textit{Insert Point} over the stack of edits). If you miss an edit that you want included, the same method can be used to add it. It is an additive operation. And, it will include the partial edits in the selected area, thus making it easy to disinclude ones you do not want.
 	It will include silence also but you can remove that or any other edit with CTRL + LMB.
 	\item Press MMB on a clip inside the highlight area and the PopUp menu is shown with the \textit{Select edits} option on the top.
-	\item Choose the \textit{Select edits} option and the clips inside the highlight area will be selected.
+	\item Choose the \textit{Select or Deselect edits} option and the clips inside the highlight area will be selected or deselected.
+\end{enumerate}
+
+And there is a Drag mouse way (this requires that the cursor be on the first
+clip and from there you start the drag):
+\begin{enumerate}
+	\item To Drag Select edits, hold down Alt+Left Mouse Button (LMB) and drag over the selection area. Releasing the mouse results in selecting. 
+	\item To Drag Deselect edits. hold down Alt+Ctrl+LMB and drag over the area to be desected.  Releasing the mouse results in deselecting.
+\end{enumerate}
+
+If using certain operating systems (for example Ubuntu and Arch) that might field the Alt key before it gets to \CGG{}, you can use the following for both Select and Deselect instead:
+\begin{enumerate}
+	\item Press and hold down Ctrl+Alt+LMB on an edit
+	\item Drag on the edits you want to select
+	\item Release the Ctrl key
+	\item Release the LMB
+	\item Release the Alt key
 \end{enumerate}
 
 \section{Inter-View Mode\;/\;Identifying Source Targets}%

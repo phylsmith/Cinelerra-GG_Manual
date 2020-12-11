@@ -42,7 +42,7 @@
 
 \nomenclature{\textbf{Concatenate}}{in File$\rightarrow$Load insertion strategy, means to load from disk or copy from the timeline edits belonging to different media onto the same set of tracks, one right after the other.}
 
-\nomenclature{\textbf{Compression}}{in \CGG{}’s dialogs means compression format. See Codec.}
+\nomenclature{\textbf{Compression}}{in \CGG{}’s dialogs means compression format. See Codec. The compression can be Lossless (without data loss) or Lossy (with data loss); it can be Intraframe (within each frame) or it can be about Groups Of Pictures (GOP and Long GOP) between frames, i.e. Interframe. Lossy and Interframe are also fine for editing, but for Color Correction, Chroma-Key and Rotoscoping Lossless and Intraframe compression is required.}
 
 \nomenclature{\textbf{Context menu}}{a pop-up menu.}
 
@@ -270,8 +270,6 @@
 
 \nomenclature{\textbf{DeSpill}}{process to remove background color contamination from the edges of the subject in foreground, during a chroma key.}
 
-\nomenclature{\textbf{Digital Intermediate (DI)}}{Over time it has taken on different meanings. For \CGG{} is meant as the creation of a high quality file that during the various stages of editing and color correction keeps as much information as possible. Being little or uncompressed its manipulation is also faster and more efficient.}
-
 \nomenclature{\textbf{Dynamic range}}{is the ratio between the largest and smallest values (luminance) that an image can assume. The larger the size, the better we can distinguish details in the dark and light parts.}
 
 \nomenclature{\textbf{Exposure}}{the exposure is the amount of light per unit area reaching an image sensor, as determined by shutter speed, lens aperture and scene luminance.}
@@ -282,11 +280,15 @@
 
 \nomenclature{\textbf{HDTV}}{(high definition TV) standard characterized by a 16:9 aspect ratio, various frames rates and scan modes and with a resolution of at least 1080.}
 
+\nomenclature{\textbf{Intermediate}}{The production process of a movie in which you switch from film to a digital intermediate for the various stages of processing and then return to the film. (ADA = Analog, Digital, Analog). The most used formats are Cineon/DPX and OpenEXR. We also talk about DI= Digital Intermediate. Nowadays it is often used as a synonym for Mezzanine codec (see).}
+
 \nomenclature{\textbf{Lanczos}}{algorithm for high quality resampling video signal. It is also used in case of upsampling, weak point of other similar filters.}
 
 \nomenclature{\textbf{Letterbox}}{blacks bars on the top and bottom side of the frame. They are due to a smaller frame size than the one set in the project (see also Pillarbox).}
 
 \nomenclature{\textbf{LUT, 3D LUT}}{(LookUp Table) used to map one color space to another. \CGG{} uses them through ffmpeg filters. There are downloadable collections or there are specific ones provided by hardware manufacturers.}
+
+\nomenclature{\textbf{Mezzanine codec}}{Transcode digital footage files into a high quality codec that is more efficient on the timeline and retains all initial information (is a DDD process, i.e. Digital, Digital, Digital). Generally such codecs are little or nothing compressed; if compressed they are lossless and intraframe and the chrominance is not less than 4:2:2. Very used codecs are DNxHD; ProRes; ffv1; HuffYUV; etc.}
 
 \nomenclature{\textbf{Nearest neighbor}}{is the simplest method of resampling an image. It is fast and resources saving, but produces less smooth results.}
 

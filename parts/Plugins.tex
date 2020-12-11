@@ -808,6 +808,7 @@ For example:
 
 \subsection{1080 to 480}%
 \label{sub:1080_to_480}
+\index{1080 to 480}
 
 Most TV broadcasts are received with a $1920\times1080$ resolution but originate from a $720\times480$ source at the studio. It is a waste of space to compress the entire $1920\times1080$ if the only resolvable details are $720\times480$. Unfortunately resizing $1920\times1080$ video to $720\times480$ is not as simple as shrinking it.
 
@@ -826,11 +827,13 @@ Extracts two $1920\times540$ fields from $1920\times1080$ image, resizes them se
 
 \subsection{Aging TV}%
 \label{sub:aging_tv}
+\index{Aging TV}
 
 This effect is the one to use if you want to achieve an old movie or TV show look. It will put moving lines up and down the movie as well as putting snow on the video. Use it along with \textit{Brightness/Contrast} and \textit{Color Balance} to make your movie look like a really old black and white movie. This came from \url{https://effectv.com}.
 
 \subsection{Alpha}%
 \label{sub:alpha}
+\index{Alpha}
 
 Allows you to apply an alpha value (transparency) to one or more tracks or one or more edits. Being also keyframable, it allows an excellent variety and possibility of use in the most disparate occasions.
 
@@ -1956,6 +1959,7 @@ Every time a keyframe is set in a loop effect, the keyframe becomes the beginnin
 
 \subsection{Motion51}%
 \label{sub:motion51}
+\index{Motion51}
 
 This plugin compensates for unwanted motion and stabilizes the picture. The \textit{Motion51} Plugin simplifies motion stabilization so that without a lot of tweaking you can easily achieve reasonable results, either by using the defaults or varying a single parameter. Since the motion in every clip is specific, there are some additional parameters useful to adjust the settings accordingly. 
 The Motion51 plugin uses different methods for tracking than the other motion plugins. Motion Stabilization is very useful if you have jittery video, for example when taken from a car window, or while walking.
@@ -2003,6 +2007,7 @@ The Samples box at the top is most often the only parameter that you may want to
 
 \subsection{Motion}%
 \label{sub:motion}
+\index{Motion}
 
 The \textit{motion tracker} is almost a complete application in itself. The motion tracker tracks two types of motion: \textit{translation} and \textit{rotation}. It can track both simultaneously or one only. It can do $\frac{1}{4}$ pixel tracking or single pixel tracking. It can stabilize motion or cause one track to follow the motion of another track. Although the motion tracker is applied as a realtime effect, it usually must be rendered to see useful results. The effect takes a long time to precisely detect motion so it is very slow.
 
@@ -2339,11 +2344,13 @@ C - has only object2 visible
 
 \subsection{Motion 2 Point}%
 \label{sub:motion_2_point}
+\index{Motion 2 Point}
 
 Motion plugin using 2 \textit{Match box} for tracking. For theory and explanations refer to the \hyperref[sub:motion]{Motion} plugin.
 
 \subsection{Motion Blur}%
 \label{sub:motion_blur}
+\index{Motion Blur}
 
 Uses X/Y camera automation vectors to apply a linear blur trailing camera direction due to movement.
 \begin{description}
@@ -2908,7 +2915,9 @@ The titler supports mainly \textit{TTF}, true type fonts. It supports others but
     # /usr/lib/cinelerra/fonts
     ttmkfdir && mv fonts.scale fonts.dir
 \end{lstlisting}
-and restart \CGG{}. The new fonts should appear. The usage of ttmkfdir changes frequently so this technique might not work.
+and restart \CGG{}. The new fonts should appear. The usage of ttmkfdir changes frequently so this technique might not work.  It is
+important to note that because there are checkboxes for both Bold and Italic, the pulldown will not include these specific fonts
+as an addition to a Regular font.  They will be used via the checkboxes but not viewed in the pulldown.
 
 If the video is displayed on a consumer TV, the outer border is going to be cropped by $5\%$ on each side. To avoid text which is too close to the edge looking bad, you may want to enable the \textit{title-safe} tool in the compositor window. The text should not cross the inner rectangle.
 
@@ -3068,7 +3077,10 @@ export BC_FONT_DEBUG=1	(default is 0 for no debug)
 unset BC_FONT_DEBUG		(to remove debug messages)
 \end{lstlisting}
 
-Then start \CGG{} from a terminal window to see the fonts being loaded and previewed in the Titler. This should point out any issues. Another debug methodology is to remove all fonts from being used and subsequently add in the ones that you want. For example:
+Then start \CGG{} from a terminal window to see the fonts being loaded and previewed in the Titler. This should point out any issues. Another debug methodology is to remove all fonts from being used and subsequently add in the ones that you want.
+This not only speeds the load up, it ensures that the fonts you actually are using are the ones you expect because the order that
+\CGG{} finds various fonts makes a difference in which one of potential duplicates shows up in the
+pulldown.  So you might not see the one you expect if it was written over by a system font.
 
 \vspace{1ex}
 \begin{lstlisting}[style=sh]
@@ -4128,7 +4140,15 @@ The following is a list of the integrated video plug-ins.
   analysis.
 \item [F\_smartblur]~\\Blurs the input video without impacting
   the outlines. Through the settings you can select the radius, the
-  strength and the threshold of luma and chroma.
+  strength and the threshold of luma and chroma. This plugin can be used to correct 
+  over-sharpened footage.  For example, on a DJI 3840x2160 D-cinelike footage using
+  these settings:
+\begin{itemize}
+	\item hluma radius: 3.247993
+	\item luma strength: 0.360153
+	\item luma threshold: -2
+\end{itemize}
+  the over-sharpened edges will be smoothed. All other settings are at default values.
 \item [F\_smptebars]~\\Generate SMPTE color bars.
 \item [F\_smptehdbars]~\\Generate SMPTE HD color bars.
 \item [F\_sobel]~\\Applies sobel operator.
