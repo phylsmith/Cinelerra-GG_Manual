@@ -2830,17 +2830,17 @@ This effect is basically a primitive \textit{luminance key} to produce a \textit
 \subsection{Time average}%
 \label{sub:time_average}
 
-\begin{wrapfigure}[18]{O}{0.35\linewidth}
-	\vspace{-2ex}
-	\includegraphics[width=0.9\linewidth]{timeaverage.png}
-	\caption{GUI for Time Average}
-	\label{fig:timeaverage}
-\end{wrapfigure}
-
 Time average is one effect which has many uses besides creating trail patterns of moving objects (figure~\ref{fig:timeaverage}).
 The main use is reducing noise in still images (or in the motionless parts of a video). Merely point a video camera at a stationary subject for $30$ frames, capture the frames, and average them using time average and you will have a high quality print. In floating point color models, time average can increase the dynamic range of low quality cameras.
 
 Inside the time average effect is an accumulation buffer and a divisor. A number of frames are accumulated in the \textit{accumulation} buffer and divided by the divisor to get the average (for $10$ accumulated frames the divisor is $10$). Because the time average can consume large amounts of memory, it is best applied by first disabling playback for the track, dropping the time average in it, configuring time average for the desired number of frames, and re-enabling playback for the track.
+
+\begin{figure}[hbtp]
+	\centering
+	\includegraphics[width=0.3\linewidth]{timeaverage.png}
+	\caption{GUI for Time Average}
+	\label{fig:timeaverage}
+\end{figure}
 
 \begin{description}
     \item[Frames count] this determines the number of frames to be accumulated in the accumulation buffer. Ranges from $1 to 1024$ frames.
@@ -2879,7 +2879,17 @@ With \textit{Time Range} we decide the size (and therefore the number) of the ba
 \subsection{Title}%
 \label{sub:title}
 
-The \textit{Titler} allows you to add text from within \CGG{}. The titler has standard options for font, size, and style plus many options as described next (figure~\ref{fig:title01}).
+The \textit{Titler} allows you to add text from within \CGG{}. It has many configuration capabilities. Often it is convenient to apply the plugin on a separate track (shared or not), in order to make it independent from the video track and have more freedom in editing and configuration. For example, you can apply the \textit{Rotation} plugin to rotate the title without rotating the underlying video. Another thing to keep in mind when using the Titler plugin is that it works on the \textit{temporary} and therefore it is not affected by Camera movements (curves), but only by Projector movements.
+
+The titler has standard options for font, size, and style plus many options as described next (figure~\ref{fig:title01})
+
+\begin{figure}[hbtp]
+	\centering
+	\includegraphics[width=1.0\linewidth]{title01.png}
+	\caption{GUI of the Title plugin}
+	\label{fig:title01}
+\end{figure}
+
 
 \begin{description}
     \item[Justify] justifies the text relative to the entire frame. Once justified, the $X$ and $Y\, offset$ is applied. This allows text to be justified while at the same time letting you push it within the title safe region.
@@ -2890,13 +2900,6 @@ The \textit{Titler} allows you to add text from within \CGG{}. The titler has st
     \item[Color and Outline] allows you to pick the color for using to draw the text or its outline.
     \item[Stamp timecode] replaces text with the current position on the timeline in seconds, frames or samples.
 \end{description}
-
-\begin{figure}[hbtp]
-    \centering
-    \includegraphics[width=0.9\linewidth]{title01.png}
-    \caption{GUI of the Title plugin}
-    \label{fig:title01}
-\end{figure}
 
 To create special effects for your title you can place it on a dedicated track and insert other realtime video effects just under the title effect and/or use camera and projector. With keyframing you can animate your title and make it change position, size, color, transparency, texture, or shape over time.
 
@@ -2925,21 +2928,23 @@ If the video is displayed on a consumer TV, the outer border is going to be crop
 \label{ssub:some_recently_added_options}
 
 \begin{description}
-    \item[Drag] initial default checkbox is \textit{off} so that the Title plugin will work as it always has. With Drag active, we can create a box that works as a region to the title; we can resize and translate it as we wish, and we can add a background image to it. See later how to use the background image.
+    \item[Drag] initial default checkbox is \textit{off} so that the Title plugin will work as it always has. With Drag active, we can create a box that works as a region to the title; we can resize and translate it as we wish, and we can add a background image (or video) to it. See later how to use the background image.
     \begin{description}
         \item[Anchors] When you turn on the Drag feature, nine different anchors/handles will appear on compositor window. The \textit{middle anchor} allows you to drag your title wherever you want in the compositor window ($X, Y$ coordinates). The other 8 handles, drawn as arrows in each corner and in the middle of each side, let you change the size of the drag area box so that your title is within that area if it fits and as it is directed.  If you need to clear the Drag enabled, you can easily do this with \textit{Allow keyframe spanning} whose use is described in \nameref{sec:allow_keyframes_spanning}. Another way to reset the box to default, i.e. the entire frame, is to set X and Y to 0 and W and H to the frame resolution (e.g. 1920x1080 for FullHD).
         \item[W/H] the values in these 2 boxes specify the size of the drag area box measured in pixels as shown in the compositor window. You can set these manually and if you can't see the location of your box or find your handles, set them to zero because $0$ sets it to the same as the width/height of the media.
         The Drag effect ignores all boundaries, including the \textit{Title Safe Region} of the Compositor so that if you drag your titles off the screen, it will look like they disappeared completely. Reset X and Y to reasonable values to have it reappear. The Title \textit{text}, \textit{background}, and \textit{pngs} are applied on a single layer so that they will drag together as an entity. All of the Title capabilities work in conjunction with dragging so if you want to justify the title, you can still use the \textit{Left/Center/Right/Top/Mid/Bottom} within the drag area. Be sure to turn off Drag when rendering or the box will show in the video; keep in mind that drag bars do not appear until there is some text in the text box and you can not actually drag until the Title window controls are available.
     \end{description}
+    
+    
+    \begin{figure}[hbtp]
+    	\centering
+    	\includegraphics[width=0.3\linewidth]{title02.png}
+    	\caption{Pulldown Attributes}
+    	\label{fig:title02}
+    \end{figure}
+        
     \item[Attributes] in the Text box where you type your Title information, you can now change several attributes to give you plenty of flexibility (figure~\ref{fig:title02}). Each of these special attributes begin with an open angle bracket < and ends with a closing angle bracket >. Until the closing angle bracket is keyed in, the actual characters you type, will be seen in the compositor window. In addition, if you do not use the exact syntax or you keyin a filename that is not available, all of the characters will continue to show up. This helps to see what needs to be fixed or is missing. The attributes usage is described in the table below.
 \end{description}
-
-\begin{figure}[hbtp]
-    \centering
-    \includegraphics[width=0.3\linewidth]{title02.png}
-    \caption{Pulldown Attributes}
-    \label{fig:title02}
-\end{figure}
 
 \begin{center}
     \small
@@ -3016,7 +3021,7 @@ Figure~\ref{fig:title03}.
 \paragraph{Special Characters (< > / \textbackslash \#)} Besides the previously described <, >, and / characters, there are two special characters: backslash “\textbackslash”, and the pound sign “\#”. The backslash character is used for two things. With the advent of the attribute name and value, your line may become quite long so you can use “\textbackslash” followed by the carriage return to continue on the next line as if it is just a single line. It also can be used to designate that the following character does not represent the beginning of an attribute. For example, if you want to use the opening angle character “<“ as a title character, precede it with the backslash character. The pound sign, “\#”, designates the whole line as a comment or if in the middle of the line, then the rest of the line is a comment (this includes the carriage return).
 
 \begin{description}
-    \item[Background] in this box you can keyin the name of a file of the type that \CGG{} accepts and use that file as a background for your Title characters (media video or image). This will be seen in the compositor window on top of the video that is loaded in the main track canvas. Besides typing in the filename, you must also check the checkbox. This makes it easy to turn it \textit{On} and \textit{Off} to see what it looks like. Next to the background box is a \textit{Loop} checkbox. If the background file takes less time than the main track canvas video to run, you can turn on the loop checkbox so that it runs over and over again to match the time size of your video. By default the background image will occupy the whole frame, but if we activate drag mode and create a box of the desired size, the image will occupy only the box leaving the rest of the frame visible.
+    \item[Background] in this box you can keyin the name of a file of the type that \CGG{} accepts and use that file as a background for your Title characters (media video or image). This will be seen in the compositor window on top of the video that is loaded in the main track canvas. Besides typing in the filename, you must also check the checkbox. This makes it easy to turn it \textit{On} and \textit{Off} to see what it looks like. Next to the background box is a \textit{Loop} checkbox. If the background file takes less time than the main track canvas video to run, you can turn on the loop checkbox so that it runs over and over again to match the time size of your video. By default the background image will occupy the whole frame, but if we activate \textit{drag} mode and create a box of the desired size, the image will occupy only the box leaving the rest of the frame visible.
     \item[Stroker] to add \textit{pen strokes} to the text letters, adjust the stroke width numerically. This looks particularly nice on certain fonts and with a negative adjustment of the \textit{Drop shadow}.
     \item[Unicode Insertion] if you want to enter a special character like the mathematical \textit{summation} symbol, you can use the unicode equivalent to do so. Press Ctrl-Shift-U followed by $2022$ and a carriage return is an example of the bullet. Refer to section \hyperref[sec:textbox_non_std_character_unicode]{17.5} for details.
     \item[Popup Helper] put your cursor where you want to add an attribute, then right mouse will bring up a list of the available attributes for you to choose, along with a submenu to choose from. The program will insert that attribute for you and all you have to add is a value when required! (see figure~\ref{fig:title02}).
@@ -3027,20 +3032,21 @@ Figure~\ref{fig:title03}.
 
 The Text Color window has several enhanced features as listed here and seen in figure~\ref{fig:title04}.
 
+\begin{figure}[hbtp]
+	\centering
+	\includegraphics[width=0.7\linewidth]{title04.png}
+	\caption{Screencast showing the Color Picker menu.}
+	\label{fig:title04}
+\end{figure}
+
+
 \begin{enumerate}
     \item The hex value of the color you choose shows in the textbox and you can also keyin a value there.
-    \item A small square next to the hex text box, is a green \textit{eyedropper} color picker. Use the left mouse button to click on the square to enable picking and you will see it turn red to designate that it is enabled. Your cursor will switch to a two-colored reticle. You can now move the mouse around to choose a color anywhere on the screen and then click there to have it picked. If you hold down the right or left mouse button while moving, you can see the color changing in the vertical bar in the color palette area as you move to give you a bigger view of the actual color. The eyedropper square is seen in figure~\ref{fig:title04}.
+    \item A small square next to the hex text box, is a green \textit{eyedropper} color picker. Use the left mouse button to click on the square to enable picking and you will see it turn red to designate that it is enabled. Your cursor will switch to a two-colored reticle. You can now move the mouse around to choose a color anywhere on the screen and then click there to have it picked. If you hold down the right or left mouse button while moving, you can see the color changing in the vertical bar in the color palette area as you move to give you a bigger view of the actual color.
     \item A history of $16$ of your last chosen colors is available to easily use again. Any time you choose a new color in any methodology, it will become the latest choice in the history either immediately or after checking OK/and leaving. History shows latest color starting left to right.
     \item Besides HSV, RGB, there is also a YUV color model to choose from.
     \item Several of these items may have associated \textit{Tool Tips}.
 \end{enumerate}
-
-\begin{figure}[hbtp]
-    \centering
-    \includegraphics[width=0.7\linewidth]{title04.png}
-    \caption{Screencast showing the Color Picker menu.}
-    \label{fig:title04}
-\end{figure}
 
 \subsubsection*{Font Choice}%
 \label{ssub:font_choice}
@@ -3091,17 +3097,17 @@ export BC_FONT_PATH=:/usr/share/fonts #(remove all fonts and then add /usr/shar/
 One last item of information about fonts that may lead to some confusion. The checkbox for Bold and Italic will occasionally be ghosted out if no bold or italic version of the selected font is available. This is no guarantee, but currently as good as it can get due to inconsistency in the creation of fonts. It is mostly just a hint. If boxes are checkmarked, but ghosted, you can not uncheck until you change to a font that does not ghost out the boxes. If you use the popup helper with the boxes checked, and attempt to keyin a font that does not have the bold/italic attribute as checked, the font will be considered illegal.
 Text: chars is output and updated to indicate the number of characters already used. The only limit to the number of characters based on a count of single $8\, bit$ characters is the available resources on the user computer available for \CGG{} use. Keep in mind that unicode or other special characters may consist of $2$ to $4$ $8\,bit$ bytes. Also, newlines are a character and any of the attributes you use count in the total. There is now a horizontal scroll bar as well as the vertical one in the textbox and they only appear when there are more lines or characters that can fit in the original sized textbox.
 
+\subsubsection*{Kerning}%
+\label{ssub:kerning}
+
+When using the Titler, kerning is applied in order to allow parts of a letter to go outside the standard sized letter box.  Kerning is the process of adjusting the space between individual letters.  It is not the same as proportional spacing.  In kerning, a bounding box is allowed to overlay another bounding box.  The philosophy here is to aim at the ability to have boxes overlap in order to make the letters look more visually appealing.  Bounding box and escapement are tracked separately.  In addition to adjusting individual letter spacing, the program will also expand the render box in order to have any parts of the letter extend outside the standard letter box.  Kerning is applied to any and all fonts (figure~\ref{fig:title05}).
+
 \begin{figure}[hbtp]
 	\centering
 	\includegraphics[width=0.4\linewidth]{title05.png}
 	\caption{Kerning in action}
 	\label{fig:title05}
 \end{figure}
-
-\subsubsection*{Kerning}%
-\label{ssub:kerning}
-
-When using the Titler, kerning is applied in order to allow parts of a letter to go outside the standard sized letter box.  Kerning is the process of adjusting the space between individual letters.  It is not the same as proportional spacing.  In kerning, a bounding box is allowed to overlay another bounding box.  The philosophy here is to aim at the ability to have boxes overlap in order to make the letters look more visually appealing.  Bounding box and escapement are tracked separately.  In addition to adjusting individual letter spacing, the program will also expand the render box in order to have any parts of the letter extend outside the standard letter box.  Kerning is applied to any and all fonts (figure~\ref{fig:title05}).
 
 \subsection{Tracer}%
 \label{sub:tracer}
@@ -4144,7 +4150,7 @@ The following is a list of the integrated video plug-ins.
   over-sharpened footage.  For example, on a DJI 3840x2160 D-cinelike footage using
   these settings:
 \begin{itemize}
-	\item hluma radius: 3.247993
+	\item luma radius: 3.247993
 	\item luma strength: 0.360153
 	\item luma threshold: -2
 \end{itemize}

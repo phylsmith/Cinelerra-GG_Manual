@@ -42,7 +42,7 @@
 
 \nomenclature{\textbf{Concatenate}}{in File$\rightarrow$Load insertion strategy, means to load from disk or copy from the timeline edits belonging to different media onto the same set of tracks, one right after the other.}
 
-\nomenclature{\textbf{Compression}}{in \CGG{}’s dialogs means compression format. See Codec. The compression can be Lossless (without data loss) or Lossy (with data loss); it can be Intraframe (within each frame) or it can be about Groups Of Pictures (GOP and Long GOP) between frames, i.e. Interframe. Lossy and Interframe are also fine for editing, but for Color Correction, Chroma-Key and Rotoscoping Lossless and Intraframe compression is required.}
+\nomenclature{\textbf{Compression}}{in \CGG{}’s dialogs means compression format. See Codec. In a media video the compression can be Intraframe (within each frame) or it can be about Groups Of Pictures (GOP and Long GOP) between frames, i.e. Interframe. Also, the compression algorithm can be lossy or lossless. Lossy and Interframe are also fine for editing, but for Color Correction, Chroma-Key and Rotoscoping, lossless and Intraframe compression is required.}
 
 \nomenclature{\textbf{Context menu}}{a pop-up menu.}
 
@@ -238,7 +238,7 @@
 
 \nomenclature{\textbf{YUV}}{is a color model which splits luma from chroma, similarly to human sight.. Colors are stored as absolute luma representation and the difference signal between luma and chroma complement components.  This color model is used by PAL and NTSC standards. Y stands for the luma component and U and V are the chroma components. U and V are actually color difference components (respectively R-Y and B-Y). In fact YUV signals are created from an original RGB source. The weighted values of R, G, and B are added together to produce a single Y signal, representing the overall luma. The U signal is then created by subtracting the Y from the blue signal of the original RGB, and then scaling; V is created by subtracting the Y from the red, and then scaling by a different factor. Previous black-and-white systems used only luma (Y) information and color information (U and V) was added so that a black-and-white receiver would still be able to display a color picture as a normal black and white picture.}
 
-\nomenclature{\textbf{8 / 10-bit images}}{images that were sampled at 8 or 10 bits per channel. The tone range for each channel is from 0 to 255 for 8-bit and from 0 to 1023 for 10-bit.}
+\nomenclature{\textbf{8 / 10-bit images}}{images that were quantizated at 8 or 10 bits per channel. The tone range for each channel is from 0 to 255 for 8-bit and from 0 to 1023 for 10-bit.}
 
 \nomenclature{\textbf{Algorithm}}{set of instructions, typically to solve a class of problems or perform a computation.}
 

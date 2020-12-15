@@ -4,9 +4,16 @@
 \section{Proxy}%
 \label{sec:proxy}
 
-Working with videos that have large image geometry can greatly impede editing.  Instead you can substitute \textit{proxies} which will create smaller video image files from the original file that can then be edited more quickly.   When you are done working on this smaller scale, you will need to bring up the Proxy settings menu again, and change the Scale factor back to the Original size so that all of your edits/work take affect on that original higher quality video on the timeline.  
+Proxies was introduced to allow for a smoother timeline experience. Full HD and everything from 4K size up are usually very large in file size. In addition, some commonly used codecs (e.g. h264/5) are very compressed and interframe type, so they are more stressful for timeline playback. These files cause performance problems on weaker PCs. As a solution the developers have introduced proxies to reduce the file size. Reduced means to minimize the resolution/dimension, as usually not the full resolution is needed, because the compositor usually takes only a fraction of the computer screen. Therefore the scaling factor, which indicates how much the original resolution should be reduced. 
+There is also the \textit{proxy 1:1} that maintains the original resolution but still allows you to act on the codec (lowering the bit rate, for example). See also next section: \ref{sec:transcode}.
+When rendering, the original setting will be used to avoid loss of image quality.  
 
-To use this feature, select \texttt{Settings $\rightarrow$ Proxy settings} and change the Scale factor from Original size to your downsized choice.  You can choose ffmpeg as the File Format and a choice of various codecs associated with that.  A good choice is the default of mpeg which can usually be quite fast.  In addition, to modify values for that codec, click on the wrench icon.  When you have completed your choices, just click OK, and then the video tracks will be rendered. This may take some time, but previous proxy renders will be reused.  
+To use the proxy in a classic way, i.e. as a scaling, select \texttt{Settings $\rightarrow$ Proxy settings} and change the Scale factor from Original size to your downsized choice.  You can choose ffmpeg as the File Format and a choice of various codecs associated with that.  A good choice is the default of mpeg which can usually be quite fast.  In addition, to modify values for that codec, click on the wrench icon.
+
+We can use the \textit{Proxy 1:1} in two ways: setting "1" as \textit{Scale factor}, or check the \textit{Rescaled to project size (FFMPEG only)}  button. In this mode we don't have scaling, i.e. downsize, but only variations of the codec parameters that allow to maintain the original resolution. The advantage is that you can use filters that require the original size to work well. NB: if we set any scaling, by activating the \textit{Rescaled to project size (FFMPEG only)} button we automatically lose scaling and enter Proxy 1:1 mode.
+
+When you have completed your choices, just click OK, and then the video tracks will be rendered. This may take some time, but previous proxy renders will be reused.
+
 The proxy videos will be added to your assets in a separate Proxy folder, and the video track edits will use the proxies.
 The assets in both the Media folder and Proxy folder will look proxied when dragged to the Viewer although the scale may be different.
 Proxy downsizing renders all loaded tracks, but only work on the $1^{st}$ video layer of any multi-layer media.  Rendered proxy media is saved in the same directory as the original media.
@@ -16,49 +23,47 @@ And you can save your project either as proxied or not.
 
 Because Proxy works on the original media in all circumstances, when you resize the
 media in the Resources window, it does not actually resize the media but puts it in
-a "buffer" in that format. This might lead to some confusion for the user who
+a \textit{buffer} in that format. This might lead to some confusion for the user who
 expects this resizing to be maintained when disabling Proxy for that media. However,
 that does not happen because the resize is only in a buffer and not in the original
-media. This result is different than in the case of media "edits", like cuts or
-adding plugins because this information is not in a buffer but rather part of the
-copy "Editing Decision List" (EDL).
+media. This result is different than in the case of media \textit{edits}, like cuts or adding plugins because this information is not in a buffer but rather part of the
+copy \textit{Editing Decision List} (EDL).
 
-You can also nest clips while in a proxied state, but you can not drag the proxied nested clips
-to the viewer or the timeline.
+You can also nest clips while in a proxied state, but you can not drag the proxied nested clips to the viewer or the timeline.
 If you create proxies for Nested clips they will be saved in \texttt{\$HOME/Videos} unless you modify that in
 \texttt{Settings $\rightarrow$ Preferences, Interface} tab, \textit{Nested Proxy Path}. 
 
-There are two ways that the proxy files can be used, with or without input scaling. When the proxy is done without rescaling, the Mask, Camera and Projector automations are re-scaled accordingly. In this situation, the entire project will be re-sized so that the session is in the resized geometry.  Not all plugins are useful when the project is rescaled, because the keyframe data must be in the original geometry.  In this case, you can use the rescaler, by enabling \textit{Use scaler (FFMPEG only)}. This has the added advantage that the project size does not change and the proxy media is down-scaled as usual and up-scaled on read-in, which means the project editing is done in full scale.   Since decoding is done on smaller video, there is a time savings, but all rendering is done full scale.  The main reason for using \textit{scaler} is that it does not change the image coordinate data, so that automation and plugin parameters will be in the original project geometry.   This is not as fast as the first option, but is a performance gain, and may be needed if you are using plugins that need coordinate data such as the Title plugin.  As noted, the scaler only works on ffmpeg video formats.
+Let's examine in detail how Proxy and Proxy 1:1 modes work: when the proxy is done with downsize, the Mask, Camera and Projector automations are scaled accordingly. In this situation, the entire project will be re-sized so that the session is in the resized geometry. Not all plugins are useful when the project is scaled, because the keyframe data must be in the original geometry.  In this case, you can use the il Proxy 1:1, by enabling \textit{Scale factor}=1. This has the added advantage that the project size does not change. The main reason for using \textit{Proxy 1:1} is that it does not change the image coordinate data, so that automation and plugin parameters will be in the original project geometry (e.g. Title plugin).
 
-In the upper right hand corner of the main window, there is a toggle button to easily switch back and forth when you have a proxied file on the timeline.  The icon is to the left of the FF icon.  It will have the letter “P” as the icon for Proxy or if \textit{Using Scaler}, the letter “S”. \quad \includegraphics[height=\baselineskip]{proxy-01.png} \quad This quick switch is especially useful when editing and you need to see a better image temporarily.
+In the upper right hand corner of the main window, there is a toggle button to easily switch back and forth when you have a proxied file on the timeline.  The icon is to the left of the FF icon.  It will have the letter “Ps” as the icon for Proxy. \quad \includegraphics[height=\baselineskip]{proxy-01.png} \quad This quick switch is especially useful when editing and you need to see a better image temporarily.
+The "P" is green when the proxy is active and red when it is disabled. The "s" is white when in \textit{Proxy 1:1} mode and red when downsize.
 
 \begin{figure}[htpb]
 	\centering
-	\includegraphics[width=0.5\linewidth]{proxy-02.png}
+	\includegraphics[width=0.8\linewidth]{proxy-02.png}
 	\caption{Proxy settings dialog}
 	\label{fig:proxy-02}
 \end{figure}
 
 Screencast in figure~\ref{fig:proxy-02} shows the use scaled checked so you can still use plugins and the original project size is kept.  The Scale factor pull-down gives you available size options.  Note the new media dimensions shown (partially covered).  If the size is an odd number, 1 is added to make the dimensions both even numbers.
 
-In the case of the scaler checkbox, it will retain that setting for ease of use.
+To go back to the original media for good, simply take the Scale factor to Off. However, if we decide to reuse the proxies, these, which have not been deleted from the Hard Disk but only from the project, will still be used without making new rendering. To completely cancel the created proxies we will have to delete them manually from the Hard Disk.
 
-There is also a convenient \textit{Beep on done volume} dial included so that you can work on other tasks until there is an audible notify of completion.  The default volume is set to 0 for no audible notify.
+There is also a convenient \textit{Beep on done volume} bar included so that you can work on other tasks until there is an audible notify of completion.  The default volume is set to 0 for no audible notify.
 
-A good choice for proxy settings with 1080p source video is:
+A good choice for classic proxy settings with 1080p source video is:
 
 \begin{lstlisting}[numbers=none]
 Scale Factor: 	1/4
-Use Scaler:	unchecked
 File Format:	FFMPEG - mpeg
 Video Preset:
 Compression:	mpeg.mpeg
-Bitrate:	1800000
+Bitrate:	2000000
 Quality:	-1
 Pixels:		yuv420p
 \end{lstlisting}
 
-If you get errors for some videos, such as those with strange variable bit rate or some types of files made on a smartphone, a usually reliable alternative is to change the following parameters:
+If you get errors for some videos, such as those with strange variable bit rate or some types of files made on a smartphone, an usually reliable alternative is to change the following parameters:
 
 \begin{lstlisting}[numbers=none]
 File Format:	FFMPEG - mov
@@ -66,13 +71,13 @@ Video Preset:
 Compression:	mov.mov
 \end{lstlisting}
 
-Or if you want small files with high image quality, a File Format of m2ts is optimal.  For example a 1 GB file can be reduced to 50 MB with scale $\frac{1}{2}$. 
+Or if you want small files with high image quality, a File Format of \texttt{m2ts} is optimal.  For example a 1 GB file can be reduced to 50 MB with scale $\frac{1}{2}$. 
 
-Checking the \textit{Auto proxy/scale media loads} results in any additional media loads to be automatically proxy scaled.  However, single frame media such as PNG or JPEG \textit{stills}, can not be scaled to \textit{stream} media.  If this type of media exists, you should \textit{use scaler}.
+Checking the \textit{Creation of proxy on media loading} results in any additional media loads to be automatically proxy scaled.  However, single frame media such as PNG or JPEG \textit{stills}, can not be scaled to \textit{stream} media.  If this type of media exists, you should \textit{Proxy 1:1}.
 
 If you get error messages when creating proxies, check the Video wrench settings.  These usually default to values that are expected to work correctly for the \textit{File Format} and codec you selected but they can be changed and may result in errors.  If you get an error message of \textit{check\_frame\_rate failed} followed by \textit{Error making proxy} in the popup Errors window, do just that and check the Frame rate value by going to the Resources window, Media folder, and use the right mouse button for the Info option for that specific media in question.  You can change the frame rate in this window to a more codec acceptable value.  Different codecs may have different legal values.
 
-More specific information on which plugins need to use scaler is provided here next.  If the keyframe data uses coordinate data that is absolute, then the scaler should be used.  If the data is normalized (like always $0-100\%$) then the proxy can be done without the scaler.  The session geometry format, shown in \texttt{Settings $\rightarrow$ Format} as $width \times height$, is changed if the scaler is not used to cause all of the data to be in the reduced format.  If this affects the plugin operation, then scaler should be used.  Examples of plugins that need the scaler are: Title, AutoScale, Scale, ScaleRatio, and Translate.  Most others are safe to use without scaling.
+More specific information on which plugins need to use \textit{Proxy 1:1}. is provided here next. If the keyframe data uses coordinate data that is absolute, then the Factor scale = 1 should be used.  If the data is normalized (like always $0-100\%$) then the proxy can be done with downsize (i.e. classic \textit{Proxy}).  The session geometry format, shown in \texttt{Settings $\rightarrow$ Format} as $width \times height$, is changed if scale factor $\neq$ 1 is used to cause all of the data to be in the reduced format.  If this affects the plugin operation, then \textit{Proxy 1:1} should be used.  Examples of plugins that need the \textit{Proxy 1:1} are: Title, AutoScale, Scale, ScaleRatio, and Translate.  Most others are safe to use with downsize.
 
 \section{Transcode}%
 \label{sec:transcode}
@@ -89,7 +94,9 @@ Multiple stream media will only transcode the first stream (this would be like t
 You will get an error message if you already have a transcoded file in the selected format with the same suffix name and try to transcode it again with a different selection made -- you will have to delete that file first. An example would be
 an already converted file that has both video and audio and now you request video only. 
 
-The BIGGEST gain from using this is if you have media that is not \textit{seekable}, that is, you can play it from the beginning but can not move to another spot and have the audio or video play correctly. A video file with no keyframes makes seeking next to impossible, but then a Transcode generally adds these keyframes. 
+The BIGGEST gain from using this is if you have media that is not \textit{seekable}, that is, you can play it from the beginning but can not move to another spot and have the audio or video play correctly. A video file with no keyframes makes seeking next to impossible, but then a Transcode generally adds these keyframes. This is particularly useful for the \texttt{mkv} container, which often has seek problems.
+
+Another important function of Transcode is being able to convert the project's media into a high-quality \textit{mezzanine} codec (sometimes also called \textit{intermediate} codec), which makes timeline work lighter and more efficient. In fact such codecs (ffv1, ProRes, DNxHD, OpenEXR, huffyuv, etc) are generally little or not at all compressed; the type of compression is intraframe --more suitable for editing, and the image quality (4:2:2 up; 10-bit color up; floating point; etc) is suitable for \textit{Color Correction}, \textit{Chroma Key} and \textit{Rotoscoping}. The use of mezzanine codecs leads to very large files, so you need to make sure you have enough storage space.
 
 
 \section{OpenEDL}%
@@ -757,19 +764,19 @@ The best way to use proxy with your multiple cameras is to follow the steps belo
 \end{enumerate}
 Instead of Open Mixers, you can Insert Mixers with new tracks at the timeline insertion point.
 
-\begin{figure}[htpb]
-	\centering
-	\includegraphics[width=1.0\linewidth]{mixer-playable.png}
-	\caption{A Mixer window showing available options with the white X designating no playing}
-	\label{fig:mixer-playable}
-\end{figure}
-
 \subsubsection*{Options available in the \textit{Mixer Windows}}%
 \label{ssub:options_available_with_mixers}
 
 There are several options you will see in each Mixer window that help with using them. These
 are shown in figure~\ref{fig:mixer-playable}. To use these, RMB in the desired mixer window,
 and choose one of the options as described here.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=1.0\linewidth]{mixer-playable.png}
+	\caption{A Mixer window showing available options with the white X designating no playing}
+	\label{fig:mixer-playable}
+\end{figure}
 
 \begin{enumerate}
 	\item Fullscreen / Windowed - will bring up a fullscreen display of that window or revert to the original size.

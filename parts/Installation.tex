@@ -1,5 +1,6 @@
 \chapter{Installation}
 \label{cha:Installation}
+\index{installation}
 
 \section{Download Already Built \CGG{}}%
 \label{sec:download_already_built_cinelerra_gg}
@@ -28,7 +29,7 @@ They are in subdirectories of:
 	\item \href{https://cinelerra-gg.org/download/pkgs}{https://cinelerra-gg.org/download/pkgs}
 \end{list}
 
-The \textbf{tars} directory contains single-user static builds for
+The \textbf{tars} \index{tars} directory contains single-user static builds for
 different distros.
 %
 This is the recommended usage of \CGG{} because all of the files
@@ -50,7 +51,7 @@ from the \texttt{./tars} subdirectory and unpack as indicated below:
 use h265 rendering to 10-bit instead of the more standard 8-bit.} For more
 information see ~\ref{sec:cinx_and_a_bit_of_confusion}.
 
-The \textbf{pkgs} directory contains the standard packaged
+The \textbf{pkgs} \index{pkgs} directory contains the standard packaged
 application for various distros.  This will install a dynamic
 system version for users who prefer to have the binaries in the
 system area and for multi-user systems.
@@ -72,6 +73,8 @@ caption={README.pkgs}
 
 \section{How to Build \CGG{} from Developer's Git Repository}%
 \label{sec:How_to_build}
+\index{build}
+\index{git}
 
 These are generic build instructions for building \CGG{} Infinity.
 Known to work on Ubuntu, Mint, OpenSuse, Fedora, Debian, Centos,
@@ -125,8 +128,9 @@ having them interfere with each other.
 
 \subsection{The system build}
 \label{sec:system-build}
+\index{git}
 
-To do a system build, you should read the file
+To do a system build \index{build} , you should read the file
 \texttt{README} that is at the top level after you get the source.
 
 \begin{itemize}
@@ -201,6 +205,8 @@ Check for errors before proceeding.
 
 \subsection{The single-user build}
 \label{sec:single-user-build}
+\index{single-user build}
+\index{git}
 
 To do a single-user build, read the file \texttt{README} that is at
 the top level after you get the source.
@@ -282,6 +288,7 @@ $ make 2>&1 | tee /tmp/cin5.log &&  make install
 
 \subsection{Notable Options and Caveats}%
 \label{sub:notable_options_and_caveats}
+\index{./configure}
 
 These procedures and the \CGG{} Infinity software have all been run
 as \textbf{root} on various home laptops and desktops. This provides
@@ -295,13 +302,13 @@ To see the full list of features use:
 \begin{lstlisting}[style=sh]
 ./configure --help
 \end{lstlisting}
-The default build is a system build which uses:
+The default build \index{build} is a system build which uses:
 
 \begin{lstlisting}[style=sh]
 ./configure --without-single-user
 \end{lstlisting}
 
-In the single-user build, the target directory is always
+In the single-user build \index{single-user build}, the target directory is always
 \texttt{cin}.  Because this is also the developer build, constant
 names are used throughout.  However, you can rename files after the
 install is complete.
@@ -367,6 +374,9 @@ export FFMPEG_EXTRA_CFG=" --disable-vdpau"
 
 \subsection{Notes about Building from Git in your Customized Environment}%
 \label{sub:notes_about_building_from_git_in_your_customized_environment}
+\index{build}
+\index{./configure}
+\index{git}
 
 Getting a build to work in a custom environment is not easy.  If you
 have already installed libraries which are normally in the
@@ -465,6 +475,8 @@ done
 
 \subsection{Cloning the Repository for Faster Updates}%
 \label{sub:cloning_the_repository_for_faster_updates}
+\index{repository}
+\index{git}
 
 If you want to avoid downloading the software every time an update
 is available you need to create a local ``repository'' or repo.  The
@@ -521,6 +533,9 @@ git clean -i     # interactive clean, use answer 1 to "clean"
 
 \subsection{How to Build from a Previous GIT Version}%
 \label{sub:how_to_build_from_a_previous_git_version}
+\index{build}
+\index{repository}
+\index{git}
 
 If you have a problem with the current GIT version, you can revert
 to a previous working version easily.  The commands to use will be
@@ -585,6 +600,8 @@ git checkout master
 
 \subsection{Debuggable Single User Build}%
 \label{sub:debuggable_single_user_build}
+\index{single-user build}
+\index{git}
 
 To build from source with full debugging symbols, first build a full
 static (non\_debug) build as follows but instead of using
@@ -610,6 +627,9 @@ gdb ./ci
 
 \subsection{Unbundled Builds}%
 \label{sub:unbundled_builds}
+\index{build}
+\index{repository}
+\index{git}
 
 There are some generic build scripts included in the \CGG{} GIT
 repository for users who want to do unbundled builds with ffmpeg
@@ -659,6 +679,7 @@ on your system.
 
 \section{Windows 10 with Cygwin for \CGG{} Limited}%
 \label{sec:ms_windows10}
+\index{windows 10}
 
 To run \CGG{} on a Windows 10 computer, you will need to have
 Cygwin installed on your system, along with the \CGG{} static tar
@@ -677,6 +698,7 @@ utility libraries are not currently compiled to work with Windows.
 
 \subsection*{Installing Cygwin}
 \label{sec:installing_cygwin}
+\index{cygwin}
 
 Cygwin is an environment that runs natively on Windows which
 allows Unix programs to be compiled and run on Windows.  With
@@ -862,8 +884,9 @@ window) will hang cygwin (and cin) when it hits a breakpoint.  You
 must run from an external console window to avoid this issue.
 
 
-\section{Distribution Systems with \CGG{} Included}%
-\label{sec:distribution_systems_with_cinelerra_included}
+\section{Distro with \CGG{} Included}%
+\label{sec:distro_with_cinelerra_included}
+\index{linux distro}
 
 There are also some special complete distribution systems
 available that include \CGG{} for audio and video production
@@ -901,6 +924,7 @@ Click \href{https://www.elivecd.org/}{Elive} for more information.
 
 \section{Cinx and a “Bit” of Confusion}%
 \label{sec:cinx_and_a_bit_of_confusion}
+\index{cinx}
 
 Cinx is the exact same program as Cin.  The X (x) represents the
 roman numeral 10 for 10-bit as opposed to 8-bit standard.  The

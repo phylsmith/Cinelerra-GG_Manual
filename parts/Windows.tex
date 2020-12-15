@@ -1,5 +1,6 @@
 \chapter{Interface (the 4+ Windows)}%
 \label{cha:the_4_windows}
+\index{interface}
 
 \begin{figure}[htpb]
     \centering
@@ -15,11 +16,12 @@ and pointers to the media so that the media is not modified. The EDL is describe
 
 \section{Program Window}%
 \label{sec:program_window}
+\index{program window}
 
 The main window is called the \textit{Program} window and is often just referred to as the \textit{timeline}.  Here is where you enter the main menu operations.  
 This timeline consists of a vertical stack of tracks with time represented horizontally on the track. 
 It is the output of the rendering operations and this is what is saved when you run the \textit{File} pulldown, Save command.
-Immediately to the left of the timeline is the patchbay. The patchbay contains options that affect each track.  
+Immediately to the left of the timeline is the patchbay \index{patchbay}. The patchbay contains options that affect each track.  
 These options are described in great detail in \nameref{sec:patchbay}.
 
 The \textit{Window} pulldown on the main window contains options
@@ -70,6 +72,7 @@ Another example is in the default cut and paste mode, hold down \texttt{Shift} w
 
 \subsection{Transport and Buttons Bar}%
 \label{sub:transport_buttons}
+\index{transport buttons}
 
 This is a short description of what is contained on the \textit{Transport and Buttons Bar} as seen in
 figure~\ref{fig:insertion-points}.
@@ -100,13 +103,13 @@ several is described in a little more detail in other areas of this manual.
    \hline
 \end{tabular}
 
-The \textit{Manual Go To} menu is quite versatile as you can see in figure~\ref{fig:goto_menu}.  The
+The \textit{Manual Go To} \index{goto} menu is quite versatile as you can see in figure~\ref{fig:goto_menu}.  The
 options of \textit{=} represents goto the position indicated in the textbox; \textit{+} indicates
 to goto forward the additional number in the textbox; and \textit{-} means to go in the reverse
 direction the number in the textbox.  If you use \textit{Enter} in the textbox, the menu will stay
 up so that you can use it without having to continuously pop it up.  If you use the OK check instead, 
 the menu will be taken down.  The pulldown arrow to the right of the textbox sets the
-\textit{Time Format} for the units to be used for position changing.  This lets you change the units
+\textit{Time Format} \index{time format} for the units to be used for position changing.  This lets you change the units
 without having to modify your Preference. 
 
 \begin{figure}[htpb]
@@ -133,6 +136,7 @@ without having to modify your Preference.
 
 \subsection{Zoom Panel}%
 \label{sub:zoom_panel}
+\index{zoom panel}
 
 Below the displayed tracks in the timeline, you will find the zoom panel as seen in figure~\ref{fig:patchbay}.
 In addition to the scrollbars, these options and their values are another set of tools for positioning the timeline.  
@@ -160,25 +164,25 @@ The sample zoom value is not an absolute time reference because it refers to the
 You can either use the $\uparrow$ and $\downarrow$ arrows to change the sample zoom by a power of two, or use the mouse wheel on the tumblers to zoom in and out.
 
 
-The next option is \emph{amplitude} and it only affects the audio waveform size. \texttt{Ctrl-$\uparrow$} and \texttt{Ctrl-$\downarrow$} are shortcuts used to change the amplitude zoom as an alternative to the down arrow to the right of the numerical size.
+The next option is \emph{amplitude} and it only affects the audio waveform \index{waveform} size. \texttt{Ctrl-$\uparrow$} and \texttt{Ctrl-$\downarrow$} are shortcuts used to change the amplitude zoom as an alternative to the down arrow to the right of the numerical size.
 
 The \emph{track audio and video zoom} affects all tracks of that type and determines the height of each track. 
 If you change the audio track zoom, the amplitude zoom will be changed also so that the audio waveforms
 are proportionally sized.
 Shortcuts, \texttt{Ctrl-Pgup} and \texttt{Ctrl-Pgdown}, change the track zoom to the next level simultaneously for all of the audio and video tracks.
 
-\emph{Automation type} is used for selecting one of the following: Audio Fade, Video Fade, Zoom, Speed, X, or Y (X and Y are for the compositor's Camera and Projector).  When an auto line is present on
+\emph{Automation type} \index{autos} is used for selecting one of the following: Audio Fade, Video Fade, Zoom, Speed, X, or Y (X and Y are for the compositor's Camera and Projector).  When an auto line is present on
 the timeline and is being manipulated, a small square the same color as the line will be shown to 
 the left of the Automation type when the left mouse button (LMB) is pressed.  This is just an indicator to make it easy to see what is being worked.
  
-The \emph{curve zoom} affects the curves for the selected \emph{automation type} in all the tracks of that type and determines the value range for those curves. 
+The \emph{curve zoom} \index{autos zoom} affects the curves for the selected \emph{automation type} in all the tracks of that type and determines the value range for those curves. 
 Use the tumbler arrows to the left of the numbers for the minimum value and the tumblers to the right for the maximum value, or manually enter the values in the text box. 
 Good default values for audio fade are -40.0 to 6.0 and for video fade are 0.0 to 100.0. 
 The tumbler arrows change curve amplitude, but the only way to curve offset is to use the fit curves button on the curve itself.
 
-The \emph{selection start time}, \emph{selection length}, and \emph{selection end time} display the current selected timeline values. When there is no selection, both the start and end time are the current
+The \emph{selection start time}, \emph{selection length}, and \emph{selection end time} \index{timeline selection} display the current selected timeline values. When there is no selection, both the start and end time are the current
 position of the timeline and the selection length is 0.
-The \emph{alpha slider} allows for varying the alpha value when using colors on the tracks as set in your \texttt{Preferences $\rightarrow$ Appearance} for \texttt{Autocolor assets}.  
+The \emph{alpha slider} \index{alpha slider} allows for varying the alpha value when using colors on the tracks as set in your \texttt{Preferences $\rightarrow$ Appearance} for \texttt{Autocolor assets}.  
 It has no function without that flag set.
 
 There are 3 additional pieces of information in the line immediately below the \textit{zoom panel}.
@@ -188,11 +192,12 @@ has just been completed. Or when working with an auto, a small square the color 
 present along with its keyframe type, location on the timeline, and its current value.  This is simply
 for easy recognition of what is being worked. The second piece of helpful information is all the way to
 the right which is a long rectangular box indicating the percentage completion of a render. Finally
-there is an X with the tooltip of "Cancel operation" used to stop an ongoing render
+there is an X with the tooltip of "Cancel operation" \index{cancel operation} used to stop an ongoing render
 (the cancel operation may seem slow due to the amount of data still in the buffer upon cancellation).
 
 \subsection{Track Popup Menu}%
 \label{sub:track_popup_menu}
+\index{track popup menu}
 
 Each Track has a popup menu. 
 To activate the track popup menu, Right mouse click (RMB) on the track. 
@@ -200,7 +205,7 @@ The popup menu affects the track whether the track is armed on the patchbay or n
 The Track Menu contains a number of options:
 
 \begin{description}
-    \item[Attach Effect] opens a dialog box of effects applicable to the type of track of audio or video.
+    \item[Attach Effect] \index{attach effect} opens a dialog box of effects applicable to the type of track of audio or video.
     \item[Move up] allows for changing the order of the tracks up; the actual code refers
 to this as a swap. Disarmed tracks affect the results.
     \item[Move down]  allow for changing the order of the tracks down; the actual code refers
@@ -210,35 +215,36 @@ to this as a swap.  Disarmed tracks affect the results.
 bottom track going to the top.  This is applicable to all armed and disarmed tracks.
     \item[Delete track]  removes the track from the timeline.
     \item[Add Track]  adds a track of the same media type as the one selected, audio or video, above the selected track.
-    \item[Find in Resources]  the media file on that track at the location of the insert pointer will be highlighted in the media folder in the Resources window. If the 
+    \item[Find in Resources] \index{find in resources}  the media file on that track at the location of the insert pointer will be highlighted in the media folder in the Resources window. If the 
 	Resources window is closed, media is found and highlighted but the Resources window is not displayed.
-    \item[Show edit]  will point out the exact start and stop points along with the length of the current edit on
+    \item[Show edit] \index{show edit}  will point out the exact start and stop points along with the length of the current edit on
         that track as well as the media name, track name and number, and edit number.
-    \item[User title]  is used to change the title name.  This is really handy for files that have very long and
+    \item[User title] \index{user title}  is used to change the title name.  This is really handy for files that have very long and
         similar names that would get cut off during edits.  You can use short names to better differentiate the
         media. In Drag and Drop editing mode, if you select multiple edits all of those clips will have
 their title name changed.
-    \item[Bar color]  allows the user to select a specific color for the title bar.  This helps to more easily locate a piece of media.
-    \item[Resize Track]  resizes the track; this is only applicable to video tracks.
-    \item[Match Output Size]  resizes the track to match the current output size; this is only applicable to video tracks.
+    \item[Bar color] \index{bar color} allows the user to select a specific color for the title bar.  This helps to more easily locate a piece of media.
+    \item[Resize Track] \index{resize track} resizes the track; this is only applicable to video tracks.
+    \item[Match Output Size] \index{match output size} resizes the track to match the current output size; this is only applicable to video tracks.
 \end{description}
 
 
 \subsection{Insertion Point}%
 \label{sub:insertion_point}
+\index{insertion point}
 
 The insertion point (figure~\ref{fig:insertion-points}) is the vertical hairline mark that spans the timeline in the program window - it can be a solid line but most of the time it will be flashing. 
 Like the cursor on a word processor, the insertion point marks the place on the timeline where the next
 operation will begin. It is the starting point of all play operations and is the point where a paste operation will occur. 
 In some cases, when rendering it defines the beginning of the region of the timeline to be rendered. 
 
-To move the insertion point, you move the mouse inside the timebar area and click with the left mouse button. 
+To move the insertion point, you move the mouse inside the timebar \index{timebar} area and click with the left mouse button. 
 You can use any place on the timebar to reposition the insertion point as long as that spot is not blocked
-by In/Out point or a label. 
+by In/Out point \index{in/out point} or a label \index{label}. 
 In cut and paste editing mode, you can also change the position of the insertion point with a simple 
 left mouse click in the timeline itself.
 When moving the insertion point, the position is either aligned to frames or aligned to samples. 
-For best results, \textit{Align cursor on frames} when editing a video track and \textit{Align to samples} when editing audio. 
+For best results, \textit{Align cursor on frames} \index{Align cursor on frames} when editing a video track and \textit{Align to samples} \index{Align to samples} when editing audio. 
 Use the pulldown \texttt{Settings$\rightarrow$Align cursor on frames} to change the alignment by
 checking the box on for video and off for audio.
 
@@ -269,12 +275,14 @@ checking the box on for video and off for audio.
 
 \subsection{Editing Modes}%
 \label{sub:editing_modes}
+\index{drag and drop}
+\index{cut and paste}
 
 There are 2 different editing modes for operations which affect how the insertion point and editing
 on the timeline operate.  
 There is:  \emph{drag and drop mode} and \emph{cut and paste mode}. 
-The editing mode is determined by selecting the \texttt{arrow}, or immediately to the right of the arrow,
-the \texttt{I-beam} in the Transport and Buttons bar. In figure~\ref{fig:insertion-points} you can see
+The editing mode is determined by selecting the \texttt{arrow} \index{arrow}, or immediately to the right of the arrow,
+the \texttt{I-beam} \index{i-beam} in the Transport and Buttons bar. In figure~\ref{fig:insertion-points} you can see
 the green colored highlight \protect\footnote{green is used in the default Cakewalk theme, but the highlight color will be different in other themes} on the arrow icon indicating that you are currently in 
 \emph{drag and drop mode}.
 
@@ -301,16 +309,17 @@ Holding down the Shift key while clicking in the timeline extends the highlighte
 
 \subsection{In/Out Points}%
 \label{sub:in_out_points}
+\index{in/out point}
 
-The In/Out points, displayed on the timebar by [ and ] brackets,  can be set in either of the editing modes to define the selection.
+The In/Out points, displayed on the timebar \index{timebar} by [ and ] brackets,  can be set in either of the editing modes to define the selection.
 In the timebar, a colored bar will show between these 2 brackets to better outline the area selected.
-In \emph{drag and drop mode}, they are an easy way to define a selected region.
+In \emph{drag and drop mode} \index{drag and drop}, they are an easy way to define a selected region.
 
 It is important to remember that a highlighted area overrides the In/Out points. That is, if a highlighted area and In/Out points are both set, the highlighted area is changed by editing operations and the In/Out points are ignored. 
 But if no region is highlighted, the In/Out points are used. 
 To avoid confusion, use either highlighting or In/Out points but not both at the same time.
 
-To set In/Out points, in the timebar move to the position where you want the In point and click the In
+To set In/Out points, in the timebar move to the position where you want the Insertion point \index{insertion point} and click the In
 point icon or one of the [ or < keys.
 Then move the insertion point to a position after the In point and click the ] or > or the Out point icon. 
 You can use these same icons or keyboard characters to toggle In/Out points on or off.
@@ -348,10 +357,11 @@ Some of the useful operations concerning the In/Out pointers are listed next.
 
 \subsection{Labels}%
 \label{sub:labels}
+\index{label}
 
 Labels are used in order to set exact locations on the timeline that you want to be able to easily get to. 
-To create a label, position the insertion point at a location and click on the label icon in the Transport
-and Buttons bar. The new label is displayed on the timebar as a down arrow at that location as shown in
+To create a label, position the insertion point \index{insertion point} at a location and click on the label icon in the Transport
+and Buttons bar. The new label is displayed on the timebar \index{timebar} as a down arrow at that location as shown in
 figure~\ref{fig:i-beam}.  Whenever the insertion point is at the same position as a label, it changes
 color to emphasize that it is exactly at that spot.
 Labels make it so you can jump back and forth to exact marked locations on the timeline.
@@ -410,7 +420,8 @@ disable the \emph{Edit labels} option under the \textit{Settings} pulldown.
 
 \subsection{Color Title Bars and Assets}%
 \label{sub:color_title_bars_and_assets}
-
+\index{bar color}
+\index{asset color}
 In order to visually aid in locating clips on the timeline that are from the same media file, you can have them auto-colored or self-colored.  Auto-color is
 an automatic system to always color the files on the timeline when loaded. 
 Self-color is a manual coloring requiring the user to take definitive action.
@@ -433,7 +444,7 @@ To go back to the default colors, uncheck \textit{Autocolor assets} in Preferenc
 To change these individually or selectively, use the Edits popup \emph{Bar Color} option and click on \textit{Default} in the color picker window.  
 
 And that’s not all!  
-There is an \emph{alpha fader slider bar} on the bottom of the main window on the right hand side of the Zoom Panel.  
+There is an \emph{alpha fader slider bar} \index{alpha slider} on the bottom of the main window on the right hand side of the Zoom Panel.  
 With this alpha slider, you can colorize your video and audio tracks to either see only the color at 0.0 or see only the image at 1.0.  
 This slider bar affects all colored areas of the Autocolor assets and the self-colored ones.  
 In the case when a specifically changed edit alpha value is set in the color picker
@@ -470,25 +481,26 @@ The main window pulldowns as pointed out in figure~\ref{fig:insertion-points} ar
 
 
 \begin{description}
-    \item[File]  options for loading, saving, and rendering as described in other sections (\ref{cha:load_save_and_the_EDL}).
-    \item[Edit]  edit functions; most of which have shortcuts that you will quickly learn (\ref{cha:editing}).
-    \item[Keyframes]  keyframe options which are described in the Keyframe section (\ref{cha:keyframes}).
-    \item[Audio]  audio functions such as \textit{Add track}, \textit{Attach effect}
+    \item[File] \index{file} options for loading, saving, and rendering as described in other sections (\ref{cha:load_save_and_the_EDL}).
+    \item[Edit] \index{edit} edit functions; most of which have shortcuts that you will quickly learn (\ref{cha:editing}).
+    \item[Keyframes] \index{keyframes} keyframe options which are described in the Keyframe section (\ref{cha:keyframes}).
+    \item[Audio] \index{audio} audio functions such as \textit{Add track}, \textit{Attach effect}
 and \textit{Attach transition}.  The \textit{Attach effect} is especially useful when
 you need the effect to be applied to all related audio tracks as a \textit{Shared effect}
 and is described as an alternative method of application in section \ref{sec:shared_effect_tracks}.
-    \item[Video]  video functions such as \textit{Add track, Default/Attach transition, Render effect}.
-    \item[Tracks]  move or delete tracks are the most often used plus \textit{Align Timecodes}.
-    \item[Settings]  much of this is described elsewhere with the most frequently used to include
+    \item[Video] \index{video} video functions such as \textit{Add track, Default/Attach transition, Render effect}.
+    \item[Tracks] \index{tracks} move or delete tracks are the most often used plus \textit{Align Timecodes}.
+    \item[Settings] \index{settings} much of this is described elsewhere with the most frequently used to include
 Preferences (\ref{cha:configuration_settings_preferences}), Format (\ref{cha:project_and_media_attributes}), 
 Proxy and Transcode (\ref{sec:proxy_settings}), as well as the others.
-    \item[View]  for display or modifying asset parameters and values to include Fade, Speed, and Cameras.
-    \item[Window]  window manipulation functions.
+    \item[View] \index{view} for display or modifying asset parameters and values to include Fade, Speed, and Cameras.
+    \item[Window] \index{window} window manipulation functions.
 \end{description}
 
 
 \subsection{Window Layouts}%
 \label{sub:window_layouts}
+ \index{window layout}
 
 If you like to use different window layouts than the default for certain scenarios, you can setup, save, and load 4 variations.   
 First, position your \CGG{} windows where you want them to be and then use the \textit{Window} pulldown and choose \emph{Save layout}. Note the words \emph{Save layout} highlighted in Figure~\ref{fig:window_layouts}a with 4 names shown to the right and below of that highlight. 
@@ -523,6 +535,7 @@ timeline window.
 
 \subsection{Multi-Pane Support}%
 \label{sub:multipane_support}
+ \index{multi-pane}
 
 The main \CGG{} edit window holds the Track Canvas which can be divided into 4 panes of track data: 1 or 2 vertical panes and/or 1 or 2 horizontal panes.  To split the track, use the \textit{Window} pulldown, and then click on \textit{Split X} or \textit{Split Y} depending on how you wish to split the track.  Alternatively, the canvas pane types can be changed using keys \textit{<Ctrl-1>} for toggle split horizontal or \textit{<Ctrl-2>} for toggle split vertical.  Or the track can be split into panes by using the \textit{+ widget} in the lower right hand corner of the track canvas.  Once the track has been divided, you can use the + widget shortcut or the drag bars to change the size of the panes.
 
@@ -545,6 +558,7 @@ Other ways to \textit{play around} are described next.
 
 \subsubsection*{Repeat Play / Looping Method}%
 \label{ssub:repeat_play_looping_method}
+ \index{transport buttons}
 
 There are 2 methods for repeat play or looping on the timeline and 1 method for both the Compositor and the Viewer.  This works in conjunction with any of the transport buttons or shortcuts in either forward or reverse as usual.  The 1 exception is that the Shift key can not be used to either add or subtract audio within the repeat area.
 
@@ -598,7 +612,7 @@ Now you can clip/play/expand or edit the previous playback selection.
 
 \subsubsection*{Playback Speed Automation Support}%
 \label{ssub:playback_speed_automation_support}
-
+ \index{autos speed}
 
 The speed automation causes the playback sampling rate to increase or decrease to a period controlled by the speed automation curve.  
 This can make playback speed-up or slow-down according to the scaled sampling rate, as \textit{time is multiplied by speed} (Speed $\times$ Unit\_rate). For more information on changing
@@ -606,6 +620,7 @@ the speed, read the section on Speed Automation~\ref{sec:speed_fade_automation_g
 
 \subsubsection*{Alternative to using Numeric Keypad for Playing}%
 \label{ssub:alternative_to_using_numeric_keypad_for_playing}
+ \index{keypad}
 
 
 For the keyboards without a numeric keypad or if you prefer to use keys closer to where you normally type, there are alternative keys for the play/transport functions.  These are listed below.
@@ -639,6 +654,7 @@ will not include audio.
 
 \section{Compositor Window}%
 \label{sec:compositor_window}
+ \index{compositor window}
 
 \begin{figure}[htpb]
     \centering
@@ -660,21 +676,22 @@ in more detail in the following sections.
 
 \subsection{Compositor Controls}%
 \label{sub:compositor_controls}
+\index{compositor controls}
 
 On the bottom of the window, there are many
-of the same transport buttons and controls that are available in the Program window.
+of the same transport buttons \index{transport buttons} and controls that are available in the Program window.
 They work the same as in the Program window and also have tooltips that are visible 
 when you mouse over each of the icons so their use is fairly obvious.  However,
-of particular note is the button \textit{Click to play} which is described in~\ref{sub:click_to_play_in_viewer_and_compositor}.  Next is the \textit{Videoscope} button which is used to enable the scopes window
+of particular note is the button \textit{Click to play} \index{click to play} which is described in~\ref{sub:click_to_play_in_viewer_and_compositor}.  Next is the \textit{Videoscope} \index{videoscope} button which is used to enable the scopes window
 without having to apply the filter to the tracks/edits.
 
-Next to all of these controls all the way to the right side, there is a \textit{zoom menu} and a \textit{tally light}.  The \textit{zoom menu} has a pulldown with different settings that you can choose from
+Next to all of these controls all the way to the right side, there is a \textit{zoom menu} \index{zoom menu} and a \textit{tally light}.  The \textit{zoom menu} has a pulldown with different settings that you can choose from
 or you can just use the tumbler arrows to the right. Generally when just getting started, you
 will be using the default \textit{Auto} option.  The window size is not changed, but rather
 the size of the video itself. In addition there are many shortcuts for zooming that you
 will find in the Shortcuts chapter (\ref{cha:shortcuts}).
 
-Using a RMB click in the compositor window brings up a menu with several options.  One of these
+Using a RMB click in the compositor window brings up a menu with several options \index{compositor RMB options}.  One of these
 is \emph{Resize Window} which allows for resizing the entire window instead of just the video
 and if you highlight that, you can choose from several variations for the window size. 
 Other available options include self-explanatory ones of \emph{Fullscreen} with "f" as a toggle
@@ -692,7 +709,7 @@ bottom set of controls for a cleaner look.
 
 Next to the zoom tumbler arrows, is a \textit{tally light} that will be filled in with some color
 (often red or blue) when a rendering operation
-is taking place. This is especially helpful when loading a very large video so you know
+is taking place \index{render operation light}. This is especially helpful when loading a very large video so you know
 when it is finished loading.  You should pay attention to this \textit{tally light} when performing
 a particularly time-consuming operation so that you do not keep executing more operations
 that just have to wait until completion of that CPU intensive operation.  Also, you should look
@@ -704,6 +721,7 @@ be accomplished with the bottom and right hand side scroll bars when displayed.
 
 \subsection{Compositor Toolbar}%
 \label{sub:compositor_toolbar}
+\index{compositor toolbar}
 
 On the left hand side of the Compositor window, there is a toolbar with several icons that
 provide functions for viewing and compositing the video. Each of these operational features 
@@ -715,7 +733,7 @@ compositor output when clicking on the Compositor window. It allows for using th
 to prevent an accidental click from making unwanted changes. When you enable this option, any
 of the other enabled tools will automatically be disabled.
 
-     \item[Zoom view / magnifying glass] when enabled, the \textit{Zoom view} immediately results
+     \item[Zoom view / magnifying glass] \index{zoom slider} when enabled, the \textit{Zoom view} immediately results
 in the addition of a zoom slider for fine viewing.  
 The vertically oriented \textit{zoom slider} will be displayed underneath the last icon of the toolbar and extends
 to almost the end of the toolbar.
@@ -746,10 +764,10 @@ The Controls zoom textbox shows $\times0.82$ size.
     \label{fig:zoom_slider}
 \end{figure}
 \begin{description}
-    \item[Edit mask] brings up a mask editing menu with many versatile options as
+    \item[Edit mask] \index{mask} brings up a mask editing menu with many versatile options as
 described in great detail later in this section (\ref{sub:masks}). You may also have to click on
 \textit{Show tool info} to popup the menu depending on whether or not you dismissed that window previously.
-    \item[Ruler] this can be a handy tool to get the X,Y coordinates of an exact point or to 
+    \item[Ruler] \index{ruler} this can be a handy tool to get the X,Y coordinates of an exact point or to 
 measure the distance between 2 points. To use the \textit{Ruler}, move the mouse on the video to
 get to the desired spot - these X,Y coordinates will be displayed in the \textit{Current} text
 box.  Clicking the LMB creates Point 1 and then continue to hold down the LMB so that a ruler line is created between
@@ -765,17 +783,17 @@ the video while maintaining its length and angle. For some desktop window manage
 so you will have to use Alt+Ctrl instead.
 If you dismiss the Ruler menu, click on
 \textit{Show tool info} to get the menu to popup again.  
-    \item[Adjust camera automation]  the camera brings up the camera editing tool. Enable \textit{Show tool info} if the popup menu does not appear. More detail for usage is provided in the subsequent
+    \item[Adjust camera automation] \index{camera} the camera brings up the camera editing tool. Enable \textit{Show tool info} if the popup menu does not appear. More detail for usage is provided in the subsequent
 section~\ref{sub:camera_and_projector}.
-    \item[Adjust projector automation]  the projector brings up the projector editing tool. Enable \textit{Show tool info} to get the menu to popup again. More detail for usage is provided in the
+    \item[Adjust projector automation] \index{projector} the projector brings up the projector editing tool. Enable \textit{Show tool info} to get the menu to popup again. More detail for usage is provided in the
 subsequent section~\ref{sub:camera_and_projector}.
-    \item[Crop a layer or output]  this is a cropping tool used to reduce the visible picture area.
+    \item[Crop a layer or output] \index{crop} this is a cropping tool used to reduce the visible picture area.
 More detail for usage is provided in a 
 subsequent paragraph (\ref{sub:cropping}).  There is also a Crop \& Position plugin that provides
 a different set of capabilities described in~\ref{sub:crop_position}.
     Enable \textit{Show tool info} to get the menu to popup if it does not come
 up automatically.
-    \item[Get color / eyedropper]  brings up the eyedropper used to detect the color at a
+    \item[Get color / eyedropper] \index{eyedropper} brings up the eyedropper used to detect the color at a
 particular spot.  Enable the \textit{Show tool info} if the Color popup menu does not come up 
 automatically or if that menu was accidentally dismissed.  Click on a specific color in the video
 output with the LMB to see the selected color. You can then use that color's 
@@ -783,7 +801,7 @@ value to be applied to some effects depending on how the effect handles the eyed
 around the cross cursor and an average value of the color will be the result.
 If you \textit{Use maximum}, instead of an average value of the color, the result
 will be the maximum of all values within that square.
-    \item[Show tool info]  this tool button is used in conjunction with the other tools on the
+    \item[Show tool info] \index{tool info} this tool button is used in conjunction with the other tools on the
 compositor's toolbar. You only need to click on this if one of these tools popup menu does not
 come up or has been dismissed - Mask, Ruler, Camera, Projector, Crop, or Eyedropper tools.
 You can also use it when highlighted to dismiss the highlighted tool's dialog box.
@@ -797,7 +815,7 @@ no dialog popup menus.
     \label{fig:safe_regions}
 \end{figure}
 
-    \item[Show safe regions]  draws 2 outlines to display the safe regions in the video as you
+    \item[Show safe regions] \index{safe region} draws 2 outlines to display the safe regions in the video as you
 can see in Figure~\ref{fig:safe_regions}.
 On some particular TVs/monitors/displays, the borders of the image are cut off and that
 cut off section might not be as square as it appears in the compositor window. 
@@ -816,8 +834,9 @@ titles are inside the inner outline and actions are inside the outer outline.
 
 \subsection{Compositing}%
 \label{sub:compositing}
+\index{compositing}
 
-Much of the editing in \CGG{} involves "compositing" which is the combining of visual
+Much of the editing in \CGG{} involves \textit{compositing} which is the combining of visual
 elements from different sources into single images.  This includes such things as 
 speeding up and slowing down the video, changing the resolution, creating a split screen, and fading in and out.
 Compositing operations are done on the timeline and in the Compositor window using various
@@ -833,6 +852,7 @@ to the camera, effects, and the projector.
 
 \subsubsection*{The Temporary}%
 \label{ssub:output_size}
+\index{temporary}
 
 \CGG{}'s compositing routines use a \textit{temporary} which is a single frame of video in
 memory where graphics processing takes place. The size of the temporary and of the output in
@@ -845,6 +865,8 @@ cropped.
 
 \subsubsection*{Track and Output size}%
 \label{ssub:track_size}
+\index{track size}
+\index{output size}
 
 The \textit{Track size} is used to define the temporary size with each track having a different size (viewports). It also serves to conform the input media to a chosen format (aspect ratio). So each track can have a different format (viewport).
 You can see or set the track size by RMB click on a track and then select \emph{Resize Track} to resize
@@ -862,6 +884,8 @@ output size is the final video track size where the temporary pipeline is render
 
 \subsubsection*{Aspect Ratio (Theory)}%
 \label{ssub:aspect_ratio_theory}
+\index{aspect ratio}
+\index{PAR, DAR, SAR}
 
 The aspect ratio is the ratio of the sides of the frame (\textit{Width} and \textit{Height}). For example, classically broadcast TV was 4:3 (= 1.33), whereas today it has changed to 16:9 (= 1.85); in cinema we use the 35 mm aspect ratio of 1.37 (Academic aperture), but even more so the super 35 mm (2.35). There are also anamorphic formats, i.e. that have no square pixels, like Cinemascope (2.35). The projection must be \textit{normalized} to have an undistorted view.
 
@@ -895,6 +919,8 @@ where:
 
 \subsection{Camera and Projector}%
 \label{sub:camera_and_projector}
+\index{camera}
+\index{projector}
 
 In the compositor window, \textit{Adjust camera automation} and \textit{Adjust projector automation}
 are editing tools to control operation of the camera and projector.  In \CGG{}'s compositing
@@ -927,6 +953,7 @@ for editing with a LMB click on the \textit{Arm track} icon of the desired track
 
 \subsubsection*{Projector Compositing}%
 \label{ssub:projector_compositing}
+\index{projector}
 
 The purpose of the \textit{projector} is to composite several sources from various tracks into one
 output track.  The projector alignment frame is the same as the camera's viewport, except that it
@@ -941,8 +968,9 @@ and the size of the frame. After you position the video with the projector, you 
 
 \subsubsection*{The Viewport}%
 \label{ssub:viewport}
+\index{viewport}
 
-The \textit{viewport} is a window on the camera that frames the area of source video. The size of the current track is used for the initial size of the viewport. A smaller viewport, for example ($640\times480$), captures a smaller area; whereas a larger viewport of ($800\times600$) captures a larger area.  If the captured area is larger than the source video, the empty spaces will be automatically filled with blanks.  To change the size and aspect ratio of the viewport (Camera) of a single track, right-click on the track in the timeline and choose Resize Track. Here we can vary the height and base of the viewport in pixels or choose the multiplication coefficient for each side (Scale). With OK we will see the change in the Compositor window with the new dimensions reflected in the green box. We can have different size viewports for each video track on the timeline. To go back, reset the viewport to the original value. After the viewport is defined, the camera needs to be placed right above the area of interest in the source video. Operations to control the location of the camera are as follows:
+The \textit{viewport} is a window on the camera that frames the area of source video. The size of the current track is used for the initial size of the viewport. A smaller viewport, for example ($640\times480$), captures a smaller area; whereas a larger viewport of ($800\times600$) captures a larger area.  If the captured area is larger than the source video, the empty spaces will be automatically filled with blanks.  To change the size and aspect ratio of the viewport (Camera \index{camera}) of a single track, right-click on the track in the timeline and choose Resize Track. Here we can vary the height and base of the viewport in pixels or choose the multiplication coefficient for each side (Scale). With OK we will see the change in the Compositor window with the new dimensions reflected in the green box. We can have different size viewports for each video track on the timeline. To go back, reset the viewport to the original value. After the viewport is defined, the camera needs to be placed right above the area of interest in the source video. Operations to control the location of the camera are as follows:
 
 \begin{enumerate}
     \item  In the compositor window you should see the selected track.
@@ -957,6 +985,7 @@ with the mouse.  The viewport moves in the same manner.
 
 \subsubsection*{Camera Compositing}%
 \label{ssub:camera_compositing}
+\index{camera}
 
 Select the camera button to enable camera editing mode. 
 In this mode, the guide box shows where the camera position is in relation to past and future camera positions but not where it is in relation to the source video. 
@@ -964,6 +993,9 @@ The green box is the Viewport; at the beginning it coincides with the size of th
 
 \subsubsection*{Camera and Projector Menu}%
 \label{ssub:camera_and_projector_menu}
+\index{tool info}
+\index{camera}
+\index{projector}
 
 The camera and projector have shortcut operations that do not appear in the popup menu and are not represented in video overlays. 
 These are accessed in the \emph{Show tool info} window.
@@ -990,7 +1022,7 @@ To put the reduced video in the center subsection that the projector shows would
 Instead, we leave out $X$ and out $Y$ at 0 and use the projector's tool window. 
 By selecting left justify and top justify, the projector displays the reduced image from the top left corner of the \textit{temporary} in the center of the output.
 
-In the \textit{Curve type} section we can choose between various interpolation algorithms that determine the curve type:
+In the \textit{Curve type} section we can choose between various interpolation algorithms that determine the curve type \index{curve type}:
 
 \begin{description}
 	\item[smooth:] bezier interpolation which are flat at the endpts
@@ -1000,7 +1032,7 @@ In the \textit{Curve type} section we can choose between various interpolation a
 	\item[bump:] has 2 values, one viewed from the left/right, discontinuous.
 \end{description}
 
-In the \textit{Keyframe} section we can create new keyframes and set them as Bump autos (\textit{Right/Left edges} and \textit{Span} buttons). For further details see \nameref{sec:bump_autos}.
+In the \textit{Keyframe} \index{keyframes} section we can create new keyframes and set them as Bump autos (\textit{Right/Left edges} and \textit{Span} buttons). For further details see \nameref{sec:bump_autos}.
 
 \subsubsection*{Reset to Default}%
 \label{ssub:reset_default}
@@ -1013,6 +1045,8 @@ In the compositing window, there is a popup menu of options for the camera and p
 
 \subsubsection*{Use Case: Interaction Between Camera And Projector \protect\footnote{Example provided by Sam. The relative video is located at: \url{https://streamable.com/iq08i}}}%
 \label{ssub:use_case_interaction_camera_projector}
+\index{camera}
+\index{projector}
 
 \begin{enumerate}
     \item Start by shrinking the projector to $z=0.500$ ($\frac{1}{4}$ of the original frame).
@@ -1024,6 +1058,7 @@ In the compositing window, there is a popup menu of options for the camera and p
 
 \subsection{Masks}%
 \label{sub:masks}
+\index{mask}
 
 Masks can be used to accomplish various tasks but basically are used to select an area of the 
 video to be displayed or hidden. 
@@ -1049,6 +1084,7 @@ The compositing pipeline graph has a masking stage (figure~\ref{fig:temporary-02
 
 \subsubsection*{Compositing pipeline with masks}%
 \label{ssub:compositing_pipeline_with_masks}
+\index{compositing pipeline}
 
 The Mask popup menu can be overwhelming upon first encounter.  However, if you follow the next
 few steps you can create a single simple mask without having to understand every possible parameter.
@@ -1247,6 +1283,7 @@ Focus checkbox = checked:
 
 \subsection{Cropping}%
 \label{sub:cropping}
+\index{crop}
 
 Cropping is used to reduce the visible picture area by changing the output dimensions, width and
 height in pixels, and the $X, Y$ values. An example of cropping and the crop menu is seen in
@@ -1307,10 +1344,11 @@ click on the \emph{Apply} button in the menu to actually perform the crop operat
 
 \section{Viewer Window}%
 \label{sec:viewer_window}
+\index{viewer window}
 
 The Viewer window (figure~\ref{fig:viewer_window}) is convenient for previewing your media and 
 clips. It can also be used for editing with cuts and then paste operations into the timeline or
-to create a clip.  There are transport buttons to use in the same manner as in the Program
+to create a clip.  There are transport buttons \index{transport buttons} to use in the same manner as in the Program
 and Compositor windows or you can quickly move through the media by dragging with the LMB in
 the timebar above the transport buttons.  
 
@@ -1333,9 +1371,9 @@ In order to view media in the window, you have to load it as follows:
 
 Note that you can have multiple Viewer windows open with different or even the same media asset.
 After the media is loaded you can use the transport buttons to play, rewind, stop, and so on, or
-for fast previewing drag with the LMB anywhere on the timebar slider.  There is also the Videoscope
+for fast previewing drag with the LMB anywhere on the timebar slider.  There is also the Videoscope \index{videoscope}
 button which is to used to enable the scopes window without having to apply the filter to the tracks/edits.
-A few more options available in the Viewer window can be accessed with a RMB click on the display.
+A few more options available in the Viewer window can be accessed with a RMB click on the display \index{viewer RMB options}.
 These functions are listed next.
 
 \begin{enumerate}
@@ -1346,7 +1384,7 @@ with the RMB on the display again and choose \textit{Windowed}.
     \item  To remove the current media from being displayed, choose \textit{Close source}.
 \end{enumerate}
 
-The Viewer uses the project's output size format settings to display the media instead of the
+The Viewer uses the project's output size output size{entry} format settings to display the media instead of the
 original asset's format. Operations performed in the Viewer affect a temporary EDL or a clip rather
 than the timeline.  By default, the Viewer window is automatically available but if it gets
 accidentally closed you can open it again by using the pulldown \texttt{Window $\rightarrow$ Show
@@ -1365,7 +1403,7 @@ You can also use the Viewer to listen to media that consists only of Audio.  Thi
 to listen to the audio to see if it is what you would like to add to a timeline audio track for
 your project.  To do this, you simply drag the audio file from the Resources window in the same
 manner as a video file. The viewer was designed to "view" images rather than play audio so in order
-to make it obvious that audio media is loaded to the viewer, a waveform is displayed that is the
+to make it obvious that audio media is loaded to the viewer, a waveform \index{waveform} is displayed that is the
 same waveform as shown in the Resources window thumbnail when in the \textit{Display Icons} mode.
 This waveform only represents the first 5 seconds of the media and will not change or move while
 playing in the Viewer window.  But you can play the entire piece of media in the window
@@ -1383,7 +1421,7 @@ The next sections describe capabilities that are available in both the Composito
 
 In both the Viewer and Compositor windows, there is an arrow on the right hand side of the other
 buttons in the edit panel as shown in figure~\ref{fig:viewer_window}.  The "play" button can be
-toggled on/off via this arrow, which has a tooltip of \textit{Click to play}.  When enabled
+toggled on/off via this arrow, which has a tooltip of \textit{Click to play} \index{click to play}.  When enabled
 the arrow is white surrounded by green and when disabled the arrow is red.\protect\footnote{the color and the look will be different for themes other than the default theme of Cakewalk}
 The purpose of enabling this capability is to make it really easy to play the media in the window
 by just using the left mouse button to start or stop the play.  The entire main canvas surface
@@ -1399,8 +1437,9 @@ at least temporarily, is so that you can quickly review your video before a rend
 
 \subsection{Timebar + Preview Region Usage in the Compositor and Viewer}%
 \label{sub:timebar_preview_region_usage_in_the_compositor_and_viewer}
+\index{preview region}
 
-The Viewer and Compositor each have a timebar control area with a red indicator
+The Viewer and Compositor each have a timebar \index{timebar} control area with a red indicator
 line below the video output. The timebar shows the whole time covered by the
 resource. When a video resource is loaded in the main window and you move in the
 compositor, the insertion pointer in the main window will reflect those movements.
@@ -1474,6 +1513,7 @@ One last interesting item of note -- sometimes you may wish to see just a little
 
 \section{Resources Window}%
 \label{sec:resources_window}
+\index{resources window}
 
 Effects, transitions, labels, clips, proxies, user bins, and media assets are accessed here. 
 Most of the resources are inserted into the project by dragging them out of the resource window. 
@@ -1487,19 +1527,19 @@ Management of resource allocation is also performed here.
 \end{figure}
 
 The resources window is divided into two areas (figure~\ref{fig:resource_window}. 
-One area lists folders and another area lists the folder contents. 
+One area lists folders \index{folders} and another area lists the folder contents \index{folder contents}. 
 Going into the folder list and clicking on a folder updates the contents area with the contents of that folder. 
 The folders can be displayed as icons or text. 
 There are several variations for displaying the contents; select \emph{Display text}, \emph{Display icons}, \emph{Display icons packed}, \emph{Display icons list} as types of display for the assets or plugins. 
 Use the letter “\texttt{V}” to easily scroll through the choices and see which you prefer.  
 You can also get to these options from the menu by a right mouse click in the window.
 
-A \emph{Search} option is available for any of the folders in the Resources window (and when using \textit{Attach effect} on the main track canvas for the Plugins).  
+A \emph{Search} \index{search resources} option is available for any of the folders in the Resources window (and when using \textit{Attach effect} on the main track canvas for the Plugins).  
 As you type in characters a match is made with that substring.  
 Names that do not match are filtered out making it a lot easier to find the item you are looking for.  
 The characters can be any where within the phrase and it does not matter if upper or lower case. 
 
-Other options you will see if you \textit{right mouse click in the folder} which brings up the menu are described next.  
+Other options you will see if you \textit{right mouse click in the folder} which brings up the menu are described next \index{folders contents RMB options}.  
 
 \begin{description}
     \item[ Load files ]  for convenience to load files same as from the main window so you do not have to move the mouse so far in case you have multiple monitors.
@@ -1512,18 +1552,18 @@ Other options you will see if you \textit{right mouse click in the folder} which
     \item[Snapshot/Grabshot]  use to take a quick snapshot or to grab a specific area on the screen.  These functions are described in detail in section \ref{sub:snapshot_grabshot}).
 \end{description}
 
-Using the right mouse click to bring up a menu in the folder area, you can also switch from Display text to Display icons, Sort items and create, delete and manipulate user defined folders/bins. Select Folder to create a user Folder or modify an existing folder.
+Using the right mouse click to bring up a menu in the folder area \index{folders RMB options}, you can also switch from Display text to Display icons, Sort items and create, delete and manipulate user defined folders/bins. Select Folder to create a user Folder or modify an existing folder.
 
 If you \textit{right mouse click on a highlighted/selected resource}, several options are available depending on whether the resource is an effect or transition or a piece of media.  
 You can highlight several for some options so that it is applicable to all of them, such as Info.  
-Those listed immediately below are the available choices for media assets.
+Those listed immediately below are the available choices for media assets \index{asset RMB options}.
 
 
 \begin{description}
-    \item[Info]  provided basic Asset information; details are described later in this section.
+    \item[Info] provided basic Asset information; details are described later in this section.
     \item[Display text/icons]  same as mentioned previously.
     \item[Sort]  same as mentioned previously.
-    \item[Rebuild index] if you switch from/to using ffmpeg/native for media loading, you should rebuild
+    \item[Rebuild index] \index{rebuild index} if you switch from/to using ffmpeg/native for media loading, you should rebuild
         indexes.  Or if you get hangs on media or strange looking tracks, you might want to rebuild indexes.
     \item[View]  use this option to bring up the media in the Viewer window.
     \item[View in new window]  in order to not overwrite your current viewer window, you can open any
@@ -1531,18 +1571,18 @@ Those listed immediately below are the available choices for media assets.
     \item[Open mixers]  when you record with multiple cameras setup, you can work with them most easily
         using the mixer mode.  This is described in detail
     \item[Paste]  
-    \item[Match]  if you need to change your media parameters you can choose from the following: Match frame
+    \item[Match] \index{match format} if you need to change your media parameters you can choose from the following: Match frame
         rate, Match project size, Match all 
-    \item[Remove]  use to Remove the asset from the project or with caution, to Remove from disk permanently.
+    \item[Remove] \index{remove asset} use to Remove the asset from the project or with caution, to Remove from disk permanently.
 \end{description}
 
-In the case of Effects or Transitions, a right mouse click on a highlighted selection leads to an \emph{Info} button which gives a short 1 line description of what the effect/transition can be used for.
-For Labels, choices are \emph{Edit}, \emph{Label}, and \emph{Go to}.
-For Clips, \emph{Nest} and \emph{UnNest} as described elsewhere are available.
+In the case of Effects or Transitions \index{effects/transitions info}, a right mouse click on a highlighted selection leads to an \emph{Info} button which gives a short 1 line description of what the effect/transition can be used for.
+For Labels \index{label RMB options}, choices are \emph{Edit}, \emph{Label}, and \emph{Go to}.
+For Clips \index{clip RMB options}, \emph{Nest} and \emph{UnNest} as described elsewhere are available.
 
 \subsection{Info Asset Details}%
 \label{sub:info_asset_details}
-
+\index{asset info}
 The asset \emph{Info} window also can be used to display detailed information about the selected/highlighted media file -- available for any loaded media of type mpeg or ffmpeg.  
 This is extremely helpful in determining what type of media it is, size, resolution, format, and type/number of audio streams.  It is especially useful for multiple program streams.  You can have the info window popped on several of your assets simultaneously.
 
@@ -1550,7 +1590,7 @@ This is extremely helpful in determining what type of media it is, size, resolut
 
 \textit{Sample rate} and \textit{Frame rate} allows you to impose a different sampling or Fps of the audio and video assets.
 
-Another option is \textit{Resize} button, which allows you to change the sides (in pixels) of the frame of the asset.
+Another option is \textit{Resize} button, which allows you to change the size (in pixels) of the frame of the asset.
 
 \textit{Asset's interlacing}  is the type of interlacing the asset has: If the file is (H)DV type, recognition and configuration is done automatically. All other media types will be set unknown. So we have to manually set the interlacing \protect\footnote{From Igor ubuntu's mail}.
 
@@ -1565,6 +1605,11 @@ Figure~\ref{fig:info_asset_details} shows the \textit{Detail} box to click on th
 
 \subsection{User Folders/Bins}%
 \label{sub:user_folders_bins}
+\index{user folders/bins}
+\index{user media bin}
+\index{user clip bin}
+\index{folder modify}
+\index{folder add filter/search}
 
 Creating folders that are more specific to a particular project is helpful in better organizing your work.  
 This can be done by utilizing the files already loaded to the \textit{master} Media or Clips folders in the Resources window.  The general rule is you can only drag clips to a ClipUserBin and you can only drag media to a MediaUserBin.
@@ -1653,7 +1698,7 @@ The figure~\ref{fig:modify_folder} below displays the available choices for each
     \label{fig:modify_folder}
 \end{figure}
 
-Information about the columns and rules for the search filters in the Modify folder window follows.
+Information about the columns and rules for the search filters in the Modify folder window follows \index{folder add filter/search}.
 
 Column headers:
 
@@ -1807,6 +1852,8 @@ Or	&Time&	Around&2018/08/02 06:00:00 + 02:00:00  & files at 4AM to 8 AM\\\bottom
 
 \subsection{Vicons \& Aicons – aka Video Icons / Audio Icons}%
 \label{sub:vicons_aicons_aka_video_icons_audio_icons}
+\index{vicons : video icons}
+\index{aicons: audio icons}
 
 Vicons are video icons.  
 Aicons are audio icons.  
@@ -1820,8 +1867,8 @@ This is enabled for the Media/Proxy folders in icon mode when the mouse pointer 
     \label{fig:vicons1}
 \end{figure}
 
-The waveform in the figure~\ref{fig:vicons2} is displayed in the Resources window in the color green for the 3 audio tracks. 
-There is a colored bar on the top of each a-icon where the color is based on the Color Spectrum -- the smaller the time duration, the redder the color; then as the time duration goes up, the color goes up so that you will go to green, then yellow, then blue, then really dark blue, then purple for the audio files 1 hour and over.  
+The waveform \index{waveform} in the figure~\ref{fig:vicons2} is displayed in the Resources window in the color green for the 3 audio tracks. 
+There is a colored bar \index{color bar aicons} on the top of each a-icon where the color is based on the Color Spectrum -- the smaller the time duration, the redder the color; then as the time duration goes up, the color goes up so that you will go to green, then yellow, then blue, then really dark blue, then purple for the audio files 1 hour and over.  
 There are various other colors between these colors same as that seen in the color spectrum in the screenshot below.  
 Colors are utilized from the hue wheel in the counter-clockwise direction.  
 Note that the horizontal line in the middle of the a-icon is yellow/red representing the 2 audio tracks and is only red for mono.
@@ -1846,6 +1893,7 @@ Note that if in \texttt{Settings $\rightarrow$ Preferences} under the Appearance
 
 \subsection{Resources Window Preview Mode}%
 \label{sub:resources_window_preview_mode}
+\index{resources preview}
 
 
 Preview mode can be used to pop up a window which draws the vicons/aicons thumbnails in a larger size.  
@@ -1865,20 +1913,20 @@ You can also temporarily increase the preview mini-window by use of the mouse wh
 There are 4 options for the preview mode.
 
 \begin{enumerate}
-    \item  \emph{Full Play} is the default mode.  
+    \item  \emph{Full Play} \index{full play} is the default mode.  
         This means all of the media will automatically play when the mouse is in the Resources window and you can use the left mouse button to click on specific media to see it pop up in a larger view.  
         Audio only files do not play the audio until the icon is clicked on and the waveform aicon pops up into the 4x larger mode. 
         \emph{Full Play} includes the \emph{Mouse Over} capabilities as described below as well as the Inter-View \emph{Src Target} functions.
 
-	\item  \emph{No Play} mode is especially useful on smaller computers and for users who find the constant loop play to be somewhat distracting.
+	\item  \emph{No Play} \index{no play} mode is especially useful on smaller computers and for users who find the constant loop play to be somewhat distracting.
 
-	\item  \emph{Mouse Over} mode is activated by a single click on one of the vicons/aicons and deactivated with another single click over any of the icons.  
+	\item  \emph{Mouse Over} \index{mouse over} mode is activated by a single click on one of the vicons/aicons and deactivated with another single click over any of the icons.  
     Once activated, whenever you just move the mouse over an icon, it automatically pops up the increased size preview.  
     The first time in your session that you enable this feature, it may take a few seconds to load all of the icon previews into memory so be patient and just wait.  
     \emph{Mouse Over} mode makes it quick and easy to preview without having to drag the media to the viewer.  
     You can still drag the media same as without preview enabled.  
 
-	\item  \emph{Src Target} mode gives easy access to the Inter-View source target available by using the middle mouse button on media.  
+	\item  \emph{Src Target} \index{source target} mode gives easy access to the Inter-View source target available by using the middle mouse button on media.  
     There are 2 advantages to this mode -- there is no 5 second play loop taking up cpu time and the popup allows for the use of the letter “\texttt{f}” on that popup to have it go to fullscreen mode.  
     \emph{Src Target} mode in any scenario never plays sound as that is nonsensical usage.  
     After the initial click to pop media in this mode, you also have the \emph{Mouse over} feature.
@@ -1911,6 +1959,7 @@ Note that if in \texttt{Settings $\rightarrow$ Preferences} under the Appearance
 
 \subsection{Moving clips/media from/to Resources window}%
 \label{sub:moving_clips_media_from_to_resources_window}
+\index{copy/paste from/to resources window}
 
 If you have several media files loaded into the Resources window of one instance of \CGG{} and want to load some of the same ones into another instance or just want a listing to save in a file for later use, you can do this with these set of steps:
 
@@ -1969,6 +2018,8 @@ Another possible usage of this capability:
 
 \subsection{Snapshot / Grabshot}%
 \label{sub:snapshot_grabshot}
+\index{snapshot}
+\index{grabshot}
 
 \begin{figure}[htpb]
     \centering
@@ -2013,6 +2064,7 @@ A red circle reticle can be moved to the area to grab; use left mouse drag to su
 
 \subsection{Transport Controls}%
 \label{sub:transport_controls}
+\index{transport buttons}
 
 Transport controls are useful for navigation and for playing media.  
 Each of the Viewer, Compositor, and Program windows has its own transport panel.  
@@ -2047,6 +2099,7 @@ If normally audio is included in the play, it will be removed and if normally au
 
 \subsection{Zoombar}%
 \label{sub:zoombar}
+\index{zoom}
 
 The compositor has zoom capability. 
 The pull-down menu on the bottom of the compositor window has a number of zoom options. 
@@ -2062,6 +2115,7 @@ This could affect performance on slower systems
 
 \subsection{Show Overlays}%
 \label{sub:show_overlays}
+\index{show ovelays window}
 
 Color Coded Keyframe Curves are a big feature in the \textit{Show Overlays} window because by changing the colors to suit the user, it helps to remove confusion from multiple curves on the track canvas.  
 They can be viewed from the pulldown menu of \texttt{Window $\rightarrow$ Show overlays} but they will operate the same as when used from the \textit{View} pulldown menu.  
@@ -2143,6 +2197,7 @@ Here is a list of how they work.  Keep in mind that if the Expander on the patch
 
 \subsection{Sound Level Meters Window}%
 \label{sub:sound_level_meters_window}
+\index{sound level meters window}
 
 An additional window, the levels window, can be brought up from the \textit{Window} pulldown.  
 The levels window displays the output audio levels after all mixing is done.  
