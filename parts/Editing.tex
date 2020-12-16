@@ -4,14 +4,14 @@
 Editing comprises both time and track space.  The timeline consists
 of the time certain media appear on the track going left to right
 and a set of tracks from the top to the bottom.  There are 2 methods
-of timeline editing -- drag and drop editing, also called
-\textit{arrow mode}, and cut and paste editing or \textit{I-beam
-  mode}.  Cut and Paste is the default editing mode.  An additional,
+of timeline editing -- drag and drop editing \index{drag and drop}, also called
+\textit{arrow mode} \index{arrow}, and cut and paste editing \index{cut and paste} or \textit{I-beam
+  mode} \index{i-beam}.  Cut and Paste is the default editing mode.  An additional,
 but not often considered editing method is called \textit{two-screen
-  editing} where the Viewer is used to view media and then the
+  editing} \index{two-screen} (or 3 point editing) where the Viewer is used to view media and then the
 desired clip from the media is transferred to the timeline.
 
-The timeline is where all editing decisions are made
+The timeline \index{timeline} is where all editing decisions are made
 (figure~\ref{fig:timeline}).  This is a stack of tracks in the
 center of the main window.  It can be scrolled up, down, left and
 right with the scrollbars on the right and bottom.  It can also be
@@ -25,11 +25,11 @@ holding down the Ctrl key and using the mouse wheel.
   \label{fig:timeline}
 \end{figure}
 
-The active region is the range of time which is affected by editing
+The active region \index{active region} is the range of time which is affected by editing
 commands on the timeline.  The active region is determined first by
-the presence of in/out points on the timeline.
+the presence of in/out points \index{in/out point} on the timeline.
 %
-If those do not exist the highlighted region is used. To reiterate,
+If those do not exist the highlighted region \index{highlighted region} is used. To reiterate,
 \emph{highlighting} is done in \emph{cut and paste mode} by moving
 the insertion point with the mouse in the timeline to where you want
 to start. Then hold down the LMB\@, drag the mouse to where you want
@@ -38,7 +38,7 @@ the end point to be and release the LMB\@. In \emph{drag and drop
 down the Ctrl key and double click with the LMB with the mouse over
 that column.
 
-If no highlighted region exists, the insertion point is used as the
+If no highlighted region exists, the insertion point \index{insertion point} is used as the
 start of the active region.  Some commands treat all the space to
 the right of the insertion point as active while others treat the
 active length as 0 (zero) if no end point for the active region is
@@ -52,7 +52,7 @@ affects pointers to source material, so if you want to have a new
 modified media file at the end of your editing session which
 represents the editing decisions, you need to render it.  Saving and
 loading your edit decisions is explained in the Load, Save and the
-EDL section and rendering is explained in the section on Rendering.
+EDL \index{EDL} section and rendering is explained in the section on Rendering.
 
 In the following editing sections, references to common operations
 are scattered within any of the modes where they seem pertinent.
@@ -61,6 +61,7 @@ However, many of the editing operations work in different modes.
 
 \section{The Patchbay}%
 \label{sec:patchbay}
+\index{patchbay}
 
 On the left of the timeline is a region known as the patchbay.  The
 patchbay enables features specific to each track as described next.
@@ -112,7 +113,7 @@ other tracks. Or you can:
 The 7 \textit{attributes} are described here next followed by the other available feature icons and their description.
 
 \begin{description}
-\item[Play Track] determines whether the track is rendered or
+\item[Play Track] \index{play track} determines whether the track is rendered or
   not. If it is off, the track is not rendered.  For example if you
   turn it off in all the video tracks, the rendered media file will
   have only audio tracks.  If the track is chained to any other tracks
@@ -120,7 +121,7 @@ The 7 \textit{attributes} are described here next followed by the other availabl
   in this shared track, regardless of play status of the shared track
   that in this particular case affects the media output but not fade
   and effects.
-\item[Arm Track] determines whether the track is armed or not.
+\item[Arm Track] \index{arm track} determines whether the track is armed or not.
   Only the armed tracks are affected by editing operations. Make sure
   you have enough armed destination tracks when you paste or splice
   material or some tracks in the material will get left out.  In
@@ -132,11 +133,11 @@ The 7 \textit{attributes} are described here next followed by the other availabl
 \end{description}
 
 \begin{description}
-\item[Draw Media] determines if picons or waveforms are drawn on
+\item[Draw Media] determines if picons \index{picons} or waveforms \index{waveform} are drawn on
   the asset in the track.  You may want to disable this if you know
   that the media/format takes a long time to draw on the timeline.  By
   default it is set to on in order to see picons on the timeline.
-\item[Don’t send to output] -- more commonly called
+\item[Don’t send to output] \index{mute} -- more commonly called
   \textit{mute} -- causes the output to be thrown away once the track is
   completely rendered. This happens whether or not \textit{Play track}
   is on.  For example if you mute all the video tracks, the rendered
@@ -151,7 +152,7 @@ The 7 \textit{attributes} are described here next followed by the other availabl
   Mute track is used to keep the track with the shared track effect
   from overlapping the output of the source track (the shared track)
   where the shared track effect is not present.
-\item[Gang Fader] cause the fader to track the movement of
+\item[Gang Fader] \index{gang fader} cause the fader to track the movement of
   whatever other fader you are adjusting by dragging either the fader
   or the curve on the track.  It doesn't affect the editing made with
   menu controls.  A fader is only ganged if the arm track is also on.
@@ -159,11 +160,11 @@ The 7 \textit{attributes} are described here next followed by the other availabl
   simultaneously.  Gang also causes Nudge parameters to synchronize
   across all the ganged tracks.
 \item[Master Track] Mark a track as \textit{master} serves when using \textit{Gang Channels} or \textit{Gang Media} mode. See \nameref{sub:displaying_tracks_ganged}
-\item[Track Data Height] this up/down toggle symbol to the immediate right
+\item[Track Data Height] \index{track height} this up/down toggle symbol to the immediate right
 of the 5 attributes, is used to individually resize each track.  This makes
 it very easy to temporarily expand or contract the size of that track either
 by clickin with the left mouse button or using the middle wheel up/down.
-\item[Fader slider] fade values are represented on the timeline
+\item[Fader slider] \index{fader slider} fade values are represented on the timeline
   with a pink (default color) curve that is keyframable.  All tracks have a fader, but
   the units of each fader depend on whether it is audio or video.
   Audio fade values are in dB. They represent relative levels, where 0
@@ -181,12 +182,12 @@ by clickin with the left mouse button or using the middle wheel up/down.
   with the arm option enabled, the other faders should follow.  Hold
   down the Shift key and drag a fader to center it on the original
   source value (0 for audio, 100 for video).
-\item[Mixer] in the expanded patchbay for that track designates
+\item[Mixer] \index{mixer toggle} in the expanded patchbay for that track designates
   the multi-camera mixer mode.
-\item[Overlay mode] in the expanded patchbay is used for
+\item[Overlay mode] \index{overlay pulldown} in the expanded patchbay is used for
   porter-duff operations and is full explained in
   \nameref{cha:overlays} chapter.
-\item[Nudge] is in the expanded patchbay.  The nudge value is
+\item[Nudge] \index{nudge} is in the expanded patchbay.  The nudge value is
   the amount the track is shifted left or right during playback. The
   track is not displayed shifted on the timeline, but it is shifted
   when it is played back. This is useful for synchronizing audio with
@@ -208,7 +209,7 @@ by clickin with the left mouse button or using the middle wheel up/down.
   sensitive menu. Nudge settings are ganged with the Gang faders
   toggle and the Arm track toggle. Use the mouse wheel over the nudge
   textbox to increment and decrement the value.
-\item[Pan] is available in the expanded patchbay for audio
+\item[Pan] \index{panning box} is available in the expanded patchbay for audio
   tracks via a panning box. Position the pointer in the panning box
   and click/drag to reposition the audio output among the speaker
   arrangement. The loudness of each speaker is printed on the relative
@@ -222,18 +223,18 @@ Press the Tab key while the cursor is anywhere over a track to
 toggle the track arming status. Press Shift-Tab while the cursor is
 over a track to toggle the arming status of every other track.
 
-\paragraph{Automatic audio mappings} Several convenience functions
+\paragraph{Automatic audio mappings} \index{audio map} Several convenience functions
 are provided for automatically setting the panning to several common
 standards. They are listed in the Audio menu. These functions only
 affect armed audio tracks. They are:
 
 \begin{description}
-\item[Audio~$\rightarrow$~Map 1:1] This maps every track to
+\item[Audio~$\rightarrow$~Map 1:1] \index{audio map 1:1} This maps every track to
   its own channel and wraps around when all the channels are
   allocated. It is most useful for making 2 tracks with 2 channels map
   to stereo and for making 6 tracks with 6 channels map to a 6 channel
   sound card.
-\item[Audio~$\rightarrow$~Map 5.1:2] This maps 6 tracks to 2
+\item[Audio~$\rightarrow$~Map 5.1:2] \index{audio map 5.1:2} This maps 6 tracks to 2
   channels. The project should have 2 channels when using this
   function. Go to \texttt{Settings $\rightarrow$ Format} to set the
   output channels to 2. This is most useful for down-mixing 5.1 audio
@@ -261,6 +262,7 @@ not store high frequencies in most cases.
 
 \section{Manipulating Tracks}%
 \label{sec:manipulating_tracks}
+\index{tracks pulldowns}
 
 Tracks in \CGG{} either contain audio or video.  There is no special
 designation for tracks other than the type of media they contain.
@@ -276,7 +278,9 @@ are armed.
 \begin{description}
 \item[Move tracks up | Move tracks down] shift all the armed
   tracks up or down the stack.
+\item[Roll tracks up | Roll tracks down] wheel motion of the tracks up or down.
 \item[Delete tracks] deletes the armed tracks.
+\item[Delete first track] deletes the first track, whether it is armed or not.
 \item[Delete last track] deletes the last track, whether it is
   armed or not.
 \item[Concatenate tracks] operation copies all the assets of
@@ -292,13 +296,14 @@ are armed.
   track. The destination track wraps around until all the disarmed
   tracks are concatenated. Disarmed tracks that are not playable are
   not concatenated.
+\item[Align timecodes] see \nameref{sub:align_timecodes}
 \item[Append to project] allows for creating new tracks after
   any existing tracks.
 \item[Add subttl] will add a track for subtitles at the top of
   the other tracks.
 \end{description}
 
-The \textbf{Audio} and \textbf{Video pulldowns} each contain an
+The \textbf{Audio} \index{audio pulldowns} and \textbf{Video pulldowns} \index{video pulldowns} each contain an
 option to add a track of their specific type. In the case of audio,
 the new track is put on the bottom of the timeline and the output
 channel of the audio track is incremented by one. In the case of
@@ -308,10 +313,11 @@ on top of old tracks.
 
 \subsection{Displaying tracks: Ganged mode}%
 \label{sub:displaying_tracks_ganged}
+\index{tracks: ganged mode}
 
 Often users working on media where Audio is the main focus, want all of a media's audio channels, whether stereo or 5:1 channels, to be treated as a single unit. They are more familiar with working with a DAW (Digital Audio Workstation software) and find that it takes extra work and a lot more care to have to individually manage audio tracks rather than have them automatically edited as a ganged group.
 
-To get this capability, there is a \textit{Gang Tracks} toggle button on the main timeline controls to switch between 3 modes of working with multiple channels so that the tracks are automatically edited as a single unit. Operations affected include edits such as cuts, moving sections, and adding plugins. Group masters are marked by the \textit{Master Track} toggle in the patchbays. A track gang group begins on a master track, and extends to, but not including, the next master track. The 3 \textit{Gang Tracks} modes are:
+To get this capability, there is a \textit{Gang Tracks} \index{gang tracks toggle} toggle button on the main timeline controls to switch between 3 modes of working with multiple channels so that the tracks are automatically edited as a single unit. Operations affected include edits such as cuts, moving sections, and adding plugins. Group masters are marked by the \textit{Master Track} \index{master track} toggle in the patchbays \index{patchbay}. A track gang group begins on a master track, and extends to, but not including, the next master track. The 3 \textit{Gang Tracks} modes are:
 
 \begin{enumerate}
 	\item \textbf{Gang None:} this is the default mode and is the traditional way Cinelerra operates. If you never toggle the "Gang Tracks" button, everything operates normally as it always has. In this mode, the button icon looks like 3 tracks with $\dots$ on the end and all tracks are visible on the timeline. See figure~\ref{fig:gang-track-01}
@@ -370,6 +376,7 @@ operational capabilities which are not compatible with the way that Ganging work
 
 \section{Two Screen Editing}%
 \label{sec:two_screen_editing}
+\index{two-screen}
 
 This is a fast way to construct a program out of movie files (in
 other programs is called \textit{three points editing}). The idea
@@ -383,12 +390,12 @@ showing what key is bound to that button.
 
 To begin a two screen editing session, load your media resources by
 using the main menu \textbf{File pulldown} and choose \textit{Load
-  files}; make sure the insertion mode is set to \textit{Create new
-  resources only}.  This insertion strategy is to ensure that the
+  files}  \index{load media files}; make sure the insertion mode is set to \textit{Create new
+  resources only}.  This insertion strategy \index{insertion strategy} is to ensure that the
 timeline stays unchanged while new resources are brought in. Go to
-the Resources window and select the Media folder. The newly loaded
+the Resources window \index{resources window} and select the Media folder. The newly loaded
 resources will appear. Double click on a resource or drag it from
-the media side of the window over to the Viewer window.
+the media side of the window over to the Viewer window \index{viewer window}.
 
 Check to make sure there are enough armed tracks on the timeline to
 put the subsections of source material that you want.  Usually this
@@ -407,14 +414,14 @@ clip from the media file:
   bracket.
 \item You will see a colored bar inside the brackets for easier
   viewing.
-\item Drag the In/Out point with the mouse to conveniently
+\item Drag the In/Out point \index{in/out point} with the mouse to conveniently
   change their position.
 \end{enumerate}
 
-These In/Out points define a clip.  You can now use this in a couple
+These In/Out points define a clip \index{clip}.  You can now use this in a couple
 of different ways.
 
-\paragraph{Splice} The splice icon, or shortcut letter “\texttt{v}”,
+\paragraph{Splice} \index{splice} The splice icon, or shortcut letter “\texttt{v}”,
 inserts the selected area in the timeline after the insertion point.
 After the splice has taken effect, the insertion point moves to the
 end of the edit ready to be used as the next splice location. This
@@ -425,7 +432,7 @@ are set on the timeline, the clip is inserted after the In point. If
 there are edits after your chosen splice location on the timeline,
 they will be moved to the right.
 
-\paragraph{Overwrite} The overwrite icon, or shortcut letter
+\paragraph{Overwrite} \index{overwrite} The overwrite icon, or shortcut letter
 “\texttt{b}”, overwrites the region of the timeline after the
 insertion point with the clip. If an In point or an Out point exists
 on the timeline the clip is overwritten after the In point or after
@@ -465,8 +472,9 @@ copies the selection into the copy buffer.
 
 \subsection{Use Case – Working with Sequences}
 \label{sub:use_case_working_sequences}
+\index{sequences}
 
-\textit{From the Viewer to the Timeline with the sequences imported
+\textit{From the Viewer to the Timeline \index{timeline} with the sequences imported
   in a Master Project.}
 
 A convenient methodology for working on a Master project along with
@@ -526,10 +534,11 @@ can use the Nest feature as described in the Nesting section
 
 \section{Cut and Paste Editing}%
 \label{sec:cut_paste_editing}
+\index{cut and paste}
 
 This is the more traditional method of editing in \CGG{} and
 therefore is the default.  To enable the cut and paste editing mode
-on the timeline, select the I-beam toggle on the control bar at the
+on the timeline, select the I-beam \index{i-beam} toggle on the control bar at the
 top of the main program window. You can copy edits in the same
 track, copy from different tracks in the same instance, start a
 second instance of \CGG{} and copy from one instance to the other or
@@ -541,7 +550,7 @@ button to cut it. Move the insertion point to another point in the
 timeline and select the paste button.  Assuming no In/Out points are
 defined on the timeline this performs a cut and paste operation.
 
-Most editing operations are listed in the \textit{Edit} pulldown. Some of
+Most editing operations are listed in the \textit{Edit} pulldown \index{edit pulldown}. Some of
 them have a button on the program control toolbar as well as a
 keyboard shortcut.  The keyboard shortcut is in parenthesis here.
 
@@ -567,7 +576,7 @@ keyboard shortcut.  The keyboard shortcut is in parenthesis here.
 \item[Select All] (a) Select the whole timeline.
 \end{description}
 
-In Cut and Paste editing mode you can \textit{edit labels} as
+In Cut and Paste editing mode you can \textit{edit labels} \index{label} as
 well. By enabling Edit labels in the \textbf{Settings pulldown}, or
 by disabling the Lock labels from moving button on the Program
 Control Tool Bar, labels will be cut, copied or pasted along with
@@ -579,10 +588,10 @@ set labels for the destination region of the destination
 waveform. Perform a cut, clear the In/Out points, select the region
 between the labels, and perform a paste.
 
-\paragraph{In / Out Points} The In and Out bracket placement is
+\paragraph{In / Out Points} \index{in/out point} The In and Out bracket placement is
 explained here to illustrate their usage.  Because of the shape of
 the markers [ and ] you may assume that they are inclusive -- that
-everything placed in between would be included in the clip, such as
+everything placed in between would be included in the clip \index{clip}, such as
 in the case of being transferred to the timeline from the Viewer.
 In reality, one of the two markers will not include the frame that
 was visible at the time the marker was affixed. Depending on whether
@@ -606,7 +615,7 @@ account in its calculations whether the \textit{Always show next
 reference of the markers is in the middle of the icon, you will
 avoid confusion.
 
-\paragraph{Overwrite} To perform overwriting within the timeline
+\paragraph{Overwrite} \index{overwrite} To perform overwriting within the timeline
 paste on a selected region (highlighted or between In/Out
 points). The selected region will be overwritten. If the clip pasted
 from the clipboard is shorter than the selected region, the selected
@@ -622,7 +631,7 @@ concatenates it by pasting those assets at the end of the first set
 of armed tracks. They are pasted one after the other, keeping the
 same order they have on the stack.
 
-\paragraph{Split -- blade cut and hard edges:} You can cut the
+\paragraph{Split -- blade cut and hard edges:} \index{split} You can cut the
 tracks into 2 pieces on the timeline by putting the hairline cursor
 on the place you want to do a cut and then using the character “x”
 or the scissors tool (figure~\ref{fig:cut}).
@@ -644,9 +653,9 @@ is split at the location of the In/Out point since it has priority
 over the cursor location.  A blade cut simply splits the edit into
 two edits.  In order to have the video and audio aligned, it works
 best to have \texttt{Settings $\rightarrow$ Align cursor on
-  frames}.  When a blade cut occurs, the edges are created as
-\textit{hard edges}.  These are edges that cannot be deleted by
-track optimizations.
+  frames} \index{align cursor on frames}.  When a blade cut occurs, the edges are created as
+\textit{hard edges}. \index{hard edge} These are edges that cannot be deleted by
+track optimizations \index{timeline optimization}.
 %
 \CGG{} has built-in optimization on the timeline.  So that whenever
 two parts on the timeline are sequential frames, it automatically
@@ -670,12 +679,13 @@ simultaneously.
 
 \section{Drag and Drop Editing}%
 \label{sec:drag_drop_editing}
+\index{drag and drop}
 
 To enable the drag and drop editing mode on the timeline, select the
-arrow toggle on the control bar at the top of the main program
+arrow toggle \index{arrow} on the control bar at the top of the main program
 window.  Drag and drop editing is a quick and simple way of working
 in \CGG{}, using mostly only the mouse. The basic idea is to create
-a bunch of clips, then drag them in order into the timeline, thus
+a bunch of clips \index{clip}, then drag them in order into the timeline, thus
 building prototype media that you can watch in the compositor. If
 after watching it, you wish to re-arrange your clips, set effects,
 add transitions or insert/delete material, just drag and drop them
@@ -683,17 +693,17 @@ on the timeline.
 
 To simply get started, perform the following operations which are
 useful for working in a drag and drop editing session.  First load
-your media by using the main menu \textit{File} pulldown and choose
-\textit{Load files}; make sure the insertion mode is set to
-\textit{Create new resources only}.  This loads the files into the
-Resources window.
+your media by using the main menu \textit{File} pulldown \index{file pulldown} and choose
+\textit{Load files} \index{load media files}; make sure the insertion mode is set to
+\textit{Create new resources only} \index{insertion strategy}.  This loads the files into the
+Resources window \index{resources window}.
 
 \begin{enumerate}
 \item Create some video and audio tracks on the timeline using
-  the \textit{Video} and \textit{Audio} pulldowns.
+  the \textit{Video} \index{video pulldown} and \textit{Audio} \index{audio pulldown} pulldowns.
 \item Open the Media folder in the Resources window.  Make sure
   the necessary tracks are armed and drag a media file from the
-  Resources window to the timeline. If the media has video, drag it
+  Resources window to the timeline \index{timeline}. If the media has video, drag it
   onto a video track or if just audio, drag it onto an audio
   track. For a still image, drag it onto a video track.
 \end{enumerate}
@@ -746,7 +756,7 @@ When you drag and drop edits within the timeline:
 \item If you have more armed tracks on the timeline than in the
   asset you are dragging, only the following edits of the tracks
   affected by the drag and drop operation will move to the right. This
-  will cause loss of synchronization. To restore it, disarm the tracks
+  will cause loss of synchronization \index{sync}. To restore it, disarm the tracks
   affected by the drag and drop operation, highlight the just dropped
   edit and paste silence over it using the \textit{Edit} pulldown,
   \textit{Paste Silence}.
@@ -754,7 +764,7 @@ When you drag and drop edits within the timeline:
 
 Labels sometimes work differently in Drag and Drop editing mode in
 that you can't drag and drop them. They might be locked to the
-timebar, even with the Edit labels option enabled.  Although with
+timebar \index{timebar}, even with the Edit labels option enabled.  Although with
 the Edit labels option enabled, if a selected area of a resource is
 spliced from the Viewer to the timeline in a position before labels,
 these labels will be pushed to the right for the length of the
@@ -767,12 +777,13 @@ pulldown to view the list and their keyboard shortcuts.
 
 \subsection{Copy/Paste Behavior}%
 \label{sub:copy_paste_behavior}
+\index{drag and drop: MMB options}
 
 There are many options for moving, copying, pasting, inserting, and
 deleting selected \textit{edits}, more commonly referred to by the
 user as \textit{clips}, when in the Drag and Drop (arrow) editing
 mode.  This makes it easier to avoid constantly having to disarm/arm
-tracks.  To create a selection move the cursor over the clip and
+tracks.  To create a selection \index{edits selection} move the cursor over the clip and
 just click the left mouse button; remove a selection by left mouse
 button click again.  This will mark your selection with a colored
 border which contains some red.  The easiest way to initially use
@@ -782,7 +793,7 @@ However, for those users who prefer the addition of the Ctrl key to
 add multiple selections as is commonly done for listbox operations,
 there is a preference in \texttt{Settings $\rightarrow$ Preferences
   $\rightarrow$ Appearance} tab, called \textit{Clears before
-  toggle} that changes the behavior.
+  toggle} \index{clears before toggle} that changes the behavior.
 
 When an edit is marked as selected, it can be cut/copied into the
 paste clip buffer.  The constructed clip buffer will begin with the
@@ -894,8 +905,9 @@ transition does not drag.
 
 \subsection{Snapping while Cutting and Dragging}%
 \label{syb:snapping_cutting_dragging}
+\index{snap}
 
-\paragraph{Cutting/Snapping edits} cuts from an edit handle to the
+\paragraph{Cutting/Snapping edits} \index{edits: cut with snap} cuts from an edit handle to the
 insert point.  There are Edit Panel buttons which normally are used
 to move to the previous or next edit handle/label.
 
@@ -927,7 +939,7 @@ following keyboard shortcuts to perform the same functions:
 	\end{tabular}
 \end{center}
 
-\paragraph{Drag Snapping} if you hold down the Ctrl + Alt keys while
+\paragraph{Drag Snapping} \index{edits: drag with snap} if you hold down the Ctrl + Alt keys while
 dragging using the mouse, once the clip gets near to an edit, a
 label, an in/out pointer or the start/end of the timeline, the
 dragged clip will snap next to that marker.  The 2 will now be
@@ -940,6 +952,7 @@ plugin while dragging so that it will be the same length as the edit.
 
 \subsection{Copy/Paste clips/medias across Multiple Instances}%
 \label{sub:copy_paste_multiple_instances}
+\index{multiple instances: copy/paste}
 
 It is easy to copy/paste clips/media within a single instance of
 \CGG{} or across multiple instances.  The reason this works is
@@ -960,6 +973,7 @@ Steps to copy from a source timeline and paste to a target timeline:
 
 \subsection{Grouping edits}%
 \label{sub:grouping_edits}
+\index{edits: grouping}
 
 \CGG{} recognizes as a group, the edits of different armed tracks
 that have aligned beginnings, regardless of whether they have the
@@ -970,7 +984,7 @@ same positions the edit the mouse pointer is currently over. Another
 method of Grouping of edits is performed as follows:
 
 \begin{enumerate}
-\item Select each of the clips you would like to be part of a
+\item Select \index{edits selection} each of the clips you would like to be part of a
   group.
 \item Use the desired Copy mode as described above to get into
   the buffer.
@@ -1011,9 +1025,10 @@ different Group Id and a different color.
 
 \subsection{Dragging Groups}%
 \label{sub:dragging_groups}
+\index{edits: dragging group}
 
 Dragging while in \textit{Drop and Drag editing mode} (arrow mode)
-is really easy.  Just select the clip or clips you want to drag
+is really easy.  Just select \index{edits selection} the clip or clips you want to drag
 using the left mouse button, then put your cursor over one of them
 and drag while holding down the left mouse button.  Keyframes,
 autos, labels, and plugins will also be dragged.  Dragging honors
@@ -1038,13 +1053,13 @@ Remember: With the \texttt{Shift} key on, it will always
 \textit{overwrite}. Without the \texttt{Shift} key enabled, it
 always \textit{inserts} only.
 
-The original (older) method of dragging while in Arrow mode, lets
+The original (older) method of dragging while in Arrow \index{arrow} mode, lets
 you just left mouse click on a single clip or aligned clips and just
 drag.  This older method of dragging does not move any of its
 effects with it at this time.  There will only be a white outline
 while dragging and it will let you drop only if it fits.  You can
 also perform some dragging and grouping while in the \textit{Cut and
-  Paste editing mode} (ibeam mode) by taking advantage of the Ctrl
+  Paste editing mode} (ibeam mode \index{i-beam}) by taking advantage of the Ctrl
 button in conjunction with the left mouse button.
 
 \begin{itemize}
@@ -1056,7 +1071,7 @@ button in conjunction with the left mouse button.
 \end{itemize}
 
 This last section on Dragging, outlines the difference
-between \textit{column selection} and \textit{marking selection}.
+between \textit{column selection} \index{column selection} and \textit{marking selection} \index{marking selection}.
 Column selection is available to make it easy to still be able to do
 some dragging in I-beam mode whereas Marking selection makes it easy
 to drag clips together that are not columnated.
@@ -1064,6 +1079,7 @@ to drag clips together that are not columnated.
 
 \subsection{Selection Methods}%
 \label{sub:selection_method}
+\index{edits selection}
 
 Concerning \textit{Selection} methods, the following information is
 partially pertinent to all editing, but is most important to keep in
@@ -1089,7 +1105,7 @@ have a position on the timeline which can be used for editing.  This
 is input for the vertical style cut/paste drag/drop editing.
 
 More recently, in addition to the column oriented timeline drag
-selection, there is now \textit{group} capabilities which have
+selection, there is now \textit{group} \index{edits: grouping} capabilities which have
 various \textit{edit} selections.  These are created in the Drag and
 Drop editing mode by clicking edits to toggle
 select/deselection.  These groups are input to a different (more
@@ -1101,7 +1117,7 @@ shown. They are more like text editor commands to include
 and so on \dots The keyboard Delete key is not hooked to these
 operations, and is hooked to the original editing methods.
 
-In this \textit{group} mode, if there are In/Out markers set, they
+In this \textit{group} mode, if there are In/Out \index{in/out point} markers set, they
 enter the selection priority queue between the column selection and
 the cursor only. You can see the In/Out markers selected region
 colored line across the timebar (slightly underneath where the time,
@@ -1139,9 +1155,10 @@ If using certain operating systems (for example Ubuntu and Arch) that might fiel
 
 \section{Inter-View Mode\;/\;Identifying Source Targets}%
 \label{sec:inter-view_identifying_source_target}
+\index{inter-view}
 
 Inter-View mode provides a mapping of a particular media file to its
-timeline usages. It is somewhat similar to Two Screen Editing in
+timeline \index{timeline} usages. It is somewhat similar to Two Screen Editing in
 that you make use of the Viewer. It makes it possible to precisely
 trace and indicate in the media the origin of a particular segment
 of the timeline and visually indicate the use and distribution that
@@ -1171,8 +1188,8 @@ next.
 \begin{itemize}
 \item Do your editing as usual on the timeline until you are
   ready to see what is used or unused.
-\item Make sure you are in any of the Preview modes in the
-  Resources window; you enable the mode using the pulldown to the left
+\item Make sure you are in any of the Preview modes \index{preview mode} in the
+  Resources window \index{resources window}; you enable the mode using the pulldown to the left
   of the word \textit{Search}.  The option looks like this \quad
   \includegraphics[height=\baselineskip]{fullplay.png}.
 \item Middle mouse click on a thumbnail in the Resources window and
@@ -1226,9 +1243,11 @@ not for Proxy.
 
 \section{Edit Tools}%
 \label{sec:edit-tools}
+\index{edit tools}
 
 \subsection{Edit Length}%
 \label{sub:edit-lenght}
+\index{edit lenght}
 
 To set the length of an edit in the timeline, select the region
 which contains the edit to be modified. Now select the menu bar
@@ -1247,6 +1266,7 @@ edits (in armed tracks) to the specified length.
 
 \subsection{Align Edits}%
 \label{sub:align_edits}
+\index{align edits}
 
 When loading media, a common problem is that the various audio/video
 tracks do not always have exactly the same lengths. For example, you
@@ -1303,6 +1323,7 @@ second section as noted in red letters.
 
 \subsection{Reverse Edits}%
 \label{sub:reverse_edits}
+\index{reverse edits}
 
 The Reverse Edits can be useful to change the order of 2 edits in
 the case where you would like to put a \textit{teaser} section that
@@ -1336,6 +1357,7 @@ Figure~\ref{fig:reverse02} shows the results of executing
 
 \subsection{Shuffle Edits}%
 \label{sub:shuffle_edits}
+\index{shuffle edits}
 
 The file pulldown \texttt{Edit $\rightarrow$ Shuffle Edits} will
 randomly exchange the location of the edits.  This feature can be
@@ -1359,12 +1381,14 @@ permutation of the fragments resulting in 0002 now being first, then
 
 \section{Multi-Session}%
 \label{sec:multi_session}
+\index{multi-session}
 
 You can run as many sessions of \CGG{} as your computer resources allow.  However, if you are using the same \texttt{\$HOME/.bcast5}, changes you make for one may impact the others. You can always create and rename a new \texttt{.bcast5} from:\\
 \texttt{Settings $\rightarrow$ Preferences $\rightarrow$ Interface $\rightarrow$ Index files:} and press \textit{Index files go here}
 
 \section{Multi-Viewer Window Support}%
 \label{sec:multi_viewer_window_support}
+\index{multi-viewer window}
 
 You can create as many Viewer windows as you want in \CGG{}.  These are handy for users who are adept at working with a lot of different clips simultaneously.  By bringing up multiple Viewer windows, each clip can be edited in its own area, making it easy to see all of the separate pieces.  After you have loaded some media files, to start another Viewer window, right click on one of the pieces of media in the Resources window.  This brings up a menu of several options, one of which is \textit{view in new window}.  Choose this option and that media will come up in a new Viewer window for you to work (figure~\ref{fig:multi-view01}).
 
@@ -1377,6 +1401,7 @@ You can create as many Viewer windows as you want in \CGG{}.  These are handy fo
 
 \section[ShuttlePROv2 and ShuttleXpress Jog Wheels for Editing]{ShuttlePROv2 and ShuttleXpress Jog Wheels for Editing\protect\footnote{programmatic specifications from Eric Messick}}%
 \label{sec:shuttle_jog_wheels_editing}
+\index{shuttle pro v2 and shuttlexpress}
 
 The ShuttlePROv2 and ShuttleXpress are affordable jog wheels which
 can be useful for working with Cin, especially if you do a lot of
