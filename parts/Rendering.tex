@@ -1,7 +1,8 @@
 \chapter{Rendering}%
 \label{cha:rendering}
+\index{rendering}
 
-Rendering takes a section of the timeline, performs all the editing,
+Rendering takes a section of the timeline \index{active region}, performs all the editing,
 effects and compositing, and creates a new media file.  You can then
 delete all the source assets, play the rendered file, or bring it
 back into \CGG{} for more editing.  All rendering operations are
@@ -16,6 +17,7 @@ But you also have the choice to render \textit{one frame}.
 
 \section{Single File Rendering}%
 \label{sec:single_file_rendering}
+\index{single file rendering}
 
 Use the \textit{File} pulldown and select Render to start the render dialog
 (figure~\ref{fig:render}).  Then choose the desired parameters.
@@ -29,7 +31,7 @@ Use the \textit{File} pulldown and select Render to start the render dialog
 \begin{description}
 \item[Select a file to render to:] enter the path and filename to
   write the rendered file to in the textbox below.
-\item[File Format:] use the down arrow to see file format options.
+\item[File Format:] \index{file format} use the down arrow to see file format options.
   For ffmpeg, which has its own set of options, you will then have to
   select an ffmpeg file type from the down arrow choices. The format
   of the file determines whether you can render audio or video or
@@ -55,7 +57,7 @@ Use the \textit{File} pulldown and select Render to start the render dialog
 \end{figure}
 
 \begin{description}
-\item[Wrench:] select the \textit{wrench} next to each toggle to set
+\item[Wrench:] \index{wrench} select the \textit{wrench} next to each toggle to set
   compression parameters.  If the file format can not store audio or
   video the compression parameters will be blank.  If \textit{Render
     audio tracks} or \textit{Render video tracks} is selected and the
@@ -79,7 +81,7 @@ Use the \textit{File} pulldown and select Render to start the render dialog
   eventually would become \texttt{/movies/track.wav001} and so on.
   Filename regeneration is only used when either render farm mode is
   active or creating new files for every label is active.
-\item[Render range:] choices are \textit{Project},
+\item[Render range:] \index{active region} choices are \textit{Project} \index{project},
   \textit{Selection}, \textit{In/Out points}, and \textit{One Frame}
   for single images like Tiff.  For these images, Render range will
   have \textit{One Frame} automatically checked and all of the others
@@ -104,14 +106,14 @@ Use the \textit{File} pulldown and select Render to start the render dialog
   check this box.  It gives you the chance to work on something else
   while waiting and still be immediately notified when the render is
   complete.
-\item[Render Profile:] another convenience feature to take advantage
+\item[Render Profile:] \index{render profile} another convenience feature to take advantage
   of if you use specific render formats frequently, is to save that
   profile for future usage without having to set it up again.
 \item[Save Profile:] after setting up your render preference
   formats, use the save profile button to save it.
 \item[Delete Profile:] if you want to delete a saved profile,
   highlight the one you no longer want and delete.
-\item[Insertion strategy:] select an insertion mode from the
+\item[Insertion strategy:] \index{insertion strategy} select an insertion mode from the
   available choices as seen when you click on the down arrow on the
   right hand side of the option. The insertion modes are the same as
   with loading files.  In the case if you select “insert nothing” the
@@ -130,6 +132,7 @@ Use the \textit{File} pulldown and select Render to start the render dialog
 
 \section{Batch Rendering}%
 \label{sec:batch_rendering}
+\index{batch rendering}
 
 Batch Rendering automates the rendering of audio/video files in that
 you can establish a set of job parameters, save them, and use them
@@ -143,13 +146,13 @@ user interface (figure~\ref{fig:batch01}).
 	\label{fig:batch01}
 \end{figure}
 
-If you want to render many projects to media files without having to
+If you want to render many projects \index{project} to media files without having to
 constantly set up the render dialog for each one, batch rendering is
 a more efficient method of rendering. To use this feature you need to 
 understand certain concepts.
 
 \begin{enumerate}
-	\item You must define a list of Batches (\textit{Job}) before starting the rendering. This is created using the \textit{New} button and displayed in \textit{Batches to Render} dialog.
+	\item You must define a list of Batches (\textit{Job} \index{job}) before starting the rendering. This is created using the \textit{New} button and displayed in \textit{Batches to Render} dialog.
 	\item Each batch consists of a source project already created in \CGG{}, e.g. \texttt{aaa.xml}, to which we assign the rendering parameters.
 	\begin{itemize}
 		\item to associate \texttt{aaa.xml} to the batch we use the \textit{EDL Path} input field.
@@ -176,7 +179,7 @@ You can use the same \CGG{} project file if you are rendering to
 different output files, as in an example where you might be creating
 the same output video in different file formats.
 
-You do not have to render an entire projects. We can limit ourselves to an \textit{active region} that we can set through a selection in Cut and Paste mode, with labels or In/Out Points. Or the rendering will start from the Insert Point position until the end of the project. Remember: if we want to render the entire project (and not just one active region) it is important to bring the Insertion Point to the beginning of the timeline. This is the only way we are sure to include the whole project.
+You do not have to render an entire projects. We can limit ourselves to an \textit{active region} \index{active region} that we can set through a selection in Cut and Paste mode, with labels or In/Out Points. Or the rendering will start from the Insert Point position until the end of the project. Remember: if we want to render the entire project (and not just one active region) it is important to bring the Insertion Point to the beginning of the timeline. This is the only way we are sure to include the whole project.
 
 With all the \CGG{} xml project files prepared with active regions,
 go to \texttt{File $\rightarrow$ Batch Render}. This brings up the
@@ -257,6 +260,7 @@ creating its usual windows.
 
 \subsection{Command Line Rendering}%
 \label{sub:command_line_rendering}
+\index{rendering: command line}
 
 The command line rendering method consists of a way to load the
 current set of batch rendering jobs and process them without a
@@ -284,6 +288,7 @@ cin -r
 
 \subsection{More about Save/Use EDL and Save/Load Jobs}%
 \label{sub:more_save_use_edl_jobs}
+\index{batch render: more options}
 
 The \texttt{File $\rightarrow$ Batch Render} pulldown brings up the
 Batch Render window to be used for batch rendering as well as DVD/BD
@@ -361,18 +366,19 @@ to illustrate how to take advantage of their capabilities.
 
 \section{Background Rendering}%
 \label{sec:background_rendering}
+\index{background rendering}
 
 Background rendering causes temporary output to be rendered
 constantly while the timeline is being modified. The temporary
 output is displayed during playback whenever possible. This is
 useful for transitions and previewing effects that are too slow to
-display in real time. If a Render Farm is enabled, the render farm
+display in real time. If a Render Farm \index{render farm} is enabled, the render farm
 is used for background rendering. This gives you the potential for
 real-time effects if enough network bandwidth and CPU nodes exist.
 
 Background rendering is enabled in the \texttt{Performance} tab of
 the \texttt{Preferences} window. It has one interactive function
-\texttt{Settings $\rightarrow$ Toggle background rendering}. This
+\texttt{Settings $\rightarrow$ Toggle background rendering} \index{background rendering toggle}. This
 sets the point where background rendering starts up to the position
 of the insertion point. If any video exists, a red bar appears in
 the time ruler showing what has been background rendered
@@ -423,6 +429,7 @@ rates (figure~\ref{fig:back-ren}).
 
 \section{Render Farm Usage}%
 \label{sec:render_farm_usage}
+\index{render farm}
 
 Render Farm uses background rendering, a feature of \CGG{} where the
 video is rendered in the background, to speed up rendering
@@ -507,6 +514,7 @@ cin -d 407
 
 \subsection{Render Farm Menu and Parameter Description}%
 \label{sub:render_farm_parameter_description}
+\index{render farm parameters}
 
 Below we describe the Performance tab for configuring a render farm
 (figure~\ref{fig:farm}).
@@ -602,6 +610,7 @@ render farm session to restart with a good balance.
 
 \subsection{Detailed Setup Description}%
 \label{sub:detailed_setup_description}
+\index{render farm setup}
 
 {\color{red} CAUTION }, any exact command lines worked as of
 $01/2018$ on a Fedora system.  These can change over time and on
@@ -849,6 +858,7 @@ want to bother setting up NFS for a shared disk.
 
 \subsection{Multi-core Computers Render Farm Setup}%
 \label{sub:multi_core_render_farm_setup}
+\index{render farm: multi core CPU}
 
 If you are lucky enough to have a computer with a large cpu core
 count, setting up a render farm can really take advantage of using
@@ -863,6 +873,7 @@ count.
 
 \subsection{Troubleshooting Tips and Warnings}%
 \label{sub:troubleshhoting_tips_warnings}
+\index{render farm: troubleshooting}
 
 \noindent If you have problems running the Render Farm.  Here is a
 list of items to check.
@@ -984,6 +995,7 @@ outlined below.  These setup steps make it easy to just get started.
 
 \subsection{Lossless Rendering}%
 \label{sub:loseeless_rendering}
+\index{rendering: lossless}
 
 Lossless means that in the compression of a file, all of the
 original data, every single bit, can be recovered when the file is
@@ -1014,6 +1026,7 @@ you see $qp=0$.  This option is also available for bluray creation.
 
 \subsection{Extra “cin\_” Options for Render with FFmpeg}%
 \label{sub:extra_cin_option_ffmpeg}
+\index{rendering: ffmpeg options}
 
 There are several special parameters that can be used in the ffmpeg
 options file to pass values to the codecs that are not normally
@@ -1095,6 +1108,7 @@ sections 19 and 21.
 
 \subsection{Two-pass Encoding with FFmpeg}%
 \label{sub:two_pass_encoding_ffmpeg}
+\index{rendering: ffmpeg two-pass encoding}
 
 In \CGG{} for two-pass, you need to run ffmpeg twice, with the same
 settings, except for designating the options of pass~1 for the first
@@ -1292,6 +1306,7 @@ Further links:
 
 \subsection{Piping Video to a Command Line}%
 \label{sub:piping_video_command_line}
+\index{rendering: command line}
 
 You can pipe a video to any command line on the computer, such as
 ffmpeg.  This can be especially useful with raw video files.  Next
