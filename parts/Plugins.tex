@@ -1,5 +1,6 @@
 \chapter{Plugins}%
 \label{cha:plugins}
+\index{plugins}
 
 There are realtime effects -- these are the most useful and probably all you will ever need -- and rendered effects.
 The rendered effects are discussed separately in the \nameref{sec:rendered_effects}  section.
@@ -12,7 +13,7 @@ Effect plugins modify the track when played, according to how they are set, with
     \label{fig:video-plugins}
 \end{figure}
 
-There is a choice of plugin icons which can be displayed.
+There is a choice of plugin icons \index{plugins: icons} which can be displayed.
 
 In \texttt{Settings$\rightarrow$ Preferences$\rightarrow$ Appearance} tab, there is a pulldown for \textit{Plugin icons} where the user can choose between the \textit{original} icons, \textit{regular} or \textit{smoother}, \textit{cinfinity}\protect\footnote{Cinfinity /2 icon set is credited to Sam - Creative Common By -- \url{https://creativhecommons.org/licenses/by/3.0/}} -- the default modernized set, or \textit{cinfinity2} (figure~\ref{fig:audio-plugins}).
 
@@ -43,13 +44,13 @@ Note that when you change the plugin icons, your session will automatically save
 \section{How to Use Plugins}%
 \label{sec:how_use_plugins}
 
-\textit{Realtime} effect plugins are listed in the Resources window as \textit{Audio} Effects and \textit{Video} Effects. Effect plugins are used by dragging them from the Resources window onto an audio track if it is an audio effect or video track if it is a video effect. You will see a colored bar appear beneath the track with the plugin name on it. If there is data on the destination track, the effect is applied to the entire track, unless a region of the track is selected in which case the effect is pasted into that region only. If there is no data on the track the effect is not added.
+\textit{Realtime} effect plugins are listed in the Resources window as \textit{Audio} Effects and \textit{Video} Effects. Effect plugins are used by dragging them from the Resources window onto an audio track if it is an audio effect or video track if it is a video effect. You will see a colored bar \index{plugins toolbar} appear beneath the track with the plugin name on it. If there is data on the destination track, the effect is applied to the entire track, unless a edit or a region of the track is selected in which case the effect is pasted into that region only. If there is no data on the track the effect is not added.
 
 Plugins are layered under the track they apply to. When dragging more than one effect onto a track, you will see the effects layering from \textit{top to bottom}, on the bottom of that track. When the track is played back, effects are processed from \textit{top to bottom}. The output of the top effect becomes the input of the bottom effect and so on.
 
-Instead of dragging from the Resources window, effects may be applied to a track via a popup menu. Right click on a track and select \textit{Attach effect} from the popup. The attach effect dialog gives you more capability than just dragging and dropping. For example, the attach effect dialog lets you attach two more types of effects: \textit{shared effects} and \textit{shared tracks} which are explained in a later section. Select a plugin from the Plugins column and hit the green colored checkmark under the plugins column to attach it. The result is the same as if the effect was dragged from the Resources window.
+Instead of dragging from the Resources window, effects may be applied to a track via a popup menu. Right click on a track and select \textit{Attach effect} \index{plugins: attch effect} from the popup. The attach effect dialog gives you more capability than just dragging and dropping. For example, the attach effect dialog lets you attach two more types of effects: \textit{shared effects} and \textit{shared tracks} which are explained in a later section. Select a plugin from the Plugins column and hit the green colored checkmark under the plugins column to attach it. The result is the same as if the effect was dragged from the Resources window.
 
-After attaching an effect to a track, it often needs to be configured. There are two ways to get to the configuration controls. Click on the magnifying glass symbol on the right side of the effect bar -- this is the middle symbol on the bar as you can see in the picture below. Alternatively, you can right click on the effect bar to bring up the effect popup which has a \textit{Show} option. Either method causes the GUI for the effect to appear in a separate window. There will not be a popup if the plugin has no GUI.
+After attaching an effect to a track, it often needs to be configured. There are two ways to get to the configuration controls. Click on the magnifying glass \index{plugins: show controls} symbol on the right side of the effect bar -- this is the middle symbol on the bar as you can see in the picture below. Alternatively, you can right click on the effect bar to bring up the effect popup which has a \textit{Show} option. Either method causes the GUI for the effect to appear in a separate window. There will not be a popup if the plugin has no GUI.
 
 
 Besides the magnifying glass, for Show Controls, on the effect colored bar beneath the track, there are two more symbols.
@@ -60,14 +61,15 @@ Besides the magnifying glass, for Show Controls, on the effect colored bar benea
     \includegraphics[width=0.7\linewidth]{button-options.png}
 \end{wrapfigure}
 
-The rightmost knob is used to Turn Off/Turn On the effect where the default is On. This is useful to easily see that the plugin is doing what you expect. The leftmost symbol that looks like a gear is for \textit{Preset Edit} and its usage is described in the section \nameref{sec:saved_plugin_preset}.
+The rightmost knob is used to Turn Off/Turn \index{plugins: turn on/off} On the effect where the default is On. This is useful to easily see that the plugin is doing what you expect. The leftmost symbol that looks like a gear is for \textit{Preset Edit} \index{plugins: preset edit} and its usage is described in the section \nameref{sec:saved_plugin_preset}.
 
 \section{Editing Effects}%
 \label{sec:editing_effects}
+\index{plugins editing}
 
 Many operations exist for manipulating effects once they are on the timeline. Because mixing effects and media is quite complex, the methods used in editing effects are not as concise as cutting and pasting. Some of the editing happens by dragging in/out points, some of the editing happens through popup menus, and some of it happens by dragging effects.
 
-When enabled, which is the default, and you edit tracks, the effects follow the editing decisions. If you cut from a track, the effect shrinks. If you drag edit in/out points, the effect changes length. This behavior can be disabled by selecting \texttt{Settings$\rightarrow$ Preferences$\rightarrow$ Interface tab$\rightarrow$ Editing section}, see figure~\ref{fig:editing-effects}.
+When enabled, which is the default, and you edit tracks, the effects follow the editing decisions. If you cut from a track, the effect shrinks. If you drag edit in/out points, the effect changes length. This behavior can be disabled by selecting \texttt{Settings$\rightarrow$ Preferences$\rightarrow$ Interface tab$\rightarrow$ Editing section}, see figure~\ref{fig:editing-effects} \index{keyframes reticle}.
 
 \begin{figure}[htpb]
     \centering
@@ -76,15 +78,15 @@ When enabled, which is the default, and you edit tracks, the effects follow the 
     \label{fig:editing-effects}
 \end{figure}
 
-To edit effects, you can move the timeline cursor over the effect borders until it changes to a resize left or resize right icon. In this state, if you drag the end of the effect, it performs an edit just like dragging an edit edge. The five editing behaviors of track trimming apply to effect trimming and they are bound to the mouse buttons that you set in interface preferences as shown in the previous screencast. \textit{Trimming} simply means changes the duration dragging the edges.
+To edit effects, you can move the timeline cursor over the effect borders until it changes to a resize left or resize right icon. In this state, if you drag the end of the effect, it performs an edit just like dragging an edit edge. The five editing behaviors of track trimming \index{trimming} apply to effect trimming and they are bound to the mouse buttons that you set in interface preferences as shown in the previous screencast. \textit{Trimming} simply means changes the duration dragging the edges.
 
 When you perform a trim edit on an effect, the effect boundary is moved by dragging it. Unlike track editing, the effect has no source length. You can extend the end of an effect as much as you want. Also unlike track editing, the starting position of the drag operation does not bind the edit decision to media. The media the effect is bound to does not follow effect edits. Other effects, however, do follow editing decisions made on an effect. You can disable effects from being subject to the edit decisions by using the pulldown \textit{Settings} and toggling off Edit effects. If you drag the end of an effect which is lined up to effects on other tracks, the effects on the other tracks will be edited while the media stays the same. When you drag an effect in from the Resources window you can insert the effect in the portion of the row unoccupied by the trimming operation. In some cases you will want a trimming operation to change only one row of effects. This can be achieved by first positioning the insertion point on the start or end of the effect. Then press the shift key while beginning the trimming operation. This causes the operation to change only one row of effects.
 
-You can move effects up or down. Every track can have a stack of effects under it. By moving an effect up or down you change the order in which effects are processed in the stack. Go to an effect and right click to bring up the effect menu. The \textit{Move up} and \textit{Move down} options move the effect up or down. When you are moving effects up or down, be aware that if they are shared as shared effects, any references will be pointing to a different effect after the move operation.
+You can move effects up or down. Every track can have a stack of effects under it. By moving an effect up or down you change the order in which effects are processed in the stack. Go to an effect and right click \index{plugins: RMB on toolbar} to bring up the effect menu. The \textit{Move up} and \textit{Move down} options move the effect up or down. When you are moving effects up or down, be aware that if they are shared as shared effects, any references will be pointing to a different effect after the move operation.
 
-Finally, there is dragging of effects. Dragging effects works just like dragging edits. You must select the arrow in the main window transport buttons line to enter drag and drop mode before dragging effects. Dragging a plugin causes a highlight outline to be drawn over a targetable timeline region, and the plugin can be re-positioned into any plugin track.  The effects snap to media boundaries, effect boundaries, and tracks. If you drag a reference to a shared effect, the reference may point to the wrong effect afterwards.  It is recommended that you re-construct shared effect track references.
+Finally, there is dragging of effects \index{plugins: dragging}. Dragging effects works just like dragging edits. You must select the arrow in the main window transport buttons line to enter drag and drop mode before dragging effects. Dragging a plugin causes a highlight outline to be drawn over a targetable timeline region, and the plugin can be re-positioned into any plugin track.  The effects snap to media boundaries, effect boundaries, and tracks. If you drag a reference to a shared effect, the reference may point to the wrong effect afterwards.  It is recommended that you re-construct shared effect track references.
 
-Figure~\ref{fig:drag-effect} showing 5 plugins, two still plugin, two have already been dragged and the \textit{Color 3 Way} in the process of being dragged. Note the gold-colored arrow which enables allow \textit{drag and drop} editing mode.
+Figure~\ref{fig:drag-effect} showing 3 plugins, two still plugin, two have already been dragged and the \textit{Color 3 Way} in the process of being dragged. Note the gold-colored frame which enables allow \textit{drag and drop} editing mode.
 
 \begin{figure}[htpb]
     \centering
@@ -95,6 +97,8 @@ Figure~\ref{fig:drag-effect} showing 5 plugins, two still plugin, two have alrea
 
 \section{Shared Effects and Shared Tracks}%
 \label{sec:shared_effect_tracks}
+\index{plugins: shared effect}
+\index{plugins: shared tracks}
 
 Two other effect types available in the Attach Effect dialog are \textit{Shared effects} and \textit{Shared tracks}. In the case of a shared effect, the following conditions must be true:
 
@@ -107,7 +111,7 @@ Two other effect types available in the Attach Effect dialog are \textit{Shared 
 Before going into further detail about how to use \textit{Shared effects}, an easier
 alternative method of application which is especially useful for Audio tracks is
 available.  In this method, all you have to do is use the \textit{Audio} pulldown and
-choose \textit{Attach effect}, highlight the effect you would like and make sure the
+choose \textit{Attach effect} \index{plugins: attach effect}, highlight the effect you would like and make sure the
 default of \textit{Attach single standalone and share others} is checked on.  It will
 automatically be a "Shared Effect" on all audio tracks (be sure to disarm any audio
 tracks that you do not want to have the effect shared on).  This method also works for
@@ -123,10 +127,11 @@ When a shared effect is played back, it is processed just like a normal effect e
 
 When an original track has a shared track as one of its effects, the shared track itself is used as a \textit{realtime} effect. This is more commonly known as \textit{bouncing tracks} but \CGG{} achieves the same operation by attaching shared tracks. The fade and any effects in the shared track are applied to the original track. Once the shared track has processed the data, the original track performs any effects which come below the shared track and then composites it on the output.
 
-In order to prevent the shared track from mixing the same data as the original track on the output, enable the output \texttt{mute} toggle in the patchbay next to each track for which you do not want to mix on the output. If you are making a video and you do want the shared track to composite the original track's data on the output a second time, the video from the shared track would always appear under the video from the original track, regardless of whether it was on top of the original track. This is because shared tracks are composited in order of their attachment. Since it is part of the original track it has to be composited before the original track is.
+In order to prevent the shared track from mixing the same data as the original track on the output, enable the output \texttt{mute} \index{mute} toggle in the patchbay next to each track for which you do not want to mix on the output. If you are making a video and you do want the shared track to composite the original track's data on the output a second time, the video from the shared track would always appear under the video from the original track, regardless of whether it was on top of the original track. This is because shared tracks are composited in order of their attachment. Since it is part of the original track it has to be composited before the original track is.
 
 \section{Saved Plugin Presets}%
 \label{sec:saved_plugin_preset}
+\index{plugins: preset edit}
 
 \textit{Presets} and \textit{Factory Presets} for Plugin settings are now combined with the Preset Keyframe Parameters allowing you to choose, apply, delete, and edit your own Presets which can then be easily saved in the file \texttt{\$HOME/.bcast5/Cinelerra\_presets}. In addition to your own saved presets, there are automatically available Factory presets for some plugins, for example the Lens video plugin. The Factory presets are preceded by an asterisk (*) and can not be modified permanently.
 
@@ -161,6 +166,7 @@ These next few sections explain some details about the plugins that are not dire
 
 \subsection{How to see short Description of a Plugin}%
 \label{sub:short_description_plugin}
+\index{plugins: short description}
 
 To get a short one or a few lines description of a plugin, mouse over that plugin in the Resources window and a popup appears. You can disable the popup by right-clicking and choosing \textit{Info Off} (shortcut "i"). And again enable it with \textit{Info On}. Some of the plugins may not have any description included. An example screenshot is next (figure~\ref{fig:info-effect}).
 
@@ -185,6 +191,7 @@ Maybe you just don't ever use certain plugins or would prefer to only find the o
 
 \subsection{Updatable Icon Image Support}%
 \label{sub:updatable_icon_image_support}
+\index{plugins: change icons}
 
 When running \CGG{} Infinity builtin icons are loaded before the
 program starts. Png files in the path:\\
@@ -280,6 +287,7 @@ Restart cin by changing \texttt{Settings$\rightarrow$ Preferences$\rightarrow$ A
 
 \subsection{Plugins/Effects Visibility}%
 \label{sub:plugins_effects_visibility}
+\index{plugins: visibility}
 
 \CGG{} contains many plugins, especially with the addition of ffmpeg, and it is somewhat difficult to find the one you are looking for in the Resources window. In \CGG{} Infinity, the plugins have been categorized into the following subsets in the \textit{Visibility} section of the Resources window to make it easier to locate a particular one:
 
@@ -336,6 +344,7 @@ Audio Effects
 
 \subsection{Speed-up of Ffmpeg plugin usage with OPTS files}%
 \label{sub:speedup_ffmpeg_plugin_opts}
+\index{plugins: speed-up via options}
 
 You can speed up some ffmpeg plugins that are quite time-consuming and use a lot of CPU\@. For a specific color-based example, \CGG{} uses 6 primary rendering color models. All of them have 3 components at full scale. Direct usage of a particular ffmpeg plugin from the ffmpeg command line might handle the planar at less than full scale chroma (yuv420), which means there is less data to manipulate. But when cinelerra loads a video it uses full scale color models. In other words:
 
@@ -365,9 +374,11 @@ This converts the input to rgb before xxxxxx runs, and so it too is slower (beca
 \section{Audio Effects - Native}%
 \label{sec:audio_effects_native}
 \settocdepth{subsection}
+\index{audio plugins}
 
 \subsection{AudioScope}%
 \label{sub:audioscope}
+\index{audioscope}
 
 Effect rewritten and improved. Convert input audio to video output representing the audio power spectrum. Shows
 % Yes
@@ -376,6 +387,7 @@ you the sound wave.
 
 \subsection{Chorus}%
 \label{sub:chorus}
+\index{chorus}
 
 It is a multitrack effect, where each track is a channel. For example if you have 4 voices per channel and 2 channels, you will have a total of 8 tracks.
 It is an effect that modulates the signal, varies the pitch up and down (instead of modulating the phases as for example in the \textit{Flanger} plugin) and creates voices from the original signal and adds them to the Output. You then get a chorus effect, with multiple voices \textit{singing} the same song but with slightly different modulations. Voices not only modulate the original signal but also start with a certain delay. There are two components of delay, \textit{constant delay} and \textit{oscillating delay} (figure~\ref{fig:chorus}).
@@ -397,6 +409,7 @@ It is an effect that modulates the signal, varies the pitch up and down (instead
 
 \subsection{Compressor (Single Band)}%
 \label{sub:compressor}
+\index{compressor}
 
 The audio compressor reduces the dynamic range of the audio, not the amount of data required to store the audio. In \CGG{} the compressor actually performs the function of an expander and compressor of the signal's dynamic range. A third and more sophisticated use serves to highlight the voice with respect to the sound background. It is a multitrack effect and can also be applied as a Shared Effect. (figure~\ref{fig:compressor}).
 
@@ -428,6 +441,7 @@ The volume (in Db) of the input signal is shown in the \textit{In meter} on the 
 
 \subsection{Compressor Multi (Multi Band)}%
 \label{sub:compressor_multi}
+\index{compressor multi band}
 
 Refer to Compressor (Single Band) for common theory and options.
 The normal compressor acts over the entire frequency spectrum. The multi-band allows us to distinguish three frequency ranges (low, med and high) on which to intervene separately and in a more sophisticated way. In other plugins there are four bands instead of three, but we can make very precise adjustments so the three present are enough because they are not fixed. Finally the value of the three corrections are added together in the Output.
@@ -455,26 +469,31 @@ In figure~\ref{fig:compressorM} we can see the three bands; the one currently ac
 
 \subsection{DC Offset}%
 \label{sub:dc_offset}
+\index{dc offset}
 
 Use this to remove \textit{DC Offset}, which is usually an undesirable characteristic of a recording normally caused by defective equipment. This effect works like a \textit{high pass filter} and has no controls. DC stands for \textit{Direct Current} which is the average amplitude of the waveform. It sounds best when it is absent, represented by zero, so that there is no imbalance in the audio.
 
 \subsection{Delay Audio}%
 \label{sub:delay_audio}
+\index{delay audio}
 
 In the Delay Audio effect you can specify the number of seconds you want to delay the video track.
 
 \subsection{DeNoise}%
 \label{sub:denoise}
+\index{denoise}
 
 Reduce audio background noise. There is only 1 parameter which is used to regulate the level dial with a range of 0 to 1.
 
 \subsection{DenoiseFFT}%
 \label{sub:denoisefft}
+\index{denoisefft}
 
 Noise removal from audio using FFT editing. Set the Denoise Power dial in dB and choose the number of reference samples.
 
 \subsection{Despike}%
 \label{sub:despike}
+\index{despike}
 
 Detect and eliminate out of range impulse values.
 
@@ -485,6 +504,7 @@ Detect and eliminate out of range impulse values.
 
 \subsection{EQ Graphic}%
 \label{sub:eq_graphic}
+\index{EQ graphic}
 
 Graphic equalizer sets the output levels for specified frequency bands. This effect works by setting control points when you click the left mouse button and drag to the desired value. In the textboxes at the bottom can be seen the frequency of the active control point, the level of the signal to be set by entering the numerical value or by dragging the control point, and the number of samples to act on (figure~\ref{fig:equalizer}).
 
@@ -497,6 +517,7 @@ Graphic equalizer sets the output levels for specified frequency bands. This eff
 
 \subsection{EQ Parametric}%
 \label{sub:eq_parametric}
+\index{EQ parametric}
 
 Parametric equalizer shows and outputs levels for \textit{frequency}, \textit{quality}, \textit{level}, \textit{mode}, and \textit{wetness} (figure~\ref{fig:eq_param}).
 
@@ -509,6 +530,7 @@ Parametric equalizer shows and outputs levels for \textit{frequency}, \textit{qu
 
 \subsection{Echo}%
 \label{sub:echo}
+\index{echo}
 
 Echo is reflection of sound. This plugin could be used to add echoing to video of your canyon hike (figure~\ref{fig:echo}).
 
@@ -527,6 +549,7 @@ Echo is reflection of sound. This plugin could be used to add echoing to video o
 
 \subsection{EchoCancel}%
 \label{sub:echocancel}
+\index{echo cancel}
 
 EchoCancel is the process of removing echos from audio in order to improve the quality. Echo cancel may be needed because an audio recording was done in a room that led to echo generation or there was some kind of unwanted feedback. There are many controls for the EchoCancel plugin which are defined here. However, the first thing you will see when you bring up the plugin, is the top portion that is black which will show a + in the middle when you mouse over it. Once you start playing audio, you will see the cepstrum spectral data inside the window. A cepstrum results from taking the inverse Fourier transform (IFT) of the logarithm of the estimated spectrum of a signal. It is used to identify the period of the echo in the audio. It is recommended to just set the \textit{Mode} to On but the below defined parameters can be utilized by professionals (figure~\ref{fig:echo-cancel}).
 
@@ -554,6 +577,7 @@ EchoCancel is the process of removing echos from audio in order to improve the q
 
 \subsection{Flanger}%
 \label{sub:flanger}
+\index{flanger}
 
 It's a single-track effect. If you apply it to multiple tracks each will work on its own track independently of the others.
 It consists of making a copy of the original sound wave and then playing it over the original one with a certain delay. The resulting signal (Output) will then be the sum of the two waves and will have peaks where the two values add up and gaps where the two values compensate each other. The result is a more \textit{evanescent} and \textit{metallic} sound. Much, however, depends on the intensity of the effect.
@@ -576,26 +600,31 @@ The delay introduced consists of two distinct components: the \textit{constant d
 
 \subsection{Freeverb}%
 \label{sub:freeverb}
+\index{freeverb}
 
 Adds effect of multiple decaying echoes to audio signals based on a specific algorithm. Common use of reverb is to simulate music played in a closed room.
 
 \subsection{Gain}%
 \label{sub:gain}
+\index{gain}
 
 Add gain, input level, to increase/decrease loudness.
 
 \subsection{Interpolate}%
 \label{sub:interpolate}
+\index{interpolate}
 
 Generate a smooth curve based on sound creating a certain softness. There are no controls.
 
 \subsection{Invert Audio}%
 \label{sub:invert_audio}
+\index{invert audio}
 
 Reverses the numerical sign of the digital audio. There are no controls.
 
 \subsection{Live Audio}%
 \label{sub:live_audio}
+\index{live audio}
 
 The Live Audio effect reads audio directly from the sound card input. It replaces any audio on the track so it is normally applied to an empty track. To use Live Audio, highlight a horizontal region of an audio track or define In and Out points. Then drop the Live Audio effect into it. Create extra tracks and attach shared copies of the first Live Audio effect to the other tracks to have extra channels recorded. Live Audio uses the sound driver selected in \texttt{Settings $\rightarrow$ Preferences $\rightarrow$ Playback A $\rightarrow$ Audio Out for recording}, but unlike recording it uses the playback buffer size as the recording buffer size and it uses the project sample rate as the sampling rate. These settings are critical since some sound drivers can not record in the same sized buffer they play back in.
 
@@ -603,26 +632,31 @@ Live audio has been most reliable when ALSA is the recording driver and the play
 
 \subsection{Loop Audio}%
 \label{sub:loop_audio}
+\index{loop audio}
 
 Loop some number of samples of audio over and over.
 
 \subsection{Overlay}%
-\label{sub:overlay}
+\label{sub: overlay}
+\index{overlay audio}
 
 Overlay has parameter settings of top or bottom for the track and add or multiply for the operation.
 
 \subsection{Pitch Shift}%
 \label{sub:pitch_shift}
+\index{pitch shift}
 
 Like the time stretching methods, there are three pitch shifting methods: \textit{Pitch shift}, \textit{Resample}, and \textit{Asset info} dialog. Pitch shift is a realtime effect which can be dragged and dropped onto recordable audio tracks. Pitch shift uses a fast Fourier transform (FFT) to try to change the pitch without changing the duration, but this introduces windowing artifacts. Because the windowing artifacts are less obtrusive in audio which is obviously pitch shifted, Pitch Shift is mainly useful for extreme pitch changes. For mild pitch changes, use Resample instead. Another way to change pitch slightly is to go to the Resources window, highlight the media folder, right click on an audio file, click on \textit{Info}, then adjust the sample rate in the Info dialog to adjust the pitch. This method also requires left clicking on the right boundary of the audio tracks and dragging left or right to correspond to the length changes.
 
 \subsection{Remove Gaps}%
 \label{sub:remove_gaps}
+\index{remove gaps}
 
 Remove silent gap (below $DB$ threshold) which persist for more than the time limit.
 
 \subsection{ResampleRT}%
 \label{sub:resamplert}
+\index{resampleRT}
 
 Allows you to convert an audio file from one sample rate to another. This effect works similarly to ReframeRT in videos.
 
@@ -637,6 +671,7 @@ Allows you to convert an audio file from one sample rate to another. This effect
 
 \subsection{Reverb}%
 \label{sub:reverb}
+\index{reverb}
 
 Reverb uses reflections of sound to add depth and fullness; the sound will seem to come from a space that can go from a small bare room to large natural valleys, cathedrals, etc. The reverb is made up of a group of echoes that occur at the same time making it feel like a single effect.
 Basically simulates creation of a large number of reflections, like lots of walls, which build up and then decay. You can use the reverb plugin to mix tracks together to simulate ambiance because it is a multitrack effect.
@@ -663,21 +698,25 @@ The configuration window (figure~\ref{fig:reverb}) shows a graph of the full ban
 
 \subsection{Reverse Audio}%
 \label{sub:reverse_audio}
+\index{reverse audio}
 
 Apply reverse audio to an audio track and play it backwards. The sound plays forward. Be aware when reversing audio that the waveform on the timeline does not reflect the actual reversed output.
 
 \subsection{SoundLevel}%
 \label{sub:soundlevel}
+\index{sound level}
 
 Effect rewritten and improved to handle fragments. Displays the Max/RMS sound level in decibels.
 
 \subsection{Spectrogram}%
 \label{sub:Spectrogram}
+\index{spectrogram}
 
 Effect rewritten and improved. Visual representation of the sound levels at specified frequencies as they vary with time.
 
 \subsection{Synthesizer}%
 \label{sub:Synthesizer}
+\index{synthesizer}
 
 Generate synthesizer sounds; to set key data, turn on Generate keyframes while tweaking (figure~\ref{fig:synthesizer}).
 
@@ -690,11 +729,13 @@ Generate synthesizer sounds; to set key data, turn on Generate keyframes while t
 
 \subsection{Time Stretch RT}%
 \label{sub:time_stretch_rt}
+\index{time stretch RT}
 
 Change the speed of an audio signal without affecting its pitch.
 
 \subsection{Tremolo}%
 \label{sub:tremolo}
+\index{tremolo}
 
 It serves to give various vibes and vitality to the sound by modulating the amplitude of the sound signal and the delay (figure~\ref{fig:tremolo}).
 
@@ -718,6 +759,7 @@ Currently available waveforms are: \textit{Sine}; \textit{Sawtooth}; \textit{Rev
 \section{Audio Ladspa Effects}%
 \label{sec:audio_ladspa_effects}
 \settocdepth{section}
+\index{ladspa}
 
 Ladspa effects are supported in realtime and rendered mode for audio. These audio effects are supported since \CGG{} implements the LADSPA interface as accurately as possible. Besides the supplied LADSPA effects\protect\footnote{credit Steve Harris}, additional LADSPA effects can be enabled by setting the \texttt{LADSPA\_PATH} environment variable to the location of your LADSPA plugins:
 
@@ -727,6 +769,7 @@ export LADSPA_PATH=/usr/lib/ladspa
 
 \section[Audio LV2 / Calf Plugins]{Audio LV2 / Calf Plugins\protect\footnote{Optional Feature - OS dependent}}%
 \label{sec:audio_lv2_calf_plugins}
+\index{LV2 - Calf}
 
 LV2 is an open standard for audio plugins using a simple interface with extensions which add functionality to support audio software. These plugins were written by external developers and provide additional audio effects to \CGG{} audio without having to change \CGG{} every time. Because the LV2 plugins are separate from \CGG{} Infinity, if one fails or does not perform as expected, \CGG{} should stay running and you will have to contact the programmers responsible for that plugin for a fix.
 
@@ -742,7 +785,7 @@ To set the buffer size:
 \texttt{Settings $\rightarrow$ Preferences $\rightarrow$ tab Playback A $\rightarrow$ section Audio Out $\rightarrow$ variable Playback buffer samples}
 
 However, be forewarned that due to variability in the lv2 plugin programming code, some of the plugins only work with the minimum buffer size of $1024$. In these cases, what you will see is the main track canvas cursor just bounces back and forth over a very small area in the timeline. This does not crash \CGG{} but you will have to remove the plugin to continue working.
-You can specify a certain set of LV2 plugins to use by setting \texttt{LV2\_PATH} as shown below before starting \CGG{} -- include a colon ($:$) separator for multiple paths. The default path for most operating systems is \texttt{/usr/lib64/lv2}. To list the system installed lv2 plugins key in: \texttt{lv2ls}.
+You can specify a certain set of LV2 plugins to use by setting \texttt{LV2\_PATH} \index{LV2 path} as shown below before starting \CGG{} -- include a colon ($:$) separator for multiple paths. The default path for most operating systems is \texttt{/usr/lib64/lv2}. To list the system installed lv2 plugins key in: \texttt{lv2ls}.
 
 \begin{lstlisting}[numbers=none]
 export LV2_PATH=/tmp/j/balance.lv2/usr/local/lib/lv2/:/usr/local/lv2
@@ -755,7 +798,7 @@ If there is no default \texttt{LV2\_PATH} set automatically, the value will be \
 
 When you change this field, cin will automatically restart and load the newly specified lv2 plugins. If when switching \texttt{LV2\_PATH} or if the lv2 audio plugins are not displayed/usable in the Resources window, you can execute a reload via:
 
-\texttt{Settings $\rightarrow$  Preferences $\rightarrow$ Interface tab $\rightarrow$ Reload plugin in\-dex}
+\texttt{Settings $\rightarrow$  Preferences $\rightarrow$ Interface tab $\rightarrow$ Reload plugin index} \index{plugins: reload index}
 or else before you bring up \CGG{}, delete \texttt{\$HOME/.bcast5/\CGG{}\_\\plugins} so that the plugins get properly reloaded.
 
 There are some lv2 plugins that display a \textit{glitzy} UI (User Interface); for example the \textit{Calf plugins}. For these LV2 plugins, if you want that to automatically come up without having to click on the UI button on the simplified UI interface, there is a flag to enable that. It is at:
@@ -805,6 +848,7 @@ For example:
 \section[Video Effects --- Native]{Video Effects -- Native}%
 \label{sec:video_effects_native}
 \settocdepth{subsection}
+\index{video plugins}
 
 \subsection{1080 to 480}%
 \label{sub:1080_to_480}
@@ -822,6 +866,7 @@ Finally, once you have $720\times480$ interlaced video you can either apply \tex
 
 \subsection{1080 to 540}%
 \label{sub:1080_to_540}
+\index{1080 to 540}
 
 Extracts two $1920\times540$ fields from $1920\times1080$ image, resizes them separately, and combines them to $1920\times540$ interlaced image.
 
@@ -839,13 +884,15 @@ Allows you to apply an alpha value (transparency) to one or more tracks or one o
 
 \subsection{Auto Scale}%
 \label{sub:auto_scale}
+\index{auto scale}
 
 Automatically scale to a specified size.
 
 \subsection{Blue Banana}%
 \label{sub:blue_banana}
+\index{blue banana}
 
-Blue Banana\protect\footnote{credit to Monty Montgomery programmer} is an \textit{HSL Qualifier} (HSL= hue, saturation, lightness), one of the basic tools of any grading software that are based on circumscribing a zone of the frame by extracting a chromatic key and producing a \textit{matte} in the alpha channel (Secondary Color Correction). Blue Banana differs not by creating a real matte, but by creating a \textit{selection mask} exclusively for use within the plugin. The BlueBanana plugin has a couple of useful purposes. It can be used for color transformation or remapping -- by isolating a specific color and then performing color change/correction on only that color (or color ranges). Another useful purpose is for chroma-key filtering, using multiple BlueBanana plugins on the same track. Also, it can be used in conjunction with the mask operation of the Compositor. Usage of BlueBanana may seem complicated at first, but it is necessarily so in order to get enough control to produce the desired effect simply and quickly. Just changing a single color is actually quite easy. BlueBanana is keyframable (figure~\ref{fig:bluebanana}).
+Blue Banana\protect\footnote{credit to Monty Montgomery programmer} is an \textit{HSL Qualifier} \index{HSL Qualifier} (HSL= hue, saturation, lightness), one of the basic tools of any grading software that are based on circumscribing a zone of the frame by extracting a chromatic key and producing a \textit{matte} in the alpha channel (Secondary Color Correction). Blue Banana differs not by creating a real matte, but by creating a \textit{selection mask} exclusively for use within the plugin. The BlueBanana plugin has a couple of useful purposes. It can be used for color transformation or remapping -- by isolating a specific color and then performing color change/correction on only that color (or color ranges). Another useful purpose is for chroma-key filtering, using multiple BlueBanana plugins on the same track. Also, it can be used in conjunction with the mask operation of the Compositor. Usage of BlueBanana may seem complicated at first, but it is necessarily so in order to get enough control to produce the desired effect simply and quickly. Just changing a single color is actually quite easy. BlueBanana is keyframable (figure~\ref{fig:bluebanana}).
 
 The basic strategy for BlueBanana is to:
 
@@ -1035,6 +1082,7 @@ If you are building an alpha selection mask by first intersection and then union
 
 \subsection{Blur}%
 \label{sub:blur}
+\index{blur}
 
 This is a Gaussian type blur. Other blur plugins -- \textit{Linear}, \textit{Motion}, \textit{Radial}, and \textit{Zoom} --are described later. This plugin is keyframable. Blur is used to blur a video track via the following parameters:
 \begin{description}
@@ -1046,6 +1094,8 @@ This is a Gaussian type blur. Other blur plugins -- \textit{Linear}, \textit{Mot
 
 \subsection{BoxBlur}%
 \label{sub:boxblur}
+\index{boxblur}
+
 Based on ffmpeg’s boxblur, this is a very fast algorithm which can be used to blur horizontal,
 vertical, and at a power level.  Simplest usage is to just blur the entire image but with
 the following parameters, you can create a specific rectangular section to blur instead.  
@@ -1076,6 +1126,7 @@ is a clear button on the right to set the value to 1.
 
 \subsection{Brightness/Contrast}%
 \label{sub:brightness_contrast}
+\index{brightness contrast}
 
 \begin{figure}[htpb]
 	\centering
@@ -1091,11 +1142,13 @@ Use the effect along with keyframing to brighten a long shot that is dark at the
 
 \subsection{BurningTV}%
 \label{sub:burningtv}
+\index{burning TV}
 
 Makes your video burn where there are small light colored patches of video. This came from \url{https://effectv.com}.
 
 \subsection[C41]{C41\protect\footnote{credit Florent Delannoy, original program code author, and Edouard Chalaron}}%
 \label{sub:c41}
+\index{C41}
 
 The C41 plugin takes a $16\,bit C41$ digital intermediate negative film as input and outputs a positive image. It became necessary because $C-41$ negatives can fade or color-shift over time which was a problem early on. It is still important today because there is a large amount of documentaries, video clips, and other media out there that was shot on super $16$ film. This works for RGB-float, RGB, and also YUV variations.
 
@@ -1155,6 +1208,7 @@ Figure~\ref{fig:c41} shows the C41 controls on the left and part of the Composit
 
 \subsection{Chroma Key}%
 \label{sub:chroma_key}
+\index{chroma key}
 
 This effect erases pixels which match the selected color. They are replaced with black if there is no alpha channel and transparency if there is an alpha channel. In this case, you create a matte in the alpha channel, which is not visible to us. The selection of color model is important to determine the behavior (figure~\ref{fig:chroma-key}).
 
@@ -1176,6 +1230,7 @@ Normally threshold is very low when using a high slope. The two parameters tend 
 
 \subsection[Chroma Key (HSV)]{Chroma Key (HSV)\protect\footnote{Credit for Plugin by Jerome Cornet \url{http://jcornet.free.fr/linux/chromakey.html}}}%
 \label{sub:chroma_key_hsv}
+\index{chroma key HSV}
 
 Chroma Key (HSV) (figure~\ref{fig:chroma-key-hsv}) replaces a color with another color or transparency using HSV variables; it is frequently used to remove a color from a video to composite with another image. This process is generally referred to as green screen or blue screen process (because of the color that is keyed out). More information: {\small \url{http://en.wikipedia.org/wiki/Chromakey}}
 
@@ -1223,6 +1278,7 @@ Now the mask is probably still very harsh, so just below the Chromakey (HSV) plu
 
 \subsection{Color 3 Way}%
 \label{sub:color_3_way}
+\index{color 3 way}
 
 Together with \textit{Histogram Bezier / Curves} Color 3 Way is the main tool of Color Grading because you can modify the colors of \textit{Shadows}, \textit{Midtones}, and \textit{Highlights} as desired. Color 3 Way is keyframable (figure~\ref{fig:color3way}).
 
@@ -1257,6 +1313,7 @@ The most common use cases (but can be adapted to virtually any situation) of the
 
 \subsection{Color Balance}%
 \label{sub:color_balance}
+\index{color balance}
 
 Video Color Balance is a great effect to use along with Brightness/Contrast and Hue/saturation to try to compensate for possible errors in filming (low lighting, for example). It can do so much without greatly lowering the quality of the video. With it you can change the colors being sent to output \textit{CMY} (Cyan, Magenta, Yellow) or \textit{RGB} (Red, Green, Blue). Color Balance is also keyframable.
 
@@ -1271,6 +1328,7 @@ Since \textit{complementary colors} are neutralized, to eliminate a \textit{colo
 
 \subsection{ColorSpace}%
 \label{sub:color_space}
+\index{color space}
 
 This plugin is a tool that can be used to convert your input media, such as a recording from your camera,
 from one color space/range to another.  It works for both RGB and YUV as set by your project format.
@@ -1298,6 +1356,7 @@ color space  or range so that you can fix it.
 
 \subsection{CriKey}%
 \label{sub:crikey}
+\index{CriKey}
 
 The Chroma Interpolation Key plugin, CriKey, is a regionally based chroma key with interpolation (figure~\ref{fig:crikey}). This is useful when you only want 1 or some specific zones to be defined by the chroma key as opposed to the entire image. Its most significant feature is that you can select several regions of interests and of different colors as opposed to only $1$.
 
@@ -1363,6 +1422,7 @@ Figure~\ref{fig:crikey01} and figure~\ref{fig:crikey02} shows how moving the Thr
 
 \subsection{Crop \& Position}%
 \label{sub:crop_position}
+\index{crop \& position}
 
 It allows you to obtain a rectangle from the frame, whose dimensions are fully adjustable by four sliders for the four sides of the frame. You can also place this rectangle in the canvas using two other sliders for right/left and up/down scrolling. With the Clear buttons we can bring the slider to default values without affecting the other parameters. Unlike the \textit{Crop} tool, the original frame size is not altered and being keyframable allows a wide variety of uses. In figure~\ref{fig:crop_position} the Crop \& Position plugin is compared with the \textit{Crop} tool.
 
@@ -1375,6 +1435,7 @@ It allows you to obtain a rectangle from the frame, whose dimensions are fully a
 
 \subsection{DeScratch}%
 \label{sub:descratch}
+\index{descratch}
 
 The descratch video plugin can be used to remove vertical scratches
 from film. It can also be used, after image rotation, to remove
@@ -1432,6 +1493,7 @@ Figure~\ref{fig:descratch} shows a before and after DeScratch scenario. With \te
 
 \subsection{Decimate}%
 \label{sub:decimate}
+\index{decimate}
 
 This is used to decrease the frame rate of a video. Changing the frame rate means eliminating a frame for any given number of frames ($1 in N$); but if frames that are important for visual continuity are deleted, temporal artifacts arise: flickering, slowdowns, accelerations, etc. The Decimate filter maintains a higher quality because it first eliminates duplicate frames or frames that are most similar, thus limiting the appearance of artifacts. It is often used after the \textit{Invert Telecine} plugin to make the video more smooth.
 
@@ -1441,11 +1503,13 @@ Keep in mind that every effect layered before decimate, processes video at the d
 
 \subsection{Deinterlace}%
 \label{sub:deinterlace}
+\index{deinterlace}
 
 The deinterlace effect has evolved over the years to deinterlacing and a whole lot more. In fact two of the deinterlacing methods, \textit{Inverse Telecine} and \textit{Frames to Fields}, are separate effects. The deinterlace effect offers several variations of line replication to eliminate comb artifacts in interlaced video. It also has some line swapping tools to fix improperly captured video or make the result of a reverse effect display fields in the right order.
 
 \subsection{Deinterlace-CV}%
 \label{sub:deinterlace_cv}
+\index{deinterlace-cv}
 
 Selection of deinterlacing mode for your video to eliminate comb artifacts (figure~\ref{fig:deinterlace}).
 
@@ -1458,11 +1522,13 @@ Selection of deinterlacing mode for your video to eliminate comb artifacts (figu
 
 \subsection{Delay Video}%
 \label{sub:delay_video}
+\index{delay video}
 
 Delay the video by some number of seconds.
 
 \subsection{Denoise Video}%
 \label{sub:denoise_video}
+\index{denoise video}
 
 Denoise video (figure~\ref{fig:denoise}).
 
@@ -1475,6 +1541,7 @@ Denoise video (figure~\ref{fig:denoise}).
 
 \subsection{Difference key}%
 \label{sub:difference_key}
+\index{difference key}
 
 The difference key creates transparency in areas which are similar between two frames. The Difference key effect must be applied to two tracks. One track contains the action in front of a constant background and another track contains the background with nothing in front of it. Apply the difference key to the track with the action and apply a \textit{shared effect} of it to the track with the background. The track with the background should be muted and underneath the track with the action and the color model should have an alpha channel. It’s hard to get good results.
 
@@ -1490,21 +1557,25 @@ Pixels which are different between the background and action track are treated a
 
 \subsection{DotTV}%
 \label{sub:dottv}
+\index{dotTV}
 
 Puts various size dots over the picture to simulate TV effect. This came from: {\small \url{https://effectv.com}}.
 
 \subsection{Downsample}%
 \label{sub:downsample}
+\index{downsample}
 
 Downsampling is the process of reducing the size of an image by throwing out data, reducing sampling rate.
 
 \subsection{Edge}%
 \label{sub:edge}
+\index{edge}
 
 Display only the edges of the video throughout the image.
 
 \subsection{Fields to frames}%
 \label{sub:fields_to_frames}
+\index{fields to frame}
 
 See the theory description in the \textit{Frames to Fields} plugin. This effect reads frames at twice the project framerate, combining two input frames into a single interlaced output frame. Effects preceding fields to frames process frames at twice the project frame rate. Each input frame is called a field.
 
@@ -1512,16 +1583,19 @@ Fields to frames needs to know what field corresponds to what lines in the outpu
 
 \subsection{Flip}%
 \label{sub:flip}
+\index{flip}
 
 This effect flips a video track either vertically or horizontally.
 
 \subsection{Foreground}%
 \label{sub:foreground}
+\index{foreground}
 
 Whatever the visual content of the frame, the Foreground plugin application applies a uniform color that can be chosen by color picker; color wheel; color presets; the various HSV, RGB, YUV sliders or by entering the hexadecimal value. The alpha slider is not missing either.
 
 \subsection{Frames to fields}%
 \label{sub:frames_to_fields}
+\index{frames to fields}
 
 \subsubsection*{Theory behind the Frames to Fields and Fields to Frames plugins}
 \label{ssub:theory_frames_fields}
@@ -1572,6 +1646,7 @@ This plugin is only useful if its output is pulled with doubled framerate with r
 
 \subsection{Freeze Frame}%
 \label{sub:freeze_frame}
+\index{freeze frame}
 
 In its simplest form, highlight a region of the track to freeze, drop the \texttt{freeze frame} effect on the highlighted region, and the lowest numbered frame in the affected area will play throughout the entire region. Freeze Frame has an enabled option which can be keyframed. Regions of a freeze frame effect which are enabled, repeat the lowest numbered frame since the last keyframe. This has unique possibilities.
 
@@ -1583,6 +1658,7 @@ In its simplest form, highlight a region of the track to freeze, drop the \textt
 
 \subsection{Gamma}%
 \label{sub:gamma}
+\index{gamma}
 
 \textit{Log} camera images store colors in a $logarithmic$ scale. The blacks in these images are nearly $0$ and the whites are supposed to be infinity. The graphics card and most video codecs store colors in a $linear$ scale but \CGG{} keeps log camera images in their original logarithmic scale when it renders them. This is necessary because the raw image parser can not always decode the proper gamma ($\gamma$) values for the images. It also does its processing in $16\,bit$ integers, which takes away a lot of information.
 
@@ -1633,6 +1709,7 @@ Care must be taken when using gamma correction: if the image carries a specific 
 
 \subsection{Gradient}%
 \label{sub:gradient}
+\index{gradient}
 
 The \textit{gradient} effect overlays a smooth color gradient on top of every video frame. It is useful for all sorts of background fills, for partially filtering, adding depth to the image, or for adding moving highlights. The Gradient effect can generate linear or circular color fills / shape. For linear fills, you can choose the \textit{angle}, for circular fills the \textit{center $(X,Y)$} of the created gradient pattern. You can control the \textit{slope} of the color transition by selecting a transition function ($linear$, $logarithmic$, $squared$) and by changing the start (\textit{inner}) and stop (\textit{outer}) radius. Note that both colors used in this color transition can contain an arbitrary \textit{Alpha} value (transparency). All parameters can be keyed and will be interpolated between keyframes.
 
@@ -1655,8 +1732,9 @@ The first time you use the plugin it may seem complicated, but if you understand
 
 \textit{Note:} The inner and outer colors are visibly mixed in the gradient area. If you want to make a vignetting of only black, you must set the two colors to black and then make the inner one transparent so that it does not cover the figure.
 
-\subsection{HistEq}%
+\subsection{HistEQ}%
 \label{sub:histeq}
+\index{histEQ}
 
 Remap colors using blended histogram weights. Figure~\ref{fig:histeq} shows the GUI and the results in a split screen.
 
@@ -1678,6 +1756,7 @@ Histeq equalizes the colorspace through use of a \textit{histogram equalization 
 
 \subsection{Histogram}%
 \label{sub:histogram}
+\index{histogram}
 
 The histogram allows an immediate view of the contrast amplitude of an image with its distribution of \textit{luma} and \textit{colors} values. If the columns of values occupy the whole range $0-100\%$ then we have maximum contrast; if the range is smaller the contrast is smaller. If most of the values are on the right of the histogram you have an image with highlights at the limit with values clamped to $1.0$. This is called \textit{overexposure}. However, if most of the values are moved to the left, with the limit of the values clamped to $0$, we have a lowlight image and we talk about \textit{underexposure}. Histogram is keyframble (figure~\ref{fig:histogram}).
 
@@ -1777,6 +1856,7 @@ So, by reporting the sum the shape of the results are more similar.
 
 \subsection{Histogram Bezier / Curves}%
 \label{sub:histogram_bezier_curves}
+\index{histogram Bezier}
 
 Histogram Bézier allows an immediate view of the contrast amplitude of an image with its distribution of luma and colors values using a piecewise linear method. In addition it uses a Bézier curve (parametric) on the histogram plot. When mapping color spaces, it has a variety of presentations to get smoother transitions and more pleasing output. It uses more general remapping, not just straight lines but more contour lines. Curves are perhaps the most powerful and sophisticated tool for color correction. For some repetitive details, see the previous description of the Histogram plugin. Histogram Bézier is keyframable.
 
@@ -1840,6 +1920,7 @@ Some examples of the use of curves to demonstrate the variety of possible interv
 
 \subsection{HolographicTV}%
 \label{sub:holographictv}
+\index{holographicTV}
 
 Incoming objects are projected like holovision seen in the movie Stars Wars as in R2-D2's video message projector of the Princess Leia. You need a movie or background image and above it a track containing the figure on which to apply the effect. This must have a transparent background. There are no configuration parameters; it only has to be applied to the upper track (figure~\ref{fig:holographictv}).
 
@@ -1854,16 +1935,19 @@ This effect originated from {\small \url{https://effectv.com}}.
 
 \subsection{Hue saturation}%
 \label{sub:hue_saturation}
+\index{hue saturation}
 
 With this effect you can change hue, saturation and value. The parameters are modified using 3 simple sliders. The \textit{hue} control shifts the colors circularly in the color plane, normally resulting in false colors. The \textit{saturation} control can be used to reduce color footage to black and white. The \textit{value} control makes any given colors more bright or more subdued. Clear buttons are present to reset its slider to default without affecting others.
 
 \subsection{Interpolate Bayer}%
 \label{sub:interpolate_bayer}
+\index{interpolate bayer}
 
 Uses a Bayer filter algorithm to interpolate (estimate) missing color information. This is needed for some cameras where each pixel location only has an R or G or B value instead of all R, G, and B values for each location. The algorithm creates values for each of the three colors at every location by smearing (interpolating) each set of partial R, G and B values to create values at every pixel location.
 
 \subsection{Interpolate Video}%
 \label{sub:interpolate_video}
+\index{interpolate video}
 
 \subsubsection*{Theory}
 \label{ssub:theory}
@@ -1877,6 +1961,7 @@ The practical use of \textit{Interpolate Video} is a little different than the t
 
 \subsection{Inverse Telecine}%
 \label{sub:inverse_telecine}
+\index{inverse telecine}
 
 This is the most effective deinterlacing tool when the footage is a video transfer of a film. This can be used to solve the problem, i.e., undo the damage caused by making film into a TV broadcast.
 That process came about because film is at 24\,\emph{fps} while TV is at 29.97\,\emph{fps} and fields are at 60.
@@ -1898,11 +1983,13 @@ The first two options are fixed patterns and affected by the pattern \textit{off
 
 \subsection{Invert Video}%
 \label{sub:invert_video}
+\index{invert video}
 
 Invert video is a method of reversing the colors of a video track. The four parameters refer to channels -- \textit{Red}, \textit{Blue}, \textit{Green}, \textit{Alpha}. A very common use is to invert the alpha channel to change transparency.
 
 \subsection{Lens}%
 \label{sub:lens}
+\index{lens}
 
 Create the effect of looking through a lens.
 
@@ -1917,6 +2004,7 @@ Create the effect of looking through a lens.
 
 \subsection{Linear Blur}%
 \label{sub:linear_blur}
+\index{linear blur}
 
 This effect acts only in one direction which can vary up to an angle of $180\degree$ with these parameters:
 
@@ -1928,7 +2016,7 @@ This effect acts only in one direction which can vary up to an angle of $180\deg
 \end{figure}
 
 \begin{description}
-    \item[Lenght:] distance between original image and final blur step; corresponds to the distance of the fields.
+    \item[Length:] distance between original image and final blur step; corresponds to the distance of the fields.
     \item[Angle:] angle of motion in one direction for linear blur
     \item[Steps:] number of blur steps to be used in the calculation. Increasing the number takes more CPU.
     \item[Channels:] R,G,B,A.
@@ -1939,6 +2027,7 @@ Figure~\ref{fig:linear} shown here has the parameters: $Length=19$, $Angle=25$, 
 
 \subsection{Live Video}%
 \label{sub:live_video}
+\index{live video}
 
 This effect reads video directly from the capture card input. It replaces any video on the track so it is normally applied to an empty track. Only one \textit{Live Video} effect can exist at any time on the timeline. It can not be shared by more than one track. The configuration for the capture card is taken from the recording preferences. Go to \texttt{Settings $\rightarrow$ Preferences $\rightarrow$ Recording} to set up the capture card.
 
@@ -1950,6 +2039,7 @@ With the video recording configured, highlight a horizontal region of a video tr
 
 \subsection{Loop video}%
 \label{sub:loop_video}
+\index{loop video}
 
 Sections of video can be looped by dropping a loop effect on them. Contrary to the \texttt{settings $\rightarrow$ loop playback} option, the loop effects can be rendered where the \texttt{settings $\rightarrow$ loop playback} option can not be. The loop effects are also convenient for short regions.
 
@@ -2360,11 +2450,13 @@ Uses X/Y camera automation vectors to apply a linear blur trailing camera direct
 
 \subsection{Oil painting}%
 \label{sub:oil_painting}
+\index{oil painting}
 
 This effect makes video tracks appears as a painting. It can be controlled by \textit{Radius} slider and \textit{intensity of colors} can be chosen as an option.
 
 \subsection{Overlay}%
 \label{sub:overlay}
+\index{overlay video}
 
 This effect can combine several tracks by using the so called Overlayer. This is a basic internal device normally used by \CGGI{} to create the dissolve transitions and for compositing the final output of every track onto the output bitmap. The Overlayer has the ability to combine one or several image layers on top of a bottom layer. It can do this combining of images in several different (and switchable) output modes such as \textit{Normal}, \textit{Additive}, \textit{Subtractive}, \textit{Multiply} (Filter), \textit{Divide}, \textit{Max} and \textit{Replace}. For a detailed list refer to the on \hyperref[cha:overlays]{Overlays} chapter  -- PorterDuff.
 
@@ -2379,6 +2471,7 @@ The \textit{overlay} plugin enables the use of this Overlayer device in the midd
 
 \subsection{Perspective}%
 \label{sub:perspective}
+\index{perspective}
 
 The \textit{perspective} plugin (aka Corner Pinning) allows you to change the perspective of an object and is used to make objects appear as if they are fading into the distance. Basically, you can get a different view. A transformation is used which preserves points, lines, and planes as well as ratios of distances between points lying on a straight line.
 
@@ -2436,11 +2529,13 @@ position a little so that the answers are not exactly zero.
 
 \subsection{Polar}%
 \label{sub:polar}
+\index{polar}
 
 The \textit{Polar} effect bends and warps your video in weird ways. Mathematically, it converts your video from either \textit{polar} coordinates to \textit{rectangular} coordinates, or the reverse. With the Clear buttons we can bring the slider to default values without affecting the other parameters.
 
 \subsection{RGB-601}%
 \label{sub:rgb-601}
+\index{rgb-601}
 
 For analog video or MPEG (including DVD) output, the maximum range for R,G,B is $[16,235]$ ($8\,bit$). For YUV, the maximum range for intensity (\textit{Y}) is $[16, 235]$ ($8\,bit$). This range corresponds to gray levels from $6\%$ to $92\%$. When rendering, values outside of these ranges will be clipped to these limits.
 
@@ -2448,6 +2543,7 @@ To render to MPEG, add the \textit{RGB-601} effect to all video tracks where mat
 
 \subsection{RGBShift}%
 \label{sub:rgb-shift}
+\index{rgb shift}
 
 Most cameras take the light coming into the lens, and convert that into $3$ sets of numbers, one for Red (R), one for Green (G), and one for Blue (B). Some of the older cameras were composed of $3$ sensors and originally the RGB sensors were on $3$ separate planes and had to be aligned. If they were misaligned in the video, you can use \textit{RGBShift} to get them realigned. To move a specific color up/down, modify the \textit{dy} value using the slider bar in the RGBShift window. To move a color left/right, modify the corresponding \textit{dx} value. Clear buttons are present to reset its slider to default without affecting others. Note that the current values of the RGBShift are maintained in the \texttt{.bcast5} defaults file and will be retained across sessions. If using the YUV color space, you will want to use \textit{YUVShift} instead. Figure~\ref{fig:rgbshift} showing RGB shift before and after.
 
@@ -2460,6 +2556,7 @@ Most cameras take the light coming into the lens, and convert that into $3$ sets
 
 \subsection{Radial Blur}%
 \label{sub:radial_blur}
+\index{radial blur}
 
 Radial blur is a \textit{Bokeh} effect that creates a whirlpool which simulates a swirling camera. You can vary the location, type, and quality of the blur.
 
@@ -2482,6 +2579,7 @@ Figure~\ref{fig:radial} has the parameters: $Angle=-35$ and $Steps=2$.
 
 \subsection{ReframeRT}%
 \label{sub:reframert}
+\index{reframeRT}
 
 ReframeRT changes the number of frames in a sequence of video
 directly from the timeline. The faster method for getting the same
@@ -2499,6 +2597,7 @@ to interpolation.
 
 \subsubsection*{Stretch}%
 \label{ssub:stretch}
+\index{stretch}
 
 Stretch mode multiplies the current frame number of its output by the \textit{scale factor} to arrive at the frame to read from its input. The scaling factor is not entered directly but using a number of \textit{input} frames to be divided by the number of \textit{output} frames.
 
@@ -2523,6 +2622,7 @@ Now in the timeline we have the affected part of the plugin where we see the slo
 
 \subsubsection*{Downsample}%
 \label{ssub:downsample}
+\index{downsample}
 
 Downsample mode does not change the length of the output sequence. It multiplies the frame rate of the output by the scale factor to arrive at a frame rate to read the input. This has the effect of replicating the input frames so that they only change at the scaled frame rate when sent to the output. It does not change the length of the sequence. If the scale factor is $0.5$ and the output frame rate is $30 \,fps$, only $15$ frames will be shown per second and the input will be read at $15 \,fps$. Downsample is only useful for scalefactors below $1$, hence the name downsample.
 
@@ -2541,11 +2641,13 @@ Downsample mode changes the frame rate of the input as well as the number of the
 
 \subsection{Reroute}%
 \label{sub:reroute}
+\index{reroute}
 
 The \textit{Reroute} plugin enables you to selectively transfer the Alpha channel or the Components (RGB or YUV) or both from a \textit{source} track to a \textit{target} track, partially overwriting the target's contents. It works as a \textit{shared plugin}. The typical usage scenario is to build up a possibly animated Mask in one track and then to transfer the Alpha channel to another content track.
 
 \subsection{Reverse video}%
 \label{sub:reverse_video}
+\index{reverse video}
 
 Media can be reversed on the timeline in realtime. This is not to be confused with using the reverse playback on the transport panel. The \texttt{reverse} effects reverse the region covered by the effect regardless of the transport direction. The region to be reversed is first determined by what part of the track the effect is under and second by the locations of keyframes in the effect. The reverse effects have an enabled option which allows you to set keyframes. This allows many possibilities.
 
@@ -2553,11 +2655,13 @@ Every enabled keyframe is treated as the start of a new reversed region and the 
 
 \subsection{Rotate}%
 \label{sub:rotate}
+\index{rotate}
 
 The \textit{Rotate} filter can rotate the video in $90$ degree increments or by any number of degrees through use of the \textit{wheel} and about any \textit{pivot point}. It can also reverse and flip the video.
 
 \subsection{Rumbler}%
 \label{sub:rumbler}
+\index{rumbler}
 
 The \textit{Rumbler} plugin can be used to create dream-like or earthquake-like noise in the video. It creates noise by jiggling the corners through use of perspective transformation at the corners. The algorithm used is:
 
@@ -2590,6 +2694,7 @@ Plugin variables:
 
 \subsection{SVG via Inkscape}%
 \label{sub:svg_via_inkscape}
+\index{SVG via Inkscape}
 
 This plugin allows the user to manipulate an SVG (scalable vector graphics) image with \textit{Inkscape} without having to leave the program. The associated \CGG{} window provides the ability to change the DPI, the Out $x/y$ coordinates, and the Out w/h values. For more information on use of inkscape, refer to: {\small \url{https://inkscape.org/develop/about-svg/}}
 
@@ -2610,6 +2715,7 @@ Figure~\ref{fig:svg} shows the menu options plugin window and the SVG image in t
 
 \subsection{Scale}%
 \label{sub:scale}
+\index{scale}
 
 Reduce or expand the image size depending on the ratio.
 
@@ -2621,6 +2727,7 @@ Reduce or expand the image size depending on the ratio.
 
 \subsection{Scale Ratio}%
 \label{sub:scale_ratio}
+\index{acale ratio}
 
 With the Scale Ratio plugin you can manipulate your video to maintain the pixel aspect ratio (proportional geometry), possibly for a different output Display device (figure~\ref{fig:scaleratio}).
 
@@ -2635,6 +2742,7 @@ With the Scale Ratio plugin you can manipulate your video to maintain the pixel 
 
 \subsection{Selective Temporal Averaging}%
 \label{sub:selective_temporal_averaging}
+\index{selective temporal averaging}
 
 This plugin is designed to smooth out non-moving areas of a video clip (figure~\ref{fig:staveraging}).
 \vspace{2ex}
@@ -2666,16 +2774,19 @@ An example of common usage is to select the number of frames you wish to average
 
 \subsection{Sharpen}%
 \label{sub:Sharpen}
+\index{sharpen}
 
 Sharpen the video, either the \textit{luminance}, \textit{horizontal}, or \textit{interlace}. With the Clear buttons we can bring the slider to default values without affecting the other parameters.
 
 \subsection{Shift Interlace}%
 \label{sub:shift_interlace}
+\index{shift interlace}
 
 Shift the interlace lines using \textit{odd} or \textit{even}. With the Clear buttons we can bring the slider to default values without affecting the other parameters.
 
 \subsection{Sketcher}%
 \label{sub:Sketcher}
+\index{sketcher}
 
 Now you can sketch \textit{lines}, \textit{curves} or \textit{shapes}, on your video in different colors using various pen widths and pen type with the \texttt{sketcher} plugin. You can even fill them. You can do rotations and scaling and apply two anti-aliasing modes; single and double. Getting started is fairly easy -- simply hold down the \textit{shift key} while using the \textit{left mouse button} to create a bunch of points in the compositor window. However, to do more than that you will need to understand the buttons and options or you may end up with unexpected results.
 
@@ -2803,11 +2914,13 @@ The \textit{fill} point is a marker point, and not really part of the curve. Tha
 
 \subsection{Sphere Cam}%
 \label{sub:sphere_cam}
+\index{sphere cam}
 
 Converts multiple fisheye images into a panoramic projection.
 
 \subsection{Swap Frames}%
 \label{sub:swap_frames}
+\index{swap frames}
 
 Swap the position of two consecutive frames. There are two modes of exchange:
 
@@ -2815,11 +2928,13 @@ Swap the position of two consecutive frames. There are two modes of exchange:
 
 \subsection{Swap channels}%
 \label{sub:swap_channels}
+\index{swap channels}
 
 Swap R G, B, Alpha with another color channel.
 
 \subsection{Threshold}%
 \label{sub:threshold}
+\index{thresold}
 
 \textit{Threshold} converts the image to pure luminance, and replaces pixels with one of three colors based on the luminance. Pixels with luminance values in the low range are replaced with black, pixels in the middle range are replaced with white, and pixels in the high range are replaced with black. \textit{Color} and \textit{alpha} (transparency) for each range are configurable with the buttons and interpolate according to keyframes.
 
@@ -2829,6 +2944,7 @@ This effect is basically a primitive \textit{luminance key} to produce a \textit
 
 \subsection{Time average}%
 \label{sub:time_average}
+\index{time average}
 
 Time average is one effect which has many uses besides creating trail patterns of moving objects (figure~\ref{fig:timeaverage}).
 The main use is reducing noise in still images (or in the motionless parts of a video). Merely point a video camera at a stationary subject for $30$ frames, capture the frames, and average them using time average and you will have a high quality print. In floating point color models, time average can increase the dynamic range of low quality cameras.
@@ -2853,11 +2969,13 @@ Inside the time average effect is an accumulation buffer and a divisor. A number
 
 \subsection{TimeBlur}%
 \label{sub:timeblur}
+\index{timeblur}
 
 The TimeBlur plugin provides a way to blur a number of \textit{Frames}.
 
 \subsection{Timefront}%
 \label{sub:timefront}
+\index{timefront}
 
 Space-temporal warping enables time to flow differently at different locations in the video (figure~\ref{fig:timefront}).
 \begin{wrapfigure}[13]{O}{0.3\linewidth}
@@ -2878,6 +2996,7 @@ With \textit{Time Range} we decide the size (and therefore the number) of the ba
 
 \subsection{Title}%
 \label{sub:title}
+\index{title}
 
 The \textit{Titler} allows you to add text from within \CGG{}. It has many configuration capabilities. Often it is convenient to apply the plugin on a separate track (shared or not), in order to make it independent from the video track and have more freedom in editing and configuration. For example, you can apply the \textit{Rotation} plugin to rotate the title without rotating the underlying video. Another thing to keep in mind when using the Titler plugin is that it works on the \textit{temporary} and therefore it is not affected by Camera movements (curves), but only by Projector movements.
 
@@ -3111,6 +3230,7 @@ When using the Titler, kerning is applied in order to allow parts of a letter to
 
 \subsection{Tracer}%
 \label{sub:tracer}
+\index{tracer}
 
 Tracer creates an outline around an object after a few points are designated, so it traces the object. Its operates in a similar manner to that of Gimp's \textit{magic wand}. You can then Fill the alpha channel with a mask, like with a gradient or another object on another track or Invert that fill. Although it works best for still images or objects that stay in the same place on a video like a logo, you can also add keyframes. To limit the mis-tracking that occurs when working on a moving object, we can increase the number of points so that the tracking is more accurate and relies on a solid foundation. Rather than \textit{points} as in a mask, tracer is based on \textit{edges} to form an outline (figure~\ref{fig:tracer-01}). Frequently it will be desirable to use either RGB or YUV as the color model without the -A for Alpha.
 
@@ -3149,6 +3269,7 @@ Be sure to uncheck \textit{Draw} and \textit{Drag} before rendering so that the 
 
 \subsection{Translate}%
 \label{sub:translate}
+\index{translate}
 
 This effect allows displacing, cropping, and/or scaling the source video horizontally and/or vertically. The \textit{In} and \textit{Out} parameters operate similar to the \textit{camera} and \textit{projector} functions in the Compositor:
 
@@ -3165,6 +3286,7 @@ This effect supports keyframes so these parameters can change smoothly over time
 
 \subsection{Unsharp}%
 \label{sub:Unsharp}
+\index{unsharp}
 
 This effect applies a traditional \textit{darkroom} technique, the so called \textit{unsharp mask} to every video frame. With different parameter values, this can be used to soften or to sharpen the image. Its parameters are:
 
@@ -3177,6 +3299,7 @@ This effect applies a traditional \textit{darkroom} technique, the so called \te
 
 \subsection{Videoscope}%
 \label{sub:videoscope}
+\index{videoscope}
 
 Videoscope summarizes intensity and color on a calibrated display. The Videoscope can be used in conjunction with other \CGG{} plugins such as \textit{Color 3 Way}, \textit{YUV}, \textit{Brightness}, \textit{Color Balance} or \textit{Histogram} to accurately correct video for contrast, clarity, conformance (to normalize various videos shot under different light settings), or for cinematic purposes. The human eye is not specialized to match precise level of light and color, but Videoscope is. Videoscope contains three displays: the waveform scope and the vectorscope, plus the histograms (figure~\ref{fig:videoscope01}). Instead of applying the plugin to the tracks/edits we want to examine, we can use the Videoscope buttons in the Composer and Viewer windows. \includegraphics[height=\baselineskip]{scope.png} In this way the monitors act on the frame indicated by the insertion point, without taking into account the stack of tracks or on which edits to apply the plugin.
 
@@ -3247,6 +3370,7 @@ More information in the later section on Vectorscope.
 
 \subsubsection*{Waveform/RGB Parade/Waveform Ply}%
 \label{ssub:waveform_rgb_parade_ply}
+\index{videoscope!waveforms}
 
 The \textit{Waveform Scope} displays image intensity (luminance) versus image $X$ position. The \textit{Waveform RGB} displays image RGB intensity versus image $X$ position (one graph per channel). The \textit{Waveform Ply} shows the three channels in a single graph. The Waveform Scope appears on the left side or in the middle of the Videoscope window. The display is calibrated vertically from $0\%$ intensity (black) at the bottom up to $100\%$ intensity (white) at the top. Each column of pixels in the image corresponds to one column of pixels in the Waveform Scope (figure~\ref{fig:videoscope02}). Note that the height of the values of a waveform/waveform RGB corresponds exactly to the values on the $x\, axis$ in the \textit{histogram}. A vertical/horizontal correspondence is therefore obtained.
 
@@ -3300,6 +3424,7 @@ If you are producing a video for NTSC television broadcast, keep the intensity b
 
 \subsubsection*{Vectorscope}%
 \label{ssub:Vectorscope}
+\index{videoscope!vectorscope}
 
 The Vectorscope displays \textit{hue} (angle on the color wheel) and \textit{saturation} (radius). Each pixel in the source image is drawn as a point on the color wheel. The distance from the center is the color saturation. Gray values are close to the center, and high saturation values are near the perimeter ($100\%$). In the center there is pure white ($0\%$). By clicking with the mouse on the color wheel a radius and circle will appear whose values of hue and saturation are shown in the  pop-up box at the bottom right of the window, similar to the values of $X$ and luminance of the Waveform and RGB Parade (figure~\ref{fig:videoscope05}).
 
@@ -3336,31 +3461,37 @@ The Vectorscope can also be used to verify that the video output will display pr
 
 \subsubsection*{Histogram}%
 \label{ssub:histogram}
+\index{videoscope!histogram}
 
 You can also display the 4 histograms (master or RGB) on the left of the window. (see figure~\ref{fig:videoscope01}).
 
 \subsection{Wave}%
 \label{sub:wave}
+\index{wave}
 
 The \textit{wave} effect adds waves on the image. \textit{Amplitude}, \textit{Phase}, and \textit{Wavelength} parameters can be adjusted. With the Clear buttons we can bring the slider to default values without affecting the other parameters.
 
 \subsection{Whirl}%
 \label{sub:whirl}
+\index{whirl}
 
 Creates a whirl (spiral) of the video around the center. With the Clear buttons we can bring the slider to default values without affecting the other parameters.
 
 \subsection{YUV}%
 \label{sub:yuv}
+\index{yuv}
 
 Modify the Y, U, V settings. With the Clear buttons we can bring the slider to default values without affecting the other parameters.
 
 \subsection{YUV411}%
 \label{sub:yuv411}
+\index{yuv411}
 
 Modify the 411 yuv to look like 420 color space instead. If the edit to which the effect is applied is not YUV type, a red warning message will appear.
 
 \subsection{YUVShift}%
 \label{sub:yuvshift}
+\index{yuv shift}
 
 \begin{figure}[hbtp]
 	\centering
@@ -3376,6 +3507,7 @@ A corrected video image is shown in the bottom. Now the red and blue colors are 
 
 \subsection{Zoom Blur}%
 \label{sub:zoom_blur}
+\index{zoom blur}
 
 Blurs the video from the center outwards, like the sun’s rays, and uses a zoom effect.
 
@@ -3398,11 +3530,13 @@ Figure~\ref{fig:zoom} shows the parameters: Radius=21 and Steps=3.
 \section{CUDA plugins}%
 \label{sec:cuda_plugins}
 \settocdepth{section}
+\index{CUDA plugin}
 
 Only for Nvidia GPU and Cuda SDK
 
 \subsection{Mandelbrot}%
 \label{sub:mandelbrot}
+\index{CUDA!mandelbrot}
 
 Produce fractal figures (figure~\ref{fig:mandelbrot}). Use case:
 
@@ -3423,6 +3557,7 @@ Produce fractal figures (figure~\ref{fig:mandelbrot}). Use case:
 
 \subsection{N\_Body}%
 \label{sub:n_body}
+\index{CUDA!n\_body}
 
 Produce animated particles (figure~\ref{fig:n_body}).
 
@@ -3436,6 +3571,7 @@ Produce animated particles (figure~\ref{fig:n_body}).
 \section{OpenCV plugins}%
 \label{sec:opencv_plugins}
 \settocdepth{section}
+\index{openCV}
 
 There are currently 6 OpenCV plugins hooked into Cinelerra static and dynamic tars with the most
 widely known being FindObj.  The \textit{Find Object} plugin searches a Scene for an Object and
@@ -3620,6 +3756,7 @@ running locally on the build system.  for example:\newline
 
 \subsection{Description of Find Object Plugin}%
 \label{sub:description_findobj_plugin}
+\index{openCV!find object}
 
 As in the standard OpenCV FindObj program, there are $5$ \textit{detector} methods and $2$ \textit{matcher} methods which can be selected. They detect features and match them as a rectangular projection. The matched region will be overlayed with a replacement image if replace object is enabled. This is done using a variety of feature detectors and region matches. The match works by creating sets of Feature points. These points are generated for both the source and reference object frames. Then the two sets are matched for \textit{Homography} (a regional similarity).
 
@@ -3749,7 +3886,7 @@ The following steps were used to set up the example in figure~\ref{fig:findobj}.
     \label{fig:opencv}
 \end{figure}
 
-The \textit{StylizeObj} plugin can be used to create some interesting edge effects using various options (figure~\ref{fig:stylizeobj01}).
+The \textit{StylizeObj} \index{openCV!stylizeobj} plugin can be used to create some interesting edge effects using various options (figure~\ref{fig:stylizeobj01}).
 
 We can apply 6 different styles:
 
@@ -3791,6 +3928,7 @@ Figure~\ref{fig:stylize} show the images after adding the 6 various styles.
 
 \section[FFmpeg Audio and Video Plugins]{FFmpeg Audio and Video Plugins}%
 \label{sec:ffmpeg_audio_video_plugins}
+\index{ffmpeg!plugins}
 
 \CGGI{} currently comes with more than $140$ of the video plugins and $55$ of the audio plugins developed by the FFmpeg project {\small \url{www.ffmpeg.org}}. These plugins do not have a GUI with buttons like the rest of plugins, therefore to change settings it is necessary to change the variables by hand by highlighting the \textit{option}, typing a value in the \textit{Range} box, and then hitting the \textit{Apply} button. Many of these plugins provide tooltips at the bottom right corner of the window when the option is highlighted. A \textit{slider} bar and a \textit{dial} for numerical values can be used to easily vary the values which take effect immediately.
 
@@ -3825,6 +3963,7 @@ FFmpeg’s plugin guide is at the link:
 
 \subsection{FFmpeg Audio Plugins\protect\footnote{credit to WPfilmmaker}}%
 \label{sub:ffmpeg_audio_plugins}
+\index{ffmpeg!audio plugin}
 
 The following is a list of the integrated audio plug-ins.
 \begin{description}
@@ -3939,6 +4078,7 @@ The following is a list of the integrated audio plug-ins.
 
 \subsection{FFmpeg Video Plugins\protect\footnote{credit to WPfilmmaker}}%
 \label{sub:ffmpeg_video_plugins}
+\index{ffmpeg!video plugins}
 
 The following is a list of the integrated video plug-ins.
 \begin{description}
@@ -4203,6 +4343,7 @@ The following is a list of the integrated video plug-ins.
 
 \section[Rendered Effects]{Rendered Effects}%
 \label{sec:rendered_effects}
+\index{plugins!rendered effects}
 
 Besides the \textit{Realtime} effects, as has been described in the previous sections, another type of effect is performed on a section of the track and the result stored somewhere before it is played back. The result is usually pasted into the track to replace the original data. The rendered effects are not listed in the resources window but instead are accessed through the \texttt{Audio $\rightarrow$ Render effect and Video $\rightarrow$ Render effect} menu options. Each of these menu options brings up a dialog for the rendered effect. In the Select an effect dialog is a list of all the realtime and all the rendered effects. The difference here is that the realtime effects are rendered to disk and not applied under the track. Rendered effects apply to only one type of track, either audio or video. If no tracks of the type exist, an error pops up.
 

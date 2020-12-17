@@ -108,6 +108,10 @@
 % Switch to sans serif (usually these do not contain SC):
 % \renewcommand*\familydefault{\sfdefault}
 
+% The necessary package for LaTeX2HTML
+\usepackage{html}
+% html.sty declares its own \hyperref - redefinition hack required
+\renewcommand{\hyperref}[2][]{\hyperrefhyper[#1]{#2}}
 
 %%% Local Variables:
 %%% mode: latex

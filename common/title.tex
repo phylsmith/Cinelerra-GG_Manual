@@ -3,6 +3,7 @@
 % realized with eso-pic as background image.
 %
 \thispagestyle{empty}
+%begin{latexonly}
 \newcommand\CinBackgroundLogo{%
    \put(0,0){%
      \parbox[b][\paperheight]{\paperwidth}{%
@@ -15,10 +16,14 @@
 
 % Use the logo
 \AddToShipoutPicture{\CinBackgroundLogo}
+%end{latexonly}
+\htmladdimg{cin-big.png}
 
 % Place the title over the "black hole".
 % The position must be set appropriately.
+%begin{latexonly}
 \vspace*{14.5cm}
+%end{latexonly}
 \begin{minipage}[t]{80mm}
   \textcolor{CinBlue}{\textsf{\Huge{The Comprehensive}}}\\[1em]
   \textcolor{CinBlue}{\textsf{\Huge{\textbf{User Manual}}}}
@@ -103,7 +108,9 @@ Illustrations: The \CGG{} Community%, for individual proofs, if different, see l
 % Translation: Translator
 \bigskip%
 
+%begin{latexonly}
 \footnotesize
+%end{latexonly}
 \subsubsection*{\sffamily{}Legal information}
 \label{sec:Legal-information}
 This manual adheres to the GNU FDL (GFDL) copyleft license for free documentation,

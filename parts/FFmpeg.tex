@@ -1,10 +1,14 @@
 \chapter{FFmpeg Interactions}%
 \label{cha:ffmpeg_interactions}
+\index{ffmpeg}
 
 \CGG{} uses ffmpeg for decoding and encoding media, thus there are many opportunities available to manipulate options.
 
 \section{FFmpeg Early Probe Explanation}%
 \label{sec:ffmpeg_early_probe_explanation}
+\index{ffmpeg: early probe}
+\index{ffmpeg: try first}
+\index{ffmpeg: try last}
 
 When you open media, a series of libraries and codec functions are used to \textit{probe} the data, to see if it can determine the type of file format and codec parameters needed to correctly decode the file.  If ffmpeg probes early -- \textit{Try FFMpeg first} is in effect for the FF button (green icon) -- it will usually find some way to try to decode just about any contemporary media file.  But there are some times that the built in codecs are actually a better choice.  A lot of this may fall into the category of personal preference.  For example, some may prefer the mpeg library in the \CGG{} code over the ffmpeg code because it has more decoding capability and seems to be more robust when the media is damaged.  In that case you will want the FF button to read \textit{Try FFMpeg last}.
 
@@ -32,6 +36,7 @@ that ffmpeg early probes is enabled; (2) \textit{Try FFMpeg last}  indicator mes
 
 \section{How to Create FFmpeg Options Files}%
 \label{sec:create_ffmpeg_options_files}
+\index{ffmpeg: options files}
 
 This section describes how the FFmpeg options files work for decoding and encoding and goes into great detail.  It will make more sense if you look at \CGG{}'s ffmpeg config directory and the \CGG{} menus at the same time.  
 It is meant to include everything necessary for complete understanding.  You will be able to personalize your own options files without knowing all of the information included below if you know the basics.  The word encoding is used interchangeably with the word rendering.
@@ -58,9 +63,9 @@ In the ffmpeg configuration directory there are a series of options files used w
     \end{tabular}
 \end{center}
 
-\paragraph{Decoder options:} Normally, only \texttt{ffmpeg.opts} and \texttt{decode.opts} are used when reading/decoding files, but may be specialized if a \texttt{<path>/media.opts} exists for a given \texttt{<path>/media.ext} file.  For example, if you want to only fail on fatal errors and to always use the video filter, edgedetect, when working with your media file \texttt{dreaming.y4m}, then create a file \texttt{dreaming.opts} in the same directory with the contents of \textit{loglevel=fatal} on the first line and \textit{video\_filter=edgedetect} on the next.  These specialized settings will override the defaults.  The fatal loglevel is especially handy for lesser quality media.
+\paragraph{Decoder options:} \index{ffmpeg: decoder options} Normally, only \texttt{ffmpeg.opts} and \texttt{decode.opts} are used when reading/decoding files, but may be specialized if a \texttt{<path>/media.opts} exists for a given \texttt{<path>/media.ext} file.  For example, if you want to only fail on fatal errors and to always use the video filter, edgedetect, when working with your media file \texttt{dreaming.y4m}, then create a file \texttt{dreaming.opts} in the same directory with the contents of \textit{loglevel=fatal} on the first line and \textit{video\_filter=edgedetect} on the next.  These specialized settings will override the defaults.  The fatal loglevel is especially handy for lesser quality media.
 
-\paragraph{Encoder Options:} Within the audio/video subdirectories of the first level ffmpeg directory, the \texttt{typ.ext} files are for encoder (rendering) setups.
+\paragraph{Encoder Options:} \index{ffmpeg: encoder options} Within the audio/video subdirectories of the first level ffmpeg directory, the \texttt{typ.ext} files are for encoder (rendering) setups.
 
 \begin{center}
     \begin{longtable}{l p{23em}}
@@ -84,6 +89,7 @@ In the ffmpeg configuration directory there are a series of options files used w
 
 \subsection{Option File Format / Content}%
 \label{sub:option_file_format_content}
+\index{ffmpeg: option file format}
 
 For the option files a specific format must be followed in creating the file content.
 In \texttt{typ.ext} encoder parameter files, the first line is defined as:
@@ -274,6 +280,9 @@ Then to use and to get 10 bit depth and preserve depth from decode to encode:
 
 \subsection{Modifying FFmpeg Format Options inside \CGG{}}%
 \label{sub:modifying_ffmpeg_cinelerra}
+\index{ffmpeg: option file format}
+\index{ffmpeg: wrench}
+\index{ffmpeg: private options}
 
 There are thousands of options for using ffmpeg.  Now it is possible to \textit{view} the available options for a particular video and audio choice by using the \textit{wrench icon} and then clicking on the \textit{view} box.  FFmpeg has to be the selected file format for this feature to be visible.  It makes it a lot easier since only the applicable options show up as opposed to everything that ffmpeg can do.  These options are just \textit{Hints} and some may be missing due to the way that ffmpeg options are coded -- \CGG{} shows the option data ffmpeg has exposed.
 
@@ -316,6 +325,7 @@ Figure~\ref{fig:audio-preset02} shows \textit{ffmpeg} video for the Kind. Note t
 
 \section{The FFmpeg Image2 Streams}%
 \label{sec:ffmpeg_image2_streams}
+\index{ffmpeg: image2 streams}
 
 Another feature gained from using ffmpeg in \CGG{} takes advantage of what is being referred to as the \textit{\%d trick}.  This trick uses the ffmpeg muxer image2 and a filename template to create a series of image files of a given type.  A specific example is described below.
 
@@ -340,6 +350,7 @@ The resulting directory of images can be opened for reading by simply opening th
 
 \section{Raw Input Opts File for Video/Audio}%
 \label{sec:raw_input_opts_video_audio}
+\index{ffmpeg: raw input options}
 
 Raw video is not affected by decoding on read in.  This makes it very attractive to provide raw image data for editing and rendering media.  A wide variety of raw formats are available via the ffmpeg file interface.  To load media in a raw format, select \textit{try ffmpeg first} and create an accompanying \textit{opts} file.  The opts files must be in the same directory as your media, with the same base name, and the \texttt{.opts} extension.  The opts file contents should reflect your video setup.  An example follows:
 
@@ -357,6 +368,7 @@ duration=90.25
 
 \section{FFmpeg Items of Note}%
 \label{sec:ffmpeg_items_note}
+\index{ffmpeg: notes}
 
 \begin{description}
     \item[Quality Option when rendering:] FFmpeg responds variably to the quality option in the render option but seems to respond well to bitrate. The subranges used by quality even seem to vary somewhat depending on how old the codec is. Some use $0$ to $35$, some use $0$ to $500$ or so.  The quality is supposed to cause the codec to output data until the noise level is below a limit determined by the quality setting. Your specific results may vary.

@@ -1,5 +1,6 @@
 \chapter{Overlays}%
 \label{cha:overlays}
+\index{overlays}
 
 The purpose of the Overlay Modes is to control the foreground and background stacking and use blending to reshape image object boundaries.  It normally makes use of a binary type alpha blending system for all in or all out.  To use the available operations in \CGG{}, follow these steps:
 
@@ -139,6 +140,7 @@ Note: the Graphic Art group operates principally on color, and the others operat
 
 \subsection*{Normal}%
 \label{sub:normal2}
+\index{overlays!normal}
 
 \begin{description}
     \item[Normal:] Normal mode is the default layer mode.  The result color is the source color.  The layer on top covers the layers below it.  If you want to see anything below the top layer when you use this mode, the layer must have some transparent areas.  It is \textit{stacked on top}.  Math formula used is different than that used by Gimp; there is no SVG equivalent.
@@ -146,6 +148,7 @@ Note: the Graphic Art group operates principally on color, and the others operat
 
 \subsection*{Arithmetic Group:}%
 \label{sub:arithmetic_group}
+\index{overlays!arithmetic}
 
 Standard numerical operations.
 
@@ -159,6 +162,7 @@ Standard numerical operations.
 
 \subsection*{Porter-Duff Group}%
 \label{sub:porter-duff_group}
+\index{overlays!Porter-Duff}
 
 Industry standard compositing operators.
 
@@ -177,6 +181,7 @@ Industry standard compositing operators.
 
 \subsection*{Logical Group}%
 \label{sub:logical_group}
+\index{overlays!logical}
 
 \begin{description}
     \item[Min:] The output color is the component-wise minimum value of the source and destination colors.  There is no SVG or Gimp equivalent math formula.
@@ -190,6 +195,7 @@ Industry standard compositing operators.
 
 \subsection*{Graphical Art Group}%
 \label{sub:graphical_art_group}
+\index{overlays!graphical art}
 
 Typical operations from popular \textit{paint} packages.
 

@@ -683,7 +683,7 @@ on your system.
 
 To run \CGG{} on a Windows 10 computer, you will need to have
 Cygwin installed on your system, along with the \CGG{} static tar
-and a patched library: libxbc.  This setup has been tested with
+and a patched library: libxcb.  This setup has been tested with
 Windows 10, version 1909, on an HP EliteBook 820 at 2.3 GHz.
 
 This limited version provides \textit{core} functionality at this
@@ -766,12 +766,12 @@ Terminal
 \item Download the tar file
   \href{https://cinelerra-gg.org/download/testing/libxcb-bld.tar.bz2}{libxcb-bld.tar.bz2}.
 
-\item Install libxbc from the tar file -- installs into
+\item Install libxcb from the tar file -- installs into
   \texttt{/usr/local} and requires approximately 21MB storage.
 \begin{lstlisting}[style=sh]
 tar -C /usr/local -xJf /path/libxcb-bld.tar.bz2
 \end{lstlisting}
-  The libxcb path repairs an error (XIOError), which stops
+  The libxcb patch repairs an error (XIOError), which stops
   Cinelerra.
 
 \item Download the tar file

@@ -1,5 +1,6 @@
 \chapter{Transition Plugins}%
 \label{cha:transition_plugin}
+\index{transitions}
 
 When playing a section of media where one edit ends and another edit begins on the timeline,
 the usual result is that the first edit's output immediately is followed by the second edit.  Transitions provide a better method whereby the first edit’s output becomes the second edit’s output.  There are several different audio and video transitions listed in the Resources window as figure~\ref{fig:transition}.
@@ -12,7 +13,7 @@ the usual result is that the first edit's output immediately is followed by the 
 \end{figure}
 
 Note the bluish colored bar above the \textit{Shape Wipe} transition.
-This bar near the transition symbol shows the position and the length of the transition. We can extend or reduce the length of the bar (and therefore the duration of the transition) by simply dragging the right edge of the bar to the desired position.
+This bar near the transition symbol shows the position and the length of the transition. We can extend or reduce the length of the bar (and therefore the duration of the transition) by simply dragging the right edge of the bar to the desired position. In the \textit{zoom bar}, at the bottom left where the words \texttt{Welcome to Cinelerra} appears, this is replaced by the real time length of the bluish bar. The unit of measure adopted is that of the timebar --the default is \textit{hh:mm:ss:frame}; we can change it as we like (RMB on timebar).
 
 Transitions only apply to the matching track type; that is audio transitions only apply to audio tracks and video transitions only apply to video tracks.
 
@@ -60,42 +61,51 @@ There is a down arrow next to the Seconds box allowing for changing to the other
 
 \section{Audio Transitions}%
 \label{sec:audio_transition}
+\index{transitions!audio}
 
 \subsection*{Crossfade}%
 \label{sub:crossfade}
+\index{crossfade}
 
 Creates a smooth transition from one audio source edit to another. The crossfade has the first source \textit{fade out} while the second \textit{fades in}.
 
 \section{Video Transitions}%
 \label{sec:video_transition}
+\index{transitions!video}
 
 \subsection*{BandSlide}%
 \label{sub:bandslide}
+\index{band slide}
 
 Bands slide across video and you see the image slide.
 
 \subsection*{BandWipe}%
 \label{sub:bandwipe}
+\index{band wipe}
 
 Bands wipe across the video and you see the mask slides.
 
 \subsection*{Dissolve}%
 \label{sub:dissolve}
+\index{dissolve}
 
 A soft dissolve where the In segment becomes more transparent while the Out segment begins to gradually show in its place until fully there.
 
 \subsection*{Flash}%
 \label{sub:flash}
+\index{flash}
 
 The video flashes when transitioning between segments.
 
 \subsection*{IrisSquare}%
 \label{sub:irissquare}
+\index{iris square}
 
 Video switches segments via a small rectangular view that gradually grows to full size.
 
 \subsection*{Shape Wipe}%
 \label{sub:shape_wipe}
+\index{shape wipe}
 
 Wipe a specific shape across the video. Currently available 63 shapes are:
 
@@ -148,16 +158,19 @@ After an update of \CGG{}, they will have to be restored each time.
 
 \subsection*{Slide}%
 \label{sub:slide}
+\index{slide}
 
 Image slides into view; you can set Left/Right/In/Out.
 
 \subsection*{Wipe}%
 \label{sub:wipe}
+\index{wipe}
 
 Wipe the image across screen starting left or right.
 
 \subsection*{Zoom}%
 \label{sub:zoom}
+\index{zoom}
 
 Zoom out video at $\frac{X}{Y}$ magnification for some seconds.
 
