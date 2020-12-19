@@ -136,7 +136,7 @@ without having to modify your Preference.
 
 \subsection{Zoom Panel}%
 \label{sub:zoom_panel}
-\index{zoom panel}
+\index{zoom!panel}
 
 Below the displayed tracks in the timeline, you will find the zoom panel as seen in figure~\ref{fig:patchbay}.
 In addition to the scrollbars, these options and their values are another set of tools for positioning the timeline.  
@@ -175,7 +175,7 @@ Shortcuts, \texttt{Ctrl-Pgup} and \texttt{Ctrl-Pgdown}, change the track zoom to
 the timeline and is being manipulated, a small square the same color as the line will be shown to 
 the left of the Automation type when the left mouse button (LMB) is pressed.  This is just an indicator to make it easy to see what is being worked.
  
-The \emph{curve zoom} \index{autos zoom} affects the curves for the selected \emph{automation type} in all the tracks of that type and determines the value range for those curves. 
+The \emph{curve zoom} \index{autos!zoom} affects the curves for the selected \emph{automation type} in all the tracks of that type and determines the value range for those curves. 
 Use the tumbler arrows to the left of the numbers for the minimum value and the tumblers to the right for the maximum value, or manually enter the values in the text box. 
 Good default values for audio fade are -40.0 to 6.0 and for video fade are 0.0 to 100.0. 
 The tumbler arrows change curve amplitude, but the only way to curve offset is to use the fit curves button on the curve itself.
@@ -197,7 +197,7 @@ there is an X with the tooltip of "Cancel operation" \index{cancel operation} us
 
 \subsection{Track Popup Menu}%
 \label{sub:track_popup_menu}
-\index{track popup menu}
+\index{track!popup menu}
 
 Each Track has a popup menu. 
 To activate the track popup menu, Right mouse click (RMB) on the track. 
@@ -483,13 +483,13 @@ The main window pulldowns as pointed out in figure~\ref{fig:insertion-points} ar
 \begin{description}
     \item[File] \index{file} options for loading, saving, and rendering as described in other sections (\ref{cha:load_save_and_the_EDL}).
     \item[Edit] \index{edit} edit functions; most of which have shortcuts that you will quickly learn (\ref{cha:editing}).
-    \item[Keyframes] \index{keyframes} keyframe options which are described in the Keyframe section (\ref{cha:keyframes}).
+    \item[Keyframes] keyframe options which are described in the Keyframe section (\ref{cha:keyframes}).
     \item[Audio] \index{audio} audio functions such as \textit{Add track}, \textit{Attach effect}
 and \textit{Attach transition}.  The \textit{Attach effect} is especially useful when
 you need the effect to be applied to all related audio tracks as a \textit{Shared effect}
 and is described as an alternative method of application in section \ref{sec:shared_effect_tracks}.
     \item[Video] \index{video} video functions such as \textit{Add track, Default/Attach transition, Render effect}.
-    \item[Tracks] \index{tracks} move or delete tracks are the most often used plus \textit{Align Timecodes}.
+    \item[Tracks] \index{track} move or delete tracks are the most often used plus \textit{Align Timecodes}.
     \item[Settings] \index{settings} much of this is described elsewhere with the most frequently used to include
 Preferences (\ref{cha:configuration_settings_preferences}), Format (\ref{cha:project_and_media_attributes}), 
 Proxy and Transcode (\ref{sec:proxy_settings}), as well as the others.
@@ -500,7 +500,7 @@ Proxy and Transcode (\ref{sec:proxy_settings}), as well as the others.
 
 \subsection{Window Layouts}%
 \label{sub:window_layouts}
- \index{window layout}
+ \index{window!layout}
 
 If you like to use different window layouts than the default for certain scenarios, you can setup, save, and load 4 variations.   
 First, position your \CGG{} windows where you want them to be and then use the \textit{Window} pulldown and choose \emph{Save layout}. Note the words \emph{Save layout} highlighted in Figure~\ref{fig:window_layouts}a with 4 names shown to the right and below of that highlight. 
@@ -614,7 +614,7 @@ Now you can clip/play/expand or edit the previous playback selection.
 
 \subsubsection*{Playback Speed Automation Support}%
 \label{ssub:playback_speed_automation_support}
- \index{autos speed}
+ \index{autos!speed}
 
 The speed automation causes the playback sampling rate to increase or decrease to a period controlled by the speed automation curve.  
 This can make playback speed-up or slow-down according to the scaled sampling rate, as \textit{time is multiplied by speed} (Speed $\times$ Unit\_rate). For more information on changing
@@ -656,7 +656,7 @@ will not include audio.
 
 \section{Compositor Window}%
 \label{sec:compositor_window}
- \index{compositor window}
+ \index{compositor!window}
 
 \begin{figure}[htpb]
     \centering
@@ -678,7 +678,7 @@ in more detail in the following sections.
 
 \subsection{Compositor Controls}%
 \label{sub:compositor_controls}
-\index{compositor controls}
+\index{compositor!controls}
 
 On the bottom of the window, there are many
 of the same transport buttons \index{transport buttons} and controls that are available in the Program window.
@@ -687,13 +687,13 @@ when you mouse over each of the icons so their use is fairly obvious.  However,
 of particular note is the button \textit{Click to play} \index{click to play} which is described in~\ref{sub:click_to_play_in_viewer_and_compositor}.  Next is the \textit{Videoscope} \index{videoscope} button which is used to enable the scopes window
 without having to apply the filter to the tracks/edits.
 
-Next to all of these controls all the way to the right side, there is a \textit{zoom menu} \index{zoom menu} and a \textit{tally light}.  The \textit{zoom menu} has a pulldown with different settings that you can choose from
+Next to all of these controls all the way to the right side, there is a \textit{zoom menu} \index{zoom!menu} and a \textit{tally light}.  The \textit{zoom menu} has a pulldown with different settings that you can choose from
 or you can just use the tumbler arrows to the right. Generally when just getting started, you
 will be using the default \textit{Auto} option.  The window size is not changed, but rather
 the size of the video itself. In addition there are many shortcuts for zooming that you
 will find in the Shortcuts chapter (\ref{cha:shortcuts}).
 
-Using a RMB click in the compositor window brings up a menu with several options \index{compositor RMB options}.  One of these
+Using a RMB click in the compositor window brings up a menu with several options \index{compositor!RMB options}.  One of these
 is \emph{Resize Window} which allows for resizing the entire window instead of just the video
 and if you highlight that, you can choose from several variations for the window size. 
 Other available options include self-explanatory ones of \emph{Fullscreen} with "f" as a toggle
@@ -711,7 +711,7 @@ bottom set of controls for a cleaner look.
 
 Next to the zoom tumbler arrows, is a \textit{tally light} that will be filled in with some color
 (often red or blue) when a rendering operation
-is taking place \index{render operation light}. This is especially helpful when loading a very large video so you know
+is taking place \index{rendering!operation light}. This is especially helpful when loading a very large video so you know
 when it is finished loading.  You should pay attention to this \textit{tally light} when performing
 a particularly time-consuming operation so that you do not keep executing more operations
 that just have to wait until completion of that CPU intensive operation.  Also, you should look
@@ -723,7 +723,7 @@ be accomplished with the bottom and right hand side scroll bars when displayed.
 
 \subsection{Compositor Toolbar}%
 \label{sub:compositor_toolbar}
-\index{compositor toolbar}
+\index{compositor!toolbar}
 
 On the left hand side of the Compositor window, there is a toolbar with several icons that
 provide functions for viewing and compositing the video. Each of these operational features 
@@ -735,7 +735,7 @@ compositor output when clicking on the Compositor window. It allows for using th
 to prevent an accidental click from making unwanted changes. When you enable this option, any
 of the other enabled tools will automatically be disabled.
 
-     \item[Zoom view / magnifying glass] \index{zoom slider} when enabled, the \textit{Zoom view} immediately results
+     \item[Zoom view / magnifying glass] \index{zoom!slider} when enabled, the \textit{Zoom view} immediately results
 in the addition of a zoom slider for fine viewing.  
 The vertically oriented \textit{zoom slider} will be displayed underneath the last icon of the toolbar and extends
 to almost the end of the toolbar.
@@ -867,7 +867,7 @@ cropped.
 
 \subsubsection*{Track and Output size}%
 \label{ssub:track_size}
-\index{track size}
+\index{track!size}
 \index{output size}
 
 The \textit{Track size} is used to define the temporary size with each track having a different size (viewports). It also serves to conform the input media to a chosen format (aspect ratio). So each track can have a different format (viewport).
@@ -1034,7 +1034,7 @@ In the \textit{Curve type} section we can choose between various interpolation a
 	\item[bump:] has 2 values, one viewed from the left/right, discontinuous.
 \end{description}
 
-In the \textit{Keyframe} \index{keyframes} section we can create new keyframes and set them as Bump autos (\textit{Right/Left edges} and \textit{Span} buttons). For further details see \nameref{sec:bump_autos}.
+In the \textit{Keyframe} section we can create new keyframes and set them as Bump autos (\textit{Right/Left edges} and \textit{Span} buttons). For further details see \nameref{sec:bump_autos}.
 
 \subsubsection*{Reset to Default}%
 \label{ssub:reset_default}
@@ -1541,7 +1541,7 @@ As you type in characters a match is made with that substring.
 Names that do not match are filtered out making it a lot easier to find the item you are looking for.  
 The characters can be any where within the phrase and it does not matter if upper or lower case. 
 
-Other options you will see if you \textit{right mouse click in the folder} which brings up the menu are described next \index{folders contents RMB options}.  
+Other options you will see if you \textit{right mouse click in the folder} which brings up the menu are described next \index{folders!RMB options}.  
 
 \begin{description}
     \item[ Load files ]  for convenience to load files same as from the main window so you do not have to move the mouse so far in case you have multiple monitors.
@@ -1554,7 +1554,7 @@ Other options you will see if you \textit{right mouse click in the folder} which
     \item[Snapshot/Grabshot]  use to take a quick snapshot or to grab a specific area on the screen.  These functions are described in detail in section \ref{sub:snapshot_grabshot}).
 \end{description}
 
-Using the right mouse click to bring up a menu in the folder area \index{folders RMB options}, you can also switch from Display text to Display icons, Sort items and create, delete and manipulate user defined folders/bins. Select Folder to create a user Folder or modify an existing folder.
+Using the right mouse click to bring up a menu in the folder area \index{folders!RMB options}, you can also switch from Display text to Display icons, Sort items and create, delete and manipulate user defined folders/bins. Select Folder to create a user Folder or modify an existing folder.
 
 If you \textit{right mouse click on a highlighted/selected resource}, several options are available depending on whether the resource is an effect or transition or a piece of media.  
 You can highlight several for some options so that it is applicable to all of them, such as Info.  
@@ -1579,8 +1579,8 @@ Those listed immediately below are the available choices for media assets \index
 \end{description}
 
 In the case of Effects or Transitions \index{effects/transitions info}, a right mouse click on a highlighted selection leads to an \emph{Info} button which gives a short 1 line description of what the effect/transition can be used for.
-For Labels \index{label RMB options}, choices are \emph{Edit}, \emph{Label}, and \emph{Go to}.
-For Clips \index{clip RMB options}, \emph{Nest} and \emph{UnNest} as described elsewhere are available.
+For Labels \index{label!RMB options}, choices are \emph{Edit}, \emph{Label}, and \emph{Go to}.
+For Clips \index{clip!RMB options}, \emph{Nest} and \emph{UnNest} as described elsewhere are available.
 
 \subsection{Info Asset Details}%
 \label{sub:info_asset_details}

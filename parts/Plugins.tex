@@ -13,7 +13,7 @@ Effect plugins modify the track when played, according to how they are set, with
     \label{fig:video-plugins}
 \end{figure}
 
-There is a choice of plugin icons \index{plugins: icons} which can be displayed.
+There is a choice of plugin icons \index{plugins!icons} which can be displayed.
 
 In \texttt{Settings$\rightarrow$ Preferences$\rightarrow$ Appearance} tab, there is a pulldown for \textit{Plugin icons} where the user can choose between the \textit{original} icons, \textit{regular} or \textit{smoother}, \textit{cinfinity}\protect\footnote{Cinfinity /2 icon set is credited to Sam - Creative Common By -- \url{https://creativhecommons.org/licenses/by/3.0/}} -- the default modernized set, or \textit{cinfinity2} (figure~\ref{fig:audio-plugins}).
 
@@ -44,13 +44,13 @@ Note that when you change the plugin icons, your session will automatically save
 \section{How to Use Plugins}%
 \label{sec:how_use_plugins}
 
-\textit{Realtime} effect plugins are listed in the Resources window as \textit{Audio} Effects and \textit{Video} Effects. Effect plugins are used by dragging them from the Resources window onto an audio track if it is an audio effect or video track if it is a video effect. You will see a colored bar \index{plugins toolbar} appear beneath the track with the plugin name on it. If there is data on the destination track, the effect is applied to the entire track, unless a edit or a region of the track is selected in which case the effect is pasted into that region only. If there is no data on the track the effect is not added.
+\textit{Realtime} effect plugins are listed in the Resources window as \textit{Audio} Effects and \textit{Video} Effects. Effect plugins are used by dragging them from the Resources window onto an audio track if it is an audio effect or video track if it is a video effect. You will see a colored bar \index{plugins!toolbar} appear beneath the track with the plugin name on it. If there is data on the destination track, the effect is applied to the entire track, unless a edit or a region of the track is selected in which case the effect is pasted into that region only. If there is no data on the track the effect is not added.
 
 Plugins are layered under the track they apply to. When dragging more than one effect onto a track, you will see the effects layering from \textit{top to bottom}, on the bottom of that track. When the track is played back, effects are processed from \textit{top to bottom}. The output of the top effect becomes the input of the bottom effect and so on.
 
-Instead of dragging from the Resources window, effects may be applied to a track via a popup menu. Right click on a track and select \textit{Attach effect} \index{plugins: attch effect} from the popup. The attach effect dialog gives you more capability than just dragging and dropping. For example, the attach effect dialog lets you attach two more types of effects: \textit{shared effects} and \textit{shared tracks} which are explained in a later section. Select a plugin from the Plugins column and hit the green colored checkmark under the plugins column to attach it. The result is the same as if the effect was dragged from the Resources window.
+Instead of dragging from the Resources window, effects may be applied to a track via a popup menu. Right click on a track and select \textit{Attach effect} \index{plugins!attch effect} from the popup. The attach effect dialog gives you more capability than just dragging and dropping. For example, the attach effect dialog lets you attach two more types of effects: \textit{shared effects} and \textit{shared tracks} which are explained in a later section. Select a plugin from the Plugins column and hit the green colored checkmark under the plugins column to attach it. The result is the same as if the effect was dragged from the Resources window.
 
-After attaching an effect to a track, it often needs to be configured. There are two ways to get to the configuration controls. Click on the magnifying glass \index{plugins: show controls} symbol on the right side of the effect bar -- this is the middle symbol on the bar as you can see in the picture below. Alternatively, you can right click on the effect bar to bring up the effect popup which has a \textit{Show} option. Either method causes the GUI for the effect to appear in a separate window. There will not be a popup if the plugin has no GUI.
+After attaching an effect to a track, it often needs to be configured. There are two ways to get to the configuration controls. Click on the magnifying glass \index{plugins!show controls} symbol on the right side of the effect bar -- this is the middle symbol on the bar as you can see in the picture below. Alternatively, you can right click on the effect bar to bring up the effect popup which has a \textit{Show} option. Either method causes the GUI for the effect to appear in a separate window. There will not be a popup if the plugin has no GUI.
 
 
 Besides the magnifying glass, for Show Controls, on the effect colored bar beneath the track, there are two more symbols.
@@ -61,11 +61,11 @@ Besides the magnifying glass, for Show Controls, on the effect colored bar benea
     \includegraphics[width=0.7\linewidth]{button-options.png}
 \end{wrapfigure}
 
-The rightmost knob is used to Turn Off/Turn \index{plugins: turn on/off} On the effect where the default is On. This is useful to easily see that the plugin is doing what you expect. The leftmost symbol that looks like a gear is for \textit{Preset Edit} \index{plugins: preset edit} and its usage is described in the section \nameref{sec:saved_plugin_preset}.
+The rightmost knob is used to Turn Off/Turn \index{plugins!turn on/off} On the effect where the default is On. This is useful to easily see that the plugin is doing what you expect. The leftmost symbol that looks like a gear is for \textit{Preset Edit} \index{plugins!preset edit} and its usage is described in the section \nameref{sec:saved_plugin_preset}.
 
 \section{Editing Effects}%
 \label{sec:editing_effects}
-\index{plugins editing}
+\index{plugins!editing}
 
 Many operations exist for manipulating effects once they are on the timeline. Because mixing effects and media is quite complex, the methods used in editing effects are not as concise as cutting and pasting. Some of the editing happens by dragging in/out points, some of the editing happens through popup menus, and some of it happens by dragging effects.
 
@@ -82,9 +82,9 @@ To edit effects, you can move the timeline cursor over the effect borders until 
 
 When you perform a trim edit on an effect, the effect boundary is moved by dragging it. Unlike track editing, the effect has no source length. You can extend the end of an effect as much as you want. Also unlike track editing, the starting position of the drag operation does not bind the edit decision to media. The media the effect is bound to does not follow effect edits. Other effects, however, do follow editing decisions made on an effect. You can disable effects from being subject to the edit decisions by using the pulldown \textit{Settings} and toggling off Edit effects. If you drag the end of an effect which is lined up to effects on other tracks, the effects on the other tracks will be edited while the media stays the same. When you drag an effect in from the Resources window you can insert the effect in the portion of the row unoccupied by the trimming operation. In some cases you will want a trimming operation to change only one row of effects. This can be achieved by first positioning the insertion point on the start or end of the effect. Then press the shift key while beginning the trimming operation. This causes the operation to change only one row of effects.
 
-You can move effects up or down. Every track can have a stack of effects under it. By moving an effect up or down you change the order in which effects are processed in the stack. Go to an effect and right click \index{plugins: RMB on toolbar} to bring up the effect menu. The \textit{Move up} and \textit{Move down} options move the effect up or down. When you are moving effects up or down, be aware that if they are shared as shared effects, any references will be pointing to a different effect after the move operation.
+You can move effects up or down. Every track can have a stack of effects under it. By moving an effect up or down you change the order in which effects are processed in the stack. Go to an effect and right click \index{plugins!RMB on toolbar} to bring up the effect menu. The \textit{Move up} and \textit{Move down} options move the effect up or down. When you are moving effects up or down, be aware that if they are shared as shared effects, any references will be pointing to a different effect after the move operation.
 
-Finally, there is dragging of effects \index{plugins: dragging}. Dragging effects works just like dragging edits. You must select the arrow in the main window transport buttons line to enter drag and drop mode before dragging effects. Dragging a plugin causes a highlight outline to be drawn over a targetable timeline region, and the plugin can be re-positioned into any plugin track.  The effects snap to media boundaries, effect boundaries, and tracks. If you drag a reference to a shared effect, the reference may point to the wrong effect afterwards.  It is recommended that you re-construct shared effect track references.
+Finally, there is dragging of effects \index{plugins!dragging}. Dragging effects works just like dragging edits. You must select the arrow in the main window transport buttons line to enter drag and drop mode before dragging effects. Dragging a plugin causes a highlight outline to be drawn over a targetable timeline region, and the plugin can be re-positioned into any plugin track.  The effects snap to media boundaries, effect boundaries, and tracks. If you drag a reference to a shared effect, the reference may point to the wrong effect afterwards.  It is recommended that you re-construct shared effect track references.
 
 Figure~\ref{fig:drag-effect} showing 3 plugins, two still plugin, two have already been dragged and the \textit{Color 3 Way} in the process of being dragged. Note the gold-colored frame which enables allow \textit{drag and drop} editing mode.
 
@@ -97,8 +97,8 @@ Figure~\ref{fig:drag-effect} showing 3 plugins, two still plugin, two have alrea
 
 \section{Shared Effects and Shared Tracks}%
 \label{sec:shared_effect_tracks}
-\index{plugins: shared effect}
-\index{plugins: shared tracks}
+\index{plugins!shared effect}
+\index{plugins!shared tracks}
 
 Two other effect types available in the Attach Effect dialog are \textit{Shared effects} and \textit{Shared tracks}. In the case of a shared effect, the following conditions must be true:
 
@@ -111,7 +111,7 @@ Two other effect types available in the Attach Effect dialog are \textit{Shared 
 Before going into further detail about how to use \textit{Shared effects}, an easier
 alternative method of application which is especially useful for Audio tracks is
 available.  In this method, all you have to do is use the \textit{Audio} pulldown and
-choose \textit{Attach effect} \index{plugins: attach effect}, highlight the effect you would like and make sure the
+choose \textit{Attach effect} \index{plugins!attach effect}, highlight the effect you would like and make sure the
 default of \textit{Attach single standalone and share others} is checked on.  It will
 automatically be a "Shared Effect" on all audio tracks (be sure to disarm any audio
 tracks that you do not want to have the effect shared on).  This method also works for
@@ -131,7 +131,7 @@ In order to prevent the shared track from mixing the same data as the original t
 
 \section{Saved Plugin Presets}%
 \label{sec:saved_plugin_preset}
-\index{plugins: preset edit}
+\index{plugins!preset edit}
 
 \textit{Presets} and \textit{Factory Presets} for Plugin settings are now combined with the Preset Keyframe Parameters allowing you to choose, apply, delete, and edit your own Presets which can then be easily saved in the file \texttt{\$HOME/.bcast5/Cinelerra\_presets}. In addition to your own saved presets, there are automatically available Factory presets for some plugins, for example the Lens video plugin. The Factory presets are preceded by an asterisk (*) and can not be modified permanently.
 
@@ -166,7 +166,7 @@ These next few sections explain some details about the plugins that are not dire
 
 \subsection{How to see short Description of a Plugin}%
 \label{sub:short_description_plugin}
-\index{plugins: short description}
+\index{plugins!short description}
 
 To get a short one or a few lines description of a plugin, mouse over that plugin in the Resources window and a popup appears. You can disable the popup by right-clicking and choosing \textit{Info Off} (shortcut "i"). And again enable it with \textit{Info On}. Some of the plugins may not have any description included. An example screenshot is next (figure~\ref{fig:info-effect}).
 
@@ -191,7 +191,7 @@ Maybe you just don't ever use certain plugins or would prefer to only find the o
 
 \subsection{Updatable Icon Image Support}%
 \label{sub:updatable_icon_image_support}
-\index{plugins: change icons}
+\index{plugins!change icons}
 
 When running \CGG{} Infinity builtin icons are loaded before the
 program starts. Png files in the path:\\
@@ -287,7 +287,7 @@ Restart cin by changing \texttt{Settings$\rightarrow$ Preferences$\rightarrow$ A
 
 \subsection{Plugins/Effects Visibility}%
 \label{sub:plugins_effects_visibility}
-\index{plugins: visibility}
+\index{plugins!visibility}
 
 \CGG{} contains many plugins, especially with the addition of ffmpeg, and it is somewhat difficult to find the one you are looking for in the Resources window. In \CGG{} Infinity, the plugins have been categorized into the following subsets in the \textit{Visibility} section of the Resources window to make it easier to locate a particular one:
 
@@ -324,7 +324,9 @@ The \texttt{expanders.txt} file has very specific requirements. The most specifi
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.8\linewidth]{expander.png}
-	\caption{$\triangledown$,$\triangleright$ = expander; "-" = options}
+        \caption{Down facing triangle, Right facing triangle = expander; "-" = options}
+%       the next line causes problems for the HTML version so do not use
+%	\caption{$\triangledown$,$\triangleright$ = expander; "-" = options}
 	\label{fig:expander}
 \end{figure}
 
@@ -344,7 +346,7 @@ Audio Effects
 
 \subsection{Speed-up of Ffmpeg plugin usage with OPTS files}%
 \label{sub:speedup_ffmpeg_plugin_opts}
-\index{plugins: speed-up via options}
+\index{plugins!speed-up via options}
 
 You can speed up some ffmpeg plugins that are quite time-consuming and use a lot of CPU\@. For a specific color-based example, \CGG{} uses 6 primary rendering color models. All of them have 3 components at full scale. Direct usage of a particular ffmpeg plugin from the ffmpeg command line might handle the planar at less than full scale chroma (yuv420), which means there is less data to manipulate. But when cinelerra loads a video it uses full scale color models. In other words:
 
@@ -374,7 +376,7 @@ This converts the input to rgb before xxxxxx runs, and so it too is slower (beca
 \section{Audio Effects - Native}%
 \label{sec:audio_effects_native}
 \settocdepth{subsection}
-\index{audio plugins}
+\index{audio!plugins}
 
 \subsection{AudioScope}%
 \label{sub:audioscope}
@@ -798,7 +800,7 @@ If there is no default \texttt{LV2\_PATH} set automatically, the value will be \
 
 When you change this field, cin will automatically restart and load the newly specified lv2 plugins. If when switching \texttt{LV2\_PATH} or if the lv2 audio plugins are not displayed/usable in the Resources window, you can execute a reload via:
 
-\texttt{Settings $\rightarrow$  Preferences $\rightarrow$ Interface tab $\rightarrow$ Reload plugin index} \index{plugins: reload index}
+\texttt{Settings $\rightarrow$  Preferences $\rightarrow$ Interface tab $\rightarrow$ Reload plugin index} \index{plugins!reload index}
 or else before you bring up \CGG{}, delete \texttt{\$HOME/.bcast5/\CGG{}\_\\plugins} so that the plugins get properly reloaded.
 
 There are some lv2 plugins that display a \textit{glitzy} UI (User Interface); for example the \textit{Calf plugins}. For these LV2 plugins, if you want that to automatically come up without having to click on the UI button on the simplified UI interface, there is a flag to enable that. It is at:
@@ -848,7 +850,7 @@ For example:
 \section[Video Effects --- Native]{Video Effects -- Native}%
 \label{sec:video_effects_native}
 \settocdepth{subsection}
-\index{video plugins}
+\index{video!plugins}
 
 \subsection{1080 to 480}%
 \label{sub:1080_to_480}
@@ -3530,7 +3532,7 @@ Figure~\ref{fig:zoom} shows the parameters: Radius=21 and Steps=3.
 \section{CUDA plugins}%
 \label{sec:cuda_plugins}
 \settocdepth{section}
-\index{CUDA plugin}
+\index{CUDA!plugin}
 
 Only for Nvidia GPU and Cuda SDK
 

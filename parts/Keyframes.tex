@@ -15,7 +15,7 @@ $\leftarrow$ Keyframe $\rightarrow$ Plugin
 
 \section{Automation Keyframes /\,Autos}%
 \label{sec:automation_keyframes_autos}
-\index{keyframes: autos}
+\index{keyframes!autos}
 
 The \textit{autos} are created by clicking on an \textit{automation curve} to establish the time position for the new keyframe anchor point.  The basic nature of these simple auto values make them primitive operations that are easy to apply when needed.
 
@@ -38,7 +38,7 @@ Curve smoothing is called \textit{interpolation} and it uses keyframe point valu
 
 The first click on the curve, creates a keyframe which you can click drag on to reposition.  The second click at a later position, generates the smoothing by creating a smooth ramp.  Ctrl-dragging on a keyframe round control point handle \index{control point handle} changes the value of either the input control or the output control.  This affects the sharpness of the curve.  While the input control and the output control can be moved horizontally as well as vertically, the horizontal movement is only for legibility and is not used in the curve value.  When you Shift-drag on a timeline curve, the keyframe snaps to the value of either the next or previous keyframe, depending on which exists.  It will snap up or down depending on direction of movement.  This lets you set a constant curve value without having to copy the next or previous keyframe.
 
-To make it easier to navigate curve keyframes, since there is not much room on the timeline for a wide range of curve values, you need to zoom the curves in and out vertically to have any variability.  This is done by 2 tools: the automation fit button, Alt-f, and automation zoom \index{zoom panel} menu which is seen at the bottom of the main window (figure~\ref{fig:automation}). The automation fit button scales and offsets the vertical range so the selected curve area appears in the timeline.  If a region of the timeline is highlighted by the cursor, only that region is scaled.  In/out points do not affect the zoomed region.  The automation zoom menu manually changes the vertical scaling of the curves in multiples of 2.  Click on its tumbler to change the zoom.  Alt$-\uparrow$ and Alt$-\downarrow$ change the automation zoom from the keyboard.
+To make it easier to navigate curve keyframes, since there is not much room on the timeline for a wide range of curve values, you need to zoom the curves in and out vertically to have any variability.  This is done by 2 tools: the automation fit button, Alt-f, and automation zoom \index{zoom!panel} menu which is seen at the bottom of the main window (figure~\ref{fig:automation}). The automation fit button scales and offsets the vertical range so the selected curve area appears in the timeline.  If a region of the timeline is highlighted by the cursor, only that region is scaled.  In/out points do not affect the zoomed region.  The automation zoom menu manually changes the vertical scaling of the curves in multiples of 2.  Click on its tumbler to change the zoom.  Alt$-\uparrow$ and Alt$-\downarrow$ change the automation zoom from the keyboard.
 
 \begin{figure}[htpb]
     \centering
@@ -68,7 +68,7 @@ Other mouse actions have the following effects:
     \end{enumerate}
 \end{itemize}
 
-You can click mouse button 3 on a keyframe box \index{keyframes MMB options} and a menu pops up with the first menu item showing the keyframe type.  The top menu item can be activated for immediate access to update the automation keyframe value.  Some keyframe types, which have values that can be manipulated in another way than by dragging the color coded line, now show up with a different colored background to make them more visible.  Keep in mind that Zoombar \index{zoom panel} ranges/values must be set to appropriate values when working with specific keyframe types, such as Fade or Speed.  If you do not see the auto line in the visible area of the video track, try the key combination Alt-f or select the speed in the \textit{Automation Type} drop-down menu at the bottom of the main window.  To the right of this field is \textit{Automation Range} where you can set the display ratio of these lines. Simply change the values until the lines are visible again.
+You can click mouse button 3 on a keyframe box \index{keyframes!MMB options} and a menu pops up with the first menu item showing the keyframe type.  The top menu item can be activated for immediate access to update the automation keyframe value.  Some keyframe types, which have values that can be manipulated in another way than by dragging the color coded line, now show up with a different colored background to make them more visible.  Keep in mind that Zoombar \index{zoom!panel} ranges/values must be set to appropriate values when working with specific keyframe types, such as Fade or Speed.  If you do not see the auto line in the visible area of the video track, try the key combination Alt-f or select the speed in the \textit{Automation Type} drop-down menu at the bottom of the main window.  To the right of this field is \textit{Automation Range} where you can set the display ratio of these lines. Simply change the values until the lines are visible again.
 
 Figure~\ref{fig:overlays1} and figure~\ref{fig:fade} shows several color coded lines for different key\-fra\-mes and specifically the slider bar for the Fade keyframe.  It is in the same color as the color coded keyframe type line which is the same color which would be shown in the \textit{Show overlays} window figure~\ref{fig:overlays_window}.
 
@@ -79,7 +79,7 @@ Figure~\ref{fig:overlays1} and figure~\ref{fig:fade} shows several color coded l
     \label{fig:fade}
 \end{figure}
 
-In the \textit{Editing} section of \texttt{Settings $\rightarrow$ Preferences, Interface} tab there is \textit{Keyframe reticle} \index{keyframes reticle} with options of Never, Dragging, or Always.  This is used to help in checking edit alignment across tracks.  (A reticle is a sighting line used to line up visual items, like cross hairs in a eyepiece.)  The appearance and function of sighting lines can be changed when dragging auto keyframes.  To see the effect, create some fader autos and drag a few to see the reticles drawn --- you will see something similar to the next screencast (figure~\ref{fig:always}).  \textit{Always} renders a line over all plugins, and \textit{dragging} only over the drag icon. \textit{Never} draws nothing.  The default is \textit{dragging}.
+In the \textit{Editing} section of \texttt{Settings $\rightarrow$ Preferences, Interface} tab there is \textit{Keyframe reticle} \index{keyframes!reticle} with options of Never, Dragging, or Always.  This is used to help in checking edit alignment across tracks.  (A reticle is a sighting line used to line up visual items, like cross hairs in a eyepiece.)  The appearance and function of sighting lines can be changed when dragging auto keyframes.  To see the effect, create some fader autos and drag a few to see the reticles drawn --- you will see something similar to the next screencast (figure~\ref{fig:always}).  \textit{Always} renders a line over all plugins, and \textit{dragging} only over the drag icon. \textit{Never} draws nothing.  The default is \textit{dragging}.
 
 \begin{figure}[htpb]
     \centering
@@ -103,7 +103,7 @@ In the screencast to the right, the Fade Auto has pink colored curves and contro
 
 \section{Speed\,/\,Fade Automation Usage and Auto Gang}%
 \label{sec:speed_fade_automation_gang}
-\index{keyframes auto gang}
+\index{keyframes!auto gang}
 
 Speed automation resamples the data at a higher or lower playback rate. Speed automation can operate
 on all tracks of the same type, either video or audio, with a single click; or all tracks, both video and
@@ -145,7 +145,7 @@ One other helpful item is a small colored indicator in the zoombar \textit{Autom
 
 \section{Bump autos}%
 \label{sec:bump_autos}
-\index{keyframes: bump autos}
+\index{keyframes!bump autos}
 
 Bump autos are a kind of floating point keyframe that differs from the rest
 of the floating autos, like smooth and linear, in that they have two values:
@@ -234,7 +234,7 @@ In the Camera and Projector tools configuration window \index{tool info} you wil
 
 \section{Plugin Keyframes}%
 \label{sec:plugin_keyframe}
-\index{keyframes: plugin}
+\index{keyframes!plugin}
 
 The Plugin keyframes are structured.  The individual data values are named parameters to the keyframe function.  For example, the hue plugin has keyframe parameters of hue, saturation, and value.  Each plugin has its own parameters, and what they do depends on the plugin.  Most of the time, it is pretty obvious what the value controls, like the audio gain plugin with the level parameter.  Some of the plugins have a wide variety of controls, like the titler which can setup a wide number of controls, like formats, fonts, styles, placement, and so on.
 
@@ -243,8 +243,8 @@ is usually due to the nature of the keyframe parameter data.  For example, it do
 
 \section{Default Keyframe}%
 \label{sec:default_keyframe}
-\index{keyframes: default keyframe}
-\index{keyframes pulldown}
+\index{keyframes!default keyframe}
+\index{keyframes!pulldown}
 
 For plugins, there is a special hidden keyframe, called the \textit{default keyframe}, that is used when no previous keyframe exists.  It is like keyframe zero on the timeline, and it is persistent and shared on
 all sessions.  The intent is to make a parameter set that is likely to be reused on all initial instances of the plugin.  An example may be to color correct a set of media that was taken in low light, or needs resampling to be played correctly.  The default keyframe is \textit{off the bar on the left side} of the plugin title bar and can not be seen.  It is used when there is no \textit{previous} keyframe for its default values.
@@ -261,9 +261,9 @@ The \texttt{keyframes $\rightarrow$ paste} \texttt{keyframes} function may then 
 
 \section{Keyframe \textit{Edit Params} for Plugins}%
 \label{sec:keyframe_edit_params_plugin}
-\index{plugins: preset edit}
+\index{plugins!preset edit}
 
-Keyframe values can be set using the various plugin \textit{plugins: show controls} \index{plugins: show controls} (magnifying glass) icon on the plugin track (figure~\ref{fig:parameters}).  It is possible to see all of the keyframe data in a raw format using the \textit{Edit Params} popup menu item which you will see when you right mouse click the keyframe icon on the timeline.  The keyframe data is stored in xml format, and the \textit{edit params} feature allows you to view and modify the xml data directly.  This normally should not be necessary since the plugin's control gui displays the intended parameters, but this will let you view and specify just about anything that can be specified in xml.  There is no validation checking of the modified data.
+Keyframe values can be set using the various plugin \textit{plugins: show controls} \index{plugins!show controls} (magnifying glass) icon on the plugin track (figure~\ref{fig:parameters}).  It is possible to see all of the keyframe data in a raw format using the \textit{Edit Params} popup menu item which you will see when you right mouse click the keyframe icon on the timeline.  The keyframe data is stored in xml format, and the \textit{edit params} feature allows you to view and modify the xml data directly.  This normally should not be necessary since the plugin's control gui displays the intended parameters, but this will let you view and specify just about anything that can be specified in xml.  There is no validation checking of the modified data.
 
 \begin{figure}[htpb]
     \centering
@@ -274,7 +274,7 @@ Keyframe values can be set using the various plugin \textit{plugins: show contro
 
 \section{Generate Keyframes while Tweaking / Automatic Keyframe Mode}%
 \label{sec:generate_keyframe_tweaking}
-\index{keyframes: automatic mode}
+\index{keyframes!automatic mode}
 
 Tweaking is defined as changing a parameter while playing -- it can be small changes or small motion increments performed in a series.  These changes are recorded as a series of new keyframes on the timeline.  Enable automatic keyframe mode by enabling the automatic keyframe toggle, that is \textit{Generate keyframes while tweaking}.  In automatic keyframe mode, every time you tweak a key-framable parameter it creates a keyframe on the timeline.  Since keyframes affect playback, you should enable generate keyframes just before you need a keyframe and disable when your parameter changes are complete.  So turn on when ready to make changes and turn off when done!
 
@@ -282,7 +282,7 @@ Also, before making a change, be sure to check the \textit{View} pulldown and ma
 
 \section{Compositor Keyframes}%
 \label{sec:compositor_keyframes}
-\index{keyframes: compositor}
+\index{keyframes!compositor}
 
 Camera and projector translation is represented by two parameters: \textit{x} and \textit{y}, making it difficult to adjust with curves.  \CGG{} solves this problem by relying on automatic keyframes.  With a video track loaded, move the insertion point to the beginning of the track and enable automatic keyframe mode.  Move the projector slightly in the compositor window to create a keyframe.  Then go forward several seconds.  Move the projector a long distance to create another keyframe and emphasize motion.  This creates a second projector box in the compositor, with a line joining the two boxes. The joining line is the motion path.  If you create more keyframes, more boxes are created.  Once all the desired keyframes are created, disable automatic keyframe mode.
 
@@ -292,7 +292,7 @@ Image translation, motion direction, and speed determine the results.  Motion va
 
 \section{More about Editing Keyframes}%
 \label{sec:more_about_editing_keyframes}
-\index{keyframes editing operations}
+\index{keyframes!editing operations}
 
 Keyframes can be shifted around and moved between tracks on the timeline using similar cut and paste operations to editing media.  Only the keyframes selected in the View menu are affected by keyframe editing operations.
 
@@ -302,7 +302,7 @@ And there is an easy way to delete keyframes besides selecting a region and usin
 
 \section{Allow Keyframe Spanning}%
 \label{sec:allow_keyframes_spanning}
-\index{keyframes spanning}
+\index{keyframes!spanning}
 
 \textit{Allow keyframe spanning} is enabled on the timeline by clicking on the icon that
 is on the right side of the \textit{Generate keyframes while tweaking}.  With this enabled,

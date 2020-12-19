@@ -1,5 +1,7 @@
 \chapter{DVD and Bluray Creation}%
 \label{cha:dvd_bluray_creation}
+\index{DVD}
+\index{BluRay}
 
 This section describes how to create a blu-ray DVD, or \textcolor{red}{BD} referring to a \textcolor{red}{B}lu-ray \textcolor{red}{D}VD, and a regular DVD, or \textcolor{red}{SD} referring to a \textcolor{red}{S}tandard \textcolor{red}{D}VD.  The DVDs (plural usage of DVD means either BD or SD) created are unencrypted, unlike commercially available movie DVDs.  This \CGG{} version conceivably can create different variations of DVD/Blu-ray media but for the casual user the most standard usages are readily usable and will be described here. 
 
@@ -204,6 +206,7 @@ To burn blu-ray media you will need to run from the command line interface.  In 
 
 \subsubsection*{Blu-ray Media}
 \label{ssub:bluray_media}
+\index{BluRay}
 
 For rewritable blu-ray (recommended) (BD-RE):
 
@@ -229,6 +232,7 @@ growisofs -dvd-compat -Z /dev/bd=./bd.udfs
 
 \subsubsection*{DVD Media}
 \label{ssub:dvd_media}
+\index{DVD}
 
 For rewritable DVD (DVD+RW):
 
@@ -270,6 +274,7 @@ Below are examples of what the batch jobs generate and you will see on the termi
 
 \subsubsection*{SD Example: Partial Output during \CGG{} run}
 \label{ssub:sd_example_partial_output}
+\index{DVD!partial output messages run}
 
 \begin{lstlisting}[style=sh]
 ...
@@ -312,6 +317,7 @@ growisofs -dvd-compat -Z /dev/dvd -dvd-video /tmp/dvd_20160407-113530/iso
 
 \subsubsection*{BD Example: Partial Output during \CGG{} run}
 \label{ssub:bd_example_partial_output}
+\index{BluRay!partial output messages run}
 
 \begin{lstlisting}[style=sh]
 ...
@@ -348,6 +354,7 @@ for RW: dd if=/tmp/bd_20161224-162059/bd.udfs of=/dev/bd bs=2048000
 
 \subsubsection*{SD Example – Partial Output during writing disc media}
 \label{ssub:sd_example_partial_output_writing}
+\index{DVD!partial output messages writing}
 
 \begin{lstlisting}[style=sh]
 growisofs -dvd-compat -Z /dev/sr0 -dvd-video /tmp/dvd_20161224-160756/iso
@@ -369,6 +376,7 @@ builtin_dd: 6624*2KB out @ average 0.7x1352KBps
 
 \subsubsection*{BD Example – Partial Output during writing disc media}
 \label{ssub:bd_example_partial_output_writing}
+\index{BluRay!partial output messages writing}
 
 \begin{lstlisting}[style=sh]
 growisofs -dvd-compat -Z /dev/sr0=/tmp/bd_20161224-155658/bd.udfs
@@ -387,6 +395,8 @@ builtin_dd: 11984*2KB out @ average 0.2x4390KBps
 
 \section{Debugging DVDs Creation}%
 \label{sec:debugging_dvd_creation}
+\index{DVD!debugging}
+\index{BluRay!debugging}
 
 This section contains helpful hints, how to initially check the results, and some information on determining what might have gone wrong and how to address it.
 
@@ -428,6 +438,8 @@ Note that there will be no files in the actual AUDIO\_TS directory.
 
 \subsubsection*{Checklist for Troubleshooting}
 \label{ssub:checklist_troubleshooting}
+\index{DVD!troubleshooting}
+\index{BluRay!troubleshooting}
 
 \begin{itemize}
     \item Are you logged in as root?  This is required in order to loopback mount files for bluray and to write media on \texttt{/dev/hardware}.  See section \hyperref[sec:bluray_workaround_mount_umount]{13.7} for a workaround for normal user mode.
@@ -449,6 +461,7 @@ Note that there will be no files in the actual AUDIO\_TS directory.
 
 \section{Subtitles}%
 \label{sec:subtitles}
+\index{DVD!subtitles}
 
 DVD (not blu-ray... yet) subtitles are added by using the main window pulldown   \texttt{File $\rightarrow$ Subtitle}   which brings up a window allowing you to type the filename of a previously generated text file containing the desired words/lines, the script.  After entering the filename, click \texttt{Load} to read in your script.  By creating a script file ahead of time, it lets you easily add dialog that was already written out and carefully edited for spelling and proper grammar.
 
@@ -499,6 +512,7 @@ Figure~\ref{fig:subtitle02} shows what the pasted subtitle script looks like in 
 
 \section{Dvd Interlaced Chroma}%
 \label{sec:dvd_interlaced_chroma}
+\index{DVD!yuv420p interlace mode}
 
 \CGG{} uses 4:4:4 colorspace to edit, so it is necessary to convert interlaced 4:2:0 video to 4:4:4.
 But you can run into problems, referred to as the \textit{chroma bug}, which you see in DVD media displayed on higher resolution monitors -- streaks or spiky horizontal lines are visible in the chroma channel, especially on diagonal edges. The Chroma Bug is specific to MPEG and 4:2:0 encoding.
@@ -564,6 +578,7 @@ For some time, DVD manufacturers have been employing  a variety of measures to m
 
 \section{HDV on a Blu-ray Disc Without Re-encoding}%
 \label{sec:hdv_bd_without_reencoding}
+\index{BluRay!HDV without re-encoding}
 
 An MTS file is a video file saved in the high-definition (HD) MPEG Transport Stream video format, commonly called \textit{AVCHD}.  It contains HD video compatible with Blu-ray disc format and is based on the MPEG-2 transport stream.   MTS files are often used by Sony, Panasonic, Canon and other HD camcorders.  Legal input for Video -- MPEG1VIDEO, MPEG2VIDEO, H264; Audio -- MP1, MP2, AC3, AC3PLUS, DTS, TRUHD. 
 
@@ -595,6 +610,7 @@ Also, be sure to do a \texttt{mkdir bluray} in your \texttt{/home/name} director
 
 \section{Blu-ray from Multiple \CGG{} Output}%
 \label{sec:bluray_multiple_cinelerra_output}
+\index{BluRay!multiple output}
 
 Writing prepared multiple \CGG{} output files, \texttt{bd.m2ts}, to a single bluray disc is relatively easy to do but is not done automatically.  You can render all of the desired files via the Create BD menu, save each individual \texttt{bd.m2ts} file with a unique name, construct a Menu Title that reflects the contents of each of these files, then manually use a few commands to create a udfs file to be written to BD.
 

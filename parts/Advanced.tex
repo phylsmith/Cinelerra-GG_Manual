@@ -6,7 +6,7 @@
 \index{proxy}
 
 Proxies was introduced to allow for a smoother timeline experience. Full HD and everything from 4K size up are usually very large in file size. In addition, some commonly used codecs (e.g. h264/5) are very compressed and interframe type, so they are more stressful for timeline playback. These files cause performance problems on weaker PCs. As a solution the developers have introduced proxies to reduce the file size. Reduced means to minimize the resolution/dimension, as usually not the full resolution is needed, because the compositor usually takes only a fraction of the computer screen. Therefore the scaling factor, which indicates how much the original resolution should be reduced. 
-There is also the \textit{proxy 1:1} \index{proxy 1:1} that maintains the original resolution but still allows you to act on the codec (lowering the bit rate, for example). See also next section: \ref{sec:transcode}.
+There is also the \textit{proxy 1:1} \index{proxy!1:1} that maintains the original resolution but still allows you to act on the codec (lowering the bit rate, for example). See also next section: \ref{sec:transcode}.
 When rendering, the original setting will be used to avoid loss of image quality.  
 
 To use the proxy in a classic way, i.e. as a scaling, select \texttt{Settings $\rightarrow$ Proxy settings} and change the Scale factor from Original size to your downsized choice.  You can choose ffmpeg as the File Format \index{file format} and a choice of various codecs associated with that.  A good choice is the default of mpeg which can usually be quite fast.  In addition, to modify values for that codec, click on the wrench icon.
@@ -15,7 +15,7 @@ We can use the \textit{Proxy 1:1} in two ways: setting "1" as \textit{Scale fact
 
 When you have completed your choices, just click OK, and then the video tracks will be rendered. This may take some time, but previous proxy renders will be reused.
 
-The proxy videos will be added to your assets in a separate Proxy folder \index{proxy folder}, and the video track edits will use the proxies.
+The proxy videos will be added to your assets in a separate Proxy folder \index{proxy!folder}, and the video track edits will use the proxies.
 The assets in both the Media folder and Proxy folder will look proxied when dragged to the Viewer although the scale may be different.
 Proxy downsizing renders all loaded tracks, but only work on the $1^{st}$ video layer of any multi-layer media.  Rendered proxy media is saved in the same directory as the original media.
 However, if you proxy your session, the clips do not get proxied to the Proxy folder, but if you Drag and Drop the clip from the Clip folder to the Viewer or the Timeline, you will see that it too is proxied.  
@@ -76,7 +76,7 @@ Or if you want small files with high image quality, a File Format of \texttt{m2t
 
 Checking the \textit{Creation of proxy on media loading} results in any additional media loads to be automatically proxy scaled.  However, single frame media such as PNG or JPEG \textit{stills}, can not be scaled to \textit{stream} media.  If this type of media exists, you should \textit{Proxy 1:1}.
 
-If you get error messages \index{proxy error} when creating proxies, check the Video wrench settings.  These usually default to values that are expected to work correctly for the \textit{File Format} and codec you selected but they can be changed and may result in errors.  If you get an error message of \textit{check\_frame\_rate failed} followed by \textit{Error making proxy} in the popup Errors window, do just that and check the Frame rate value by going to the Resources window, Media folder, and use the right mouse button for the Info option for that specific media in question.  You can change the frame rate in this window to a more codec acceptable value.  Different codecs may have different legal values.
+If you get error messages \index{proxy!error} when creating proxies, check the Video wrench settings.  These usually default to values that are expected to work correctly for the \textit{File Format} and codec you selected but they can be changed and may result in errors.  If you get an error message of \textit{check\_frame\_rate failed} followed by \textit{Error making proxy} in the popup Errors window, do just that and check the Frame rate value by going to the Resources window, Media folder, and use the right mouse button for the Info option for that specific media in question.  You can change the frame rate in this window to a more codec acceptable value.  Different codecs may have different legal values.
 
 More specific information on which plugins need to use \textit{Proxy 1:1}. is provided here next. If the keyframe data uses coordinate data that is absolute, then the Factor scale = 1 should be used.  If the data is normalized (like always $0-100\%$) then the proxy can be done with downsize (i.e. classic \textit{Proxy}).  The session geometry format, shown in \texttt{Settings $\rightarrow$ Format} as $width \times height$, is changed if scale factor $\neq$ 1 is used to cause all of the data to be in the reduced format.  If this affects the plugin operation, then \textit{Proxy 1:1} should be used.  Examples of plugins that need the \textit{Proxy 1:1} are: Title, AutoScale, Scale, ScaleRatio, and Translate.  Most others are safe to use with downsize.
 
@@ -84,7 +84,7 @@ More specific information on which plugins need to use \textit{Proxy 1:1}. is pr
 \label{sec:transcode}
 \index{transcode}
 
-Transcode, an option under the \textit{Settings} pulldown right next to the Proxy settings option, is a type of full resolution \textbf{1:1 Proxy} \index{proxy 1:1}.
+Transcode, an option under the \textit{Settings} pulldown right next to the Proxy settings option, is a type of full resolution \textbf{1:1 Proxy} \index{proxy!1:1}.
 The process of transcoding works directly from the resource; it is independent of the timeline. 
 All of the loaded asset media will be converted, that is, rendered in the selected format and loaded onto the timeline. 
 Menu choices besides the usual File Format \index{file format} and File Type include: \textit{Tag suffix} (to add to media filename), \textit{Remove originals from project}, \textit{Into Nested Proxy directory} (an option to have the file saved here instead of the location of the original media), and \textit{Beep on done} volume.
@@ -116,7 +116,7 @@ EDL you had to remake the whole clip from scratch.  The program is
 actually "opening" the file as it currently exists for that particular
 media so that it can be edited separately from the project EDL. In other NLEs the term \textit{sub-timeline} is used.
 
-Here is how this works. In the Clip \index{clip folder} or Media folder \index{media folder} or on a timeline
+Here is how this works. In the Clip \index{clip !older} or Media folder \index{media folder} or on a timeline
 EDL edit, the option \textit{Open EDL} for the highlighted clip or
 nested clip is available so that when you choose this option, that
 EDL will be brought up on the timeline superseding the current EDL
@@ -313,7 +313,7 @@ Here is a step by step example of how you can use \textit{File by
 
 \section{Trimming}%
 \label{sec:trimming}
-\index{trimming}
+\index{trim}
 
 With some edits on the timeline it is possible to do trimming. By
 trimming you shrink or grow the edit boundaries (\textit{head} or \textit{tail}) by dragging them. In
@@ -358,7 +358,7 @@ A description of the fundamental/common terminology for choices
 follows.
 
 \begin{description}
-	\item[All Edits (ripple)] \index{trimmming: ripple} shorten or lengthen the start or end
+	\item[All Edits (ripple)] \index{trim!ripple} shorten or lengthen the start or end
 	of a single piece of media while moving all media to the right of
 	that clip up or down on the timeline correspondingly.  Timeline
 	duration is modified.  In a drag \textit{All Edits} operation, the
@@ -368,25 +368,25 @@ follows.
 	it forward or cuts data from the end of the edit if you move it
 	backward. All the following edits shift. If you drag the end of the
 	edit past the start of the edit, the edit is deleted.
-	\item[One Edit (roll)] \index{trimming: roll} move the in and out point of a single
+	\item[One Edit (roll)] \index{trim!roll} move the in and out point of a single
 	clip without changing the timeline duration. In a drag \textit{One
 		Edit} operation, nothing is cut or pasted. If you move the beginning
 	or end of the edit forward, the source reference in the edit shifts
 	forward. If you move the beginning or end of the edit backward, the
 	source reference shifts backward. The edit remains in the same spot
 	in the timeline but the source shifts.
-	\item[Src Only (slip)] \index{trimming: slip} move the in and out point of a single
+	\item[Src Only (slip)] \index{trim!slip} move the in and out point of a single
 	clip without changing the timeline duration. In a drag \textit{Src
 		Only} operation, nothing is cut or pasted. If you move the beginning
 	or end of the edit forward, the source reference in the edit shifts
 	forward. If you move the beginning or end of the edit backward, the
 	source reference shifts backward. The edit remains in the same spot
 	in the timeline but the source shifts.
-	\item[Slide] \index{trimming: slide} a single clip is moved but retains its current in
+	\item[Slide] \index{trim!slide} a single clip is moved but retains its current in
 	and out point; however the out point of the clip to the left changes
 	and the in point of the clip to the right also changes.  Timeline
 	duration remains the same.
-	\item[Edge Left/Right] \index{trimming: edge} moves the edge of the clips.
+	\item[Edge Left/Right] \index{trim!edge} moves the edge of the clips.
 	\item[No effect] no changes are made.  You might want to use
 	this choice to prevent accidental movements.
 \end{description}
@@ -481,7 +481,7 @@ creates an L-cut.
 
 \subsection{Split View in Compositor Using the Drag Handle with Trim}%
 \label{sub:split_view_compositor_using_drag_trim}
-\index{trimming: split view}
+\index{trim!split view}
 The Trim Feature using the drag handle provides some good ways to
 view your video while editing.  The playback position in the
 compositor is updated live and the view in the compositor can be
@@ -684,7 +684,7 @@ Figure~\ref{fig:multicam01} shows 9 media sources in the left corner, the compos
 	\item From the \textit{File} pulldown, create a \textit{New project} with the desired format for Audio and Video output (or you can just use the default).
 	\item \texttt{File $\rightarrow$ Load} the media files you want to work with using \textit{Create new resources only}.
 	\item In the Resources window, with  the Media folder, highlight the list of media you want to \textit{Mix}. This is done using a ctrl or shift mouse button press as you would in a standard listbox selection.
-	\item Right click the mouse on the media selection and choose \textit{open mixers} \index{mixer: open mixers}. This opens multiple mixer viewer \index{mixer viewer} windows, one for each media item that was highlighted.  You can
+	\item Right click the mouse on the media selection and choose \textit{open mixers} \index{mixers!open mixers}. This opens multiple mixer viewer \index{mixers!viewer} windows, one for each media item that was highlighted.  You can
 	do them 1 at a time instead.  This also adds the source media tracks to the main window.
 	\item Now use the timeline \index{timeline} to play and you will see all viewers/cameras playing.  Stop when you get to the
 	end of the \textit{good} camera playback.
@@ -712,7 +712,7 @@ Figure~\ref{fig:multicam01} shows 9 media sources in the left corner, the compos
 \subsubsection*{But, I want to use only the first set of audio tracks\dots}%
 \label{ssub:but_use_only_first_audio}
 
-There are many cases where you may want to compose using media from several different tracks while using the the same audio tracks as associated from a specific viewer.  Since mixer source tracks can be updated any time by using a mixer toggle \index{mixer toggle}, this makes it possible to do this.  
+There are many cases where you may want to compose using media from several different tracks while using the the same audio tracks as associated from a specific viewer.  Since mixer source tracks can be updated any time by using a mixer toggle \index{mixers!toggle}, this makes it possible to do this.  
 
 Procedure to update the mixer audio source track list:
 
@@ -772,13 +772,13 @@ The best way to use proxy \index{proxy} with your multiple cameras is to follow 
 	\item Choose the size and other options you want and click the checkmark OK. If you choose the option \textit{Beep when done} you will hear a short beep if all media is already proxied or a longer beep when all proxies have been created.
 	\item When your editing is complete, use \textit{Settings} pulldown and proxy to \textit{original size}.
 \end{enumerate}
-Instead of Open Mixers, you can Insert Mixers \index{mixer: insert mixers} with new tracks at the timeline insertion point.
+Instead of Open Mixers, you can Insert Mixers \index{mixers!insert mixers} with new tracks at the timeline insertion point.
 
 \subsubsection*{Options available in the \textit{Mixer Windows}}%
 \label{ssub:options_available_with_mixers}
-\index{mixer viewer RMB options}
+\index{mixers!viewer RMB options}
 
-There are several options you will see in each Mixer viewer \index{mixer viewer} that help with using them. These
+There are several options you will see in each Mixer viewer \index{mixers!viewer} that help with using them. These
 are shown in figure~\ref{fig:mixer-playable}. To use these, RMB in the desired mixer window,
 and choose one of the options as described here.
 
@@ -792,7 +792,7 @@ and choose one of the options as described here.
 \begin{enumerate}
 	\item Fullscreen / Windowed - will bring up a fullscreen display of that window or revert to the original size.
 	\item Resize Window - allows for resizing the window to a choice of different sizes.
-	\item Tile Mixers \index{mixer: tile mixers} - makes it easy to get all of the mixers nicely tiled to a standard size.
+	\item Tile Mixers \index{mixers!tile mixers} - makes it easy to get all of the mixers nicely tiled to a standard size.
 	This is also available in the \textit{Window} pulldown.
 	\item Playable - enabled by default so that you will see a checkmark next to it in the 
 	popup.  The benefit of making a mixer window not playable is to save cpu time. When a specific
@@ -822,16 +822,16 @@ From Program windows menu we can access the \texttt{windows $\rightarrow$ mixers
 \end{figure}
 
 \begin{description}
-	\item[Mixer Viewer:] \index{mixer viewer} (Shift-M) opens a new empty \textit{Mixer 1} window, which will then be associated with a track. We can open as many Mixers as we like.
-	\item[Drag Tile mixers:] \index{mixer: drag tile mixers} (Alt-t) the default size of a mixer window is related to the std size of the \textit{Viewer} window. If we want to modify it at our convenience, we can build a window of the desired size with the \textit{Drag Tile mixers} function and then automatically order our mixers within it with the right click of the mouse.
-	\item[Align mixers:] \index{mixer: align mixers} see \nameref{sub:audio_video_sync_waveform}
-	\item[Mix masters:] \index{mixer: mix masters} this feature makes it very easy to get into the multi-camera mixer mode after tracks have already been set up and edited. Before this addition, you could only \textit{Open Mixers} from original media assets in the \textit{Resources} window.
+	\item[Mixer Viewer:] \index{mixers!viewer} (Shift-M) opens a new empty \textit{Mixer 1} window, which will then be associated with a track. We can open as many Mixers as we like.
+	\item[Drag Tile mixers:] \index{mixers!drag tile mixers} (Alt-t) the default size of a mixer window is related to the std size of the \textit{Viewer} window. If we want to modify it at our convenience, we can build a window of the desired size with the \textit{Drag Tile mixers} function and then automatically order our mixers within it with the right click of the mouse.
+	\item[Align mixers:] \index{mixers!align mixers} see \nameref{sub:audio_video_sync_waveform}
+	\item[Mix masters:] \index{mixers!mix masters} this feature makes it very easy to get into the multi-camera mixer mode after tracks have already been set up and edited. Before this addition, you could only \textit{Open Mixers} from original media assets in the \textit{Resources} window.
 	\item[Entries:] If the mixers of several sources have been opened, the entries of each assets will appear, useful for recalling a specific mixer window.
 \end{description}
 
 \subsection{Recover Mixer Windows}%
 \label{sub:recover_mixer_windows}
-\index{mixer: recover mixer window}
+\index{mixers!recover mixer window}
 
 It is a hazard that you might accidentally \textit{undo} (\texttt{z or Ctrl-z}) too far and lose your mixer windows.  Here are the steps to recover.  It is recommended that you make a backup of your project before performing the recovery steps just in case there are other problems.
 

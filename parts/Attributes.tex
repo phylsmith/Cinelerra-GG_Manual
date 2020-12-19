@@ -1,5 +1,8 @@
 \chapter{Project and Media Attributes}%
 \label{cha:project_and_media_attributes}
+\index{project attributes}
+\index{format}
+\index{settings}
 
 When you play media files in \CGG{}, the media files have a certain
 number of tracks, frame size, sample size, and so on.  No matter
@@ -10,8 +13,8 @@ if a video file's frame size is different than the project
 attributes, the video is composited on a black frame, either cropped
 or bordered with black.
 
-The project attributes are adjusted in \texttt{file $\rightarrow$
-Set Format} (figure~\ref{fig:set-format}) or can be created in
+The project attributes are adjusted in \texttt{Settings $\rightarrow$
+Format} (figure~\ref{fig:set-format}) or can be created in
 \texttt{File $\rightarrow$ New}.  When you adjust project settings
 in \texttt{File $\rightarrow$ New}, a new empty timeline is created.
 Every timeline created from this point on uses the same settings.
@@ -28,9 +31,9 @@ from this point uses the same settings.
 In addition to the standard settings for sample rate, frame rate,
 and frame size, \CGG{} uses some less traditional settings like
 channel positions, color model, and aspect ratio.  The aspect ratio
-refers to the screen aspect ratio.
+refers to the screen aspect ratio (SAR).
 
-Edit decision lists , the EDL stored in XML, save the project
+Edit decision lists , the EDL \index{EDL} stored in XML, save the project
 settings.  Formats which contain media but no edit decisions just
 add data to the tracks.  Keep in mind details such as if your
 project sample rate is 48\,kHz and you load a sound file with
@@ -54,6 +57,7 @@ Explanation of the various fields is described next.
 
 \section{Audio attributes}%
 \label{sec:audio_attributes}
+\index{audio!attributes}
 
 
 \begin{description}
@@ -66,11 +70,11 @@ audio.
 tracks for the new project. Tracks can be added or deleted later,
 but this option is on the New Project menu for convenience.
 
-\item[Samplerate:] sets the samplerate of the audio. The project
+\item[Samplerate:] \index{sample rate} sets the samplerate of the audio. The project
 samplerate does not have to be the same as the media sample rate
 that you load. Media is resampled to match the project sample rate.
 
-\item[Channels:] sets the number of audio channels for the new
+\item[Channels:] \index{audio!channels} sets the number of audio channels for the new
 project. The number of audio channels does not have to be the same
 as the number of tracks.
 
@@ -105,24 +109,25 @@ close together to make them have the same output.
 
 \section{Video attributes}%
 \label{sec:video_attributes}
+\index{video!attributes}
 
 \begin{description}
 \item[Tracks:] (in New Project menu only) sets the number of video
 tracks the new project is assigned.  Tracks can be added or deleted
 later, but options are provided here for convenience.
 
-\item[Framerate:] sets the framerate of the video.  The project
+\item[Framerate:] \index{framerate} sets the framerate of the video.  The project
 framerate does not have to be the same as an individual media file
 frame rate that you load.  Media is reframed to match the project
 framerate.
 
-\item[Canvas size:] sets the size of the video output.  In addition,
+\item[Canvas size:] \index{canvas size} sets the size of the video output \index{output size}.  In addition,
 each track also has its own frame size.  Initially, the New Project
 dialog creates video tracks whose size match the video output.  The
 video track sizes can be changed later without changing the video
 output.
 
-\item[Aspect ratio:] sets the aspect ratio; this aspect ratio refers
+\item[Aspect ratio:] \index{aspect ratio} sets the aspect ratio; this aspect ratio refers
 to the screen aspect ratio.  The aspect ratio is applied to the
 video output.  The aspect ratio can be different than the ratio that
 results from the formula: $\dfrac{h}{v}$ (the number of horizontal
@@ -134,7 +139,7 @@ will be in non-square pixels.
 dialog always recalculates the Aspect ratio setting based upon the
 given Canvas size. This ensures pixels are always square.
 
-\item[Color model:] the internal color space of \CGG{} is X11 sRGB
+\item[Color model:] \index{color model} the internal color space of \CGG{} is X11 sRGB
 without color profile. \CGG{} always switches to sRGB when applying
 filters or using the compositing engine. Different case for
 decoding/playback or encoding/output; the project will be stored in
@@ -170,8 +175,10 @@ derivative allows video to be processed fast with the least color
 degradation.
   \item[YUVA-8 bit] Allocates an alpha channel to the 8\,bit YUV
 colormodel for transparency.
-  \end{description} In order to do effects which involve alpha
-channels, a colormodel with an alpha channel must be selected.
+  \end{description}
+
+In order to do effects which involve alpha
+channels \index{alpha channel}, a colormodel with an alpha channel must be selected.
 These are RGBA-8 bit, YUVA-8 bit, and RGBA-Float.  The 4 channel
 colormodels are slower than 3\,channel colormodels, with the slowest
 being RGBA-Float.  Some effects, like fade, work around the need for
@@ -181,8 +188,8 @@ results, it is always a good idea to try the effect without alpha
 channels to see if it works before settling on an alpha channel and
 slowing it down.
 
-  When using compressed footage, YUV colormodels are usually faster
-than RGB colormodels.  They also destroy fewer colors than RGB
+  When using compressed footage, YUV colormodels \index{YUV} are usually faster
+than RGB colormodels \index{RGB}.  They also destroy fewer colors than RGB
 colormodels.  If footage stored as JPEG or MPEG is processed many
 times in RGB, the colors will fade whereas they will not fade if
 processed in YUV\@.  Years of working with high dynamic range footage
@@ -193,7 +200,7 @@ information when used with YUV source footage and also supports
 brightness above 100\,\%.  Be aware that some effects, like
 Histogram, still clip above 100\,\% when in floating point.
 
-\item[Interlace mode:] this is mostly obsolete in the modern digital
+\item[Interlace mode:] \index{interlacing} this is mostly obsolete in the modern digital
 age, but may be needed for older media such as that from broadcast
 TV\@.  Interlacing uses two fields to create a frame. One field
 contains all odd-numbered lines in the image; the other contains all

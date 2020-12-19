@@ -160,7 +160,7 @@ The 7 \textit{attributes} are described here next followed by the other availabl
   simultaneously.  Gang also causes Nudge parameters to synchronize
   across all the ganged tracks.
 \item[Master Track] Mark a track as \textit{master} serves when using \textit{Gang Channels} or \textit{Gang Media} mode. See \nameref{sub:displaying_tracks_ganged}
-\item[Track Data Height] \index{track height} this up/down toggle symbol to the immediate right
+\item[Track Data Height] \index{track!height} this up/down toggle symbol to the immediate right
 of the 5 attributes, is used to individually resize each track.  This makes
 it very easy to temporarily expand or contract the size of that track either
 by clickin with the left mouse button or using the middle wheel up/down.
@@ -182,7 +182,7 @@ by clickin with the left mouse button or using the middle wheel up/down.
   with the arm option enabled, the other faders should follow.  Hold
   down the Shift key and drag a fader to center it on the original
   source value (0 for audio, 100 for video).
-\item[Mixer] \index{mixer toggle} in the expanded patchbay for that track designates
+\item[Mixer] \index{mixers!toggle} in the expanded patchbay for that track designates
   the multi-camera mixer mode.
 \item[Overlay mode] \index{overlay pulldown} in the expanded patchbay is used for
   porter-duff operations and is full explained in
@@ -223,18 +223,18 @@ Press the Tab key while the cursor is anywhere over a track to
 toggle the track arming status. Press Shift-Tab while the cursor is
 over a track to toggle the arming status of every other track.
 
-\paragraph{Automatic audio mappings} \index{audio map} Several convenience functions
+\paragraph{Automatic audio mappings} \index{audio!map} Several convenience functions
 are provided for automatically setting the panning to several common
 standards. They are listed in the Audio menu. These functions only
 affect armed audio tracks. They are:
 
 \begin{description}
-\item[Audio~$\rightarrow$~Map 1:1] \index{audio map 1:1} This maps every track to
+\item[Audio~$\rightarrow$~Map 1:1] \index{audio!map 1:1} This maps every track to
   its own channel and wraps around when all the channels are
   allocated. It is most useful for making 2 tracks with 2 channels map
   to stereo and for making 6 tracks with 6 channels map to a 6 channel
   sound card.
-\item[Audio~$\rightarrow$~Map 5.1:2] \index{audio map 5.1:2} This maps 6 tracks to 2
+\item[Audio~$\rightarrow$~Map 5.1:2] \index{audio!map 5.1:2} This maps 6 tracks to 2
   channels. The project should have 2 channels when using this
   function. Go to \texttt{Settings $\rightarrow$ Format} to set the
   output channels to 2. This is most useful for down-mixing 5.1 audio
@@ -262,7 +262,7 @@ not store high frequencies in most cases.
 
 \section{Manipulating Tracks}%
 \label{sec:manipulating_tracks}
-\index{tracks pulldowns}
+\index{track!pulldown}
 
 Tracks in \CGG{} either contain audio or video.  There is no special
 designation for tracks other than the type of media they contain.
@@ -303,7 +303,7 @@ are armed.
   the other tracks.
 \end{description}
 
-The \textbf{Audio} \index{audio pulldowns} and \textbf{Video pulldowns} \index{video pulldowns} each contain an
+The \textbf{Audio} \index{audio!pulldowns} and \textbf{Video pulldowns} \index{video!pulldown} each contain an
 option to add a track of their specific type. In the case of audio,
 the new track is put on the bottom of the timeline and the output
 channel of the audio track is incremented by one. In the case of
@@ -313,7 +313,7 @@ on top of old tracks.
 
 \subsection{Displaying tracks: Ganged mode}%
 \label{sub:displaying_tracks_ganged}
-\index{tracks: ganged mode}
+\index{track!ganged mode}
 
 Often users working on media where Audio is the main focus, want all of a media's audio channels, whether stereo or 5:1 channels, to be treated as a single unit. They are more familiar with working with a DAW (Digital Audio Workstation software) and find that it takes extra work and a lot more care to have to individually manage audio tracks rather than have them automatically edited as a ganged group.
 
@@ -550,7 +550,7 @@ button to cut it. Move the insertion point to another point in the
 timeline and select the paste button.  Assuming no In/Out points are
 defined on the timeline this performs a cut and paste operation.
 
-Most editing operations are listed in the \textit{Edit} pulldown \index{edit pulldown}. Some of
+Most editing operations are listed in the \textit{Edit} pulldown \index{edit!pulldown}. Some of
 them have a button on the program control toolbar as well as a
 keyboard shortcut.  The keyboard shortcut is in parenthesis here.
 
@@ -700,7 +700,7 @@ Resources window \index{resources window}.
 
 \begin{enumerate}
 \item Create some video and audio tracks on the timeline using
-  the \textit{Video} \index{video pulldown} and \textit{Audio} \index{audio pulldown} pulldowns.
+  the \textit{Video} \index{video!pulldown} and \textit{Audio} \index{audio!pulldown} pulldowns.
 \item Open the Media folder in the Resources window.  Make sure
   the necessary tracks are armed and drag a media file from the
   Resources window to the timeline \index{timeline}. If the media has video, drag it
@@ -777,13 +777,13 @@ pulldown to view the list and their keyboard shortcuts.
 
 \subsection{Copy/Paste Behavior}%
 \label{sub:copy_paste_behavior}
-\index{drag and drop: MMB options}
+\index{drag and drop!MMB options}
 
 There are many options for moving, copying, pasting, inserting, and
 deleting selected \textit{edits}, more commonly referred to by the
 user as \textit{clips}, when in the Drag and Drop (arrow) editing
 mode.  This makes it easier to avoid constantly having to disarm/arm
-tracks.  To create a selection \index{edits selection} move the cursor over the clip and
+tracks.  To create a selection \index{edit!selection} move the cursor over the clip and
 just click the left mouse button; remove a selection by left mouse
 button click again.  This will mark your selection with a colored
 border which contains some red.  The easiest way to initially use
@@ -907,7 +907,7 @@ transition does not drag.
 \label{syb:snapping_cutting_dragging}
 \index{snap}
 
-\paragraph{Cutting/Snapping edits} \index{edits: cut with snap} cuts from an edit handle to the
+\paragraph{Cutting/Snapping edits} \index{edit!cut with snap} cuts from an edit handle to the
 insert point.  There are Edit Panel buttons which normally are used
 to move to the previous or next edit handle/label.
 
@@ -939,7 +939,7 @@ following keyboard shortcuts to perform the same functions:
 	\end{tabular}
 \end{center}
 
-\paragraph{Drag Snapping} \index{edits: drag with snap} if you hold down the Ctrl + Alt keys while
+\paragraph{Drag Snapping} \index{edit!drag with snap} if you hold down the Ctrl + Alt keys while
 dragging using the mouse, once the clip gets near to an edit, a
 label, an in/out pointer or the start/end of the timeline, the
 dragged clip will snap next to that marker.  The 2 will now be
@@ -973,7 +973,7 @@ Steps to copy from a source timeline and paste to a target timeline:
 
 \subsection{Grouping edits}%
 \label{sub:grouping_edits}
-\index{edits: grouping}
+\index{edit!grouping}
 
 \CGG{} recognizes as a group, the edits of different armed tracks
 that have aligned beginnings, regardless of whether they have the
@@ -984,7 +984,7 @@ same positions the edit the mouse pointer is currently over. Another
 method of Grouping of edits is performed as follows:
 
 \begin{enumerate}
-\item Select \index{edits selection} each of the clips you would like to be part of a
+\item Select \index{edit!selection} each of the clips you would like to be part of a
   group.
 \item Use the desired Copy mode as described above to get into
   the buffer.
@@ -1025,10 +1025,10 @@ different Group Id and a different color.
 
 \subsection{Dragging Groups}%
 \label{sub:dragging_groups}
-\index{edits: dragging group}
+\index{edit!dragging group}
 
 Dragging while in \textit{Drop and Drag editing mode} (arrow mode)
-is really easy.  Just select \index{edits selection} the clip or clips you want to drag
+is really easy.  Just select \index{edit!selection} the clip or clips you want to drag
 using the left mouse button, then put your cursor over one of them
 and drag while holding down the left mouse button.  Keyframes,
 autos, labels, and plugins will also be dragged.  Dragging honors
@@ -1079,7 +1079,7 @@ to drag clips together that are not columnated.
 
 \subsection{Selection Methods}%
 \label{sub:selection_method}
-\index{edits selection}
+\index{edit!selection}
 \index{active region}
 
 Concerning \textit{Selection} methods, the following information is
@@ -1106,7 +1106,7 @@ have a position on the timeline which can be used for editing.  This
 is input for the vertical style cut/paste drag/drop editing.
 
 More recently, in addition to the column oriented timeline drag
-selection, there is now \textit{group} \index{edits: grouping} capabilities which have
+selection, there is now \textit{group} \index{edit!grouping} capabilities which have
 various \textit{edit} selections.  These are created in the Drag and
 Drop editing mode by clicking edits to toggle
 select/deselection.  These groups are input to a different (more
@@ -1219,7 +1219,7 @@ confusion in the display.
 \item Ctrl-click on the bottom bar and the timeline and composer
   are re-positioned to the beginning of that edit.
 \item Shift-click on the bottom bar and a \textit{selection} is
-  made of that section in the timeline and the composer is updated
+  made of that section in the timeline and the compqoser is updated
   with that start position.
 \end{itemize}
 
@@ -1248,7 +1248,7 @@ not for Proxy.
 
 \subsection{Edit Length}%
 \label{sub:edit-lenght}
-\index{edit length}
+\index{edit!length}
 
 To set the length of an edit in the timeline, select the region
 which contains the edit to be modified. Now select the menu bar

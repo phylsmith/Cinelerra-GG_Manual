@@ -17,7 +17,7 @@ But you also have the choice to render \textit{one frame}.
 
 \section{Single File Rendering}%
 \label{sec:single_file_rendering}
-\index{single file rendering}
+\index{rendering!single file}
 
 Use the \textit{File} pulldown and select Render to start the render dialog
 (figure~\ref{fig:render}).  Then choose the desired parameters.
@@ -106,7 +106,7 @@ Use the \textit{File} pulldown and select Render to start the render dialog
   check this box.  It gives you the chance to work on something else
   while waiting and still be immediately notified when the render is
   complete.
-\item[Render Profile:] \index{render profile} another convenience feature to take advantage
+\item[Render Profile:] \index{rendering!profile} another convenience feature to take advantage
   of if you use specific render formats frequently, is to save that
   profile for future usage without having to set it up again.
 \item[Save Profile:] after setting up your render preference
@@ -260,7 +260,7 @@ creating its usual windows.
 
 \subsection{Command Line Rendering}%
 \label{sub:command_line_rendering}
-\index{rendering: command line}
+\index{rendering!command line}
 
 The command line rendering method consists of a way to load the
 current set of batch rendering jobs and process them without a
@@ -288,7 +288,7 @@ cin -r
 
 \subsection{More about Save/Use EDL and Save/Load Jobs}%
 \label{sub:more_save_use_edl_jobs}
-\index{batch render: more options}
+\index{batch rendering!more options}
 
 The \texttt{File $\rightarrow$ Batch Render} pulldown brings up the
 Batch Render window to be used for batch rendering as well as DVD/BD
@@ -378,7 +378,7 @@ real-time effects if enough network bandwidth and CPU nodes exist.
 
 Background rendering is enabled in the \texttt{Performance} tab of
 the \texttt{Preferences} window. It has one interactive function
-\texttt{Settings $\rightarrow$ Toggle background rendering} \index{background rendering toggle}. This
+\texttt{Settings $\rightarrow$ Toggle background rendering} \index{background rendering!toggle}. This
 sets the point where background rendering starts up to the position
 of the insertion point. If any video exists, a red bar appears in
 the time ruler showing what has been background rendered
@@ -514,7 +514,7 @@ cin -d 407
 
 \subsection{Render Farm Menu and Parameter Description}%
 \label{sub:render_farm_parameter_description}
-\index{render farm parameters}
+\index{render farm!parameters}
 
 Below we describe the Performance tab for configuring a render farm
 (figure~\ref{fig:farm}).
@@ -610,7 +610,7 @@ render farm session to restart with a good balance.
 
 \subsection{Detailed Setup Description}%
 \label{sub:detailed_setup_description}
-\index{render farm setup}
+\index{render farm!setup}
 
 {\color{red} CAUTION }, any exact command lines worked as of
 $01/2018$ on a Fedora system.  These can change over time and on
@@ -858,7 +858,7 @@ want to bother setting up NFS for a shared disk.
 
 \subsection{Multi-core Computers Render Farm Setup}%
 \label{sub:multi_core_render_farm_setup}
-\index{render farm: multi core CPU}
+\index{render farm!multi core CPU}
 
 If you are lucky enough to have a computer with a large cpu core
 count, setting up a render farm can really take advantage of using
@@ -873,7 +873,7 @@ count.
 
 \subsection{Troubleshooting Tips and Warnings}%
 \label{sub:troubleshhoting_tips_warnings}
-\index{render farm: troubleshooting}
+\index{render farm!troubleshooting}
 
 \noindent If you have problems running the Render Farm.  Here is a
 list of items to check.
@@ -995,7 +995,7 @@ outlined below.  These setup steps make it easy to just get started.
 
 \subsection{Lossless Rendering}%
 \label{sub:loseeless_rendering}
-\index{rendering: lossless}
+\index{rendering!lossless}
 
 Lossless means that in the compression of a file, all of the
 original data, every single bit, can be recovered when the file is
@@ -1026,7 +1026,7 @@ you see $qp=0$.  This option is also available for bluray creation.
 
 \subsection{Extra “cin\_” Options for Render with FFmpeg}%
 \label{sub:extra_cin_option_ffmpeg}
-\index{rendering: ffmpeg options}
+\index{rendering!ffmpeg options}
 
 There are several special parameters that can be used in the ffmpeg
 options file to pass values to the codecs that are not normally
@@ -1108,7 +1108,7 @@ sections 19 and 21.
 
 \subsection{Two-pass Encoding with FFmpeg}%
 \label{sub:two_pass_encoding_ffmpeg}
-\index{rendering: ffmpeg two-pass encoding}
+\index{rendering!ffmpeg two-pass encoding}
 
 In \CGG{} for two-pass, you need to run ffmpeg twice, with the same
 settings, except for designating the options of pass~1 for the first
@@ -1306,7 +1306,7 @@ Further links:
 
 \subsection{Piping Video to a Command Line}%
 \label{sub:piping_video_command_line}
-\index{rendering: command line}
+\index{rendering!command line}
 
 You can pipe a video to any command line on the computer, such as
 ffmpeg.  This can be especially useful with raw video files.  Next
