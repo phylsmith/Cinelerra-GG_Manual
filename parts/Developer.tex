@@ -3,6 +3,7 @@
 
 \section{How Builds Really Work and Even More Options}
 \label{sec:builds_really_work_more_options}
+\index{build!more options}
 
 This section describes how builds really work if you want to know more about making changes or understanding the process; probably only for a developer or system administrator.
 
@@ -112,6 +113,7 @@ Since the procedure for obtaining the latest ffmpeg version is not always kept u
 
 \section{Configuration Features}
 \label{sec:configuration_features}
+\index{build!configuration}
 
 A listing of the current configuration features as of January 11, 2020:
 
@@ -303,6 +305,7 @@ Report bugs to <mail@lists.cinelerra-gg.org>.
 
 \section{Thirdparty Parallel Build}
 \label{sec:thirdparty_parallel_build}
+\index{build!thirdparty}
 
 The Makefile in the thirdparty build directory employs a set of macros used to create a build rule set of thirdparty library build dependencies.  The standard build sequence of [source, config, build] is used to prepare thirdparty products as static libraries.  Build package dependency can be specified in the Makefile std-build macro call.  These Makefile macro calls define the rules used for each thirdparty build.  The expanded rule definitions may be viewed by using:
 
@@ -323,6 +326,7 @@ The rule targets create the set of thirdparty packages which are built from loca
 
 \section{Using the very latest Libraries}
 \label{sec:latest_libraries}
+\index{build!use latest library}
 
 Using the most current libraries can be a challenge for some of the Operating System distros that use
 stable compilers, assemblers, and their own libraries.  Because they are stable, they frequently do
@@ -418,6 +422,7 @@ Look into opencv4/opencv2/core/types.hpp:711;27
 
 \section{Find Lock Problems with Booby Trap}
 \label{sec:find_lock_problems_booby_trap}
+\index{build!booby trap}
 
 A Booby Trap is used in \CGG{} for setting a trap to catch lock problems that might have been missed. It will trap boobies only if compile by adding \textit{-{}-with-booby} on the configuration command line. This is the default if you compile using \texttt{./bld.sh} from the GIT repository. It should not interfere with normal execution.
 
@@ -463,6 +468,7 @@ It comes back with the routine as:
 
 \section{Valgrind Support Level}
 \label{sec:valgrind_support_level}
+\index{build!valgrind}
 
 Valgrind is a memory mis-management detector.  It shows you memory leaks, deallocation errors, mismanaged threads, rogue reads/writes, etc.  \CGG{} memory management is designed to work with Valgrind detection methods.  This assists in developing reliable code.  Use of Valgrind points out problems so that they can be fixed.  For example, when this version of \CGG{} shuts down, it deallocates memory instead of just stopping, thus making memory leak detection possible.
 
@@ -494,6 +500,7 @@ When compiling \CGG{} Infinity a CFLAGS option used is \textit{Wall} where the "
 
 \section{Prof2 -- A Profiler}
 \label{sec:prof2_profiler}
+\index{build!prof2}
 
 Frequently there is a problem with a program running slow and you do not know why. You need a thumbnail analysis of where the program is spending most of its time without all of the overwhelming details. This is when a Profiler comes in handy.
 
@@ -645,6 +652,7 @@ So why use a Profiler? Because it is the ``ls'' for executable functions!!
 
 \section{How to Create a new Theme}
 \label{sec:how_create_theme}
+\index{theme!create new theme}
 
 A \textit{Theme} is a base class object that is created and customized as \textit{ThemeName}.
 It is constructed during program initialization in a theme plugin

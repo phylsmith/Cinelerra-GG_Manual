@@ -22,6 +22,7 @@ Besides the above hardware recommendations, this section covers tips for perform
 
 \section{Hardware video acceleration}%
 \label{sec:hardware_video_acceleration}
+\index{hardware!acceleration}
 
 With certain newer, more powerful graphics boards and newer device drivers, there is the potential for enhanced \textit{decode} and \textit{encode} performance.   Decode refers to loading and playing video in \CGG{}. The GPU, Graphics Processing Unit, on the graphics board is accessed via one of the following libraries: vdpau or vaapi. The hardware acceleration done by the graphics card increases performance by activating certain functions in connection with a few of the FFmpeg decoders. This use makes it possible for the graphics card to decode video, thus offloading the CPU.  Decode operations are described here next.  
 Encode refers to rendering video and is described at the end of this section
@@ -36,6 +37,7 @@ Currently only the most common codecs, such as MPEG-1, MPEG-2, MPEG-4, H.264 /MP
 
 \subsection{GPU hardware decoding}%
 \label{sub:gpu_hardware_decoding}
+\index{hardware!decoding}
 
 \begin{enumerate}
 	\item Verify that you have installed \textit{libva-dev} or \textit{libva} on your operating system.
@@ -122,6 +124,7 @@ Using the GPU is going to react differently depending on your hardware, software
 
 \subsubsection*{Special .opts file}%
 \label{ssub:special_opts_file}
+\index{hardware!special opts files}
 
 The situation may arise where you have enabled hardware acceleration and after loading several files for a project, you find that a file had some kind of error resulting in a black video instead of an image or you see an error message pop up which states something like \textit{Error retrieving data from GPU to CPU} or \textit{err: Unknown error occurred}. Because the \texttt{CIN\_HW\_DEV} environment variable is either all or none, ordinarily in order to correct the non-working video you would have to turn off hardware acceleration for the entire project/session.  However, there is a way to continue working on your project without having to reload all of your files. You still use the environment variable and it will be effective for all of the formats it is able to handle, but you make an exception for any of the files that erred out. To do this you simply create a file in the same directory with the same name as the erring file with the different extension of .opts. The contents of this .opts file would just be the one line of:
 
@@ -279,6 +282,7 @@ One last item of note, \textit{nvdec} is also enabled in the ffmpeg build, but a
 
 \subsection{GPU hardware encoding}%
 \label{sub:gpu_hardware_encoding}
+\index{hardware!encoding}
 
 Encoding using hardware acceleration of your graphics board GPU is
 included in \CGG{} but it is of limited availability and works only
@@ -290,6 +294,7 @@ developed by Nvidia for Nvidia graphics boards.
 
 \subsubsection*{Broadcom, Intel HD, AMD}%
 \label{ssub:broadcom_intel_amd}
+\index{hardware!vaapi}
 
 To use hardware acceleration for rendering (that is, encoding) you do not have to set a preference or an environment variable, as was required for decoding.  To use this feature you use an ffmpeg render options file which specifies a vaapi codec, such as h264\_vaapi.  You must include this line in that options file to trigger the hardware probe: \qquad	\texttt{CIN\_HW\_DEV=vaapi}
 
@@ -333,6 +338,7 @@ using \texttt{ydiff} as described in the Appendix (\ref{sec:ydiff_check_results}
 
 \subsubsection*{Nvidia graphics boards}%
 \label{ssub:nvidia_graphics_card}
+\index{hardware!nvenc}
 
 To use hardware acceleration for rendering (that is, encoding) you do not have to set a preference or an environment variable, as was required for decoding.  To use this feature you use an ffmpeg render options file which specifies the nvenc codec, either \texttt{h264\_nvenc.mp4} or \texttt{nvenc.mp4}.  There are several requirements in order for this to work on your computer as listed here:
 
@@ -365,6 +371,8 @@ There is one last potentially significant graphics speedup when using the X11-Op
 
 \subsection{Effects (OpenCL, Cuda)}%
 \label{sub:effects_opencl_cuda}
+\index{openCL}
+\index{CUDA}
 
 CUDA® is a parallel computing platform / programming model developed by Nvidia that provides big increases in computing performance through use of the GPU. It was first introduced in about 2006 for applications in computationally intense fields such as astronomy, biology, chemistry, and physics.
 
@@ -418,6 +426,7 @@ In wrapping up this Hardware Acceleration section, you may want to refer to the 
 
 \section{Optimized Playback -- X11 Direct}%
 \label{sec:optimized_playback}
+\index{playback -X11 direct}
 
 Normally, when \CGG{} reads a video frame, it is copied into a \textit{Vframe}.  This frame may also need other actions performed on it, such as a color model change.  In addition, ffmpeg and libzmpeg \textit{can\_scale\_input}.  So the read can be color transformed and scaled just by asking the library to do that.  This means that if the compositor is in a \textit{good} state with no zoom, the VFrame read can be done in the fastest render color model, and already scaled to the correct size for the compositor.  In reality, this is not what you need for editing, but quite often the \textit{virtualconsole} is not used because the render is media only -- that is \textit{just data}.  If no data transforms are needed and the input scaling can be done, the vrender program detects this, and tells the codec to transmit the data in a compatible way to the compositor canvas. This is the \textit{X11 direct} data path.
 
@@ -436,6 +445,7 @@ Info on transcode in \nameref{sec:transcode}
 
 \section{Some Settings Parameter Values}%
 \label{sec:settings_parameter_values}
+\index{cache}
 
 \texttt{Cache} in \texttt{Settings $\rightarrow$ Preferences, Performance} tab is used to store images on the timeline.  One 1080p frame uses about 10 MB.  The default setting is 256 and this is enough for testing and running.  However, why not use more memory if it is available.   To experiment for testing a good number tuned to the way you use your computer, set the cache to 0, start up \CGG{}, load a typical media file, play it and run \texttt{top} on the command line in another window to see how much memory is being used.  In the \textit{top} display, look at \textit{free} memory.  Whatever your computer is not using, is a good number to use for cache.  If you start other programs, or change the design of the session so that it uses a lot of frame storage, you may need to experiment again later and resize accordingly.
 
@@ -464,6 +474,7 @@ A list of items to check for smaller computers that will help to use less cpu/me
 
 \section{General Crash Handling Tips}%
 \label{sec:general_crash_tips}
+\index{crash handling tips}
 
 This section is a handy guide for describing various kinds of software computer system failures.  Only some of these various lockups or crashes can be dealt with.  Hopefully, it will help to have some hints to know what kind of failure it is, or to save your work or to avoid future problems.  For most of this, your user name must be root, although you can certainly try to see if it works for you when not root.
 
@@ -545,6 +556,7 @@ To create a specific 440 Hz tone, follow these steps.  You can vary the length, 
 
 \subsection{Camera supplied LUTs}%
 \label{sub:camera_supplied_luts}
+\index{LUT}
 
 A LUT, acronym for Look-Up Table, is a mathematically precise way of taking specific RGB image values from a source image and modifying them to new RGB values by changing the hue, saturation and brightness values of that source image. In other words, LUTs are used to map one color space to another.  Some high-end cameras supply a .cube file to use as input. There are several different ffmpeg plugins included with CinGG for using Lut's.  These are:
 
@@ -560,6 +572,7 @@ For example, to use a 3dlut simply load your video, drop the F\_lut3d plugin on 
 
 \subsection{Encoding into Dolby Pro Logic}%
 \label{sub:encoding_dolby_pro_logic}
+\index{dolby pro logic}
 
 Dolby pro logic is an easy way to output 6 channel audio from a 2-channel soundcard with degraded but useful results. Rudimentary Dolby pro logic encoding can be achieved with usage of some effects.
 
@@ -608,6 +621,7 @@ Use the Camera in the compositor to shift the picture up or down a line to remov
 
 \subsection{Remove Interlacing}%
 \label{sub:remove_interlacing}
+\index{interlacing}
 
 Interlacing often exists on older video sources, such as camcorders, and was previously used in broadcast television. Playing this video results in jagged images on a computer monitor, but with \CGG{} you can use deinterlacing effects to solve this.  After some experimentation, it has been determined that the FFmpeg \textit{F\_kerndeint} plugin seems to produce the best results with the least amount of fiddling.  But some of the parameters described next are pertinent to other potential plugin usage.
 
@@ -695,6 +709,7 @@ The resulting .mp3 file can be uploaded to a web server and then the phone's web
 
 \subsection{Time stretching audio}%
 \label{sub:time_stretching_audio}
+\index{audio!time stretching}
 
 It may appear that time stretching audio is a matter of selecting a region of the audio tracks, enabling recording for the desired tracks, going to\texttt{ Audio $\rightarrow$ Render Effect}, and applying \textit{TimeStretch}. In actuality there are 3 audio effects for time stretching: Time Stretch, Resample, and Asset info dialog.
 

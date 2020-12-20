@@ -5,6 +5,7 @@ This section describes in detail some areas of \CGG{} to help explain how things
 
 \section{Copy/Paste and Highlight Usage}%
 \label{sec:copy_paste_highlight_usage}
+\index{copy/paste}
 
 There are 3 types of copy/cut and paste methods which exist in X windows, and most modern programs use 2 of them.  The 3 cases are:
 
@@ -52,6 +53,7 @@ When a text selection is set, the selected text is redrawn using selected-highli
 
 \subsection{Playing/Seeking}%
 \label{sub:playing_seeking}
+\index{seek!playing}
 
 \textit{Seeking} targets and displays the next frame.  The next frame is targeted because frame zero has no previous.  When you seek, you reposition to just before the target frame, and since the play direction has not been established (there is no direction when seeking) it shows you the next frame.  This produces the expected behavior when you seek to frame zero; you see the first frame.  Seeking displays in the compositor what you are getting ready to work with/edit/etc; always showing the next frame in relation to the cursor. Technically, since seeking just resets the position, it would be correct not to update the compositor, but it is best to seek and show the next frame to confirm that it is the frame you expected to see.
 
@@ -90,6 +92,7 @@ To recap, position is usually set in the program as a location that is between a
 
 \subsection{Always Show Next Frame}%
 \label{sub:always_show_next_frame}
+\index{always show next frame}
 
 Since some users prefer the insertion pointer to reflect the same as the Compositor a choice is available.  For playing forward, there is a preference option which results in what looks like 1 was added to the frame displayed in the Compositor window.  To enable this mode, check the box \texttt{Always show next frame}, and this will be saved to \texttt{.bcast5}.  The option checkbox is in the \texttt{Settings $\rightarrow$ Preferences $\rightarrow$ Appearance} tab and when checked, any forward \textit{plays} in the Compositor window show the same frame as you would with a seek.  Reverse plays and plays using a selection or In/Out pointers (with Ctrl) work the same as without this preference set.  But you will no longer see the odd behavior where if you frame advance forward and then frame advance backward, the displayed frame does not change -- instead it will change and look more natural.
 A color indicator that shows in the main track canvas timeline and the compositor timeline reminds the user which mode is currently active.  The cursor in the compositor turns \textit{red} for default mode and \textit{white} for \textit{Always show next frame} mode.  The top portion of the insertion cursor in the track canvas mirrors this, with red for default and white otherwise.
@@ -128,11 +131,14 @@ Figure~\ref{fig:cursor02} using the \textit{Always show next frame} method where
 
 \subsection{Seeking Issues}%
 \label{sub:seeking_issue}
+\index{seek!issue}
 
 If you have an issue playing a video and not seeing it in the Compositor (just see a black screen), it is most likely due to the media not being designed to be \textit{editable}.  It is most likely not damaged.  Generally it just does not have keyframes which are needed for seeking which is what is done when you move around the media and start playing in the middle.  The media plays just fine in the compositor if you always play from the beginning because then you don’t need keyframes to seek.  You can get around this problem if you proxy the media.  A good choice to use for the proxy would be \textit{use scalar}, \textit{ffmpeg/mp4} and size of $\frac{1}{2}$.  The proxied media can then seek and you will see it play in the compositor because keyframes exist.
 
 \section{Color Space and Color Range Affecting Playback}%
 \label{sec:color_space_range_playback}
+\index{color!space}
+\index{color!range}
 
 Playback \textit{single step} and \textit{plugins} cause the render to be in the session color model, while continuous playback with no plugins tries to use the file’s best color model for the display (for speed).
 This can create a visible effect of a switch in color in the Compositor, usually shown as grayish versus over-bright.
@@ -162,6 +168,7 @@ There is now program code to look for RGB versus YUV color model mismatches.  Yo
 
 \section{Automatic "Best Model" Media Load}%
 \label{sec:conform_the_project}
+\index{color!model}
 When you load media with the insertion strategy of \textit{replace current project}, the program code will
 automatically use the "best model" for the render based on the media's codec.  The best model is pretty
 much going to be what works well for television.  This automation was added to facilitate easy use of
@@ -205,6 +212,7 @@ This is \textit{simple} animation so you can expect speech synthesis not to be t
 
 \section{Textbox Non-std Character / Unicode Insertion}%
 \label{sec:textbox_non_std_character_unicode}
+\index{unicode insertion}
 
 If you want to enter a special character -- like a bullet, an accent grave character, or a mathematical summation symbol -- you can use the unicode equivalent in a textbox to do so.  In the textbox, keyin Ctrl-Shift-U which puts you into single character unicode mode, then keyin the numerical value for the intended single character followed by the carriage return.  For a voluminous list of possible special characters, you can go to {\small \url{https://unicode-table.com/en/}} on the internet to choose by highlighting a character to get its numerical equivalence.  For example, $U+2022$ is a bullet.  If you make a mistake, you can use the \textit{backspace} key or if you want to exit unicode-insert-mode, use the \textit{ESC} key.  This feature is especially useful with the \textit{Title} plugin and for naming Tracks in the main window.
 

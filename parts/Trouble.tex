@@ -24,6 +24,7 @@ troubleshooting help is included in other sections of this manual for specific f
 
 \section{What to Include in Problem Reports}%
 \label{cha:include_in_problem_reports}
+\index{report problem}
 For the best help, if you have a reproducible problem and can provide the following list of materials for analysis, it
 is usually possible to figure out what the problem is and how to fix it. It may be a simple usage or setup mistake or
 a real bug which a programmer would like to fix rather quickly. Although it is not always necessary to provide this
@@ -56,6 +57,7 @@ It is better to upload any files to a drop site as some of them can be quite lar
 
 \section{Crash Dumps for Analysis}%
 \label{cha:crash_dumps_analysis}
+\index{crash dumps}
 If you get a SEGV crash and can explain what steps you took, a \texttt{/tmp/cinelerra\_<pid> .dmp} file is
 very useful for analysis. You can also use Ctrl-c in the controlling window to force an INTR signal interrupt when
 you think the program is hung up. You can only perform one Ctrl-c as the second Ctrl-c quits out of the program. It
@@ -92,6 +94,8 @@ probability that the dump will prove useful, but if the problem can be recreated
 
 \section{When things go wrong}%
 \label{cha:when_things_go_wrong}
+\index{problem FAQ}
+
 Sometimes things go wrong and there are some ways to continue your work without much trouble. Below is a list of items
 to try before abandoning your session.
 
@@ -134,10 +138,10 @@ On the \textit{File} pulldown, there is a \textit{Dumps} option with a submenu o
 the text results will be shown in that window.
 
 \begin{itemize}[nosep]
-\item \textit{Dump EDL} will display your current EDL state on the screen in the window from where you started Cin. This can be useful to see information concerning a specific edit or a file path.
-\item \textit{Dump Plugins} will show the names of the currently loaded plugins.
-\item \textit{Dump Assets} displays the media assets that you have loaded and various pertinent details on each, such as samplerate, width, and height.
-\item \textit{Dump Undo }will dump the last 32 edits on the undo stack exactly as kept, which can be useful if you are looking to see how far back in the undo to go to get to a specific spot.
+\item \textit{Dump EDL} \index{EDL dump} will display your current EDL state on the screen in the window from where you started Cin. This can be useful to see information concerning a specific edit or a file path.
+\item \textit{Dump Plugins} \index{plugins!dumps} will show the names of the currently loaded plugins.
+\item \textit{Dump Assets} \index{asset!dump} displays the media assets that you have loaded and various pertinent details on each, such as samplerate, width, and height.
+\item \textit{Dump Undo} \index{undo dump} will dump the last 32 edits on the undo stack exactly as kept, which can be useful if you are looking to see how far back in the undo to go to get to a specific spot.
 \end{itemize}
 
 \textbf{Common Problems}
@@ -224,6 +228,7 @@ In the mask window, check the box \textit{Disable OpenGL masking} to use softwar
 
 \section{Menu Bar Shell Commands}%
 \label{menu_bar_shell_commands}
+\index{shell commands}
 
 In order to provide some types of help, the Menu Bar Shell Commands are available for customization purposes (figure~\ref{fig:trouble-img001}).
 
@@ -309,6 +314,7 @@ There are some Help features currently included in the Shell Cmds menu. Those av
 
 \section{\CGG{} Command Line -h}%
 \label{cha:cinelerra_command_line_-h}
+\index{command line}
 
 To see the command line parameters available to use with \CGG{}, key in:
 

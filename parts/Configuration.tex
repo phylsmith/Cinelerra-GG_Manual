@@ -218,7 +218,7 @@ In the Render Farm Section are many options that are explained in detail in the 
     \item[Android Remote Control] check this to enable using an android device as a remote control for broradcast TV.
     \item[Port] default port 23432 is used for the android remote control.
     \item[Pin] default PIN Cinelerra is used for the android remote control.
-    \item[Shell Commands] \index{shel commands} this button brings up the controls for setting up your own shell commands or editing previously set up commands.  See the section on Menu Bar Shell Commands for information.
+    \item[Shell Commands] \index{shell commands} this button brings up the controls for setting up your own shell commands or editing previously set up commands.  See the section on Menu Bar Shell Commands for information.
     \item[Reload plugin index] \index{plugins!reload index} execute this reload command when you have modified plugins and want to make sure your changes take effect.
     \item[Nested Proxy Path] \index{nested proxy path} designates the default directory path for Nested Proxy files.
     \item[Default LV2\_Path] \index{default lv2 path} when there is no system \texttt{LV2\_PATH} set, if you want lv2 plugins loaded, you must set the correct directory path name here. When you change this field, cin will automatically restart and load the newly specified lv2 plugins.
@@ -230,7 +230,7 @@ In the Render Farm Section are many options that are explained in detail in the 
 Screencast below shows part of the Preferences menu where you can change the index files setup (figure~\ref{fig:index}).
 \begin{figure}[htpb]
     \centering
-    \includegraphics[width=1.0\linewidth]{images/index.png}
+    \includegraphics[width=1.0\linewidth]{images/index-01.png}
     \caption{Index file setup for your preferred configuration for Render Farm sharing or anything}
     \label{fig:index}
 \end{figure}
@@ -295,10 +295,10 @@ then in Preferences window, click on the \textit{Appearance} tab. In the Editing
 
 To create a personal theme see \hyperref[sec:how_create_theme]{How to create your own theme}.
 
-\paragraph{Plugin Icons} \index{plugins!icons} here are currently 4 choices for different plugin icons to include the old original.
+\paragraph{Plugin Icons} \index{plugins!icons} There are currently 4 choices for different plugin icons to include the old original.
 \paragraph{Locale} \index{locale/language} The default is \textit{sys} so that the system language is active. With the pulldown menu we can choose among the other languages present in ... This language will be saved in
 your Configuration and used each time you start up CinGG. In order to change the environment variable, LANGUAGE, the setting must be \textit{sys} because that is the best way we could get it working.
-\paragraph{Layout Scale} \index{layout scale} allows for setting up scaling for your 4K monitors or any monitor where you would like the text and icons to be just a little bigger or a lot bigger. This scale setting is automatically saved across sessions. 
+\paragraph{Layout Scale} \index{layout scale} Allows for setting up scaling for your 4K monitors or any monitor where you would like the text and icons to be just a little bigger or a lot bigger. This scale setting is automatically saved across sessions. 
 When first using \CGG{}, or if \textit{Layout Scale} has never been set, the initial value is 0.0.
 This means an automatic probe of the biggest monitor in use will be used for the setting. The advantage of this is that "new users" with a 4K monitor will not immediately be discouraged with too small text/icons.
 Leaving it at 0 instead of 1 is what most people will do and is probably preferable so that if you move to a different monitor with different dimensions/resolution, it will automatically probe. 
@@ -318,9 +318,9 @@ and then when you get back into \CGG{}, fix \textit{Layout Scale} value in Prefe
 \begin{lstlisting}[numbers=none]
         BC_SCALE=1.0 {your Cinelerra path}/bin/cin
 \end{lstlisting}
-\paragraph{View thumbnail size} \index{view thumbnais size} you can increase or decrease the thumbnail size -- larger size uses more cpu.
-\paragraph{Vicon quality} \index{vicon quality}  increase the quality used for thumbnails to get more clarity of pixels -- this will use more memory.
-\paragraph{Vicon color mode} \index{vicon color mode} modify the color mode to Low, Medium, or High for the thumbnails -- High will look the best but takes more memory.
+\paragraph{View thumbnail size} \index{view thumbnais size} You can increase or decrease the thumbnail size -- larger size uses more cpu.
+\paragraph{Vicon quality} \index{vicon quality}  Increase the quality used for thumbnails to get more clarity of pixels -- this will use more memory.
+\paragraph{Vicon color mode} \index{vicon color mode} Modify the color mode to Low, Medium, or High for the thumbnails -- High will look the best but takes more memory.
 
 \subsection{Time Format section}%
 \label{sub:time_format_section}
@@ -343,9 +343,9 @@ Various representations of time are given so that you can select the most conven
 \label{sub:color_section}
 
 
-\paragraph{Highlighting Inversion color} \index{inverted colors} modify the selection area color; default is \textit{ffffff} which is white. When you make a selection, that area becomes an inverse image which by default becomes a whitish color.  You can set it to a different color by modifying the hex value in the box next to \textit{Highlight inversion color}.   Keep in mind that if you set the value to a low value, you will not be able to see the outlined selected area (for example the hex value "f" is not readily visible and leads to confusion).  A leading 0 or blank is not allowed and will be automatically changed to \textit{ffffff}.
+\paragraph{Highlighting Inversion color} \index{inverted colors} Modify the selection area color; default is \textit{ffffff} which is white. When you make a selection, that area becomes an inverse image which by default becomes a whitish color.  You can set it to a different color by modifying the hex value in the box next to \textit{Highlight inversion color}.   Keep in mind that if you set the value to a low value, you will not be able to see the outlined selected area (for example the hex value "f" is not readily visible and leads to confusion).  A leading 0 or blank is not allowed and will be automatically changed to \textit{ffffff}.
 \paragraph{Composer BG Color} \index{background color} You can choose the background color of the viewer window.
-\paragraph{YUV color space} \index{yuv color space} default is \textit{BT601}; others \textit{BT709} (high definition), \textit{BT2020} (ultra high definition).
+\paragraph{YUV color space} \index{yuv color space} Default is \textit{BT601}; others \textit{BT709} (high definition), \textit{BT2020} (ultra high definition).
 \paragraph{YUV color range} \index{yuv color range} JPEG [$0-255$] and MPEG [$16-235$]
 
 
