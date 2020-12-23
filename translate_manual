@@ -1,0 +1,35 @@
+#!/bin/sh
+
+# First build PDF version, 3 times to be completely sure.
+# The various auxiliary files will be needed later.
+
+pdflatex CinelerraGG_Manual
+pdflatex CinelerraGG_Manual
+pdflatex CinelerraGG_Manual
+
+# Now build HTML version, using auxiliary files created by pdflatex.
+
+# clean the future HTML directory
+rm -rf CinelerraGG_Manual
+
+# latex2html does not know documentclass memoir. It does work nevertheless
+# but produces slightly better results if we temporarily switch to book.
+mv -f CinelerraGG_Manual.tex CinelerraGG_tmp.tex
+sed -e 's/{memoir}/{book}/' <CinelerraGG_tmp.tex >CinelerraGG_Manual.tex
+
+# translate document
+#latex2html -html_version 4.0,math -use_pdftex -nouse_dvipng -image_type gif -nofootnode -split +3 -link 3 -bottom_navigation -local_icons -t 'Cinelerra-GG Infinity' CinelerraGG_Manual.tex
+
+# another alternative options combination
+latex2html -html_version 4.0,math -use_pdftex -use_dvipng -image_type png -nofootnode -split +3 -link 3 -bottom_navigation -local_icons -t 'Cinelerra-GG Infinity' CinelerraGG_Manual.tex
+
+# revert back to the original documentclass
+mv -f CinelerraGG_tmp.tex CinelerraGG_Manual.tex
+
+# this single image has to be copied explicitly
+cp images/cin-big.png CinelerraGG_Manual
+
+# clean temporary files in the HTML directory
+rm -f CinelerraGG_Manual/WARNINGS
+rm -f CinelerraGG_Manual/*.pl
+rm -f CinelerraGG_Manual/images*
