@@ -23,7 +23,7 @@ Use the \textit{File} pulldown and select Render to start the render dialog
 (figure~\ref{fig:render}).  Then choose the desired parameters.
 
 \begin{figure}[htpb] \centering
-  \includegraphics[width=0.7\linewidth]{render.png}
+  \includegraphics[width=0.5\linewidth]{render.png}
   \caption{Example of the Render menu}
   \label{fig:render}
 \end{figure}
@@ -129,6 +129,467 @@ Use the \textit{File} pulldown and select Render to start the render dialog
   video tracks armed, the video tracks will get truncated while the
   audio output is pasted into the audio tracks.
 \end{description}
+
+
+\subsection{Extra “cin\_” Options for Render with FFmpeg}%
+\label{sub:extra_cin_option_ffmpeg}
+\index{rendering!ffmpeg options}
+
+There are several special parameters that can be used in the ffmpeg
+options file to pass values to the codecs that are not normally
+available.  They're called Global Options. These are explained
+below.
+
+\paragraph{cin\_pix\_fmt} The Render menus allows you to choose the
+codec input pixel format (figure~\ref{fig:yuv420}).  The Pixels
+selection provides the available pixel format options for the chosen
+codec type; valid choices vary for the different file types.  This
+list represents the formats that the codec advertises.  It is not
+always complete, and it may include options that are not legal with
+all parameter configurations.
+
+\begin{figure}[htpb] \centering
+	\includegraphics[width=1.0\linewidth]{yuv420.png}
+	\caption{Render \& Video Preset menus displaying Pixel choices}
+	\label{fig:yuv420}
+\end{figure}
+
+\begin{itemize}
+	\item The \textit{Bitrate}, \textit{Quality}, and \textit{Pixels}
+	fields are only updated when the Video Options are reloaded.  This
+	occurs when you either change the ffmpeg file format, or video
+	presets compression fields.
+	\item If the video options preset has \textit{cin\_pix\_fmt}
+	defined, its value will be loaded as the default.  If you override
+	the default, the value you specify will be used.
+	\item If the video options preset does not have
+	\textit{cin\_pix\_fmt}, the default pixel format will be computed by
+	ffmpeg (\textit{avcodec\_find\_best\_pix\_fmt\_of\_list}), using the
+	session format as the source choice.  The \textit{best} is usually
+	the format which is most similar in color and depth.
+	\item If no choices are available, yuv420p for video will be used.
+	\item You can also specify ffmpeg pixel formats which are not in the
+	list.  The list is provided by ffmpeg as input selection, but is
+	more like suggestions than fact.  For example, the raw formats can
+	take almost any format, but the rawvideo codec actually specifies no
+	legal formats.
+\end{itemize}
+
+\noindent Some option files provide \textit{cin\_pix\_fmt} to
+suggest a choice for good quality output or to prevent parameter
+errors when the other provided parameters conflict with the
+\textit{best} pixel format.  This is the case in
+\texttt{faststart\_h264.mp4} where the \textit{profile=high}
+parameter dictates pixel format must be \texttt{yuv420p}.
+
+\paragraph{cin\_bitrate} If you specify the bitrate, you can not
+specify the quality.\\ Example: \textit{cin\_bitrate=2000000}
+
+\paragraph{cin\_quality} If you specify the quality, you can not
+specify the bitrate.\\ Example: \textit{cin\_quality=7}
+
+\paragraph{cin\_stats\_filename} This parameter is useful for 2 pass
+operations.\\ Example: \texttt{cin\_stats\_filename
+	/tmp/cin\_video\_vp9\_webm}
+
+\paragraph{cin\_sample\_fmt} For audio the preset sample format
+default is computed in a similar way as stated above for video or
+can be set with the \textit{cin\_sample\_fmt} parameter
+(figure~\ref{fig:audio}).  If no choices are provided, s16 will be
+used.\\ Example: \textit{cin\_sample\_fmt=s16}
+
+\begin{figure}[htpb] \centering
+	\includegraphics[width=0.7\linewidth]{audio.png}
+	\caption{Render menu showing where Samples is}
+	\label{fig:audio}
+\end{figure}
+
+\paragraph{Private Options} (muxers). In the window of the
+\textit{wrench} in addition to the \textit{View} button, which
+allows more global options and changes to the formats, there is an
+additional \textit{Format} button that allows you to modify the
+Private Options, i.e.\ relating to specific muxing formats. More
+information on all these options can be found at
+\href{https://ffmpeg.org/ffmpeg-all.html#Format-Options}{ffmpeg.org}
+sections 19 and 21. See also \nameref{sub:modifying_ffmpeg_cinelerra}.
+
+\section{Some Specific Rendering}%
+\label{sec:some_specific_rendering}
+
+\noindent The next few pages relate to rendering for specific common
+cases.
+
+\subsection{FFmpeg Common H.264 Rendering}%
+\label{sub:ffmpeg_h264_rendering}
+
+Because H.264 is so widely used, the method in \CGG{} Infinity is
+outlined below.  These setup steps make it easy to just get started.
+
+\begin{itemize}
+	\item File $\rightarrow$ Render
+	\item File Format $\rightarrow$ FFMPEG + mp4
+	\item Video Wrench $\rightarrow$ Preset $\rightarrow$ h264.mp4 +
+	bitrate: 6000000 (or whatever) + OK
+	\item Audio Wrench $\rightarrow$ Preset $\rightarrow$ h265.mp4 +
+	bitrate: 224000 (or whatever) + OK
+	\item Set your target path in: Render $\rightarrow$ Select a file to
+	render to
+	\item Set your timeline in: Render $\rightarrow$ Render range +
+	click Project
+	\item Set your insertion strategy: Replace project (or whatever)
+	\item Press OK to start rendering.
+\end{itemize}
+
+\subsection{Lossless Rendering}%
+\label{sub:loseeless_rendering}
+\index{rendering!lossless}
+
+Lossless means that in the compression of a file, all of the
+original data, every single bit, can be recovered when the file is
+uncompressed.  This is different than \textit{lossy compression}
+where some data is permanently deleted so that when uncompressed,
+all of the original data can not be exactly recovered.  Lossy is
+generally used for video and sound, where a certain amount of
+information loss will not be detected by most users or the playback
+hardware does not reproduce it anyway -- it is a trade-off between
+file size and image/sound quality.  The files created will be more
+than 10 times larger than usual.  Most players will not be able to
+decode lossless as the bitrate will overwhelm the device.
+
+For x264 lossless compression to work, the only color model allowed
+here is yuv420p.  Any other specification will be converted to
+yuv420p and the data will be modified.  Also, keep in mind that the
+YUV color model has to be converted to RGB, which also modifies the
+data.
+
+To use x264 lossless rendering -- choose File format of ffmpeg, m2ts
+in the Render window.  Click on the Video wrench, which brings up
+the Video Preset window and scroll down in the Compression filebox
+and choose \texttt{lossless.m2ts}.  \textit{Preset=medium} is the
+default, but can be varied from \textit{ultrafast} (least amount of
+compression, but biggest file size) to \textit{veryslow} (most
+amount of compression, but still HUGE) in the parameter box where
+you see $qp=0$.  This option is also available for bluray creation.
+
+\subsection{Two-pass Encoding with FFmpeg}%
+\label{sub:two_pass_encoding_ffmpeg}
+\index{rendering!ffmpeg two-pass encoding}
+
+In \CGG{} for two-pass, you need to run ffmpeg twice, with the same
+settings, except for designating the options of pass~1 for the first
+pass and then pass~2.  In pass~1, a logfile that ffmpeg needs for
+the second pass is created.  In pass~1 the audio codec should be
+specified that will be used in pass~2.  For more information on
+ffmpeg 2-pass, check
+\href{https://trac.ffmpeg.org/wiki/Encode/H.264}{ffmpeg.org}.
+Different libraries may have different requirements and you will
+probably have to determine this by looking online at ffmpeg or
+looking directly at that code.
+
+This 2 line ffmpeg 2-pass operation can be functionally duplicated
+in \CGG{} in the steps below them:
+
+\begin{lstlisting}[style=sh]
+	ffmpeg -y -i $INPUT \
+	-c:v libx264 -b:v 2600k -pass 1 \
+	-c:a aac -b:a 128k -f mp4 /dev/null && \
+	ffmpeg -i $INPUT \
+	-c:v libx264 -b:v 2600k -pass 2 \
+	-c:a aac -b:a 128k $OUTPUT.mp4
+\end{lstlisting}
+
+\begin{enumerate}
+	\item After you have completed your editing, do a Save Session with
+	\texttt{File $\rightarrow$ Save as}\dots Before starting, be sure
+	your session is ready for batch render. That is, positioned at the
+	beginning and nothing selected.
+	\item Bring up \texttt{File $\rightarrow$ Batch Render}\dots where
+	you will do the setup.
+	\item Click on the \textit{Delete} box to remove old jobs
+	highlighted in the bottom listbox.
+	\begin{itemize}
+		\item For the \textit{File Format} choose ffmpeg and mp4 for the
+		type.
+		\item Set \textit{Output path} to the path and filename for the
+		render output file.
+		\item Click on \textit{Use Current EDL} to use the designated EDL
+		Path file.
+		\item Click on \textit{New} and you will see a new highlighted job
+		show up in the listbox at the bottom.
+		\item Use the Audio wrench to set bitrate to $128000$ ($128k$ as
+		in ffmpeg example above).
+		\item Click checkmark OK\@.  Open the video tools with the video
+		wrench.
+		\item Set the Video Compression to \textit{h264.mp4} (as seen in
+		the example).
+		\item Set the bitrate to $2600000$ ($2600k$ as in ffmpeg example
+		above).
+		\item Add the following 2 lines after the first line:
+		\begin{lstlisting}[style=sh]
+			flags +pass1
+			passlogfile /tmp/"{temporary log file name}.log"
+		\end{lstlisting} Click checkmark OK.
+	\end{itemize}
+	\item Click on \textit{New} to create the second pass job.  You will
+	see this second job in the listbox below.  Use the Video wrench and
+	change pass1 to pass2 as follows.
+	\begin{lstlisting}[style=sh]
+		flags +pass2
+	\end{lstlisting}
+	\item Click checkmark OK.
+	\item Click on the \textit{Start} box and watch it go!
+	\item You can now check the output file for results.  At the time
+	this was documented, \textit{rc=2pass} will be in the output.
+\end{enumerate}
+
+If you need to re-render this, the Batch Render will still be set up
+but you have to click on the \textit{Enabled} column in the listbox
+to re-enable the jobs to run which puts an X there.  Click Start
+again. You can reuse batch job using the \textit{save jobs} and
+\textit{load jobs} buttons in the batch render dialog.
+
+\paragraph{Render shortcuts for webm, h264, h265} are available by
+using the option files that are already set up for this purpose.
+Use the render menu as usual, with ffmpeg/mp4, choose h264 or h265
+\textit{pass1of2\_h26x} for the video and
+\textit{passes1and\-2\_h26x} for the audio; with ffmpeg/webm, choose
+\textit{pass1of2\_vp9}.  When that is finished, you will have to use
+the render menu again and this time for video, choose
+\textit{pass2of2\_h26x} or \textit{pass2of2\_vp9}.  The logfile is
+hard coded in the options file so will write over any currently
+existing logfile if you do not change it before you start the
+render.
+
+\paragraph{Requirements for some other libraries} (used instead
+of \textit{flags +pass1} \& \textit{passlogfile}):
+\begin{description}
+	\item[x265:] add this line:
+	\begin{lstlisting}[style=sh]
+		x265-params=pass=1:stats=/tmp/{temporary-log-file-name}.log
+	\end{lstlisting} at the time this document was written, you should
+	see in the output: \textit{stats-read=2}
+	\item[libvpx-vp9, xvid, and huffyuv:]~
+	\begin{lstlisting}[style=sh]
+		cin_stats_filename /tmp/{temporary-log-file-name}.log
+		flags +pass1 (or flags +pass2 for the second pass)
+	\end{lstlisting}
+\end{description}
+
+\textit{NOTE:} for vp9, the best Pixels is \textit{gbrp}
+
+\subsection{Use case: High Efficiency Video Coding (HEVC)}%
+\label{sub:use_case_hevc}
+
+An example of video profile based on CRF, a quality-controlled
+variable bitrate, instead of fixed quality scale (ABR).  HEVC
+(H.265) was developed as a successor to AVC (H.264) to more
+efficiently compress the future large amounts of data from 2/4/8k
+videos.  In comparison to AVC, an average saving of around 30
+percent can be assumed for the same quality.  Because HEVC is not
+bound to any size format, it is suitable for virtually any image
+size.
+
+The following example is HD and FullHD oriented and produces a
+picture quality similar to the Blu-ray with some limitations.  As
+container Matroska (\texttt{.mkv}) is used, but also mp4 and others
+are possible.
+
+\begin{lstlisting}[style=sh]
+	matroska libx265
+	
+	# CRF 16 creates a balanced compromise
+	# between quality and file size.
+	crf=16
+	
+	# Preset changes encoding speed and generally
+	# degrades the overall result. Medium (default)
+	# always fits.
+	preset=medium
+	
+	# Additional parameters that are passed on to the codec.
+	# me=star improves the search for very fast
+	# movements, but slows down the encoding.
+	#x265-params=me=star
+	
+	# Keyint does FFmpeg automatically, otherwise
+	# the setting must match the frame rate.
+	#keyint_min=25
+	
+	# Profile does FFmpeg automatically.
+	#profile=high
+	
+	# Source sRBG and retention of color space.
+	# 720/1080=bt709 if no profile set. Useful
+	# for formats smaller than 720 if no lossy
+	# conversion is desired.
+	colorspace=bt709
+	color_trc=bt709
+	color_primaries=bt709
+	
+	# Output in 10 bit, prevents 8-bit step formation
+	pixel_format=yuv420p
+\end{lstlisting}
+
+\noindent \textit{NOTE:}
+
+A CRF of 16 delivers satisfactory results in most cases. However, if
+the video material is really \emph{grainy}, a CRF~16 can lead to
+unwanted large files.  In this case, a trial export of perhaps one
+minute should be performed. The resulting bit rate can be used to
+correct the CRF to 17,\,18,\,19\ldots -- remember, a CRF of $0$ (zero)
+means lossless, the higher the number the stronger the lossy
+compression. The approximate calculation of the final file size can
+be extrapolated from the sample export.
+
+The color space information must be used explicitly so that it can
+be included in the video. \CGG{} or FFmpeg does not write it by
+itself. Without this information the players (e.\,g.\
+\href{https://mpv.io/}{mpv}) stick to the dimensions of the video
+and take the assumed color model from a table. With videos in the
+dimensions from 720 to 1080 this is bt709. For smaller dimensions,
+e.\,g.\ DVD, bt601 is assumed and for 4k and above it is
+bt2020. Normally this is not a problem, but if you want to export a
+FullHD without color loss to a smaller size like 576 for example,
+you have to inform the encoder as well as the decoder of the
+player. This also applies if the videos are to be loaded on video
+platforms, where they are then converted into videos of different
+sizes. It is a security measure to prevent false colors, such as the
+color profiles in digital photos and the copies made from them.
+
+The HEVC tuning has not been considered here, because it is is
+rarely used and requires background knowledge.
+
+Further links:
+\begin{itemize}
+	\item \href{http://x265.readthedocs.org/en/default/}{x265
+		Documentation}
+	\item \href{http://x265.readthedocs.org/en/latest/cli.html}{x265
+		Command Line Options}
+	\item \href{http://x265.readthedocs.org/en/latest/presets.html}{x265
+		Presets/Tuning}
+\end{itemize}
+
+
+\subsection{YouTube with \CGG{}}%
+\label{sub:youtube_with_cinelerra}
+\index{rendering!youtube preset}
+
+To create a youtube or dailymotion video, you can easily follow the steps below.  You will have to learn a lot more about \CGG{} to take full advantage of its capabilities and make some really special videos, but this is just to get a start and to see the possibilities.
+
+\begin{enumerate}
+	\item Start \CGG{}; usually you can do this by clicking on \CGG{} icon or key in \texttt{{cin\_path}/bin/cin}.
+	\item In the Program window on the lower left side of your screen, left mouse click the \textit{File} pulldown.
+	\item You will see \textit{Load files} as the second choice so left mouse click this and find your video file to
+	load, highlight it, and check the green checkmark in the lower left hand corner to get it loaded.
+	\item Edit your video in the Program window using the basic commands of:
+	\begin{itemize}
+		\item play and then stop using the space bar
+		\item move the mouse and then left click to move the insertion (location) pointer
+		\item cut a section out by holding down the left mouse and drag, then key in “x” to cut or “c” to copy
+		\item paste a copy or cut section by moving the insertion pointer, then key in “v”
+	\end{itemize}
+	\item Add a title by highlighting the \textit{Video Effects} in the right hand side Resources window; then
+	highlighting the \textit{Title} icon and dragging it to the Program window video track and dropping.
+	\item Click on the middle icon button (looks like a magnifying glass) on the brown colored Title bar to
+	bring up the Title window bottom text box and key in a title.
+	\item Use the \textit{File} pulldown to select \textit{Render} to create the desired video.  In the \textit{Render} window just next to the empty box to the right of the \textit{ffmpeg} file format, click on the down arrow shown there
+	to see the choices and pick \textit{youtube}.  Then move back up to key in the path and filename to render
+	to.  It will pick all of the defaults automatically for you so then just click on the green checkmark to
+	have it start.  There is a progress bar in the main window, very bottom of the right hand side.
+	\item Key in “q” in the main window to get out of \CGG{} and yes or no to save your edit session.
+\end{enumerate}
+
+Youtube will allow the upload of the resulting rendered file as named.  However, Dailymotion requires that the file be named with an acceptable extension so you must rename the output file to have the extension of .webm instead of .youtube
+
+There are currently 6 specific variations within the ffmpeg (file format) / youtube (file type) for different video options.  You see these when you click on the wrench to the right of the word Video and then the Compression down arrow in the Video Preset window.  The first 3 are based on Webm/Vp9\protect\footnote{credit by Frederic Roenitz} and contain basic comments of usage and where to find more information.
+
+The first 3 below, plus any of the VP9 files under the file type of \textit{webm} are the recommended options to use because they are freely usable in any circumstance.
+
+\begin{center}
+	\begin{tabular}{l p{8cm}}
+		sd.youtube & Standard Definition use with default audio/Opus stereo.youtube \\
+		hd.youtube & High Definition “ “ \\
+		uhd.youtube & Ultra High Definition “ “ \\
+	\end{tabular}
+\end{center}
+
+For more details and options on VP9, see: {\small\url{https://developers.google.com/media/vp9}}
+
+Alternatives based on h264 and for non-commercial use are listed below.  For Dailymotion, these must be renamed to have a different extension of .mp4 instead of .youtube before uploading.
+
+\begin{center}
+	\begin{tabular}{l p{8cm}}
+		sd\_h264.youtube & Standard Definition – must change to audio stereo\_with\_h264.youtube \\
+		hd\_h264.youtube & High Definition -          “ “ \\
+		uhd\_u264.youtube & Ultra High Definition - “ “ \\
+	\end{tabular}
+\end{center}
+
+\subsection{Piping Video to a Command Line}%
+\label{sub:piping_video_command_line}
+\index{rendering!command line}
+
+You can pipe a video to any command line on the computer, such as
+ffmpeg.  This can be especially useful with raw video files.  Next
+is an example usage.
+
+\begin{enumerate}
+	\item on a terminal window create a named pipe file, for example:
+	\begin{lstlisting}[style=sh]
+		mknod /tmp/piper.yuv p
+	\end{lstlisting} load your video and do your editing
+	\item set up your Render (\texttt{Shift-R}), you can choose a raw
+	format such as \textit{yuv} or \textit{rgb}
+	\item for the filename \textit{Select a file to render to}, use the
+	named pipe as created in step 1 (\texttt{/tmp/piper.yuv})
+	\item for \textit{Insertion Strategy}, you will want to make sure to
+	select \textit{insert nothing}
+	\item click for OK on the green checkmark.(the \CGG{} gui will look
+	like it is hanging while waiting for a command line to use the
+	pipe.)
+	\item on the terminal window, keyin your command, for example:
+	\begin{lstlisting}[style=sh]
+		/mnt0/build5/cinelerra-5.1/thirdparty/ffmpeg-3.4.1/ffmpeg -f \
+		rawvideo -pixel_format yuv420p -video_size 1280x720 \
+		-framerate 30000/1001 -i /tmp/piper.yuv /tmp/pys.mov
+	\end{lstlisting}
+\end{enumerate}
+
+A slightly different option can be used instead that may be more
+familiar to some.  In the render menu after choosing the File Format
+of \textit{ffmpeg}, use the pulldown to choose \textit{y4m} as the
+file type.  This choice results in putting a header on the rendered
+output with some pertinent information that can be used for ffmpeg
+processing thus alleviating the requirement for
+\textit{pixel\_format}, \textit{video\_size}, and \textit{framerate}
+on the ffmpeg command line.  In this case the format is
+\textit{yuv4mpegpipe} instead of \textit{rawvideo}.  An example
+command line would look as follows (assuming the created pipe is
+called \texttt{piper.y4m}):
+\begin{lstlisting}[style=sh]
+	ffmpeg -f yuv4mpegpipe -i /tmp/piper.y4m -vcodec libx264 /tmp/test.mp4
+\end{lstlisting}
+
+\subsection{Faststart Option for MOV type files}%
+\label{sub:faststart_option_mov0}
+
+If you have mov video and want to be able to start playing without
+having to first load the entire video, \textit{-movflags=+faststart}
+is needed for ffmpeg to put the meta-data, known as the \textit{moov
+	atom}, at the beginning of the file.  Otherwise, ffmpeg puts this
+atom at the end of the video file which means you have to wait to
+play until the whole video is loaded.  Or worse yet, if the file
+becomes damaged in the middle and you can not get to the end, you
+won’t be able to play anything.
+
+Now you can have the \textit{moov atom} put on the front of the file
+(automatically via a second pass).  To do this, when rendering using
+ffmpeg \& either the mp4 or qt format/container, click on the
+video/audio wrenches and choose \textit{faststart\_h264}.  With the
+\textit{qt} format, settings will just be the default whereas the
+\textit{mp4} format uses the highest quality and lowest file size as
+possible, but you can easily modify these options in the associated
+Video Preset textbox.
 
 \section{Batch Rendering}%
 \label{sec:batch_rendering}
@@ -965,410 +1426,6 @@ If one of the render farm computers is connected to the internet,
 you should use a firewall to maintain the safety of all of the
 computers.  The ports have to be reachable for the intranet but you
 do not want the ports to be open to the outside.
-
-\section{Some Specific Rendering}%
-\label{sec:some_specific_rendering}
-
-\noindent The next few pages relate to rendering for specific common
-cases.
-
-\subsection{FFmpeg Common H.264 Rendering}%
-\label{sub:ffmpeg_h264_rendering}
-
-Because H.264 is so widely used, the method in \CGG{} Infinity is
-outlined below.  These setup steps make it easy to just get started.
-
-\begin{itemize}
-\item File $\rightarrow$ Render
-\item File Format $\rightarrow$ FFMPEG + mp4
-\item Video Wrench $\rightarrow$ Preset $\rightarrow$ h264.mp4 +
-  bitrate: 6000000 (or whatever) + OK
-\item Audio Wrench $\rightarrow$ Preset $\rightarrow$ h265.mp4 +
-  bitrate: 224000 (or whatever) + OK
-\item Set your target path in: Render $\rightarrow$ Select a file to
-  render to
-\item Set your timeline in: Render $\rightarrow$ Render range +
-  click Project
-\item Set your insertion strategy: Replace project (or whatever)
-\item Press OK to start rendering.
-\end{itemize}
-
-\subsection{Lossless Rendering}%
-\label{sub:loseeless_rendering}
-\index{rendering!lossless}
-
-Lossless means that in the compression of a file, all of the
-original data, every single bit, can be recovered when the file is
-uncompressed.  This is different than \textit{lossy compression}
-where some data is permanently deleted so that when uncompressed,
-all of the original data can not be exactly recovered.  Lossy is
-generally used for video and sound, where a certain amount of
-information loss will not be detected by most users or the playback
-hardware does not reproduce it anyway -- it is a trade-off between
-file size and image/sound quality.  The files created will be more
-than 10 times larger than usual.  Most players will not be able to
-decode lossless as the bitrate will overwhelm the device.
-
-For x264 lossless compression to work, the only color model allowed
-here is yuv420p.  Any other specification will be converted to
-yuv420p and the data will be modified.  Also, keep in mind that the
-YUV color model has to be converted to RGB, which also modifies the
-data.
-
-To use x264 lossless rendering -- choose File format of ffmpeg, m2ts
-in the Render window.  Click on the Video wrench, which brings up
-the Video Preset window and scroll down in the Compression filebox
-and choose \texttt{lossless.m2ts}.  \textit{Preset=medium} is the
-default, but can be varied from \textit{ultrafast} (least amount of
-compression, but biggest file size) to \textit{veryslow} (most
-amount of compression, but still HUGE) in the parameter box where
-you see $qp=0$.  This option is also available for bluray creation.
-
-\subsection{Extra “cin\_” Options for Render with FFmpeg}%
-\label{sub:extra_cin_option_ffmpeg}
-\index{rendering!ffmpeg options}
-
-There are several special parameters that can be used in the ffmpeg
-options file to pass values to the codecs that are not normally
-available.  They're called Global Options. These are explained
-below.
-
-\paragraph{cin\_pix\_fmt} The Render menus allows you to choose the
-codec input pixel format (figure~\ref{fig:yuv420}).  The Pixels
-selection provides the available pixel format options for the chosen
-codec type; valid choices vary for the different file types.  This
-list represents the formats that the codec advertises.  It is not
-always complete, and it may include options that are not legal with
-all parameter configurations.
-
-\begin{figure}[htpb] \centering
-  \includegraphics[width=1.0\linewidth]{yuv420.png}
-  \caption{Render \& Video Preset menus displaying Pixel choices}
-  \label{fig:yuv420}
-\end{figure}
-
-\begin{itemize}
-\item The \textit{Bitrate}, \textit{Quality}, and \textit{Pixels}
-  fields are only updated when the Video Options are reloaded.  This
-  occurs when you either change the ffmpeg file format, or video
-  presets compression fields.
-\item If the video options preset has \textit{cin\_pix\_fmt}
-  defined, its value will be loaded as the default.  If you override
-  the default, the value you specify will be used.
-\item If the video options preset does not have
-  \textit{cin\_pix\_fmt}, the default pixel format will be computed by
-  ffmpeg (\textit{avcodec\_find\_best\_pix\_fmt\_of\_list}), using the
-  session format as the source choice.  The \textit{best} is usually
-  the format which is most similar in color and depth.
-\item If no choices are available, yuv420p for video will be used.
-\item You can also specify ffmpeg pixel formats which are not in the
-  list.  The list is provided by ffmpeg as input selection, but is
-  more like suggestions than fact.  For example, the raw formats can
-  take almost any format, but the rawvideo codec actually specifies no
-  legal formats.
-\end{itemize}
-
-\noindent Some option files provide \textit{cin\_pix\_fmt} to
-suggest a choice for good quality output or to prevent parameter
-errors when the other provided parameters conflict with the
-\textit{best} pixel format.  This is the case in
-\texttt{faststart\_h264.mp4} where the \textit{profile=high}
-parameter dictates pixel format must be \texttt{yuv420p}.
-
-\paragraph{cin\_bitrate} If you specify the bitrate, you can not
-specify the quality.\\ Example: \textit{cin\_bitrate=2000000}
-
-\paragraph{cin\_quality} If you specify the quality, you can not
-specify the bitrate.\\ Example: \textit{cin\_quality=7}
-
-\paragraph{cin\_stats\_filename} This parameter is useful for 2 pass
-operations.\\ Example: \texttt{cin\_stats\_filename
-  /tmp/cin\_video\_vp9\_webm}
-
-\paragraph{cin\_sample\_fmt} For audio the preset sample format
-default is computed in a similar way as stated above for video or
-can be set with the \textit{cin\_sample\_fmt} parameter
-(figure~\ref{fig:audio}).  If no choices are provided, s16 will be
-used.\\ Example: \textit{cin\_sample\_fmt=s16}
-
-\begin{figure}[htpb] \centering
-  \includegraphics[width=0.7\linewidth]{audio.png}
-  \caption{Render menu showing where Samples is}
-  \label{fig:audio}
-\end{figure}
-
-\paragraph{Private Options} (muxers). In the window of the
-\textit{wrench} in addition to the \textit{View} button, which
-allows more global options and changes to the formats, there is an
-additional \textit{Format} button that allows you to modify the
-Private Options, i.e.\ relating to specific muxing formats. More
-information on all these options can be found at
-\href{https://ffmpeg.org/ffmpeg-all.html#Format-Options}{ffmpeg.org}
-sections 19 and 21.
-
-\subsection{Two-pass Encoding with FFmpeg}%
-\label{sub:two_pass_encoding_ffmpeg}
-\index{rendering!ffmpeg two-pass encoding}
-
-In \CGG{} for two-pass, you need to run ffmpeg twice, with the same
-settings, except for designating the options of pass~1 for the first
-pass and then pass~2.  In pass~1, a logfile that ffmpeg needs for
-the second pass is created.  In pass~1 the audio codec should be
-specified that will be used in pass~2.  For more information on
-ffmpeg 2-pass, check
-\href{https://trac.ffmpeg.org/wiki/Encode/H.264}{ffmpeg.org}.
-Different libraries may have different requirements and you will
-probably have to determine this by looking online at ffmpeg or
-looking directly at that code.
-
-This 2 line ffmpeg 2-pass operation can be functionally duplicated
-in \CGG{} in the steps below them:
-
-\begin{lstlisting}[style=sh]
-ffmpeg -y -i $INPUT \
-  -c:v libx264 -b:v 2600k -pass 1 \
-  -c:a aac -b:a 128k -f mp4 /dev/null && \
-  ffmpeg -i $INPUT \
-    -c:v libx264 -b:v 2600k -pass 2 \
-    -c:a aac -b:a 128k $OUTPUT.mp4
-\end{lstlisting}
-
-\begin{enumerate}
-\item After you have completed your editing, do a Save Session with
-  \texttt{File $\rightarrow$ Save as}\dots Before starting, be sure
-  your session is ready for batch render. That is, positioned at the
-  beginning and nothing selected.
-\item Bring up \texttt{File $\rightarrow$ Batch Render}\dots where
-  you will do the setup.
-\item Click on the \textit{Delete} box to remove old jobs
-  highlighted in the bottom listbox.
-  \begin{itemize}
-  \item For the \textit{File Format} choose ffmpeg and mp4 for the
-    type.
-  \item Set \textit{Output path} to the path and filename for the
-    render output file.
-  \item Click on \textit{Use Current EDL} to use the designated EDL
-    Path file.
-  \item Click on \textit{New} and you will see a new highlighted job
-    show up in the listbox at the bottom.
-  \item Use the Audio wrench to set bitrate to $128000$ ($128k$ as
-    in ffmpeg example above).
-  \item Click checkmark OK\@.  Open the video tools with the video
-    wrench.
-  \item Set the Video Compression to \textit{h264.mp4} (as seen in
-    the example).
-  \item Set the bitrate to $2600000$ ($2600k$ as in ffmpeg example
-    above).
-  \item Add the following 2 lines after the first line:
-\begin{lstlisting}[style=sh]
-flags +pass1
-passlogfile /tmp/"{temporary log file name}.log"
-\end{lstlisting} Click checkmark OK.
-  \end{itemize}
-\item Click on \textit{New} to create the second pass job.  You will
-  see this second job in the listbox below.  Use the Video wrench and
-  change pass1 to pass2 as follows.
-\begin{lstlisting}[style=sh]
-flags +pass2
-\end{lstlisting}
-\item Click checkmark OK.
-\item Click on the \textit{Start} box and watch it go!
-\item You can now check the output file for results.  At the time
-  this was documented, \textit{rc=2pass} will be in the output.
-\end{enumerate}
-
-If you need to re-render this, the Batch Render will still be set up
-but you have to click on the \textit{Enabled} column in the listbox
-to re-enable the jobs to run which puts an X there.  Click Start
-again. You can reuse batch job using the \textit{save jobs} and
-\textit{load jobs} buttons in the batch render dialog.
-
-\paragraph{Render shortcuts for webm, h264, h265} are available by
-using the option files that are already set up for this purpose.
-Use the render menu as usual, with ffmpeg/mp4, choose h264 or h265
-\textit{pass1of2\_h26x} for the video and
-\textit{passes1and\-2\_h26x} for the audio; with ffmpeg/webm, choose
-\textit{pass1of2\_vp9}.  When that is finished, you will have to use
-the render menu again and this time for video, choose
-\textit{pass2of2\_h26x} or \textit{pass2of2\_vp9}.  The logfile is
-hard coded in the options file so will write over any currently
-existing logfile if you do not change it before you start the
-render.
-
-\paragraph{Requirements for some other libraries} (used instead
-of \textit{flags +pass1} \& \textit{passlogfile}):
-\begin{description}
-\item[x265:] add this line:
-\begin{lstlisting}[style=sh]
-x265-params=pass=1:stats=/tmp/{temporary-log-file-name}.log
-\end{lstlisting} at the time this document was written, you should
-  see in the output: \textit{stats-read=2}
-\item[libvpx-vp9, xvid, and huffyuv:]~
-\begin{lstlisting}[style=sh]
-cin_stats_filename /tmp/{temporary-log-file-name}.log
-flags +pass1 (or flags +pass2 for the second pass)
-\end{lstlisting}
-\end{description}
-
-\textit{NOTE:} for vp9, the best Pixels is \textit{gbrp}
-
-\subsection{Use case: High Efficiency Video Coding (HEVC)}%
-\label{sub:use_case_hevc}
-
-An example of video profile based on CRF, a quality-controlled
-variable bitrate, instead of fixed quality scale (ABR).  HEVC
-(H.265) was developed as a successor to AVC (H.264) to more
-efficiently compress the future large amounts of data from 2/4/8k
-videos.  In comparison to AVC, an average saving of around 30
-percent can be assumed for the same quality.  Because HEVC is not
-bound to any size format, it is suitable for virtually any image
-size.
-
-The following example is HD and FullHD oriented and produces a
-picture quality similar to the Blu-ray with some limitations.  As
-container Matroska (\texttt{.mkv}) is used, but also mp4 and others
-are possible.
-
-\begin{lstlisting}[style=sh]
-matroska libx265
-
-# CRF 16 creates a balanced compromise
-# between quality and file size.
-crf=16
-
-# Preset changes encoding speed and generally
-# degrades the overall result. Medium (default)
-# always fits.
-preset=medium
-
-# Additional parameters that are passed on to the codec.
-# me=star improves the search for very fast
-# movements, but slows down the encoding.
-#x265-params=me=star
-
-# Keyint does FFmpeg automatically, otherwise
-# the setting must match the frame rate.
-#keyint_min=25
-
-# Profile does FFmpeg automatically.
-#profile=high
-
-# Source sRBG and retention of color space.
-# 720/1080=bt709 if no profile set. Useful
-# for formats smaller than 720 if no lossy
-# conversion is desired.
-colorspace=bt709
-color_trc=bt709
-color_primaries=bt709
-
-# Output in 10 bit, prevents 8-bit step formation
-pixel_format=yuv420p
-\end{lstlisting}
-
-\noindent \textit{NOTE:}
-
-A CRF of 16 delivers satisfactory results in most cases. However, if
-the video material is really \emph{grainy}, a CRF~16 can lead to
-unwanted large files.  In this case, a trial export of perhaps one
-minute should be performed. The resulting bit rate can be used to
-correct the CRF to 17,\,18,\,19\ldots -- remember, a CRF of $0$ (zero)
-means lossless, the higher the number the stronger the lossy
-compression. The approximate calculation of the final file size can
-be extrapolated from the sample export.
-
-The color space information must be used explicitly so that it can
-be included in the video. \CGG{} or FFmpeg does not write it by
-itself. Without this information the players (e.\,g.\
-\href{https://mpv.io/}{mpv}) stick to the dimensions of the video
-and take the assumed color model from a table. With videos in the
-dimensions from 720 to 1080 this is bt709. For smaller dimensions,
-e.\,g.\ DVD, bt601 is assumed and for 4k and above it is
-bt2020. Normally this is not a problem, but if you want to export a
-FullHD without color loss to a smaller size like 576 for example,
-you have to inform the encoder as well as the decoder of the
-player. This also applies if the videos are to be loaded on video
-platforms, where they are then converted into videos of different
-sizes. It is a security measure to prevent false colors, such as the
-color profiles in digital photos and the copies made from them.
-
-The HEVC tuning has not been considered here, because it is is
-rarely used and requires background knowledge.
-
-Further links:
-\begin{itemize}
-\item \href{http://x265.readthedocs.org/en/default/}{x265
-    Documentation}
-\item \href{http://x265.readthedocs.org/en/latest/cli.html}{x265
-    Command Line Options}
-\item \href{http://x265.readthedocs.org/en/latest/presets.html}{x265
-    Presets/Tuning}
-\end{itemize}
-
-\subsection{Piping Video to a Command Line}%
-\label{sub:piping_video_command_line}
-\index{rendering!command line}
-
-You can pipe a video to any command line on the computer, such as
-ffmpeg.  This can be especially useful with raw video files.  Next
-is an example usage.
-
-\begin{enumerate}
-\item on a terminal window create a named pipe file, for example:
-\begin{lstlisting}[style=sh]
-mknod /tmp/piper.yuv p
-\end{lstlisting} load your video and do your editing
-\item set up your Render (\texttt{Shift-R}), you can choose a raw
-  format such as \textit{yuv} or \textit{rgb}
-\item for the filename \textit{Select a file to render to}, use the
-  named pipe as created in step 1 (\texttt{/tmp/piper.yuv})
-\item for \textit{Insertion Strategy}, you will want to make sure to
-  select \textit{insert nothing}
-\item click for OK on the green checkmark.(the \CGG{} gui will look
-  like it is hanging while waiting for a command line to use the
-  pipe.)
-\item on the terminal window, keyin your command, for example:
-\begin{lstlisting}[style=sh]
-/mnt0/build5/cinelerra-5.1/thirdparty/ffmpeg-3.4.1/ffmpeg -f \
-  rawvideo -pixel_format yuv420p -video_size 1280x720 \
-  -framerate 30000/1001 -i /tmp/piper.yuv /tmp/pys.mov
-\end{lstlisting}
-\end{enumerate}
-
-A slightly different option can be used instead that may be more
-familiar to some.  In the render menu after choosing the File Format
-of \textit{ffmpeg}, use the pulldown to choose \textit{y4m} as the
-file type.  This choice results in putting a header on the rendered
-output with some pertinent information that can be used for ffmpeg
-processing thus alleviating the requirement for
-\textit{pixel\_format}, \textit{video\_size}, and \textit{framerate}
-on the ffmpeg command line.  In this case the format is
-\textit{yuv4mpegpipe} instead of \textit{rawvideo}.  An example
-command line would look as follows (assuming the created pipe is
-called \texttt{piper.y4m}):
-\begin{lstlisting}[style=sh]
-ffmpeg -f yuv4mpegpipe -i /tmp/piper.y4m -vcodec libx264 /tmp/test.mp4
-\end{lstlisting}
-
-\subsection{Faststart Option for MOV type files}%
-\label{sub:faststart_option_mov0}
-
-If you have mov video and want to be able to start playing without
-having to first load the entire video, \textit{-movflags=+faststart}
-is needed for ffmpeg to put the meta-data, known as the \textit{moov
-  atom}, at the beginning of the file.  Otherwise, ffmpeg puts this
-atom at the end of the video file which means you have to wait to
-play until the whole video is loaded.  Or worse yet, if the file
-becomes damaged in the middle and you can not get to the end, you
-won’t be able to play anything.
-
-Now you can have the \textit{moov atom} put on the front of the file
-(automatically via a second pass).  To do this, when rendering using
-ffmpeg \& either the mp4 or qt format/container, click on the
-video/audio wrenches and choose \textit{faststart\_h264}.  With the
-\textit{qt} format, settings will just be the default whereas the
-\textit{mp4} format uses the highest quality and lowest file size as
-possible, but you can easily modify these options in the associated
-Video Preset textbox.
 
 %%% Local Variables:
 %%% mode: latex

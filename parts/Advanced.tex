@@ -1083,3 +1083,56 @@ ffmpeg -i originalfile.mp4 -metadata timecode="14:36:08:29" -c copy newfile.mp4
 # where "-c copy" just copies the video/audio to the following output filename
 \end{lstlisting}
 
+\section{Subtitles}%
+\label{sec:subtitles}
+\index{subtitles}
+
+\CGG{} can create subtitles directly in the timeline with the Subtitle tool. Subtitles are added by using the main window pulldown   \texttt{File $\rightarrow$ Subtitle} (Alt-y)  which brings up a window allowing you to type the filename of a previously generated text file containing the desired words/lines, the script.  After entering the filename, click \texttt{Load} to read in your script.  By creating a script file ahead of time, it lets you easily add dialog that was already written out and carefully edited for spelling and proper grammar.
+
+The file must be plain text; a .srt or .sub can also be used, but only the text lines will be used and not the timecodes or comments. The format of the script/text input file has specific requirements as listed below:
+
+\begin{itemize}
+	\item Lines can be any length but they will be broken up to fit according to some criteria below.
+	\begin{itemize}
+		\item Running text used as script lines will be broken into multiple lines.
+		\item The target line length is 60 characters.
+		\item Punctuation may be flagged to create an early break.
+		\item Single carriage return ends an individual script line.
+		\item Double carriage return indicates the end of a entry and helps to keep track of where you are.
+	\end{itemize}
+	\item The "\textit{=}" sign in column 1 indicates a comment seen in the script text to assist you in location.
+	\item An "\textit{*}" at the beginning of the line is a comment and not a script line.
+	\item \textit{Whitespace} at either the beginning of a script line or the end will be removed.
+\end{itemize}
+
+Figure~\ref{fig:subtitle01} shows the Subtitle window you will see.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\linewidth]{subtitle01.png}
+	\caption{Subtitle window}
+	\label{fig:subtitle01}
+\end{figure}
+
+To put the subtitles onto your media, first add a subtitle track via the pulldown  \texttt{Tracks $\rightarrow$ Add subttl} (Shit-Y). In the Subtitle window, note that there are 2 major textboxes.  There is the \textit{Script Text} textbox showing the current entry of text from your input file and there is the \textit{Line Text} textbox showing the currently active text.  In your subtitle track, select a timeline region (in/out or drag select with hairline cursor/highlight or via labels or the \textit{selection start/length/end time} textboxes in the Zoom Panel) to indicate the region where you want the active Line Text to be pasted.  Then click the \texttt{Paste} button in the Subtitle window to paste the line onto the subtitle track.  Silence will be added to the subtitle track in the places in the media where there are gaps.
+
+Editing in the Line Text box can be used to change the active script line. By double clicking the timeline over the subtitle track, you can reselect the active script line.  The subtitle text will be reloaded into the Line Text box and can be edited and re-pasted as the new active subtitle text.  You can also highlight multiple lines in the Script Text box and paste them (using the usual window paste methodology) into the Line Text box.  After pasting to the timeline, the Line Text box will be updated with the next script line.  In addition, if you triple click a line in the \textit{Script Text} box, it will automatically become the current line in the \textit{Line Text} box.
+
+When you are finished, before clicking on \textit{Save}, you can specify the output format using the \textit{Format} drop-down button. You can choose between the classic \texttt{.udvd} (micro DVD) and the more universally supported \texttt{.srt} (subrip) and \texttt{.sub} (subviewer). The next step is to provide a legitimate filname in the \textit{Path} box; your current directory will be used if only a filename but no directory path is supplied.  The filename used will automatically have a "--" after it followed by the \textit{track label} and then \textit{udvd/srt/sub} extension added; any extension in the filename will be removed..  If you click OK before saving, the subtitle script position is saved with the session.  This is convenient for continuing where you left off.
+
+To reposition the script, use the slider or tumbler buttons:
+
+\textit{Slider} bar to move through the text entries quickly. \\
+\textit{Prev} or \textit{Next} buttons to go to the previous or next script line.
+
+Figure~\ref{fig:subtitle02} shows what the pasted subtitle script looks like in a portion of the main window.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=1.0\linewidth]{subtitle02.png}
+	\caption{Subtitles on timeline}
+	\label{fig:subtitle02}
+\end{figure}
+
+
+
