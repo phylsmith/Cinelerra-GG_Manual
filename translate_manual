@@ -24,7 +24,10 @@ rm -rf CinelerraGG_Manual
 #latex2html -html_version 4.0,math -use_pdftex -nouse_dvipng -image_type gif -nofootnode -numbered_footnotes -split +3 -link 3 -bottom_navigation -local_icons -t 'Cinelerra-GG Infinity' CinelerraGG_Manual.tex
 
 # another alternative options combination
-latex2html -html_version 4.0,math -use_pdftex -use_dvipng -image_type png -nofootnode -numbered_footnotes -cut_ref_name -split +3 -link 3 -bottom_navigation -local_icons -t 'Cinelerra-GG Infinity' CinelerraGG_Manual.tex
+#latex2html -html_version 4.0,math -use_pdftex -use_dvipng -image_type png -nofootnode -numbered_footnotes -cut_ref_name -split +3 -link 3 -bottom_navigation -local_icons -t 'Cinelerra-GG Infinity' CinelerraGG_Manual.tex
+
+# Alternative currently used on the cinelerra-gg.org website / created on a Fedora system
+latex2html -html_version 4.0,math -use_pdftex -nouse_dvipng -long_titles 5 -image_type gif -nofootnode -numbered_footnotes -split +3 -link 3 -cut_ref_name -bottom_navigation -local_icons -t 'CinelerraGG_Manual' CinelerraGG_Manual.tex
 
 # revert back to the original documentclass
 #mv -f CinelerraGG_tmp.tex CinelerraGG_Manual.tex
