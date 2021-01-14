@@ -491,7 +491,20 @@ Reduce audio background noise. There is only 1 parameter which is used to regula
 \label{sub:denoisefft}
 \index{denoisefft}
 
-Noise removal from audio using FFT editing. Set the Denoise Power dial in dB and choose the number of reference samples.
+Audio sampling (time data) is converted to a frequency spectrum using FFT (\textit{Fast Fourier Transform}). Since the \textit{Signal} contains only the background noise while the rest of the clip contains noise + audio to clean up, you get separate frequencies so you can subtract them to get the clean audio only. Set the Denoise Power dial in dB and choose the number of reference samples.
+
+For example, if you record a voice with a microphone\protect\footnote{credit fary54}:
+\begin{enumerate}
+        \item You record 15 seconds of background noise (without talking). This is the \textit{Signal audio clip}.
+        \item After 15 seconds, start the voice. This is the whole \textit{Noise Audio clip}
+        \item You stop recording.
+        \item You place the FFT effect on the whole length of the recording (including the 15 seconds of signal noise).
+        \item Then place your cursor at the beginning of the 15 seconds. Enter the number of samples in the effect presets, e.g. 65536.
+\end{enumerate}
+
+This has the effect of creating a keyframe that marks the beginning of the reference range which, in our example, ends at 65536 samples later.
+
+During playback, the background noise is then automatically removed along the entire length of the effect.
 
 \subsection{Despike}%
 \label{sub:despike}
@@ -1593,7 +1606,8 @@ This effect flips a video track either vertically or horizontally.
 \label{sub:foreground}
 \index{foreground}
 
-Whatever the visual content of the frame, the Foreground plugin application applies a uniform color that can be chosen by color picker; color wheel; color presets; the various HSV, RGB, YUV sliders or by entering the hexadecimal value. The alpha slider is not missing either.
+Whatever the visual content of the frame, the Foreground plugin application applies a uniform color that can be chosen by color picker, color wheel, color presets, or by entering the hexadecimal value.
+In addition there are HSV, RGB, YUV, and alpha sliders to vary the color accordingly.
 
 \subsection{Frames to fields}%
 \label{sub:frames_to_fields}
