@@ -782,11 +782,11 @@ Ladspa effects are supported in realtime and rendered mode for audio. These audi
 export LADSPA_PATH=/usr/lib/ladspa
 \end{lstlisting}
 
-\section[Audio LV2 / Calf Plugins]{Audio LV2 / Calf Plugins\protect\footnote{Optional Feature - OS dependent}}%
+\section[Audio LV2 / Calf Plugins]{Audio LV2 / Calf Plugins}%
 \label{sec:audio_lv2_calf_plugins}
 \index{LV2 - Calf}
 
-LV2 is an open standard for audio plugins using a simple interface with extensions which add functionality to support audio software. These plugins were written by external developers and provide additional audio effects to \CGG{} audio without having to change \CGG{} every time. Because the LV2 plugins are separate from \CGG{} Infinity, if one fails or does not perform as expected, \CGG{} should stay running and you will have to contact the programmers responsible for that plugin for a fix.
+LV2\protect\footnote{Optional Feature - OS dependent} is an open standard for audio plugins using a simple interface with extensions which add functionality to support audio software. These plugins were written by external developers and provide additional audio effects to \CGG{} audio without having to change \CGG{} every time. Because the LV2 plugins are separate from \CGG{} Infinity, if one fails or does not perform as expected, \CGG{} should stay running and you will have to contact the programmers responsible for that plugin for a fix.
 
 Typically, a user OS has specialized package groups installed. It is difficult to create one build of \CGG{} to accommodate all potential LV2 plugins. Specifically for the \textit{Calf-Studio LV2 plugins}, you should install the \textit{Calf Plugins} package. The user’s computer must have \textit{gtk-2-runtime} installed, which seems to be automatically done already for most distros. For users doing their own builds, you can build \CGG{} without LV2 support by including \texttt{-{}-without-lv2} in the configure step. The default build is \texttt{-{}-with-lv2=yes} and requires that \textit{GTK-2-devel} must be installed or the build will fail and notify you. In addition for some newer distros, you will need to install
 \textit{lv2-calf-plugins-gui}; for example Fedora version 32.
@@ -1161,11 +1161,11 @@ Use the effect along with keyframing to brighten a long shot that is dark at the
 
 Makes your video burn where there are small light colored patches of video. This came from \url{https://effectv.com}.
 
-\subsection[C41]{C41\protect\footnote{credit Florent Delannoy, original program code author, and Edouard Chalaron}}%
+\subsection[C41]{C41}%
 \label{sub:c41}
 \index{C41}
 
-The C41 plugin takes a $16\,bit C41$ digital intermediate negative film as input and outputs a positive image. It became necessary because $C-41$ negatives can fade or color-shift over time which was a problem early on. It is still important today because there is a large amount of documentaries, video clips, and other media out there that was shot on super $16$ film. This works for RGB-float, RGB, and also YUV variations.
+The C41\protect\footnote{credit Florent Delannoy, original program code author, and Edouard Chalaron} plugin takes a $16\,bit C41$ digital intermediate negative film as input and outputs a positive image. It became necessary because $C-41$ negatives can fade or color-shift over time which was a problem early on. It is still important today because there is a large amount of documentaries, video clips, and other media out there that was shot on super $16$ film. This works for RGB-float, RGB, and also YUV variations.
 
 There are two sets of data -- the scanned input values and your corrected values. Simple functionality of the plugin is to compute the data, transform to get corrected values, then apply that.
 
@@ -1243,11 +1243,11 @@ If the lightness or hue is within a certain \textit{threshold} it is erased. Inc
 
 Normally threshold is very low when using a high slope. The two parameters tend to be exclusive because slope fills in extra threshold. The slope tries to soften the edges of the chroma key but it does not work well for compressed sources. A popular softening technique is to use a maximum slope and chain a blur effect below the chroma key effect to blur just the alpha.
 
-\subsection[Chroma Key (HSV)]{Chroma Key (HSV)\protect\footnote{Credit for Plugin by Jerome Cornet \url{http://jcornet.free.fr/linux/chromakey.html}}}%
+\subsection[Chroma Key (HSV)]{Chroma Key (HSV)}%
 \label{sub:chroma_key_hsv}
 \index{chroma key HSV}
 
-Chroma Key (HSV) (figure~\ref{fig:chroma-key-hsv}) replaces a color with another color or transparency using HSV variables; it is frequently used to remove a color from a video to composite with another image. This process is generally referred to as green screen or blue screen process (because of the color that is keyed out). More information: {\small \url{http://en.wikipedia.org/wiki/Chromakey}}
+Chroma Key (HSV)\protect\footnote{Credit for Plugin by Jerome Cornet \url{http://jcornet.free.fr/linux/chromakey.html}} (figure~\ref{fig:chroma-key-hsv}) replaces a color with another color or transparency using HSV variables; it is frequently used to remove a color from a video to composite with another image. This process is generally referred to as green screen or blue screen process (because of the color that is keyed out). More information: {\small \url{http://en.wikipedia.org/wiki/Chromakey}}
 
 \begin{figure}[htpb]
     \centering
@@ -3978,11 +3978,11 @@ Some of the ffmpeg plugins are not usable with \CGGI{} due to input/output requi
 FFmpeg’s plugin guide is at the link:
 \href{https://ffmpeg.org/ffmpeg-filters.html}{ffmpeg-filters}.
 
-\subsection{FFmpeg Audio Plugins\protect\footnote{credit to WPfilmmaker}}%
+\subsection{FFmpeg Audio Plugins}%
 \label{sub:ffmpeg_audio_plugins}
 \index{ffmpeg!audio plugin}
 
-The following is a list of the integrated audio plug-ins.
+The following is a list of the integrated audio plug-ins\protect\footnote{credit to WPfilmmaker} .
 \begin{description}
 \item [F\_abench]~\\Benchmark part of a filtergraph.
 \item [F\_acompressor]~\\Audio compressor.
@@ -4093,11 +4093,11 @@ The following is a list of the integrated audio plug-ins.
 \item [F\_volumedetect]~\\Detect audio volume.
 \end{description}
 
-\subsection{FFmpeg Video Plugins\protect\footnote{credit to WPfilmmaker}}%
+\subsection{FFmpeg Video Plugins}%
 \label{sub:ffmpeg_video_plugins}
 \index{ffmpeg!video plugins}
 
-The following is a list of the integrated video plug-ins.
+The following is a list of the integrated video plug-ins \protect\footnote{credit to WPfilmmaker} .
 \begin{description}
 \item [F\_addroi]~\\Mark a region of interest in a video frame.
 \item [F\_amplify]~\\Amplify changes between successive video
