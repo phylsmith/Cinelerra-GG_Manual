@@ -693,7 +693,7 @@ a more efficient method of rendering. To use this feature you need to
 understand certain concepts.
 
 \begin{enumerate}
-	\item You must define a list of Batches (\textit{Job} \index{job}) before starting the rendering. This is created using the \textit{New} button and displayed in \textit{Batches to Render} dialog.
+	\item  You must define a list of Batches (\textit{Job} \index{job}) before starting the rendering. This is created using the \textit{New} button and displayed in \textit{Batches to Render} dialog.
 	\item Each batch consists of a source project already created in \CGG{}, e.g. \texttt{aaa.xml}, to which we assign the rendering parameters.
 	\begin{itemize}
 		\item to associate \texttt{aaa.xml} to the batch we use the \textit{EDL Path} input field.
@@ -732,7 +732,7 @@ called \textit{Batches to render}.  Above this are the configuration
 parameters for a single batch; a batch is simply a pairing of a
 project file with a choice of output file and render settings.
 
-Set the \textit{Output path}, \textit{File format}, \textit{Audio},
+It may be advisable to start with a \textit{Delete} so you don't have any problems. Set the \textit{Output path}, \textit{File format}, \textit{Audio},
 \textit{Video}, and \textit{Create new file at each label}
 parameters as if you were rendering a single file.  These parameters
 apply to only one batch.  In addition to the standard rendering
@@ -772,7 +772,25 @@ follows:
   job.
 \item[Elapsed:] the amount of time taken to render the batch if
   finished.  If field is empty, it did not run.
-\end{description} To start rendering from the first enabled batch,
+\end{description} 
+
+The \texttt{File $\rightarrow$ Batch Render} pulldown brings up the
+Batch Render window to be used for batch rendering as well as DVD/BD
+creation.  There are some additional buttons that can save time and
+mistakes.  These are described next.
+
+\begin{description}
+	\item[Save Jobs] when you have set up the batch jobs the way you
+	want and you think you may have to run them more than once, it is
+	beneficial to save the jobs for later use so you easily run them
+	again.
+	\item[Load Jobs] reload a previous set of saved jobs.  This can come
+	in handy if you did not have the time to render them when you
+	originally set them up, if you need to rerun, or if you got
+	interrupted.
+\end{description}
+
+To start rendering from the first enabled batch,
 hit \textit{Start}.  Once rendering, the main window shows the
 progress of the batch. After each batch finishes, the elapsed column
 in the batch list is updated and the next batch is rendered until
@@ -798,6 +816,84 @@ program, execute:
 \texttt{batchjob.xml}.  When invoked with these parameters, \CGG{}
 will start up and perform the rendering jobs in that list, without
 creating its usual windows.
+
+\subsection{Advanced features}%
+\label{sub:advanced_features}
+\index{batch rendering!more options}
+
+\textbf{Warning}: one of these advanced functions overwrites the original EDL, which will then be lost!
+
+Although the operation of Batch Rendering in \CGG{} is similar to that of other NLEs, there is one big difference that we need to take into account. The render setup is not done on a project-by-project basis, which are then brought into the Batch window to be rendered automatically. The setup must be done in the Batch rendering window, where various projects are loaded and set up. In the case of similar projects, derived from a single EDL with some variation, this mode offers the possibility of altering the projects without having to open each individual project, make the changes, set up the rendering, save and import into the Batch window. The procedure is to select the batch we want to modify in the Batches to render window; operate on the currently open timeline (even if it does not correspond to the one we want to modify) making the desired changes and then press the \textit{Save to EDL path} button. Thus the chosen batch, while retaining its original name, will now contain the modified project. Since this possibility destroys the original EDL overwriting it with the modified one, you must be very careful. This procedure is convenient in case the batches are similar, i.e. they are variations of the same EDL, where we want to experiment with other effects, other output formats or when trying out various cuts of a DVD/BD before the final production. It might also be useful to use an \textit{active region} of the timeline, so as to speed up rendering times but still have an indicative result for comparison. Instead operating on different projects, we can do a \textit{save as...} of the project on the timeline to have a new EDL with a new name and then replace it with the batch selected in the joblist using the \textit{Use Current EDL} button. The new project (with its name) overwrites the original project.
+
+The \textit{Save to EDL Path} and \textit{Use Current EDL} buttons
+can be valuable tools for advanced usage or for developers doing
+testing.  Description of how you can expect them to work will help
+to illustrate how to take advantage of their capabilities (figure~\ref{fig:batch-advanced}):
+
+\begin{figure}[htpb] \centering
+	\includegraphics[width=0.7\linewidth]{batch-advanced.png}
+	\caption{New Buttons with Unsafe GUI in batchrender}
+	\label{fig:batch-advanced}
+\end{figure}
+
+
+\begin{description}
+\item[Save to EDL Path] Warning: this function overwrites the contents of the original EDL with new data, keeping the name of the original. If we don't know exactly what we're doing we may lose the original project. If you have made a change to the EDL, use
+  this button to save the changes so that they will be used in the
+  render operation.  Although you can get the same results by using
+  \texttt{File $\rightarrow$ Save\dots}, this capability was initially
+  added to assist developers in testing the batch jobs needed to
+  create dvd/bluray media as it keeps the work focused in a single
+  window and retains the original job name.  An example --you have
+  everything all set up with a new job in the Batch Render window
+  using \texttt{generic.xml} for the EDL path and with a job name of
+  \texttt{original\_name.xml}.  Then you realize that you forgot to
+  cut out a section in the media that is not wanted in the final
+  product.  You can cut that out and then \textit{Save to EDL Path} so
+  your change will be in effect for the rendering.  Without this
+  button, you would be using the EDL you started with and the cut
+  would be ignored.  Alternatively, if the cut changes are saved via
+  \texttt{File $\rightarrow$ Save as}\dots with a filename of
+  \texttt{new.xml} and then you use \textit{Save to EDL Path}, the
+  current highlighted job displayed in the window as
+  \texttt{original\_name.xml} will be replaced with \texttt{new.xml}.
+  However, it is important to note that the result will be saved with
+  the name \texttt{original\_name} – that is, the new content from
+  \texttt{new.xml} but with the old name of
+  \texttt{original\_name.xml}. To have this functionality we have to enable the checkbox in \texttt{Settings $\rightarrow$ Preferences $\rightarrow$ Appearance} tab; section \textit{Dangerous:} and unchecked (default) \textit{Unsafe GUI in batchrender}.
+\item[Use Current EDL] Warning: this function overwrites the contents of the original EDL with new project. If we don't know exactly what we're doing we may lose the original project. if you are working on media and still testing
+  out the results, you can take advantage of this click-box to quickly
+  get results.  Basically, you change the media, save that change with
+  another name (in order to preserve the original name in case you
+  don't like the changes), and press \textit{Use Current EDL}.  As an
+  example, a user creates a new job in the Batch Render window using
+  the current media, previously defined in generic.xml, with the EDL
+  path of \texttt{generic.xml}.  The user then changes the media on
+  the timeline, saves the changes via \texttt{File $\rightarrow$ Save
+    as\dots} with a new name, such as \texttt{new\_name.xml}, and then
+  clicks on \textit{Use Current EDL}.  In this case, the EDL path
+  listbox will be automatically updated to the \texttt{new\_name.xml}
+  and the current existing highlighted job will be replaced with the
+  \texttt{new\_name.xml} in the EDL column.
+\item[Warn if Jobs/Session mismatched] Warning: It is better to keep this function unchecked because it is only needed in case of changes on the original EDL. By default it is hidden and is shown only if we enable the checkbox in \texttt{Settings $\rightarrow$ Preferences $\rightarrow$ Appearance} tab; section \textit{Dangerous:} and checked \textit{Unsafe GUI in batchrender}. After you set up your render
+  and press Start, the program checks to see if the current EDL
+  session matches your Batch Render job.  If the EDL has been changed
+  since the batch job was created, it warns you so that you have the
+  opportunity to \textit{Save to EDL} path to record those changes.
+  Otherwise, you can dismiss that warning box, disable the warning
+  message by unchecking the box and use the original values.  If you
+  never want to be warned about the mismatches, leave the box
+  unchecked (figure~\ref{fig:batch02}). It is advisable to keep it unchecked because it can cause problems.
+\end{description}
+
+\begin{figure}[htpb] \centering
+	\includegraphics[width=0.9\linewidth]{batch02.png}
+	\caption{Batch render with the 4 ghosted buttons on the right side
+		+ the Warning message below}
+	\label{fig:batch02}
+\end{figure}
+
+A very clear tutorial on these features can be found \href{https://linuxvideoediting.blogspot.com/2021/01/save-edl-path-use-current-edl-in-cinelerra-gg.html}{here}\protect\footnote{credit Igor Vladimirsky}; in Russian but easily translatable with DeepL or similar.
 
 \subsection{Command Line Rendering}%
 \label{sub:command_line_rendering}
@@ -826,84 +922,6 @@ On the command line run:
 \begin{lstlisting}[style=sh]
 cin -r
 \end{lstlisting}
-
-\subsection{More about Save/Use EDL and Save/Load Jobs}%
-\label{sub:more_save_use_edl_jobs}
-\index{batch rendering!more options}
-
-The \texttt{File $\rightarrow$ Batch Render} pulldown brings up the
-Batch Render window to be used for batch rendering as well as DVD/BD
-creation.  There are some additional buttons that can save time and
-mistakes.  These are described next.
-
-The \textit{Save to EDL Path} and \textit{Use Current EDL} buttons
-can be valuable tools for advanced usage or for developers doing
-testing.  Description of how you can expect them to work will help
-to illustrate how to take advantage of their capabilities.
-
-\begin{description}
-\item[Save to EDL Path] if you have made a change to the EDL, use
-  this button to save the changes so that they will be used in the
-  render operation.  Although you can get the same results by using
-  \texttt{File $\rightarrow$ Save\dots}, this capability was initially
-  added to assist developers in testing the batch jobs needed to
-  create dvd/bluray media as it keeps the work focused in a single
-  window and retains the original job name.  An example --you have
-  everything all set up with a new job in the Batch Render window
-  using \texttt{generic.xml} for the EDL path and with a job name of
-  \texttt{original\_name.xml}.  Then you realize that you forgot to
-  cut out a section in the media that is not wanted in the final
-  product.  You can cut that out and then \textit{Save to EDL Path} so
-  your change will be in effect for the rendering.  Without this
-  button, you would be using the EDL you started with and the cut
-  would be ignored.  Alternatively, if the cut changes are saved via
-  \texttt{File $\rightarrow$ Save as}\dots with a filename of
-  \texttt{new.xml} and then you use \textit{Save to EDL Path}, the
-  current highlighted job displayed in the window as
-  \texttt{original\_name.xml} will be replaced with \texttt{new.xml}.
-  However, it is important to note that the result will be saved with
-  the name \texttt{original\_name} – that is, the new content from
-  \texttt{new.xml} but with the old name of
-  \texttt{original\_name.xml}.
-\item[Use Current EDL] if you are working on media and still testing
-  out the results, you can take advantage of this click-box to quickly
-  get results.  Basically, you change the media, save that change with
-  another name (in order to preserve the original name in case you
-  don't like the changes), and press \textit{Use Current EDL}.  As an
-  example, a user creates a new job in the Batch Render window using
-  the current media, previously defined in generic.xml, with the EDL
-  path of \texttt{generic.xml}.  The user then changes the media on
-  the timeline, saves the changes via \texttt{File $\rightarrow$ Save
-    as\dots} with a new name, such as \texttt{new\_name.xml}, and then
-  clicks on \textit{Use Current EDL}.  In this case, the EDL path
-  listbox will be automatically updated to the \texttt{new\_name.xml}
-  and the current existing highlighted job will be replaced with the
-  \texttt{new\_name.xml} in the EDL column.
-\item[Save Jobs] when you have set up the batch jobs the way you
-  want and you think you may have to run them more than once, it is
-  beneficial to save the jobs for later use so you easily run them
-  again.
-\item[Load Jobs] reload a previous set of saved jobs.  This can come
-  in handy if you did not have the time to render them when you
-  originally set them up, if you need to rerun, or if you got
-  interrupted.
-\item[Warn if Jobs/Session mismatched] After you set up your render
-  and press Start, the program checks to see if the current EDL
-  session matches your Batch Render job.  If the EDL has been changed
-  since the batch job was created, it warns you so that you have the
-  opportunity to \textit{Save to EDL} path to record those changes.
-  Otherwise, you can dismiss that warning box, disable the warning
-  message by unchecking the box and use the original values.  If you
-  never want to be warned about the mismatches, leave the box
-  unchecked (figure~\ref{fig:batch02}).
-\end{description}
-
-\begin{figure}[htpb] \centering
-  \includegraphics[width=1.0\linewidth]{batch02.png}
-  \caption{Batch render with the 4 ghosted buttons on the right side
-    + the Warning message below}
-  \label{fig:batch02}
-\end{figure}
 
 \section{Background Rendering}%
 \label{sec:background_rendering}

@@ -378,9 +378,10 @@ as long as you only loaded a different file and have performed no editing operat
 \textbf{Perpetual session} is very useful for working on a project over many days so you can just quit before shutting down and the next time you start up \CGG{} you will be right back where you left off.  
 You will retain all of your undo’s and redo’s.  
 The binary file name is \texttt{\$HOME/.bcast5/perpetual.dat} and as long as \texttt{Settings $\rightarrow$ Preferences}, the Appearance tab has the Flag \textit{Perpetual session} set this capability takes effect.  
-It is very important to understand that this is not the same as the continuously editing- operation-updated \texttt{backup.xml} file.  
-The perpetual.dat file is \textit{only} updated when you Quit \CGG{} in the normal manner.  
-Which means if you interrupt the program, or kill it, or there is a segv or system crash, the \texttt{perpetual.dat} file will only reflect the state of your project from when you last started \CGG{}, and none of the editing/undo’s/redo’s you executed during the current session which was not ended normally.
+It is very important to understand that this is not the same as the continuously editing- operation-updated \texttt{backup.xml} file which is still operating as usual.  
+The perpetual.dat file is updated so that when you Quit \CGG{} in the normal manner,
+interrupt the program, kill the program, or there is a segv or system crash, the \texttt{perpetual.dat} file still reflects the state of your project. This means the editing/undo’s/redo’s you executed during the current session should still be available on a restart with the exception of any edit
+that may not have had a chance to be written on disk before an abnormal stoppage.
 \vspace{1ex}
 
 Some notes to keep in mind about Perpetual session are:
@@ -393,7 +394,7 @@ Some notes to keep in mind about Perpetual session are:
     after stopping \CGG{}, delete the current \texttt{\$HOME/.bcast5/perpetual.dat} file
     \item only session data is backed up (not program feature setup)
     \item the files backup.xml and backup.prev will operate the same as before so that if there is a crash, you
-    will want to use \texttt{File $\rightarrow$ Load backup} in order to continue where you were interrupted.
+    can still use \texttt{File $\rightarrow$ Load backup} in order to continue where you were interrupted.
     \item to start \CGG{} without using your Perpetual session data even if enabled, keyin: /your\_cinelerra\_path\texttt{/bin/cin -S}
 \end{itemize}
 

@@ -293,19 +293,19 @@ There are numerous methods to cut and paste in \emph{drag and drop mode} by sett
 a selected region or using the Copy/Paste Behavior as outlined in~\ref{sub:copy_paste_behavior}. 
 In this mode, clicking the LMB in the timeline does not reposition the \textit{Insertion Point}. 
 
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.4\linewidth]{i-beam.png}
+	\caption{I-beam + in/out  +  labels}
+	\label{fig:i-beam}
+\end{figure}
+
 When the I-beam is highlighted, you are in \emph{cut and paste mode}.
 In cut and paste mode, clicking the LMB in the timeline does reposition the \textit{Insertion Point}. 
 Double clicking in the timeline selects the entire edit the cursor is over, i.e.\ that column. 
 Dragging in the timeline with the LMB pressed down, highlights a selected region and this is the region that is affected by cut
 and paste operations.  It is also the playback range used for the subsequent playback operation. 
 Holding down the Shift key while clicking in the timeline extends the highlighted region.
-
-\begin{figure}[htpb]
-    \centering
-    \includegraphics[width=0.4\linewidth]{i-beam.png}
-    \caption{I-beam + in/out  +  labels}
-    \label{fig:i-beam}
-\end{figure}
 
 \subsection{In/Out Points}%
 \label{sub:in_out_points}
@@ -354,6 +354,12 @@ Some of the useful operations concerning the In/Out pointers are listed next.
     \item[Shift-Ctrl] with a transport button (e.g. Fast Forward), loops play between In/Out points
     \item[Ctrl-t]  clears both In/Out points
 \end{description}
+
+\subsection{Guide on timeline}%
+\label{sub:guide_timeline}
+\index{guide lines}
+
+It can be useful to have visual reference points on the timeline to help you position edits relative to other tracks. For example in manual synchronization of audio and video. You can set two points on the timeline with In/Out points or by selecting a range in Cut and Paste mode. Now we use \texttt{Settings $\rightarrow$ Loop Playback} (Shift - L) to make two vertical green lines appear at the edges of the selection. Originally this function is used to limit the playback within this range, but we can take advantage of the fact that the green lines remain even when we move the insertion point or delete the In/Out points or deselect the range. So they can be used as a visual reference when we want to move the edits precisely. To delete these guides press \textit{Shift-L} again.
 
 \subsection{Labels}%
 \label{sub:labels}
