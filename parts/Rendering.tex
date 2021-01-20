@@ -675,7 +675,9 @@ Video Preset textbox.
 \label{sec:batch_rendering}
 \index{batch rendering}
 
-Batch Rendering automates the rendering of audio/video files in that
+Batch Rendering as implemented in \CGG{} is considered to be more of
+an advanced feature and careful usage is advised.  It automates the
+rendering of audio/video files in that
 you can establish a set of job parameters, save them, and use them
 repeatedly.  It also allows for \CGG{} to be run by external
 programs, with no need for the user to manually interact with the
@@ -783,7 +785,8 @@ mistakes.  These are described next.
 	\item[Save Jobs] when you have set up the batch jobs the way you
 	want and you think you may have to run them more than once, it is
 	beneficial to save the jobs for later use so you easily run them
-	again.
+	again.  It is recommended to use a filename with .rc as the extension
+	so that it is obvious that it is a list of batch jobs to be run.
 	\item[Load Jobs] reload a previous set of saved jobs.  This can come
 	in handy if you did not have the time to render them when you
 	originally set them up, if you need to rerun, or if you got
@@ -805,23 +808,37 @@ render dialog whether or not anything is being rendered, by hitting
 You can automate \CGG{} batch renders from other programs.  In the
 batch render dialog, once you have created your list of batch render
 jobs, you can click the button \textit{Save Jobs} and choose a file
-to save your batch render list to.  Once you have created this file,
+to save your batch render list to.  It is recommended that you use
+a filename with the extension of .rc in order to make it obvious that
+this is a list of batch jobs to render. Once you have created this file,
 you can start up a batch render without needing to interact with the
 \CGG{} user interface.  From a shell prompt, from a script, or other
 program, execute:
 
 \begin{lstlisting}[style=sh]
-{path_to_cinelerra}/cin -r batchjob.xml
+{path_to_cinelerra}/cin -r batchjob.rc
 \end{lstlisting} substituting your actual filename for
-\texttt{batchjob.xml}.  When invoked with these parameters, \CGG{}
-will start up and perform the rendering jobs in that list, without
-creating its usual windows.
+\texttt{batchjob.rc}. \textbf{Warning} this file will be modified
+so if you use any filename that is not a legitimate list of batch jobs to
+render, that file will be overwritten and its previous contents destroyed.
+When invoked with these parameters, \CGG{}
+will start up and perform the rendering jobs in the list contained
+in that file, without creating its usual windows. If you do not
+specify a filename, the default will be \$HOME/.bcast5/batchrender.rc.
+Possible messages you might see where you started up the job are as follows.
+\begin{description}
+\item[The following files exist: - filename - Won't overwrite existing files] that batch job will not run in order to prevent writing over previous run.
+\item["filename" No such file or directory] the specified batch job file does not exist.
+\item["filename": Permission denied] the specified batch job file does not have write permission so can not be updated.
+\item[Render::run: filename] the batch job with the name of filename will be processed.
+\item[** rendered 0 frames in 0.000 secs, 0.000 fps] either you used a file that is not a list of batch jobs or the batch jobs within the file were not enabled.
+\end{description}
 
 \subsection{Advanced features}%
 \label{sub:advanced_features}
 \index{batch rendering!more options}
 
-\textbf{Warning}: one of these advanced functions overwrites the original EDL, which will then be lost!
+\textbf{Warning}: \textit{Save to EDL path} overwrites the current EDL thus destroying the original contents.
 
 Although the operation of Batch Rendering in \CGG{} is similar to that of other NLEs, there is one big difference that we need to take into account. The render setup is not done on a project-by-project basis, which are then brought into the Batch window to be rendered automatically. The setup must be done in the Batch rendering window, where various projects are loaded and set up. In the case of similar projects, derived from a single EDL with some variation, this mode offers the possibility of altering the projects without having to open each individual project, make the changes, set up the rendering, save and import into the Batch window. The procedure is to select the batch we want to modify in the Batches to render window; operate on the currently open timeline (even if it does not correspond to the one we want to modify) making the desired changes and then press the \textit{Save to EDL path} button. Thus the chosen batch, while retaining its original name, will now contain the modified project. Since this possibility destroys the original EDL overwriting it with the modified one, you must be very careful. This procedure is convenient in case the batches are similar, i.e. they are variations of the same EDL, where we want to experiment with other effects, other output formats or when trying out various cuts of a DVD/BD before the final production. It might also be useful to use an \textit{active region} of the timeline, so as to speed up rendering times but still have an indicative result for comparison. Instead operating on different projects, we can do a \textit{save as...} of the project on the timeline to have a new EDL with a new name and then replace it with the batch selected in the joblist using the \textit{Use Current EDL} button. The new project (with its name) overwrites the original project.
 
@@ -910,7 +927,8 @@ if any output files already exist.
 To perform rendering from the command line, first run \CGG{} in
 graphical mode. Go to \texttt{File $\rightarrow$ Batch
   Render}. Create the batches you intend to render in the batch window
-and close the window. This saves the batches in a file. Set up the
+and close the window. This automatically saves the batches in a file 
+with the name of \$HOME/.bcast5/batchrender.rc. Set up the
 desired render farm attributes in \texttt{Settings $\rightarrow$
   Preferences} and quit out of \CGG{} if you want to use the Render
 Farm capability.  These settings are used the next time command line
