@@ -95,6 +95,21 @@ Figure~\ref{fig:drag-effect} showing 3 plugins, two still plugin, two have alrea
     \label{fig:drag-effect}
 \end{figure}
 
+\section{Copy/Paste Effects}%
+\label{sec:copy_paste_effects}
+\index{plugins!copy paste effects}
+
+In \textit{Drag and Drop} mode we can copy and paste edits containing plugins (see also \nameref{sub:copy_paste_behavior}). Start by selecting an edit (that contains plugins) with LMB and open the context menu with MMB. The possibilities offered are:
+
+\begin{description}
+	\item[Ctrl - c]: copy edits and plugins to buffer.
+	\item[Ctrl - v]: paste edits and plugins into the timeline (splice) at the Insertion point.
+	\item[Ctrl - b]: paste edits and plugins into the timeline (overwrite) at the Insertion point.
+	\item[Ctrl - Shift - p]: paste only the plugins into the timeline, at the Insertion point, keeping the original length (overwrite).
+	\item[Collect Effects]: copy only plugins into buffer.
+	\item[Paste Effects]: pastes the plugins into a selected target edit. The length of the plugins adapts to the length of the edit.
+\end{description}
+
 \section{Shared Effects and Shared Tracks}%
 \label{sec:shared_effect_tracks}
 \index{plugins!shared effect}
@@ -491,18 +506,18 @@ Reduce audio background noise. There is only 1 parameter which is used to regula
 \label{sub:denoisefft}
 \index{denoisefft}
 
-Audio sampling (time data) is converted to a frequency spectrum using FFT (\textit{Fast Fourier Transform}). Since the \textit{Signal} contains only the background noise while the rest of the clip contains noise + audio to clean up, you get separate frequencies so you can subtract them to get the clean audio only. Set the Denoise Power dial in dB and choose the number of reference samples.
+Audio sampling (time data) is converted to a frequency spectrum using FFT (\textit{Fast Fourier Transform}). Since the \textit{reference} contains only the background noise while the rest of the clip contains noise + audio to clean up, you get separate frequencies so you can subtract them to get the clean audio only. Set the Denoise Power dial in dB and choose the number of reference samples.
 
 For example, if you record a voice with a microphone\protect\footnote{credit fary54}:
 \begin{enumerate}
-        \item You record 15 seconds of background noise (without talking). This is the \textit{Signal audio clip}.
-        \item After 15 seconds, start the voice. This is the whole \textit{Noise Audio clip}
+        \item You record 15 seconds of background (without talking). This is represent the background noise that the filter uses as a reference..
+        \item After 15 seconds, start the voice. This is represents the recording whose filter should remove the background noise.
         \item You stop recording.
-        \item You place the FFT effect on the whole length of the recording (including the 15 seconds of signal noise).
+        \item You place the FFT effect on the whole length of the recording (including the 15 seconds of background noise).
         \item Then place your cursor at the beginning of the 15 seconds. Enter the number of samples in the effect presets, e.g. 65536.
 \end{enumerate}
 
-This has the effect of creating a keyframe that marks the beginning of the reference range which, in our example, ends at 65536 samples later.
+This has the effect of creating a keyframe that marks the beginning of the reference range, mentioned in point 1, which in our example ends at 65536 samples later.
 
 During playback, the background noise is then automatically removed along the entire length of the effect.
 
