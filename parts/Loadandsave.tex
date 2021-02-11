@@ -185,7 +185,9 @@ All data that you work with in \CGG{} is acquired either by loading from disk or
     \item The new file's tracks are created in the timeline.
 \end{itemize}
 
-\noindent Let's now see in detail the options of loading files.
+NOTE: \CGG{} supports paths of up to 255 characters, which is sufficient for most situations. In the case of long folders, subfolders and filenames, be careful not to exceed this limit to avoid errors.
+
+Let's now see in detail the options of loading files.
 
 \begin{description}
     \item[Insertion Strategy] \index{insertion strategy}
@@ -361,28 +363,32 @@ Originally, the easiest way to maintain a project for moving to another computer
 
 \noindent Keep in mind that to maintain the integrity of your project xml file for easy moving to another computer, do not delete the symbolic links.  You will want to use \texttt{cp\,-a} to maintain the links for moving to a USB key or another computer.
 
-\subsection{Information about Backups and Perpetual Session}%
-\label{sub:information_backups_perpetual_session}
+\subsection{Backup and Perpetual Session}%
+\label{sub:backup_perpetual_session}
 \index{backup}
 \index{perpetual session}
 
-In an effort to minimize loss of work due to user, hardware, or software issues, \CGG{} has some automatic backup capabilities.
+\textbf{Default behavior:}\\
+In an effort to minimize loss of work due to user, hardware, or software issues, \CGG{} has some automatic backup capabilities. \CGG{} automatically saves every editing operation to the current project on disk continuously to a file named \texttt{\$HOME/.bcast5/backup.xml}. We can also make a manual backup via \texttt{File $\rightarrow$ Save backup} ("b") or we can load the chosen backup via \texttt{File $\rightarrow$ Load backup}. Before a new backup is rewritten to \texttt{backup.xml} by an editing operation, the content is automatically copied to \texttt{backup.prev} which becomes a second backup file. In total we have 2 levels of backups: the previous one, called \texttt{backup.prev}, and the current one, called \texttt{backup.xml}.
 
-\CGG{} automatically saves every \textit{editing operation} to the current project on disk continuously to a file named \texttt{\$HOME/.bcast5/backup.xml}.  In the unlikely event of a crash, when you restart \CGG{}, you should select \texttt{File $\rightarrow$ Load backup} in order to continue with the operations that were recorded before the crash.  If you have more than 1 instance of \CGG{} running, only the last editing operation made in whichever instance it was last made, will overwrite the backup. 
+In the un-likely event of a crash, when you restart \CGG{}, you should select \texttt{File $\rightarrow$ Load backup} in order to continue with the operations that were recorded before the crash. If you have more than 1 instance of \CGG{} running, only the last editing operation made in whichever instance it was last made, will overwrite the \texttt{backup.xml}.
+If for some reason you forgot to use \textit{Load backup} immediately when restarting or you did a Load with \textit{Replace current project} in your current session (not default behavior!), you have a second chance to use \texttt{File $\rightarrow$ Load backup} and select \texttt{\$HOME/.bcast5/backup.prev} as long as you only loaded a different file and have performed no editing operations. This same file is also used by multiple instances of \CGG{}.
 
-There is still 1 more backup that may save you.  If for some reason you forgot to use \textit{Load backup}
-immediately when restarting or you did a Load with \textit{Replace current project} in your current session,
-you have a second chance to use \texttt{File $\rightarrow$ Load} and select \texttt{\$HOME/.bcast5/backup.prev}
-as long as you only loaded a different file and have performed no editing operations.  This same file is also used by multiple instances of \CGG{}.
+\textbf{Use of \textit{Autosaves continuous backups:}}\protect\footnote{credits to Andrew Randrianasulu and Reuss Andràs} \\
+\textit{Autosaves continuous backups} can be enabled in (see \nameref{sub:dangerous_section}): \\
+\texttt{Settings $\rightarrow$ Preferences $\rightarrow$ Appearance Tab $\rightarrow$ Dangerous} \\
+In this modality the formation of \texttt{backup.xml} and \texttt{backup.prev} remains the same. In addition there is a simultaneous formation of a third copy with a timestamp, called \texttt{backup\_prev.xxxxxxxx.xxxx} (with \textit{Date} and \textit{Clock time}). So at each editing operation a backup will be created with its own timestamp. The user can thus go back to the moment when he wants to restart an editing, because of an error, or to experiment with different choices from a certain moment on.
 
-\textbf{Perpetual session} is very useful for working on a project over many days so you can just quit before shutting down and the next time you start up \CGG{} you will be right back where you left off.  
+We can load the backup file of our choice via \texttt{File $\rightarrow$ Load backup}. For long editing sessions it is easy to have lots of backups but when you exit from \CGG{}, all files with timestamps will be deleted except the last 50, which will still be available at the next restart.
+
+\textbf{Perpetual session:} \\
+is very useful for working on a project over many days so you can just quit before shutting down and the next time you start up \CGG{} you will be right back where you left off.  
 You will retain all of your undo’s and redo’s.  
-The binary file name is \texttt{\$HOME/.bcast5/perpetual.dat} and as long as \texttt{Settings $\rightarrow$ Preferences}, the Appearance tab has the Flag \textit{Perpetual session} set this capability takes effect.  
+The binary file name is \texttt{\$HOME/.bcast5/perpetual.dat} and as long as \texttt{Settings $\rightarrow$ Preferences}, the \textit{Appearance} tab has the Flag \textit{Perpetual session} set this capability takes effect.  
 It is very important to understand that this is not the same as the continuously editing- operation-updated \texttt{backup.xml} file which is still operating as usual.  
-The perpetual.dat file is updated so that when you Quit \CGG{} in the normal manner,
+The \texttt{perpetual.dat} file is updated so that when you Quit \CGG{} in the normal manner,
 interrupt the program, kill the program, or there is a segv or system crash, the \texttt{perpetual.dat} file still reflects the state of your project. This means the editing/undo’s/redo’s you executed during the current session should still be available on a restart with the exception of any edit
 that may not have had a chance to be written on disk before an abnormal stoppage.
-\vspace{1ex}
 
 Some notes to keep in mind about Perpetual session are:
 
@@ -390,12 +396,39 @@ Some notes to keep in mind about Perpetual session are:
     \item when you Quit in the normal manner, it does not have to ask whether or not to save a backup
     \item takes disk space in \texttt{.bcast5} area and this could get really big
     \item after you complete a project, it is advisable to turn off the Perpetual session flag before quitting so
-    that when you start a new project, you can start with a fresh perpetual.dat by turning the flag on or
+    that when you start a new project, you can start with a fresh \texttt{perpetual.dat} by turning the flag on or
     after stopping \CGG{}, delete the current \texttt{\$HOME/.bcast5/perpetual.dat} file
     \item only session data is backed up (not program feature setup)
-    \item the files backup.xml and backup.prev will operate the same as before so that if there is a crash, you
+    \item the files \texttt{backup.xml} and \texttt{backup.prev} will operate the same as before so that if there is a crash, you
     can still use \texttt{File $\rightarrow$ Load backup} in order to continue where you were interrupted.
-    \item to start \CGG{} without using your Perpetual session data even if enabled, keyin: /your\_cinelerra\_path\texttt{/bin/cin -S}
+    \item to start \CGG{} without using your Perpetual session data even if enabled, keyin: \texttt{/your\_cinelerra\_path/bin/cin -S}
+\end{itemize}
+
+\textbf{For developers:} \\
+We report the list of editing events that lead to the automatic formation of a backup file:
+
+\begin{itemize}
+	\item cinelerra/cwindowgui.C
+	\item cinelerra/swindow.C
+	\item cinelerra/keyframepopup.C
+	\item cinelerra/pluginpopup.C
+	\item cinelerra/mwindowedit.C
+	\item cinelerra/presetsgui.C.sav1
+	\item cinelerra/assetpopup.C
+	\item cinelerra/cwindowtool.C
+	\item cinelerra/render.C
+	\item cinelerra/setformat.C
+	\item cinelerra/mwindow.C
+	\item cinelerra/keyframegui.C
+	\item cinelerra/mwindowgui.C
+	\item cinelerra/mainmenu.C
+	\item cinelerra/loadfile.C
+	\item cinelerra/savefile.C
+	\item cinelerra/menueffects.C
+	\item cinelerra/main.C
+	\item cinelerra/presetsgui.C.sav
+	\item cinelerra/record.C
+	\item cinelerra/plugindialog.C
 \end{itemize}
 
 
