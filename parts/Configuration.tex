@@ -11,6 +11,10 @@
     \label{fig:settings}
 \end{figure}
 
+\section{.bcast5}%
+\label{sec:bcast5}
+\index{bcast5}
+
 The user's default settings, preferences, and other helpful files are retained across sessions in a hidden file, called \texttt{.bcast5}, in the user’s \texttt{\$HOME} directory. Initially when \CGG{} is launched there is an empty project and there are program default settings, and from then on the \texttt{.bcast5} directory will contain the settings that were set when quitting.  If you need to revert to the default settings, delete the \texttt{.bcast5} directory contents and restart \CGG{}.  Or you may want to rename it temporarily if you think you might want it back later.
 Although the location defaults to \texttt{\$HOME/.bcast5}, you can use the \texttt{CIN\_CONFIG} variable to override this location.  For example:  \texttt{export CIN\_CONFIG=/tmp/.bcast5}  will use a temporary setup for testing purposes.  It is also useful for multiple users sharing the same home directory who would like to have different configuration/preferences settings data.  And if you are experiencing inexplicable errors or crashes in \CGG{}, they may be due to a problem with \texttt{.bcast5} in which case taking it out of the picture  can at least eliminate this as the cause. Another use case is if we want multiple installations of \CGG{}, for example one stable and one experimental, we can create the \texttt{.bcastX} folder externally and then set it as default with the option \textit{Index files go here} in \nameref{sub:index_file_section}.
 
@@ -236,7 +240,7 @@ Screencast below shows part of the Preferences menu where you can change the ind
 \end{figure}
 
 \begin{description}
-    \item[Index files go here] \index{index file!path} index files exist in order to speed up drawing the audio/video tracks. This option determines where index files are placed on the disk.
+    \item[Index files go here] \index{index file!path} index files exist in order to speed up drawing the audio/video tracks. This option determines where index files are placed on the disk
     \item[Size of index file] \index{index file!size} determines the size of an index file. Larger index sizes allow smaller files to be drawn faster, while slowing down the drawing of large files. Smaller index sizes allow large files to be drawn faster, while slowing down small files.  The default is currently 4kB for average size files.
     \item[Number of index files to keep] \index{index file!number} to keep the index directory from becoming very large, old index files are deleted. This determines the maximum number of index files to keep in the directory.
     \item[build ffmpeg marker indexes] \index{ffmpeg!build index} improves ffmpeg seeks in certain cases although not clear which ones.
