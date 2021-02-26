@@ -11,9 +11,7 @@
 % Set up the page layout
 % memman.pdf capter 2: Laying out the page (READ IT!)
 % example: memsty.sty
-%begin{latexonly}
 \settypeblocksize{8.75in}{34pc}{*}
-%end{latexonly}
 
 % In loose reference to the theme CW.
 \definecolor{CinBlueText}{RGB}{23,85,142}% "Dark blue"
@@ -31,7 +29,6 @@
 % \definecolor{subsectioncolour}{RGB}{23,85,142}
 % \definecolor{subsubsectioncolour}{RGB}{23,85,142}
 
-%begin{latexonly}
 \makechapterstyle{morrow}{% requires graphicx package
   \chapterstyle{default}
   \renewcommand*{\chapnamefont}{%
@@ -45,7 +42,6 @@
   \renewcommand*{\chaptitlefont}{% Overwrites toc
     \normalfont\Huge\bfseries\sffamily\raggedleft\color{CinBlueText}}
 }
-%end{latexonly}
 
 \addtodef{\printpartname}{\color{CinBlueText}}{}% Part
 \addtodef{\printchaptername}{\color{CinBlueText}}{}% Chapter
@@ -129,12 +125,10 @@
 
 \parindent=0.0cm                    % first indent in section
 \righthyphenmin=2                   % hyphen last charecter
-%begin{latexonly}
 \setsecnumdepth{subsubsection} 		% section numeration depth
 
 % We use the chapter header style:
 \chapterstyle{morrow}
-%end{latexonly}
 
 % \renewcommand{\printchaptername}{\normalfont\large\scshape Chapter}
 \renewcommand{\chapterheadstart}{}
