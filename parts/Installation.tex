@@ -2,6 +2,59 @@
 \label{cha:Installation}
 \index{installation}
 
+\section{\CGG{} AppImage}%
+\label{sec:cin_gg_appimage}
+
+The main way to install \CGG{} is to use the AppImage. This is updated regularly and works for every distro, since it already contains the necessary dependencies. 
+
+For 64-bit systems you can choose between an image with up-to-date libraries or one that supports older libraries, which you should use only if the first image gives you problems with unsupported libs. There is also a 32-bit older distro available that has \textit{i686} as part of the filename.  Installing the appimage is simple:
+
+Download the file from:
+
+\url{https://cinelerra-gg.org/download/images/}
+
+Some example file names are as follows - where 8 digits represent yyyymmdd:
+
+\begin{lstlisting}[style=sh]
+	CinGG-20210228-x86_64.AppImage
+	  (currently based on Fedora Core 32, libc version 2.31)
+	CinGG-20210228-x86_64-older-distros.AppImage
+	  (currently based on Ubuntu 16.04, libc version 2.23)
+	CinGG-20210228-i686.AppImage
+	  (not yet available, but will be based on Debian 9, libc version 2.23)
+\end{lstlisting}
+
+Make the file executable with the proper execute permissions either from the GUI of the Desktop Environment used (link to the file) or from a terminal window.  Make sure you are already in the directory containing the appimage:
+
+\begin{lstlisting}[style=sh]
+	$ chmod u+x CinGG-yyyymmdd.AppImage
+\end{lstlisting}
+
+Finally start the program from a window in the directory where the image is stored:
+
+\begin{lstlisting}[style=sh]
+	$ ./CinGG-yyyymmdd.AppImpage
+\end{lstlisting}
+
+or create a convenient desktop icon with a link to the run action:
+
+\begin{enumerate}
+	\item right-click on the appimage file
+	\item Properties
+	\item Application Tab
+	\item Command:
+	\begin{lstlisting}[style=sh]
+		/path/to/appimage/./CinGG-yyyymmdd.AppImage
+	\end{lstlisting}
+	\item OK
+\end{enumerate}
+
+Most distros already have the libraries to run the appimage, but if not you may need an additional installation. For example Arch Linux needs the \texttt{libappimage} package.
+
+\begin{lstlisting}[style=sh]
+	sudo pacman -S libappimage
+\end{lstlisting}
+
 \section{Download Already Built \CGG{}}%
 \label{sec:download_already_built_cinelerra_gg}
 
@@ -20,8 +73,7 @@ you get the added benefit of the latest checked in changes, please reference
 ~\ref{sec:How_to_build}.
 %
 A Windows 10 version installation is described in~\ref{sec:ms_windows10}.  There are also 32-bit i686 Ubuntu, Debian,
-and Slackware versions available.  These are updated on a fairly
-regular basis as long as significant code changes have been made.
+and Slackware versions available. \textbf{These binaries are no longer being updated; they are stable and working but without future functionality}.
 They are in subdirectories of:
 
 \begin{list}{}{}
