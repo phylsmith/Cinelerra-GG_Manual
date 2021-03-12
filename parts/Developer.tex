@@ -492,7 +492,10 @@ Now your \CGG{} obj has all of the debug stuff. Next run valgrind as root for th
 
 This runs \CGG{} under the control of valgrind, and produces a log file in /tmp which will list information about any leaks, usually clearly identifiable. Be sure to Quit out of \CGG{} normally instead of Ctrl-C or a SEGV otherwise the program does not have a chance to cleanup and there will be some false alarms. But it runs very slowly, and is basically single threaded, which means that race conditions may be impossible to catch$\dots$ like one thread deletes memory that another thread is currently using. But overall it is a big help and if you test any new features, please email the log output. A lot of effort when writing the code was put into trying to be sure that all of the object constructors have matching destructors so that the leaks can be identified. There are already several libraries that create predictable memory leaks and valgrind does a good job for most of these.
 
-It is impossible to test everything with valgrind because some things are just too big and slow for a practical test. Occasionally you can find a leak or an illegal memory access. There are several false alarms that are difficult to avoid \textit{Conditional jump} messages, and \textit{unhandled DW\_OP\_}, but anything with the word \textit{illegal} in the message is important. Memory leaks that originate in \CGG{} are good to find and fix, but are usually not deadly.
+It is impossible to test everything with valgrind because some things are just too big and slow for a practical test. Occasionally you can find a leak or an illegal memory access. There are several false alarms that are difficult to avoid \textit{Conditional jump} messages, and \textit{unhandled DW\_OP\_}, but anything with the word \textit{illegal} in the message is important. Memory leaks that originate in \CGG{} are good to find and fix, but are usually not
+deadly. The listing of the memory leaks can be quite voluminous so locating the \textit{LEAK SUMMARY} section
+towards the end of the report is most useful.
+
 
 \section{CFLAGS has -Wall}
 \label{sec:cflags_has_-wall}

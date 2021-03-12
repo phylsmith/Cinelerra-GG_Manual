@@ -290,6 +290,9 @@ off even though it gives you the option to do so.  These include:
 	Instead just use the X to dismiss the warning.
 \end{enumerate}
 
+Workaround cases for the alpha channel not working as intended when using an EDL inserted as a reference
+is described in \ref{sub:nested_clips}.
+
 Here is a step by step example of how you can use \textit{File by
 	Reference}:
 \begin{enumerate}
@@ -630,6 +633,23 @@ nested clip, the thumbnails of the video track may be redrawn and may look diffe
 way they did originally with respect to the audio waveforms. This is simply a result of the redrawing of the
 video track which is independent from the redrawing of the audio tracks. The playback is still synchronized.
 \end{itemize}
+
+Workaround cases for the alpha channel not working as intended when using an EDL inserted as a reference
+or when an EDL is nested, is described here.
+
+\paragraph{Case 1 using the Projector on the EDL within a Master Project:} follow these next steps.
+\begin{itemize}
+   \item Open your EDL with \textit{Open EDL} by using the middle mouse button on the Nested edit on its track.
+   \item In this nested EDL, insert a new Video track below the last video track.
+   \item Add the Alpha plugin to the new Video track for the entire length of the nested EDL.
+   \item Change the value of the Alpha to 0.00.
+   \item Close the EDL.
+\end{itemize} This solves the alpha channel not working as expected and the Master Project now looks correct.
+
+\paragraph{Case 2 using FadeIn/Out with autos:}
+In the Master Project for the Videeo track containing the nested EDL, in its Patchbay change
+the \textit{Overlay Mode} from \textit{Normal} to \textit{PorterDuff->SrcOver}.
+
 
 \paragraph{Usage Examples of Nested Clips}
 
