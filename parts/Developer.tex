@@ -483,6 +483,10 @@ The best way to compile and run valgrind is to run the developer static build. T
 		\texttt{CFLAGS=-ggdb make -j8 rebuild\_all}
 \end{enumerate}
 
+If you frequently make mods and changes in \CGG{} or the thirdparty libraries, do not depend on those
+compiled versions to have the headers updated; so be sure to fully rebuild as shown in the previous 2
+steps before running valgrind or you will get false errors.
+
 Now your \CGG{} obj has all of the debug stuff. Next run valgrind as root for the most useful results:
 
 \hspace{2em}\texttt{cd /path/cinelerra-5.1/cinelerra}

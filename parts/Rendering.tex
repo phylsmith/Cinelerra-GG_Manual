@@ -679,9 +679,9 @@ Batch Rendering as implemented in \CGG{} is considered to be more of
 an advanced feature and careful usage is advised.  It automates the
 rendering of audio/video files in that
 you can establish a set of job parameters, save them, and use them
-repeatedly.  It also allows for \CGG{} to be run by external
-programs, with no need for the user to manually interact with the
-user interface (figure~\ref{fig:batch01}).
+repeatedly (figure~\ref{fig:batch01}).  It also allows for \CGG{} to
+be run by external programs, with no need for the user to manually
+interact with the user interface.
 
 \begin{figure}[htpb] \centering
 	\includegraphics[width=1.0\linewidth]{batch01.png}
@@ -821,9 +821,9 @@ program, execute:
 \texttt{batchjob.rc}. \textbf{Warning} this file will be modified
 so if you use any filename that is not a legitimate list of batch jobs to
 render, that file will be overwritten and its previous contents destroyed.
-When invoked with these parameters, \CGG{}
-will start up and perform the rendering jobs in the list contained
-in that file, without creating its usual windows. If you do not
+When invoked with these parameters, \CGG{} will start up and run the
+rendering jobs in the list contained in that file starting at the defined
+\textit{active region}, without creating its usual windows. If you do not
 specify a filename, the default will be \$HOME/.bcast5/batchrender.rc.
 Possible messages you might see where you started up the job are as follows.
 \begin{description}
@@ -925,15 +925,16 @@ operation is somewhat difficult. That is why the command line aborts
 if any output files already exist.
 
 To perform rendering from the command line, first run \CGG{} in
-graphical mode. Go to \texttt{File $\rightarrow$ Batch
-  Render}. Create the batches you intend to render in the batch window
-and close the window. This automatically saves the batches in a file 
+graphical mode. Go to \texttt{File $\rightarrow$ Batch Render}.
+Create the batches you intend to render in the batch window and
+close the window.  This automatically saves the batches in a file 
 with the name of \$HOME/.bcast5/batchrender.rc. Set up the
 desired render farm attributes in \texttt{Settings $\rightarrow$
   Preferences} and quit out of \CGG{} if you want to use the Render
 Farm capability.  These settings are used the next time command line
 rendering is used to process the current set of batch jobs without a
-GUI\@.
+GUI\@.  It is important to remember that the rendering will begin at
+the defined \textit{active region} saved when the project was saved. 
 
 On the command line run:
 
@@ -1044,7 +1045,7 @@ communication, shared filesystem, permissions and usernames synched.
   \item in the \textit{Hostname} box, keyin your hostname or ip
     address such as 192.168.1.12 or \textit{localhost};
   \item enter in a port number such as 401--405 (only a root user
-    can use privileged ports) or $1025$ and click on \textit{Add Nodes};
+    can use privileged ports) or $10400...$ for non-root and click on \textit{Add Nodes};
   \item you will see something like the following in the Nodes
     listbox to the right:\newline
     \begin{tabular}{lllc} On & Hostname & Port & Framerate
@@ -1337,12 +1338,6 @@ RenderFarmClient::main_loop: Session started from 127.0.0.1
 \end{lstlisting} As it completes its jobs, you will should see:
 \begin{lstlisting}[style=sh]
 RenderFarmClientThread::run: Session finished
-\end{lstlisting} A quick way to start a sequence of clients is to
-  use:
-\begin{lstlisting}[style=sh,mathescape]
-for n in `seq 1501 1505`; do
-  cin -d $\$$n
-done
 \end{lstlisting}
 \item[Render Using Render Farm] After you have followed the
   preceding steps, you are ready to use the render farm.  Click on
@@ -1477,7 +1472,7 @@ list of items to check.
   section of the video so keep that in mind when designating port
   numbers.
 \item If not running as root, a port number in the higher range of
-  $1024$ and above must be used instead of the $400+$ range.
+  $1024$ and above must be used instead of the $401+$ range.
 \item The master and client jobs on the ports do not go away so if
   you want to stop them, you will have to kill them via: \texttt{kill
     PID\#}.
