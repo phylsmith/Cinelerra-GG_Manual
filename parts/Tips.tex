@@ -437,9 +437,9 @@ With the X11 video driver choice, large format files such as 4K, will playback f
 \section{Proxy Settings and Transcode}%
 \label{sec:proxy_settings}
 
-Info on proxies in \nameref{sec:proxy}
+Information on proxies to reduce required CPU for less powerful computers is in the section \nameref{sec:proxy}.
 
-Info on transcode in \nameref{sec:transcode}
+Information on transcode which is used to provide keyframes to make the video seekable is in the section \nameref{sec:transcode}.
 
 
 
@@ -736,3 +736,12 @@ Another way to change duration slightly is to go to the Resources window, highli
 
 You can see that the camera smoothly flows from keyframe point to next keyframe point, as \CGG{} automatically adjusts the camera movement in straight lines from point to point.
 
+\subsection{Video lagging behind Audio}%
+\label{sub:video_lagging}
+
+When there is a lag between the Audio and the Video, it can be because there are a lot of video frames
+and the computer can not display them as fast as the Audio can play the samples.  However, this does
+not affect the rendered media in that the Audio and Video will be correctly synchronized. When playing
+the original media, you can alleviate the lag between the Audio and Video by disabling
+\textit{Play every frame} in \texttt{Settings $\rightarrow$ Preferences, Playback A} tab.  Now frames
+will be skipped in order to keep the audio/video in synch.

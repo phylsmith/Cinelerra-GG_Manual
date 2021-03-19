@@ -1013,14 +1013,13 @@ Render Farm uses background rendering, a feature of \CGG{} where the
 video is rendered in the background, to speed up rendering
 significantly.  Because rendering is memory and cpu intensive, using
 multiple computers on a network via a render farm is a significant
-gain.  With \CGG{} installed on all nodes, the master node and the
-clients communicate via a network port that you specify.
-
+gain. With \CGG{} installed on all nodes, the master node and the clients communicate via a network port that you specify.
+The Master node is the one of the instance of \CGG{} that we normally start with its gui; the other nodes are the instances of \CGG{} that we decide to start in parallel from the terminal to create the Render farm (clients).
 \CGG{} can distribute the rendering tasks over the network to the
-other computers of the Render Farm.  The render farm software tries
+other computers of the Render Farm; or among all threads of a multicore CPU.  The render farm software tries
 to process all of the rendering in parallel so that several
 computers can be used to render the results.  The \textit{Total jobs
-  to create} in the setup or labels on the timeline are used to divide
+to create} in the setup or labels on the timeline are used to divide
 a render job into that specified number of tasks.  Each background
 job is assigned a timeline segment to process and the jobs are sent
 to the various computer nodes depending upon the load balance.  The
@@ -1035,6 +1034,7 @@ script.
 The following steps are just a guideline to start your render farm.
 It is assumed that you already have the master and client nodes
 communication, shared filesystem, permissions and usernames synched.
+Let's take the example of a network with 2 PCs: the master and the client. On the client we set 5 tasks; on the master we set 2 tasks.
 
 \begin{enumerate}
 \item On the master computer, use \texttt{Settings} $\rightarrow$
@@ -1045,35 +1045,37 @@ communication, shared filesystem, permissions and usernames synched.
   \item in the \textit{Hostname} box, keyin your hostname or ip
     address such as 192.168.1.12 or \textit{localhost};
   \item enter in a port number such as 401--405 (only a root user
-    can use privileged ports) or $10400...$ for non-root and click on \textit{Add Nodes};
+    can use privileged ports) or $10650...$ for non-root and click on \textit{Add Nodes}. To find a range of free ports to use you can look at the file \texttt{/etc/services};
   \item you will see something like the following in the Nodes
     listbox to the right:\newline
     \begin{tabular}{lllc} On & Hostname & Port & Framerate
       \\\midrule
-      X & 192.168.1.12 & 401 & 0.0 \\
-      X & 192.168.1.12 & 402 & 0.0 \\
-      X & 192.168.1.12 & 403 & 0.0 \\
-      X & 192.168.1.12 & 404 & 0.0 \\
-      X & 192.168.1.12 & 405 & 0.0 \\
-      X & localhost & 406 & 0.0 \\
-      X & localhost & 407 & 0.0 \\
+      X & 192.168.1.12 & 10650 & 0.0 \\
+      X & 192.168.1.12 & 10651 & 0.0 \\
+      X & 192.168.1.12 & 10652 & 0.0 \\
+      X & 192.168.1.12 & 10653 & 0.0 \\
+      X & 192.168.1.12 & 10654 & 0.0 \\
+      X & localhost & 10655 & 0.0 \\
+      X & localhost & 10656 & 0.0 \\
     \end{tabular}
-  \item set the Total number of jobs to create;
+  \item set the Total number of jobs to create. This number only pertains to client nodes, so we do not need to consider the master node;
   \item click OK on the bottom of the Preferences window.
   \end{itemize}
-\item Now we must join the nodes created to instances of \CGG{}. On the client computers ($192.168.1.12$), on the terminal, start 5 background  \CGG{} tasks via:
+\item For external network nodes, now we must join the nodes created to instances of \CGG{}. On the client computers ($192.168.1.12$), on the terminal, start 5 background  \CGG{} tasks via:
 \begin{lstlisting}[style=sh]
 cd {path_to_cinelerra}
-cin -d 401 cin -d 402
+cin -d 10650 cin -d 10651
 ...
-cin -d 405
+cin -d 10654
 \end{lstlisting}
-\item Similarly, on the terminal, we must join the local nodes created to instances of \CGG{}. On the master node (localhost), start the 2 background \CGG{}  tasks via:
+In practice, at each instance that we start, the cursor will be positioned in a new line ready to enter the next command, without exiting the task. If we have several PCs on the network, repeat these steps for each new client (with its own ip address).
+\item Similarly, on the terminal, we must join the local nodes (internal to the Master node) created to instances of \CGG{}. On the Master node (localhost), start the 2 background \CGG{}  tasks via:
 \begin{lstlisting}[style=sh]
 cd {path_to_cinelerra}
-cin -d 406
-cin -d 407
+cin -d 10655
+cin -d 10656
 \end{lstlisting}
+Similar to the previous point, the cursor positions itself in a new line ready to enter the next command, without exiting the task.
 \item When your video is ready, setup a render job via \texttt{File
     $\rightarrow$ Render} or \texttt{File $\rightarrow$ Batch Render}
   and check OK.
@@ -1087,7 +1089,7 @@ cin -d 407
   Scripts icon.
 \item If you plan on doing more rendering, you can just leave the
   master/client jobs running to use again and avoid having to restart
-  them.  Or you can kill them when you no longer are using them.
+  them. You can also close the terminal, but the jobs will remain active until you turn off the PC. Or you can kill them when you no longer are using them.
 \end{enumerate}
 
 \subsection{Render Farm Menu and Parameter Description}%
@@ -1124,7 +1126,7 @@ Below we describe the Performance tab for configuring a render farm
   existing node or enter a new node.
 \item[Port] keyin the port number of an existing or new node here.
   You can also type in a range of port numbers using a hyphen, for
-  example $1501-1505$ when you need to add many.
+  example $10650-10799$ when you need to add many.
 \item[Apply Changes] this will allow you to edit an existing node
   and to then commit the changes to hostname and port. The changes
   will not be committed if you do not click the OK button.
@@ -1366,13 +1368,26 @@ RenderFarmClientThread::run: Session finished
 \item[Assemble the Output Files] Once all of the computer jobs are
   complete, you can put the output files together by using the shell
   script, \textit{RenderMux} (from the menubar \textit{scripts} button
-  just above FF), if the files were rendered using ffmpeg, or you can
-  load these by creating a new track and specifying concatenate to
+  just above FF), if the files were rendered using ffmpeg (see \nameref{sec:menu_bar_shell_commands}).
+  
+  If you want to remain within the open project in \CGG{}, you can load these files by creating a new track and specifying concatenate to
   existing tracks in the load dialog in the correct numerical order.
   File types which support direct copy can be concatenated into a
   single file by rendering to the same file format with render farm
   disabled as long as the track dimensions, output dimensions, and
   asset dimensions are equal.
+  
+  Finally if you want to use ffmpeg from terminal externally to \CGG{} you can go to the directory where the rendered files are, it creates a text file \texttt{list.txt} containing the list of all our files:
+  \begin{lstlisting}[style=sh]
+  	file 'name.webm001'
+  	file 'name.webm002'
+  	...
+  	file 'name.webm00n'
+  \end{lstlisting}
+  and finally give the command
+  \begin{lstlisting}[style=sh]
+  	ffmpeg -f concat -i list.txt -c copy output.webm
+  \end{lstlisting}
 \end{description}
 
 \subsection{Quick and Easy Render Farm Setup – The Buddy System
@@ -1399,7 +1414,7 @@ want to bother setting up NFS for a shared disk.
   add the plugins, such as a Title, etc.
 \item Check for a set of unused ports in \texttt{/etc/services}
   file, if username is root usually $401-425$ are available; if
-  non-root, then $1024-1079$.
+  non-root, then $10650-10799$.
 \item On the master computer, in \texttt{Settings $\rightarrow$
     Preferences, Performance} tab:
   \begin{itemize}
@@ -1417,13 +1432,13 @@ want to bother setting up NFS for a shared disk.
 /{cinelerra_pathname}/cin -d port#
 \end{lstlisting}
 \item On the master, bring up the render menu and name the output
-  files, for example \texttt{/tmp/myoutput.mp4}.
+  files, for example \texttt{/tmp/myoutput.webm}.
 \item The client nodes output results will be on their local
   \texttt{/tmp} filesystems so you will have to again use
   \textit{rsh/ftp} or \textit{usb sneaker net} to move them over to
   the main computer.  File names will be the render job output file
   name with port number tacked on
-  (e.g. \texttt{/tmp/hb.mp4001...mp4005}).
+  (e.g. \texttt{/tmp/hb.webm001...webm005}).
 \item Load the files by concatenate to existing track on the master
   node or use RenderMux shell script.
 \end{enumerate}
@@ -1434,10 +1449,10 @@ want to bother setting up NFS for a shared disk.
 
 If you are lucky enough to have a computer with a large cpu core
 count, setting up a render farm can really take advantage of using
-all of the cpus. This is much faster than the default automatic
+all of the cores at 100\%. This is much faster than the default automatic
 threading capability. Since you don’t need to communicate with other
 computers, you will not have to be concerned about TCP communication
-or shared disks/files; only localhost nodes. On the terminal, we will open many instances of \CGG{} by connecting them to the jobs created. The number of such jobs can be the total number of CPU threads or not. When you are going to be doing other work
+or shared disks/files; only localhost nodes. On the terminal we will open many instances of \CGG{} by connecting them to the jobs created. The number of such jobs can be the total number of CPU threads (-1) or not. When you are going to be doing other work
 simultaneously while rendering a large job, you will want to leave
 some of the cpus available for that.  Be sure to set \textit{Project SMP
 cpus} in the \texttt{Settings $\rightarrow$ Preferences, Performance} tab to your CPU
@@ -1472,7 +1487,7 @@ list of items to check.
   section of the video so keep that in mind when designating port
   numbers.
 \item If not running as root, a port number in the higher range of
-  $1024$ and above must be used instead of the $401+$ range.
+  $10650$ and above must be used instead of the $401+$ range.
 \item The master and client jobs on the ports do not go away so if
   you want to stop them, you will have to kill them via: \texttt{kill
     PID\#}.
@@ -1502,7 +1517,7 @@ list of items to check.
   time.  You can adjust the timer in \texttt{Settings $\rightarrow$
     Preferences, Performance} tab.
 \item When you get the message \texttt{RenderFarmClient::main\_loop:
-    bind port 400: Address already in use}, use a different port.
+    bind port 400: Address already in use}, use a different port. See \texttt{/etc/services} for free ports.
 \item A message of \texttt{RenderFarmServerThread::open\_client:
     unknown host abcompany} means that the hostname of abcompany is not
   in \texttt{/etc/hosts} so you will have to add it or use the ip
