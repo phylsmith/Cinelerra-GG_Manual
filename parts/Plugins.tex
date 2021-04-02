@@ -510,7 +510,7 @@ Audio sampling (time data) is converted to a frequency spectrum using FFT (\text
 
 For example, if you record a voice with a microphone\protect\footnote{credit fary54}:
 \begin{enumerate}
-        \item You record 15 seconds of background (without talking). This is represent the background noise that the filter uses as a reference..
+        \item You record 15 seconds of background (without talking). This is represent the background noise that the filter uses as a reference.
         \item After 15 seconds, start the voice. This is represents the recording whose filter should remove the background noise.
         \item You stop recording.
         \item You place the FFT effect on the whole length of the recording (including the 15 seconds of background noise).
@@ -2565,6 +2565,12 @@ position a little so that the answers are not exactly zero.
 
 The \textit{Polar} effect bends and warps your video in weird ways. Mathematically, it converts your video from either \textit{polar} coordinates to \textit{rectangular} coordinates, or the reverse. With the Clear buttons we can bring the slider to default values without affecting the other parameters.
 
+\subsection{Posterize}%
+\label{sub:posterize}
+\index{posterize}
+
+Reduces the color depth so as to decrease the displayed color gradients, up to the bands typical of posterization. It is used by setting the number of \textit{steps} from 0 to 255.
+
 \subsection{RGB-601}%
 \label{sub:rgb-601}
 \index{rgb-601}
@@ -3025,6 +3031,12 @@ With \textit{Inner} and \textit{Outer Radius} we can position the beginning and 
 With \textit{Time Range} we decide the size (and therefore the number) of the bands.
 
 \textit{Rate} allows you to choose the type of algorithm to use when switching between the start and end bands. You can reverse the direction with the \textit{Invers} button. The three modes are: \textit{Linear}, \textit{Log} or \textit{Quadratic} (exponential). This is a warping framework plugin based on this article: {\small \url{http://www.vision.huji.ac.il/videowarping/HUJI-CSE-LTR-2005-10_etf-tr.pdf}}
+
+\subsection{Timelapse Helper}%
+\label{sub:timelapse_helper}
+\index{timelapse helper}
+
+It is used to get a timelapse quickly and easily. It sets the number of frames to be skipped during playback. The default value of \textit{Number of Frames x block} is 10; playback (and rendering) displays frames 1 - 10 - 20 - ... and not the intermediate ones.
 
 \subsection{Title}%
 \label{sub:title}
@@ -3670,13 +3682,13 @@ cin/plugins/opencv/stylizeobj.plugin
 
 The location for most User installs is:
 
-\hspace{4em}\texttt{<cinlib\_path>/plugins/}
+\hspace{4em}\texttt{<cinlib\_path>/plugins/video}
 
 Location for some System installs is:
 
-\hspace{4em}\texttt{/usr/lib/cin/plugins/} (most ubuntu distros)
+\hspace{4em}\texttt{/usr/lib/cin/plugins/video} (most ubuntu distros)
 
-\hspace{4em}\texttt{/usr/lib64/cin/plugins/} (Leap distro)
+\hspace{4em}\texttt{/usr/lib64/cin/plugins/video} (Leap distro)
 
 \subsection{How to Build OpenCV Plugins}%
 \label{sub:how_build_opencv_plugins}
