@@ -731,3 +731,171 @@ example, the SUV theme has over 800 lines in the initialize function, and has ov
 500 png images in the data directory.  Most of these images and data values are
 required to be initialized by the custom theme constructor; very tedious and
 time consuming work.  Creating a new theme is usually a lot of work.
+
+\section{How Context Help works in the Program Code}
+\label{sec:context_help_coding}
+\index{context help}
+
+All class methods related to context help start with the common pattern \texttt{context \_help} in their names. It is easy to get all occurences in the code with the following command (example):
+
+\begin{lstlisting}[style=sh]
+        grep -F context_help `find . -name '*.[Ch]' -print`
+\end{lstlisting}
+
+The base functionality is defined in several \textit{BC\_WindowBase} class methods in \\ \texttt{guicast/bcwindowbase.C} (search on \texttt{context\_help}). All BC\_Window's and BC\_SubWindow's inherit these methods.
+
+For the simplest case of context help definition, it is sufficient to add the call to \texttt{context\_help\_set\_keyword()} in the most inclusive widget constructor. If \texttt{Alt/h} is pressed with the mouse over this widget's window, its \texttt{keypress\_event()} method (inherited from BC\_WindowBase) will catch this hotkey, fetch the keyphrase defined by \texttt{context\_help\_set\_keyword()} and call the \texttt{doc/ContextManual.pl} script with this keyphrase. Then ContextManual.pl script does the whole processing of the keyphrase given and calls web browser to display the found HTML manual page. The browser is called in the background to prevent from blocking the calling \CGG{} thread.
+
+An example from \textit{cinelerra/zoombar.C}:
+
+\begin{lstlisting}[style=sh]
+        ZoomBar::ZoomBar(MWindow *mwindow, MWindowGUI *gui)
+        : BC_SubWindow(...)
+        {
+                this->gui = gui;
+                this->mwindow = mwindow;
+		context_help_set_keyword("Zoom Panel");
+	}                                                        
+\end{lstlisting}
+
+If \texttt{Alt/h} is pressed with the mouse over some subwindow (arbitrary depth) of the \texttt{context\_help\_set\_keyword()} caller, the \texttt{keypress\_event()} method of that subwindow catches the hotkey. Its own context help keyword, probably, will be empty. In this case the whole widget hierarchy is traced up to \textit{top\_level} widget, their context help keywords are checked, and the first nonempty keyword is used for context help.
+
+This approach allows us to define the help keyword common to the whole dialog window with a bunch of diverse buttons with a single call to \texttt{context\_help\_set \_keyword()}, without placing such a call into each button constructor. And at the same time, this approach allows to assign different help keywords to GUI elements belonging to the same window but documented in different manual pages.
+
+\subsubsection{An example with several different help keywords from cinelerra/mwindowgui.C:}%
+\label{ssub:exemple_different_help_keywords}
+
+\begin{lstlisting}[style=sh]
+        MWindowGUI::MWindowGUI(MWindow *mwindow)
+        : BC_Window(_(PROGRAM_NAME ": Program"), ...)
+        {
+                this->mwindow = mwindow;
+                ...
+                context_help_set_keyword("Program Window");
+        }
+        ...
+        FFMpegToggle::FFMpegToggle(MWindow *mwindow, MButtons *mbuttons, int x, int y)
+        : BC_Toggle(...)
+        {
+                this->mwindow = mwindow;
+                this->mbuttons = mbuttons;
+                set_tooltip(get_value() ? FFMPEG_EARLY_TIP : FFMPEG_LATE_TIP);
+                context_help_set_keyword("FFmpeg Early Probe Explanation");
+        }
+        ...
+        StackButton::StackButton(MWindow *mwindow, int x, int y)
+        : BC_GenericButton(x, y, mwindow->theme->stack_button_w, "0")
+        {
+                this->mwindow = mwindow;
+                set_tooltip(_("Close EDL"));
+                context_help_set_keyword("OpenEDL");
+        }
+        ...
+        ProxyToggle::ProxyToggle(MWindow *mwindow, MButtons *mbuttons, int x, int y)
+        : BC_Toggle(...)
+        {
+                this->mwindow = mwindow;
+                this->mbuttons = mbuttons;
+                ...
+                context_help_set_keyword("Proxy");
+        }
+        \end{lstlisting}
+If the widget we wish to add context help to, overloads keypress\_event() of the base class with its own method, then it is necessary to introduce a small addition to its keypress\_event() handler: the call to \texttt{context\_help\_check\_and\_show()} has to be added in a suitable place in the handler.
+
+An example with \texttt{context\_help\_check\_and\_show()} from \textit{cinelerra/mbuttons.C}:
+\begin{lstlisting}[style=sh]
+	int MButtons::keypress_event()
+	{
+	    int result = 0;
+	    if(!result) {
+	        result = transport->keypress_event();
+	    }
+	    if(!result) {
+        	result = context_help_check_and_show();
+            }
+	    return result;
+	}
+\end{lstlisting}
+
+All the keypress handlers are not equal, therefore we provide different variants of the methods context\_help\_check\_and\_show() and context\_help\_show() (the latter for explicit checking on hotkey).
+
+An example with context\_help\_show() from cinelerra/editpanel.C:
+\begin{lstlisting}[style=sh]
+        int EditPanelTcInt::keypress_event()
+        {
+                if( get_keypress() == 'h' && alt_down() ) {
+                        context_help_show("Align Timecodes");
+                        return 1;
+                }
+                ...further processing...
+                return 1;
+        }
+\end{lstlisting}
+
+A single example of much more sophisticated keypress\_event() handler can be found in \texttt{cinelerra/trackcanvas.C} (search on context\_help). The problem here was to track the particular object drawn on the canvas to figure out whose context help is to be requested. Another rare example of difficulty may appear when context help is desired for some GUI object which is not subclassed from BC\_WindowBase.
+
+\textit{ContextManual.pl} looks for occurence of keyphrases in the following order:
+
+\begin{enumerate}
+        \item In \textit{Contents.html}
+        \item In \textit{Index.html}
+        \item In all the \textit{CinelerraGG\_Manual/*.html} files via grep
+\end{enumerate}
+
+Keyphrase matching is tried first exact and case sensitive, then partially and case insensitive. The special keyword \texttt{TOC} shows Contents, \texttt{IDX} shows Index. If the keyword starts with \texttt{FILE:}, the filename after \textit{FILE:} is extracted and that file is shown. You can look in the ContextManual.pl script text.
+
+For debugging purposes the script can be called from command line. For this to work, the environment variable \texttt{\$CIN\_DAT} has to be set to the parent directory of doc.
+
+
+\subsubsection{Providing context help for plugins}%
+\label{ssub:providing_context_help_plugins}
+
+In the simplest case, nothing has to be done at all. The plugin context help functionality introduced in \texttt{cinelerra/pluginclient.C} automatically assigns context help keyword from the plugin's title for all plugins subclassed from \textit{PluginClient}. For this to work, the manual page documenting the plugin must be entitled identically to the programmatic title of the plugin. A special treatment can be necessary in the following cases:
+
+\begin{enumerate}
+        \item \textit{Rendered effects} are not subclasses of PluginClient and require an explicit context help definition via \texttt{context\_help\_set\_keyword().}
+        \item Only the main plugin dialog inherits context help functionality from the parent class. If a plugin opens additional dialog windows, they probably require explicit context help definitions.
+        \item If the plugin title differs from its subsection title in the documentation, either its help keyword or the corresponding title in the manual should be renamed. Another possibility can be an addition to the \textit{\%rewrite table} in \texttt{doc/ContextManual.pl}.
+        \item If the plugin title contains some characters special for HTML and/or Perl regular expression syntax, the special characters have to be escaped. For example, the keyphrase corresponding to the title \textit{Crop \& Position (X/Y)} should be converted to:
+
+        \begin{lstlisting}[style=sh]
+                Crop & Position \\(X\\/Y\\)
+        \end{lstlisting}
+
+        Such a rewriting can be done either in the C++ code or in ContextManual.pl.
+\end{enumerate}
+
+One additional explanation about previous user information when plugin tooltips are off. Help for the \textit {selected plugin} is shown because in this case it would be difficult to figure out, without a visual feedback, which particular item is currently under the mouse.
+
+\subsection{Manual Maintenance is now Tightly Coupled with the Program Code}
+\label{sub:manmaintain}
+
+If some section of the \CGG{} manual gets renamed and is used for Context Help, the corresponding help keywords should be adjusted too. All the keywords used can be listed via the following example command:
+
+\begin{lstlisting}[style=sh]
+	grep -F context_help `find . -name '*.C' -print` | grep -F '"'
+\end{lstlisting}
+----------------
+
+Note that the keyword does not have to exactly match the section title; it can also be a case insensitive substring of the section title.
+
+If some new \CGG{} window or dialog is created and documented, the inclusion of context\_help\_set\_keyword() calls and/or adaptation of keypress\_event() handler (if any) should be included in the program code.
+
+If some new \CGG{} plugin is created, it is best to document it in the section entitled exactly equal to that plugin's title. Then probably its context help will work out of the box. Otherwise, some adaptation to its keypress\_event() (if any) or to the %rewrite table in ContextManual.pl may be necessary.
+
+Why the local copy of \CGG{} manual should be used?
+
+\begin{enumerate}
+	\item For context help keyphrases matching, the local copy of \textit{Contents.html} and \textit{Index.html} is necessary anyway.
+	\item Grepping \textit{CinelerraGG\_Manual/*.html} files of the remote manual from the website cannot work per definition.
+	\item The local copy usage ensures exact matching of the version of the manual to the version of \CGG{}. Otherwise, if one uses for some reason an older version of \CGG{} with the help fetched from the newer version of the website manual, various incompatibilities can be expected.
+	\item Packing the manual into AppImage, the current method of \CGG{} packaging, should be much easier than merging two different git branches when building from source packages, as was earlier.
+\end{enumerate}
+
+What about Localization?
+
+For now, \CGG{} context help is not localized at all. There is no complete \CGG{} manual in any language except English. But even should the manual be translated to other languages, the context help keywords must remain unlocalized literal string constants. First, because the set of languages known to \CGG{} itself is not the same as the set of languages the manual will be translated to. If some "translated keyword" is fed to the help system, while the manual in this language does not exist, keyword matching cannot succeed. Second, such a help localization with the translation of all keywords can be done and then maintained much easier and much more reliably inside the ContextManual.pl script rather than in the \CGG{} binary.
+
+More about ContextManual.pl file?
+
+The bin/doc/ContextManual.pl script can be configured further. Look in the script text. You can define your preferable web browser, or redefine it to 'echo' for debug purposes. There are also some predefined HTML pages for Contents and Index, and several explicitly rewritten keyphrases. 

@@ -1,6 +1,91 @@
 \chapter{Troubleshooting and Help}%
 \label{cha:troubleshooting_help}
 
+\section{Help and Context Help}%
+\label{sec:help_context_help}
+\index{context help}
+
+\CGG{} is a complex and feature-rich program. Using a guide is indispensable. The official manual (in English) can be found in PDF and HTML format:
+
+\url{https://cinelerra-gg.org/download/CinelerraGG_Manual.pdf}
+
+\url{https://cinelerra-gg.org/download/CinelerraGG_Manual/}
+
+From within the program, you can invoke \textit{Context Help}, which references sections of the HTML manual\protect\footnote{credit Georgy(sge) for full implementation}.
+
+Context help can be requested from almost any \CGG{} window or subwindow by pointing with the mouse cursor on the GUI element of interest and pressing \texttt{Alt/h}. That HTML manual page will be shown via the configured web browser, which is assumed as most relevant to the GUI element currently under the mouse pointer.
+
+\subsection{How it works}%
+\label{sub:how_it_works}
+
+The hotkey to request context help is \texttt{Alt/h}. What particular help page is shown, depends on the mouse cursor location while \texttt{Alt/h} is pressed. Usually, when the mouse is located in some window or dialog, the help page related to the functionality of this window or dialog is shown. In this case the mouse can point either on some widget, or on an empty area in the window. In \CGG{} GUI there are several rich loaded windows, \textit{Timeline} and \textit{Compositor} for example. In such a case different help pages can be requested depending on the particular GUI element under the mouse. For example, pressing \texttt{Alt/h} while pointing on the \textit{Autos curve} in a track would show help on \textit{automation keyframes} section, pointing on the \textit{Overlay} mode button in the \textit{patchbay} would show help on \textit{overlays}, pointing on the \textit{camera control} in \textit{Compositor} would show help on \textit{camera and projector}.
+
+If no context dependent help page is found, the manual page of Contents itself is shown.
+
+\subsection{Requesting context help for plugins}%
+\label{sub:context_help_plugins}
+\index{context help!plugins}
+
+There are several possibilities to request the help page for a particular plugin of interest.
+
+\begin{enumerate}
+	\item Pressing \texttt{Alt/h} with the mouse in the dialog window of that plugin's settings menu.
+	\item Pressing \texttt{Alt/h} while pointing with the mouse on the plugin bar in a track, transition bar, or transition icon.
+	\item Pressing \texttt{Alt/h} while pointing on the plugin name (icon) in the Resources window. If plugin tooltips are on, help for the highlighted plugin under the mouse is shown. If plugin tooltips are off, help for the selected plugin is shown.
+	\item Pressing \texttt{Alt/h} while pointing on the plugin name in the \textit{Attach Effect} dialog menu.
+\end{enumerate}
+
+\subsection{Requesting context help on Contour Shuttle}%
+\label{sub:context_help_contour_shuttle}
+\index{context help!contour shuttle}
+
+Contour Shuttle has no \texttt{Alt/h}. Nevertheless, its help page can be requested by simultaneously pressing both \texttt{Alt} keys (left and right) on the keyboard followed by pressing any button on the Contour Shuttle. Here, pressing both Alt keys is necessary due to the way X11 tracks the status of modifiers. To cancel this mode, press any single modifier key (\texttt{Alt, \texttt{Ctrl}} or Shift) once.  Note that the manual Shuttle Configuration will be the default one, rather than the one that you may have redefined.
+
+\subsection{Alternative web browser configuration}%
+\label{sub:alt_browser}
+\index{context help}
+
+If you prefer to get \textit{Context Help} pages displayed in the same tab
+in your browser instead of each help request displayed in a different tab,
+choose an alternative method as outlined here that works for you.
+
+\begin{enumerate}
+	\item Use another browser which has such a configurable mode. Here is an example for Seamonkey:
+\begin{lstlisting}[style=sh]
+	export CIN_BROWSER=seamonkey
+\end{lstlisting}
+In the seamonkey browser go to Edit -> Preferences... -> Browser -> Link
+Behavior -> Links from other applications .
+Set the option "Open links passed from other applications in:" to the value
+"The current tab/window".
+
+	\item Hack a default browser if you know how to hack it. Here is an example for Firefox.
+Start Firefox and open the pseudo-URL:
+\begin{lstlisting}[style=sh]
+	about:config
+\end{lstlisting}
+There will be a warning like "I'll be careful, I promise!", acknowledge it.
+Then there is a very long list with lots of undecipherable variable names.
+Scroll down to the variable: browser.link.open\_newwindow.override.external .
+By default it has value of -1, which means "use value of the more general
+variable: browser.link.open\_newwindow .
+Next, place the mouse cursor over: browser.link.open\_newwindow.override.external ,
+press the right mouse button, and select from the popup menu "Modify".
+You can now edit the value. Set it to 1, and you get new links from external
+apps opened in the same tab.
+
+If you set the variable "browser.link.open\_newwindow" instead, you get this
+behavior not only for external, but also for all links which otherwise would
+be opened in new tabs or new windows. The possible values of both variables
+are:
+\newline \hspace*{1cm} Value = 1: open in the current window and tab
+\newline \hspace*{1cm} Value = 2: open in the new window
+\newline \hspace*{1cm} Value = 3: (default): open in the new tab, current window
+\end{enumerate}
+
+\section{Troubleshooting}%
+\label{sec:troubleshooting}
+
 You can report potential problems, bugs, and crashes to the \CGG{} website at:
 
 \begin{center}
@@ -23,7 +108,7 @@ are outlined in \ref{cha:when_things_go_wrong} - be sure to read down through
 troubleshooting help is included in other sections of this manual for specific features.
 
 \section{What to Include in Problem Reports}%
-\label{cha:include_in_problem_reports}
+\label{sub:include_in_problem_reports}
 \index{report problem}
 For the best help, if you have a reproducible problem and can provide the following list of materials for analysis, it
 is usually possible to figure out what the problem is and how to fix it. It may be a simple usage or setup mistake or
@@ -38,7 +123,7 @@ Basically we\textbf{ need to see what you see }with the input, output, and sessi
 	\item If possible, also provide the rendered output, again using that representative sample.
 	\item Save a session file used with that same sample which will contain a lot of setup parameters; the best method to do this is to use the \texttt{File $\rightarrow$ Export Project}$\dots$ with the Copy option. That way all of the files will be in 1 location and easily loaded onto any other computer.
 	\item To make sure that the same rendering setup is used, it may be necessary to send an additional session file at the definition point just before rendering starts.
-	\item Include the Operating System name and version number and version of Cin that you are running. You can find the date and time \textit{built} in the \texttt{Settings $\rightarrow$ Preferences, About} tab, bottom left corner.
+	\item Include the Operating System name and version number and version of \CGG{} that you are running. You can find the date and time \textit{built} in the \texttt{Settings $\rightarrow$ Preferences, About} tab, bottom left corner.
 \end{itemize} 
 
 It is better to upload any files to a drop site as some of them can be quite large.
@@ -103,7 +188,7 @@ to try before abandoning your session.
         \item If your computer or the program crashed, you can use the \textit{File} pulldown choice
 of \textit{Load backup} to get back to the last automatically saved session. It will most
 likely not include the last few operations that were done though.  But if you forgot to 
-Load backup when you restarted Cinelerra, you have a second chance to use \texttt{File $\rightarrow$ Load} and
+Load backup when you restarted ,\CGG{} you have a second chance to use \texttt{File $\rightarrow$ Load} and
 select \texttt{\$HOME/.bcast5/backup .prev} as long as you only loaded a different file and have
 performed no editing operations.
          \item If you accidentally destroyed your current project by a Load with 
@@ -138,7 +223,7 @@ On the \textit{File} pulldown, there is a \textit{Dumps} option with a submenu o
 the text results will be shown in that window.
 
 \begin{itemize}[nosep]
-\item \textit{Dump EDL} \index{EDL dump} will display your current EDL state on the screen in the window from where you started Cin. This can be useful to see information concerning a specific edit or a file path.
+\item \textit{Dump EDL} \index{EDL dump} will display your current EDL state on the screen in the window from where you started .\CGG{} This can be useful to see information concerning a specific edit or a file path.
 \item \textit{Dump Plugins} \index{plugins!dumps} will show the names of the currently loaded plugins.
 \item \textit{Dump Assets} \index{asset!dump} displays the media assets that you have loaded and various pertinent details on each, such as samplerate, width, and height.
 \item \textit{Dump Undo} \index{undo dump} will dump the last 32 edits on the undo stack exactly as kept, which can be useful if you are looking to see how far back in the undo to go to get to a specific spot.
@@ -168,7 +253,7 @@ This indicates that there is something wrong with the audio. Some reasons for th
 	\item You simply stopped playing in \CGG{} while the audio is in progress.
 	\item Running on a computer where there is no sound card.
 	\item Incorrect setup of the audio parameters in the \texttt{Settings $\rightarrow$ Preferences, Playback} tab.
-	\item Your sound system is already in use by another program, like when playing \textit{tunes} outside Cin.
+	\item Your sound system is already in use by another program, like when playing \textit{tunes} outside \CGG{}.
 \end{itemize}
 \bigskip
 
@@ -183,8 +268,8 @@ There can be various reasons that \CGG{} does not come up. Some of the recent re
 \medskip
 
 \begin{itemize}[nosep]
-	\item Cin doesn't come up in Debian with compiz window manager running. Workaround is to use a different window manager or bring up cin first and then compiz. There is also a report that Compiz leads to single frame problems after a certain amount of time in the case where you switch to fullscreen mode and than back to normal node -- cin stops working and so you will have to restart cin.
-	\item When a library goes from one version to a later version, sometimes a pre-built Cin binary will fail because it was created at a different version than the one the user has on their computer. This seems to happen more frequently on Arch distros because Arch has continuous releases and is usually kept up to date. An example of the error message you might see in your startup window would be:\\
+	\item \CGG{} doesn't come up in Debian with compiz window manager running. Workaround is to use a different window manager or bring up cin first and then compiz. There is also a report that Compiz leads to single frame problems after a certain amount of time in the case where you switch to fullscreen mode and than back to normal node -- cin stops working and so you will have to restart cin.
+	\item When a library goes from one version to a later version, sometimes a pre-built \CGG{} binary will fail because it was created at a different version than the one the user has on their computer. This seems to happen more frequently on Arch distros because Arch has continuous releases and is usually kept up to date. An example of the error message you might see in your startup window would be:\\
 	\texttt{cin: error while loading shared libraries: libvpx.so.5: \\
 	cannot open shared object file: No such file}
 \end{itemize}
@@ -193,7 +278,7 @@ There can be various reasons that \CGG{} does not come up. Some of the recent re
 You can usually install the required library to fix the problem. A temporary fix may be to create a symlink but this must be done with extreme caution as it may create an unstable condition. A better workaround is to use a tarball to install the software instead of the package build until the libraries are in sync between the build and your Operating System install.
 \bigskip
 
-\textit{ Loading a very large number of media files, for example 500 clips, crashes \CGG{} with messages similar to the following that are displayed in the window from where you started Cin:}
+\textit{ Loading a very large number of media files, for example 500 clips, crashes \CGG{} with messages similar to the following that are displayed in the window from where you started \CGG{}:}
 
 \begin{lstlisting}[numbers=none,xleftmargin=10mm]
 
@@ -227,7 +312,7 @@ main000();
 In the mask window, check the box \textit{Disable OpenGL masking} to use software instead of OpenGL.
 
 \section{Menu Bar Shell Commands}%
-\label{menu_bar_shell_commands}
+\label{sec:menu_bar_shell_commands}
 \index{shell commands}
 
 In order to provide some types of help, the Menu Bar Shell Commands are available for customization purposes (figure~\ref{fig:trouble-img001}).

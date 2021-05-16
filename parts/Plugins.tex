@@ -192,6 +192,15 @@ To get a short one or a few lines description of a plugin, mouse over that plugi
     \label{fig:info-effect}
 \end{figure}
 
+\textit{Context Help} provides more detailed information about the plugin in 4 possible
+ways using the Alt/h hotkey combination. 
+\begin{enumerate}
+        \item Pressing \texttt{Alt/h} with the mouse in the dialog window of that plugin's settings menu.
+        \item Pressing \texttt{Alt/h} while pointing with the mouse on the plugin bar in a track, transition bar, or transition icon.
+        \item Pressing \texttt{Alt/h} while pointing on the plugin name (icon) in the Resources window. If plugin tooltips are on, help for the highlighted plugin under the mouse is shown. If plugin tooltips are off, help for the selected plugin is shown.
+        \item Pressing \texttt{Alt/h} while pointing on the plugin name in the \textit{Attach Effect} dialog menu.
+\end{enumerate}
+
 \subsection{Delete Plugins to save Resources Space or make them Unavailable}%
 \label{sub:delete_plugin_resouces_unavaible}
 
@@ -2143,7 +2152,7 @@ To save time the motion result can be saved in a file for later reuse, recalled 
  	\label{fig:motion}
 \end{figure}
 
-Motion tracking parameters:
+Motion tracking parameters\protect\footnote{credit Georgy (sge)}:
 
 \begin{description}
     \item[Track translation] Enables translation operations. The motion tracker tracks $X$ and $Y$ motion in the \textit{master} layer and adjusts $X$ and $Y$ motion in the \textit{target} layer.
