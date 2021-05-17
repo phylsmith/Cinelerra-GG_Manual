@@ -12,8 +12,19 @@ pdflatex CinelerraGG_Manual.tex
 
 # Now build HTML version, using auxiliary files created by pdflatex.
 
-# clean the future HTML directory
+# Clean the future HTML directory
 rm -rf CinelerraGG_Manual
+
+# Ensure creating the important settings file
+if [ ! -f .latex2html-init ]
+then
+    cp latex2html-init .latex2html-init
+fi
+
+# When translating manual for context help, don't use -show_section_numbers !
+# And do use -split +3 -link 3 -nofootnode and -local_icons.
+# -use_dvipng, -image_type and -bottom_navigation can be used
+# according to your preferences.
 
 # translate document (GIF images generated via gs, good for debugging)
 #latex2html -html_version 4.0,math -use_pdftex -nouse_dvipng -image_type gif -nofootnode -show_section_numbers -split +3 -link 3 -bottom_navigation -local_icons -t 'Cinelerra-GG Infinity' CinelerraGG_Manual.tex
@@ -22,12 +33,12 @@ rm -rf CinelerraGG_Manual
 #latex2html -html_version 4.0,math -use_pdftex -use_dvipng -image_type png -nofootnode -show_section_numbers -split +3 -link 3 -bottom_navigation -local_icons -t 'Cinelerra-GG Infinity' CinelerraGG_Manual.tex
 
 # Alternative currently used on the cinelerra-gg.org website / created on a Fedora system
-latex2html -html_version 4.0,math -use_pdftex -nouse_dvipng -long_titles 5 -image_type gif -nofootnode -show_section_numbers -split +3 -link 3 -bottom_navigation -local_icons -t 'CinelerraGG_Manual' CinelerraGG_Manual.tex
+latex2html -html_version 4.0,math -use_pdftex -nouse_dvipng -long_titles 5 -image_type gif -nofootnode -split +3 -link 3 -bottom_navigation -local_icons -t 'CinelerraGG_Manual' CinelerraGG_Manual.tex
 
-# this single image has to be copied explicitly
+# This single image has to be copied explicitly
 cp images/cin-big.png CinelerraGG_Manual
 
-# clean temporary files in the HTML directory
+# Clean temporary files in the HTML directory
 rm -f CinelerraGG_Manual/WARNINGS
 rm -f CinelerraGG_Manual/*.pl
 rm -f CinelerraGG_Manual/images*
