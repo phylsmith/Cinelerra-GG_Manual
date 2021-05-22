@@ -294,6 +294,35 @@ You can usually install the required library to fix the problem. A temporary fix
 This usually indicates that you are out of Operating System file descriptors.  You can increase the amount easily with the following command line:  \texttt{ulimit -n 4096}   where 4096 is a size suggestion but can be increased.  You can include this command line in your \texttt{.bashrc} or \texttt{.profile} file for the user login which gets run every time you login, or modify the Operating System limit for everyone in the system file, which for Fedora is \texttt{/etc/security/limits.conf}.  Alternatively, you can reduce the number of file descriptors needed by going into \texttt{Settings $\rightarrow$ Preferences, Appearance} tab and unchecking the flag \textit{use thumbnails in resource window}.
 
 \bigskip
+
+\textit{Using a non-supported locale could cause a failure in starting \CGG{} with the following error.}
+
+\begin{lstlisting}[numbers=none,xleftmargin=10mm]
+
+   BC_WindowBase::init_im: Could not open input method.
+   unjoined tids / owner 1
+     00007f543dffb700 / 00007f54989d5840 12BC_Clipboard
+
+\end{lstlisting}
+
+This is caused by LC\_CTYPE setting you are using, and maybe other Locale settings too. 
+For example, using the following will cause the \textit{unjoined tids} error.
+
+\begin{lstlisting}[numbers=none,xleftmargin=10mm]
+   LC_CTYPE="en_IL" /mnt0/build5/cinelerra-5.1/bin/cin # set LC_CTYPE and start cin 
+\end{lstlisting}
+
+This is an operating system error which is resolved by using the following startup instead:
+
+\begin{lstlisting}[numbers=none,xleftmargin=10mm]
+
+   LC_CTYPE="en_GB.utf8" /mnt0/build5/cinelerra-5.1/bin/cin # set LC_CTYPE and start cin 
+\end{lstlisting}
+
+You can either export the LC\_CTYPE variable before starting \CGG{} or
+add this in your bash startup file or simply run from the command line as shown above.
+
+\bigskip
 \textit{Masking Feather is not working and produces error messages on the startup window similar to:}
 
 \begin{lstlisting}[numbers=none,xleftmargin=10mm]
