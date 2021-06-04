@@ -129,6 +129,15 @@ some minor changes.  Also works on a somewhat limited basis on
 FreeBSD and Windows 10 with the bsd.patch for FreeBSD and the
 cygwin.patch for Windows 10.
 
+NOTE: as of May 31, 2021 when Context Help was added, to include
+this Context Help you will need to download the corresponding
+tgz file containing the HTML manual sections referenced for the
+Help pages.  The file to download is:
+\url{https://cinelerra-gg.org/download/images/HTML_Manual-20210531.tgz}
+substituting for "20210531" the "yyyymmdd" representing latest release date.
+Then unpack to your Cinelerra/bin/doc directory so it is included in
+your built system.
+
 Alternatively, there are some pre-built dynamic or static binaries
 which are updated on a fairly regular basis (as long as code changes
 have been made) available at the link below.
@@ -416,6 +425,16 @@ export ac_cv_header_xmmintrin_h=no
 export FFMPEG_EXTRA_CFG=" --disable-vdpau"
 \end{lstlisting}
 
+NOTE: as of May 31, 2021 when Context Help was added, to include
+this Context Help you will need to download the corresponding
+tgz file containing the HTML manual sections referenced for the
+Help pages.  The file to download is:
+\url{https://cinelerra-gg.org/download/images/HTML_Manual-20210531.tgz}
+substituting for "20210531" the "yyyymmdd" representing latest release date.
+Then unpack to your Cinelerra/bin/doc directory so it is included in
+your built system.  The reason for not including the HTML manual in 
+the source code so that it would already be there, is because it is
+very large and has its own GIT base.
 
 \subsection{Notes about Building from Git in your Customized Environment}%
 \label{sub:notes_about_building_from_git_in_your_customized_environment}
