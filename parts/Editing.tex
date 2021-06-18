@@ -372,6 +372,12 @@ NOTES:
 	to the first audio channel to be automatically duplicated before reverting to the \textit{Gang None} mode to make other changes. Once you start changing individual channels (that is, audio tracks) so that they are no longer coordinated in their edits/plugins, it may be more difficult to switch back to \textit{Gang Channels} mode and get the desired results since the channels may no longer be lined up.
 	\item Gang modes should not be used with Multi-camera/Mixers because they have very specific
 operational capabilities which are not compatible with the way that Ganging works.
+	\item Gang flags in the patchbay specifically when in \textit{Gang Channels} or \textit{Gang Media} modes will
+operate as set in the Master Track.  For example, if when in \textit{Gang Channels} mode, you turn off
+“Play track” on the visible audio track, none of the associated channels (i.e. the other stereo or
+other 5 channels will play).  And if in \textit{Gang Media} mode, if you turn on “Play track” for the
+Master Track, all associated video and audio tracks will play unless you turned off “Play track” for
+some of the associated audio/video slave tracks which will not play. 
 \end{itemize}
 
 \section{Two Screen Editing}%
