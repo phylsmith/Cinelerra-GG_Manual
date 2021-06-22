@@ -116,6 +116,26 @@ The following extensions of files in \CGG{}'s \texttt{.bcast5} directory are exp
 	\item [.png] thumbnails of files in Resources so they do not have to be created over and over
 \end{labeling}
 
+\section{Focusing the 4 main windows as a group}
+\label{sec:focus_group}
+
+When working with multiple programs it is often the case where a set of windows needs to be minimized
+or maximized temporarily while working with a different program.  This can be a little awkward with
+\CGG{} because there are 4 distinct windows that are treated individually. To improve the workflow
+so that the 4 are minimized or maximized together as a group, you can use a routine called \textit{xdotool}.
+This will help to automatically focus all 4 of the windows as one window while still letting the user 
+reposition the 4 screens. The "focusing windows as a group" option makes it so that you can quickly
+move back and forth between this program and other programs.  Here is how to do this.
+
+\begin{description}
+	\item Install xdotool \url{https://www.semicomplete.com/projects/xdotool/}
+
+	\item Iconifying all Cinelerra windows at once:
+\newline xdotool search --name Cinelerra windowminimize \%@
+	\item Reactivating all Cinelerra windows at once:
+\newline xdotool search --name Cinelerra windowactivate \%@
+\end{description}
+                                                     
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../CinelerraGG_Manual"
