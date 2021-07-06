@@ -209,6 +209,25 @@ lines of interlaced source footage. The alternating lines missing on
 each output frame are interpolated.
 \end{description}
 
+\section{Best practice in pre-editing}%
+\label{sec:best_practice_pre_editing}
+
+\CGG{} supports the simultaneous presence in the Timeline of sources with different frame sizes and frame rates. However, audio/video synchronization problems may occur due to their different timing.\protect\footnote{credit to sge and Andrew Randrianasulu}
+Plugins that rely on the timing of each frame, for example \textit{Motion} and \textit{Interpolate} plugins, may have problems when used at the same time with engines which increase frame rate. Frame rate per definition cannot be increased without either duplicating some frames or generating them in some intelligent way. But to work reliably, the \textit{Motion} plugin requires access to all actual frames. These kinds of plugins (and also the rare cases of audio/video desync) explicitly require the \textit{Play every frame} option.
+
+There is no problem as long as the source fps, project fps, and destination fps are identical. In most cases, high frame rates such as 120 or 144 or any fps, will be just fine for \textit{Motion} provided that source footage all has the same frame rate.
+
+But when \textit{project} and \textit{source} frame rates are different (or \textit{project} and
+\textit{rendered} fps), then the \CGG{} engine has to either duplicate (interpolate) some frames or throw some away. Because of this, the audio tracks and the timeline get out of sync with such accelerated (or slowed down) video. And to make \textit{Motion} plugins reliably calculate interframe changes, you have to ensure the consistent frame numbers and frame properties.
+
+Generally, best practice is to perform the following sequence of preparations for video editing.
+
+\begin{enumerate}
+	\item Motion stabilization, and maybe some other preparations, to improve the quality of the source video is best done under the properties identical to the properties of the original video; it may be different codec, but same frame size and same frame rate.
+	\item If you need to alter the frame rate, for example because different source clips have different frame rates, then recode all the necessary clips to the same future project frame rate. Here frame sizes can still have different sizes, but frame rates should be all the same.
+	\item Whole editing: if you need to change frame rate of some restricted part, particularly when smooth acceleration/deceleration is needed, it can be done here. But if frame rate has to be changed only due to different source fps, it is better to do it during the preparation stage.
+\end{enumerate}
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../CinelerraGG_Manual"
