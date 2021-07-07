@@ -228,6 +228,27 @@ Generally, best practice is to perform the following sequence of preparations fo
 	\item Whole editing: if you need to change frame rate of some restricted part, particularly when smooth acceleration/deceleration is needed, it can be done here. But if frame rate has to be changed only due to different source fps, it is better to do it during the preparation stage.
 \end{enumerate}
 
+\CGG{} does not have color management \index{color management}, but we can still give some general advice on how to set color spaces:
+
+\begin{enumerate}
+	\item Profiling and setting the monitor: \\
+	source: \textit{sRGB} $\rightarrow$ monitor: \textit{sRGB}  (we get a correct color reproduction) \\
+	source: \textit{sRGB} $\rightarrow$ monitor: \textit{rec709} (we get slightly dark colors) \\
+	source: \textit{sRGB} $\rightarrow$ monitor: \textit{DCI-P3} (we get over-saturated colors) \\
+	
+	source: \textit{rec709} $\rightarrow$ monitor: \textit{rec709} (we get a correct color reproduction) \\
+	source: \textit{rec709} $\rightarrow$ monitor: \textit{sRGB} (we get slightly faded colors) \\
+	source: \textit{rec709} $\rightarrow$ monitor: \textit{DCI-P3} (we get over-saturated colors)
+	\item It would be better to set the project as RGB(A)-FLOAT, allowing system performance, because it collects all available data and does not make rounding errors. If we can't afford it, starting from YUV type media it is better to set the project as YUV(A)8, so as not to have a darker rendering in the timeline. On the contrary, if we start from RGB signals, it is better to use RGB(A)8. If we don't display correctly on the timeline, we'll make adjustments from the wrong base (metamerism) and get false results.
+	\item Among the rendering options always set the values \\
+	\texttt{colorspace=...} (color model); \\
+	\texttt{color\_trc=...} (gamma correction) \\
+	\texttt{color\_primaries=...} (gamut).
+	
+	These are only metadata that do not affect rendering but when the file is read by a player later they are used to reproduce the colors without errors.
+\end{enumerate}
+
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../CinelerraGG_Manual"
