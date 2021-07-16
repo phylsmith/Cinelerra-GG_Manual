@@ -240,14 +240,17 @@ Generally, best practice is to perform the following sequence of preparations fo
 	source: \textit{rec709} $\rightarrow$ monitor: \textit{sRGB} (we get slightly faded colors) \\
 	source: \textit{rec709} $\rightarrow$ monitor: \textit{DCI-P3} (we get over-saturated colors)
 	\item It would be better to set the project as RGB(A)-FLOAT, allowing system performance, because it collects all available data and does not make rounding errors. If we can't afford it, starting from YUV type media it is better to set the project as YUV(A)8, so as not to have a darker rendering in the timeline. On the contrary, if we start from RGB signals, it is better to use RGB(A)8. If we don't display correctly on the timeline, we'll make adjustments from the wrong base (metamerism) and get false results.
-	\item Among the rendering options always set the values \\
-	\texttt{colorspace=...} (color model); \\
+	\item Among the rendering options always set the values \\	
 	\texttt{color\_trc=...} (gamma correction) \\
-	\texttt{color\_primaries=...} (gamut).
+	\texttt{color\_primaries=...} (gamut) \\
+	\texttt{colorspace=...} (color spaces conversion, more depth-color); \\
+	or \\
+	\texttt{colormatrix=...} (color spaces conversion, faster).
 	
 	These are only metadata that do not affect rendering but when the file is read by a player later they are used to reproduce the colors without errors.
 \end{enumerate}
 
+For more tips on how \CGG{} processes colors on the timeline see  \nameref{sec:color_space_range_playback} and \nameref{sec:conform_the_project}.
 
 %%% Local Variables:
 %%% mode: latex
