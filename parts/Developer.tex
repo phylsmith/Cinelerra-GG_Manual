@@ -351,7 +351,7 @@ developer's feedback and experimentation.
 \begin{description}[noitemsep]
      \item Status - currently \CGG{} is staying at 0.5.  This is disappointing because there
 may be speed gains in version 0.6 that would be beneficial. However, it is usable for decoding
-whereas libaom is just too slow.  Unfortunately, it has no effective encoder.
+whereas libaom is a lot slower.  Unfortunately, it has no effective encoder.
      \item Problem - 0.6 dav1d requires NASM 2.14 and uses instructions like vgf2p8affineqb,
 not exactly an "add" instruction. It also uses meson which is not widely available on all
 distros.  The only distros that are built for \CGG{} that are at 2.14 are the latest version
@@ -398,10 +398,10 @@ Look into opencv4/opencv2/core/types.hpp:711;27
 
 \textbf{libaom}
 \begin{description}[noitemsep]
-     \item Status - currently at version 1.0.0 
-     \item Problem - requires cmake 3.5 
+     \item Status - currently at version 3.0.0 for older O/S and 3.1.1 for newer O/S
+     \item Problem - requires cmake 3.5 at 3.0.0 and 3.6 for 3.1.1
      \item Workaround already in use by \CGG{} - leaving out of Ubuntu14, Ubuntu, Centos7
-     \item Your workaround - upgrade on those systems to cmake 3.5
+     \item Your workaround - upgrade on those systems to cmake 3.6
 \end{description}
 
 \textbf{x10tv}
@@ -889,7 +889,7 @@ Why the local copy of \CGG{} manual should be used?
 	\item For context help keyphrases matching, the local copy of \textit{Contents.html} and \textit{Index.html} is necessary anyway.
 	\item Grepping \textit{CinelerraGG\_Manual/*.html} files of the remote manual from the website cannot work per definition.
 	\item The local copy usage ensures exact matching of the version of the manual to the version of \CGG{}. Otherwise, if one uses for some reason an older version of \CGG{} with the help fetched from the newer version of the website manual, various incompatibilities can be expected.
-	\item Packing the manual into AppImage, the current method of \CGG{} packaging, should be much easier than merging two different git branches when building from source packages, as was earlier.
+	\item Packing the manual into AppImage, the current method of \CGG{} packaging, should be much easier than merging two different git branches when building from source packages, as was done earlier.
 \end{enumerate}
 
 What about Localization?

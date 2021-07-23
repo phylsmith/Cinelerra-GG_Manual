@@ -94,7 +94,7 @@ There are 4 phases during \CGG{}’s handling of hardware acceleration. These fi
 	can not convert the data, you will see the error message of \textit{Error retrieving data from GPU to CPU}.
 \end{enumerate}
 
-Due to variations in user’s computer hardware configuration, it is often suggested that you refer to your startup window to check for error messages.   Since your situation is unique, the error may not have been seen by anyone else and is probably unknown/undocumented.
+AppImage does not provide this capability. Due to variations in user’s computer hardware configuration, it is often suggested that you refer to your startup window to check for error messages.   Since your situation is unique, the error may not have been seen by anyone else and is probably unknown/undocumented.
 \textcolor{red}{For debugging problems, modify in the \CGG{} ffmpeg subdirectory, the file:  \texttt{decode.opts}   by temporarily changing the line from \textit{loglevel =fatal} to \textit{loglevel =verbose} and restarting \CGG{}}.  
 
 \subsubsection*{Possible improvements or differences}%
@@ -165,7 +165,7 @@ or
 HEVC with NVIDIA, VDPAU driver is buggy, skipping
 \end{lstlisting}
 
-If you would like to see more information on what is occurring, you can modify in the \CGG{} ffmpeg subdirectory, the file:  \texttt{decode.opts}   by temporarily changing the line from \textit{loglevel =fatal} to \textit{loglevel =verbose} and restarting \CGG{}.  Then you will see messages in the startup window like:
+AppImage does not provide this capability. If you would like to see more information on what is occurring, you can modify in the \CGG{} ffmpeg subdirectory, the file:  \texttt{decode.opts}   by temporarily changing the line from \textit{loglevel =fatal} to \textit{loglevel =verbose} and restarting \CGG{}.  Then you will see messages in the startup window like:
 
 \begin{lstlisting}[numbers=none]
 [AVHWDeviceContext @ 0x7fc9540be940] Successfully created a VDPAU device 

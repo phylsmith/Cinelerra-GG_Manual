@@ -38,14 +38,14 @@ that ffmpeg early probes is enabled; (2) \textit{Try FFMpeg last}  indicator mes
 \label{sec:create_ffmpeg_options_files}
 \index{ffmpeg!options files}
 
-This section describes how the FFmpeg options files work for decoding and encoding and goes into great detail.  It will make more sense if you look at \CGG{}'s ffmpeg config directory and the \CGG{} menus at the same time.  
+AppImage does not provide this capability. This section describes how the FFmpeg options files work for decoding and encoding and goes into great detail.  It will make more sense if you look at \CGG{}'s ffmpeg config directory and the \CGG{} menus at the same time.  
 It is meant to include everything necessary for complete understanding.  You will be able to personalize your own options files without knowing all of the information included below if you know the basics.  The word encoding is used interchangeably with the word rendering.
 The possible combinations for ffmpeg options files are literally combinatorial -- that is a lot (factorial!).  The allowed media file format / codec choices are much more flexible than you might realize.  When the ffmpeg design was initially added, some parameter files which describe the choices which the program uses had to be created.  There are way too many to enumerate in the deliverable \CGG{} package.  Some quite detailed information for how ffmpeg options work is given here and hopefully, enough basics for simple understanding.  It may all seem complicated at first, but will become obvious.
 
 \subsection{File naming convention}%
 \label{sub:file_naming_convention}
 
-In \CGG{}'s ffmpeg configuration directory you will see files as listed and described below.  File type and extension names are the key for \CGG{}'s use of ffmpeg.  Basically the \texttt{.opts} file extension represents options; \texttt{.dfl} represents defaults; and all the rest are media types.  For example one media type is quicktime so that \texttt{*.qt} file names would be the \textit{quicktime} choices.  In the file names below, \textit{ext} refers to a set of files with file names matching the \texttt{*.ext} file extension.  And \textit{typ} refers to a type of format / codec combination used, that is, the media type.
+AppImage does not provide this capability. In \CGG{}'s ffmpeg configuration directory you will see files as listed and described below.  File type and extension names are the key for \CGG{}'s use of ffmpeg.  Basically the \texttt{.opts} file extension represents options; \texttt{.dfl} represents defaults; and all the rest are media types.  For example one media type is quicktime so that \texttt{*.qt} file names would be the \textit{quicktime} choices.  In the file names below, \textit{ext} refers to a set of files with file names matching the \texttt{*.ext} file extension.  And \textit{typ} refers to a type of format / codec combination used, that is, the media type.
 
 In the ffmpeg configuration directory there are a series of options files used when encoding or decoding audio or video.  They are read in the order from top to bottom and only the files needed for the current operation are added to the active configuration.
 
@@ -91,7 +91,7 @@ In the ffmpeg configuration directory there are a series of options files used w
 \label{sub:option_file_format_content}
 \index{ffmpeg!option file format}
 
-For the option files a specific format must be followed in creating the file content.
+AppImage does not provide this capability.  For the option files a specific format must be followed in creating the file content.
 In \texttt{typ.ext} encoder parameter files, the first line is defined as:
 
 \begin{lstlisting}[style=sh]
@@ -327,7 +327,7 @@ Figure~\ref{fig:audio-preset02} shows \textit{ffmpeg} video for the Kind. Note t
 \label{sec:ffmpeg_image2_streams}
 \index{ffmpeg!image2 streams}
 
-Another feature gained from using ffmpeg in \CGG{} takes advantage of what is being referred to as the \textit{\%d trick}.  This trick uses the ffmpeg muxer image2 and a filename template to create a series of image files of a given type.  A specific example is described below.
+AppImage does not provide this capability. Another feature gained from using ffmpeg in \CGG{} takes advantage of what is being referred to as the \textit{\%d trick}.  This trick uses the ffmpeg muxer image2 and a filename template to create a series of image files of a given type.  A specific example is described below.
 
 To encode a series of $48$\,bit tiff output image files, add a file to the \CGG{} data ffmpeg/video subdirectory as in:
 

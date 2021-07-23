@@ -137,6 +137,7 @@ Help pages.  The file to download is:
 substituting for "20210531" the "yyyymmdd" representing latest release date.
 Then unpack to your Cinelerra/bin/doc directory so it is included in
 your built system.
+NOTE End
 
 Alternatively, there are some pre-built dynamic or static binaries
 which are updated on a fairly regular basis (as long as code changes
@@ -740,6 +741,46 @@ current case of Leap 15, libx264 and libx265 are not built in and
 this can be debilitating; you can always run \texttt{ffmpeg
   -formats} and \texttt{ffmpeg -codecs} to see what is available
 on your system.
+
+\section{Building the HTML Manual for Context Help}%
+\label{sec:building_the_manual}
+\index{context help}
+
+In addition to compiling your own \CGG{}, you should also build an html version of the manual that is needed for Context Help in the program. The main version of the manual is in latex to produce a pdf version of the manual and this is required to be built first as the basis for the html version. This means that you need a full latex environment, git, and the latex2html program in order to eventually create the html version. Texlive is about 1 GB; Latex2html itself has many requirements and missing any will result in failure: some requirments include Netpbm, GhostScript, dvips, etc.  Latex2html must be at least version "2021.2" in order to create the html manual version from the latex.
+
+The steps are as follows:
+\begin{enumerate}
+	\item Download the manual in LaTeX:
+
+\begin{lstlisting}[style=sh]
+git clone "git://git.cinelerra-gg.org/goodguy/cin-manual-latex.git" master
+\end{lstlisting}
+
+	\item Included in the download is the \textit{translate\_manual} script. After modifying this file to have execute permission, run this script from a terminal window in the \textit{master} directory where it was downloaded (be aware that this script includes several \textit{rm} commands):
+\begin{lstlisting}[style=sh]
+./translate_manual
+\end{lstlisting}
+
+The PDF document will be produced from the latex source in the \textit{master} directory. Since the glossary and index are also present, it has to run the pdf build several times. The following commands in the \textit{translate\_manual} script produce the PDF document from latex source which includes invoking makeindex for the Index and Glossary.
+
+\begin{lstlisting}[style=sh]
+pdflatex CinelerraGG_Manual.tex
+makeindex CinelerraGG_Manual.idx
+pdflatex CinelerraGG_Manual.tex
+makeindex CinelerraGG_Manual.nlo -s nomencl.ist -o CinelerraGG_Manual.nls
+pdflatex CinelerraGG_Manual.tex
+\end{lstlisting}
+
+After these commands are executed you will have the manual only in PDF format.  So if you only want a PDF version, you only need to run these previous 5 lines but Context Help from the program will not be available with the PDF version.
+
+	\item Next, to produce HTML output the script then moves (renames) latex2html-init to .latex2html-init (starting with dot).
+
+	\item Finally latex2html is run with a unique set of parameters and some cleanup is performed.  The script uses latex2html. It creates the directory CinelerraGG\_Manual containing all the files of the manual in html:  tables, references, index, glossary, and various images.
+
+	\item After installation of the \CGG{} program, place the complete unchanged directory CinelerraGG\_Manual, as it was produced by latex2html from the manual package, into the 'doc' directory of the installed Cinelerra package. This will be the directory bin/doc/CinelerraGG\_Manual if \CGG{} was built --with-single-user. The script ContextManual.pl will automatically be in bin/doc after the successful build of the program. It is this perl script that allows the program to access CinelerraGG\_Manual to offer Context Help.
+
+	\item Optionally you can make some adjustments to the latex2html command line in the \textit{translate\_manual} script. Some variants are shown in the comments inside the script but changes may impact the usability of Alt/h hotkey from the program.
+\end{enumerate}
 
 \section{Windows 10 with Cygwin for \CGG{} Limited}%
 \label{sec:ms_windows10}
