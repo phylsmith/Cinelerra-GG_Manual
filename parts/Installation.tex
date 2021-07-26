@@ -451,54 +451,52 @@ the library interfaces exist.  Below is the list of thirdparty
 builds, but this list may have changed over time.
 % It's list of Table?
 
-\begin{table}[htpb]
-  \centering
-  \caption{List of thirdparty builds}
-  \label{tab:List_of_thirdparty_builds}
-  \small
-  \begin{tabular}{m{8em}c}
-    \toprule
- 	a52dec   & yes\\
- 	djbfft   & yes\\
- 	ffmpeg   & yes\\
- 	fftw     & auto\\
- 	flac     & auto\\
- 	giflib   & yes\\
- 	ilmbase	 & auto\\
- 	lame     & auto\\
- 	libavc1394&auto\\
- 	libraw1394&auto\\
- 	libiec61883&auto\\
-    libdv     &auto\\
- 	libjpeg   &auto\\
- 	opus	  &auto\\
- 	openjpeg  &auto\\
- 	libogg    &auto\\
- 	libsndfile&auto\\
- 	libtheora&auto\\
- 	libuuid  & yes\\
- 	libvorbis&auto\\
- 	mjpegtools&yes\\
- 	openexr   &auto\\
-    tiff      &auto\\
- 	twolame   &auto\\
- 	x264      &auto\\
- 	x265      &auto\\
- 	libvpx    &auto\\
- 	lv2       &auto\\
- 	sratom    &auto\\
- 	serd      &auto\\
- 	sord      &auto\\
- 	lilv      &auto\\
- 	suil      &auto\\
- 	libaom    &auto\\
- 	dav1d     &auto\\
-    libwebp   &auto\\
- 	ffnvcodec &auto\\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
+\begin{center}
+	\small
+	\begin{longtable}{m{8em} c}		
+		\caption{List of thirdparty builds}
+		\label{tab:List_of_thirdparty_builds}\\
+		\toprule
+		a52dec   & yes\\
+		djbfft   & yes\\
+		ffmpeg   & yes\\
+		fftw     & auto\\
+		flac     & auto\\
+		giflib   & yes\\
+		ilmbase	 & auto\\
+		lame     & auto\\
+		libavc1394&auto\\
+		libraw1394&auto\\
+		libiec61883&auto\\
+		libdv     &auto\\
+		libjpeg   &auto\\
+		opus	  &auto\\
+		openjpeg  &auto\\
+		libogg    &auto\\
+		libsndfile&auto\\
+		libtheora&auto\\
+		libuuid  & yes\\
+		libvorbis&auto\\
+		mjpegtools&yes\\
+		openexr   &auto\\
+		tiff      &auto\\
+		twolame   &auto\\
+		x264      &auto\\
+		x265      &auto\\
+		libvpx    &auto\\
+		lv2       &auto\\
+		sratom    &auto\\
+		serd      &auto\\
+		sord      &auto\\
+		lilv      &auto\\
+		suil      &auto\\
+		libaom    &auto\\
+		dav1d     &auto\\
+		libwebp   &auto\\
+		ffnvcodec &auto\\
+		\bottomrule
+	\end{longtable}
+\end{center}
 
 The \textit{yes} means force build and \textit{auto} means probe and
 use the system version if the build operation is not static.  To get
@@ -746,7 +744,7 @@ on your system.
 \label{sec:building_the_manual}
 \index{context help}
 
-In addition to compiling your own \CGG{}, you should also build an html version of the manual that is needed for Context Help in the program. The main version of the manual is in latex to produce a pdf version of the manual and this is required to be built first as the basis for the html version. This means that you need a full latex environment, git, and the latex2html program in order to eventually create the html version. Texlive is about 1 GB; Latex2html itself has many requirements and missing any will result in failure: some requirments include Netpbm, GhostScript, dvips, etc.  Latex2html must be at least version "2021.2" in order to create the html manual version from the latex.
+In addition to compiling your own \CGG{}, you should also build an html version of the manual that is needed for Context Help in the program. The main version of the manual is in latex to produce a pdf version of the manual and this is required to be built first as the basis for the html version. This means that you need a full latex environment, git, and the latex2html program in order to eventually create the html version. Texlive is about 1 GB; Latex2html itself has many requirements and missing any will result in failure: some requirments include Netpbm, GhostScript, dvips, etc.  Latex2html must be at least version \textit{2021.2} in order to create the html manual version from the latex.
 
 The steps are as follows:
 \begin{enumerate}
@@ -756,30 +754,32 @@ The steps are as follows:
 git clone "git://git.cinelerra-gg.org/goodguy/cin-manual-latex.git" master
 \end{lstlisting}
 
-	\item Included in the download is the \textit{translate\_manual} script. After modifying this file to have execute permission, run this script from a terminal window in the \textit{master} directory where it was downloaded (be aware that this script includes several \textit{rm} commands):
+	\item Included in the download is the \texttt{translate\_manual} script. After modifying this file to have execute permission, run this script from a terminal window in the \textit{master} directory where it was downloaded (be aware that this script includes several \textit{rm} commands):
 \begin{lstlisting}[style=sh]
 ./translate_manual
 \end{lstlisting}
 
-The PDF document will be produced from the latex source in the \textit{master} directory. Since the glossary and index are also present, it has to run the pdf build several times. The following commands in the \textit{translate\_manual} script produce the PDF document from latex source which includes invoking makeindex for the Index and Glossary.
+	The steps that this script performs are as follows:
+	\begin{itemize}
+		\item PDF production. The PDF document will be produced from the latex source in the \textit{master} directory. Since the glossary and index are also present, it has to run the pdf build several times. The following commands in the \texttt{translate\_manual} script produce the PDF document from latex source which includes invoking makeindex for the Index and Glossary.
+		
+		\begin{lstlisting}[style=sh]
+			pdflatex CinelerraGG_Manual.tex
+			makeindex CinelerraGG_Manual.idx
+			pdflatex CinelerraGG_Manual.tex
+			makeindex CinelerraGG_Manual.nlo -s nomencl.ist -o CinelerraGG_Manual.nls
+			pdflatex CinelerraGG_Manual.tex
+		\end{lstlisting}
+		
+		After these commands are executed you will have the manual only in PDF format.  So if you only want a PDF version, you only need to run these previous 5 lines but Context Help from the program will not be available with the PDF version.
+		\item Next, to produce HTML output the script then moves (renames) \texttt{latex 2html-init} to \texttt{.latex2html-init} (starting with dot).
+		
+		\item Then the script uses latex2html: latex2html is run with a unique set of parameters and some cleanup is performed. It creates the directory CinelerraGG\_Manual containing all the files of the manual in html:  tables, references, index, glossary, and various images.
+	\end{itemize}
 
-\begin{lstlisting}[style=sh]
-pdflatex CinelerraGG_Manual.tex
-makeindex CinelerraGG_Manual.idx
-pdflatex CinelerraGG_Manual.tex
-makeindex CinelerraGG_Manual.nlo -s nomencl.ist -o CinelerraGG_Manual.nls
-pdflatex CinelerraGG_Manual.tex
-\end{lstlisting}
+	\item After installation of the \CGG{} program, place the complete unchanged directory \texttt{CinelerraGG\_Manual}, as it was produced by latex2html from the manual package, into the \textit{doc} directory of the installed Cinelerra package. This will be the directory \textit{bin/doc/CinelerraGG\_Manual} if \CGG{} was built \texttt{--with-single-user}. The script ContextManual.pl will automatically be in bin/doc after the successful build of the program. It is this perl script that allows the program to access CinelerraGG\_Manual to offer Context Help.
 
-After these commands are executed you will have the manual only in PDF format.  So if you only want a PDF version, you only need to run these previous 5 lines but Context Help from the program will not be available with the PDF version.
-
-	\item Next, to produce HTML output the script then moves (renames) latex2html-init to .latex2html-init (starting with dot).
-
-	\item Finally latex2html is run with a unique set of parameters and some cleanup is performed.  The script uses latex2html. It creates the directory CinelerraGG\_Manual containing all the files of the manual in html:  tables, references, index, glossary, and various images.
-
-	\item After installation of the \CGG{} program, place the complete unchanged directory CinelerraGG\_Manual, as it was produced by latex2html from the manual package, into the 'doc' directory of the installed Cinelerra package. This will be the directory bin/doc/CinelerraGG\_Manual if \CGG{} was built --with-single-user. The script ContextManual.pl will automatically be in bin/doc after the successful build of the program. It is this perl script that allows the program to access CinelerraGG\_Manual to offer Context Help.
-
-	\item Optionally you can make some adjustments to the latex2html command line in the \textit{translate\_manual} script. Some variants are shown in the comments inside the script but changes may impact the usability of Alt/h hotkey from the program.
+	\item Optionally you can make some adjustments to the latex2html command line in the \texttt{translate\_manual} script. Some variants are shown in the comments inside the script but changes may impact the usability of Alt/h hotkey from the program.
 \end{enumerate}
 
 \section{Windows 10 with Cygwin for \CGG{} Limited}%
