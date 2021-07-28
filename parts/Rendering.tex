@@ -998,12 +998,25 @@ rates (figure~\ref{fig:back-ren}).
   path. Since hundreds of thousands of image files are usually
   created, ls commands will not work in the background rendering
   directory. The browse button for this option normally will not work
-  either, but the configuration button for this option works.
+  either, but the configuration button for this option works. The
+  default value will be /tmp/brender .
 \item[File format] The file format for background rendering has to
   be a sequence of images. The format of the image sequences
   determines the quality and speed of playback. JPEG generally works
-  well.
+  well and is the default.
 \end{description}
+Tip: If you have rendered your whole project with \textit{File format}
+set to JPEG and there are no missing numbers in the sequence, you can
+create a video from that sequence outside of \CGG{}.
+For example, if using the default output so that your files are named
+/tmp/brender000000, /tmp/brender000001, ... in a window, you would type:
+
+\begin{lstlisting}[style=sh]
+ffmpeg -f image2 -i /tmp/brender0%5d -c:v copy brender.mov
+\end{lstlisting}
+which would create the video file brender.mov -  be sure to delete
+existing brender files before creating a new sequence to ensure there
+are no missing numerical values in the sequence.
 
 \section{Render Farm Usage}%
 \label{sec:render_farm_usage}
