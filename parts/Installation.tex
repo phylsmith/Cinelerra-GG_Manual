@@ -11,7 +11,7 @@ and since each release is named differently, you can keep a number of versions i
 and when testing from a terminal you just have to type CinGG, then hit tab, and complete it to
 the desired date release.
 
-For 64-bit systems you can choose between an image with up-to-date libraries or one that supports older libraries, which you should use only if the first image gives you problems with unsupported libs. There is also a 32-bit older distro available that has \textit{i686} as part of the filename.  Installing the appimage is simple:
+For 64-bit systems you can choose between an image with up-to-date libraries or one that supports older libraries, which you should use only if the first image gives you problems with unsupported libs. There is also a 32-bit older distro available that has \textit{i686} as part of the filename and a 8/10/12 bit newer distro that handles 8 or 10 or 12 bits that has \textit{multibit} as part of the filename.  Installing the appimage is simple:
 
 Download the file from:
 
@@ -20,12 +20,14 @@ Download the file from:
 Some example file names are as follows - where 8 digits represent yyyymmdd:
 
 \begin{lstlisting}[style=sh]
-	CinGG-20210228-x86_64.AppImage
+	CinGG-20210731-x86_64.AppImage
 	  (currently based on Fedora Core 32, libc version 2.31)
-	CinGG-20210228-x86_64-older-distros.AppImage
+	CinGG-20210731-x86_64-older-distros.AppImage
 	  (currently based on Ubuntu 16.04, libc version 2.23)
-	CinGG-20210228-i686.AppImage
-	  (not yet available, but will be based on Debian 9, libc version 2.23)
+	CinGG-20210731-i686.AppImage
+	  (currently based on Debian 9, linux kernel 4.9)
+	CinGG-20210731-x86_64-multibit.AppImage
+	  (currently based on Fedora Core 32, libc version 2.31)
 \end{lstlisting}
 
 Make the file executable with the proper execute permissions either from the GUI of the Desktop Environment used (link to the file) or from a terminal window.  Make sure you are already in the directory containing the appimage:
@@ -1065,6 +1067,22 @@ There is also a 12-bit version for consideration but currently the
 results are simply the same as 10-bit with padding to make 12-bit
 so it is of no value.
 
+\section{Multibit build for 8/10/12-bit Handling}%
+\label{sec:multibit_build}
+\index{multibit}
+
+To build a version that can handle 8 bit, or 10 bit, or 12 bit videos,
+a patch is provided in the \textit{thirdparty} subdirectory that needs
+to be applied to do so.  Be aware that the compile will take a
+substantial amount of extra time.  To apply the required patch:
+
+\begin{lstlisting}[style=sh]
+cd location of your cinelerra/cinelerra-5.1/thirdparty
+patch < x265_compile_multibit.patch
+mv x265_3.5.patch* src/.
+\end{lstlisting}
+Render formats h265-10bit and h265-12bit have been provided and will
+be operational after the applied patch is compiled in.
 
 %%% Local Variables:
 %%% mode: latex
