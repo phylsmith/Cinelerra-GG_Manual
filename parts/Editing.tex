@@ -129,7 +129,9 @@ The 7 \textit{attributes} are described here next followed by the other availabl
   combination with the active region determine where material is
   inserted when loading files.  If the files are loaded with one of
   the insertion strategies which do not delete the existing project,
-  the armed tracks will be used as destination tracks.
+  the armed tracks will be used as destination tracks.  Note that disarming
+  a track does not prevent you from dragging or attaching an Effect/Plugin
+  onto a disarmed track - this is not considered an edit in this case.
 \end{description}
 
 \begin{description}
@@ -378,6 +380,11 @@ operate as set in the Master Track.  For example, if when in \textit{Gang Channe
 other 5 channels will play).  And if in \textit{Gang Media} mode, if you turn on “Play track” for the
 Master Track, all associated video and audio tracks will play unless you turned off “Play track” for
 some of the associated audio/video slave tracks which will not play. 
+	\item When adding a Plugin/Effect in \textit{Gang Channels} or \textit{Gang Media} mode to the track, highlighted selected region, or In/Out pointers area via
+ dragging the plugin from the Resources Window the plugin will be added on the master and all slave tracks.  If using the Audio or Video pulldown, \textit{Attach Effect} option and you want
+to propagate the effect to all slave tracks, make sure that the checkbox for "Attach single standalone
+and share others" in the Dialog window is checked.  However, currently when using the right mouse button (RMB) on the master track to \textit{Attach effect}, the effect will only be inserted on that track.
+
 \end{itemize}
 
 \section{Two Screen Editing}%
