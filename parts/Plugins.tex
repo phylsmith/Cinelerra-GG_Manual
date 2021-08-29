@@ -4029,14 +4029,18 @@ The following is a list of the integrated audio plug-ins\protect\footnote{credit
 \item [F\_acrusher]~\\Reduces audio bit resolution.
 \item [F\_acue]~\\Delay filtering to match a cue.
 \item [F\_adelay]~\\Delays one or more audio channels.
+\item [F\_adenorm]~\\Remedy denormals by adding extremely
+  low-level noise.
 \item [F\_aderivative]~\\Compute derivative of input audio.
 \item [F\_aecho]~\\Adds echoing to the audio.
 \item [F\_aemphasis]~\\Audio emphasis.
 \item [F\_aeval]~\\Filters audio signal according to a
   specific expression.
+\item [F\_aeexciter]~\\Enhance high frequency part of audio.
 \item [F\_afade]~\\Fades in/out input audio.
 \item [F\_aformat]~\\Convert the input audio to one of he
   specified formats.
+\item [F\_afreqshift]~\\Apply frequency shifting to input audio.
 \item [F\_agate]~\\Audio gate.
 \item [F\_aintegral]~\\Compute integral of input audio.
 \item [F\_allpass]~\\Applies a two-pole all-pass filter.
@@ -4045,6 +4049,7 @@ The following is a list of the integrated audio plug-ins\protect\footnote{credit
 \item [F\_aperms]~\\Set permissions for the output audio
   frame.
 \item [F\_aphaser]~\\Adds a phasing effect to the audio.
+\item [F\_aphaseshift]~\\Apply phase shifting to input audio.
 \item [F\_arealtime]~\\Slows down filtering to match realtime.
 \item [F\_aresample]~\\Resamples audio data.
 \item [F\_asetrate]~\\Change the sample rate without altering
@@ -4052,6 +4057,10 @@ The following is a list of the integrated audio plug-ins\protect\footnote{credit
 \item [F\_astats]~\\Shows time domain statistics about audio
   frames.
 \item [F\_asubboost]~\\Boost subwoofer frequencies.
+\item [F\_asubcut]~\\Cut subwoofer frequencies.
+\item [F\_asupercut]~\\Cut super frequencies.
+\item [F\_asuperpass]~\\Apply high order Butterworth band-pass filter.
+\item [F\_asuperstop]~\\Apply high order Butterworth band-stop filter.
 \item [F\_atempo]~\\Adjusts audio tempo so that when you speed up audio, it will
 adjust the pitch accordingly to make audio sounds more normal, but faster without
 being badly distorted. Its behavior is similar to what can be seen when you watch
@@ -4160,16 +4169,23 @@ The following is a list of the integrated video plug-ins \protect\footnote{credi
 \item [F\_cas]~\\Apply Contrast Adaptive Sharpen filter to video.
 \item [F\_chromakey]~\\Turns a certain color into
   transparency. Operates on YUV colors.
+\item [F\_chromanr]~\\Reduce chrominance noise.
 \item [F\_ciescope]~\\Video CIE scope.
 \item [F\_color]~\\Provide an uniformly colored input.
 \item [F\_colorbalance]~\\Adjusts the color balance.
 \item [F\_colorchannelmixer]~\\Adjusts colors by mixing color
   channels.
+\item [F\_colorcontrast]~\\Adjust color contrast between RGB
+  components.
+\item [F\_colorcorrect]~\\Adjust color white balance selectivity
+  for blacks and whites.
 \item [F\_colorkey]~\\Turns a certain color into
   transparency. Operates on RGB colors.
 \item [F\_colorlevels]~\\Adjusts the color levels.
 \item [F\_colormatrix]~\\Converts color matrix.
+\item [F\_colorize]~\\Overlay a solid color on the video stream.
 \item [F\_colorspace]~\\Converts color space.
+\item [F\_colortemperature]~\\Adjust color temperature of video.
 \item [F\_cover\_rect]~\\Find and cover a user specified
   object.
 \item [F\_crop]~\\Crops the input video.
@@ -4221,9 +4237,12 @@ The following is a list of the integrated video plug-ins \protect\footnote{credi
 \item [F\_elbg]~\\Apply posterize effect, using the ELBG
   algorithm.
 \item [F\_entropy]~\\Measure video frames entropy.
+\item [F\_epx]~\\Scale the input using EPX algorithm.
 \item [F\_eq]~\\Adjusts brightness, contrast, gamma and
   saturation.
 \item [F\_erosion]~\\Applies erosion effect.
+\item [F\_estdif]~\\Apply Edge Slope Tracing deinterlace.
+\item [F\_exposure]~\\Adjust exposure of the video stream.
 \item [F\_fade]~\\Fade in/out input video.
 \item [F\_fftdnoiz]~\\Denoise frames using $3D FFT$.
 \item [F\_fftfilt]~\\Apply arbitrary expressions to pixels in
@@ -4262,6 +4281,7 @@ The following is a list of the integrated video plug-ins \protect\footnote{credi
   interlaced.
 \item [F\_kerndeint]~\\Applies kernel deinterlacing to the
   input.
+\item [F\_kirsch]~\\Apply kirsch operator.
 \item [F\_lenscorrection]~\\Rectifies the image by correcting
   for lens distortion.
 \item [F\_life]~\\Generate a life pattern.
@@ -4285,6 +4305,7 @@ The following is a list of the integrated video plug-ins \protect\footnote{credi
   deinterlacing.
 \item [F\_median]~\\Pick median pixel from rectangle defined by radius.
 \item [F\_mestimate]~\\Generate motion vectors.
+\item [F\_monochrome]~\\Convert video to gray using custom color filter.
 \item [F\_mpdecimate]~\\Remove near-duplicate frames.
 \item [F\_mptestsrc]~\\Generate various test pattern.
 \item [F\_negate]~\\Negates input video.
@@ -4336,8 +4357,10 @@ The following is a list of the integrated video plug-ins \protect\footnote{credi
   output video frame.
 \item [F\_setrange]~\\Force color range for the output video
   frame.
+\item [F\_shear]~\\Shear transform the input image.
 \item [F\_showpalette]~\\Display frame palette.
 \item [F\_shuffleframes]~\\Shuffles video frames.
+\item [F\_shufflepixels]~\\Shuffles video pixels.
 \item [F\_shuffleplanes]~\\Shuffles video planes.
 \item [F\_sierpinski]~\\Generate a Sierpinski carpet/triangle fractal, and randomly pan around.
 \item [F\_signalstats]~\\Separates statistics from video
@@ -4372,6 +4395,7 @@ The following is a list of the integrated video plug-ins \protect\footnote{credi
 \item [F\_tlut2]~\\Compute and apply a lookup table from 2
   successive frames.
 \item [F\_tmedian]~\\Pick median pixels from successive frames.
+\item [F\_tmidequalizer]~\\Apply Temporal Midway Equalization.
 \item [F\_tmix]~\\Mix successive video frames.
 \item [F\_transpose]~\\Transposes input video.
 \item [F\_unsharp]~\\Sharpen or blur the input videlo.
