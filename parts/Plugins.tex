@@ -2642,7 +2642,7 @@ the sequence, and therefore its length, but not the framerate. The
 varying the framerate.  It is important to understand that the
 plugin works by varying the frames, the possible change of
 \textit{fps} is only a side effect of the creation of new frames due
-to interpolation.
+to interpolation. The interpolation algorithm is simply the slope of a linear curve. This plugin is keyframable and the \textit{Interpolate} option works between keyframes. A simpler and more handy version is the \textit{Speed PerCent} plugin.
 
 \subsubsection*{Stretch}%
 \label{ssub:stretch}
@@ -2667,7 +2667,7 @@ in stretch mode with a value less than $1$.
 
 \textit{Example:} you have a clip that you want to put in slow motion. The clip starts at $33.792\, seconds$ and ends at $39.765$. The clip is $5.973\, seconds$ long. You want to play it at $\frac{4}{10}^{ths}$ normal speed. You divide the clip length by the playback speed ($5.973\div0.4$) to get a final clip length of $14.9325\,seconds$. You create an in point at the start of your clip: $33.792\,seconds$. You put an out point $14.9325\,seconds$ later, at $48.7245\,seconds$ ($33.792 + 14.9325$). You attach a \texttt{ReframeRT} effect, set it to $0.4$ and stretch. You change the out point at $48.7245$ to an in point. You start your next clip after the slow motion effect at the $48.7245$ out point. You can do this without making any calculations by first applying the effect and then lengthening or shortening the bar to where the stretched movie ends.
 
-Now in the timeline we have the affected part of the plugin where we see the slow/fast effect, and the continuation of the timeline from where the plugin ends. We then have to select the interval on which the plugin acts and render it or transform it into a nested clip or nested asset. In this way we can replace or overlap it with the part of the timeline that originally included all of the part we wanted to slow down/speed up.
+Now in the timeline we have the affected part of the plugin where we see the slow/fast effect, and the continuation of the timeline from where the plugin ends. We then have to select the interval on which the plugin acts and render it or transform it into a nested clip or nested asset. In this way we can replace or overlap it with the part of the timeline that originally included all of the part we wanted to slow down/speed up. See also the \textit{Reframe} render effect for direct rendering.
 
 \subsubsection*{Downsample}%
 \label{ssub:downsample}
@@ -2683,7 +2683,7 @@ Downsample mode changes the frame rate of the input as well as the number of the
 \begin{itemize}
     \item ReframeRT uses the fps indicated in \texttt{Settings $\rightarrow$ Format $\rightarrow$ fps} project and not the \texttt{fps} of the assets.
     \item It can be associated with Nested Clips.
-    \item As an alternative to ReframeRT you can use the \textit{speed curve}, or change the framerate in \texttt{Resources $\rightarrow$ info} and in the \texttt{Project}.
+    \item As an alternative to ReframeRT you can use the \textit{speed curve}, or change the framerate in \texttt{Resources $\rightarrow$ info} and in the \texttt{Project}; or using \textit{Reframe} render effect, or using \textit{Speed PerCent} plugin.
     \item It is keyframmable.
     \item ResampleRT with the same settings is used to act on audio tracks.
 \end{itemize}
@@ -2960,6 +2960,12 @@ Points and curves are identified by numeric ids, and not the table position. Thi
 \label{ssub:fill_detailed_information}
 
 The \textit{fill} point is a marker point, and not really part of the curve. That point identifies the inside of the loop. It can also be used to identify the outside of the loop in order to fill that. The loop is created by drawing a line from the last point to the first point in the curve. The line of this last segment is from the last point of the curve. If there are isolated loops in the curve (it is self intersecting) then you will be able to use multiple fill points to fill these regions.
+
+\subsection{Speed PerCent}%
+\label{sub:speed_per_cent}
+\index{speed percent}
+
+It works like the \texttt{ReframeRT} plugin in \textit{Stretch} mode. The interpolation algorithm is simply the slope of a linear curve. It allows you to change the speed of the video track, or an edit, or a region of the track quickly and intuitively. There are presets to set the speed to 100\% (default) or 25\%; 50\%; 200\% and 400\%. Or we can enter the value directly in the text box or use the slider until the desired value is reached. \textit{Interpolate} option works between keyframes. It requires setting the right limits for applying the effect and then rendering that region, or turning it into a nested clip, which will replace the original one.
 
 \subsection{Sphere Cam}%
 \label{sub:sphere_cam}
