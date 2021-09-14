@@ -16,7 +16,7 @@ There are 3 types of copy/cut and paste methods which exist in X windows, and mo
 \end{description}
 
 \subsection*{How Copy/Paste works:}%
-\label{sub:how_it_works}
+\label{sub:how_copy_paste_works}
 
 All of the methods use window \textit{properties} to attach data, called a selection, to a source window.  The program advertises the selection by using the X server.  The window property used determines which selection type is set/advertised by the new selection.
 
@@ -165,6 +165,14 @@ There is now program code to look for RGB versus YUV color model mismatches.  Yo
     \item[YUV color space] default choice is BT601, alternate is BT709 (High Definition), BT2020 (UHD)
     \item[YUV color range] default choice is JPEG,   alternate is MPEG
 \end{description}
+
+Some general tips (See also \ref{sec:video_attributes} \textit{Color model}):
+\begin{itemize}
+	\item If your hardware allows it use RGB-Float (in \texttt{Settings $\rightarrow$ Format}); this format does not lead to transfer errors from one model to another, but it uses more cpu.
+	\item Use RGB-8 if the source is RGB and YUV-8 if the source is YUV (most commonly used).
+	\item If you notice alterations in color/brightness representation, try playing with color models in \texttt{Settings $\rightarrow$ Format} and with \textit{YUV color space} and \textit{YUV color range} in \texttt{Settings $\rightarrow$ Preferences $\rightarrow$ Appearance} tab. Another possibility is to check if the display color model conforms to the project color model.
+\end{itemize}
+
 
 \section{Automatic "Best Model" Media Load}%
 \label{sec:conform_the_project}
