@@ -671,6 +671,39 @@ video/audio wrenches and choose \textit{faststart\_h264}.  With the
 possible, but you can easily modify these options in the associated
 Video Preset textbox.
 
+\section{About Image Sequences}%
+\label{sec:about_image_sequences}
+\index{image sequence}
+
+\CGG{} supports image sequences with both decoding and encoding.
+
+\CGG{} by default uses ffmpeg as encoding/decoding engine but we can disable it to have the specific internal engine available. See \nameref{sec:ffmpeg_early_probe_explanation} on how to switch between engines. With the internal engine we can create and load sequences of OpenEXR; PNG; TIFF; TGA; GIF; PPM and JPEG. With ffmpeg we can create and load DPX sequences or create a custom preset for any kind of image. Using these formats results in great timeline efficiency and high video quality at the cost of taking up a lot of space because they are uncompressed (or with lossless compression).
+By rendering, you will get as many still images as there are frames in the project, plus a \textit{file-list} (or \textit{TOC}) that indexes the images. A good practice is to create a folder to contain the images (for example \texttt{/tmp/img\_seq/}) and then open the rendering window in \CGG{} and set a serial and increasing number as the name (for example: \texttt{/tmp/img\_seq/image \%05d.png}). \textit{image} is a generic name chosen at will; $\%$ creates a progressive sequence of distinct images; $05d$ indicates how many digits the image number will be, in this case 5 digits to go from $00000$ to $99999$.
+Once we have our folder of images, if we want to import it in a project just load the file-list, which includes the link to all the files of the sequence.
+To learn more about using and creating a preset with ffmpeg of an image sequence, see \nameref{sec:ffmpeg_image2_streams} and/or \nameref{sec:image_sequence_creation}.
+
+\section{Data storage formulas}%
+\label{sec:data_storage_formulas}
+\index{data storage}
+
+If we are dealing with large projects and poorly compressed formats, we will get large files that are difficult to manage and take up a lot of space on the HDD. We present some simple formulas to be able to calculate the space that will be occupied and the data rates we have to deal with:
+
+\begin{description}
+	\item[Frame size] 
+	
+	\[ \dfrac{Width \times Height [pixels] \times BitDepth [bits/pixel] \times Color}{8 [bit/Byte]} \] 	
+	\[= ... [MB/frame] \]
+	\item[File size] 
+	
+	\[ Frame size [MB/frame] \times frames [frame] = ... [MB] \]
+	\item[Data Rate] 
+	
+	\[ Frame size [MB/frame] \times fps [frame/sec] = ... [MB/sec] \]
+	\item[Data in 1 Hour] 
+	
+	\[ \dfrac{Data Rate [MB/sec] \times 3600 [sec]}{1024MB/GB}  = ... [GB] \]	
+\end{description}
+
 \section{Batch Rendering}%
 \label{sec:batch_rendering}
 \index{batch rendering}
