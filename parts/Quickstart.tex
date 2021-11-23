@@ -285,7 +285,7 @@ The file you created in the Render step should now be playable.  You can test th
 
 Here is an overview of the formats (also called containers) and codecs that are used in \CGG{}, by ffmpeg and the internal engine. Roughly speaking these are divided into uncompressed codecs (or codecs with \textit{Intraframe} compression, which can be lossy or lossless) and compressed codecs of \textit{Interframe} type (LongGOP, almost always with lossy compression). The All-I (intraframe) codecs are suitable for editing because a cut or other operation on the timeline corresponds to the exact frame on which you are operating. The interframe types use Groups of Pictures (GOP) and a cut or other operation is accurate (and requires no further calculation) only if it coincides with the beginning of the GOP, and not with an internal frame. There is also color compression: Color Space \textit{bit-depth} and \textit{Chroma-Subsampling} for YUV models. In addition, heavy compression requires the system to do more encoding/decoding work on the timeline. High quality codecs have high bit rates and bit depths but this also affects the performance of the system, not to mention the increased disk space usage. Some formats implement both audio and video streams, others audio only or video only.  
 
-\subsection{FFmpeg Video Formats}%
+\subsection{Video FFmpeg Formats}%
 \label{sec:FFmpeg_video}
 
 FFmpeg supports hundreds of codecs and formats. Some are proprietary and cannot be implemented in FFmpeg or can be voluntarily compiled as non-free; others are proprietary but their use is free; finally there are the Open formats/codecs, fully supported and well documented. We are only describing here a selection of the most well-known and most frequently used ones.
@@ -366,7 +366,7 @@ Some formats, though used in the past in the pro field, are disappearing with th
 	\newline    Presets: \textit{mjpeg}
 \end{description}
 
-\subsection{FFmpeg Audio Formats}%
+\subsection{Audio FFmpeg Formats}%
 \label{sub:FFmpeg_audio}
 
 Audio formats and codecs take much less resources and space than video ones, so they are often used without compression for maximum quality. However these are compressed formats and codecs widely used in streaming and sharing.
