@@ -11,7 +11,9 @@ and since each release is named differently, you can keep a number of versions i
 and when testing from a terminal you just have to type CinGG, then hit tab, and complete it to
 the desired date release.
 
-For 64-bit systems you can choose between an image with up-to-date libraries or one that supports older libraries, which you should use only if the first image gives you problems with unsupported libs. There is also a 32-bit older distro available that has \textit{i686} as part of the filename and a 8/10/12 bit newer distro that handles 8 or 10 or 12 bits that has \textit{multibit} as part of the filename.  Installing the appimage is simple:
+For 64-bit systems you can choose between an image with up-to-date libraries or one that supports older libraries, which you should use only if the first image gives you problems with unsupported libs. There is also a 32-bit older distro available that has \textit{i686} as part of the filename that currently works on older distros but may not work on the latest distros and
+definitely does now work on Debian version 11.00 (most of the popular Linux distributions such
+as Arch, Ubuntu, and Fedora have dropped support for this older architecture).  And there is a 8/10/12 bit newer distro that handles 8 or 10 or 12 bits that has \textit{multibit} as part of the filename.  Installing the appimage is simple:
 
 Download the file from:
 
@@ -25,7 +27,7 @@ Some example file names are as follows - where 8 digits represent yyyymmdd:
 	CinGG-20210731-x86_64-older-distros.AppImage
 	  (currently based on Ubuntu 16.04, libc version 2.23)
 	CinGG-20210731-i686.AppImage
-	  (currently based on Debian 9, linux kernel 4.9)
+	  (currently based on Debian 9, linux kernel 4.9, does not work on Debian 11.0)
 	CinGG-20210731-x86_64-multibit.AppImage
 	  (currently based on Fedora Core 32, libc version 2.31)
 \end{lstlisting}
@@ -72,6 +74,10 @@ not included in the AppImage.
 	\caption{Screencast of the website Download page for installing \CGG{} for various O/S.}
 	\label{fig:download-distros}
 \end{figure}
+
+All of these images are dated 10/31/2020 and are no longer being maintained.  They
+will still work on the version of the O/S in use at that time but will have none of
+the latest features.  You should use the simpler AppImage instead as described previously.
 
 If you prefer to not have to take the time to build \CGG{} Infinity
 yourself, there are pre-built dynamic or static binaries for various
@@ -142,7 +148,10 @@ Arch, Slackware, and Gentoo.  It has not been tested on every
 single possible distro yet so you might expect to have to make
 some minor changes.  Also works on a somewhat limited basis on
 FreeBSD and Windows 10 with the bsd.patch for FreeBSD and the
-cygwin.patch for Windows 10.
+cygwin.patch for Windows 10. As of 10/31/2020, FreeBSD and Windows
+10 builds and patches are no longer being maintained so that they
+will work using the GIT version in use at that time but you will
+have to create new patches for arising problems on later GITs.
 
 NOTE: as of May 31, 2021 when Context Help was added, to include
 this Context Help you will need to download the corresponding
@@ -801,6 +810,11 @@ git clone "git://git.cinelerra-gg.org/goodguy/cin-manual-latex.git" master
 \label{sec:ms_windows10}
 \index{windows 10}
 
+As of 10/31/2020, this is no longer being maintained.  It should
+still work using an older GIT version with Windows 10 but it is
+possible with some effort to modify the patch file to work with the
+latest updated GIT.
+
 To run \CGG{} on a Windows 10 computer, you will need to have
 Cygwin installed on your system, along with the \CGG{} static tar
 and a patched library: libxcb.  This setup has been tested with
@@ -1003,6 +1017,90 @@ Running gdb from inside a desktop resident console (not a cygwin64
 window) will hang cygwin (and cin) when it hits a breakpoint.  You
 must run from an external console window to avoid this issue.
 
+\section{Android Tablet or Phone with TERMUX}%
+\label{sec:android_termux}
+\index{Android}
+
+CinGG can be run on Android (without audio), a non-x86 mostly posix system,
+tablet or phone after installing TERMUX, the \textit{terminal emulator}.
+You will have to do your own build using the file in Cinelerra's
+\textit{blds} subdirectory, \textit{termux.bld}.
+Because this is a relatively new capability and of lesser use, some
+additional effort may have to be exerted on your part to get it going
+but it is easy to get help by contacting the mailing list.
+In addition, there is currently no known procedure for hearing audio.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=1.0\linewidth]{android.png}
+	\caption{Screencast of an Android tablet running \CGG{} using TERMUX.}
+	\label{fig:android}
+\end{figure}
+
+Some requirements include;
+\begin{enumerate}
+\item Termux runs with X on Android 7+. 
+\item Install takes 5 GB of internal storage. In addition you can download videos,
+and other files with wget to one specific location at sdcard after running termux-setup-storage
+inside termux (it will prompt you to give access to sdcard graphically the first time used).
+\item If you have empty versions of locale.alias, locale.dir,
+ and
+\newline \$PREFIX\/share/X11\/locale\/en\_US.UTF-8\/en\_US.UTF-8\/XLC\_LOCALE
+ you will have to request non-empty versions via the mailing list.
+\item Some helpful information on installing the X environment is at:
+ \url{https://wiki.termux.com/wiki/Graphical\_Environment}
+\item To prevent crashing when loading a video file that has audio, use the guide
+ \url{https://www.reddit.com/r/termux/comments/bpa8jz/pulseaudio\_streaming\_client/}
+ which explains vnc/pulseaudio setup.
+\end{enumerate} 
+
+A little more about Audio is presented next because you will need to have this running
+in order to prevent a crash (even though you still will not be able to hear audio) -
+there does not seem to be a simple PA client in termux itself.
+Some information is available at:
+ \url{https://android.stackexchange.com/questions/205576/how-to-play-sound-from-termux-when-using-linux} .
+
+The next few lines show a successful setup/usage.
+\begin{lstlisting}[style=sh]
+$ pulseaudio --start
+$ ps axv
+  PID TTY STAT TIME MAJFL TRS DRS RSS %MEM COMMAND
+ 7003 pts/28 S<s 0:00 637 532 9039 1716 0.0 /data/data/com
+13684 ? S<l 0:00 0 49 123898 16616 0.8 pulseaudio --
+13692 pts/28 R<+ 0:00 0 63 7500 1420 0.0 ps axv
+\end{lstlisting}
+\begin{lstlisting}[style=sh]
+$ pactl load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=116
+$ PULSE_SERVER=127.0.0.1 pactl info
+Server String: 127.0.0.1
+Library Protocol Version: 34
+Server Protocol Version: 34
+Is Local: no
+Client Index: 2
+Tile Size: 65496
+User Name: u0_a116
+Host Name: localhost
+Server Name: pulseaudio
+Server Version: 14.2
+Default Sample Specification: s16le 2ch 44100Hz
+Default Channel Map: front-left,front-right
+Default Sink: OpenSL_ES_sink
+Default Source: OpenSL_ES_sink.monitor
+Cookie: c659:c1b7
+\end{lstlisting}
+
+Now to start up \CGG{}, type in:
+\begin{lstlisting}[style=sh]
+        $ cd (your cinelerra directory)/cinelerra/cinelerra-5.1/
+        $ PULSE_SERVER=127.0.0.1 ./cin.sh
+\end{lstlisting}
+
+You can even build a package version similiar to Debian, just with 'pkg search\/pkg install'
+instead of 'apt search/install' and with '*-static' instead of '-dev\/-devel packages'. For more
+information on this, see:
+
+\url{https://wiki.termux.com/wiki/Package\_Management}
+\newline \url{https://wiki.termux.com/wiki/Building\_packages}
 
 \section{Distro with \CGG{} Included}%
 \label{sec:distro_with_cinelerra_included}
