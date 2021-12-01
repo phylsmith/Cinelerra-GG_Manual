@@ -1045,7 +1045,7 @@ and other files with wget to one specific location at sdcard after running termu
 inside termux (it will prompt you to give access to sdcard graphically the first time used).
 \item If you have empty versions of locale.alias, locale.dir,
  and
-\newline \$PREFIX\/share/X11\/locale\/en\_US.UTF-8\/en\_US.UTF-8\/XLC\_LOCALE
+\newline \$PREFIX/share/X11/locale/en\_US.UTF-8/XLC\_LOCALE
  you will have to request non-empty versions via the mailing list.
 \item Some helpful information on installing the X environment is at:
  \url{https://wiki.termux.com/wiki/Graphical\_Environment}
@@ -1095,9 +1095,9 @@ Now to start up \CGG{}, type in:
         $ PULSE_SERVER=127.0.0.1 ./cin.sh
 \end{lstlisting}
 
-You can even build a package version similiar to Debian, just with 'pkg search\/pkg install'
-instead of 'apt search/install' and with '*-static' instead of '-dev\/-devel packages'. For more
-information on this, see:
+You can even build a package version similiar to Debian, just with "pkg search pkg\_name / pkg install
+ pkg\_name" instead of "apt search/install pkg\_name" and with "*-static" instead of "*-dev/-devel packages".
+For more information on this, see:
 
 \url{https://wiki.termux.com/wiki/Package\_Management}
 \newline \url{https://wiki.termux.com/wiki/Building\_packages}
