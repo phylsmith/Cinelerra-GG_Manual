@@ -11,9 +11,9 @@ and since each release is named differently, you can keep a number of versions i
 and when testing from a terminal you just have to type CinGG, then hit tab, and complete it to
 the desired date release.
 
-For 64-bit systems you can choose between an image with up-to-date libraries or one that supports older libraries, which you should use only if the first image gives you problems with unsupported libs. There is also a 32-bit older distro available that has \textit{i686} as part of the filename that currently works on older distros but may not work on the latest distros and
-definitely does now work on Debian version 11.00 (most of the popular Linux distributions such
-as Arch, Ubuntu, and Fedora have dropped support for this older architecture).  And there is a 8/10/12 bit newer distro that handles 8 or 10 or 12 bits that has \textit{multibit} as part of the filename.  Installing the appimage is simple:
+For 64-bit systems you can choose between an image with up-to-date libraries or one that supports older libraries, which you should use only if the first image gives you problems with unsupported libs. There is also a 32-bit older distro available that has \textit{i686} as part of the filename that currently works on older distros but may not work on the newest distros
+(most of the popular Linux distributions such
+as Arch, Ubuntu, and Fedora have dropped support for this older architecture). In any case, if you are using a 32-bit Linux distro, you should compile your sources from git or use a precompiled binary\protect\footnote{Remember that a 32-bit distro does not address more than 4GB of memory, so you may have stability and performance problems with large, high-resolution mediafiles.}. And there is a 8/10/12 bit newer distro that handles 8 or 10 or 12 bits that has \textit{multibit} as part of the filename.  Installing the appimage is simple:
 
 Download the file from:
 
@@ -87,7 +87,7 @@ you get the added benefit of the latest checked in changes, please reference
 ~\ref{sec:How_to_build}.
 %
 A Windows 10 version installation is described in~\ref{sec:ms_windows10}.  There are also 32-bit i686 Ubuntu, Debian,
-and Slackware versions available. \textbf{These binaries are no longer being updated; they are stable and working but without future functionality}.
+and Slackware versions available\protect\footnote{Remember that a 32-bit distro does not address more than 4GB of memory, so you may have stability and performance problems with large, high-resolution mediafiles.}. \textbf{These binaries are no longer being updated; they are stable and working but without future functionality}.
 They are in subdirectories of:
 
 \begin{list}{}{}
@@ -144,7 +144,7 @@ caption={README.pkgs}
 
 These are generic build instructions for building \CGG{} Infinity.
 Known to work on Ubuntu, Mint, OpenSuse, Fedora, Debian, Centos,
-Arch, Slackware, and Gentoo.  It has not been tested on every
+Arch, Slackware, and Gentoo. Compiling from git is perhaps the best way to get \CGG{} on 32-bit systems\protect\footnote{Remember that a 32-bit distro does not address more than 4GB of memory, so you may have stability and performance problems with large, high-resolution mediafiles.}. It has not been tested on every
 single possible distro yet so you might expect to have to make
 some minor changes.  Also works on a somewhat limited basis on
 FreeBSD and Windows 10 with the bsd.patch for FreeBSD and the
@@ -1024,7 +1024,7 @@ must run from an external console window to avoid this issue.
 \CGG{} can be run on Android (without audio), a non-x86 mostly posix system,
 tablet or phone after installing TERMUX, the \textit{terminal emulator}.
 You will have to do your own build using the file in Cinelerra's
-\textit{blds} subdirectory, \textit{termux.bld}.
+\texttt{blds} subdirectory, \texttt{termux.bld}.
 Because this is a relatively new capability and of lesser use, some
 additional effort may have to be exerted on your part to get it going
 but it is easy to get help by contacting the mailing list.
@@ -1043,10 +1043,10 @@ Some requirements include;
 \item Install takes 5 GB of internal storage. In addition you can download videos,
 and other files with wget to one specific location at sdcard after running termux-setup-storage
 inside termux (it will prompt you to give access to sdcard graphically the first time used).
-\item If you have empty versions of locale.alias, locale.dir,
+\item If you have empty versions of \texttt{locale.alias}, \texttt{locale.dir},
  and
-\newline \$PREFIX/share/X11/locale/en\_US.UTF-8/XLC\_LOCALE
- you will have to request non-empty versions via the mailing list.
+\newline \texttt{\$PREFIX/share/X11/locale/en\_US.UTF-8/XLC\_LOCALE}
+\newline you will have to request non-empty versions via the mailing list.
 \item Some helpful information on installing the X environment is at:
  \url{https://wiki.termux.com/wiki/Graphical\_Environment}
 \item To prevent crashing when loading a video file that has audio, use the guide
@@ -1055,8 +1055,7 @@ inside termux (it will prompt you to give access to sdcard graphically the first
 \end{enumerate} 
 
 A little more about Audio is presented next because you will need to have this running
-in order to prevent a crash (even though you still will not be able to hear audio) -
-there does not seem to be a simple PA client in termux itself.
+in order to prevent a crash (even though you still will not be able to hear audio) -- there does not seem to be a simple PA client in termux itself.
 Some information is available at:
  \url{https://android.stackexchange.com/questions/205576/how-to-play-sound-from-termux-when-using-linux} .
 
@@ -1095,8 +1094,8 @@ Now to start up \CGG{}, type in:
         $ PULSE_SERVER=127.0.0.1 ./cin.sh
 \end{lstlisting}
 
-You can even build a package version similiar to Debian, just with "pkg search pkg\_name / pkg install
- pkg\_name" instead of "apt search/install pkg\_name" and with "*-static" instead of "*-dev/-devel packages".
+You can even build a package version similiar to Debian, just with "\texttt{pkg search} pkg\_name / \texttt{pkg install}
+ pkg\_name" instead of "\texttt{apt search/install} pkg\_name" and with "\texttt{*-static}" instead of "\texttt{*-dev/-devel} packages".
 For more information on this, see:
 
 \url{https://wiki.termux.com/wiki/Package\_Management}
@@ -1183,10 +1182,7 @@ so it is of no value.
 \label{sec:multibit_build}
 \index{multibit}
 
-To build a version that can handle 8 bit, or 10 bit, or 12 bit videos,
-a patch is provided in the \texttt{thirdparty} subdirectory that needs
-to be applied to do so.  Be aware that the compile may take more time
-and seems to be about twice as long. To apply the required patch:
+To build a version that can handle 8 bit, or 10 bit, or 12 bit videos, a patch is provided in the \texttt{thirdparty} subdirectory that needs to be applied to do so.  Be aware that the compile may take more time and seems to be about twice as long. To apply the required patch:
 
 \begin{lstlisting}[style=sh]
 cd /path/to/cinelerra-5.1/thirdparty
