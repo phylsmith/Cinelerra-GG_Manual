@@ -60,7 +60,7 @@ Now render yourfile using different quality levels and run ydiff to compare the 
 \label{sec:image_sequence_creation}
 \index{image sequence}
 
-Example script to create a jpeglist sequence file is next.  It can be modified to instead
+Example script to create a jpeg list sequence file is next.  It can be modified to
 create a list for \textit{exr}, \textit{gif}, \textit{ppm}, \textit{png}, \textit{tga}, or \textit{tiff}
 sequences instead by changing JPEGLIST
 to be EXRLIST, GIFLIST, PPMLIST, PNGLIST, TGALIST, or TIFFLIST.
@@ -96,12 +96,14 @@ To use this script, you will have to install the package on your operating syste
 includes \textit{anytopnm} which is ususally \textit{netpbm}.
 Example usage of this script follows:
 
-\qquad \texttt{./jpeglist.sh outfile infiles/*.jpg}
+\qquad \texttt{./imagelist.sh outfile infiles/*.jpg}
 
-where \textit{jpeglist.sh} is just the name chosen for this script which could
+where \textit{imagelist.sh} is just the name chosen for this script which could
 be anything but has to be executable, \textit{outfile} is the sequence list
 that is created, \textit{infiles} is the directory containing the 
-format\_type files such as \textit{jpg} in this example.
+format\_type files such as \textit{jpg} in this example. The xxxtopnm
+messages that show up can just be ignored such as: jpegtopnm: WRITING PPM FILE and jpegtopnm: Error writing row.
+In addition, you can edit this script as needed.
 
 \section{Details about .bcast5 Files}
 \label{sec:details_.bcast5_files}

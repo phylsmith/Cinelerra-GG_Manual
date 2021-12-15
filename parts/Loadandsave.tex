@@ -74,24 +74,23 @@ File lists formats can be utilized in some way for the following list of types o
 \begin{center}
     \begin{tabular}{l l l l}
     PNGLIST = *.png	&	PPMLIST = *.ppm	&	TGALIST = *.tga	  &  TIFFLIST = *.tiff \\
-    EXALIST = *.exa	&	CR2LIST = *.cr2	&	JPEGLIST = *.jpg	&    GIFLIST = *.gif
+    EXRLIST = *.exr	&	CR2LIST = *.cr2	&	JPEGLIST = *.jpg	&    GIFLIST = *.gif
     \end{tabular}
 \end{center}
 
 %\vspace*{1ex} 
-Using the example of jpeg’s, the jpeg list sequence file type is the easiest and fastest way to access a sequence of jpg images as a single asset.  First build a jpeglist sequence file and name it something like jpeglist.sh.  There is an example script of how to do this in the Auxiliary Programs section of the Appendix (\ref{sec:image_sequence_creation}).  Once the jpeglist.sh file is built you can then run it similar to this line:
+Using the example of jpeg’s, the jpeg list sequence file type is the easiest and fastest way to access a sequence of jpg images as a single asset.  First build a jpeglist sequence file and name it something like jpeglist.sh.  There is an example script of how to do this in the Auxiliary Programs section of the Appendix (\ref{sec:image_sequence_creation}).  Once the jpeglist.sh file is built and made executable you can then run it similar to this line:
 
 \begin{lstlisting}[style=sh]
-jpeglist.sh   /<path>/file.jpg   /<path>/DSC*.jpg
+./jpeglist.sh   /<path>/outputfile.jpgs   /<path>/inputfilesDSC*.jpg
 \end{lstlisting}
 
-\vspace*{1ex} \noindent If <\texttt{path}> is the same on both outfile and infiles, then file.jpg is created in the same directory as infiles, the directory contains the entire asset, and the file list uses relative paths; otherwise the file list contains absolute paths.   Since this creates outfile list as a single asset, the memory demand and access time is much lower.  When you load the outfile in \CGG{}, you will need to set \textit{Try ffmpeg last} since ffmpeg does not work with jpeglist sequence files.
+\vspace*{1ex} \noindent If <\texttt{path}> is the same on both outputfile and inputfiles, then file.jpgs is created in the same directory as infiles, the directory contains the entire asset, and the file list uses relative paths; otherwise the file list contains absolute paths.   Since this creates outputfile list as a single asset, the memory demand and access time is much lower.  When you load the outputfile in \CGG{}, you might need to set \textit{Try ffmpeg last} if ffmpeg does not work with that particular type of sequence files.
 
-An example output file from running this script residing in the directory where \texttt{DSC*.jpg} files exist is shown below.
+An example output file from running this script residing in the directory where \texttt{DSC*.jpg} files exist is shown below.  To use this, turn off ffmpeg probes first, and open \texttt{outputfile.jpgs} using File $\rightarrow$ Load files.  Of course, you can edit this file to change frame rate or names of files to include. 
+The width and height are expected to be of the same or similar size.
 
-To use this, turn off ffmpeg probes first, and open \texttt{timelapse.jpg} using File $\rightarrow$ Load files.
-
-\begin{lstlisting}[style=sh,caption={Example: timelapse.jpg},captionpos=t]
+\begin{lstlisting}[style=sh,caption={Example: outputfile.jpgs},captionpos=t]
 JPEGLIST
 # First line is always JPEGLIST
 # Frame rate:
