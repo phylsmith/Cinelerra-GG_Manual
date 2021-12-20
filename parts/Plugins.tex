@@ -921,7 +921,7 @@ This effect is the one to use if you want to achieve an old movie or TV show loo
 \label{sub:alpha}
 \index{Alpha}
 
-Allows you to apply an alpha value (transparency) to one or more tracks or one or more edits. Being also keyframable, it allows an excellent variety and possibility of use in the most disparate occasions.
+Allows you to apply an alpha value (transparency) to one or more tracks or one or more edits. You can use the slider or have maximum precision by entering numbers in the input box. You can use the \textit{Clear} button to reset to the default value. Being also keyframable, it allows an excellent variety and possibility of use in the most disparate ways.
 
 \subsection{Auto Scale}%
 \label{sub:auto_scale}
@@ -1178,7 +1178,7 @@ is a clear button on the right to set the value to 1.
 
 To brighten a dark shot, or add light, use this plugin. Do not overuse the effect or you risk degrading your video quality.
 The \textit{Brightness} slider moves up or down the values of the entire channel and corresponds to the \textit{Master Offset} of the various grading programs.
-The \textit{Contrast} slider expands or narrows the brightness values of the entire channel; corresponds to the use of the \textit{cursors} (small triangles) in the \textit{Histogram} plugin. Clear icons are present to reset its slider to default without affecting others.
+The \textit{Contrast} slider expands or narrows the brightness values of the entire channel; corresponds to the use of the \textit{cursors} (small triangles) in the \textit{Histogram} plugin. For maximum precision you can use the input box. \textit{Clear} icons are present to reset its slider to default without affecting others.
 Use the effect along with keyframing to brighten a long shot that is dark at the beginning but bright at the end. Generally you will want to change the brightness and contrast about the same amount (for example -- brightness $28$, contrast $26$) so that your original colors are kept intact. This effect is also keyframable (figure~\ref{fig:brightness}).
 
 \subsection{BurningTV}%
@@ -1979,7 +1979,7 @@ This effect originated from {\small \url{https://effectv.com}}.
 \label{sub:hue_saturation}
 \index{hue saturation}
 
-With this effect you can change hue, saturation and value. The parameters are modified using 3 simple sliders. The \textit{hue} control shifts the colors circularly in the color plane, normally resulting in false colors. The \textit{saturation} control can be used to reduce color footage to black and white. The \textit{value} control makes any given colors more bright or more subdued. Clear buttons are present to reset its slider to default without affecting others.
+With this effect you can change hue, saturation and value. The parameters are modified using 3 simple sliders. For maximum precision you can use the input box. The \textit{hue} control shifts the colors circularly in the color plane, normally resulting in false colors. The \textit{saturation} control can be used to reduce color footage to black and white. The \textit{value} control makes any given colors more bright or more subdued. \textit{Clear} buttons are present to reset its slider to default without affecting others.
 
 \subsection{Interpolate Bayer}%
 \label{sub:interpolate_bayer}
@@ -2065,6 +2065,7 @@ This effect acts only in one direction which can vary up to an angle of $180\deg
     \item[Clear] With the Clear buttons we can bring the slider to default values without affecting the other parameters.
 \end{description}
 
+For maximum precision you can use the input box.
 Figure~\ref{fig:linear} shown here has the parameters: $Length=19$, $Angle=25$, and $Steps=2$.
 
 \subsection{Live Video}%
@@ -2574,7 +2575,7 @@ position a little so that the answers are not exactly zero.
 \label{sub:polar}
 \index{polar}
 
-The \textit{Polar} effect bends and warps your video in weird ways. Mathematically, it converts your video from either \textit{polar} coordinates to \textit{rectangular} coordinates, or the reverse. With the Clear buttons we can bring the slider to default values without affecting the other parameters.
+The \textit{Polar} effect bends and warps your video in weird ways. Mathematically, it converts your video from either \textit{polar} coordinates to \textit{rectangular} coordinates, or the reverse. For maximum precision you can use the input box. With the \textit{Clear} buttons we can bring the slider to default values without affecting the other parameters.
 
 \subsection{Posterize}%
 \label{sub:posterize}
@@ -2594,14 +2595,17 @@ To render to MPEG, add the \textit{RGB-601} effect to all video tracks where mat
 \label{sub:rgb-shift}
 \index{rgb shift}
 
-Most cameras take the light coming into the lens, and convert that into $3$ sets of numbers, one for Red (R), one for Green (G), and one for Blue (B). Some of the older cameras were composed of $3$ sensors and originally the RGB sensors were on $3$ separate planes and had to be aligned. If they were misaligned in the video, you can use \textit{RGBShift} to get them realigned. To move a specific color up/down, modify the \textit{dy} value using the slider bar in the RGBShift window. To move a color left/right, modify the corresponding \textit{dx} value. Clear buttons are present to reset its slider to default without affecting others. Note that the current values of the RGBShift are maintained in the \texttt{.bcast5} defaults file and will be retained across sessions. If using the YUV color space, you will want to use \textit{YUVShift} instead. Figure~\ref{fig:rgbshift} showing RGB shift before and after.
+Most cameras take the light coming into the lens, and convert that into $3$ sets of numbers, one for Red (R), one for Green (G), and one for Blue (B). Figure~\ref{fig:rgbshift} showing RGB shift before and after.
 
 \begin{figure}[hbtp]
-    \centering
-    \includegraphics[width=0.8\linewidth]{rgbshift.png}
-    \caption{Bad Misaligned color and after color aligned}
-    \label{fig:rgbshift}
+	\centering
+	\includegraphics[width=0.8\linewidth]{rgbshift.png}
+	\caption{Bad Misaligned color and after color aligned}
+	\label{fig:rgbshift}
 \end{figure}
+
+Some of the older cameras were composed of $3$ sensors and originally the RGB sensors were on $3$ separate planes and had to be aligned. If they were misaligned in the video, you can use \textit{RGBShift} to get them realigned. To move a specific color up/down, modify the \textit{dy} value using the slider bar in the RGBShift window. To move a color left/right, modify the corresponding \textit{dx} value. For maximum precision you can use the input box. \textit{Clear} buttons are present to reset its slider to default without affecting others. Note that the current values of the RGBShift are maintained in the \texttt{.bcast5} defaults file and will be retained across sessions. If using the YUV color space, you will want to use \textit{YUVShift} instead.
+
 
 \subsection{Radial Blur}%
 \label{sub:radial_blur}
@@ -2623,6 +2627,7 @@ Radial blur is a \textit{Bokeh} effect that creates a whirlpool which simulates 
     \item[Clear] to reset its slider to default without affecting others.
 \end{description}
 
+For maximum precision you can use the input box.
 Figure~\ref{fig:radial} has the parameters: $Angle=-35$ and $Steps=2$.
 
 
@@ -2825,7 +2830,7 @@ An example of common usage is to select the number of frames you wish to average
 \label{sub:Sharpen}
 \index{sharpen}
 
-Sharpen the video, either the \textit{luminance}, \textit{horizontal}, or \textit{interlace}. With the Clear buttons we can bring the slider to default values without affecting the other parameters.
+Sharpen the video, either the \textit{luminance}, \textit{horizontal}, or \textit{interlace}. You can use sliders or, for maximum precision, you can use the input box. With the \textit{Clear} buttons we can bring the slider to default values without affecting the other parameters.
 
 \subsection{Shift Interlace}%
 \label{sub:shift_interlace}
@@ -3349,7 +3354,7 @@ This effect supports keyframes so these parameters can change smoothly over time
 \label{sub:Unsharp}
 \index{unsharp}
 
-This effect applies a traditional \textit{darkroom} technique, the so called \textit{unsharp mask} to every video frame. With different parameter values, this can be used to soften or to sharpen the image. Its parameters are:
+This effect applies a traditional \textit{darkroom} technique, the so called \textit{unsharp mask} to every video frame. With different parameter values, this can be used to soften or to sharpen the image. You can use sliders or, for maximum precision, you can use the input box. Its parameters are:
 
 \begin{description}
     \item[Amount] moving the slider to the right makes dark areas get darker and light areas get lighter.
@@ -3530,19 +3535,19 @@ You can also display the 4 histograms (master or RGB) on the left of the window.
 \label{sub:wave}
 \index{wave}
 
-The \textit{wave} effect adds waves on the image. \textit{Amplitude}, \textit{Phase}, and \textit{Wavelength} parameters can be adjusted. With the Clear buttons we can bring the slider to default values without affecting the other parameters.
+The \textit{wave} effect adds waves on the image. \textit{Amplitude}, \textit{Phase}, and \textit{Wavelength} parameters can be adjusted. You can use sliders or, for maximum precision, you can use the input box. With the \textit{Clear} buttons we can bring the slider to default values without affecting the other parameters.
 
 \subsection{Whirl}%
 \label{sub:whirl}
 \index{whirl}
 
-Creates a whirl (spiral) of the video around the center. With the Clear buttons we can bring the slider to default values without affecting the other parameters.
+Creates a whirl (spiral) of the video around the center. You can use sliders or, for maximum precision, you can use the input box. With the \textit{Clear} buttons we can bring the slider to default values without affecting the other parameters.
 
 \subsection{YUV}%
 \label{sub:yuv}
 \index{yuv}
 
-Modify the Y, U, V settings. With the Clear buttons we can bring the slider to default values without affecting the other parameters.
+Modify the Y, U, V settings. You can use sliders or, for maximum precision, you can use the input box. With the \textit{Clear} buttons we can bring the slider to default values without affecting the other parameters.
 
 \subsection{YUV411}%
 \label{sub:yuv411}
@@ -3561,10 +3566,10 @@ Modify the 411 yuv to look like 420 color space instead. If the edit to which th
 	\label{fig:yuvshift}
 \end{figure}
 
-This effect is used for YUV input video from older cameras using $3$ sensors. It is possible to have misalignment of the $3$ sets of numbers: \textit{Y}, which represents the luminance or brightness component, and for \textit{U} and \textit{V} representing the chrominance (color) components. If they were misaligned in the video, you can use \textit{YUVShift} to realign. To move a specific component up/down, modify the \textit{dy} value using the slider bar in the RGBShift window. To move a component left/right, modify the corresponding \textit{dx} value. With the Clear buttons we can bring the slider to default values without affecting the other parameters. If you are using an RGB color space, you will want to use the \textit{RGBShift} effect instead.
+This effect is used for YUV input video from older cameras using $3$ sensors. It is possible to have misalignment of the $3$ sets of numbers: \textit{Y}, which represents the luminance or brightness component, and for \textit{U} and \textit{V} representing the chrominance (color) components. If they were misaligned in the video, you can use \textit{YUVShift} to realign. To move a specific component up/down, modify the \textit{dy} value using the slider bar in the RGBShift window. To move a component left/right, modify the corresponding \textit{dx} value. For maximum precision you can use the input box. With the \textit{Clear} buttons we can bring the slider to default values without affecting the other parameters. If you are using an RGB color space, you will want to use the \textit{RGBShift} effect instead.
 
-Figure~\ref{fig:yuvshift} (top) shows the blue \textit{U} component aligned too far to the left. And the red \textit{V} component is misaligned too far to the right. Note the \textit{U\_dx} current slider bar set to $0$ as shown by the yellow box value in the YUVShift plugin window. All components are currently at zero.
-A corrected video image is shown in the bottom. Now the red and blue colors are correctly aligned. Note how \textit{U\_dx} is now at $+20$ and \textit{V\_dx} is now negative to realign the image.
+Figure~\ref{fig:yuvshift} (top) shows the blue \textit{U} component aligned too far to the right/down. And the red \textit{V} component is misaligned too far to the right/down. Note the \textit{U\_dx} current slider bar set to $0$ as shown by the input box value in the YUVShift plugin window. All components are currently at zero.
+A corrected video image is shown in the bottom. Now the red and blue colors are correctly aligned. Note how \textit{U\_dx} is now at $+26$ and \textit{V\_dx} is now $+41$ to realign the image.
 
 \subsection{Zoom Blur}%
 \label{sub:zoom_blur}
@@ -3572,21 +3577,23 @@ A corrected video image is shown in the bottom. Now the red and blue colors are 
 
 Blurs the video from the center outwards, like the sun’s rays, and uses a zoom effect.
 
+\begin{figure}[hbtp]
+	\centering
+	\includegraphics[width=0.8\linewidth]{zoom.png}
+	\caption{For clarity of presentation only 3 fields are shown}
+	\label{fig:zoom}
+\end{figure}
+
 \begin{description}
     \item[X,Y] center of the origin field.
     \item[Radius] Zoom on the fields.
     \item[Steps] number of blur steps to be used in the calculation. Increasing the number takes more CPU.
     \item[Clear] With the Clear buttons we can bring the slider to default values without affecting the other parameters.
+    \item[Reset] To reset all parameters to default at the same time.
 \end{description}
 
+You can use sliders or, for maximum precision, you can use the input box.
 Figure~\ref{fig:zoom} shows the parameters: Radius=21 and Steps=3.
-
-\begin{figure}[hbtp]
-    \centering
-    \includegraphics[width=0.8\linewidth]{zoom.png}
-    \caption{For clarity of presentation only 3 fields are shown}
-    \label{fig:zoom}
-\end{figure}
 
 \section{CUDA plugins}%
 \label{sec:cuda_plugins}
