@@ -2697,7 +2697,14 @@ Downsample mode changes the frame rate of the input as well as the number of the
 \label{sub:reroute}
 \index{reroute}
 
-The \textit{Reroute} plugin enables you to selectively transfer the Alpha channel or the Components (RGB or YUV) or both from a \textit{source} track to a \textit{target} track, partially overwriting the target's contents. It works as a \textit{shared plugin}. The typical usage scenario is to build up a possibly animated Mask in one track and then to transfer the Alpha channel to another content track.
+The \textit{Reroute} plugin\protect\footnote{By Hermann Vosseler} enables you to selectively transfer the Alpha channel or the Components (RGB or YUV) or both from a \textit{source} track to a \textit{target} track, partially overwriting the target's contents.
+
+\begin{description}
+	\item[Target Track:] you can choose between \textit{Top} and \textit{Bottom}.
+	\item[Operation:] you can choose between \textit{Replace Target} (component + alpha channels); \textit{Components Only} (color channels only) and \textit{Alpha Replace} (alpha channel only)
+\end{description}
+
+It works as a shared plugin. The typical usage scenario is to build up a possibly animated Mask in one track and then to transfer the Alpha channel to another target track.
 
 \subsection{Reverse video}%
 \label{sub:reverse_video}
