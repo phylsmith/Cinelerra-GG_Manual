@@ -14,7 +14,7 @@ run the \CGG{} startup from a terminal window, instead of the icon, in order to 
 
 A warning here -- writing blu-ray BDs and  regular SDs can take a large amount of clock time.  Keep in mind that a blu-ray can contain 25 hours of viewing, so would take multiple hours to just write one.
 
-The max disk space needed is a little over $100GB$ for $50GB$ Double Layer (DL) media or $50GB$ for a single layer BD blu-ray.  A standard SD of $4.7GB$ needs about $10GB$ disk space. You probably can get by with much less if the render for blu-ray is less than 25 hours of media.  You will need twice as much disk space as the media holds to ensure you have sufficient space for working and copying.
+The amount of data you have to render determines the amount of disk space you will need for working.  The max disk space needed for a completely full media disc is a little over $100GB$ for $50GB$ Double Layer (DL) media or $50GB$ for a single layer BD blu-ray.  A standard SD of $4.7GB$ needs about $10GB$ disk space. You will need much less if the render for blu-ray is less than 25 hours of media.  Generally you will need twice as much disk space as will be written on the media to ensure you have sufficient space for working and copying.
 
 The most important thing you need to know about in order to get started is \textit{Format} and \textit{Scale}  in the \textit{Create dvd or bd} window.  Format settings shown in the \texttt{Set Format} window are set accordingly to an algorithm.  Basically, it will take whatever you say in the asset format.  It matches that against the known Presets available so that is what will be shown.  If the asset format doesn't match any of the Presets default formats, then that will be shown as the \textit{User Defined} format.  In addition when you load media, the format is initially set to \textit{same as source} so matches the source input and if that matches a known preset, then that is what is shown.  The PAL versus NTSC only comes into play when there is no known correct matching format when you attempt to create a DVD Render batch job.  It is applied when you click OK. For example, if you load up a YouTube video, it will not match any known format and will choose PAL or NTSC based on time zone.
 
@@ -27,7 +27,7 @@ Figure~\ref{fig:preset01} shows pulldown \textit{Presets} in \textit{Set Format}
     \label{fig:preset01}
 \end{figure}
 
-A quick set of basic steps to create DVDs is immediately below and usually just using the defaults will get you something.  However there is a serious issue with interaction between the Operating System and bdwrite when creating a BD/blu-ray that requires automount to be turned off.  Refer to the details and more specific explanations below the following steps for how to do this.
+A quick set of basic steps to create DVDs is immediately below and usually just using the defaults will get you something.  However there is a serious issue with interaction between the Operating System and bdwrite when creating a BD/blu-ray that requires automount to be turned off.  For more details on using automount see: ~\ref{sec:bluray_workaround_mount_umount}.
 
 \begin{enumerate}
     \item If not logged in as root, you will get an error message in order to avoid doing a lot of work and then failing out because root is required for automount and to write on DVD hardware.
@@ -42,7 +42,9 @@ A quick set of basic steps to create DVDs is immediately below and usually just 
     \item Load your media, format if needed, note device name to substitute for \textit{<bd>} or \textit{<dvd>}
     \begin{itemize}
         \item If rewritable blu-ray, use \\
-        \texttt{dd if=./bd.udfs of=/dev/<bd> bs=2048000}
+        \texttt{dd if=./bd.udfs of=/dev/<bd> bs=2048000} \\
+	Note: unwritten media must be quickly formatted one time using: \\
+        \texttt{dvd+rw-format /dev/bd}
         \item If write-once blu-ray, use \\
         \texttt{growisofs -dvd-compat -Z /dev/<bd>=./bd.udfs}
         \item If any DVD media,    use \\
@@ -167,9 +169,9 @@ Horizontal and Vertical are duplicates or restatement of same functionality as C
     \item Click OK check button.
 \end{itemize}
 
-The default bitrate is the largest value possible.  The actual \textit{target} bitrate is calculated based on a formula from the blu-ray/DVD code.  It divides the media size (in bits)  by the video time (in seconds) to find the bitrate that will \textit{just fit} on the target media.  This could create a weird bitrate if the media is large, and the video time is small, so the default/target bitrate is limited to $10Mb/s$.Batch jobs are then built and appended to the job list.  Once these batch jobs are built, if you make any changes, you have to start over.  You will see listed the batch jobs that are created to perform the rendering/tasks -- 2 jobs for blu-ray, one for audio/video processing and one for the scripts.  There will be 3 batch jobs created for DVD when not using ffmpeg to include one each for audio and video and then one more for the scripts.  When you click on \texttt{start}, it fires off those jobs and you will see the rendering main window progress bar in the bottom corner reflecting the fact that it is currently processing.  Be aware that the \CGG{} program will be totally shutdown AFTER the batch jobs finish.  Screenshot below shows BD blu-ray creation with 2 batch jobs queued up and ready to go.
+The default bitrate is the largest value possible.  The actual \textit{target} bitrate is calculated based on a formula from the blu-ray/DVD code.  It divides the media size (in bits)  by the video time (in seconds) to find the bitrate that will \textit{just fit} on the target media.  This could create a weird bitrate if the media is large, and the video time is small, so the default/target bitrate is limited to $10Mb/s$.Batch jobs are then built and appended to the job list.  Once these batch jobs are built, if you make any changes, you have to start over.  You will see listed the batch jobs that are created to perform the rendering/tasks -- 2 jobs for blu-ray, one for audio/video processing and one for the scripts.  There will be 3 batch jobs created for DVD when not using ffmpeg to include one each for audio and video and then one more for the scripts.  When you click on \texttt{start}, it fires off those jobs and you will see the rendering main window progress bar in the bottom corner reflecting the fact that it is currently processing.  Be aware that the \CGG{} program will be totally shutdown AFTER the batch jobs finish.
 
-Figure~\ref{fig:dvd-batch01} for DVD and Figure~\ref{fig:dvd-batch02} for BD shows a creation render ready to be started.  Note that because it is not ffmpeg, the processing of video is done separately from audio.  If you need to modify the video tracks, which you can see is ghosted out, you need to highlight the first batch job listed.  Be sure to highlight the first batch job before pressing Start so it runs all of the jobs and be sure the X for job enabled is set.
+Figure~\ref{fig:dvd-batch01} for DVD and Figure~\ref{fig:dvd-batch02} for BD show creation renders with batch jobs queued up and ready to be started.  Note that because it is not ffmpeg, the processing of video is done separately from audio.  If you need to modify the video tracks, which you can see is ghosted out, you need to highlight the first batch job listed.  Be sure to highlight the first batch job before pressing Start so it runs all of the jobs and be sure the X for job enabled is set.
 
 \begin{figure}[htpb]
     \centering
@@ -190,13 +192,13 @@ When you click on \textit{start}, it fires off those jobs and you will see the r
 
 This will produce a new directory in your target path which contains a filesystem image file.
 For example: \\
-\texttt{/TargetDirectory/bd\_20150820-093747} \\
+\texttt{/<target directory>/bd\_(or dvd\_)<date-time>/} \\
 Directory and file names should not be changed at this time because the scripts and programs rely on the given names in order to proceed.  You can change them later for your own purposes.
 
 If bluray to test the filesystem you just created, use the command line interface; loopback mount the filesystem image which was generated in the target directory.  For example if blu-ray:
 
 \begin{lstlisting}[style=sh]
-cd /TargetDirectory/bd_20150820-093747/
+cd /<target directory>/bd_(or dvd_)<date-time>/
 mount -o loop,ro ./bd.udfs ./udfs
 #check the media using a compatible media rendering tool like ffplay
 umount ./udfs...
@@ -210,7 +212,7 @@ To burn blu-ray media you will need to run from the command line interface.  In 
 
 For rewritable blu-ray (recommended) (BD-RE):
 
-Note: unwritten (virgin) media must be formatted first using:
+Note: new or previously unwritten media must be formatted first using:
 
 \begin{lstlisting}[style=sh]
 dvd+rw-format /dev/bd   #only done once and does not take very long
@@ -219,14 +221,14 @@ dvd+rw-format /dev/bd   #only done once and does not take very long
 To write or rewrite rewritable blu-ray media:
 
 \begin{lstlisting}[style=sh]
-cd /TargetDirectory/bd_20150820-093747/
+cd /<target directory>/bd_(or dvd_)<date-time>/
 dd if=./bd.udfs of=/dev/bd bs=2048000    #the growisofs command below also works
 \end{lstlisting}
 
 To write blu-ray write-once media: (BD-R)  (no pre-formatting needed):
 
 \begin{lstlisting}[style=sh]
-cd /TargetDirectory/bd_20150820-093747/
+cd /<target directory>/bd_(or dvd_)<date-time>/
 growisofs -dvd-compat -Z /dev/bd=./bd.udfs
 \end{lstlisting}
 
@@ -236,7 +238,7 @@ growisofs -dvd-compat -Z /dev/bd=./bd.udfs
 
 For rewritable DVD (DVD+RW):
 
-Note: unwritten (virgin) media must be formatted first using:
+Note: unwritten media must be formatted first using:
 
 \begin{lstlisting}[style=sh]
 dvd+rw-format /dev/dvd   #only done once and does not take very long
@@ -245,7 +247,7 @@ dvd+rw-format /dev/dvd   #only done once and does not take very long
 To write a DVD, load blank media and run the following from the command line (requires dvdauthor):
 
 \begin{lstlisting}[style=sh]
-cd /TargetDirector/dvd_20160404-175416
+cd /<target directory>/bd_(or dvd_)<date-time>/
 growisofs -dvd-compat -Z /dev/dvd -dvd-video ./iso
 \end{lstlisting}
 

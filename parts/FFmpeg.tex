@@ -237,7 +237,7 @@ To get a listing of the current ffmpeg supported formats and codecs that can be 
 
 For illustrative purposes, here is an example of the options files that need to be added for using the ffmpeg \textit{ProRes 422} format. This makes it possible to transcode to \texttt{h264.mov} with FFmpeg retaining \textit{10-bit yuv422p} from the source to the target output video.
 
-Add the file named  \texttt{./ffmpeg/audio/acc256k.pro} which contains the following lines:
+Add the file named  \texttt{./ffmpeg/audio/aac256k.pro} which contains the following lines:
 
 \begin{lstlisting}[style=sh]
 mov aac
@@ -250,7 +250,7 @@ b 256000
 Add the file named \texttt{./ffmpeg/audio/pro.dfl} which contains the following lines:
 
 \begin{lstlisting}[style=sh]
-acc256k.pro
+aac256k.pro
 \end{lstlisting}
 
 Add the file named \texttt{./ffmpeg/video/prores.pro} which contains the following lines:
