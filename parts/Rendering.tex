@@ -174,7 +174,9 @@ all parameter configurations.
 	list.  The list is provided by ffmpeg as input selection, but is
 	more like suggestions than fact.  For example, the raw formats can
 	take almost any format, but the rawvideo codec actually specifies no
-	legal formats.
+	legal formats.  Note that if you want a very specific Bitrate you must
+	make sure there is not conflicting parameter values set such as Quality
+	or CRF.
 \end{itemize}
 
 \noindent Some option files provide \textit{cin\_pix\_fmt} to
@@ -185,7 +187,7 @@ errors when the other provided parameters conflict with the
 parameter dictates pixel format must be \texttt{yuv420p}.
 
 \paragraph{cin\_bitrate} If you specify the bitrate, you can not
-specify the quality.\\ Example: \textit{cin\_bitrate=2000000}
+specify the quality or CRF.\\ Example: \textit{cin\_bitrate=2000000}
 
 \paragraph{cin\_quality} If you specify the quality, you can not
 specify the bitrate.\\ Example: \textit{cin\_quality=7}

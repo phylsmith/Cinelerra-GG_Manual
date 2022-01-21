@@ -80,6 +80,69 @@ If you get error messages \index{proxy!error} when creating proxies, check the V
 
 More specific information on which plugins need to use \textit{Proxy 1:1}. is provided here next. If the keyframe data uses coordinate data that is absolute, then the Factor scale = 1 should be used.  If the data is normalized (like always $0-100\%$) then the proxy can be done with downsize (i.e. classic \textit{Proxy}).  The session geometry format, shown in \texttt{Settings $\rightarrow$ Format} as $width \times height$, is changed if scale factor $\neq$ 1 is used to cause all of the data to be in the reduced format.  If this affects the plugin operation, then \textit{Proxy 1:1} should be used.  Examples of plugins that need the \textit{Proxy 1:1} are: Title, AutoScale, Scale, ScaleRatio, and Translate.  Most others are safe to use with downsize.
 
+\subsection{Proxies with Alpha channel}%
+\label{sub:proxies_alpha_channel}
+
+Next are some examples of tested and working configurations that maintain the alpha channel:
+
+\begin{lstlisting}[numbers=none]
+Proxy #1
+	Scale factor: 1/4
+	Rescaled to project size (FFMEG only) = unchecked
+	File Format: FFMPEG | qt
+	Video Preset-->
+		Compression: png.qt
+		Bitrate: 0
+		Quality: -1
+		Pixels: rgba (or rgba64be)
+	
+	
+Proxy #2
+	Scale factor: 1/4
+	Rescaled to project size (FFMEG only) = unchecked
+	File Format: FFMPEG | qt
+	Video Preset-->
+		Compression: magicyuv.qt
+		Bitrate: 0
+		Quality: -1
+		Pixels: yuva444p
+	
+	
+Proxy #3
+	Scale factor: 1/4
+	Rescaled to project size (FFMEG only) = unchecked
+	File Format: FFMPEG | qt
+	Video Preset-->
+		Compression: openjpeg.qt
+		Bitrate: 0
+		Quality: -1
+		Pixels: yuva420p
+	
+	
+Proxy #4
+	Scale factor: 1/4
+	Rescaled to project size (FFMEG only) = unchecked
+	File Format: FFMPEG | pro
+	Video Preset-->
+		Compression: prores_4444.pro
+		prores_4444xq.pro
+		Bitrate: 0
+		Quality: -1
+		Pixels: yuva444p10le
+	
+	
+Proxy #5
+	Scale factor: 1/4
+	Rescaled to project size (FFMEG only) = unchecked
+	File Format: FFMPEG | mkv
+	Video Preset-->
+		Compression: user_ffvhuff.mkv
+		Bitrate: 0
+		Quality: -1
+		Pixels: yuva4--p
+				   yuva4--p--le
+\end{lstlisting}
+
 \section{Transcode}%
 \label{sec:transcode}
 \index{transcode}
