@@ -7,7 +7,7 @@
 
 Proxies was introduced to allow for a smoother timeline experience. Full HD and everything from 4K size up are usually very large in file size. In addition, some commonly used codecs (e.g. h264/5) are very compressed and interframe type, so they are more stressful for timeline playback. These files cause performance problems on weaker PCs. As a solution the developers have introduced proxies to reduce the file size. Reduced means to minimize the resolution/dimension, as usually not the full resolution is needed, because the compositor usually takes only a fraction of the computer screen. Therefore the scaling factor, which indicates how much the original resolution should be reduced. 
 There is also the \textit{proxy 1:1} \index{proxy!1:1} that maintains the original resolution but still allows you to act on the codec (lowering the bit rate, for example). See also next section: \ref{sec:transcode}.
-When rendering, the original setting will be used to avoid loss of image quality.  
+When we want to render the project, remember to remove the proxy to return to the original settings with the highest quality.  
 
 To use the proxy in a classic way, i.e. as a scaling, select \texttt{Settings $\rightarrow$ Proxy settings} and change the Scale factor from Original size to your downsized choice.  You can choose ffmpeg as the File Format \index{file format} and a choice of various codecs associated with that.  A good choice is the default of mpeg which can usually be quite fast.  In addition, to modify values for that codec, click on the wrench icon.
 
