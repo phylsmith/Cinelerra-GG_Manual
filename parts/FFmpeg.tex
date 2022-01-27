@@ -332,14 +332,14 @@ AppImage does not provide this capability. Another feature gained from using ffm
 To encode a series of $48$\,bit tiff output image files, add a file to the \CGG{} data ffmpeg/video subdirectory as in:
 
 \begin{lstlisting}[style=sh]
-# \dots/ffmpeg/video/tiff.dfl
+# {path_to_cinelerra}/bin/ffmpeg/video/tiff.dfl
 tiff48.tif
 \end{lstlisting}
 
 Then create an ffmpeg video encoder parameters file in the same directory:
 
 \begin{lstlisting}[style=sh]
-# \dots/ffmpeg/video/tiff48.tiff
+# {path_to_cinelerra}/bin/ffmpeg/video/tiff48.tiff
 image2 tiff
 pixel_format=rgb48
 \end{lstlisting}
