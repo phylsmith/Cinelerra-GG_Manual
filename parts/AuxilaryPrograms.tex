@@ -83,11 +83,7 @@ echo "# Height:"
 echo "$h"
 echo "# List of image files follows"
 while [ $# -gt 0 ]; do
-  if [ x$(dirname "$1") = x"$dir" ]; then
-	f=./`basename "$1"`;
-  else
-	f="$1";
-  fi
+  f=./`basename "$1"`
   echo "$f"
   shift
 done
@@ -96,14 +92,14 @@ To use this script, you will have to install the package on your operating syste
 includes \textit{anytopnm} which is ususally \textit{netpbm}.
 Example usage of this script follows:
 
-\qquad \texttt{./imagelist.sh outfile infiles/*.jpg}
+\qquad \texttt{./imagelist.sh outfile infiles*.jpg}
 
 where \textit{imagelist.sh} is just the name chosen for this script which could
 be anything but has to be executable, \textit{outfile} is the sequence list
-that is created, \textit{infiles} is the directory containing the 
+that is created, \textit{infiles*.jpg} are the 
 format\_type files such as \textit{jpg} in this example. The xxxtopnm
 messages that show up can just be ignored such as: \texttt{jpegtopnm: WRITING PPM FILE and jpegtopnm: Error writing row.}
-In addition, you can edit this script as needed. See also \nameref{ssub:filelist_format}.
+You may have to edit this script to suit your needs or to include specific directory locations. See also \nameref{ssub:filelist_format}.
 
 \section{Details about .bcast5 Files}
 \label{sec:details_.bcast5_files}

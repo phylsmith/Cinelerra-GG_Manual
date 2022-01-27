@@ -203,7 +203,7 @@ is all that is needed to repair a media problem.
 	\item On an older computer, if you are playing media and it can not keep up, you can turn off \textit{Play every frame} in the \textit{Video Out} tab of \texttt{Settings $\rightarrow$ Preferences, Playback} tab. You will then see the video jump as it skips frames in order to stay caught up.
 	\item The \textit{Cache size} can be lowered to 1048 if playback seems choppy or if you have problems with lv2 plugins, or you can increase the \textit{Cache size} for better flow. This can be changed in \texttt{Settings $\rightarrow$ Preferences, Performance} tab.
 	\item After saving your session and settings and exiting \CGG{}, you might want to rename your current \texttt{\$HOME/.bcast5} directory and start with the default setup. This will eliminate your settings as the potential cause of a problem; however, all of your preferences will be lost until you go back to your original \texttt{.bcast5}.
-        \item You can also temporarily rename just \CGG{}\_rc in your \$HOME/.bcast5 directory, so
+        \item You can also temporarily rename just Cinelerra\_rc in your \$HOME/.bcast5 directory, so
 that a new file with the original name will be created with original defaults.  You will lose your preferences,
 but it is just for testing and you can move back the renamed \CGG{}\_rc over the new one if that is not the
 cause of the problem.  Be sure to stop and restart \CGG{} whenever you rename this file.
@@ -231,6 +231,8 @@ LOAD: urna-comp
 \end{lstlisting}
 The last line before the \textit{segv} indicates the name of the LV2 plugin that is causing problems.
 Please refer to the section on LV2 plugins \ref{sec:audio_lv2_calf_plugins} to resolve the issue.
+	\item Check your \textit{Overlays} window if you do not see your Assets, Titles, Transitions, Plugin Keyframes, or other lines such as Fade, Cameras, etc. on your timeline.
+These items will still be functional, but you may be confused when you do not actually see their physical presence if you inadvertently unchecked them in the \textit{Overlays} window.  Use the \textit{Window} pulldown to enable/disable the \textit{Show Overlays} window.
 	\item BugTracker - sometimes there is a problem creating a new report issue in the website's Mantis Bugtracker
 using the Chrome web browser and you lose what you just typed in.  Generally when logging into the bugtracker, the
 option "only allow with this IP address" needs to be disabled, then the bug tracker will work fine. 

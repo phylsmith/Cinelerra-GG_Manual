@@ -37,7 +37,7 @@ Microsoft WAV,
 Raw DV and PCM,
 MPEG Audio and Video.
 
-\paragraph{Still Images:}  JPEG/EXR/PNG/PPM/TGA/TIFF
+\paragraph{Still Images:}  JPEG/EXR/GIF/PNG/PPM/TGA/TIFF
 
 \paragraph{MPEG Files:} 
 What is an MPEG file?  A very common file format is MPEG because it works with many cameras and televisions.  Mpeg2 video, an elementary codec stream for mpeg files, is the most common format.  To read this format you need to decode the mpeg stream.  You can read and write mpeg natively.  Mpeg video encoding is done separately from mpeg audio encoding when using the native file format, meaning that 2 passes are required and then they have to be muxed together.  However, if using ffmpeg it is rendered in only 1 pass.  DVD uses MPEG as does NTSC and Pal.
@@ -82,22 +82,22 @@ File lists formats can be utilized in some way for the following list of types o
 Using the example of jpeg’s, the jpeg list sequence file type is the easiest and fastest way to access a sequence of jpg images as a single asset.  First build a jpeglist sequence file and name it something like jpeglist.sh.  There is an example script of how to do this in the Auxiliary Programs section of the Appendix (\ref{sec:image_sequence_creation}).  Once the jpeglist.sh file is built and made executable you can then run it similar to this line:
 
 \begin{lstlisting}[style=sh]
-./jpeglist.sh   /<path>/outputfile.jpgs   /<path>/inputfilesDSC*.jpg
+./jpeglist.sh   /<same_path>/outputfile.jpgs   /<same_path>/inputfilesDSC*.jpg
 \end{lstlisting}
 
-\vspace*{1ex} \noindent If <\texttt{path}> is the same on both outputfile and inputfiles, then file.jpgs is created in the same directory as infiles, the directory contains the entire asset, and the file list uses relative paths; otherwise the file list contains absolute paths.   Since this creates outputfile list as a single asset, the memory demand and access time is much lower.  When you load the outputfile in \CGG{}, you might need to set \textit{Try ffmpeg last} if ffmpeg does not work with that particular type of sequence files.
+\vspace*{1ex} \noindent The <\texttt{path}> must be the same on both outputfile and inputfiles so that they can be successfully loaded in \CGG{}.  Since this creates outputfile list as a single asset, the memory demand and access time is much lower.  When you load the outputfile in \CGG{}, you might need to set \textit{Try ffmpeg last} if ffmpeg does not work with that particular type of sequence files.
 
 An example output file from running this script residing in the directory where \texttt{DSC*.jpg} files exist is shown below.  To use this, turn off ffmpeg probes first, and open \texttt{outputfile.jpgs} using File $\rightarrow$ Load files.  Of course, you can edit this file to change frame rate or names of files to include. 
-The width and height are expected to be of the same or similar size.
+The width and height should always be the same size for each included file and the file type must be the same.  For example, if you include a JPEG file in a GIF list, you will get undesirable results.
 
 \begin{lstlisting}[style=sh,caption={Example: outputfile.jpgs},captionpos=t]
 JPEGLIST
-# First line is always JPEGLIST
+# First line is always JPEGLIST and all files must be JPEGs
 # Frame rate:
 29.970030
-# Width:
+# Width - all files must be the same size in width:
 6016
-# Height:
+# Height - all files must be the same size in height:
 4016
 # List of image files follows
 ./DSC04948.jpg
