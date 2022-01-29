@@ -229,7 +229,7 @@ More info can be found in \nameref{sub:align_timecodes}.
 \label{cha:faq_problems_workarounds}
 \index{workarounds}
 
-There are a few known problems that have not yet been fixed for which there are some workarounds presented here.
+Some workarounds for issues and a few known problems that have not yet been fixed, are described here.
 
 \paragraph{Workaround for the \textit{alpha channel not working as intended when using an EDL} inserted as a reference or when an EDL is nested.}
 Using the Projector on the EDL within a Master Project follow these next steps.
@@ -249,6 +249,16 @@ dissolve.  Instead, there is a jump inside the dissolve, as if the plugin does n
 2 possible workarounds.  For example, extend the Motion51 plugin to cover both clips rather than
 having a separate plugin for each clip.  Or another workaround is to use two tracks and have the 
 plugin cover the cut point and use a Fade auto instead of the Dissolve transition.
+
+\paragraph{Workaround for access to modifiable text files when using AppImage.}  This includes
+such files as FFmpeg video or audio files, fonts that you want to add for usage in the Title
+plugin, icons that you wish to modify, and any other text file for customization.
+To get access, first extract the files from the AppImage, find the files to add, edit, or modify, and then run the extracted binary following the steps shown here.
+\begin{itemize}
+	\item  /path-to-appimage/CinGG-20211231-x86\_64.AppImage --appimage-extract
+	\item  edit or add the files you want to modify in the \textit{bin} subdirecctory
+	\item  /path-to-appimage/squashfs-root/usr/bin/cin
+\end{itemize}
 
 \paragraph{The Fade auto in certain circumstances produces an unwanted black flash.}
 When you insert an effect on an empty track the fade fades as if it were on a black background;

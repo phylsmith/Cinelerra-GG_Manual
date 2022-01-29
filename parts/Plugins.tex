@@ -206,7 +206,10 @@ ways using the Alt/h hotkey combination.
 \subsection{Delete Plugins to save Resources Space or make them Unavailable}%
 \label{sub:delete_plugin_resouces_unavaible}
 
-Maybe you just don't ever use certain plugins or would prefer to only find the ones that are useful to you. To save space in the Resources Window so you don't have to scroll to find the plugins you want as much, a feature to delete others is available. If you have a System install, you will have to be root for this function to be usable. The plugins will be permanently deleted, but only until you rebuild or download a new set of \CGG{} binaries. To delete a plugin, highlight the plugin you no longer want in the Resources window then press Ctrl-Shift-delete. A small window will come up allowing you to change your mind and red-X out or check-OK to remove plugin. This feature may come in handy if you have personnel working on media for you and you only want them to exercise certain functions. Or maybe you can't remember which is the good \textit{deinterlace} plugin out of the available five or so and want to delete the extras so as not to be confused. The ffmpeg, \textit{ladspa}, and \textit{lv2} plugins can not be deleted in this manner but, of course, you can always turn them off from view by clicking on \textit{Visibility} and unchecking them (figure~\ref{fig:remove-effect}).
+Maybe you just don't ever use certain plugins or would prefer to only find the ones that are useful to you. To save space in the Resources Window so you don't have to scroll to find the plugins you want as much, a feature to delete others is available. If you have a System install, you will have to be root for this function to be usable. The plugins will be permanently deleted, but only until you rebuild or download a new set of \CGG{} binaries. To delete a plugin, highlight the plugin you no longer want in the Resources window then press Ctrl-Shift-delete. A small window will come up allowing you to change your mind and red-X out or check-OK to remove plugin. 
+AppImage does not provide this capability unless you use the workaround as described in the Appendix \nameref{cha:faq_problems_workarounds}.
+
+This feature may come in handy if you have personnel working on media for you and you only want them to exercise certain functions. Or maybe you can't remember which is the good \textit{deinterlace} plugin out of the available five or so and want to delete the extras so as not to be confused. The ffmpeg, \textit{ladspa}, and \textit{lv2} plugins can not be deleted in this manner but, of course, you can always turn them off from view by clicking on \textit{Visibility} and unchecking them (figure~\ref{fig:remove-effect}).
 
 \begin{figure}[htpb]
     \centering
@@ -247,6 +250,8 @@ For some System installs, the files might be located at:
 \texttt{/usr/lib64/cin/plugins/picon/cinfinity}
 
 (or cinfinity2, original or smoother -- Leap distro)
+
+AppImage does not provide this capability unless you use the workaround as described in the Appendix \nameref{cha:faq_problems_workarounds}.
 
 \subsection{Details on where to put your own Plugin Icons}%
 \label{sub:details_put_plugin_icons}
@@ -292,6 +297,7 @@ Keep in mind these points for newly created plugin icons:
 \label{sub:example_plugin_icon_testing}
 
 For a simple test just copy an existing \texttt{<plugin\_name>.png} file into the cinfinity directory with the name \texttt{bluebanana.png} to write over the existing file. This icon will now show up in \CGG{} and still execute the Blue Banana function.
+AppImage does not provide this capability unless you use the workaround as described in the Appendix \nameref{cha:faq_problems_workarounds}.
 
 For an ffmpeg plugin, create \texttt{ff\_loop.png} and copy it to: \\
 \texttt{<cinlib\_path>/plugins/picon/original}. This icon will show up in \CGG{} if original is selected and execute the \textit{F\_loop} function.
@@ -3104,7 +3110,9 @@ To include graphical elements like \textit{logos}, you may want to import your t
 
 The X Window system originally did not have a suitable font renderer for video. It also is restricted to the current bit depth. It does not have a convenient way to know which fonts work with the suitable font renderer in the desired bit depth. The easiest way we have found to support fonts in the titler is to have a directory for them at \texttt{/usr/lib/cinelerra/fonts}.
 
-The titler supports mainly \textit{TTF}, true type fonts. It supports others but TTF are the most reliable. To add true type fonts, copy the \texttt{.TTF} files to the fonts directory. In that directory run
+The titler supports mainly \textit{TTF}, true type fonts. It supports others but TTF are the most reliable. AppImage does not provide this capability unless you use the workaround as described in the Appendix \nameref{cha:faq_problems_workarounds}.
+
+ To add true type fonts, copy the \texttt{.TTF} files to the fonts directory. In that directory run
 \vspace{1ex}
 \begin{lstlisting}[style=sh]
     # /usr/lib/cinelerra/fonts
