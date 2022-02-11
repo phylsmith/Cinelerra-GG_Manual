@@ -657,6 +657,86 @@ The summary line above in Bold represents the User time, System time, Real time 
 
 So why use a Profiler? Because it is the ``ls'' for executable functions!!
 
+\section{Working on AppImage}
+\label{sec:working_on_appimage}
+
+You can work on the appimage file to make changes and fix errors, or you can create a new appimage from scratch containing customizations. For example, you can add new rendering presets; update the Context-Help; change libraries that are no longer supported by the current distro; or make other modifications.
+
+\subsection{Managing AppImage}
+\label{sub:managing_appimage}
+
+A limitation of using AppImage instead of installing the binary or compiling from git, is that there is only a single file without the ability to browse the directory structure or to look for files to edit or check. So if using \CGG{} leads to some errors, it is not possible to investigate and fix the problem. Which means if you want to add the most up-to-date Context-Help or want to introduce some custom presets, that can not be done.
+
+Because the appimage file is nothing more than a compressed file containing the same structure as the installed program plus other libraries that allow the program to run independently from the system, the content can be extracted so that you can work on it as you would have on the normally installed program.  To do this you will need the appimage management program.
+Many Linux distros come with this managment program by default, but others may not. For instance in the case of Arch Linux the \texttt{appimagetool-bin} package from AUR needs to be installed. 
+
+To work on the appimage, first unpack it using the command\protect\footnote{Example provided by Glitterball3}:
+
+\begin{lstlisting}[numbers=none]
+	/{path to appimage}/CinGG-20220131-x86_64.AppImage --appimage-extract
+\end{lstlisting}
+
+You will now have a \texttt{squashfs-root} folder containing \texttt{/usr/bin/} as well as other files and directories such as \texttt{/usr/lib} and \texttt{/usr/share}. \texttt{Bin} is the folder similar to the one installed with \CGG{} and contains the files that you can work on. Now it is possible to make changes like adding  a custom preset in \texttt{/ffmpeg/video} or replacing a library that no longer works with a more recent version by working in \texttt{/squashfs-root/usr/lib}.
+
+To start the unpacked program from the bin folder use the command:
+
+\begin{lstlisting}[numbers=none]
+	/{path to appimage}/squashfs-root/usr/bin/./cin
+\end{lstlisting}
+
+After making your changes, to get back to having an appimage file instead of having to run the program from the bin folder, you can take the extra step of recompressing the squashfs-root folder.
+To do so use linuxdeploy's appimage, a program that can also be useful for creating appimages from scratch (\url{https://github.com/linuxdeploy/linuxdeploy/releases/continuous}).
+
+The steps to recreate the appimage are:
+
+\begin{enumerate}
+	\item Copy the linuxdeploy appimage to \texttt{/\{path to appimage\}} and make sure it is executable.
+	\item Then use the command:
+	\begin{lstlisting}[numbers=none]
+		./linuxdeploy-x86_64.AppImage --appdir squashfs-root --output appimage
+	\end{lstlisting}
+\end{enumerate}
+
+A new appimage will be created like the original but containing the changes.
+
+Alternatively, download the \texttt{appimagetool} version from \url{https://github.com/AppImage/AppImageKit/releases} if available for your distro and use the command:
+
+\begin{lstlisting}[numbers=none]
+	./appimagetool --comp /{path to appimage}/squashfs-root /tmp/my-appimage.appimage
+\end{lstlisting}
+
+Now there will be an appimage called \textit{my-appimage.appimage} with the changes that were made.
+
+\subsection{Build the \CGG{} AppImage from scratch}
+\label{sub:built_appimage_scratch}
+
+If a developer wants to create an appimage from git, follow these next few steps.
+An existing automated script is available, \texttt{bld\_appimage.sh}, in the directory \texttt{/\{path to cinelerra-5.1\}/blds}.
+Start by downloading the \CGG{} source from git:
+
+\begin{lstlisting}[numbers=none]
+	git clone --depth 1 "git://git.cinelerra-gg.org/goodguy/cinelerra.git" cinelerra5
+\end{lstlisting}
+
+Then move to the \texttt{/\{path to cinelerra-5.1}/\} folder.
+
+Now copy \texttt{/\{path to cinelerra-5.1\}/blds/bld\_appimage.sh} to \texttt{/\{path to cinelerra-5.1\}/} and make it executable:
+
+\begin{lstlisting}[numbers=none]
+	chmod x+u bld_appimage.sh
+\end{lstlisting}
+
+Download linuxdeploy appimage from \url{https://github.com/linuxdeploy/linuxdeploy/releases/continuous} and copy it to \texttt{/\{path to cinelerra-5.1\}/} and make it executable.
+You can make additions or changes in this script if you want to customize the appimage.  Then run the command:
+
+\begin{lstlisting}[numbers=none]
+	./bld_appimage.sh
+\end{lstlisting}
+
+The first part of the script is used to compile \CGG{}; the second part creates the folder \texttt{/AppDir/usr}, which is the basic structure of an appimage, and then populates it with the contents of \texttt{/\{path to cinelerra-5.1\}/bin}. Finally, the third part of the script starts linuxdeploy and builds the appimage.
+There will now be an appimage of \CGG{} which can be moved, made executable, and run.
+If there are problems look for errors in the file \texttt{appimage.log}.
+
 \section{How to Create a new Theme}
 \label{sec:how_create_theme}
 \index{theme!create new theme}
