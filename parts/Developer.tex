@@ -664,7 +664,7 @@ You can work on the appimage file to make changes and fix errors, or you can cre
 
 \subsection{Managing AppImage}
 \label{sub:managing_appimage}
-
+\index{appimage!management}
 A limitation of using AppImage instead of installing the binary or compiling from git, is that there is only a single file without the ability to browse the directory structure or to look for files to edit or check. So if using \CGG{} leads to some errors, it is not possible to investigate and fix the problem. Which means if you want to add the most up-to-date Context-Help or want to introduce some custom presets, that can not be done.
 
 Because the appimage file is nothing more than a compressed file containing the same structure as the installed program plus other libraries that allow the program to run independently from the system, the content can be extracted so that you can work on it as you would have on the normally installed program.  To do this you will need the appimage management program.
@@ -673,7 +673,7 @@ Many Linux distros come with this managment program by default, but others may n
 To work on the appimage, first unpack it using the command\protect\footnote{Example provided by Glitterball3}:
 
 \begin{lstlisting}[numbers=none]
-	/{path to appimage}/CinGG-20220131-x86_64.AppImage --appimage-extract
+	/{path to appimage}/CinGG-yyyymmdd.AppImage --appimage-extract
 \end{lstlisting}
 
 You will now have a \texttt{squashfs-root} folder containing \texttt{/usr/bin/} as well as other files and directories such as \texttt{/usr/lib} and \texttt{/usr/share}. \texttt{Bin} is the folder similar to the one installed with \CGG{} and contains the files that you can work on. Now it is possible to make changes like adding  a custom preset in \texttt{/ffmpeg/video} or replacing a library that no longer works with a more recent version by working in \texttt{/squashfs-root/usr/lib}.
@@ -702,13 +702,14 @@ A new appimage will be created like the original but containing the changes.
 Alternatively, download the \texttt{appimagetool} version from \url{https://github.com/AppImage/AppImageKit/releases} if available for your distro and use the command:
 
 \begin{lstlisting}[numbers=none]
-	./appimagetool --comp /{path to appimage}/squashfs-root /tmp/my-appimage.appimage
+	./appimagetool --comp /{path to appimage}/squashfs-root /tmpCinGG-yyyymmdd.AppImage
 \end{lstlisting}
 
-Now there will be an appimage called \textit{my-appimage.appimage} with the changes that were made.
+Now there will be an appimage called \textit{CinGG-yyyymmdd.AppImage} with the changes that were made.
 
-\subsection{Build the \CGG{} AppImage from scratch}
+\subsection{Build the CinGG.AppImage from scratch}
 \label{sub:built_appimage_scratch}
+\index{appimage!creating}
 
 If a developer wants to create an appimage from git, follow these next few steps.
 An existing automated script is available, \texttt{bld\_appimage.sh}, in the directory \texttt{/\{path to cinelerra-5.1\}/blds}.
@@ -726,7 +727,7 @@ Now copy \texttt{/\{path to cinelerra-5.1\}/blds/bld\_appimage.sh} to \texttt{/\
 	chmod x+u bld_appimage.sh
 \end{lstlisting}
 
-Download linuxdeploy appimage from \url{https://github.com/linuxdeploy/linuxdeploy/releases/continuous} and copy it to \texttt{/\{path to cinelerra-5.1\}/} and make it executable.
+Download linuxdeploy appimage from \url{https://github.com/linuxdeploy/linuxdeploy/releases/continuous} and copy it to \texttt{\{path to cinelerra-5.1\}} and make it executable.
 You can make additions or changes in this script if you want to customize the appimage.  Then run the command:
 
 \begin{lstlisting}[numbers=none]

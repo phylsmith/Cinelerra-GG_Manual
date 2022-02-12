@@ -4,16 +4,15 @@
 
 \section{\CGG{} AppImage}%
 \label{sec:cin_gg_appimage}
+\index{appimage}
 
 The main way to install \CGG{} is to use the AppImage. This is updated regularly and works for every distro, since it already contains the necessary dependencies. 
 A big advantage of using the AppImage format is that it is only 1/3 the size of the normal install,
 and since each release is named differently, you can keep a number of versions in a directory,
 and when testing from a terminal you just have to type CinGG, then hit tab, and complete it to
 the desired date release.
-
 For 64-bit systems you can choose between an image with up-to-date libraries or one that supports older libraries, which you should use only if the first image gives you problems with unsupported libs. There is also a 32-bit older distro available that has \textit{i686} as part of the filename that currently works on older distros but may not work on the newest distros
-(most of the popular Linux distributions such
-as Arch, Ubuntu, and Fedora have dropped support for this older architecture). In any case, if you are using a 32-bit Linux distro, you should compile your sources from git or use a precompiled binary\protect\footnote{Remember that a 32-bit distro does not address more than 4GB of memory, so you may have stability and performance problems with large, high-resolution mediafiles.}. And there is a 8/10/12 bit newer distro that handles 8 or 10 or 12 bits that has \textit{multibit} as part of the filename.  Installing the appimage is simple:
+(most of the popular Linux distributions such as Arch, Ubuntu, and Fedora have dropped support for this older architecture). In any case, if you are using a 32-bit Linux distro, you should compile your sources from git or use a precompiled binary\protect\footnote{Remember that a 32-bit distro does not address more than 4GB of memory, so you may have stability and performance problems with large, high-resolution mediafiles.}. And there is a 8/10/12 bit newer distro that handles 8 or 10 or 12 bits that has \textit{multibit} as part of the filename.  Installing the appimage is simple:
 
 Download the file from:
 
@@ -68,6 +67,8 @@ And Leap 15.3 (OpenSUSE) requires installation of the \textit{appimage} package.
 In addition, if you are using the OpenGL video driver, you will need to install the appropriate OpenGL
 drivers for your Operating System graphics board because libGLU.so and other OpenGL libraries are
 not included in the AppImage.
+
+Using AppImage means you can't have the installation folder and work on the files. To unpack the AppImage and get its structure in folders and files see \nameref{sub:managing_appimage} To create, edit and manage appimages see \nameref{sub:built_appimage_scratch}.
 
 \section{Download Already Built \CGG{}}%
 \label{sec:download_already_built_cinelerra_gg}
