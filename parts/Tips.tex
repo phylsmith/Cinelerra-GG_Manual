@@ -83,7 +83,7 @@ Precedence of the decode hardware acceleration settings are:
 
 \subsubsection*{Hardware decoding in \CGG{}}%
 \label{ssub:hardware_decoding_cinelerra}
-
+\index{appimage!vaapi/vdpau}
 There are 4 phases during \CGG{}’s handling of hardware acceleration. These first 2 steps occur just \textit{before} the first read.
 
 \begin{enumerate}
@@ -101,7 +101,16 @@ There are 4 phases during \CGG{}’s handling of hardware acceleration. These fi
 	can not convert the data, you will see the error message of \textit{Error retrieving data from GPU to CPU}.
 \end{enumerate}
 
-AppImage does not provide this capability. Due to variations in user’s computer hardware configuration, it is often suggested that you refer to your startup window to check for error messages.   Since your situation is unique, the error may not have been seen by anyone else and is probably unknown/undocumented.
+AppImage will probably not allow for either VDPAU or VA-API hardware acceler-
+ation because the computer where AppImage is created will not have the same
+graphics card and/or vaapi/vdpau libraries as yours. In other words:
+
+\begin{itemize}
+	\item Hardware acceleration, vaapi or vdpau, works the same running either the	created binary or the created AppImage from that binary on that same computer. See \nameref{sub:built_appimage_scratch}.
+	\item Hardware acceleration using an AppImage created on another computer running a different Operating System or even just a different level of Operating System, most likely will not work unless the user’s computer just happens to have the same characteristics with respect to vaapi/vdpau as the computer where the AppImage was created.
+\end{itemize}
+
+Due to these variations in user’s computer hardware configuration, it is often suggested that you refer to your startup window to check for error messages.   Since your situation is unique, the error may not have been seen by anyone else and is probably unknown/undocumented.
 \textcolor{red}{For debugging problems, modify in the \CGG{} ffmpeg subdirectory, the file:  \texttt{decode.opts}   by temporarily changing the line from \textit{loglevel =fatal} to \textit{loglevel =verbose} and restarting \CGG{}}.  
 
 \subsubsection*{Possible improvements or differences}%
