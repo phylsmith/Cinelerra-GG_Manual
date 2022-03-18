@@ -274,6 +274,16 @@ This is not a problem. Basically, when you open a file if a stream has a known d
 This is not a problem. \CGG{} is building an index for your file in order to better seek.  In that process, different methods are tried until a successful scan is complete.
 \bigskip
 
+\textit{int FFMPEG::init\_encoder(const char*);} followed by
+\newline 
+\textit{bad file format:} \quad \texttt{your directory/filename}
+
+This error occurs when you are rendering, or possibly capturing media via recording, when the
+file format/type are set to an incompatible option.  To fix this in the Render window, check
+the Video and Audio wrenches configure compression settings and choose a compatible Compression
+as shown when clicking on the down arrow in the Preset window.
+\bigskip
+
 \textit{AudioALSA::write\_buffer err -32(Broken pipe) at sample \#}
 
 This indicates that there is something wrong with the audio. Some reasons for this are:
