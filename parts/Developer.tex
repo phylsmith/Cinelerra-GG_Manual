@@ -980,3 +980,12 @@ For now, \CGG{} context help is not localized at all. There is no complete \CGG{
 More about ContextManual.pl file?
 
 The bin/doc/ContextManual.pl script can be configured further. Look in the script text. You can define your preferable web browser, or redefine it to 'echo' for debug purposes. There are also some predefined HTML pages for Contents and Index, and several explicitly rewritten keyphrases. 
+
+After the first invocation of context help the system-wide script, bin/doc/ContextManual.pl, copies itself into
+the user's config directory, \$HOME/.bcast5. If the user needs to modify ContextManual.pl, it should be done
+on that copy from .bcast5 rather than the system-wide one. On all subsequent context help requests this
+(possibly modified) .bcast5 version of the script will be called.  If later the \CGG{} package gets
+upgraded containing a newer, not 100\% compatible version of ContextManual.pl script, and/or not compatible
+structure of the HTML manual itself, the new system-wide version of the script will be copied into .bcast5
+again to ensure context help functionality. The older version of the script will be backed up (with the .bak
+suffix) as a reference of the modifications done by the user.
