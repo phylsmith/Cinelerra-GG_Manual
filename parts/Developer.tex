@@ -665,6 +665,7 @@ You can work on the appimage file to make changes and fix errors, or you can cre
 \subsection{Managing AppImage}
 \label{sub:managing_appimage}
 \index{appimage!management}
+
 A limitation of using AppImage instead of installing the binary or compiling from git, is that there is only a single file without the ability to browse the directory structure or to look for files to edit or check. So if using \CGG{} leads to some errors, it is not possible to investigate and fix the problem. Which means if you want to add the most up-to-date Context-Help or want to introduce some custom presets, that can not be done.
 
 Because the appimage file is nothing more than a compressed file containing the same structure as the installed program plus other libraries that allow the program to run independently from the system, the content can be extracted so that you can work on it as you would have on the normally installed program.  To do this you will need the appimage management program.
@@ -711,32 +712,68 @@ Now there will be an appimage called \textit{CinGG-yyyymmdd.AppImage} with the c
 \label{sub:built_appimage_scratch}
 \index{appimage!creating}
 
-If a developer wants to create an appimage from git, follow these next few steps.
-An existing automated script is available, \texttt{bld\_appimage.sh}, in the directory \texttt{/\{path to cinelerra-5.1\}/blds}.
-Start by downloading the \CGG{} source from git:
+If a developer wants to create an appimage from git, follow these next few steps. An existing automated script is available, \texttt{bld\_appimage.sh}, in the directory \texttt{/\{path to cinelerra-5.1\}}.
+
+This follows four steps:
+
+\begin{itemize}
+	\item Build static version of \CGG{}.
+	\item If desired and needed, build the HTML manual for context-sensitive help.
+	\item Organize code and if present, the manual, in a AppImage specific format \textit{AppDir}. Do this with tool makeappimage, which is built if needed.
+	\item Call an external tool to make the AppDir into an AppImage
+\end{itemize}
+
+Start by downloading the \CGG{} source from Cinelerra's git. The last parameter is a directory name of your choice, the directory must not exist. As example, the name \textit{cinelerra5} is used.
 
 \begin{lstlisting}[numbers=none]
 	git clone --depth 1 "git://git.cinelerra-gg.org/goodguy/cinelerra.git" cinelerra5
 \end{lstlisting}
 
-Then move to the \texttt{/\{path to cinelerra-5.1}/\} folder.
+The source will be in a subdirectory \texttt{cinelerra-5.1} of the directory created by the \textit{git clone} operation.
 
-Now copy \texttt{/\{path to cinelerra-5.1\}/blds/bld\_appimage.sh} to \texttt{/\{path to cinelerra-5.1\}/} and make it executable:
-
-\begin{lstlisting}[numbers=none]
-	chmod x+u bld_appimage.sh
-\end{lstlisting}
-
-Download linuxdeploy appimage from \url{https://github.com/linuxdeploy/linuxdeploy/releases/continuous} and copy it to \texttt{\{path to cinelerra-5.1\}} and make it executable.
-You can make additions or changes in this script if you want to customize the appimage.  Then run the command:
+If context-sensitive help is needed, download the manual sources too, with a different destination directory.
 
 \begin{lstlisting}[numbers=none]
-	./bld_appimage.sh
+	git clone --depth 1 "git://git.cinelerra-gg.org/goodguy/cin-manual-latex.git" cin-manual-latex
 \end{lstlisting}
 
-The first part of the script is used to compile \CGG{}; the second part creates the folder \texttt{/AppDir/usr}, which is the basic structure of an appimage, and then populates it with the contents of \texttt{/\{path to cinelerra-5.1\}/bin}. Finally, the third part of the script starts linuxdeploy and builds the appimage.
-There will now be an appimage of \CGG{} which can be moved, made executable, and run.
-If there are problems look for errors in the file \texttt{appimage.log}.
+Then move to the \texttt{/\{path to cinelerra-5.1}/\} directory.
+
+
+There are two preliminaries to do before running the script:
+
+1- If context sensitive help in the appimage version is required, the source of the manual and the tools (packages) to build it must be on the system. In the bld\_appimage.sh script, set the variable \texttt{MANUAL\_DIRECTORY=\$(pwd)/../../ cin-manual-latex} to the path of the source of the manual. If the variable is empty, or the specified directory does not exist, \CGG{} will be built without built-in help. The path to the manual source can be an absolute or relative one.
+
+2- The script bld\_appimage.sh uses a platform specific version of appimagetool so that it can create appimages for \textit{x86\_64}, \textit{i686}, \textit{aarch64}, or \textit{armv7l} architecture. We need to add appimagetool-(platform).AppImage to the \texttt{/\{path to cinelerra- 5.1\}/tools} directory, or somewhere in your path. You can download the tool for your system (e.g. appimagetool-x86\_64.AppImage) from git: {\small\url{https://github.com/AppImage/AppImageKit/releases}}
+
+Always remember to make it executable. The four supported platforms are:
+
+\begin{itemize}
+	\item appimagetool-aarch64.AppImage
+	\item appimagetool-armhf.AppImage
+	\item appimagetool-i686.AppImage
+	\item appimagetool-x86\_64.AppImage
+\end{itemize}
+
+With the preparations done, let's go back to the bld\_appimage.sh script.
+
+Make the script executable if it isn't already:
+
+\begin{lstlisting}[numbers=none]
+chmod x+u bld_appimage.sh
+\end{lstlisting}
+
+Start the script with:
+
+\begin{lstlisting}[numbers=none]
+./bld_appimage.sh
+\end{lstlisting}
+
+The first part of the script customizes \texttt{configure}, depending on the architecture of our system. The next step compiles and installs \CGG{} in the \texttt{bin} subdirectory. The third part creates the manual in HTML; It will be the basis for the context help (see \nameref{sec:help_context_help}). The fourth part creates the directory \texttt{/AppDir/usr}, which is the basic structure of an appimage, and then populates it with the contents of \texttt{/\{path to cinelerra-5.1\}/bin}. Finally, the fifth step starts a script, called \texttt{makeappimage}, which points to \textit{bld.sh} contained in \texttt{/tools/makeappimagetool/}.
+
+The script specifies all executables that are part of \CGG{}, so makeappimage can pick up dependencies. Any executable code in other places is not picked up. makeappimage will populate the AppDir directory, and then call the platform dependent appimagetool found in \texttt{/\{path to cinelerra-5.1\}/tools}.
+
+At the end of the compilation there will be an appimage in the \texttt{cinelerra-5.1} directory, which we can move and use.
 
 \section{How to Create a new Theme}
 \label{sec:how_create_theme}
