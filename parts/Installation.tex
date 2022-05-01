@@ -455,6 +455,13 @@ export ac_cv_header_xmmintrin_h=no
 export FFMPEG_EXTRA_CFG=" --disable-vdpau"
 \end{lstlisting}
 
+Note for building 32-bit packages on hybrid 32/64 x86 systems, you may
+need to add the following:
+
+\begin{lstlisting}[style=sh]
+setarch i686  (befire configure and package build)
+\end{lstlisting}
+
 NOTE: as of May 31, 2021 when Context Help was added, to include
 this Context Help you will need to download the corresponding
 tgz file containing the HTML manual sections referenced for the
