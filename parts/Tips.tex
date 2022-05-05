@@ -9,11 +9,11 @@ in \texttt{Settings $\rightarrow$ Preferences, Playback A} tab, the frames/secon
 
 Some computer hardware factors to consider for better performance are listed here:
 \begin{itemize}
-	\item Multi-core and more SMP processors greatly improve \CGG{} speed by making use of threads.
-	\item A large amount of free memory available can help speed up operations by avoiding unnecessary disk
-	swaps and keeping videos easily accessible in memory.
+	\item Multi-core and more SMP processors greatly improve speed by making use of threads. \CGG{} automatically uses the available threads, but some processes are single-threaded anyway and these become the weak link in the chain. The \textit{Project SMP cpus} parameter is used to limit the use of threads in the deconding (playback) stage only. It is better to lower the number of threads to leave some for the system and for the plugins in use.
+	\item RAM: In video editing in general, the more RAM the better. A large amount of free memory available can help speed up operations by avoiding unnecessary disk swaps and keeping videos easily accessible in memory. 
+You can optimize RAM utilization with \textit{Cache size} and \textit{Seconds to preroll render} parameters. See section \ref{sec:cache_and_preroll}. If there is limited RAM you must necessarily have a large swap partition. For system swap, (2 x RAM) GB seems to be more than sufficient. If the amount of memory being used by the program is close, then swap might save you but often if swapping becomes necessary, it presents more problems and you end up killing the \CGG{} process anyway.
 	\item Video editing is almost always I/O intensive. To create longer running videos at high resolution
-	you will want to have a lot of disk space available on fast access disks.
+	you will want to have a lot of disk space available on fast access disks. The higher the transfer rate, the less slowdowns and problems. So a modern SSD is better than an old HDD.
 	\item \CGG{} benefits from OpenGL hardware acceleration. A good graphics card is worthwhile to have.
 	\item Multiple monitors really come in handy to increase productivity as you can see more information and
 	in bigger windows so you do not have to keep moving windows around.
@@ -459,13 +459,13 @@ Information on transcode which is used to provide keyframes to make the video se
 
 
 
-\section{Some Settings Parameter Values}%
-\label{sec:settings_parameter_values}
+\section{Cache size and Seconds to preroll render}%
+\label{sec:cache_and_preroll}
 \index{cache}
 
-\texttt{Cache} in \texttt{Settings $\rightarrow$ Preferences, Performance} tab is used to store images on the timeline.  One 1080p frame uses about 10 MB.  The default setting is 256 and this is enough for testing and running.  However, why not use more memory if it is available.   To experiment for testing a good number tuned to the way you use your computer, set the cache to 0, start up \CGG{}, load a typical media file, play it and run \texttt{top} on the command line in another window to see how much memory is being used.  In the \textit{top} display, look at \textit{free} memory.  Whatever your computer is not using, is a good number to use for cache.  If you start other programs, or change the design of the session so that it uses a lot of frame storage, you may need to experiment again later and resize accordingly.
+\textit{Cache size} in \texttt{Settings $\rightarrow$ Preferences, Performance} tab is used to store images on the timeline.  One 1080p frame uses about 10 MB.  The default setting is 256 and this is enough for testing and running.  However, why not use more memory if it is available.   To experiment for testing a good number tuned to the way you use your computer, set the cache to 0, start up \CGG{}, load a typical media file, play it and run \textit{top} on the command line in another window to see how much memory is being used.  In the \textit{top} display, look at \textit{free} memory.  Whatever your computer is not using, is a good number to use for cache.  If you start other programs, or change the design of the session so that it uses a lot of frame storage, you may need to experiment again later and resize accordingly. The system keeps all requested data cached until it is replaced by other data or you reboot your PC. Reboot if you want to clear the cache.
 
-For system \textit{swap}, 1 GB seems to be more than sufficient.  If the amount of memory being used by the program is \textit{close}, then swap might save you but often if swapping becomes necessary, it presents more problems and you end up killing the \CGG{} process anyway.
+\textit{Seconds to preroll render} in \texttt{Settings $\rightarrow$ Preferences, Performance} tab are used to increase the amount of frames (which are calculated in advance) at the time of their use. The default setting is 0.5 sec but you can increase it to 1.0 sec to improve smoothness in the timeline. Higher values are always less effective.
 
 \section{Tips for Improving Smaller Computers Use}%
 \label{sec:tips_improving_smaller_computers}
