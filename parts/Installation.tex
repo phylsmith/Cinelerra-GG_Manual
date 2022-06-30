@@ -244,20 +244,23 @@ cd cinelerra5/cinelerra-5.1
 \begin{lstlisting}[style=sh]
 ./blds/bld_prepare.sh <os> # where <os> represents the
                            # Operating System of
-                           # centos, fedora, suse, ubuntu, mint, debian.
+                           # centos, fedora, suse, ubuntu, mint, debian, arch, debian-testing, ubuntu-testing.
 ./autogen.sh
 ./configure --prefix=/usr  # optional parameters can be added here
 make 2>&1 | tee log        # make and log the build
 \end{lstlisting}
 
-  \texttt{bld\_prepare.sh} does not work for Arch Linux or Gentoo,
-  so we have to install the dependencies
-  manually. \texttt{README.arch} or \texttt{README.gentoo}, which
+  \texttt{bld\_prepare.sh} for Arch Linux may require other packages,
+  so you may have to install the dependencies
+  manually as you will have to do for gentoo.  \texttt{README.arch} or \texttt{README.gentoo}, which
   contain the list of dependencies, can be found at:
   \begin{list}{}{}
   \item \href{https://cinelerra-gg.org/download/README.arch}{https://cinelerra-gg.org/download/README.arch}
   \item \href{https://cinelerra-gg.org/download/README.gentoo}{https://cinelerra-gg.org/download/README.gentoo}
   \end{list}
+  
+  \texttt{bld\_prepare.sh} option of debian-testing and ubuntu-testing is currently for future distros and
+  will be changed to more relevant names when they are released.
 
 \item Check for obvious build errors:
 \begin{lstlisting}[style=sh]
