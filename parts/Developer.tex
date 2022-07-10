@@ -98,11 +98,11 @@ FFmpeg is a \textit{strongly connected} component in the build linkage and widel
 	\item \texttt{./configure} {\dots}
 \end{itemize}
 
-Specific information on using the current ffmpeg GIT repository follows.  You have to supply the actual URL location of the ffmpeg git as you can see in this example \texttt{?bld.sh?} script:
+Specific information on using the current ffmpeg GIT repository follows.  You have to supply the actual URL location of the ffmpeg git as you can see in this example \texttt{bld.sh} script:
 
 \begin{lstlisting}[numbers=none]
-#!/bin/bash\newline
-() ./autogen.sh\newline
+#!/bin/bash
+./autogen.sh
 ./configure --with-single-user --with-booby --with-git-ffmpeg=https://git.ffmpeg.org/ffmpeg.git
 make && make install ) 2>1 | tee log
 mv Makefile Makefile.cfg
