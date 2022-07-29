@@ -170,9 +170,20 @@ Some general tips (See also \ref{sec:video_attributes} \textit{Color model}):
 \begin{itemize}
 	\item If your hardware allows it use RGB-Float (in \texttt{Settings $\rightarrow$ Format}); this format does not lead to transfer errors from one model to another, but it uses more cpu.
 	\item Use RGB-8 if the source is RGB and YUV-8 if the source is YUV (most commonly used).
-	\item If you notice alterations in color/brightness representation, try playing with color models in \texttt{Settings $\rightarrow$ Format} and with \textit{YUV color space} and \textit{YUV color range} in \texttt{Settings $\rightarrow$ Preferences $\rightarrow$ Appearance} tab. Another possibility is to check if the display color model conforms to the project color model.
+	\item If you notice alterations in color/brightness representation, try playing with color models in \texttt{Settings $\rightarrow$ Format} and with \textit{YUV color space} and \textit{YUV color range} in \texttt{Settings $\rightarrow$ Preferences $\rightarrow$ Appearance} tab. Another possibility is to check if the display color model conforms to the project color model. A practical case that may arise is as follows\protect\footnote{thanks to DeJay}: YUV source with limited color range (MPEG or TV); \CGG{} set with the color range to extended (JPEG or PC); the colors on the compositor will be flattened. If we set the color range to MPEG the colors will be correct but hard clipping will occur. In this case the best result is presented by setting the color range to JPEG but then doing a conversion of the source to JPEG color range via the \texttt{ColorSpace} plugin. Summary table:
 \end{itemize}
 
+\begin{center}
+	\begin{tabular}{ |c|c|c| } 
+		\hline
+		\textbf{Source} & \textbf{YUV Color Range} & \textbf{Colors} \\ 
+		\hline
+		MPEG & JPEG & Flat colors \\ 
+		MPEG & MPEG & Hard clipping \\
+		MPEG + conversion to JPEG & JPEG & Colors OK \\
+		\hline
+	\end{tabular}
+\end{center}
 
 \section{Automatic "Best Model" Media Load}%
 \label{sec:conform_the_project}
