@@ -480,7 +480,7 @@ there are not too many or too bad alterations. But if the basis that we have set
 		\item The color space of the timeline: we can choose and set the color space on which to work.
 		\item The color space of the output: we can choose the color space of the output (on other monitors or of the final rendering).
 	\end{enumerate}
-	\textit{ACES} and \textit{OpenColorIO} have an SRC workflow. NB: the monitor must still be calibrated to avoid unwanted color shifts.
+	\textit{ACES} and \textit{OpenColorIO} have an SRC workflow. Please note that the monitor must still be calibrated to avoid unwanted color shifts.
 	\item There is also a third type of CMS: the one through the \textbf{LUTs}. In practice, the SRC workflow is followed through the appropriate 3D LUTs, instead of relying on the internal (automatic) management of the program. The LUT combined with the camera used to display it correctly in the timeline and the LUT for the final output. Using LUTs, however, always involves preparation, selection of the appropriate LUT and post-correction. Also, as they are fixed conversion tables, they can always result in clipping and banding.
 \end{itemize}
 
