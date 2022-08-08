@@ -445,3 +445,93 @@ There are quite a few formats available.
 	\item[MPEG Audio] Very widespread standard. Extension \texttt{.mp3}.
 	\newline    Presets: \textit{mp3}
 \end{description}
+
+\section{Overview on Color Management}%
+\label{sec:overview_color_management}
+\index{color!management}
+
+\CGG{} does not have support for ICC color profiles or global color management to standardize and facilitate the management of the various files with which it works. But it has its own way of managing color spaces and conversions; let's see how.
+
+\subsection{Color Space}%
+\label{sub:the_color_spaces}
+
+A color space is a subspace of the absolute CIE XYZ color space that includes all possible, human-visible color coordinates (therefore makes human visual perception mathematically tractable). CIE XYZ is based on the RGB color model and consists of an infinite three-dimensional space but characterized (and limited) by the xyz coordinates of five particular points: the Black Point (pure black); the White Point (pure white); Reddest red color (pure red); Greenest green color (pure green); and Bluest blue color (pure blue). All these coordinates define an XYZ matrix. The color spaces are submatrices (minors) of the XYZ matrix. The absolute color space is device independent while the color subspaces are mapped to each individual device.  For a more detailed introduction see: \small\href{https://peteroupc.github.io/colorgen.html}{https://peteroupc.github.io/colorgen.html}
+\normalsize A color space consists of primaries (\textit{gamut}), transfer function (\textit{gamma}), and matrix coefficients (\textit{scaler}).
+
+\begin{description}
+	\item[Color primaries]: the gamut of the color space associated with the media, sensor, or device (display, for example).
+	\item[Transfer characteristic function]: converts linear values to non-linear values (e.g. logarithmic). It is also called Gamma correction.
+	\item[Color matrix function] (scaler): converts from one color model to another. $RGB \leftrightarrow YUV$; $RGB \leftrightarrow YCbCr$; etc. 
+\end{description}
+
+The camera sensors are always RGB and linear. Generally, those values get converted to YUV in the files that are produced, because it is a more efficient format thanks to chroma subsampling, and produces smaller files (even if of lower quality, i.e. you lose part of the colors data). The conversion is nonlinear and so it concerns the "transfer characteristic" or gamma. The encoder gets input YUV and compresses that. It stores the transfer function as metadata if provided.
+
+\subsection{CMS}%
+\label{sub:cms}
+
+A color management system (CMS) describes how it translates the colors of images/videos from their current color space to the color space of the other devices, i.e. monitors. The basic problem is to be able to display the same colors in every device we use for editing and every device on which our work will be viewed. Calibrating and keeping our hardware under control is feasible, but when viewed on the internet or DVD, etc. it will be impossible to maintain the same colors. The most we can hope for is that
+there are not too many or too bad alterations. But if the basis that we have set up is consistent, the alterations should be acceptable because they do not result from the sum of more issues at each step. There are two types of color management: \textit{Display referred} (DRC) and \textit{Scene referred} (SRC).
+
+\begin{itemize}
+	\item \textbf{DRC} is based on having a calibrated monitor. What it displays is considered correct and becomes the basis of our color grading. The goal is that the colors of the final render will not change too much when displayed in other hardware/contexts. Be careful to make sure there is a color profile for each type of color space you choose for your monitor. If the work is to be viewed on the internet, be sure to set the monitor in \textit{sRGB} with its color profile. If for HDTV we have to set the monitor in \textit{rec.709} with its color profile; for 4k in \textit{Rec 2020}; for Cinema in \textit{DCP-P3}; etc.
+	\item \textbf{SRC} instead uses three steps:
+	\begin{enumerate}
+		\item The input color space: whatever it is, it can be converted manually or automatically to a color space of your choice.
+		\item The color space of the timeline: we can choose and set the color space on which to work.
+		\item The color space of the output: we can choose the color space of the output (on other monitors or of the final rendering).
+	\end{enumerate}
+	\textit{ACES} and \textit{OpenColorIO} have an SRC workflow. NB: the monitor must still be calibrated to avoid unwanted color shifts.
+	\item There is also a third type of CMS: the one through the \textbf{LUTs}. In practice, the SRC workflow is followed through the appropriate 3D LUTs, instead of relying on the internal (automatic) management of the program. The LUT combined with the camera used to display it correctly in the timeline and the LUT for the final output. Using LUTs, however, always involves preparation, selection of the appropriate LUT and post-correction. Also, as they are fixed conversion tables, they can always result in clipping and banding.
+\end{itemize}
+
+\subsection{Display}%
+\label{sub:display}
+
+Not having \CGG{} a CMS, it becomes essential to have a monitor calibrated and set in sRGB that is just the output displayed on the timeline of the program. You have these cases:
+
+\begin{center}
+	\begin{tabular}{ |l|l|l| } 
+		\hline
+		\textbf{Timeline} & \textbf{Display} & \textbf{Description} \\ 
+		\hline
+		sRGB & sRGB & we get a correct color reproduction \\ 
+		sRGB & Rec.709 & we get slightly dark colors, because gamma \\
+		sRGB & DCI-P3 & we get over-saturated dark colors, because gamma and bigger gamut \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\subsection{Pipeline CMS}%
+\label{sub:pipeline_cms}
+
+INPUT $\rightarrow$ DECODING/PROCESSING $\rightarrow$ OUTPUT/PLAYBACK $\rightarrow$ DISPLAY $\rightarrow$ ENCODING
+
+\begin{description}
+	\item[Input] color space and color depth of the source file; better if combined with an ICC profile.
+	\item[Decoding] how \CGG{} transforms and uses the input file (it is a temporary transformation, for usage of the internal/ffmpeg engine and plugins).
+	\item[Output] our setting of the project for the output. In \CGG{} such a signal is \texttt{8-bit sRGB}, but it can also be 8-bit YUV in \textit{continuous playback}.
+	\item[Display] as the monitor equipped with its color space (and profiled with ICC or LUT) displays the signal that reaches the user and what we see. The signal reaching the display is also mediated by the graphics card and the operating system CMS, if any.
+	\item[Encoding] the final rendering stage where we set not only formats and codecs but also color space, color depth, and color range.
+\end{description}
+
+\subsection{How \CGG{} works}%
+\label{sub:how_cingg_works}
+
+\begin{description}
+	\item[Decoding/playback:] Video is decoded to internal representation (look at \texttt{Settings /Format/Color model}). Internal format is unpacked 3..4 values every pixel. \CGG{} has 6 internal pixel formats (RGB(A) 8-bit; YUV(A) 8-bit and RGB(A)\_FLOAT 32-bit (see Color Model in \nameref{sec:video_attributes}). The program will configure the frame buffer for your resulting video to be able to hold data in that color model. Then, for each plugin, it will pick the variant of the algorithm coded for that model.
+	\CGG{} automatically converts the source file to the set color model (in a buffer, the original is not touched!). Even if the input color model matches what we set in \texttt{Settings/Format/Color model}, there will always be a first conversion because \CGG{} works internally (in the buffer) at 32-bit in RGB. For playback \CGG{} has to convert each frame to the format acceptable by the output device, i.e. sRGB 8-bit. In practice, the decoded file follows two separate paths: conversion to FLOAT for all internal calculations in the temporary (including other conversions for plugins, etc.) and simultaneously the result in the temporary is converted to 8-bit sRGB for on-screen display. See also \nameref{sec:conform_the_project}. To review, a \textit{temporary} is a single frame of
+video in memory where graphics processing takes place.
+\CGG{} use X11 and X11 is RGB only and it is used to draw the \textit{refresh frame}. So single step is always drawn in RGB. Continuous playback on the other hand can also be YUV for efficiency reasons.
+	\item[Color range:] One problem with the YUV color model is the \texttt{YUV color range}. This can create a visible effect of a switch in color in the Compositor, usually shown as grayish versus over-bright. The cause of the issue is that X11 is RGB only and it is used to draw the \textit{refresh frame}. So single step is always drawn in RGB. To make a YUV frame into RGB, a color model transfer function is used. The math equations are based on Color\_space and Color\_range. In this case, color\_range is the cause of the \textit{grayish} offset. The \textit{YUV MPEG color range} (limited or TV) is 16..235 for \textbf{Y}, 16..240 for \textbf{UV}, and the color range used by \textit{YUV JPEG color range} (full or HDTV) is 0..255. The cause is that 16-16-16 is seen as pure black in MPEG, but as gray in JPEG and all playback will come out brighter and more grayish. This can be fixed by forcing appropriate conversions via the ColorSpace plugin. See \nameref{sec:color_space_range_playback}
+	\item[Plugins:] On the timeline all plugins see the frames only in internal pixel format and modify this as needed (\textit{temporary}). Some effects work differently depending on colorspace: sometimes pixel values are converted to float, sometimes to 8-bit for an effect. In addition \textit{playback single step} and \textit{plugins} cause the render to be in the session color model, while \textit{continuous playback} with no plugins tries to use the file’s best color model for the display (for speed). As mentioned, each plugin we add converts and uses the color information in its own way. Some limit the gamut and depth of color by clipping (i.e. \texttt{Histogram}); others convert and reconvert color spaces for their convenience; others introduce artifacts and posterization; etc. For example, the \texttt{Chroma Key (HSV)} plugin converts any signal to HSV for its operation.
+	If we want to better control and target this color management in \CGG{}, we can take advantage of its internal ffmpeg engine: there is an optional feature that can be used via \texttt{.opts} lines from the ffmpeg decoded files. This is via the \texttt{video\_filter=colormatrix=...}ffmpeg plugin. There may be other good plugins (lut3d...) that can also accomplish a desired color transform. This \texttt{.opts} feature affects the file colorspace on a file by file basis, although in principle it should be possible to setup a \texttt{histogram} plugin or any of the \texttt{F\_lut*} plugins to remap the colortable, either by table or interpolation.
+	\item[Conversion:] Any conversion is done with approximate mathematical calculations and always involves a loss of data, more or less visible, because you always have to interpolate an exact value when mapping it into the other color space. Obviously, when we use floating point numbers to represent values, these losses become small and close to negligible. So the choice comes down to either keeping the source color model even while processing or else converting to FLOAT, which in addition to leading to fewer errors should also minimize the number of conversions, being congruous with the program's internal one. The use of FLOAT, however, takes more system resources than the streamlined YUV. Color conversions are mathematical operations; for example to make a YUV frame into RGB, a color model matrix function is used. The math equations are based on color\_space and color\_range. Since the majority of sources are YUV, this conversion is very common and it is important to set these parameters to optimize playback speed and correct color representation.
+	\item[Encoding:] Finally, the encoding converts to colorspace required by the codec.
+\end{description}
+
+\subsection{Workflow}%
+\label{sub:workflow}
+
+Let us give an example of color workflow in \CGG{}. We start with a source of type YUV (probably: YCbCr); this is decoded and converted to the chosen color model for the project, resulting in a \textit{temporary}. Various jobs and conversions are done in FLOAT math and the result remains in the chosen color model until further action. In addition, the temporary is always converted to sRGB 8-bit for monitor display only. If we apply the \texttt{ChromaKey (HSV)} plugin, the temporary is converted to HSV (in FLOAT math) and the result in the temporary becomes HSV. If we do other jobs the temporary is again converted to the set color model (or others if there is demand) to perform the other actions. At the end of all jobs, the obtained temporary will be the basis of the rendering that will be implemented according to the choice of codecs in the render window (\textit{Wrench}), regardless of the color model set in the project. If we have worked well the final temporary will retain as much of the source color data as possible and will be a good basis for encoding of whatever type it is.
+
+For practical guidelines, one can imagine starting with a quality file, for example, \textit{10-bit YUV 4.2.2}. You set the project to \texttt{RGBA-FLOAT}; the \texttt{YUV color space} to your choice of Rec709 (for a FullHD) or BT 2020NCL (for UHD) and finally the \texttt{YUV color range} to JPEG. If the original file has the MPEG type color range then you convert to JPEG with the \texttt{ColorSpace} plugin. If you want to transcode to a quality intermediate you can use \textit{DNxHR 422}, or even \textit{444}, and maybe do the editing step with a \textit{proxy}. For rendering you choose the codec appropriate for the file destination, but you can still generate a high-quality master, for example \textit{ffv1 .mov} with lossless compression.
