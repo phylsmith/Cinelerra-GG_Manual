@@ -223,7 +223,7 @@ But when \textit{project} and \textit{source} frame rates are different (or \tex
 Generally, best practice is to perform the following sequence of preparations for video editing.
 
 \begin{enumerate}
-	\item Motion stabilization, and maybe some other preparations, to improve the quality of the source video is best done under the properties identical to the properties of the original video; it may be different codec, but same frame size and same frame rate.
+	\item Motion stabilization, and maybe some other preparations, to improve the quality of the source video is best done under the properties identical to the properties of the original video; it may be different codec, but same frame size and same frame rate. For stabilization you can use ffmpeg command line plugins called \textit{vidstabdetect} and \textit{vidstabtransform}.
 	\item If you need to alter the frame rate, for example because different source clips have different frame rates, then recode all the necessary clips to the same future project frame rate. Here frame sizes can still have different sizes, but frame rates should be all the same.
 	\item Whole editing: if you need to change frame rate of some restricted part, particularly when smooth acceleration/deceleration is needed, it can be done here. But if frame rate has to be changed only due to different source fps, it is better to do it during the preparation stage.
 \end{enumerate}
@@ -251,7 +251,7 @@ Generally, best practice is to perform the following sequence of preparations fo
 	These are only metadata that do not affect rendering but when the file is read by a player later they are used to reproduce the colors without errors.
 \end{enumerate}
 
-For more tips on how \CGG{} processes colors on the timeline see  \nameref{sec:color_space_range_playback} and \nameref{sec:conform_the_project}.
+For more tips on how \CGG{} processes colors on the timeline see  \nameref{sec:color_space_range_playback}, \nameref{sec:conform_the_project} and \nameref{sec:overview_color_management}.
 
 %%% Local Variables:
 %%% mode: latex

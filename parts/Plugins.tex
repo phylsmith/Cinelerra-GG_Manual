@@ -2103,6 +2103,8 @@ Every time a keyframe is set in a loop effect, the keyframe becomes the beginnin
 \label{sub:motion51}
 \index{Motion51}
 
+Note: Motion and Motion51 plugins are complex and slow to use for video stabilization. If you are stabilizing an entire video, you may want to preporcess by using ffmpeg's \textit{vidstabdetect} and \textit{vidstabtransform} plugins before importing the video into \CGG{}.
+
 This plugin compensates for unwanted motion and stabilizes the picture. The \textit{Motion51} Plugin simplifies motion stabilization so that without a lot of tweaking you can easily achieve reasonable results, either by using the defaults or varying a single parameter. Since the motion in every clip is specific, there are some additional parameters useful to adjust the settings accordingly. 
 The Motion51 plugin uses different methods for tracking than the other motion plugins. Motion Stabilization is very useful if you have jittery video, for example when taken from a car window, or while walking.
 
@@ -2150,6 +2152,8 @@ The Samples box at the top is most often the only parameter that you may want to
 \subsection{Motion}%
 \label{sub:motion}
 \index{Motion}
+
+Note: Motion and Motion51 plugins are complex and slow to use for video stabilization. If you are stabilizing an entire video, you may want to preporcess by using ffmpeg's \textit{vidstabdetect} and \textit{vidstabtransform} plugins before importing the video into \CGG{}.
 
 The \textit{motion tracker} is almost a complete application in itself. The motion tracker tracks two types of motion: \textit{translation} and \textit{rotation}. It can track both simultaneously or one only. It can do $\frac{1}{4}$ pixel tracking or single pixel tracking. It can stabilize motion or cause one track to follow the motion of another track. Although the motion tracker is applied as a realtime effect, it usually must be rendered to see useful results. The effect takes a long time to precisely detect motion so it is very slow.
 
@@ -2480,7 +2484,14 @@ C - has only object2 visible
 \label{ssub:tips}
 
 \begin{enumerate}
+    \item Motion plugin\protect\footnote{Thanks to Georgy} algorithm in \CGG{} is rather difficult to understand (the most efficient way to understand it is to look inside its C++ code:). Moreover, it has some tricks that, although can be derived knowing the details of the algorithm, are absolutely non-intuitive by themselves. Moreover, it is rather slow, and the results cannot be visible immediately while altering the settings.
+    \item The Motion plugin \textit{cache} (or\textit{ motion vector} or \textit{tracking file}) sometimes allows to play with very sophisticated techniques. For example, by editing the cache, perhaps with some custom script, you can induce some kind of motion which would be difficult to make in other way. But in the same time the existence of the cache file can trigger user's mistakes. So you must always pay attention, which cache file may be used in the moment. //
+    Motion's cache data are absolute-frame-number based. If you insert some small piece of video before that where the plugin was attached, the frame numbers get displaced relative to the cached numbers, and the result may become incorrectly stabilized.
     \item The motion vector is a text file located in \texttt{/tmp}. We can open it with a plain editor and modify the wrong $X\,Y$ coordinates, i.e.\ those that deviate from the linearity, to correct the errors that always happen when we perform a motion tracking (jumps). It can be a long and tedious job, but it leads to good results.
+    \item It is not possible to switch Motion cache off. While working, \textit{Motion} always looks in its cache. If it contains some data assigned to the current frame numbers, that cached data will be used unconditionally. If not, that data will be calculated, stored in the cache, and later reused, also unconditionally.
+    \item In the Motion plugin dialog there is a button \texttt{Clear tracking file contents}. When in doubt, you can press this button, the cached data will be erased and fresh recalculated on the next pass.
+    \item It is quite usual to wish independent caches for different parts of video. It is possible to set such distinct cache file names (either manually, or let software generate them with \texttt{Generate tracking file name}). When you generate new names, the plugin automatically switches Calculation off, just for security. You switch it on again when needed.
+    \item If \texttt{play track} is switched off for the track where the Motion plugin was attached, the plugin will calculate nothing. Also, if \texttt{Play every frame} was not active in \texttt{Preferences}, some video frames can get skipped from processing.
     \item You can try tracking using reverse playback of the track. Sometimes it may lead to a better calculation.
 \end{enumerate}
 
