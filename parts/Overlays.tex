@@ -27,6 +27,7 @@ Conceptually, when the foreground color is completely opaque, the resulting blen
 When blending source and destination shapes (Dst and Src), the shape boundaries can be changed with the alpha blending effects.  There are a total of 10 standard Porter-Duff operators, but there are 30 possible overlay modes used in \CGG{}.  Each is characterized by its value in the four regions: source, destination and both, with the \textit{neither} region always being blank.  The source and destination regions can either be blank or filled with the source or destination colors.  A specific compositing math formula is used to calculate effect.  This is only applicable to RGB; some effort has been made to accommodate YUV, but the effects are not as predictable, and may not be useful. 
 
 Below, in figure~\ref{fig:normal}, are the results of utilizing the 30 available operations within \CGG{} as listed on a following page.  Src is the solid green rectangle and Dst is the solid red rectangle.  There are better illustrations of what alpha blending can do, however for consistency sake, these are the results when using standards.
+For an alternative set of source video illustrations, see \nameref{sec:altviews}.
 
 \begin{figure}[htpb]
     \centering
@@ -209,6 +210,46 @@ Typical operations from popular \textit{paint} packages.
     \item[Hardlight:] Multiplies or screens the colors, dependent on the source color value.  If the source color is lighter than $0.5$, the destination is lightened as if it were screened.  If the source color is darker than $0.5$, the destination is darkened, as if it were multiplied.  The degree of lightening or darkening is proportional to the difference between the source color and $0.5$.  If it is equal to $0.5$ the destination is unchanged.  Using pure black or white produces black or white.  The effect is similar to shining a harsh spotlight on the destination.  This mode is useful for creating the appearance of shadows on a layer.  You might use this mode to combine two photographs and obtain bright colors and sharp edges.  Math formula is the same as used by SVG and Gimp.
     \item[Softlight:] Darkens or lightens the colors, dependent on the source color value.  If the source color is lighter than 0.5, the destination is lightened. If the source color is darker than $0.5$, the destination is darkened, as if it were burned in.  The degree of darkening or lightening is proportional to the difference between the source color and $0.5$.  If it is equal to $0.5$, the destination is unchanged.  Using pure black or white produces a distinctly darker or lighter area, but does not result in pure black or white.  The effect is similar to shining a diffused spotlight on the destination.  A layer with pure black or white becomes markedly darker or lighter, but does not become pure black or white.  Soft light is not related to “Hard light” in anything but the name, but it does tend to make the edges softer and the colors not so bright.   Math formula is the same as used by Gimp; SVG formula differs.
 \end{description}
+
+\section{Alternative Views of Overlay Modes}%
+\label{sec:altviews}
+
+An alternative set of source videos used to provide a different real world view is shown here to help illustrate alpha blending. They use a landscape photo as one and the other is half of a color and half of a black and white gradient photo.  First is shown the Aritmetic, Logical, and Graphic-Art views.  
+After that the Porter Duff overlays are shown using the same source videos but
+with each of the Source videos offset in a different direction so that the
+generated output is more obvious.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1.0\linewidth]{normal2.png}
+    \caption{Normal and Arithmetic overlays
+    ** Subtract currently not applying guards but should look like this when corrected.}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1.0\linewidth]{logical2.png}
+    \caption{Logical overlays}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1.0\linewidth]{graphic-art2.png}
+    \caption{Graphic Art overlays}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1.0\linewidth]{porter-duff2.png}
+    \caption{Offset source videos to illustrate Porter Duff overlays}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1.0\linewidth]{porter-duff3.png}
+    \caption{Porter Duff overlays}
+\end{figure}
+
 
 
 %%% Local Variables:
