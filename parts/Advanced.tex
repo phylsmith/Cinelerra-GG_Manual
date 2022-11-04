@@ -86,7 +86,13 @@ up could potentially be 10 to 30 times faster depending on the parameter values 
 and the size of your video file.  This script is included in the doc subdirectory as 
 vaapi\_proxy.sh for users not using an AppImage version and is shown below.  You will
 have to tune it to your specific needs for the vaapi\_device name (currently set to
-/dev/dri/renderr128), file type (currently set to h264 and mp4), and proxy size (now is 6).
+/dev/dri/renderr128), file type (currently set to h264 and mp4), and proxy size (now is 6). 
+Once you have created the proxy file, you then start Cinelerra, load the original un-proxied
+video, use the Settings pulldown and choose the Proxy settings options as you would normally,
+but because you already have created the existing proxy file with the correct name, it will
+be automatically loaded and will not have to create it.  The filename of the proxy file
+must be in the same location as the original video and have the exact required naming
+conventions and scale factor.
 
 \begin{lstlisting}[numbers=none]
 #!/bin/bash
