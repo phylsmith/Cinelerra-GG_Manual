@@ -64,7 +64,7 @@ Quality:	-1
 Pixels:		yuv420p
 \end{lstlisting}
 
-If you get errors for some videos, such as those with strange variable bit rate or some types of files made on a smartphone, an usually reliable alternative is to change the following parameters:
+If you get errors for some videos, such as those with strange variable bit rate or some types of files made on a smartphone, a usually reliable alternative is to change the following parameters:
 
 \begin{lstlisting}[numbers=none]
 File Format:	FFMPEG - mov
@@ -79,6 +79,26 @@ Checking the \textit{Creation of proxy on media loading} results in any addition
 If you get error messages \index{proxy!error} when creating proxies, check the Video wrench settings.  These usually default to values that are expected to work correctly for the \textit{File Format} and codec you selected but they can be changed and may result in errors.  If you get an error message of \textit{check\_frame\_rate failed} followed by \textit{Error making proxy} in the popup Errors window, do just that and check the Frame rate value by going to the Resources window, Media folder, and use the right mouse button for the Info option for that specific media in question.  You can change the frame rate in this window to a more codec acceptable value.  Different codecs may have different legal values.
 
 More specific information on which plugins need to use \textit{Proxy 1:1}. is provided here next. If the keyframe data uses coordinate data that is absolute, then the Factor scale = 1 should be used.  If the data is normalized (like always $0-100\%$) then the proxy can be done with downsize (i.e. classic \textit{Proxy}).  The session geometry format, shown in \texttt{Settings $\rightarrow$ Format} as $width \times height$, is changed if scale factor $\neq$ 1 is used to cause all of the data to be in the reduced format.  If this affects the plugin operation, then \textit{Proxy 1:1} should be used.  Examples of plugins that need the \textit{Proxy 1:1} are: Title, AutoScale, Scale, ScaleRatio, and Translate.  Most others are safe to use with downsize.
+
+A faster method of creating the proxy file outiside of \CGG{} for users who have
+vaapi hardware acceleration capability on their graphics board is via a script.  Speed
+up could potentially be 10 to 30 times faster depending on the parameter values you choose
+and the size of your video file.  This script is included in the doc subdirectory as 
+vaapi\_proxy.sh for users not using an AppImage version and is shown below.  You will
+have to tune it to your specific needs for the vaapi\_device name (currently set to
+/dev/dri/renderr128), file type (currently set to h264 and mp4), and proxy size (now is 6).
+
+\begin{lstlisting}[numbers=none]
+#!/bin/bash
+filename="$1"
+fileout="${filename%.*}"
+proxy="6"
+# Hardware encode AMD
+ffmpeg -threads 2 -hwaccel vaapi  -vaapi_device /dev/dri/renderD128 \
+ -i  "$1" -c:v h264_vaapi -vf "format=nv12,hwupload,scale_vaapi=iw/'$proxy':ih/'$proxy'" \
+ -vcodec h264_vaapi  -preset fast -c:a copy \
+ -bf 0 -profile:v 66 "$fileout".proxy"$proxy"-mp4.mp4
+\end{lstlisting}
 
 \subsection{Proxies with Alpha channel}%
 \label{sub:proxies_alpha_channel}
