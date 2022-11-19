@@ -2522,7 +2522,7 @@ This effect makes video tracks appears as a painting. It can be controlled by \t
 \label{sub:overlay}
 \index{overlay video}
 
-This effect can combine several tracks by using the Overlayer. This is a basic internal device normally used by \CGGI{} to create the dissolve transitions and for compositing the final output of every track onto the output bitmap. The Overlayer has the ability to combine one or several image layers on top of a "bottom layer". It can do this combining of images in several different (and switchable) output modes such as \textit{Normal}, \textit{Addition}, \textit{Subtract}, \textit{Multiply} (Filter), \textit{Divide}, \textit{Max} and \textit{Replace}. For a detailed list refer to the on \hyperref[cha:overlays]{Overlays} chapter  -- PorterDuff.
+This effect can combine several tracks by using the Overlayer. This is a basic internal device normally used by \CGGI{} to create the dissolve transitions and for compositing the final output of every track onto the output bitmap. The Overlayer has the ability to combine one or several image layers on top of a "bottom layer". It can do this combining of images in several different (and switchable) output modes such as \textit{Normal}, \textit{Addition}, \textit{Subtract}, \textit{Multiply} (Filter), \textit{Divide}, \textit{Max} and \textit{Replace}. For a detailed list and some differences in output expectations, refer to the \hyperref[cha:overlays]{Overlays} chapter  -- PorterDuff.
 
 
 The \textit{overlay} plugin enables the use of this Overlayer device in the middle of any plugin stack, opening endless filtering and processing possibilities. It is only useful as a \textit{shared plugin} (i.e.\ a multitrack plugin). To use the overlay plugin:
@@ -2534,13 +2534,15 @@ The \textit{overlay} plugin enables the use of this Overlayer device in the midd
     \item Manipulate the plugin parameters in Track A.
 \end{enumerate}
 
-In the Overlay plugin's parameter window you can choose the overlay order
+In the Overlay plugin's parameter window you can choose the overlay "Layer order"
 to select which track plays the role of the "bottom layer" and which plays the
 role of the "top layer". For some overlay modes this can make quite a
-difference, for example the top layer is subtracted from the bottom layer for
+difference, for example the bottom layer is subtracted from the top layer for
 "Subtract" mode. Also in the parameter window, you can choose on which of the tracks
-to overlay the combined output. (Hint: in most cases, you will want to mute
-the other track so you only see the combined output).
+to overlay the combined output by changing the "Output layer" and it too can make
+quite a difference.
+(Hint: in most cases, you will want to mute the other track so you only see the
+combined output).
 
 \subsection{Perspective}%
 \label{sub:perspective}

@@ -52,6 +52,10 @@ the plugin in the same track without an alpha channel but not if there is no cli
 And the Transition effect works fine when there is a transition between two clips/images without
 an alpha channel.
 
+\paragraph{Do not change Color Model Format in session just before loading backup.}
+Under certain circumstance if you change the Color Model in Settings->Format, quit the session,
+and then "Load backup" when you start again, it will crash.  Workaround is to avoid this scenario.
+
 \paragraph{Audio tracks align with no video track, and in working with Mixers.}
 
 The use of \texttt{Open Mixers} always requires the existence of a video track. See \nameref{ssub:but_use_only_first_audio} We cannot act on audio tracks only, for example to align them. A workaround to get the audio tracks aligned would be:
