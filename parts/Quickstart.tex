@@ -338,6 +338,54 @@ These are also called Delivery codecs. They are the most used and widespread bei
 	\newline Presets:  \textit{mpeg, mpeg2}
 \end{description}
 
+\subsubsection{Note on Matroska (mkv) container}
+\label{ssub:note_mkv_container}
+\index{mkv}
+
+Matroska is a modern universal container that is Open Source so there is lots of ongoing development with community input along with excellent documentation.  Also derived from this format is the \textit{Webm} container used by Google and YouTube, which use the VP8-9 and AV1 codecs. Although using in \CGG{} is highly recommended, you may have seeking problems during playback. The internal structure of matroskas is sophisticated but requires exact use of internal keyframes (I-frame; B-frame and P-frame) otherwise playback on the timeline may be subject to freeze and drop frames. The mkv format can be problematic if the source encoding is not done well by the program (for example, OBS Studio). For an easy but accurate introduction of codecs and how they work see: \url{https://ottverse.com/i-p-b-frames-idr-keyframes-differences-usecases/}.
+
+To find out the keyframe type (I, P, B) of your media you can use ffprobe:
+
+\begin{lstlisting}[numbers=none]
+	$ ffprobe -v error -hide_banner-of default=noprint_wrappers=0 -print_format flat  -select_streams v:0 -show_entries frame=pict_type input.mkv
+\end{lstlisting}
+
+\textbf{-v error -hide\_banner:} serves to hide a blob of information that is useless for our purposes.
+
+\textbf{-of:} is an alias for \textit{-print\_format} and is used to be able to use \textit{default=noprint\_wrappers =0}.
+
+\textbf{-default=noprint\_wrappers=0:} is used to be able to show the information from the parsed stream that we need.
+
+\textbf{-print\_format flat:} is used to display the result of ffprobe according to a \textit{flat} format (you can choose CSV, Json, xml, etc).
+
+\textbf{-select\_streams v:0:} is used to choose the first stream (0) in case there are multiple audio and video streams (tracks, in \CGG{}).
+
+\textbf{-show\_entries:} shows the type of data collected by ffprobe that we want to display (there are also types: \texttt{\_streams}, \texttt{\_formats}, \texttt{\_packets}, and \texttt{\_frames}. They are called \textit{specifiers}).
+
+\textbf{-frame=pict\_type:} within the chosen specifier indicates the data to be displayed; in this case \textit{pict\_type}, that is, the keyframe type (I, P, B) of the frame under consideration.
+
+\textbf{input.mkv:} is the media to be analyzed (it can be any container and code).
+
+(see \url{https://ffmpeg.org/ffprobe.html} for more details)
+
+We thus obtain a list of all frames in the analyzed media and their type. For example:
+
+\begin{lstlisting}[numbers=none]
+	frames.frame.0.pict_type="I"
+	frames.frame.1.pict_type="P"
+	frames.frame.2.pict_type="B"
+	frames.frame.3.pict_type="B"
+	frames.frame.4.pict_type="B"
+	...
+\end{lstlisting}
+
+There are also 2 useful scripts that not only show the keyframe type but also show the GOP length of the media. They are zipped tars with readme's at: \newline
+\small\url{https://cinelerra-gg.org/download/testing/getgop_byDanDennedy.tar.gz} \newline 
+\small\url{https://cinelerra-gg.org/download/testing/iframe-probe_byUseSparingly.tar.gz}
+
+We can now look at the timeline of \CGG{} to see the frames that give problems in playback. Using a codec of type Long GOP, it is probably the rare I-frames that give the freezes.
+To find a solution you can use MKVToolNix (\url{https://mkvtoolnix.download/}) to correct and insert new keyframes into the mkv file (matroska talks about \textit{cues data}). It can be done even without new encoding. Or you can use the \texttt{Transcode} tool within \CGG{} because during transcoding new keyframes are created that should correct errors.
+
 \subsubsection{Image Sequences}
 \label{ssub:ffmpeg_image_sequences}
 

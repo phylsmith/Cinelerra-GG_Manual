@@ -137,7 +137,15 @@ Each line describes a pair with the left one for alpha and the right one for chr
 
 The previous math forms are the only truly accurate description of each blending operation, but short descriptions are below where \textit{Source} is the output from the next track and \textit{Destination} is the output from the lower track stacking.  Blending starts with new Source and combines it with the previous render stack output, which is referred to as Destination.  The new output becomes the next Destination and the next up stack level becomes the new Source.  Source is above; Destination is below.
 
-Note: the Graphic Art group operates principally on color, and the others operate principally on alpha.
+Some notable items that affect the results are listed here.
+\begin{enumerate}
+	\item So as not to be surprised by the results, set your Video Driver to X11, not X11-OpenGL, because when rendering your video no graphics library is used. Rendering is handled in software and there is sometimes anomaly differences when using the OpenGL driver.
+	\item The Graphic Art group operates principally on color, and the others operate principally on alpha.
+	\item When using the Title plugin with text, blending or changes in the text will only take affect in Subtract, Divide, and Difference.  This matches the implmentation of the original Cinelerra version.
+	\item If comparing results with the original Cinelerra version for Subtract and Divide, you may have to switch the order of the source and destination tracks to see the same output. If you do not want to switch tracks, you can use the \textit{overlay} plugin as shared and change the Layer order and/or Output layer. The reason for having to switch tracks to get equivalent output is because of differences in the math formulas used.  Subtract exactly matches the original Cinelerra version if you switch the 2 tracks; Divide matches in one order only.
+	\item Instead of using the patchbay overlays, you may prefer to use the \textit{overlay} plugin instead.
+	\item If you see undesirable results, always check under Settings->Format and check your Color Model as that will vary or interfere with the look.
+\end{enumerate}
 
 % Leave the word Group in due to latex2html dual name conflict
 \subsection*{Normal Group}%
@@ -155,11 +163,11 @@ Note: the Graphic Art group operates principally on color, and the others operat
 Standard numerical operations.
 
 \begin{description}
-    \item[Addition:] The source is added to the destination and replaces the destination.  Addition mode is very simple - the pixel values of the upper and lower layers are added to each other.  The resulting image is normally brighter.  The equation can result in color values greater than $255$, so some of the light colors may be clipped to the maximum value of $255$.  Math formula is the same as that used by SVG but different than Gimp.
-    \item[Subtract:] Subtract mode reduces the pixel values of the upper layer by the pixel values of the lower layer.  The resulting image is normally darker.  You might get a lot of black or near-black in the resulting image.  The equation can result in negative color values, so some of the dark colors may be clipped to the minimum value of $0$.  Math formula used is different than that used by Gimp; there is no SVG equivalent.
+    \item[Addition:] The source is added to the destination and replaces the destination.  Addition mode is very simple - the pixel values of the upper and lower layers are added to each other.  The resulting image is normally brighter.  The equation can result in color values greater than $255$, so some of the light colors may be clipped to the maximum value of $255$.  Math formula is the same as that used by SVG but slightly different than Gimp.
+    \item[Subtract:] Subtract mode reduces the pixel values of the upper layer by the pixel values of the lower layer.  The resulting image is normally darker.  You might get a lot of black or near-black in the resulting image.  The equation can result in negative color values, so some of the dark colors may be clipped to the minimum value of $0$.  Math formula used is different than that used by the Gimp "Default" version, but you can get the same as the "Legacy" version if you switch the 2 tracks or use the \textit{overlay} plugin and switch to Top first. There is no SVG equivalent.
     \item[Multiply:] The source color is multiplied by the destination color and replaces the destination.  The resulting color is always at least as dark as either the source or destination color.  Multiplying any color with black results in black.  Multiplying any color with white preserves the original color.  Math formula is the same as used by SVG and Gimp.
-    \item[Divide:] Divides source color by destination color.  If the source color is white, the result color is the underlying color.  The resulting image is often lighter.  Math formula used is different than that used by Gimp; there is no SVG equivalent.
-    \item[Replace:] Replace mode will cause any existing destination to be replaced by the source media.  Mathematical formula used is the same as used by Gimp; there is no SVG equivalent.
+    \item[Divide:] Divides source color by destination color.  If the source color is white, the result color is the underlying color.  The resulting image is often lighter.  Math forumula is different than that of Gimp, but by changing the order of the Source and Destination tracks you can get the same results in some cases (this is true for the original Cinelerra version also). There is no SVG equivalent.  
+    \item[Replace:] Replace mode will cause any existing destination to be replaced by the source media.  Math formula used is the same as used by Gimp; there is no SVG equivalent.
 \end{description}
 
 \subsection*{Porter-Duff Group}%
@@ -222,8 +230,7 @@ generated output is more obvious.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=1.0\linewidth]{normal2.png}
-    \caption{Normal and Arithmetic overlays
-    ** Subtract currently not applying guards but should look like this when corrected.}
+    \caption{Normal and Arithmetic overlays}
 \end{figure}
 
 \begin{figure}[ht]
