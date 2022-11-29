@@ -380,8 +380,8 @@ We thus obtain a list of all frames in the analyzed media and their type. For ex
 \end{lstlisting}
 
 There are also 2 useful scripts that not only show the keyframe type but also show the GOP length of the media. They are zipped tars with readme's at: \newline
-\small\url{https://cinelerra-gg.org/download/testing/getgop_byDanDennedy.tar.gz} \newline 
-\small\url{https://cinelerra-gg.org/download/testing/iframe-probe_byUseSparingly.tar.gz}
+{\small\url{https://cinelerra-gg.org/download/testing/getgop_byDanDennedy.tar.gz}} \newline 
+{\small\url{https://cinelerra-gg.org/download/testing/iframe-probe_byUseSparingly.tar.gz}}
 
 We can now look at the timeline of \CGG{} to see the frames that give problems in playback. Using a codec of type Long GOP, it is probably the rare I-frames that give the freezes.
 To find a solution you can use MKVToolNix (\url{https://mkvtoolnix.download/}) to correct and insert new keyframes into the mkv file (matroska talks about \textit{cues data}). It can be done even without new encoding. Or you can use the \texttt{Transcode} tool within \CGG{} because during transcoding new keyframes are created that should correct errors.
