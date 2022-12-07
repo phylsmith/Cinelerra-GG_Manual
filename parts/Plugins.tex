@@ -2103,7 +2103,7 @@ Every time a keyframe is set in a loop effect, the keyframe becomes the beginnin
 \label{sub:motion51}
 \index{Motion51}
 
-Note: Motion and Motion51 plugins are complex and slow to use for video stabilization. If you are stabilizing an entire video, you may want to preporcess by using ffmpeg's \textit{vidstabdetect} and \textit{vidstabtransform} plugins before importing the video into \CGG{}.
+Note: Motion and Motion51 plugins are complex and slow to use for video stabilization. If you are stabilizing an entire video, you may want to preprocess by using ffmpeg's \textit{vidstabdetect} and \textit{vidstabtransform} plugins before importing the video into \CGG{}.
 
 This plugin compensates for unwanted motion and stabilizes the picture. The \textit{Motion51} Plugin simplifies motion stabilization so that without a lot of tweaking you can easily achieve reasonable results, either by using the defaults or varying a single parameter. Since the motion in every clip is specific, there are some additional parameters useful to adjust the settings accordingly. 
 The Motion51 plugin uses different methods for tracking than the other motion plugins. Motion Stabilization is very useful if you have jittery video, for example when taken from a car window, or while walking.
@@ -2153,7 +2153,7 @@ The Samples box at the top is most often the only parameter that you may want to
 \label{sub:motion}
 \index{Motion}
 
-Note: Motion and Motion51 plugins are complex and slow to use for video stabilization. If you are stabilizing an entire video, you may want to preporcess by using ffmpeg's \textit{vidstabdetect} and \textit{vidstabtransform} plugins before importing the video into \CGG{}.
+Note: Motion and Motion51 plugins are complex and slow to use for video stabilization. If you are stabilizing an entire video, you may want to preprocess by using ffmpeg's \textit{vidstabdetect} and \textit{vidstabtransform} plugins before importing the video into \CGG{}.
 
 The \textit{motion tracker} is almost a complete application in itself. The motion tracker tracks two types of motion: \textit{translation} and \textit{rotation}. It can track both simultaneously or one only. It can do $\frac{1}{4}$ pixel tracking or single pixel tracking. It can stabilize motion or cause one track to follow the motion of another track. Although the motion tracker is applied as a realtime effect, it usually must be rendered to see useful results. The effect takes a long time to precisely detect motion so it is very slow.
 
