@@ -660,7 +660,7 @@ So why use a Profiler? Because it is the ``ls'' for executable functions!!
 \section{Working on AppImage}
 \label{sec:working_on_appimage}
 
-You can work on the appimage file to make changes and fix errors, or you can create a new appimage from scratch containing customizations. For example, you can add new rendering presets; update the Context-Help; change libraries that are no longer supported by the current distro; or make other modifications.
+You can work on the appimage file to make changes and fix errors, or you can create a new appimage from scratch containing customizations. For example, you can add new rendering presets, update the Context-Help, change libraries that are no longer supported by the current distro, or make other modifications.
 
 \subsection{Managing AppImage}
 \label{sub:managing_appimage}
@@ -677,7 +677,7 @@ To work on the appimage, first unpack it using the command\protect\footnote{Exam
 	/{path to appimage}/CinGG-yyyymmdd.AppImage --appimage-extract
 \end{lstlisting}
 
-You will now have a \texttt{squashfs-root} folder containing \texttt{/usr/bin/} as well as other files and directories such as \texttt{/usr/lib} and \texttt{/usr/share}. \texttt{Bin} is the folder similar to the one installed with \CGG{} and contains the files that you can work on. Now it is possible to make changes like adding  a custom preset in \texttt{/ffmpeg/video} or replacing a library that no longer works with a more recent version by working in \texttt{/squashfs-root/usr/lib}.
+You will now have a \texttt{squashfs-root} folder in your current directory containing \texttt{/usr/bin/} as well as other files and directories such as \texttt{/usr/lib} and \texttt{/usr/share}. \texttt{Bin} is the folder similar to the one installed with \CGG{} and contains the files that you can work on. Now it is possible to make changes like adding a custom preset in \texttt{/ffmpeg/video} or replacing a library that no longer works with a more recent version by working in \texttt{/squashfs-root/usr/lib}.
 
 To start the unpacked program from the bin folder use the command:
 
@@ -707,6 +707,16 @@ Alternatively, download the \texttt{appimagetool} version from \url{https://gith
 \end{lstlisting}
 
 Now there will be an appimage called \textit{CinGG-yyyymmdd.AppImage} with the changes that were made.
+
+NOTE: for the \textbf{bdwrite} program which is used to create the udfs image to burn Blu-ray
+media (or any other standalone program), you will find it in the squashfs-root/usr/bin
+subdirectory. You only need to do the initial unpacking extract step and then just copy
+bdwrite and the entire squashfs-root/usr/lib directory to a convenient permanent place for
+usage.  Then when running bdwrite, you will have to first export the libary path by typing
+this command in the window first:
+\begin{lstlisting}[numbers=none]
+export LD_LIBRARY_PATH=/{put your copied usr/lib path here}:$LD_LIBRARY_PATH
+\end{lstlisting}
 
 \subsection{Build the CinGG.AppImage from scratch}
 \label{sub:built_appimage_scratch}
