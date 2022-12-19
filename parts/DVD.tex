@@ -544,23 +544,59 @@ zmpeg3cc2txt -o - /dvb_data/channel5.ts
 
 For some time, DVD manufacturers have been employing  a variety of measures to make reading a DVD difficult on a computer.  One technique which is widely deployed is to add a bunch of extra program data, so that correct playback is only likely if you can read the DVD virtual machine data and decode a maze of program data to find the undamaged stream definitions.  Only a few streams are created which are machine usable, and dozens are created as decoy streams.  The decoy streams fail or introduce errors.  This program scans the IFO (info file) playlists and verifies the contents of the stream that does not contain obvious damage.  The result is a list of program ids which can be entered into the playback preferences to select a program which qualifies.
 
-\section{HDV on a Blu-ray Disc Without Re-encoding}%
-\label{sec:hdv_bd_without_reencoding}
-\index{BluRay!HDV without re-encoding}
+\section{Creating Blu-ray Without Re-encoding}%
+\label{sec:bluray_without_reencoding}
+\index{BluRay!without re-encoding}
+\index{BluRay!camcorders}
+\index{BluRay!AVCHD}
 
-An MTS file is a video file saved in the high-definition (HD) MPEG Transport Stream video format, commonly called \textit{AVCHD}.  It contains HD video compatible with Blu-ray disc format and is based on the MPEG-2 transport stream.   MTS files are often used by Sony, Panasonic, Canon and other HD camcorders.  Legal input for Video -- MPEG1VIDEO, MPEG2VIDEO, H264; Audio -- MP1, MP2, AC3, AC3PLUS, DTS, TRUHD. 
+If you have video that is already in Blu-ray format AND you do not want to use \CGG{} to do
+any editing, you can create blu-ray video media using Cinelerra's \textit{bdwrite} program.  This
+could be the case if you are working with media from a modern Digital Camcorder.  Camcorders
+usually record in a legacy tape-based format or the current file-based format.  The most common
+digital camcorder formats and whether or not they need to be re-encoded are:
 
-For creating a blu-ray disc, if you have HDV MPEG-2 media that is in blu-ray format, you can save the original quality of your work, rather than rendering it to another format.  Follow the steps below directly instead of going through \CGG{}.  It has been tested on 10 different MTS files.
-For older media or media which used MP1 or MP2 audio codecs which will not work on blu-ray discs, it may be necessary to transcode the audio while leaving video intact.  An example of the transcode line to use is: \newline
-\hspace*{2mm}ffmpeg -i hdv -c:v copy -c:a pcm\_bluray -mpegts\_m2ts\_mode 1 new\_hdv.mts
+\begin{itemize}
+        \item DV (1995) to SD-blu-ray video - process in \CGG{} using the File pulldown of
+BD Render as previously described or use programs documented in their manuals to re-encode
+video to mpeg2 and then re-encode DV LPCM audio to Blu-ray LPCM.
+        \item HDV (2004) to blu-ray video - process in \CGG{} using the File pulldown of
+BD Render as previously described or use programs documented in their manuals to
+ copy mpeg2
+video and then re-encode MP2 audio to Blu-ray LPCM or AC3.
+        \item AVCHD (2006-current) to blu-ray video; these are the types of videos that do
+not have to be re-encoded if you do not want to edit anything.
+\end{itemize}
+For an explanation of the differences between HDV vs AVCHD see:
+  {\small \url{http://www.differencebetween.net/technology/difference-between-hdv-and-avchd}}
 
+Besides digital camcorder file-based format of AVCHD, there are video files in MTS format
+that are also candidates for burning to blu-ray video media without re-encoding.
+An MTS file is a video file saved in the high-definition (HD) MPEG Transport Stream video format/H264, commonly called \textit{AVCHD}.  It contains HD video compatible with Blu-ray video disc format and is based on the MPEG-2 transport stream.   MTS files are often used by Sony, Panasonic, Canon and other HD camcorders.  Legal input for Video -- MPEG1VIDEO, MPEG2VIDEO, H264; Audio -- MP1, MP2, AC3, AC3PLUS, DTS, TRUHD.
+
+For creating a blu-ray video disc, if you have these HD MPEG-2 media types that are in blu-ray video format, you can save the original quality of your work, rather than rendering it to another format.
+Note that for older media or media which used MP1 or MP2 audio codecs which will not work on
+blu-ray video discs, it may be necessary to first transcode the audio while leaving video intact.
+An example of the transcode line to use if using ffmpeg version 5.1 or higher is shown next.
+If using a lower ffmpeg version substitute ac3 for pcm\_bluray:
+
+\begin{lstlisting}[numbers=none]
+ffmpeg -i hdv -c:v copy -c:a pcm_bluray -mpegts_m2ts_mode 1 new_hdv.mts
+\end{lstlisting}
+
+Follow the next 2 sets of steps to create the  blu-ray video disc.
 \begin{lstlisting}[style=sh]
-du -sb /yourHDVfile.MTS		# Determine the size of your file in bytes.
-blocks=((size-in-bytes/2048 + 4096))	# Convert bytes into blocks + a little more.	
-mkudffs /tmp/newfilename.udfs blocks	# Create a file with that \# of blocks + some extra.
+du -sb /yourHDVfile.MTS         # Determine the size of your file in bytes.
+blocks=((size-in-bytes/2048 + 4096))    # Convert bytes into blocks + a little more.
+mkudffs -b 2048 /tmp/newfilename.udfs blocks    # Create a file with that \# of blocks + some extra.
 mount -o loop /tmp/newfilename.udfs /mntX          # Use a mount point like mntX that is not in use.
+\end{lstlisting}
+In order to create the udfs file, you will need access to Cinelerra's \textit{bdwrite} program.
+If you do not do your own build and compile, but use the AppImage instead, you will have to first
+extract \textit{bdwrite} from the AppImage as described in the NOTE at \ref{sub:managing_appimage}.
+\begin{lstlisting}[style=sh]
 /<cinelerra_installed_path>/bin/bdwrite /mntX /tmp/yourHDVfile.MTS   # Substitute \CGG{} path.
-umount /mntX				# You must unmount the udfs filesystem
+umount /mntX                            # You must unmount the udfs filesystem
 growisofs -Z /dev/bd=/tmp/newfilename.udfs   # Replace /dev/bd with your bluray hardware device.
 OR  dd if=/tmp/newfilename.udfs of=/dev/bd bs=2048000   # if using rewritable blu-ray; replace bd.
 \end{lstlisting}
@@ -582,7 +618,8 @@ Also, be sure to do a \texttt{mkdir bluray} in your \texttt{/home/name} director
 \label{sec:bluray_multiple_cinelerra_output}
 \index{BluRay!multiple output}
 
-Writing prepared multiple \CGG{} output files, \texttt{bd.m2ts}, to a single bluray disc is relatively easy to do but is not done automatically.  You can render all of the desired files via the Create BD menu, save each individual \texttt{bd.m2ts} file with a unique name, construct a Menu Title that reflects the contents of each of these files, then manually use a few commands to create a udfs file to be written to BD.
+Writing prepared multiple \CGG{} output files, \texttt{bd.m2ts}, to a single bluray video disc is relatively easy to do but is not done automatically.  You can render all of the desired files via the Create BD menu, save each individual \texttt{bd.m2ts} file with a unique name, construct a Menu Title that reflects the contents of each of these files, then manually use a few commands to create a udfs file to be written to blu-ray video media. If using AppImage, you will have to first extract the \textit{bdwrite} program as explained in the NOTE at \ref{sub:managing_appimage}.  You can
+use any other software program that works instead.
 
 Usage of the final preparation taken from the bdwrite program comments:
 
