@@ -224,3 +224,26 @@ To render, do not forget to uncheck the P (proxy) button in the main program win
 \paragraph{Note:} If our files have Jam-syncing timecodes, we can speed up the workflow (steps 4 - 15) with the simple command : \texttt{Tracks $\rightarrow$ Align Timecodes}.
 
 More info can be found in \nameref{sub:align_timecodes}.
+
+\section{Workflow with Keyframes and Plugins}%
+\label{sec:workflow_keyframes_plugins}
+
+One of the most powerful functions of \CGG{} is the use of keyframes, which can be managed and applied for virtually anything you can do in the timeline, for example using them with plugins. See \nameref{cha:keyframes} for their in-depth description. Since they can be used in many ways, including very sophisticated ones, we present a workflow that can serve as an approach to the basic operation of keyframes applied to plugins\protect\footnote{credit to DeJay.}.
+
+Effects keyframing only works on the effect you are using, they are independently set for each effect you have added.
+
+\begin{enumerate}
+	\item Put a multi-edits movie segment on the timeline, hit the \texttt{Ctrl-End} keys to get to the end and drag the effect(s) on to the whole timeline from the Resources window, then hit the \texttt{Ctrl-Home} keys to go to the beginning.
+	\item Enable keyframes autos button (\texttt{Generate keyframes while tweeking}) or hit \texttt{"j"}, make an adjustment to the effect and a keyframe will be generated automatically.
+	\item Move the cursor until it becomes an arrow at the junction with the next clip and left click to put the play cursor there.
+	\item Backspace one frame to the end of the first clip (hit \texttt{"4"} or \texttt{Alt-u} or click the \texttt{left frame reverse} transport button).
+	\item Adjust one parameter minutely and return it to its setting, one click on the mouse wheel rotation in each direction will do it, to set another keyframe which will hold the settings for the length of the clip. If you don't the settings will change as you adjust to set the next keyframe.
+	\item Go forward to the first frame of the next clip, reset the effect to set another keyframe, make any necessary adjustments.
+	\item Repeat as for the first clip and do that all the way down the segment. Remember to disable keyframes afterwards or you might inadvertently change settings while continuing to work.
+\end{enumerate}
+
+It is always best to use the File pulldown and the option \textit{Save As} after each operation e.g. Color Correction using (for instance) \texttt{Histogram}, \texttt{Saturation} and \texttt{Unsharp} plugins, then there is a point to return to if the next operation fails, or you want to make changes.
+
+The final result is to have the first clip with a given plugin setting; the next edit with other settings; and so on throughout the timeline. The advantage is that you have only used the plugin once instead of adding a plugin to each edit.
+
+It is preferable to put all the effects on the whole timeline and adjust them for each clip together, so you can see the overall result before moving on to the next clip. Effects are read from the top to the bottom of the stack and it is usually necessary to disable the effects lower down the stack while making adjustments. Using the example of Histogram, Saturation and Sharpen, disable Saturation and Sharpen while adjusting Histogram, or the Videoscope readings will be incorrect and so will the resulting settings, then enable Saturation and adjust that before moving to the next clip. Usually Sharpen is used as a \textit{track effect}, meaning you don't keyframe it for each clip, keeping it disabled until the rest is complete.
