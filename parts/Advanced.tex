@@ -5,39 +5,95 @@
 \label{sec:proxy}
 \index{proxy}
 
-Proxies was introduced to allow for a smoother timeline experience. Full HD and everything from 4K size up are usually very large in file size. In addition, some commonly used codecs (e.g. h264/5) are very compressed and interframe type, so they are more stressful for timeline playback. These files cause performance problems on weaker PCs. As a solution the developers have introduced proxies to reduce the file size. Reduced means to minimize the resolution/dimension, as usually not the full resolution is needed, because the compositor usually takes only a fraction of the computer screen. Therefore the scaling factor, which indicates how much the original resolution should be reduced. 
-There is also the \textit{proxy 1:1} \index{proxy!1:1} that maintains the original resolution but still allows you to act on the codec (lowering the bit rate, for example). See also next section: \ref{sec:transcode}.
-When we want to render the project, remember to remove the proxy to return to the original settings with the highest quality.  
+Proxies were introduced to allow for a smoother timeline experience. Full HD and everything from 4K size up are usually very large in file size. In addition, some commonly used codecs (for example h264/5) are very compressed and interframe type, so they are more CPU intensive for timeline playback. These files cause performance problems on smaller computers. As a solution, proxies were introduced to reduce the file size. Reduced means to minimize the resolution/dimension, as usually not the full resolution is needed because the compositor generally occupies only a fraction of the computer screen. The proxy provides a scaling factor which indicates how much the original resolution should be reduced. 
+There is also the \textit{proxy 1:1} \index{proxy!1:1} option that maintains the original resolution but still allows you to modify codec parameters (lowering the bit rate, for example). This is explained in the next section, \ref{sec:transcode}.
+Always remember when getting ready to render the project, disable Proxy to return to the original settings with the highest quality.  
 
-To use the proxy in a classic way, i.e. as a scaling, select \texttt{Settings $\rightarrow$ Proxy settings} and change the Scale factor from Original size to your downsized choice.  You can choose ffmpeg as the File Format \index{file format} and a choice of various codecs associated with that.  A good choice is the default of mpeg which can usually be quite fast.  In addition, to modify values for that codec, click on the wrench icon.
+To use proxy in a classic way, that is as a scaling, select \texttt{Settings $\rightarrow$ Proxy settings} and change the Scale factor from Original size to your downsized choice.  You can choose ffmpeg as the \textit{File Format} \index{file format} and for the \textit{File Type} a choice of various codecs associated with that.  A good choice for \textit{File Type} is the default of mpeg or mov which can usually be quite fast.  In addition you can modify values for that codec by clicking on the wrench icon.
 
-We can use the \textit{Proxy 1:1} in two ways: setting "1" as \textit{Scale factor}, or check the \textit{Rescaled to project size (FFMPEG only)}  button. In this mode we don't have scaling, i.e. downsize, but only variations of the codec parameters that allow to maintain the original resolution. The advantage is that you can use filters that require the original size to work well. Please note that if we set any scaling, by activating the \textit{Rescaled to project size (FFMPEG only)} button we automatically lose scaling and enter Proxy 1:1 mode. The size of your video is scaled down of the \textit{Scale factor} but, then, it is rescaled up to the project format. For example, your format project is $1920x1080$ and Proxy's Scale factor is $\frac{1}{4}$, then your videos will be scaled down to $480x270$ and then up-scaled to $1920x1080$. For an old computer, this option is not recommended.
+There are two main ways to use Proxy, with or without \texttt{Rescaled to project size} option checked. The options of the Scale factor may be different if Rescaled to project size is checked versus unchecked. It is a special case when the Scale factor is set to "1" and it does not  matter if Rescaled to project size is checked or unchecked.
 
-When you have completed your choices, just click OK, and then the video tracks will be rendered. This may take some time, but previous proxy renders will be reused.
+The usual steps to use Proxy are:
+\begin{enumerate}
+	\item Check that \textit{File Format} is set to \texttt{FFMPEG}.
+	\item Check or uncheck the \texttt{Rescaled to project size} (FFMPEG only). The difference with this option will be explained here \nameref{sub:rescaled_project_size_works}. But for old computers checking Rescaled to project size is not recommended. You need to know that when Rescaled to project size is unchecked some Effects/Plugins do not work as expected because they use pixel values instead of percentage values as is used in the Project Format. For example \texttt{Title}, \texttt{Blur}, \texttt{Sketcher} plugins do not work right if unchecked, while \texttt{Perspective} and \texttt{Crop\&Position} plugins work correctly for both checked and unchecked.
+	\item Choose the \textit{Scale factor}. The options may be different if Rescaled to project size is checked or unchecked. The smaller the Scale factor is, the smoother playing on the Timeline will be ($\frac{1}{8}$ is smaller than $\frac{1}{4}$), but on the Viewer/Compositor the image will be degraded/pixelated more.
+	\item Set the \textit{File Type} in the \textit{File Format} for FFMPEG, such as mp4, mpeg, or mov. Still images like jpg, tiff, and png will be converted to PNG files with alpha channel if it had an alpha channel.
+	\item Click on the wrench icon to configure video compression; just use the default values if you are unsure and prefer not to experiment.
+	\begin{enumerate}
+		\item Select the Compressor type (codec).
+		\item Change Bitrate, or Quality, and Pixels. Because not all codecs use the alpha channel for transparency, check that the letter "a" is in the Pixels name (such as yuva420p or rgba) to retain the alpha channel.
+		\item Click on the OK button to close the Compressor window.
+	\end{enumerate}
+	\item Now click on the \texttt{OK} button to start the rendering for the proxy.
+	\item Look in the lower right corner of the main window where there is a progress bar and a percentage value showing the progress of the creation of proxies, and in the lower left corner there is the \texttt{Creating proxy files... ETA: hh:mm:ss} text with the "estimated time of completion" in hours, minutes, seconds. Depending on how many files your project uses, the file size, which codec is used, the scale factor, and cpu performance, creating proxies may take some time.
+\end{enumerate}
 
-The proxy videos will be added to your assets in a separate Proxy folder \index{proxy!folder}, and the video track edits will use the proxies.
-The assets in both the Media folder and Proxy folder will look proxied when dragged to the Viewer although the scale may be different.
-Proxy downsizing renders all loaded tracks, but only work on the $1^{st}$ video layer of any multi-layer media.  Rendered proxy media is saved in the same directory as the original media.
-However, if you proxy your session, the clips do not get proxied to the Proxy folder, but if you Drag and Drop the clip from the Clip folder to the Viewer or the Timeline, you will see that it too is proxied.  
-As usual, you can delete proxy files from the project or disk in the Resources window if you no longer want to retain them.
-And you can save your project either as proxied or not.
+You will know that Proxy mode is enabled because:
+\begin{itemize}
+	\item A white colored \textbf{P} meaning \textit{Proxy}, or a white colored \textbf{S} meaning \textit{Proxy Scaled} icon is shown in the upper right corner of the main window to the left of the FF icon.  If using the Cakewalk or Neophyte theme it will be a \textbf{Ps} icon.
+	\item  The Proxy folder in the Resources window has been populated with the names and/or icons of the proxy media.
+	\item The track title bar in the timeline will have the name of the proxy file instead of the original name. So if the video filename is \texttt{VID\_20221012.mp4}, the Proxy Scale Factor is $\frac{1}{4}$, and the Proxy container is mov, then the proxy name will be \texttt{VID\_20221012.proxy4-mp4.mov}.
+\end{itemize}
 
-Because Proxy works on the original media in all circumstances, when you resize the
-media in the Resources window, it does not actually resize the media but puts it in
-a \textit{buffer} in that format. This might lead to some confusion for the user who
-expects this resizing to be maintained when disabling Proxy for that media. However,
-that does not happen because the resize is only in a buffer and not in the original
-media. This result is different than in the case of media \textit{edits}, like cuts or adding plugins because this information is not in a buffer but rather part of the
-copy \textit{Editing Decision List} (EDL).
+The Proxy icon is a toggle button so that you just click on the icon to change modes.  Or it can be toggled using the \texttt{Ctrl+R} shortcut. 
 
-You can also nest clips while in a proxied state, but you can not drag the proxied nested clips to the viewer or the timeline.
-If you create proxies for Nested clips they will be saved in \texttt{\$HOME/Videos} unless you modify that in
-\texttt{Settings $\rightarrow$ Preferences, Interface} tab, \textit{Nested Proxy Path}. 
+\begin{table}[ht]
+	\centering
+	\begin{tabular}{|p{2.5cm}|p{3.2cm}|p{3.2cm}| p{3.2cm}|}
+		\hline
+		\textbf{Proxy State} & \textbf{Rescaled to project size (FFMPEG only)} & \textbf{Proxy icon for themes:
+		Cakewalk/Neophyte} & \textbf{Proxy icon for themes: the Others}\\
+		\hline
+		Off & checked/ unchecked & no icon
+		 & no icon\\
+		\hline
+		Active (Enable) & checked & Ps: P(green)  s(white)
+		 & S (white)\\
+		\hline
+		Disable & checked & Ps: P(red)  s(white) & S (gray)\\
+		\hline
+		Active (Enable) & unchecked & Ps: P(green) s(red) & P (white)\\
+		\hline
+		Disable & unchecked & Ps: P(red) s(red) & P (gray)\\
+		\hline
+	\end{tabular}
+	\caption{Table: list States of the Proxy icon}
+\end{table}
 
-Let's examine in detail how Proxy and Proxy 1:1 modes work: when the proxy is done with downsize, the Mask, Camera and Projector automations are scaled accordingly. In this situation, the entire project will be re-sized so that the session is in the resized geometry. Not all plugins are useful when the project is scaled, because the keyframe data must be in the original geometry.  In this case, you can use the il Proxy 1:1, by enabling \textit{Scale factor}=1. This has the added advantage that the project size does not change. The main reason for using \textit{Proxy 1:1} is that it does not change the image coordinate data, so that automation and plugin parameters will be in the original project geometry (e.g. Title plugin).
+When you disable Proxy using the toggle button for Proxy, or its shortcut (\texttt{Ctrl+R}), in the Proxy Settings window you will see the \texttt{Scale Factor = 1}, but if you look at the Active Scale and the State, you can understand what your setting is.
+Proxy can have three possible States: Off, Active, Disabled. The difference between Off and Disabled is that Disabled means you have set the Proxy and it is temporarily switched off (and you can see the icon in the upper right corner of the main window); you can enable proxy by just clicking on the icon, so the State will then be changed from Disabled to Active.
 
-In the upper right hand corner of the main window, there is a toggle button to easily switch back and forth when you have a proxied file on the timeline.  The icon is to the left of the FF icon.  It will have the letter “Ps” as the icon for Proxy. \quad \includegraphics[height=\baselineskip]{proxy-01.png} \quad This quick switch is especially useful when editing and you need to see a better image temporarily.
-The "P" is green when the proxy is active and red when it is disabled. The "s" is white when in \textit{Proxy 1:1} mode and red when downsize.
+\subsection{How Rescaled to project size (FFMPEG only) works}%
+\label{sub:rescaled_project_size_works}
+
+\begin{itemize}
+	\item When \texttt{Rescaled to project size (FFMPEG only)} is checked, the size of the video data to be computed will always be the same as the Project Format. The size of your video is scaled down to the Scale factor BUT then it is rescaled up to the Project Format. For example, your Project Format is 1920x1080 and Proxy's Scale factor is $\frac{1}{4}$, then your videos ($1920x1080$) will be scaled down to 480x270 and then up-scaled to $1920x1080$. All the Effects/Plugins work correctly because the original resolution/geometry/size is not changed. For an old computer, this option is not recommended.
+	\item When \texttt{Rescaled to project size (FFMPEG only)} is UNchecked, the size of the video data to be computed will be reduced to the Scale factor. The size of your video is scaled down to the Scale factor. For example, your Project Format is 1920x1080 and Proxy's Scale factor is $\frac{1}{4}$, then your videos ($1920x1080$) will be scaled down to $480x270$. It works as if the Project Format were $480x270$ (and really it works). If you take a look at \texttt{Settings $\rightarrow$ Format...} when Proxy is enabled (Active), you can see that the Width and Height are changed according to the Scale factor; you absolutely must NOT change these values! The good thing is that your computer will be faster. The bad thing is that some Effects/Plugins do not work as expected because they use pixel units. Examples are \texttt{Title} and \texttt{Blur} plugins. A workaround is needed for that.
+\end{itemize}
+
+Note: the dimensions of the frame/image are downscaled to the Scale factor; so if the Scale factor is $\frac{1}{4}$ and the dimension of the image is $4288x2848$ pixels, that image will be downscaled to $1072x712$. It doesn't matter what the Project Format is.
+
+\subsection{Using proxy}%
+\label{sub:using_proxy}
+
+To insert a clip/video from Resources window to the Timeline when Proxy is enabled (Active) you MUST Drag \& Drop that clip/video from the Proxy folder instead of the Media folder, as well as for Nested clips. And also if you want to load the clip in the Viewer or Compositor. You can use clips in the Clips folder in any State of the Proxy - it does not matter if Proxy is enabled or disabled.
+
+Rendered proxy media is saved in the same directory as the original media. As usual, you can delete proxy files from the project or disk in the Resources window if you no longer want to retain them. You should always save your project with the Proxy disabled.
+
+If you create proxies for Nested clips they will be saved in \texttt{\$HOME/Videos} unless you modify that in \texttt{Settings $\rightarrow$ Preferences}, \texttt{Interface tab}, \texttt{Nested Proxy Path}. If you change anything in a Nested clip using the Open EDL feature, you must first delete its old proxy file from disk because it is not updated automatically, and then enable Proxy again so that a new one is created. 
+
+Not all the settings for Proxy are saved in the project: the values of Active Scale and the Rescaled to project size are saved but not the \textit{File Format}, \textit{File Type} and all video compression data. A good idea is to record this information in a README file about your project where you make a note of your Proxy settings for that project.
+If the \textit{Creation of proxy on media loading} option has been checked, then when you load other media later, proxies will be created for them automatically, or else you can change the Proxy's State from disabled to enabled (Active) using the Proxy icon. Previous proxy renders will be reused unless you change one of the following proxy parameters: \textit{Scale factor}, \textit{File Format}, or \textit{File Type}. If proxies have been created and then you decide to change only the Compression type (Codec, Bitrate, Quality, Pixels), without changing the Scale factor or Container, you must delete proxy files from the disk beforehand. That is because \CGG{} does not read the compression type; it does read the filename and if the filename does
+not change, \CGG{} thinks the proxy was already created.
+
+\subsection{Scale factor set to 1, a special case}%
+\label{sub:scale_factor_special_case}
+
+This special case is used to temporarily change the codec parameters of your video while maintaining the original resolution - for example maybe your videos use long-GOP or the video codec is too hard to handle due to a strong compression. It does not matter if Rescaled to project size is checked or unchecked. For old computers, or underpowered computers, this option is not recommended.
+
+\subsection{Setting the proxy}%
+\label{sub:setting_proxy}
 
 \begin{figure}[htpb]
 	\centering
@@ -46,13 +102,13 @@ The "P" is green when the proxy is active and red when it is disabled. The "s" i
 	\label{fig:proxy-02}
 \end{figure}
 
-Screencast in figure~\ref{fig:proxy-02} shows the use scaled checked so you can still use plugins and the original project size is kept.  The Scale factor pull-down gives you available size options.  Note the new media dimensions shown (partially covered).  If the size is an odd number, 1 is added to make the dimensions both even numbers.
+Screencast in figure~\ref{fig:proxy-02} shows the \textit{Rescaled to project size} checked so you can still use plugins correctly and the original project size is kept.  The Scale factor pull-down gives you available size options.  Note the new media dimensions shown (partially covered).  If the size is an odd number, 1 is added to make the dimensions both even numbers.
 
-To go back to the original media for good, simply take the Scale factor to Off. However, if we decide to reuse the proxies, these, which have not been deleted from the Hard Disk but only from the project, will still be used without making new rendering. To completely cancel the created proxies we will have to delete them manually from the Hard Disk.
+To go back to the original media permanently, simply set the Scale factor to Off or disable the Proxy by clicking on its toggle button. However, if you decide to reuse the proxies, those which have not been deleted from the Hard Disk (but have been removed from the project) will be used without re-rendering - this saves a lot of time. To completely remove the created proxies you will have to delete them manually from the Hard Disk.
 
-There is also a convenient \textit{Beep on done volume} bar included so that you can work on other tasks until there is an audible notify of completion.  The default volume is set to 0 for no audible notify.
+There is also a convenient \textit{Beep on done volume} slider included so that you can work on other tasks until there is an audible notify of completion.  The default volume is set to 0 for no audible notify.
 
-A good choice for classic proxy settings with 1080p source video is:
+A good choice for classic proxy settings with a 1080p source video is:
 
 \begin{lstlisting}[numbers=none]
 Scale Factor: 	1/4
@@ -72,22 +128,18 @@ Video Preset:
 Compression:	mov.mov
 \end{lstlisting}
 
-Or if you want small files with high image quality, a File Format of \texttt{m2ts} is optimal.  For example a 1 GB file can be reduced to 50 MB with scale $\frac{1}{2}$. 
+Or if you want small files with high image quality, a \textit{File Format} of m2ts is optimal.  For example a 1 GB file can be reduced to 50 MB with scale $\frac{1}{2}$. 
 
-Checking the \textit{Creation of proxy on media loading} results in any additional media loads to be automatically proxy scaled.  However, single frame media such as PNG or JPEG \textit{stills}, can not be scaled to \textit{stream} media.  If this type of media exists, you should \textit{Proxy 1:1}.
-
-If you get error messages \index{proxy!error} when creating proxies, check the Video wrench settings.  These usually default to values that are expected to work correctly for the \textit{File Format} and codec you selected but they can be changed and may result in errors.  If you get an error message of \textit{check\_frame\_rate failed} followed by \textit{Error making proxy} in the popup Errors window, do just that and check the Frame rate value by going to the Resources window, Media folder, and use the right mouse button for the Info option for that specific media in question.  You can change the frame rate in this window to a more codec acceptable value.  Different codecs may have different legal values.
-
-More specific information on which plugins need to use \textit{Proxy 1:1}. is provided here next. If the keyframe data uses coordinate data that is absolute, then the Factor scale = 1 should be used.  If the data is normalized (like always $0-100\%$) then the proxy can be done with downsize (i.e. classic \textit{Proxy}).  The session geometry format, shown in \texttt{Settings $\rightarrow$ Format} as $width \times height$, is changed if scale factor $\neq$ 1 is used to cause all of the data to be in the reduced format.  If this affects the plugin operation, then \textit{Proxy 1:1} should be used.  Examples of plugins that need the \textit{Proxy 1:1} are: Title, AutoScale, Scale, ScaleRatio, and Translate.  Most others are safe to use with downsize.
+If you get error messages \index{proxy!error} when creating proxies, check the Video wrench settings.  These usually default to values that are expected to work correctly for the \textit{File Format} and codec you selected but they can be changed and may result in errors.  If you get an error message of \textit{check\_frame\_rate failed} followed by \textit{Error making proxy} in the popup Errors window, do just that and check the Frame rate value by going to the Resources window, Media folder, and use the right mouse button for the \textit{Info} option for the specific media in question.  You can change the frame rate in this window to a more codec acceptable value.  Different codecs may have different legal values.
 
 A faster method of creating the proxy file outiside of \CGG{} for users who have
 vaapi hardware acceleration capability on their graphics board is via a script.  Speed
 up could potentially be 10 to 30 times faster depending on the parameter values you choose
 and the size of your video file.  This script is included in the doc subdirectory as 
-vaapi\_proxy.sh for users not using an AppImage version and is shown below.  You will
+\texttt{vaapi\_proxy.sh} for users not using an AppImage version and is shown below.  You will
 have to tune it to your specific needs for the vaapi\_device name (currently set to
-/dev/dri/renderr128), file type (currently set to h264 and mp4), and proxy size (now is 6). 
-Once you have created the proxy file, you then start Cinelerra, load the original un-proxied
+\texttt{/dev/dri/renderr128}), file type (currently set to h264 and mp4), and proxy size (now is 6). 
+Once you have created the proxy file, you then start \CGG{}, load the original un-proxied
 video, use the Settings pulldown and choose the Proxy settings options as you would normally,
 but because you already have created the existing proxy file with the correct name, it will
 be automatically loaded and will not have to create it.  The filename of the proxy file
@@ -178,7 +230,7 @@ The process of transcoding works directly from the resource; it is independent o
 All of the loaded asset media will be converted, that is, rendered in the selected format and loaded onto the timeline. 
 Menu choices besides the usual File Format \index{file format} and File Type include: \textit{Tag suffix} (to add to media filename), \textit{Remove originals from project}, \textit{Into Nested Proxy directory} (an option to have the file saved here instead of the location of the original media), and \textit{Beep on done} volume.
 
-The settings of the project have an effect, for example the dimensions are taken into account. The resulting files are also larger than if they were created directly with ffmpeg.
+The settings of the project have an effect on the outcome, for example the dimensions are taken into account. The resulting files are also larger than if they were created directly with ffmpeg.
 Transcode works for videos with or without audio and even single frame files, like png's.
 If you have a video file that also contains audio, and you convert only the video, the original audio will stay on the timeline if do not check \textit{Remove originals from project}. Or vice versa if audio converted and not video.
 Multiple stream media will only transcode the first stream (this would be like the TV channel recordings in the United States).
