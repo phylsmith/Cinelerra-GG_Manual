@@ -205,7 +205,7 @@ Start \CGG{} to create an empty video track and two audio tracks (default). If y
 	\item In the align mixer dialog select first \textit{adjust}. Wait for the program do its work. You can see the progress bar at the bottom right of the main window.
 	\item Check the correctness of the alignment from column \textit{R}; the values of the various tracks must be close to 1. Then click on the \textit{apply} button. The tracks will move to the right and align.
 	\item In the main timeline in the audio 9 track, click on the \textit{Play Track} button that is beside the \textit{Arm track} button to enable it (if it is not already). Then enable audio and you can hear the audio while editing.
-	\item Position the windows mixers in a position you are comfortable with and next in the main window move the cursor to the beginning of the timeline. We can also resize the Mixers windows to your liking.
+	\item Position the windows mixers in a position you are comfortable with and next in the main window move the cursor to the beginning of the timeline. You can also resize the Mixers windows to your liking.
 	\item Click on play (space bar) and stop when you want to insert the portion of the track you want in the main track. You do this by double clicking in the mixer.
 	\item Go on starting, stopping and double clicking to insert new portions of the clips in the main track.
 	\item When you finish, arm only the main video track and your main audio 9 track.
@@ -228,7 +228,7 @@ More info can be found in \nameref{sub:align_timecodes}.
 \section{Workflow with Keyframes and Plugins}%
 \label{sec:workflow_keyframes_plugins}
 
-One of the most powerful functions of \CGG{} is the use of keyframes, which can be managed and applied for virtually anything you can do in the timeline, for example using them with plugins. See \nameref{cha:keyframes} for their in-depth description. Since they can be used in many ways, including very sophisticated ones, we present a workflow that can serve as an approach to the basic operation of keyframes applied to plugins\protect\footnote{credit to DeJay.}.
+One of the most powerful functions of \CGG{} is the use of keyframes, which can be managed and applied for virtually anything you can do in the timeline, for example using them with plugins. See \nameref{cha:Keyframes} for their in-depth description. Since they can be used in many ways, including very sophisticated ones, we present a workflow that can serve as an approach to the basic operation of keyframes applied to plugins\protect\footnote{credit to DeJay.}.
 
 Effects keyframing only works on the effect you are using, they are independently set for each effect you have added.
 
@@ -247,3 +247,52 @@ It is always best to use the File pulldown and the option \textit{Save As} after
 The final result is to have the first clip with a given plugin setting; the next edit with other settings; and so on throughout the timeline. The advantage is that you have only used the plugin once instead of adding a plugin to each edit.
 
 It is preferable to put all the effects on the whole timeline and adjust them for each clip together, so you can see the overall result before moving on to the next clip. Effects are read from the top to the bottom of the stack and it is usually necessary to disable the effects lower down the stack while making adjustments. Using the example of Histogram, Saturation and Sharpen, disable Saturation and Sharpen while adjusting Histogram, or the Videoscope readings will be incorrect and so will the resulting settings, then enable Saturation and adjust that before moving to the next clip. Usually Sharpen is used as a \textit{track effect}, meaning you don't keyframe it for each clip, keeping it disabled until the rest is complete.
+
+\section{Create a frame for a PiP}%
+\label{sec:create_frame_pip}
+
+In  \CGG{} it is quick and easy to create \textit{Picture-in-Picture} (PiP) using the Camera and Projector tools. You can read about how to use these at \nameref{sub:camera_and_projector}.
+
+PiPs created with Camera and Projector, however, do not have a frame. You can add it with the \textit{Sketcher} plugin that allows for drawing on the canvas of the Compositor window. Such a frame remains fixed in the position where it was created  and can only be moved manually, with a movement that must be in accordance with the movement of the PiP. Unfortunately, this is very complicated and imprecise work.
+A convenient workaround is to use the \textit{Sketcher} plugin together with the \textit{Crop\&Position} plugin. Here is a description of how to do this.
+
+Consider an example of a main video (\texttt{bbb\_sunflower\_1080p\_30fps\_ normal.mp4}) and a still image example (\texttt{Rodents.png}). You want to insert a crop of the image surrounded by a colored frame inside the video. Later you can move the PiP with its frame by using keyframes.
+
+\begin{enumerate}
+        \item First, create a project with 3 video tracks. From top to bottom name them: \texttt{V3\_Frame 4Picture}, \texttt{V2\_Picture}, \texttt{V1\_Video}.
+        \item In V1\_Video put the video file. In V2\_Picture put the image (extending it to the length of the video by simply dragging the right edge) - or you can put another video instead of a still image. The V3\_Frame4Picture track is left empty.
+        \item In V2\_Picture, if needed put the \textit{Scale} plugin, and then 2 separate \textit{Crop\&Position} plugins. The \textit{Scale} plugin may be needed to scale the image -  maybe to use it with the Camera tool, however it is not needed for the creation of the frame and PiP. Depending on its use, you can put it in the first or second position in the plugin stack. The first \textit{Crop\&Position} plugin (the topmost one, which is processed first in \textit{Temporary} and whose output becomes the input to the next plugin) will be used only to make the desired crop for our image (Crop Only). The second \textit{Crop\&Position} plugin will be used to place the PiP in the desired position (Position Only).
+        \item In V3\_Frame4Picture, select the length of the video track and apply the \textit{Sketcher} plugin. Either highlight the region in which to apply the plugin or assign \textit{In/Out Points}, because you can not add plugins to an empty track. Now add the \textit{Shared Effects} of the \textit{Crop\&Position} plugin, taking care to choose the second plugin (Position Only) which is further down the stack (for shared effects see: \nameref{sec:shared_effect_tracks}).
+\end{enumerate}
+
+This is what the timeline should look like:
+
+\begin{lstlisting}[numbers=none]
+        - V3_Frame4Picture
+                -> Sketcher
+                -> Shared V2_Picture:Crop&Position (Position ONLY)
+        - V2_Picture
+                -> Rodents.png
+                -> Crop&Position (Crop ONLY)
+                -> Scale
+                -> Crop&Position (Position ONLY)
+        - V1_Video
+                -> bbb_sunflower_1080p_30fps_normal.mp4
+\end{lstlisting}
+
+
+as you can see in figure~\ref{fig:Frame_on_PiP}.
+
+\begin{figure}[htpb]
+        \centering
+        \includegraphics[width=1.0\linewidth]{Frame_on_PiP.png}
+        \caption{Setting effects}
+        \label{fig:Frame_on_PiP}
+\end{figure}
+
+All that remains is to create the frame on the image that has already been cropped to the desired size. Drawing the frame with the \textit{Sketcher} plugin is not difficult but requires precision. You can draw the 4 corner points imprecisely (\texttt{Shift + LMB}) and then arrange the created points by dragging them to exactly the right coordinates (\texttt{Ctrl+LMB}), or you can impose the coordinates on the 4 corner points by entering the exact numbers in the \texttt{X} and \texttt{Y Input} windows. You can also adjust the thickness of the frame and the color (see \nameref{sub:Sketcher}).
+
+If you want to move the PiP to another position you have to go back to \textit{Crop\&Position} (Position Only) and change the coordinates.  Now you can see that the frame also moves along with the image thanks to the Shared effect present in the V3\_Frame4Picture track, which returns the same coordinates to the \textit{Sketcher} plugin.
+
+Finally, you can animate the position of the PiP as well as the thickness and color of the frame throughout the video using the keyframes (see \nameref{cha:keyframes}).
+
