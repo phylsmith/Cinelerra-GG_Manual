@@ -470,7 +470,10 @@ It comes back with the routine as:
 \label{sec:valgrind_support_level}
 \index{build!valgrind}
 
-Valgrind is a memory mis-management detector.  It shows you memory leaks, deallocation errors, mismanaged threads, rogue reads/writes, etc.  \CGG{} memory management is designed to work with Valgrind detection methods.  This assists in developing reliable code.  Use of Valgrind points out problems so that they can be fixed.  For example, when this version of \CGG{} shuts down, it deallocates memory instead of just stopping, thus making memory leak detection possible.
+Valgrind is a memory mis-management detector.  It shows you memory leaks, deallocation errors, mismanaged threads, rogue reads/writes, etc.  \CGG{} memory management is designed to work with Valgrind detection methods.  This assists in developing reliable code.  Use of Valgrind points out problems so that they can be fixed.  For example, when this version of \CGG{} shuts down, it deallocates memory instead of just stopping, thus making memory leak detection possible.  An alternative to Valgrind is
+\textit{heaptrack} which has good documentation and for large programs can run
+faster.  You can find the source and information about it at {\small\url{https://github.com/KDE/heaptrack}}.
+\index{valgrind!heaptrack}
 
 The best way to compile and run valgrind is to run the developer static build. This takes 2 steps and you must already have gdb and valgrind installed:
 
