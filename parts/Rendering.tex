@@ -999,7 +999,9 @@ the \texttt{Preferences} window. It has one interactive function
 sets the point where background rendering starts up to the position
 of the insertion point. If any video exists, a red bar appears in
 the time ruler showing what has been background rendered
-(figure~\ref{fig:back-ren02}).
+(figure~\ref{fig:back-ren02}).  Because this creates a very large number 
+of files, a Shell Command script is available to delete them if in the
+default location.
 
 \begin{figure}[htpb] \centering
   \includegraphics[width=1.0\linewidth]{back-ren02.png}
@@ -1038,7 +1040,10 @@ rates (figure~\ref{fig:back-ren}).
   created, ls commands will not work in the background rendering
   directory. The browse button for this option normally will not work
   either, but the configuration button for this option works. The
-  default value will be /tmp/brender .
+  default value will be /tmp/brender .  Because using background
+  rendering creates a voluminous number of brender numbered files,
+  a Shell Command script is available to delete them if they are
+  in the default /tmp/brender format.
 \item[File format] The file format for background rendering has to
   be a sequence of images. The format of the image sequences
   determines the quality and speed of playback. JPEG generally works
