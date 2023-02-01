@@ -549,7 +549,7 @@ keyboard shortcut.  The keyboard shortcut is in parenthesis here.
 
 \begin{description}
 \item [Split | Cut] (x) Delete the selected area and put it in
-  the cut buffer for future pasting.
+  the cut buffer for future pasting. If a cut is made on the \textit{Insertion Point} only, without selecting a region, \textit{hard edges} are created.
 \item[Copy] (c) Copy the selected area and put it in the cut
   buffer for future pasting.
 \item[Paste] (v) Paste the material that is in the cut buffer.
@@ -630,7 +630,7 @@ on the place you want to do a cut and then using the character “x”
 or the scissors tool (figure~\ref{fig:cut}).
 
 \begin{wrapfigure}[16]{O}{0.3\linewidth}
-  \vspace{-2ex}
+  \vspace{2ex}
   \centering
   \includegraphics[width=0.9\linewidth]{cut.png}
   \caption{Blade cut}
@@ -669,6 +669,7 @@ you can see an arrow pointing to the corner.  Use Shift-left mouse
 button 1 to toggle off/on the hard edge marker on all tracks
 simultaneously.
 
+\paragraph{NOTE:} Hard Edges do not allow trim operations. For more details see: \nameref{sec:trimming}.
 
 \section{Drag and Drop Editing}%
 \label{sec:drag_drop_editing}
