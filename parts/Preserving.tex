@@ -1,0 +1,625 @@
+\chapter{Overview}%
+\label{cha:camcorders}
+
+This document describes the methods used to achieve a "backup type" or intermediate codec
+for non-edited source video camcorder formats, compatible with and viewable on Bluray hardware players. After you have
+moved your camcorder media onto a computer disk, you can with some extra effort, transfer them for safekeeping and
+longer term storage on simple viewable Blu-ray video discs. 
+
+Transferring camcorder media to digital files on a computer, and next to optical Blu-ray video media is especially
+important for legacy tape-based camcorders, because tape will degrade over time. You can do this using a combination of
+free tools on Linux, generic and independent of any NLE. 
+
+In this case we use and keep interlaced video as on the source or digitized video (PAL 50i, 25 fps) for both DV and HDV
+formats.  As confirmed by the ffmpeg output below, DV uses 25 Mbps data rate (DV25), is Standard Definition (SD),
+resolution 720{\texttimes}576, 8 bits color depth 4:2:0, display aspect ratio (DAR) 4:3 while HDV is High Definition HD video,
+resolution 1440{\texttimes}1080, DAR 16:9, 8 bits color depth 4:2:0. 
+
+We utilize or keep relative low MPEG-2 video compression at the same bit-rate 25 Mbps as the original video recorded
+onto the source tapes. That is about 13 GB per hour video and audio in total, and about 3 hours playtime with 40 GB
+BD-video size (of max 46.5 GB) on each 50 GB BD-R DL Blu-ray disc. Audio is transcoded to uncompressed LPCM compatible
+with BD-video. 
+
+In this how-to we combine \textbf{ffmpeg}, \textbf{tsMuxeR} and \textbf{xorriso} to create the MTS-video stream, to
+create the Blu-ray ISO image, and to burn the image to Blu-ray video disc. The benefit of using tsMuxer here, is its
+support of UDF version 2.50 as required by the Blu-ray video standard. Listed next are the possible camcorder video formats on Blu-ray video discs.
+
+\begin{itemize}
+\item \textbf{DV} (1995) transfer to SD-blu-ray video (re-encoding video to mpeg2, re-encoding DV LPCM audio to Blu-ray LPCM) 
+\item \textbf{HDV} (2004) transfer to blu-ray video (copying mpeg2 video, re-encoding MP2 audio to Blu-ray LPCM or AC3) 
+\item \textbf{AVCHD} (2006-current) transfer to Blu-ray video (copying H.264 video and AC3 audio)
+\end{itemize}
+
+An alternative method as described in the CinGG manual, is to use \textit{mkudffs} and \textit{bdwrite} packaged with CinGG, to create the udfs image and burn it to Blu-ray disc using \textit{growisofs} or \textit{dd}. \\
+{\small \url{https://cinelerra-gg.org/download/CinelerraGG\_Manual/Creating\_Blu\_ray\_Without\_Re.html}}
+
+There are other methods described on the internet and there are alternatives to the software programs used here that work as well. 
+
+\chapter{Video recording formats}%
+\label{cha:recording}
+
+A description of the most common video recording formats for consumer and prosumer equipment; camcorders, analog video
+cassette recorders (VCR decks), digital video hard disc recorders, and optical disc recorders (DVD, Blu-ray).
+
+\section{\textbf{Analog video} (legacy) onto magnetic tape cassettes}%
+\label{sec:analog}
+\settocdepth{subsection}
+
+\subsection{\textbf{VHS (1976), VHS-C (1982), and Video8 (1984)}}%
+\label{sub:vhs1976}
+
+%
+% WARNING - the next line will change it for every list for rest of document
+%
+\setlist{noitemsep}
+\begin{itemize}
+\item Composite Audio/Video is encoded on one channel with maximum horizontal resolution 240 (250) dots (or visually
+resolvable vertical picture lines) for VHS/VHS-C and 280 dots for Video8 (2.7MHz video bandwidth).
+\item In comparision, horizontal resolution bandwidth for PAL broadcast: 5.0-5.5 MHz, NTSC: 4.2 MHz.
+\item It is the horizontal resolution that makes the big difference in picture quality since all video formats have the
+same number of vertical resolution (or visible horizontal scan lines); always 576 for PAL/SECAM and 486 for NTSC.
+\item RCA (phono) connectors: yellow for composite video, red and white for left and right audio signals.
+\item 21-pin SCART Euro connector with optional RCA adapter.
+\item Magnetic tape media in full size VHS (1/2") cassettes, VHS-C (1/4") compact and 8\ mm cassettes.
+\item Cassette adapters to playback compact VHS-C cassettes on full size VHS decks/players.
+\end{itemize}
+
+\subsection{SVHS (Super VHS, 1987), SVHS-C (-Compact, 1987) and Hi8 (1989)}%
+\label{sub:svhs1987}
+
+\begin{itemize}
+\item S-Video (separate video, Y/C) encodes video \href{https://en.wikipedia.org/wiki/Luma\_(video)}{luma}
+(brightness/contrast/black\&white) and
+\href{https://en.wikipedia.org/wiki/Chrominance}{chrom}\href{https://en.wikipedia.org/wiki/Chrominance}{a} (color) on
+two separate channels, achieving higher image quality and amount of picture details over composite video.
+\item Max visible horizontal resolution is 400 dots for SVHS/SVHS-C and 440 dots for Hi8 systems on high-end VCR
+machines (4.5 MHz decks). In practice consumer/prosumer camcorder recordings quality vary from about 330-350 dots
+horizontal resolution (3.5MHz), which is equivalent to analog TV set quality.
+\item 4-pin mini-DIN S-video connector for Y/C video, red and white RCA line connectors for left and right audio;
+optional SCART Euro adapter with 4-pin video and RCA audio connectors.
+\item In comparision, analog Component video (three component YPbPr) has the highest color resolution and is encoded
+over three channels with green, blue and red RCA connectors (consumer) or with BNC connectors (prosumer), additional red
+and white phono line connectors for audio.
+\end{itemize}
+
+\section{\textbf{Digital video}}%
+\label{sec:digital}
+
+\subsection{\textbf{DV (1995), Digital8 (1999)}}%
+\label{sub:dv1995}
+
+\begin{itemize}
+\item DV refers to a family of codecs and tape formats used for storing digital video, especially on MiniDV cassettes, the most popular tape format, or on Digital8 cassettes using a DV codec. 
+\item DV codecs are still sometimes used when dealing with legacy standard definition SD video:
+ \newline\hspace*{.5cm}PAL:  625i50, 720 {\texttimes} 576 frame size, 25 fps, 8 bit 4:2:0 subsampling
+ \newline\hspace*{.5cm}NTSC: 525i60, 720 {\texttimes} 480 frame size, 30 fps, 8-bit 4:1:1 subsampling
+\item The same frame size is used for 4:3 and 16:9 frame aspect ratios, resulting in different pixel aspect ratios for
+fullscreen and anamorphic widescreen video.
+\item DV uses lossy, DCT algorithm intraframe video compression 5:1 on a frame-by-frame basis.
+\item Audio almost exclusively is stored as 16-bit LPCM at 48 kHz sampling rate, 1.5 Mbit/s stereo.
+\item Data rate is about 25 Mbit/s for video, thus DV25, and an additional 1.5 Mbit/s for PCM audio. 
+\item Total stream is 29 Mbps, or 3.6 MiB/s. The information output is approximately 200 MiB per minute, 12 GiB or 13 GB
+per hour playtime.
+\item DV camcorders and decks have IEEE 1394 (FireWire, i.LINK) ports for digital video transfer. 
+\item \textbf{DV50} (Digital-S or D-9 and DVCPRO50) is a 50 Mbit/s variant of DV with improved 4:2:2 chroma subsampling and 3.3:1 compression.  This in effect cuts total record time of any given storage medium in half compared to DV25. 
+\item DV was strongly associated with the transition from analog to digital desktop video production.
+\item Digital8 equipment recorded in DV format only, but usually could playback Video8 and Hi8 tapes as well, and were
+also capable to do analog to digital video conversion during playback. 
+\item Most (but not all) modern digital camcorders provided an analog-to-digital
+"passthrough" capability. This feature fed an analog input signal (usually via S-Video,
+sometimes RCA) into the camcorder and output a standard DV signal. The camcorder converts the analog signal on-the-fly
+using a hardware encoder. The input device could be your old analog camcorder (playing 8\ mm or Hi8 tapes), a VHS/VHS-C
+video player, to convert analog to digital output via Firewire \textbf{dv} file extension.
+\end{itemize}
+
+\subsection{\textbf{DVD-Video} (1996)}%
+\label{sub:DVD-Video}
+
+DVD-Video discs are intended for full-length movies and offer a range of features including the following:
+\begin{itemize}
+\item Playing time: a nominal 133 minutes playing time for DVD-5 or each side of a DVD-10 and 240 minutes for DVD-9 using opposite track path format. In practice playing times are often reduced in favour of improved quality.
+\item Video encoding: MPEG-2 (\href{mailto:MP@ML}{MP@ML}) or MPEG-1.
+\item Audio Quality and Languages: Dolby Digital, DTS, MPEG-2 or Linear PCM audio for up to 5.1 channel surround sound.
+\end{itemize}
+
+\begin{itemize}
+\item To record digital video, DVD-Video uses \href{https://en.wikipedia.org/wiki/H.262/MPEG-2\_Part\_2}{H.262/MPEG-2 Part
+2} compression at up to 9.8~Mbit/s, maximum of 10.08 Mbit/s can be split amongst audio and video. DVD-Video supports
+video with a \href{https://en.wikipedia.org/wiki/Color\_depth}{bit depth} of 8 bits per color, encoded as
+\href{https://en.wikipedia.org/wiki/YCbCr}{YCbCr} with 4:2:0
+\href{https://en.wikipedia.org/wiki/Chroma\_subsampling}{chroma subsampling}. The H.262/MPEG-2 Part 2 format supports
+both interlaced and progressive scan content.
+\item As for lines of horizontal resolution, DVD has about 500. In analog output signal terms, typical luma frequency
+response maintains 53/145 full amplitude to between 5.0 - 5.5 MHz. This is below the 6.75 MHz native frequency of the
+MPEG-2 digital signal. Chroma frequency response is one-half that of luma.
+\end{itemize}
+
+The following formats are allowed for H.262/MPEG-2 Part 2 video:
+\begin{itemize}
+\item At a display rate of 25 frames per second, interlaced or progressive scan (commonly used in regions with 50 Hz
+image scanning frequency, compatible with analog 625-line PAL/SECAM):
+ \begin{adjustwidth}{.5cm}{0cm}
+ 720 {\texttimes} 576 pixels (D-1 resolution, 4:3 fullscreen or 16:9 anamorphic widescreen aspect ratio)
+ \end{adjustwidth}
+\item  At a display rate of 29.97 frames per second, interlaced or progressive scan (commonly used in regions with 60 Hz
+image scanning frequency, compatible with analog 525-line NTSC):
+ \begin{adjustwidth}{.5cm}{0cm}
+ 720 {\texttimes} 480 pixels (D-1 resolution, 4:3 or 16:9)
+ \end{adjustwidth}
+\end{itemize}
+
+The official allowed formats for the audio tracks on a DVD-Video are:
+ \begin{itemize}
+ \item PCM: 48 kHz or 96 kHz sampling rate, 16 bit or 24 bit Linear PCM, 2 to 6 channels, up to 6,144 kbit/s; N. B.
+16-bit 48 kHz 8 channel PCM is allowed by the DVD-Video specification but is not well supported by authoring
+applications or players.
+ \item  AC-3: 48 kHz sampling rate, 1 to 5.1 (6) channels, up to 448 kbit/s.
+ \item  MP2: 48 kHz sampling rate, 1 to 7.1 channels, up to 912 kbit/s.
+ \item  DTS: 48 kHz or 96 kHz sampling rate; channel layouts = 2.0, 2.1, 5.0, 5.1, 6.1; bitrates for 2.0  and 2.1 =
+377.25 and 503.25 kbit/s, bitrates for 5.x and 6.1 = 754.5 and 1509.75 kbit/s.
+\item File system.\\
+\item Almost all DVD-Video discs use the UDF bridge format, which is a combination of the DVD MicroUDF (a subset of UDF
+1.02) and ISO 9660 file systems. The UDF bridge format provides backwards compatibility for operating systems that
+support only ISO 9660. Most DVD players read the UDF filesystem from a DVD-Video disc and ignore the ISO9660
+filesystem.  
+\end{itemize}
+
+\subsection{\textbf{HDV (2003)}}%
+\label{sub:HDV2003}
+
+\begin{itemize}
+\item HDV was a successor format to DV with an updated video codec, and used the same MiniDV cassette format, optional
+specifically for HDV recording on tape with reduced drop-out rate.
+\item Some manufacturers offered on (larger) camera hard disk recording units capable of recording HDV both onto tape
+and/or onto file-based media via FireWire connection. 
+\item HDV camcorders can typically switch between HDV/MP2 and SD-DV/PCM recording modes.
+\item HDV 1080i with horizontal resolution 1440 is twice the 720 resolution of DV and DVD, and the perceived
+sharpness with HDV is much higher when scaled up to full HD (TV) resolution.
+\end{itemize}
+
+\begin{tabular}{ll}
+------------------- \\
+{\textbullet}\textbf{HDV 1080i} specification (HD2): & \textbf{HDV 720p} specification (HD1): \\
+{\textbullet} 1080/ 50i (PAL), 1080/ 60i (NTSC) &  720/25p, 720/50p,720/30p, and 720/60p \\
+{\textbullet} 1440 {\texttimes} 1080, anamorphic pixels 4:3=1.33 & 1280 x 720, Pixel aspect ratio 1.0  \\ 
+{\textbullet} 16:9 Display aspect ratio & 16:9 Display aspect ratio \\
+\hspace*{.5cm} - 720{\texttimes}480/ 60i  (SD-DV 4:3 og 16:9) \\
+\hspace*{.5cm} - 720{\texttimes}576/ 50i  (SD-DV 4:3 og 16:9) \\
+{\textbullet} MPEG-2 interframe GOP (\href{mailto:MP@H-14}{MP@H-14}) & MPEG-2 (\href{mailto:MP@H-14/HL}{MP@H-14/HL}) \\
+{\textbullet} 8 bit color depth 4:2:0 subsampling & 8 bit color depth 4:2:0 subsampling \\
+{\textbullet} 25 Mbps data rate after compression (20:1) & 19.4 Mbps data rate after compression \\
+{\textbullet} MP2/MPEG-1 Audio Layer II & MP2/MPEG-1 Audio Layer II \\ 
+{\textbullet} Stereo (2-ch), 384 kbps & Stereo (2-ch), 384 kbps \\
+{\textbullet} A/V out: HDMI, Component, S-video/RCA\ &  A/V out: HDMI, Component, S-video/RCA \\
+{\textbullet} IEEE 1394 (MPEG-2-TS) stream interface & IEEE 1394 (MPEG-2-TS) stream interface \\
+{\textbullet} M2T file extension & M2T file extension
+\end{tabular}
+
+\subsection{\textbf{AVCHD (2006-current)}}%
+\label{sub:AVCHD}
+
+\begin{itemize}
+\item AVCHD stands for \textit{Advanced Video Coding High Definition}, in particular, \textit{MPEG-4 Part 10:
+AVC/H.264}. The intent of the H.264/AVC project was to create a standard capable of providing good video quality at
+substantially lower bit rates than previous standards (i.e., half or less the bit rate of MPEG-2, H.263, or MPEG-4 Part
+2). \\ 
+\item AVCHD is a file based format for digital camcorders to record and playback 1080i and 720p HD-video onto certain
+random access media. Memory cards, thumb drives, and HDDs use the FAT file system. This highly compressed video allows for
+recording long videos in high definition.\\
+\item AVCHD was originally a simplified version of the Blu-ray standard to enable DVD and BD-based camcorders.
+Recordable optical discs use UDF or ISO9660 derived from the Blu-ray disc specification. For example, it utilizes a
+legacy 8.3 file naming system while Blu-ray disc uses long filenames. \\
+\item MTS file extension changes to M2TS when MTS recorded data is transferred to the computer for storing the video in
+a Blu-ray disc. \\
+\item Playback is possible on an AVCHD-compatible Blu-ray Disc player/recorder, DVD player/recorder, or PlayStation 3, 
+the 8 cm DVDs (discs recorded in AVCHD) you have recorded or DVDs (discs recorded in AVCHD) and Blu-ray Discs created
+by importing videos to a PC or Blu-ray Disc player. \\
+\item Today AVCHD is the most popular camcorder format for consumers and prosumers, and is also available as AVCHD
+Progressive/PCM models for professional use.\\
+\item AVCHD supports both \textit{AVCHD-SD Standard Definition} and \textit{AVCHD 1080i High Definition} interlaced
+video, while AVCHD 1080i is available with most AVCHD camcorders. AVCHD supports 720-line progressive recording mode at
+frame rates of 24 and 60 frames/s for 60 Hz models and 50 frames/s for 50 Hz models.\\
+\item Also, 3D (MVC format) and 1080/60p(1080/50p) video formats were added as an extension to the AVCHD format to
+create the \textit{AVCHD Ver. 2.0, 2011} (AVCHD 3D, AVCHD Progressive) format. Compatibility in AVCHD Ver. 2.0 format compliant devices is secured by being standardized as the AVCHD format.\\
+\end{itemize}
+--------------------------------------
+
+\begin{tabular}{ll}
+ \textbf{8\ cm DVD/Built-in/SD Memory/M-Stick: } & \textbf{Built-in media/SD Memory/Memory Stick:} \\
+
+ {\textbullet} 1920{\texttimes}1080/ 60i, 50i, 24p &  1920{\texttimes}1080/ 60p, 50p \\ 
+ {\textbullet} 1440{\texttimes}1080/ 60i, 50i, 24p & 1440{\texttimes}1080/ 60p, 50p \\
+ {\textbullet} 1280{\texttimes}720/ 60i, 50i, 24p & 1280{\texttimes}720/ 60p, 50p \\
+ {\textbullet} 720{\texttimes}480/ 60i  (SD 4:3 og 16:9)  \\
+ {\textbullet} 720{\texttimes}576/ 50i  (SD 4:3 og 16:9) \\ 
+ {\textbullet} 16:9 Display aspect ratio & 16:9 Display aspect ratio \\
+ {\textbullet} MPEG-4 Part 10: AVC / H.264 & MPEG-4 Part  10: AVC / H.264 \\
+ {\textbullet} 8 bit color depth 4:2:0 subsampling & 8 bit color depth 4:2:0 subsampling \\
+ {\textbullet} {\textless}= 24 Mbps data rate & {\textless}= 28 Mbps data rate \\
+ {\textbullet} {\textless}= 18 Mbps data rate for DVD   \\
+ {\textbullet} Dolby Digital AC-3\ \ , 64-640 kbps &  Dolby Digital AC-3, 64-640 kbps \\ 
+ \hspace*{.3cm} 2 ch stereo and 5.1  (5-ch + subw.) surround & \hspace*{.3cm} 1$\sim$ 5.1 channels \\
+ {\textbullet} Linear PCM,  1.5 Mbps (2 ch) & Linear PCM,  1.5 Mbps (2 ch)  \\
+  \hspace*{.3cm}1$\sim$ 7.1 channels & \hspace*{.3cm} 1$\sim$ 7.1 channels \\
+ {\textbullet} A/V out: HDMI, Component, S-video/RCA &  A/V out: HDMI, Component, S-video/RCA \\
+ {\textbullet} MPEG-2 Transport Stream & MPEG-2 Transport Stream \\
+ {\textbullet} MTS file extension\ \ (recorded) & MTS file extension (recorded) \\
+\end{tabular}
+
+\subsection{\textbf{Blu-ray BD-Video (2006), UHD-video (2016)}}%
+\label{sub:Blu-ray}
+
+All standard DVDs will play on existing Blu-ray players, making the switch to Blu-ray much easier than the switch
+from VHS to DVD. Ultra HD Blu-ray is the latest version available, supporting 4K resolution content. Historically,
+Blu-ray Disc allows video with a color (bit) depth of 8-bits per color YCbCr with 4:2:0 chroma subsampling (colors
+compressed to 25\% of uncompressed), which means 256 possible values for red, green and blue; 16.7 million colors in
+total. Ultra-HD Blu Ray is 10-bit 4:2:0 to reduce color banding, giving 1024 values for RGB, 1.0 billion colors in
+total, or 64x more than 8-bit.
+
+BDMV Video encoding: 
+\begin{itemize}
+\item UDF2.5 as file system (BD-R/RE, 2005)
+\item M2TS file extension
+\item H.262/MPEG-2 Part 2 (\href{mailto:MP@HL}{MP@HL}, \href{mailto:MP@ML}{MP@ML})
+\item H.264/MPEG-4 AVC (\href{mailto:HP@L4.1}{HP@4.1}, \href{mailto:MP@L4.1}{MP@4.1})
+\item SMPTE VC-1 (\href{mailto:AP@L3}{AP@L3})
+\item H.265/H.265/MPEG-H Part 2 (HEVC) (only Ultra HD Blu-ray on High-density optical disc)
+\end{itemize}
+
+BD Video movies have a maximum data transfer rate of 54 Mbit/s, a maximum AV bitrate of 48 Mbit/s (for both audio
+and video data), and a maximum video bit rate of 40 Mbit/s., BD disc capacities, each with its own data rate: 
+\begin{itemize}
+\item 25 GB (BD-R SL)
+\item 50, 66 GB (BD-R DL) at 72 or 92 Mbit/s (50 GB BD-R DL 4x read speed supports UHD-video)
+\item 100 GB (TL), 128 GB (QL) at 92, 123, or 144 Mbit/s (BD-R XL)
+\end{itemize}
+
+Supported video formats (shortened):
+
+\begin{tabular}{ l c c}
+\textbf{Format} & \textbf{Resolution and frame rate} & \textbf{Display aspect ratio }\\
+
+4K UHD & 3840x2160 60p, 50p & 16:9 \\
+         & 3840x2160 25p, 24p & 16:9 \\
+\\
+HD & 1920x1080 60p, 50p & 16:9 \\
+   & 1920x1080 25p, 24p & 16:9 \\
+   & 1920x1080 29.97i, 25i & 16:9 \\
+   & 1440x1080 29.97i, 25i & 16:9\\
+\\
+HD & 1440x1080 24p & 16:9\\
+   & 1280x720 59.94p, 50p 1 & 16:9 \\
+   & 1280x720 24p & 16:9 \\
+\\
+SD & 720x480 29.97i, 25i & 4:3 or 16:9\\
+\end{tabular}
+
+\chapter{How to digitize and capture analog video to digital SD video format with A/D video conversion}%
+\label{cha:how_to}
+
+\section{Methods and workflow}%
+\label{sec:methods}
+
+There are a number of ways to get analog source recorded video digitized and captured into the computer. 
+\begin{itemize}
+\item One way is to use the passthrough feature of an available miniDV camcorder or the digital output of a Sony Digital 8
+camcorder to convert the Hi8 source to DV, which is then sent via firewire to the computer.
+\item Another alternative might be a Linux supported external capture card to USB3 (often MPEG-4), or find a higher-end
+internal PCIe analog video capture card to store uncompressed, 422 or DV video. 
+\item A third way is to use a standalone analog to digital A/D converter and capture device. This might be to DV HDD recorder
+or optional to a high-end analog/SDI and a SSD 422 codec (i.e ProRes) recorder.
+\end{itemize}
+\hspace*{.9cm} An example workflow and setup for this third way:
+
+\small{Analog Hi8 \hspace*{.15cm}            S-Video  \hspace*{.8cm}           S-Video} \\
+       tape player ----------> TBC --------------> A/D-conv. \\
+\hspace*{8cm}                                            $\backslash$ \_ DV/HDV HDD \hspace*{.5cm} Firewire \hspace*{.5cm} PC \\
+\hspace*{8.3cm}                                                       \_ rec/player  ------------------------> DV/M2T \\
+\hspace*{6.4cm}                                              Firewire \hspace*{.1cm}/ \\
+\hspace*{3.5cm}                              HDV tape player ----------->
+
+\begin{itemize}
+\item A fourth, interesting way as discussed on the CinGG mailing list (yet to be tested), is to combine a HDMI-USB3 capture dongle with an Analog Video to Digital HDMI miniConverter (ADC). The analog video player output (via TBC) connects to the actual input connectors (S-video/RCA or possibly Component) of the adapter.  Reference the following from/to: \\
+{\small \url{https://lists.cinelerra-gg.org/pipermail/cin/2021-October/003960.html}} \\
+{\small \url{https://lists.cinelerra-gg.org/pipermail/cin/2021-October/003970.html}}
+
+\end{itemize}
+
+{\small \texttt{S-Video Out -> A/D video converter -> HDMI/USB3-> HDMI/USB3 capture card}}
+
+\section{Equipment and setup}%
+\label{sec:equipment}
+
+\begin{itemize}
+\item The first required is a tape player device (VCR deck or camcorder) to playback the analog video tape cassette formats,
+either VHS/ SVHS, VHS-C/ SVHS-C or Video8/ Hi8. Use a video head cleaning tape before use. Wind and rewind the tape
+cassette before playback in Edit mode "ON" to minimize picture deterioration. \\
+\item A second recommended device for all capture methods is a Time Base Corrector (TBC).  Connected to the analog output of
+a VCR, a good TBC can make wonder and remove most or all of the flagging, shaky pictures, wavy lines, and other time
+base problems from a videotape, to get a clearer and more steady picture. The best is a standalone, fullframe
+high-resolution TBC of broadcast quality; minimum is a line-based TBC built in high-end VCR decks. \\
+\item A third, optional feature before digitizing is a noise filter to reduce/soften noise and grain (snow) from bad VHS tape
+recordings, or also when video that is over-processed using sharpness controls and enhancers. Noise filter adjustment
+may be part of the TBC setup and preview, or fixed built in the playback VCR.  Optional a standalone Video
+corrector/processor if available can be used, where also optional brightness, contrast and color saturation/correction
+can be adjusted.
+\end{itemize}
+
+\section{Example articles and references}%
+\label{sec:example}
+
+\begin{itemize}
+\item Digitizing Analog Video through a Digital Camcorder (Michael Steil, 2022) \\
+{\small \url{https://www.pagetable.com/?p=1697}} \\
+\item How to Get the Best Images Digitizing SD Video (TBC/ProRes, Larry Jordan, 2021) \\
+{\small \url{https://larryjordan.com/articles/how-to-get-the-best-images-digitizing-sd-video/}} \\
+\item Digitize analog cassettes (VHS or 8\ mm) with Linux (USB/H.264, Corinne HENIN, 2021) \\
+{\small \url{https://www.arsouyes.org/en/blog/2021/2021-05-17\_Numerisation\_VHS}} \\
+\item The Digitization of VHS Videotapes -- Technical Bulletin 31 -- Canada.ca (Joe Iraci, 2020) \\
+{\small \url{https://www.canada.ca/en/conservation-institute/services/conservation-preservation-publications/technical-bulletins/digitization-vhs-video-tapes.html}} \\
+\item Hi8 to DVD Workflow in Linux (Eric Olson, Renomath (2012) \\
+{\small \url{https://renomath.org/video/linux/hi8/}} \\
+\item Transfer VHS/DVD Media or Video8/Hi8 Tapes into CINELERRA-GG (chpt. 13.4 manual) \\
+{\small \url{https://cinelerra-gg.org/download/CinelerraGG\_Manual/Transfer\_VHS\_DVD\_Media\_or\_V.html}}
+\end{itemize}
+
+\chapter{\textbf{DV files converted to Blu-ray compliant MPEG-2/LPCM and authored to SD BD-Video}}%
+\label{cha:dv_files}
+
+\textbf{Step 1}
+
+\begin{itemize}
+\item Prepare a 40 GB continuously DV input file by joining and concatenating the actual dv clips in order. Each
+digitized Hi8 video tape was automatically split and recorded as a numbered series of 2.0 GB dv files each. \\
+\item Naming convention used, for example, for Tape \#1 with clips in order: \texttt{dv01, dv01-01, dv01\_02, dv01\_03},
+etc. For the full example at the end of this article, the concatenated \texttt{DV41\_02+DV42+DV43\_02} contains the clips from on
+ \texttt{dv41\_02+all dv42} up to and including \texttt{dv43\_02}.
+\end{itemize}
+
+\textbf{Step 2}
+
+\begin{itemize}
+\item Encode DV to MPEG-2 video and "re-encode" uncompressed PCM to Blu-ray PCM audio and
+remux to interlaced SD-BD-video.mts: 
+\begin{lstlisting}[style=sh]
+ffmpeg -i DV41_02+DV42+DV43_02.dv -c:v mpeg2video -refs 1 -bf 2 -b:v 25M -maxrate 25M -minrate 25M -bufsize 28M -muxrate 28M -dc 10 -c:a pcm_bluray -mpegts_m2ts_mode 1 -flags +ilme+ildct SD-BD_DV41_02+DV42+DV43_02.mts
+\end{lstlisting}
+\end{itemize}
+
+\textbf{Step 3}
+
+\begin{itemize}
+\item Run \textbf{tsMuxer} (screenshot of tsMuxer usage is displayed at the end of this article). The following
+parameters are shown for tsMuxer\_SD\_M2TS: \\
+\newline\hspace*{.5cm} Input file: \texttt{SD-BD\_DV41\_02+DV42+DV43\_02.mts} 
+\newline\hspace*{.5cm} Tracs:\hspace*{.63cm}\ MPEG-2 video stream and LPCM audio stream 
+\newline\hspace*{.5cm} Output:\hspace*{.37cm} \texttt{SD-BD\_DV41\_02+DV42+DV43\_02.iso}
+\end{itemize}
+
+\textbf{Step 4}
+\begin{itemize}
+\item Burn the iso SD-BD-Video image with \textbf{xorriso} on a BD-R DL 50 GB disc:
+\begin{lstlisting}[style=sh]
+xorriso -as cdrecord -v -sao dev=/dev/sr1 SD-BD_DV41_02+DV42+DV43_02.iso
+\end{lstlisting}
+\end{itemize}
+
+\chapter{\textbf{HDV.m2t files converted and authored to HD BD-Video}}%
+\label{cha:hdvm2t}
+
+\textbf{Step 1}
+\begin{itemize}
+\item Prepare the source HDV.m2t file using hdv clips as for DV above.
+\end{itemize}
+
+\textbf{Step 2}
+\begin{itemize}
+\item Copying the mpeg2 video, re-encoding MP2 audio to Blu-ray LPCM. If using an ffmpeg version lower than 5.1,
+substitute ac3 for pcm\_bluray and add -b:a 384 to override lower default. 
+
+\begin{lstlisting}[style=sh]
+ffmpeg -i HDV.m2t -c:v copy -c:a pcm_bluray -mpegts_m2ts_mode 1 HDV.mts 
+\end{lstlisting}
+\end{itemize}
+
+\textbf{Step 3}
+\begin{itemize}
+\item Run \textbf{tsMuxer} (screenshot of tsMuxer usage is displayed at the end of this article). 
+\newline\hspace*{.5cm} Input file: \texttt{HD-BD\_HDV.mts} 
+\newline\hspace*{.5cm} Tracs: \hspace*{.5cm} MPEG-2 video stream and LPCM audio stream 
+\newline\hspace*{.5cm} Output: \hspace*{.25cm} \texttt{HD-BD\_HDV.iso}
+\end{itemize}
+
+\textbf{Step 4}
+\begin{itemize}
+\item Burn the iso HD-BD-Video image with \textbf{xorriso} on a BD-R DL 50 GB disc:
+\begin{lstlisting}[style=sh]
+ xorriso -as cdrecord -v -sao dev=/dev/sr1 HD-BD_HDV.iso
+\end{lstlisting}
+\end{itemize}
+
+\chapter{\textbf{Full example output}}%
+\label{cha:full}
+
+\section{DV files converted to Blu-ray compliant MPEG-2 video and LPCM audio, authored to SD BD-Video and burned to a BD-R
+DL}%
+\label{sec:DVFILES}
+
+17/01-2023 \\
+SD-BD\_DV41\_02+DV42+DV43\_02 \\
+-----------------------------------------------
+
+\textbf{Step 1}
+\begin{lstlisting}[style=sh]
+cd /run/media/terje/Seagate_8TB_back/video/DV
+
+cat dv41_02.dv dv41_03.dv dv41_04.dv dv41_05.dv dv41_06.dv dv41_07.dv dv41_08.dv dv41_09.dv dv42.dv dv42_01.dv dv42_02.dv dv42_03.dv dv42_04.dv  dv42_05.dv dv42_06.dv dv42_07.dv dv42_08.dv dv42_09.dv dv43.dv dv43_01.dv dv43_02.dv > /home/terje/Videoklipp/SD-BD-DV-iso/DV41_02+DV42+DV43_02.dv
+\end{lstlisting}
+
+--------------------------------------
+\begin{lstlisting}[style=sh]
+cd /home/terje/Videoklipp/SD-BD-DV-iso
+
+du -sh DV*
+40G     DV41_02+DV42+DV43_02.dv
+\end{lstlisting}
+------------------------------------------------
+
+\textbf{Step 2}
+\begin{lstlisting}[style=sh]
+cd /home_lp154/terje/Videoklipp/SD-BD-DV-iso
+
+ffmpeg -i DV41_02+DV42+DV43_02.dv -c:v mpeg2video -refs 1 -bf 2 -b:v 25M -maxrate 25M -minrate 25M -bufsize 28M -muxrate 28M -dc 10 -c:a pcm_bluray -mpegts_m2ts_mode 1 -flags +ilme+ildct SD-BD_DV41_02+DV42+DV43_02.mts
+
+ffmpeg version 5.1.2 Copyright (c) 2000-2022 the FFmpeg developers
+   built with gcc 12 (SUSE Linux)
+.............................
+
+(NOTE: the @ sign represents the pound sign in the next 21 lines)
+
+Input @0, dv, from 'DV41_02+DV42+DV43_02.dv':
+ Metadata:
+   timecode        : 00:19:52:24
+ Duration: 03:15:53.28, start: 0.000000, bitrate: 28800 kb/s
+ Stream @0:0: Video: dvvideo, yuv420p, 720x576 [SAR 16:15 DAR 4:3], 25000 kb/s, 25 fps, 25 tbr, 25 tbn
+ Stream @0:1: Audio: pcm_s16le, 48000 Hz, stereo, s16, 1536 kb/s
+Stream mapping:
+ Stream @0:0 -> @0:0 (dvvideo (native) -> mpeg2video (native))
+ Stream @0:1 -> @0:1 (pcm_s16le (native) -> pcm_bluray (native))
+Press [q] to stop, [?] for help
+[mpeg2video @ 0x558bb9453ac0] Warning vbv_delay will be set to 0xFFFF (=VBR) as the specified vbv buffer is too large for the given bitrate!
+Output @0, mpegts, to 'SD-BD_DV41_02+DV42+DV43_02.mts':
+ Metadata:
+   timecode        : 00:19:52:24
+   encoder         : Lavf59.27.100
+ Stream @0:0: Video: mpeg2video (Main), yuv420p(bottom coded first (swapped)), 720x576 [SAR 16:15 DAR 4:3], q=2-31,25000 kb/s, 25 fps, 90k tbn
+   Metadata:
+     encoder        : Lavc59.37.100 mpeg2video
+   Side data:
+     cpb: bitrate max/min/avg: 25000000/25000000/25000000 buffer size: 28000000 vbv_delay: N/A
+ Stream @0:1: Audio: pcm_bluray, 48000 Hz, stereo, s16, 128 kb/s
+   Metadata:
+     encoder          : Lavc59.37.100 pcm_bluray
+frame=293832 fps=373 q=2.5 Lsize=41027202kB time=03:15:53.28 bitrate=28595.8kbits/s speed=14.9x  
+video:35867310kB audio:2212922kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 7.738845%
+
+--------------------------------------
+du -sh *.mts
+40G      SD-BD_DV41_02+DV42+DV43_02.mts
+\end{lstlisting}
+--------------------------------------
+
+\textbf{Step 3}
+\begin{itemize}
+\item Run \textbf{tsMuxer} (screenshots of tsMuxer usage are displayed at the end of this article). 
+\newline\hspace*{.5cm} Input file: \texttt{HD-BD\_HDV.mts} 
+\newline\hspace*{.5cm} Tracs: \hspace*{.5cm} MPEG-2 video stream and LPCM audio stream 
+\newline\hspace*{.5cm} Output: \hspace*{.2cm} \texttt{HD-BD\_HDV.iso}
+\end{itemize}
+
+-------------------------------- 
+\begin{lstlisting}[style=sh]
+du -sh *.iso
+39G     SD-BD_DV41_02+DV42+DV43_02.iso
+\end{lstlisting}
+--------------------------------------
+
+\textbf{Step 4}
+\begin{lstlisting}[style=sh,escapechar=\^]
+MediaRange BD-R DL
+
+eject /dev/sr1
+eject -t /dev/sr1
+
+umount /dev/sr1
+umount: /dev/sr1: not mounted.
+--------------------------------------
+ 
+xorriso -devices
+xorriso 1.5.4 : RockRidge filesystem manipulator, libburnia project.
+
+Beginning to scan for devices ...
+Full drive scan done
+--------------------------------------
+0  -dev '/dev/sr0' rwrw-- :   'HL-DT-ST' 'BD-RE BH10LS30'
+1  -dev '/dev/sr1' rwrw-- :   'ASUS    ' 'BW-16D1X-U'
+--------------------------------------
+
+Device og media info for a new BD-R DL (MediaRange):
+--------------------------------------
+xorrecord -dev=/dev/sr1 -atip
+xorriso 1.5.4 : RockRidge filesystem manipulator, libburnia project.
+
+Drive current: -outdev '/dev/sr1'
+Media current: BD-R sequential recording
+Media status : is blank
+Media summary: 0 sessions, 0 data blocks, 0 data, 46.6g free
+Device type  : Removable CD-ROM
+Vendor_info  : 'ASUS'
+Identifikation : 'BW-16D1X-U'
+Revision  : 'A105'
+Driver flags  : BURNFREE
+Supported modes: SAO TAO
+Current: BD-R sequential recording
+Profile: 0x0043 (BD-RE)
+Profile: 0x0042 (BD-R random recording)
+Profile: 0x0041 (BD-R sequential recording) (current)
+Profile: 0x0040 (BD-ROM)
+Profile: 0x002B (DVD+R/DL)
+Profile: 0x001B (DVD+R)
+Profile: 0x001A (DVD+RW)
+Profile: 0x0016 (DVD-R/DL layer jump recording)
+Profile: 0x0015 (DVD-R/DL sequential recording)
+Profile: 0x0014 (DVD-RW sequential recording)
+Profile: 0x0013 (DVD-RW restricted overwrite)
+Profile: 0x0012 (DVD-RAM)
+Profile: 0x0011 (DVD-R sequential recording)
+Profile: 0x0010 (DVD-ROM)
+Profile: 0x000A (CD-RW)
+Profile: 0x0009 (CD-R)
+Profile: 0x0008 (CD-ROM)
+Profile: 0x0002 (Removable disk)
+Mounted Media: 41h, BD-R sequential recording
+Product Id:  CMCMAG/DI6/0
+Producer:  CMC Magnetics Corporation
+Manufacturer:  'CMCMAG'
+Media type:  'DI6'
+-------------------------------------- 
+\end{lstlisting}
+
+\underline{Burning the 40 GB SD-BD-Video iso image to a BD-R DL disc:}
+
+\begin{lstlisting}[style=sh]
+27 min
+
+xorriso -as cdrecord -v -sao dev=/dev/sr1 SD-BD_DV41_02+DV42+DV43_02.iso
+
+xorriso 1.5.4 : RockRidge filesystem manipulator, libburnia project.
+Drive current: -outdev '/dev/sr1'
+Media current: BD-R sequential recording
+Media status : is blank
+Media summary: 0 sessions, 0 data blocks, 0 data, 46.6g free
+Beginning to write data track.
+...........
+xorriso : UPDATE : 39219 of 39251 MB written (fifo 71%) [buf 100%]  6.1x.
+xorriso : UPDATE : 39245 of 39251 MB written (fifo 80%) [buf 100%]  6.1x.
+xorriso : UPDATE : 39251 of 39251 MB written (fifo  0%) [buf 100%]  1.5x.
+xorriso : UPDATE : 39251 of 39251 MB written (fifo  0%) [buf 100%]  0.0x.
+xorriso : UPDATE : Closing track/session. Working since 1587 seconds
+xorriso : UPDATE : Closing track/session. Working since 1588 seconds
+..........
+xorriso : UPDATE : Closing track/session. Working since 1627 seconds
+Writing to '/dev/sr1' completed successfully.
+
+xorriso : NOTE : Re-assessing -outdev '/dev/sr1'
+xorriso : NOTE : Disc status unsuitable for writing
+Drive current: -outdev '/dev/sr1'
+Media current: BD-ROM
+Media status : is written , is closed
+Media summary: 1 session, 20096864 data blocks, 38.3g data,  0 free
+\end{lstlisting}
+
+\begin{figure}[htpb]
+\centering
+\includegraphics[width=15.132cm,height=9.823cm]{Preserving.png}
+\end{figure}
