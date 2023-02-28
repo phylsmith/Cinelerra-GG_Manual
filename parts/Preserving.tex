@@ -51,8 +51,8 @@ cassette recorders (VCR decks), digital video hard disc recorders, and optical d
 %
 % WARNING - the next line will change it for every list for rest of document
 %
-\setlist{noitemsep}
-\begin{itemize}
+%\setlist{noitemsep}
+\begin{itemize}[noitemsep]
 \item Composite Audio/Video is encoded on one channel with maximum horizontal resolution 240 (250) dots (or visually
 resolvable vertical picture lines) for VHS/VHS-C and 280 dots for Video8 (2.7MHz video bandwidth).
 \item In comparision, horizontal resolution bandwidth for PAL broadcast: 5.0-5.5 MHz, NTSC: 4.2 MHz.
@@ -67,7 +67,7 @@ same number of vertical resolution (or visible horizontal scan lines); always 57
 \subsection{SVHS (Super VHS, 1987), SVHS-C (-Compact, 1987) and Hi8 (1989)}%
 \label{sub:svhs1987}
 
-\begin{itemize}
+\begin{itemize}[noitemsep]
 \item S-Video (separate video, Y/C) encodes video \href{https://en.wikipedia.org/wiki/Luma\_(video)}{luma}
 (brightness/contrast/black\&white) and
 \href{https://en.wikipedia.org/wiki/Chrominance}{chrom}\href{https://en.wikipedia.org/wiki/Chrominance}{a} (color) on
@@ -88,7 +88,7 @@ and white phono line connectors for audio.
 \subsection{\textbf{DV (1995), Digital8 (1999)}}%
 \label{sub:dv1995}
 
-\begin{itemize}
+\begin{itemize}[noitemsep]
 \item DV refers to a family of codecs and tape formats used for storing digital video, especially on MiniDV cassettes, the most popular tape format, or on Digital8 cassettes using a DV codec. 
 \item DV codecs are still sometimes used when dealing with legacy standard definition SD video:
  \newline\hspace*{.5cm}PAL:  625i50, 720 {\texttimes} 576 frame size, 25 fps, 8 bit 4:2:0 subsampling
@@ -116,7 +116,7 @@ video player, to convert analog to digital output via Firewire \textbf{dv} file 
 \label{sub:DVD-Video}
 
 DVD-Video discs are intended for full-length movies and offer a range of features including the following:
-\begin{itemize}
+\begin{itemize}[noitemsep]
 \item Playing time: a nominal 133 minutes playing time for DVD-5 or each side of a DVD-10 and 240 minutes for DVD-9 using opposite track path format. In practice playing times are often reduced in favour of improved quality.
 \item Video encoding: MPEG-2 (\href{mailto:MP@ML}{MP@ML}) or MPEG-1.
 \item Audio Quality and Languages: Dolby Digital, DTS, MPEG-2 or Linear PCM audio for up to 5.1 channel surround sound.
@@ -157,17 +157,19 @@ applications or players.
  \item  MP2: 48 kHz sampling rate, 1 to 7.1 channels, up to 912 kbit/s.
  \item  DTS: 48 kHz or 96 kHz sampling rate; channel layouts = 2.0, 2.1, 5.0, 5.1, 6.1; bitrates for 2.0  and 2.1 =
 377.25 and 503.25 kbit/s, bitrates for 5.x and 6.1 = 754.5 and 1509.75 kbit/s.
-\item File system.\\
-\item Almost all DVD-Video discs use the UDF bridge format, which is a combination of the DVD MicroUDF (a subset of UDF
-1.02) and ISO 9660 file systems. The UDF bridge format provides backwards compatibility for operating systems that
-support only ISO 9660. Most DVD players read the UDF filesystem from a DVD-Video disc and ignore the ISO9660
-filesystem.  
+\item File system:
+\begin{itemize}[noitemsep]
+\item Almost all DVD-Video discs use the UDF bridge format, which is a combination of the DVD MicroUDF (a subset of UDF 1.02) and ISO 9660 file systems.
+\item  The UDF bridge format provides backwards compatibility for operating systems that
+support only ISO 9660. 
+\item Most DVD players read the UDF filesystem from a DVD-Video disc and ignore the ISO9660 filesystem.  
+\end{itemize}
 \end{itemize}
 
 \subsection{\textbf{HDV (2003)}}%
 \label{sub:HDV2003}
 
-\begin{itemize}
+\begin{itemize}[noitemsep]
 \item HDV was a successor format to DV with an updated video codec, and used the same MiniDV cassette format, optional
 specifically for HDV recording on tape with reduced drop-out rate.
 \item Some manufacturers offered on (larger) camera hard disk recording units capable of recording HDV both onto tape
@@ -257,7 +259,7 @@ total. Ultra-HD Blu Ray is 10-bit 4:2:0 to reduce color banding, giving 1024 val
 total, or 64x more than 8-bit.
 
 BDMV Video encoding: 
-\begin{itemize}
+\begin{itemize}[noitemsep]
 \item UDF2.5 as file system (BD-R/RE, 2005)
 \item M2TS file extension
 \item H.262/MPEG-2 Part 2 (\href{mailto:MP@HL}{MP@HL}, \href{mailto:MP@ML}{MP@ML})
@@ -268,7 +270,7 @@ BDMV Video encoding:
 
 BD Video movies have a maximum data transfer rate of 54 Mbit/s, a maximum AV bitrate of 48 Mbit/s (for both audio
 and video data), and a maximum video bit rate of 40 Mbit/s., BD disc capacities, each with its own data rate: 
-\begin{itemize}
+\begin{itemize}[noitemsep]
 \item 25 GB (BD-R SL)
 \item 50, 66 GB (BD-R DL) at 72 or 92 Mbit/s (50 GB BD-R DL 4x read speed supports UHD-video)
 \item 100 GB (TL), 128 GB (QL) at 92, 123, or 144 Mbit/s (BD-R XL)
