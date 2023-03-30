@@ -13,6 +13,10 @@ track. \includegraphics[height=\baselineskip]{auto.png} Auto
 $\leftarrow$ Keyframe $\rightarrow$ Plugin
 \includegraphics[height=\baselineskip]{plugin.png}
 
+It is important to understand the fundamental difference between \CGG{} \textit{Autos} (zoom,
+pan, etc.) is that \textit{Autos} are interpolable in any way (linear, bezier, etc.) while
+\textit{Plugin keyframes} may be interpolable in various ways or not be interpolable at all.
+
 \section{Automation Keyframes /\,Autos}%
 \label{sec:automation_keyframes_autos}
 \index{keyframes!autos}
@@ -32,6 +36,8 @@ The \textit{Keyframes} pulldown on the main timeline is used for Cut, Copy, Past
 Usually, the use of the keyframe values are more pleasing when the data varies smoothly between keyframe anchors on the timeline.  This is useful in many cases that are familiar, like a video fade in/out, or audio pan between channels.  To make the auto value change smoothly as the media is played, the keyframes auto values are points on curves that are created according to the design of the effect.  Most of the primitive types can create anchor points on curves that are piecewise linear, smooth, sloped, or broken at the keyframe anchor points.
 
 Curve smoothing is called \textit{interpolation} and it uses keyframe point values and control values that determine how the curve will react at the time the media is played or rendered.  Interpolation uses 2 keyframes to create a set of intermediates which are used as active values between the \textit{previous} and \textit{next} keyframe anchors on the timeline.  The way the intermediate data is generated depends on the type of curve used to invent these values.  \CGG{} interpolates the intermediate values making the change happen smoothly and gradually over time.  The simple linear mathematical formula for interpolation is:   $a\times(1-t) + b\times t$    where $0\le t\le 1$ uniformly.
+
+Autos are handled inside the main executable. Therefore \CGG{} knows exactly what a particular Auto does, how to interpret it, and how it can be interpolated.
 
 \section{Using Autos}%
 \label{sec:using_autos}
@@ -134,7 +140,7 @@ An easy way to get an exact position is to set the \textit{Automation range} in 
 window to the low and high ends of the desired range. For example, 1.000 to 50.000, which makes it
 so you can drag the speed/fade handle all the way to the left for 1.000 or all the way to the right for 50.
 
-Figure~\ref{fig:always} shows orange keyframes and lines for the ganged speed automation on all video/audio tracks. The figure shows the orange speed slider bar triangle with the current value displayed via the tooltip. Note the status bar numbers in the lower lefthand corner displaying 01:08 seconds as the location and 2.05 as the playback rate.
+Figure~\ref{fig:speed} shows orange keyframes and lines for the ganged speed automation on all video/audio tracks. The figure shows the orange speed slider bar triangle with the current value displayed via the tooltip. Note the status bar numbers in the lower lefthand corner displaying 01:08 seconds as the location and 2.05 as the playback rate.
 
 \begin{figure}[htpb]
     \centering
@@ -243,6 +249,9 @@ The Plugin keyframes are structured.  The individual data values are named param
 Plugins also may use interpolation to smooth the data between the keyframe paramaters on the timeline.  Just exactly how this is done varies with the plugin and is not always easy to predict, but this
 is usually due to the nature of the keyframe parameter data.  For example, it does not make sense to interpolate which font is in use.
 
+Plugin keyframes are handled inside its own plugin. \CGG{} knows nothing about internal functionalities inside plugins, either external (such as ffmpeg) or native plugins. And has no chance to do 
+any interpolation. Only the plugin can interpolate its own keyframes. And if you succeed to add plugin keyframe interpolation in some particular plugin, all the other (even similar in functionality) plugins will know nothing about it. So, each one out of dozen of plugin keyframes has to be implemented individually.
+
 \section{Default Keyframe}%
 \label{sec:default_keyframe}
 \index{keyframes!default keyframe}
@@ -265,14 +274,16 @@ The \texttt{keyframes $\rightarrow$ paste} \texttt{keyframes} function may then 
 \label{sec:keyframe_edit_params_plugin}
 \index{plugins!preset edit}
 
-Keyframe values can be set using the various plugin \textit{plugins: show controls} \index{plugins!show controls} (magnifying glass) icon on the plugin track (figure~\ref{fig:parameters}).  It is possible to see all of the keyframe data in a raw format using the \textit{Edit Params} popup menu item which you will see when you right mouse click the keyframe icon on the timeline.  The keyframe data is stored in xml format, and the \textit{edit params} feature allows you to view and modify the xml data directly.  This normally should not be necessary since the plugin's control gui displays the intended parameters, but this will let you view and specify just about anything that can be specified in xml.  There is no validation checking of the modified data.
+Keyframe values can be set using the various plugin \textit{plugins: show controls} \index{plugins!show controls} (magnifying glass) icon on the plugin track (figure~\ref{fig:parameters}).
 
 \begin{figure}[htpb]
-    \centering
-    \includegraphics[width=0.7\linewidth]{parameters.png}
-    \caption{Keyframe Parameters window for a Color 3 Way plugin added to the video track}
-    \label{fig:parameters}
+	\centering
+	\includegraphics[width=0.7\linewidth]{parameters.png}
+	\caption{Keyframe Parameters window for a Color 3 Way plugin added to the video track}
+	\label{fig:parameters}
 \end{figure}
+
+It is possible to see all of the keyframe data in a raw format using the \textit{Edit Params} popup menu item which you will see when you right mouse click the keyframe icon on the timeline.  The keyframe data is stored in xml format, and the \textit{edit params} feature allows you to view and modify the xml data directly.  This normally should not be necessary since the plugin's control gui displays the intended parameters, but this will let you view and specify just about anything that can be specified in xml.  There is no validation checking of the modified data.
 
 \section{Generate Keyframes while Tweaking / Automatic Keyframe Mode}%
 \label{sec:generate_keyframe_tweaking}
