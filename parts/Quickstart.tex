@@ -301,8 +301,8 @@ High quality formats are also called Mezzanine codecs, Digital Intermediate, Pre
 	\newline    Presets: \textit{DNxHR, ffv1, AVC\_Intra\_100}
 	\item[MOV] Created by Apple. It is a suitable format for editing because it organizes the files within the container into hierarchically structured \textit{atoms} described in a header. This brings simplicity and compatibility with various software and does not require continuous encoding/decoding in the timeline.
 	\newline    Presets: \textit{DNxHR, ffv1, CineformHD, huffyuv}
-	\item[PRO] Different extension, but it is still mov. Prores is proprietary and there are no official encoders except the original Adobe one. The engine used by ffmpeg is the result of reverse engineering and, according to Adobe, does not guarantee the same quality and performance of the original\protect\footnote{https://support.apple.com/en-us/HT200321}.
-	\newline    Presets: \textit{ProRes}
+	\item[PRO] Different extension, but it is still mov. Prores is proprietary and there are no official encoders except the original Adobe one. The engine used by ffmpeg is the result of reverse engineering and, according to Adobe, does not guarantee the same quality and performance of the original\protect\footnote{https://support.apple.com/en-us/HT200321}. Option \textit{vendor=apl0} is used to make it appear that the original Apple engine was used.
+	\newline    Presets: \textit{ProRes; ProRes\_ks}
 	\item[QT] Different extension, but it is always mov.
 	\newline    Presets: \textit{DNxHD, magicyuv, raw, utvideo}
 	\item[MP4] mostly used for General Purpose. It belongs to the large MPEG family.
@@ -342,7 +342,7 @@ These are also called Delivery codecs. They are the most used and widespread bei
 \label{ssub:note_mkv_container}
 \index{mkv}
 
-Matroska is a modern universal container that is Open Source so there is lots of ongoing development with community input along with excellent documentation.  Also derived from this format is the \textit{Webm} container used by Google and YouTube, which use the VP8-9 and AV1 codecs. Although using in \CGG{} is highly recommended, you may have seeking problems during playback. The internal structure of matroskas is sophisticated but requires exact use of internal keyframes (I-frame; B-frame and P-frame) otherwise playback on the timeline may be subject to freeze and drop frames. The mkv format can be problematic if the source encoding is not done well by the program (for example, OBS Studio). For an easy but accurate introduction of codecs and how they work see: \url{https://ottverse.com/i-p-b-frames-idr-keyframes-differences-usecases/}.
+Matroska is a modern universal container that is Open Source so there is lots of ongoing development with community input along with excellent documentation.  Also derived from this format is the \textit{Webm} container used by Google and YouTube, which use the VP8-9 and AV1 codecs. Although using in \CGG{} is highly recommended, you may have seeking problems during playback. The internal structure of matroskas is sophisticated but requires exact use of internal keyframes (I-frame; B-frame and P-frame) otherwise playback on the timeline may be subject to freeze and drop frames. The mkv format can be problematic if the source encoding is not done well by the program (for example, OBS Studio). For an easy but accurate introduction of codecs and how they work see: {\small\url{https://ottverse.com/i-p-b-frames-idr-keyframes-differences-usecases/}}.
 
 To find out the keyframe type (I, P, B) of your media you can use ffprobe:
 
@@ -366,7 +366,7 @@ To find out the keyframe type (I, P, B) of your media you can use ffprobe:
 
 \textbf{input.mkv:} is the media to be analyzed (it can be any container and codec).
 
-(see \url{https://ffmpeg.org/ffprobe.html} for more details)
+(see {\small\url{https://ffmpeg.org/ffprobe.html}} for more details)
 
 We thus obtain a list of all frames in the analyzed media and their type. For example:
 
@@ -384,7 +384,7 @@ There are also 2 useful scripts that not only show the keyframe type but also sh
 {\small\url{https://cinelerra-gg.org/download/testing/iframe-probe_byUseSparingly.tar.gz}}
 
 We can now look at the timeline of \CGG{} to see the frames that give problems in playback. Using a codec of type Long GOP, it is probably the rare I-frames that give the freezes.
-To find a solution you can use MKVToolNix (\url{https://mkvtoolnix.download/}) to correct and insert new keyframes into the mkv file (matroska talks about \textit{cues data}). It can be done even without new encoding. Or you can use the \texttt{Transcode} tool within \CGG{} because during transcoding new keyframes are created that should correct errors.
+To find a solution you can use MKVToolNix ({\small\url{https://mkvtoolnix.download/}}) to correct and insert new keyframes into the mkv file (matroska talks about \textit{cues data}). It can be done even without new encoding. Or you can use the \texttt{Transcode} tool within \CGG{} because during transcoding new keyframes are created that should correct errors.
 
 \subsubsection{Image Sequences}
 \label{ssub:ffmpeg_image_sequences}
