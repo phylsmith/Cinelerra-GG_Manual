@@ -928,6 +928,14 @@ where:
 
 \textit{SAR}= Storage Aspect Ratio (i.e media file aspect ratio)
 
+In practice, there can be a problem with anamorphic format rendering as desired because it does
+not use square pixels.  So, for example, FFV1 format in the mkv container will ignore the DAR
+(Display Aspect Ratio).  You can check if your media is anamorphic format using the \textit{Mediainfo}
+program.  If the Width/Height is 720/576 (=1.25) and DAR is 16/9 (=1.777) then you have non-square
+pixels.  SAR (Storage Aspect Ratio) is different from DAR and you have to use a workaround as 
+described at the "Cinelerra for Grandma" site by Raffaella Traniello:
+{\small\url{http://www.g-raffa.eu/Cinelerra/HOWTO/anamorphic.html}} . 
+
 
 \subsection{Camera and Projector}%
 \label{sub:camera_and_projector}
