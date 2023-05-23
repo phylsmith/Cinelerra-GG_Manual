@@ -249,6 +249,11 @@ The BIGGEST gain from using this is if you have media that is not \textit{seekab
 
 Another important function of Transcode is being able to convert the project's media into a high-quality \textit{mezzanine} codec \index{mezzanine codec} (sometimes also called \textit{intermediate} codec \index{digital intermediate}), which makes timeline work lighter and more efficient. In fact such codecs (ffv1, ProRes, DNxHD, OpenEXR, huffyuv, etc) are generally little or not at all compressed; the type of compression is intraframe --more suitable for editing, and the image quality (4:2:2 up; 10-bit color up; floating point; etc) is suitable for \textit{Color Correction}, \textit{Chroma Key} and \textit{Rotoscoping}. The use of mezzanine codecs leads to very large files, so you need to make sure you have enough storage space.
 
+\paragraph{NOTE:} \CGG{} cannot do \textit{remuxing} without transcoding. For remuxing only, use \textit{ffmpeg} as shown in the following script. First move to the folder containing the files to be remuxed; the script takes all video files of a certain extension (in the following example \texttt{avi}) from the folder and its subfolders and makes a remux in a new container (in this example \texttt{mkv}) inside the new folder \texttt{remux}. The internal codec will remain the original one.  Here is an example script:
+
+\begin{lstlisting}[numbers=none]
+	for f in $(find . -name '*.avi'); do ffmpeg -i "$f" -c:v copy -c:a copy "remux/{f%.*}.mkv "; done
+\end{lstlisting}
 
 \section{OpenEDL}%
 \label{sec:openedl}
