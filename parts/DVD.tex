@@ -10,7 +10,8 @@ Some preliminary information follows.  For NTSC, SD media is almost always $720\
 Frames per seconds is usually $29.97$ for NTSC and $25$ fps for PAL.  The standard SD dvd generally uses the MPEG-2 program stream with a filename extension of \texttt{m2v}.  BD blu-ray media is not normally interlaced, but you can leave it interlaced.  Blu-ray uses the MPEG transport stream which contains 1 or more program streams with a default filename extension of \texttt{m2ts}.
 
 Requirements for creating DVDs is the hardware device to write the media on and, obviously, the blank media for either BD or SD.  When generating SD media, you will have to install \textit{dvdauthor} and for BD media, install \textit{udftools} if they are not on your system.  Also, keep in mind that to mount filesystems for creating files and to burn DVDs, you will have to be root since you have to have privileges, unless special permissions have been provided for a non-root user.  It is also highly recommended to
-run the \CGG{} startup from a terminal window, instead of the icon, in order to see informative messages of how to actually write the output (at prompt: keyin \texttt{<install\_directory\_path/bin/cin}).
+run the \CGG{} startup from a terminal window, instead of the icon, in order to see informative messages of how to actually write the output (at prompt: keyin \texttt{<install\_directory\_path/bin/cin} or 
+ \texttt{<install\_directory\_path/<your\_version>.AppImage}).
 
 A warning here -- writing blu-ray BDs and  regular SDs can take a large amount of clock time.  Keep in mind that a blu-ray can contain 25 hours of viewing, so would take multiple hours to just write one.
 
@@ -33,6 +34,7 @@ A quick set of basic steps to create DVDs is immediately below and usually just 
     \item If not logged in as root, you will get an error message in order to avoid doing a lot of work and then failing out because root is required for automount and to write on DVD hardware.
     \item Load your input source media via: \texttt{File $\rightarrow$ Load files}.
     \item Choose PAL or NTSC for SD/dvd or 1080P/24 for blu-ray in \texttt{Settings $\rightarrow$ Format}.
+    \item If DVD "Interlace Mode" of Bottom Field First is wanted, you MUST set that in \texttt{Settings $\rightarrow$ Format}.
     \item For blu-ray, choose BD Render or for PAL/NTSC, choose DVD \textit{Render} in  \textit{File} menu.
     \item Designate a \textit{work path} with sufficient disk space and then Chk-OK.
     \item When the Batch Render window comes up, click on \textit{Start} and the batch jobs will run.
@@ -127,6 +129,8 @@ Explanation of the choice boxes as seen in figure~\ref{fig:bluray_dvd} for both 
 
 \begin{description}
     \item[Deinterlace] remove the interlace.  Interlacing is a video scanning system in which alternating lines are transmitted so that half a picture is displayed each time the scanning beam moves down the screen.  You lose a lot and the quality is bad when you view interlacing on a progressive TV.  You might not really want to use deinterlace, because if you deinterlace non-interlaced media, it will look awful.
+In the case of DVD only, for interlaced media when you do not check the Deinterlace option, it will always be done as Top Field First.  
+To get DVD media to be Bottom Field First, you MUST set the "Interlace Mode" in \texttt{Settings $\rightarrow$ Format}.
     \item[Scale] alter the spatial mapping of an image to increase or reduce the size; modifies the picture.  When some programs scale from $4:3$ to $16:9$ they will automatically cut off the appropriate section of the image for you.  It is necessary to keep in mind, that \textit{square pixels} is the true end goal of scaling, not the aspect ratio which could result in squished or stretched output.  More information about scaling will be provided on a subsequent page with usage of the \textit{Scale Ratio} plugin.
     \item[Profile] for bluray only, use the default bluray.m2ts or choose bluray\_lpcm.m2ts for linear pulse code modulation for digitally encoding uncompressed audio information.
     \item[use tsmuxer] for bluray only, to use tsMuxer as a transport stream muxer for remuxing/muxing elementary streams, check this box.  Usage of tsmuxer requires that your computer have the tsmuxer software installed along with any of its prerequisites. The default is do not use tsmuxer.

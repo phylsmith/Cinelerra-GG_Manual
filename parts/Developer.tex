@@ -98,18 +98,35 @@ FFmpeg is a \textit{strongly connected} component in the build linkage and widel
 	\item \texttt{./configure} {\dots}
 \end{itemize}
 
-Specific information on using the current ffmpeg GIT repository follows.  You have to supply the actual URL location of the ffmpeg git as you can see in this example \texttt{bld.sh} script:
+\section{Experimental Builds}
+\label{sec:experimental_builds}
+\index{build!experimental}
+
+The main compilation we have seen leads to building \CGG{} with its own internal ffmpeg, which includes its stability and feature patches. Normally ffmpeg is updated to version x.1 of each release. The reasons why it is best to use thirdparty with their static versions of the libraries and ffmpeg are explained in detail in \nameref{sec:latest_libraries} and in \nameref{sub:unbundled_builds}.
+
+You can still compile \CGG{} with ffmpeg-git to enjoy the latest version. This build may lead to feature variation and less stability, but in most cases will work perfectly fine.
+You have to supply the actual URL location of the ffmpeg git as you can see in this example \texttt{bld.sh} script:
 
 \begin{lstlisting}[numbers=none]
-#!/bin/bash
-./autogen.sh
-./configure --with-single-user --with-booby --with-git-ffmpeg=https://git.ffmpeg.org/ffmpeg.git
-make && make install ) 2>1 | tee log
-mv Makefile Makefile.cfg
-cp Makefile.devel Makefile
+	#!/bin/bash
+	./autogen.sh
+	./configure --with-single-user --with-booby --with-git-ffmpeg=https://git.ffmpeg.org/ffmpeg.git
+	make && make install ) 2>1 | tee log
+	mv Makefile Makefile.cfg
+	cp Makefile.devel Makefile
 \end{lstlisting}
 
-Since the procedure for obtaining the latest ffmpeg version is not always kept up-to-date and the line numbers will always change, you may have to create that patch first. Generally those line numbers are only updated by a developer when a new stable version with worthwhile features is actually included in the \CGG{} build. FFmpeg is constantly changing and many times the git version is not as stable as desired.
+Since the procedure for obtaining the latest ffmpeg version is not always kept up-to-date and the line numbers will always change, you may have to create some patch first. Generally those line numbers are only updated by a developer when a new stable version with worthwhile features is actually included in the \CGG{} build. FFmpeg is constantly changing and many times the git version is not as stable as desired.
+
+Finally, it is possible to compile \CGG{} so that it uses ffmpeg which is already installed on the system. This build takes less time to compile and may increase performance in both rendering and timeline manipulation. Again, there may be variations in functionality and less stability.
+Getting a build to work in a system environment is not easy. If you have already installed libraries which are normally in the thirdparty build, getting them to be recognized means you have to install the devel version
+so the header files which match the library interfaces exist. If you want to build using only the thirdparty libraries installed in your system, just include \texttt{-–without-thirdparty} to your configure script. For example:
+
+\begin{lstlisting}[numbers=none]
+./confgure --with-single-user --disable-static-build --without-thirdparty --without-libdpx
+\end{lstlisting}
+
+The library, libdpx, is just such an example of lost functionality: this build of \CGG{} will not be able to use the DPX format.
 
 \section{Configuration Features}
 \label{sec:configuration_features}

@@ -476,7 +476,13 @@ Getting a build to work in a custom environment is not easy.  If you
 have already installed libraries which are normally in the
 thirdparty build, getting them to be recognized means you have to
 install the \textit{devel} version so the header files which match
-the library interfaces exist.  Below is the list of thirdparty
+the library interfaces exist. If you want to build using only the
+thirdparty libraries installed in your system, just include 
+"--without-thirdparty" to your configure script.  For example:
+\begin{lstlisting}[style=sh]
+./confgure --with-single-user --disable-static-build --without-thirdparty
+\end{lstlisting}
+Below is the list of thirdparty
 builds, but this list may have changed over time.
 % It's list of Table?
 
