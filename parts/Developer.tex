@@ -520,6 +520,10 @@ It is impossible to test everything with valgrind because some things are just t
 deadly. The listing of the memory leaks can be quite voluminous so locating the \textit{LEAK SUMMARY} section
 towards the end of the report is most useful.
 
+Another very useful valgrind run to locate unitialized variables while executing is:
+
+\hspace{2em}\texttt{valgrind -{}-log-file=/tmp/log -{}-tool=memcheck\\
+	-{}-num-callers=32 ./ci}
 
 \section{CFLAGS has -Wall}
 \label{sec:cflags_has_-wall}
