@@ -354,7 +354,7 @@ To accentuate a set of common plugins, there are \textit{expander} arrows on the
 \CGG{}’s default setup is in the file \texttt{\$CIN\_DAT/expan\-ders.txt} but if the user wants their own specific setup and if the file in \texttt{\$HOME/.\\bcast5/expanders.txt} exists, it will take precedence.
 If there are recommendations for other relevant categories, they can be added. The subtree structure is applicable to any of the \textit{Video Effects/Transitions} or \textit{Audio Effects/Transitions}. You can not sort once an expansion is in effect (figure~\ref{fig:expander}).
 
-The \texttt{expanders.txt} file has very specific requirements. The most specific is that there are no blanks -- you must use tabs only. A \# (pound sign) can be used in column 1 to indicate a comment. Here is a short example:
+The \texttt{expanders.txt} file has very specific requirements. The most specific is that there are no blanks -- you must use tabs only. A \# (pound sign) can be used in column 1 to indicate a comment. A short example of what the txt file looks like is shown below.
 
 \begin{figure}[htpb]
 	\centering
@@ -367,6 +367,10 @@ The \texttt{expanders.txt} file has very specific requirements. The most specifi
 
 \begin{lstlisting}[style=sh]
 Video Effects
+    -Favorites
+        Brightness/Contrast
+        Title
+        VideoScope
     - Color_Correction
         Blue Banana
 			  Color 3 Way
@@ -377,6 +381,14 @@ Audio Effects
         L2_Calf Organ
         L2_Calf Monosynth
         L2_Calf Fluidsynth
+\end{lstlisting}
+
+NOTE: The capability to put the expanders.txt file in \texttt{./bcast5} (see \nameref{sec:bcast5}) allows for customizations such as grouping favorite plugins in one section so that they can be recalled more quickly. For this purpose, the \textit{Favorites} section has been included at the top of Video Effects, the contents can be changed as desired. Once your modified file is saved to hard disk as \$HOME/.bcast5/expanders.txt it will remain in use on every update as long as you do not delete it or remove the .bcast subdirectory.
+For users running \CGG{} using the AppImage, to make an initial copy of expanders.txt, execute the
+following lines on /tmp:
+\begin{lstlisting}[numbers=none]
+        git clone --depth 1 "git://git.cinelerra-gg.org/goodguy/cinelerra.git" cinelerra5
+        cp /tmp/cinelerra5/cinelerra-5.1/expanders.txt $HOME/.bcast5/expanders.txt
 \end{lstlisting}
 
 \subsection{Speed-up of Ffmpeg plugin usage with OPTS files}%
@@ -3797,7 +3809,7 @@ cp Makefile.devel Makefile
 To build findobject and the other plugins using OpenCV, access the src using git:
 
 \begin{lstlisting}[style=sh]
-git clone -depth 1 "git://git.cinelerra-gg.org/goodguy/cinelerra.git" cinelerra5
+git clone --depth 1 "git://git.cinelerra-gg.org/goodguy/cinelerra.git" cinelerra5
 \end{lstlisting}
 To use the latest version, the method for creating a tarball is:
  
