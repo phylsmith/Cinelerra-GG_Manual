@@ -3143,25 +3143,6 @@ For improving playback performances of titles with effects, you can reduce the s
 
 To include graphical elements like \textit{logos}, you may want to import your title as a PNG image (alpha channel transparency is possible), move it with camera and projector or add effects.
 
-\subsubsection*{Adding fonts to the titler}%
-\label{ssub:adding_fonts_to_titler}
-
-The X Window system originally did not have a suitable font renderer for video. It also is restricted to the current bit depth. It does not have a convenient way to know which fonts work with the suitable font renderer in the desired bit depth. The easiest way we have found to support fonts in the titler is to have a directory for them at \texttt{/usr/lib/cinelerra/fonts}.
-
-The titler supports mainly \textit{TTF}, true type fonts. It supports others but TTF are the most reliable. AppImage does not provide this capability unless you use the workaround as described in the Appendix \nameref{cha:faq_problems_workarounds}.
-
- To add true type fonts, copy the \texttt{.TTF} files to the fonts directory. In that directory run
-\vspace{1ex}
-\begin{lstlisting}[style=sh]
-    # /usr/lib/cinelerra/fonts
-    ttmkfdir && mv fonts.scale fonts.dir
-\end{lstlisting}
-and restart \CGG{}. The new fonts should appear. The usage of ttmkfdir changes frequently so this technique might not work.  It is
-important to note that because there are checkboxes for both Bold and Italic, the pulldown will not include these specific fonts
-as an addition to a Regular font.  They will be used via the checkboxes but not viewed in the pulldown.
-
-If the video is displayed on a consumer TV, the outer border is going to be cropped by $5\%$ on each side. To avoid text which is too close to the edge looking bad, you may want to enable the \textit{title-safe} tool in the compositor window. The text should not cross the inner rectangle.
-
 \subsubsection*{Some recently added options}%
 \label{ssub:some_recently_added_options}
 
@@ -3196,7 +3177,7 @@ If the video is displayed on a consumer TV, the outer border is going to be crop
         color name such as RED from \textit{<cin\_path>/guicast/colors.h} &
         Or use the hex value like \textit{\#a000a0}; color-hex.com shows examples \\\midrule
         font &
-        exact name from \textit{Font} pulldow &
+        exact name from \textit{Font} pulldown &
         When you set font, bold/size and  italic will be as currently set up \\\midrule
         alpha &
         floating-point number between 0 and 1&
@@ -3261,6 +3242,7 @@ Figure~\ref{fig:title03}.
 \begin{description}
     \item[Background] in this box you can keyin the name of a file of the type that \CGG{} accepts and use that file as a background for your Title characters (media video or image). This will be seen in the compositor window on top of the video that is loaded in the main track canvas. Besides typing in the filename, you must also check the checkbox. This makes it easy to turn it \textit{On} and \textit{Off} to see what it looks like. Next to the background box is a \textit{Loop} checkbox. If the background file takes less time than the main track canvas video to run, you can turn on the loop checkbox so that it runs over and over again to match the time size of your video. By default the background image will occupy the whole frame, but if we activate \textit{drag} mode and create a box of the desired size, the image will occupy only the box leaving the rest of the frame visible.
     \item[Stroker] to add \textit{pen strokes} to the text letters, adjust the stroke width numerically. This looks particularly nice on certain fonts and with a negative adjustment of the \textit{Drop shadow}.
+    \item[Text: chars:] to output and update the number of characters already used. The only limit to the number of characters based on a count of single $8\, bit$ characters is the available resources on the user computer available for \CGG{} use. Keep in mind that unicode or other special characters may consist of $2$ to $4$ $8\,bit$ bytes. Also, newlines are a character and any of the attributes you use count in the total. There is now a horizontal scroll bar as well as the vertical one in the textbox and they only appear when there are more lines or characters than can fit in the original sized textbox.
     \item[Unicode Insertion] if you want to enter a special character like the mathematical \textit{summation} symbol, you can use the unicode equivalent to do so. Press Ctrl-Shift-U followed by $2022$ and a carriage return is an example of the bullet. Refer to section \hyperref[sec:textbox_non_std_character_unicode]{17.5} for details.
     \item[Popup Helper] put your cursor where you want to add an attribute, then right mouse will bring up a list of the available attributes for you to choose, along with a submenu to choose from. The program will insert that attribute for you and all you have to add is a value when required! (see figure~\ref{fig:title02}).
 \end{description}
@@ -3288,6 +3270,8 @@ The Text Color window has several enhanced features as listed here and seen in f
 
 \subsubsection*{Font Choice}%
 \label{ssub:font_choice}
+The X Window system originally did not have a suitable font renderer for video. It also is restricted to the current bit depth. It does not have a convenient way to know which fonts work with the suitable font renderer in the desired bit depth. The easiest way we have found to support fonts in the titler is to have a directory for them at \texttt{/usr/lib/cinelerra/fonts}.
+Or if not system installed, at \texttt{<cinelerra\_install\_path>/bin/plug\-ins/fonts}.
 
 In order to choose a font faster, you can keyin the first few characters of the font name, being sure to use capital characters if used since it is case-sensitive. The steps to follow are:
 
@@ -3296,11 +3280,32 @@ In order to choose a font faster, you can keyin the first few characters of the 
     \item keyin the first character(s) of the desired font and you will see the first match become highlighted;
     \item you can see the characters you keyed in the upper right corner of the fonts.
 \end{enumerate}
+It is important to note that because there are checkboxes for both Bold and Italic, the pulldown will not include these specific fonts
+as an addition to a Regular font.  They will be used via the checkboxes but not viewed in the pulldown.
+
+One last item of information about fonts that may lead to some confusion. The checkbox for Bold and Italic will occasionally be ghosted out if no bold or italic version of the selected font is available. This is no guarantee, but currently as good as it can get due to inconsistency in the creation of fonts. It is mostly just a hint. If boxes are checkmarked, but ghosted, you can not uncheck until you change to a font that does not ghost out the boxes. If you use the popup helper with the boxes checked, and attempt to keyin a font that does not have the bold/italic attribute as checked, the font will be considered illegal.
+
+Also of note, if the video is displayed on a consumer TV, the outer border is going to be cropped by $5\%$ on each side. To avoid text which is too close to the edge looking bad, you may want to enable the \textit{title-safe} tool in the compositor window. The text should not cross the inner rectangle.
 
 \subsubsection*{Font Addition / Font Subtraction}%
 \label{ssub:font_addition_subtraction}
 
-Some of the system fonts are automatically included in the set of fonts being used by \CGG{}. The easiest way to add additional fonts for the Title plugin's set, is to use ones available in specific directories on your computer as long as they have a \texttt{fonts.scale} file already set up. You can run \texttt{mkfontscale} to create this file within that directory. In order to include a specific directory you set an environment variable before starting \CGG{} which stays in effect until it is unset or until the next reboot. Below is the method and an example.
+If using a compiled build (that is, NOT an AppImage) to add true type fonts, copy the \texttt{.TTF} files to the fonts directory at \texttt{/usr/lib/cinelerra/fonts}
+or if not system installed, at \texttt{<cinelerra\_install\_path>/bin/plug\-ins/fonts}. In that directory run
+\vspace{1ex}
+\begin{lstlisting}[style=sh]
+    # /usr/lib/cinelerra/fonts
+    ttmkfdir && mv fonts.scale fonts.dir
+\end{lstlisting}
+and restart \CGG{}. The new fonts should appear. However, keep in mind that the next
+time you install a new version of CINELERRA-GG, your changes will be written over so
+you will have to make sure to save them elsewhere and then re-establish.
+The usage of ttmkfdir changes frequently so this technique might not work.  The titler supports mainly \textit{TTF}, true type fonts. It supports others such as OTF, but TTF are the most reliable. 
+
+AppImage does not provide this specific method unless you use the workaround as described in the Appendix \nameref{cha:faq_problems_workarounds}.
+However, if you use Ubuntu Studio 2304 with AppImage, you can easily add font files directly to ~/.fonts and you will have all of these available in the Title fonts list. And, there may be other operating systems with specific implementations that also allow for this easier methodology to add additional fonts.
+
+Some of the system fonts are automatically included in the set of fonts being used by \CGG{}. The easiest way to add additional system or other application available fonts for the Title plugin's set, is to use ones available in specific directories on your computer as long as they have a \texttt{fonts.scale} file already set up. You can run \texttt{mkfontscale} to create this file within that directory. In order to include a specific directory you set an environment variable before starting \CGG{} which stays in effect until it is unset or until the next reboot. Below is the method and an example.
 
 \vspace{1ex}
 \begin{lstlisting}[style=sh]
@@ -3310,7 +3315,7 @@ export BC_FONT_PATH=/usr/share/fonts
 
 The current set of fonts in \CGG{}'s directory will be automatically included and will be the default set if this environment variable is not set. Keep in mind that if you add a lot of fonts, it will considerably slow down the startup every time you bring up the Title plugin.
 
-If you want to only have a limited number of fonts set up, you can manipulate the \CGG{} directory directly at \texttt{<cinelerra\_install\_path> /bin/plug\-ins/fonts}.
+If you want to only have a limited number of fonts set up, you can manipulate the \CGG{} directory directly at \texttt{<cinelerra\_install\_path>/bin/plug\-ins/fonts}.
 Here you will find the default set of fonts that come with the install. Copy any other fonts you would like to include here with read permission, delete any fonts you do not want to have, then execute \texttt{mkfontscale} which creates the file \texttt{fonts.scale} that \CGG{} will read. However, the next time you install a new version of \CGG{}, your changes will be written over so you will have to make sure to save them elsewhere and then re-establish.
 
 If you have problems with a specific font or set of fonts, there is a debug option available to determine which font is an issue. When starting \CGG{}, you should set up the variable:
@@ -3331,9 +3336,6 @@ pulldown.  So you might not see the one you expect if it was written over by a s
 export BC_FONT_PATH=:   #(the : "colon" removes all automatic system and Cinelerra fonts)
 export BC_FONT_PATH=:/usr/share/fonts #(remove all fonts and then add /usr/shar/fonts)
 \end{lstlisting}
-
-One last item of information about fonts that may lead to some confusion. The checkbox for Bold and Italic will occasionally be ghosted out if no bold or italic version of the selected font is available. This is no guarantee, but currently as good as it can get due to inconsistency in the creation of fonts. It is mostly just a hint. If boxes are checkmarked, but ghosted, you can not uncheck until you change to a font that does not ghost out the boxes. If you use the popup helper with the boxes checked, and attempt to keyin a font that does not have the bold/italic attribute as checked, the font will be considered illegal.
-Text: chars is output and updated to indicate the number of characters already used. The only limit to the number of characters based on a count of single $8\, bit$ characters is the available resources on the user computer available for \CGG{} use. Keep in mind that unicode or other special characters may consist of $2$ to $4$ $8\,bit$ bytes. Also, newlines are a character and any of the attributes you use count in the total. There is now a horizontal scroll bar as well as the vertical one in the textbox and they only appear when there are more lines or characters that can fit in the original sized textbox.
 
 \subsubsection*{Kerning}%
 \label{ssub:kerning}

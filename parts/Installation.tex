@@ -243,20 +243,19 @@ cd cinelerra5/cinelerra-5.1
 \begin{lstlisting}[style=sh]
 ./blds/bld_prepare.sh <os> # where <os> represents the
                            # Operating System of
-                           # centos, fedora, suse, ubuntu, mint, debian, arch, debian-testing, ubuntu-testing.
+                           # centos, fedora, suse, ubuntu, mint, debian, arch, debian-older, ubuntu-older.
 ./autogen.sh
 ./configure --prefix=/usr  # optional parameters can be added here
 make 2>&1 | tee log        # make and log the build
 \end{lstlisting}
 
-\texttt{bld\_prepare.sh} works for debian-testing, ubuntu-testing, and arch with some additional information. For Arch linux, a README file containing many more dependencies is maintained. For Gentoo, a README file lists other dependencies that have to be installed manually.
+\texttt{bld\_prepare.sh} works for Arch and Gentoo with some additional information. For Arch linux, a README file containing many more dependencies is maintained. For Gentoo, a README file lists other dependencies that have to be installed manually.
 \begin{list}{}{}
   \item \href{https://cinelerra-gg.org/download/README.arch}{https://cinelerra-gg.org/download/README.arch}
   \item \href{https://cinelerra-gg.org/download/README.gentoo}{https://cinelerra-gg.org/download/README.gentoo}
 \end{list}
 
-  \texttt{bld\_prepare.sh} option of debian-testing and ubuntu-testing is currently for perhaps the absolute latest versions and future distros and
-  will be changed to more relevant names when they are released.
+  \texttt{bld\_prepare.sh} option of debian-older and ubuntu-older is currently for older operating system versions since before about 06/2022.
 
 \item Check for obvious build errors:
 \begin{lstlisting}[style=sh]
