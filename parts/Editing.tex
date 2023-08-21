@@ -11,6 +11,8 @@ but not often considered editing method is called \textit{two-screen
   editing} \index{two-screen} (or 3 point editing) where the Viewer is used to view media and then the
 desired clip from the media is transferred to the timeline.
 
+The entire space comprised by the timebar (horizontal extent) and the stack of the tracks, whether empty or occupied, (vertical extent) is called the \textit{canvas}, in analogy of the workspace of raster graphics programs or the painter's canvas. It is usual to interchange the terms \textit{timeline} and \textit{canvas}. In the canvas, Audio tracks are different from Video tracks so a media including both audio and video will be split into 2 or more indipendent tracks. There is no \textit{Link/Unlink}-like function present in other programs, although there are workarounds.
+
 The timeline \index{timeline} is where all editing decisions are made
 (figure~\ref{fig:timeline}).  This is a stack of tracks in the
 center of the main window.  It can be scrolled up, down, left and
@@ -53,6 +55,8 @@ modified media file at the end of your editing session which
 represents the editing decisions, you need to render it.  Saving and
 loading your edit decisions is explained in the Load, Save and the
 EDL \index{EDL} section and rendering is explained in the section on Rendering.
+
+\textbf{Nomenclature:} media loaded in the timeline (canvas), in whole or in part, are called \textit{edits}, unlike other programs that call them \textit{clips}. Clips in \CGG{} are those that are created in the Viewer window and can be brought into the timeline, where they become edits, or brought into the Resources window, inside the \texttt{Clips folder}, where they can be renamed and a description added. These too, once brought into the timeline, are renamed edits. In \CGG{} the difference edits/clips is not important; however, the difference of clips as it is intended in other NLEs is important. These are media (or parts of it) complete in themselves and indipendent from other clips and the timeline. Edits in \CGG{} on the other hand, can be a media (or part of it) but can also be any region of the timeline between In/Out Points or from a highlighted, on which we can do editing operations. This leads to some advantages (e.g. putting an effect only in a part of the edit) but one must always keep in mind that the edit remains dependent on the track and the entire canvas.
 
 In the following editing sections, references to common operations
 are scattered within any of the modes where they seem pertinent.
