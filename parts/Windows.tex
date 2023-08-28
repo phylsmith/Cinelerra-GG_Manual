@@ -23,7 +23,7 @@ see \nameref{sec:focus_group}.
 \index{program window}
 
 The main window is called the \textit{Program} window and is often just referred to as the \textit{timeline}\index{timeline}.  Here is where you enter the main menu operations.  
-This timeline (or \textit{canvas}) consists of a vertical stack of tracks with time represented horizontally on the track. 
+This timeline consists of a vertical stack of tracks with time represented horizontally on the track. 
 It is the output of the rendering operations and this is what is saved when you run the \textit{File} pulldown, Save command.
 Immediately to the left of the timeline is the patchbay\index{patchbay}. The patchbay contains options that affect each track.  
 These options are described in great detail in \nameref{sec:patchbay}.
@@ -675,16 +675,9 @@ will not include audio.
     \label{fig:compositor_window}
 \end{figure}
 
-The Compositor window (figure~\ref{fig:compositor_window}) is used to display the timeline
-output.  Playing and moving along the timeline video in the Program window shows in the
-Compositor window what the current image is.  Here is where many compositing operations are
-performed that can change 
-what the timeline will look like.  When enabled, you can simply click the LMB in the Compositor
-window to start and stop play.
-  You can zoom in and out to 
-see small details, pan with the scrollbars, lock the window to prevent changes, add masks,
-and make changes with the Projector and Camera function operators. These will be explained
-in more detail in the following sections.
+The Compositor window (figure~\ref{fig:compositor_window}) is used to display the timeline output.  Playing and moving along the timeline video in the Program window shows in the Compositor window what the current image is.  Here is where many compositing operations are performed that can change what the timeline will look like and that is why it is called \textit{canvas}. The canvas dimesions correspond, by default, to the W/H values set in the project (\textit{Set Format} window).
+
+When enabled, you can simply click the LMB in the Compositor window to start and stop play. You can zoom in and out to see small details, pan with the scrollbars, lock the window to prevent changes, add masks, and make changes with the Projector and Camera function operators. These will be explained in more detail in the following sections.
 
 \subsection{Compositor Controls}%
 \label{sub:compositor_controls}
@@ -866,14 +859,7 @@ to the camera, effects, and the projector.
 \label{ssub:output_size}
 \index{temporary}
 
-\CGG{}'s compositing routines use a \textit{temporary} which is a single frame of video in
-memory where graphics processing takes place. The size of the temporary and of the output in
-the compositing pipeline are different and vary for any particular frame.  Effects are processed in
-the temporary and as such are affected by the temporary size.  In the case of the camera, its
-viewport is the temporary size. However, projectors are rendered to the output and so are affected
-by the output size. When the temporary is smaller than the output, the temporary will have blank
-borders around the region in the output.  When the temporary is larger than the output, it will be
-cropped.
+\CGG{}'s compositing routines use a \textit{temporary} which is a single frame of video in memory where graphics processing takes place. By default the size of the temporary is that of the project ($W \times H$), i.e., the output size. But if the tracks on the timeline have various sizes different from those of the project, then the temporary will take the size of the active track (viewport = green border). We can also change the size of the viewport using the Camera tool, as well as pans and zooms the temporary displayed in it. Effects are processed in the temporary and as such are affected by the temporary size.  In the case of the camera, its viewport is the temporary size.  The size of the temporary and of the output in the compositing pipeline can be different and vary for any particular frame. However, projectors are rendered to the output and so are affected by the output size. The temporary is the basis on which the Projector tool acts to display the canvas on the Compositor window. The canvas always has the size of the project, although with the projector we can make pans and resizes of the red border inside it. When the temporary is smaller than the output, the temporary will have blank borders around the region in the output.  When the temporary is larger than the output, it will be cropped.
 
 \subsubsection*{Track and Output size}%
 \label{ssub:track_size}
@@ -892,7 +878,11 @@ or by using \texttt{Settings $\rightarrow$ Format}, or in the Resources window w
 a video asset and choosing \texttt{Match $\rightarrow$ Match project size}. When you \emph{Match project size}, you
 are conforming the output to the asset. To change the size and aspect ratio of the output (Projector) we have to change the whole project, which will alter all the tracks in the timeline. Once you have set the output size in 1 of these 3 ways,
 any newly created tracks will conform to the specified output size.  When rendering, the project's
-output size is the final video track size where the temporary pipeline is rendered into. 
+output size is the final video track size where the temporary pipeline is rendered into.
+
+To clarify, let's take an example.
+
+If we load a media (M) into Resources and adjust the size of the project to the size of M, we will get the canvas size of the media $W_{M} \times H_{M}$). We can see in the Set Format window that the project's default values ($W \times H$) have changed to those of M ($W_{M} \times H_{M}$). The tracks on the timeline can have different sizes, but what we will see on the canvas, that is, in the Compositor window, is always the output size i.e. the size of the project. Tracks with smaller sizes will be seen with black bands; tracks with larger sizes will be cropped. Each track has its own size but we will see it inserted in the output size. If we change the output size the tracks will not change, remaining in their original size. We can only change the size of the tracks by manually acting on each one in the ways seen before. Finally, if we create a new track in a project of size $W \times H$, it will assume the size of the project automatically.
 
 \subsubsection*{Aspect Ratio (Theory)}%
 \label{ssub:aspect_ratio_theory}
@@ -1564,7 +1554,7 @@ The characters can be any where within the phrase and it does not matter if uppe
 Other options you will see if you \textit{right mouse click in the folder} which brings up the menu are described next \index{folders!RMB options}.  
 
 \begin{description}
-    \item[ Load files ]  for convenience to load files same as from the main window so you do not have to move the mouse so far in case you have multiple monitors.
+    \item[Load files ]  for convenience to load files same as from the main window so you do not have to move the mouse so far in case you have multiple monitors.
     \item[Display text/icons]  as described previously for format variations preference.
     \item[Select]  options are All, Used, Unused, and None.  This gives you the capability to have a set of the
         contents highlighted for ease of use so you can see what is or is not loaded, or unset the highlight.
@@ -1729,7 +1719,7 @@ Column headers:
 \begin{description}
 \item[ Enable]  this column is used to designate the state of that filter rule
     \begin{description}
-        \item[ Off]		disable the filter
+        \item[Off]		disable the filter
                 \item[And] 		narrow your search; all of your search terms must be present
                 \item[Or]		broaden your search to include more values
                 \item[And Not]	exclude terms that do not contain the given value from your search results
@@ -1737,7 +1727,7 @@ Column headers:
     \end{description}
 \item [Target] – this column designates which media asset attribute to look at
     \begin{description}
-        \item[ Patterns]	each line contains a filename filter, matches the file path
+        \item[Patterns]	each line contains a filename filter, matches the file path
                 \item[Filesize]	number of bytes in a file
                 \item[Time]		date file was created
                 \item[Track Type]	track type of video, audio, or audio video (for both)

@@ -29,7 +29,7 @@ from this point uses the same settings.
 \end{figure}
 
 In addition to the standard settings for sample rate, frame rate,
-and frame size, \CGG{} uses some less traditional settings like
+and frame size (canvas size), \CGG{} uses some less traditional settings like
 channel positions, color model, and aspect ratio.  The aspect ratio
 refers to the screen aspect ratio (SAR).
 
@@ -121,19 +121,10 @@ framerate does not have to be the same as an individual media file
 frame rate that you load.  Media is reframed to match the project
 framerate.
 
-\item[Canvas size:] \index{canvas size} sets the size of the video output \index{output size}.  In addition,
-each track also has its own frame size.  Initially, the New Project
-dialog creates video tracks whose size match the video output.  The
-video track sizes can be changed later without changing the video
-output.
+\item[Canvas size:] \index{canvas size} sets the size of the video output \index{output size}. In addition,
+each track also has its own frame size.  Initially, the New Project dialog creates video tracks whose size match the video output.  The video track sizes can be changed later without changing the video output. We have: Project size = $W \times H$ pixels = canvas size = output size
 
-\item[Aspect ratio:] \index{aspect ratio} sets the aspect ratio; this aspect ratio refers
-to the screen aspect ratio.  The aspect ratio is applied to the
-video output.  The aspect ratio can be different than the ratio that
-results from the formula: $\dfrac{h}{v}$ (the number of horizontal
-pixels divided into the number of vertical pixels).  If the aspect
-ratio differs from the results of the formula above, your output
-will be in non-square pixels.
+\item[Aspect ratio:] \index{aspect ratio} sets the aspect ratio; this aspect ratio refers to the screen aspect ratio.  The aspect ratio is applied to the video output (canvas). It can be convenient to vary the size of the canvas in percentage terms, instead of having to calculate the number of W x H pixels. The aspect ratio can be different than the ratio that results from the formula: $\dfrac{h}{v}$ (the number of horizontal pixels divided into the number of vertical pixels).  If the aspect ratio differs from the results of the formula above, your output will be in non-square pixels.
 
 \item[Auto aspect ratio:] if this option is checked, the Set Format
 dialog always recalculates the Aspect ratio setting based upon the
@@ -224,8 +215,10 @@ Generally, best practice is to perform the following sequence of preparations fo
 
 \begin{enumerate}
 	\item Motion stabilization, and maybe some other preparations, to improve the quality of the source video is best done under the properties identical to the properties of the original video; it may be different codec, but same frame size and same frame rate. For stabilization you can use ffmpeg command line plugins called \textit{vidstabdetect} and \textit{vidstabtransform}.
-	\item If you need to alter the frame rate, for example because different source clips have different frame rates, then recode all the necessary clips to the same future project frame rate. Here frame sizes can still have different sizes, but frame rates should be all the same.
-	\item Whole editing: if you need to change frame rate of some restricted part, particularly when smooth acceleration/deceleration is needed, it can be done here. But if frame rate has to be changed only due to different source fps, it is better to do it during the preparation stage.
+	\item To have a workflow at the highest quality it may be convenient to convert the sources into image sequences (e.g. OpenEXR). Especially if we want to exchange files with other Color or Compositimg programs that preferably use image sequences.
+	\item Uniform the color models. It is convenient to unify the color models of the sources because they would give different and inconsistent results with each other once displayed in the Compositor window.
+	\item If we intend to do some color correction or compositing with VFX, it is convenient to do some de-noising on the sources to make their pixels more homogeneous and suitable for post processing. De-noising is a heavy operation for the system so it may be convenient to do it in pre-editing.
+	\item If you need to alter the frame rate, for example because different source clips have different frame rates, then recode all the necessary clips to the same future project frame rate. Here frame sizes can still have different sizes, but frame rates should be all the same.	If you need to change frame rate of some restricted part, particularly when smooth acceleration/deceleration is needed, it can be done in timeline. But if frame rate has to be changed only due to different source fps, it is better to do it during the preparation stage.
 \end{enumerate}
 
 \CGG{} does not have color management \index{color management}, but we can still give some general advice on how to set color spaces:

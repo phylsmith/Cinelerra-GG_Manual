@@ -70,6 +70,13 @@ or
 export CIN_HW_DEV=vaapi
 \end{lstlisting}
 
+In addition for a computer with dual graphics cards, you can select your specific device with an environment variable
+to decode and encode.  For example:
+\begin{lstlisting}[numbers=none]
+CIN_DRM_DEC=/dev/dri/renderD129  CIN_DRM_ENC=/dev/dri/renderD128   ./cin
+\end{lstlisting}
+and substituting your specific location instead of /dev/dri/renderD129 or D128.
+
 It might be more difficult to analyze problems as a result of using the GPU because of the wide variation in hardware.  When you do not set the \texttt{CIN\_HW\_DEV} environment variable, the code will work exactly as before since this feature is self-contained.
 
 There is also a \texttt{Settings $\rightarrow$ Preferences, Performance} tab, \textit{Use HW device} flag
