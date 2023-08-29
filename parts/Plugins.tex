@@ -2112,6 +2112,30 @@ The loop effects have one option: the \textit{number of frames} or \textit{sampl
 
 Every time a keyframe is set in a loop effect, the keyframe becomes the beginning of the region to loop. Setting several keyframes in succession causes several regions to loop. Setting a single keyframe causes the region after the keyframe to be looped throughout the effect, no matter where the keyframe is. The end of an effect can be looped from the beginning by setting the keyframe near the end.
 
+\subsection{Mirror}%
+\label{sub:mirror}
+\index{Mirror}
+
+Mirror does more than simply flip (or reflect) the frame. It divides the frame into two vertical and/or horizontal half-planes, allowing them to be translated and oriented to achieve complex reflections and compositions, which can be reminiscent of kaleidoscope.
+
+An example of horizontal + vertical reflection without Swap nor shifting of the center of reflection is shown in the figure~\ref{fig:mirror}
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.9\linewidth]{mirror.png}
+	\caption{mirror plugin}
+	\label{fig:mirror}
+\end{figure}
+
+\begin{description}
+	\item[Horizontal:] composes a reflection of the right half-plane joined to the left half-plane. The axis of reflection is central and vertical (Reflection Center). It can be used together with Vertical to have 4 half-planes of reflection.
+	\item[Swap LEFT-RIGHT side:] Swaps the two horizontal reflection half-planes, reversing their orientation. If this option is enabled, Enable Reflection Center is disabled.
+	\item[Vertical:] composes a reflection of the top half-plane joined to the bottom half-plane. The axis of reflection is central and horizontal (Reflection Center). It can be used together with Horizontal to have 4 half-planes of reflection.
+	\item[Swap TOP-BOTTOM side:] Swaps the two vertical reflection half-planes, reversing their orientation. If this option is enabled, Enable Reflection Center is disabled.
+	\item[Enable Reflection Center:] allows shifting the half-plane along the X-axis and/or along the Y-axis, relative to the Reflection Center. You can enter the percentage value or act on the slider for a visual adjustment. Checking this option excludes the use of swap functions.
+	\item[Reset] returns all values to the initial conditions, that is with only the Horizontal button enabled.
+\end{description}
+
 \subsection{Motion51}%
 \label{sub:motion51}
 \index{Motion51}
