@@ -252,30 +252,6 @@ For best results, \textit{Align cursor on frames} \index{Align cursor on frames}
 Use the pulldown \texttt{Settings$\rightarrow$Align cursor on frames} to change the alignment by
 checking the box on for video and off for audio.
 
-\begin{figure}[htpb]
-    \centering
-    %\includegraphics[width=0.8\linewidth]{name.ext}
-    \begin{tikzpicture}[scale=1, transform shape]
-        \node (img1) [yshift=0cm, xshift=0cm, rotate=0]
-         {\includegraphics[width=0.6\linewidth]{insertion-point.png}};
-        \node [yshift=-5mm, xshift=-1cm,anchor=east] at (img1.north west) (Pulldowns) {Pulldowns};
-        \node [yshift=-10mm, xshift=-1cm,anchor=east] at (img1.north west) (Transport) {Transport \& Buttons Bar};
-        \node [yshift=-15mm, xshift=-1cm,anchor=east] at (img1.north west) (Timebar) {Timebar};
-        \node [yshift=-20mm, xshift=-1cm,anchor=east] at (img1.north west) (Title) {Media Title };
-        \node [yshift=-28mm, xshift=-1cm,anchor=east] at (img1.north west) (Video) {Video Track};
-        \node [yshift=-46mm, xshift=-1cm,anchor=east] at (img1.north west) (Audio) {Audio Track};
-        \draw [->, line width=1mm] (Pulldowns) edge  ([yshift=-5mm] img1.north west);
-        \draw [->, line width=1mm] (Transport) edge  ([yshift=-10mm] img1.north west);
-        \draw [->, line width=1mm] (Timebar) edge    ([yshift=-15mm] img1.north west);
-        \draw [->, line width=1mm] (Title) edge      ([yshift=-20mm] img1.north west);
-        \draw [->, line width=1mm] (Video) edge      ([yshift=-28mm] img1.north west);
-        \draw [->, line width=1mm] (Audio) edge      ([yshift=-46mm] img1.north west);
-        \end{tikzpicture}
-    
-    \caption{Insertion point is at 0:00:25:10 in Hr:Mn:Sec:Frames}
-    \label{fig:insertion-points}
-\end{figure}
-
 
 \subsection{Editing Modes}%
 \label{sub:editing_modes}
@@ -286,9 +262,31 @@ There are 2 different editing modes for operations which affect how the insertio
 on the timeline operate.  
 There is:  \emph{drag and drop mode} and \emph{cut and paste mode}. 
 The editing mode is determined by selecting the \texttt{arrow} \index{arrow}, or immediately to the right of the arrow,
-the \texttt{I-beam} \index{i-beam} in the Transport and Buttons bar. In figure~\ref{fig:insertion-points} you can see
-the green colored highlight \protect\footnote{green is used in the default Cakewalk theme, but the highlight color will be different in other themes} on the arrow icon indicating that you are currently in 
-\emph{drag and drop mode}.
+the \texttt{I-beam} \index{i-beam} in the Transport and Buttons bar. In figure~\ref{fig:insertion-points} you can see the green colored highlight \protect\footnote{green is used in the default Cakewalk theme, but the highlight color will be different in other themes} on the arrow icon indicating that you are currently in \emph{drag and drop mode}.
+
+\begin{figure}[htpb]
+	\centering
+	%\includegraphics[width=0.8\linewidth]{name.ext}
+	\begin{tikzpicture}[scale=1, transform shape]
+		\node (img1) [yshift=0cm, xshift=0cm, rotate=0]
+		{\includegraphics[width=0.6\linewidth]{insertion-point.png}};
+		\node [yshift=-5mm, xshift=-1cm,anchor=east] at (img1.north west) (Pulldowns) {Pulldowns};
+		\node [yshift=-10mm, xshift=-1cm,anchor=east] at (img1.north west) (Transport) {Transport \& Buttons Bar};
+		\node [yshift=-15mm, xshift=-1cm,anchor=east] at (img1.north west) (Timebar) {Timebar};
+		\node [yshift=-20mm, xshift=-1cm,anchor=east] at (img1.north west) (Title) {Media Title };
+		\node [yshift=-28mm, xshift=-1cm,anchor=east] at (img1.north west) (Video) {Video Track};
+		\node [yshift=-46mm, xshift=-1cm,anchor=east] at (img1.north west) (Audio) {Audio Track};
+		\draw [->, line width=1mm] (Pulldowns) edge  ([yshift=-5mm] img1.north west);
+		\draw [->, line width=1mm] (Transport) edge  ([yshift=-10mm] img1.north west);
+		\draw [->, line width=1mm] (Timebar) edge    ([yshift=-15mm] img1.north west);
+		\draw [->, line width=1mm] (Title) edge      ([yshift=-20mm] img1.north west);
+		\draw [->, line width=1mm] (Video) edge      ([yshift=-28mm] img1.north west);
+		\draw [->, line width=1mm] (Audio) edge      ([yshift=-46mm] img1.north west);
+	\end{tikzpicture}
+	
+	\caption{Insertion point is at 0:00:25:10 in Hr:Mn:Sec:Frames}
+	\label{fig:insertion-points}
+\end{figure}
 
 With the arrow highlighted for \emph{drag and drop mode}, a double click with the left mouse button in the timeline selects the edit the mouse pointer is over. 
 Then dragging in the timeline repositions that edit and this can be used for moving effects,
@@ -1621,54 +1619,43 @@ Figure~\ref{fig:info_asset_details} shows the \textit{Detail} box to click on th
 \index{folder add filter/search}
 
 Creating folders that are more specific to a particular project is helpful in better organizing your work.  
-This can be done by utilizing the files already loaded to the \textit{master} Media or Clips folders in the Resources window.  The general rule is you can only drag clips to a ClipUserBin and you can only drag media to a MediaUserBin.
+This can be done by utilizing the files already loaded to the \textit{master} Media or Clips folders in the Resources window.  The general rule is you can only drag clips to a ClipUserBin and you can only drag media to a MediaUserBin. No subfolders can be created within the new folders. Further below, after we populate the new folder, we will see how to use logical operators or other filters to automatically sort the media.
 
-Below are steps illustrating an easy way to set up a folder.
+Below are steps illustrating an easy way to set up a new folder.
 
-%TODO Below part need to be rewriten
 \begin{enumerate}
-    \item In the Resources window (figure~\ref{fig:folder_resources}), in the location of the Video/Audio effects and Media folders, bring up the \textit{Folder}$\dots$ popup by clicking the right mouse button.  
-        Highlight, then click \textit{New Media or Clips}.
-        \begin{figure}[htpb]
-            \begin{minipage}{.6\linewidth}
-                \centering
-                \includegraphics[width=0.9\linewidth]{folder_resources.png}
-                \caption{Highlight, then click “New Media or Clips”.
-                    “Modify folder” can be used to change the name of a folder.
-                    “Delete folder” in the popup can be used to delete a folder.
-                }
-                \label{fig:folder_resources}
-            \end{minipage}
-            \hfill
-            \begin{minipage}{.37\linewidth}
-                \centering
-%begin{latexonly}
-                \vspace{18ex}
-%end{latexonly}
-
-                \includegraphics[width=0.9\linewidth]{folder_new.png}
-                \caption{Type in your folder name in the textbox.  Click OK.}
-                \label{fig:folder_new}
-            \end{minipage}
-        \end{figure}
+    \item In the Resources window (figure~\ref{fig:folder_resources}), in the location of the Video/Audio effects and Media folders, bring up the \textit{Folder...} popup by clicking the right mouse button. Highlight, then click \textit{New Media} or \textit{New Clips}. \textit{Modify folder} can be used to change the name of a folder. \textit{Delete folder} can be used to delete a folder.
     \item  In the \textit{New folder} popup as shown below (figure~\ref{fig:folder_new}), type in your folder name in the textbox.  Click OK.
-     \begin{figure}[htbp]    
-     	\centering
-     	\includegraphics[width=0.9\linewidth]{folder_master.png}
-     	\caption{The “master” Media folder}
-     	\label{fig:folder_master}
-     \end{figure}     
-    \item  Select the \textit{master} Media folder to see which files are currently loaded, figure~\ref{fig:folder_master}.  
-        Highlight the files there that you want to copy to your new folder (named Photos of Garden).  
-        Drag the files to the left and when you see the Photos of Garden folder become highlighted, then drop there.  
-        You can drag and drop any of the media from the \textit{master} Media at any time.  
-        It flashes when the drop is successful.
+    \item  Select the \textit{master} Media folder to see which files are currently loaded, figure~\ref{fig:folder_master}. Highlight the files there that you want to copy to your new folder (named \textit{Photos of Garden}). Drag the files to the left and when you see the \textit{Photos of Garden} folder become highlighted, then drop there. You can drag and drop any of the media from the \textit{master} Media at any time. It flashes when the drop is successful.       
 \end{enumerate}
 
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.5\linewidth]{folder_resources.png}
+	\caption{New folder menu}
+	\label{fig:folder_resources}
+\end{figure}
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.4\linewidth]{folder_new.png}
+	\caption{Folder name}
+	\label{fig:folder_new}
+\end{figure}
+
+ \begin{figure}[htbp]    
+	\centering
+	\includegraphics[width=0.8\linewidth]{folder_master.png}
+	\caption{The “master” Media folder}
+	\label{fig:folder_master}
+\end{figure}
+
 Adding the Shift key before the actual drop, will allow for relative path filenames instead of full path.
-But you might want to include or eliminate some of the media that exists in one of the folders that you have set up already.  
-In this case you will want to click on the \textit{Modify folder} in the popup.  
-When you bring up the Modify folder window, if you already have files in that folder, you will see filters that were generated automatically when you did a Drag and Drop.
+
+\textbf{Sort the media}. After creating the new folder we can populate it automatically through a choice of filters. This provides functionality similar to \textit{Smart Bins}. Once the folder is populated we can still take action to change the filters and thus the sorting, loading or deleting of some media. Creating new folders and populating them with Modify Folder is akin to the \textit{Logging} phase of professional workflows. Let us examine the Modify folder window in detail: 
+
+When you bring up the Modify folder window, if you already have files in that folder, you will see filters that were generated automatically when you did a Drag and Drop. See figure~\ref{fig:modify-target}.
+
 
 
 \begin{figure}[htpb]
@@ -1677,20 +1664,22 @@ When you bring up the Modify folder window, if you already have files in that fo
     \begin{tikzpicture}[scale=1, transform shape]
         \node (img1) [yshift=0cm, xshift=0cm, rotate=0] {\includegraphics[width=0.7\linewidth]{folder_modify.png}};
         \node [yshift=-20mm, xshift=-1cm,anchor=east] at (img1.north west) (Arrow1) {\parbox{8em}{Here is the filter that was generated with the original drop }};
-        \node [yshift=-65mm, xshift=0cm,anchor=east] at (img1.north west) (Arrow2) {\parbox{10em}{When you click on the Value portion of that filter, the entire set of files that are covered by the filter rules pops up.   Now you can highlight a target filename that you would like to remove, and just erase that line and check the green checkmark for OK.}};
         \draw [->, line width=1mm] (Arrow1) edge  ([yshift=-20mm] img1.north west);
         \end{tikzpicture}
-    
-    \caption{Modify target}
+        
+    \caption{Modify Folder}
     \label{fig:modify-target}
 \end{figure}
 
-To delete the entire set of files listed on the filter rule, highlight the rule line and hit the \textit{Del} button.  
+When you click on the \textit{Value} portion of that filter, the entire set of files that are covered by the filter rules pops up.   Now you can highlight a target filename that you would like to remove, and just erase that line and check the green checkmark for OK.
+
+To delete the entire set of files listed on the filter rule, highlight the rule line and hit the \textit{Del} button. 
+
 To add a new filter rule, click on the \textit{Add} button which will automatically add a default line after any current lines.  
-The default line will be a line that matches everything in the \textit{master} Media folder which is \textit{Or  Patterns  Matches   *}.  
+The default line will be a line that matches everything in the master Media folder which is \textit{Or  Patterns  Matches   *}.  
 Click the right mouse button on the current field underneath the column header to see the choices available for each column.  
 
-Modifications will not be in effect until you click on the green arrow OK button or click on the Apply button.  
+Modifications will not be in effect until you click on the green arrow \textit{OK} button or click on the \textit{Apply} button.  
 But once you hit Apply, clicking on the red X button will not undo your changes.  
 The filter/search rules are applied in the order listed in the Modify folder window.  
 You can change the order of the filter rules by highlighting the rule you want to move and then drag and drop to a new location.
@@ -1705,7 +1694,7 @@ The figure~\ref{fig:modify_folder} below displays the available choices for each
         \node (img2) [yshift=-1cm, xshift=3.5cm, rotate=0] at (img1) {\includegraphics[width=0.8\linewidth]{modify_folder2.png}};
         \node (img3) [yshift=-1cm, xshift=3cm, rotate=0] at (img2){\includegraphics[width=0.5\linewidth]{modify_folder3.png}};
     \end{tikzpicture}
-    \caption{The available choices for each field}
+    \caption{The available choices for each field. Value field missing.}
     \label{fig:modify_folder}
 \end{figure}
 
@@ -1714,7 +1703,7 @@ Information about the columns and rules for the search filters in the Modify fol
 Column headers:
 
 \begin{description}
-\item[ Enable]  this column is used to designate the state of that filter rule
+\item[\textcolor{CinBlueText}{Enable}]  – this column is used to designate the state of that filter rule
     \begin{description}
         \item[Off]		disable the filter
                 \item[And] 		narrow your search; all of your search terms must be present
@@ -1722,7 +1711,7 @@ Column headers:
                 \item[And Not]	exclude terms that do not contain the given value from your search results
                 \item[Or Not]	include terms that do not contain the given value from your search results
     \end{description}
-\item [Target] – this column designates which media asset attribute to look at
+\item [\textcolor{CinBlueText}{Target}] – this column designates which media asset attribute to look at
     \begin{description}
         \item[Patterns]	each line contains a filename filter, matches the file path
                 \item[Filesize]	number of bytes in a file
@@ -1735,7 +1724,7 @@ Column headers:
                 \item[Channels]	Number of audio channels
                 \item[Duration]	Playback time in seconds -- it uses the largest of audio or video if contains both
     \end{description}
-\item[Op] – boolean operators used to narrow or broaden the relationship between your search terms
+\item[\textcolor{CinBlueText}{Op}] – boolean operators used to narrow or broaden the relationship between your search terms
     \begin{description}
         \item[Around]	about this value; use \textit{+radius} for a search range: [target–radius$\dots$  target+radius]
         \item[Eq	]	equal to
@@ -1748,14 +1737,14 @@ Column headers:
     \end{description}
 \end{description}
 
-\textbf{Value} --- the characteristic you are looking for with expressions that can be written with the following:
+\textbf{\textcolor{CinBlueText}{Value}} --- the characteristic you are looking for with expressions that can be written with the following:
 
-\begin{description}
-\item[Number] (decimal points are allowed and will be converted to a standard form):
-    \begin{description}
-        \item[inf] representing infinity
-        \item[\#[TtGgMmKk]]  ---  where \# represents a number and the characters mean:
-    \end{description}
+	\begin{description}
+	\item[Number] (decimal points are allowed and will be converted to a standard form):
+    	\begin{description}
+       	 \item[inf] representing infinity
+       	 \item[\#[TtGgMmKk]]  ---  where \# represents a number and the characters mean:
+    	\end{description}
 
     \begin{tabular}{rcl}
         inf&=& infinity\\
