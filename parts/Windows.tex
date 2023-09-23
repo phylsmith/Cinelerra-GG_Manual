@@ -1650,26 +1650,46 @@ Below are steps illustrating an easy way to set up a new folder.
 	\label{fig:folder_master}
 \end{figure}
 
-Adding the Shift key before the actual drop, will allow for relative path filenames instead of full path.
+\subsection{Modify Folder: sorting the media}%
+\label{sub:sorting_media}
+\index{folder modify}
 
-\textbf{Sort the media}. After creating the new folder we can populate it automatically through a choice of filters. This provides functionality similar to \textit{Smart Bins}. Once the folder is populated we can still take action to change the filters and thus the sorting, loading or deleting of some media. Creating new folders and populating them with Modify Folder is akin to the \textit{Logging} phase of professional workflows. Let us examine the Modify folder window in detail: 
+In \CGG{} all the virtual mediafiles loaded in the \textit{Resources} window are collected in the \texttt{Media} folder without any kind of organization and sorting other than alphabetical. The Media folder is considered a \textit{master} folder because it is the basis for every other new folder we create. Another \textit{master} folder is \texttt{Clips}, and in fact we can create new clips folders as well. If we do editing of large projects containing numerous mediafiles, a rational and selective organization of the source material becomes necessary. In fact, having the sources organized in folders, where they can be found and used easily, makes subsequent editing much faster, as well as minimizing confusion and the possibility of errors. This step, which is fundamental in the pro environment, is called \textit{Logging} and also includes \textit{screening} individual mediafiles in the Viewer window; \textit{renaming} them rationally; and adding labels and descriptions in the \textit{metadata}.
 
-When you bring up the Modify folder window, if you already have files in that folder, you will see filters that were generated automatically when you did a Drag and Drop. See figure~\ref{fig:modify-target}.
+We start by creating one or more new folders (MediaUserBin). These will be empty and we should populate them with the mediafiles contained in the master Media folder. There are two options: manual \textit{Drag and Drop} or automatic populating by setting \textit{filters} (Smart Bins).
 
-
+\paragraph{Drag and Drop:} you drag mediafiles into the new folder one by one or in selected groups. The starting master folder can only be \texttt{Media} (or \texttt{Clips}, if we have created a new clip folder). Dragging is done by preserving the absolute path of the sources. If you open Modify Folder window you will notice that each imported mediafile occupies a different row characterized by its own path and name. See figure~\ref{fig:modify-target}. The \texttt{Value} field containing paths can contain only 63 characters, and it may happen to find the names cut off. The full path and name can be found by right-clicking on the row, but this is inconvenient and time-consuming. The best solution is to drag the mediafiles while holding down the \texttt{Shift} key; this will return the relative path instead of the absolute path, with space gain.
 
 \begin{figure}[htpb]
-    \centering
-    %\includegraphics[width=0.8\linewidth]{name.ext}
-    \begin{tikzpicture}[scale=1, transform shape]
-        \node (img1) [yshift=0cm, xshift=0cm, rotate=0] {\includegraphics[width=0.7\linewidth]{folder_modify.png}};
-        \node [yshift=-20mm, xshift=-1cm,anchor=east] at (img1.north west) (Arrow1) {\parbox{8em}{Here is the filter that was generated with the original drop }};
-        \draw [->, line width=1mm] (Arrow1) edge  ([yshift=-20mm] img1.north west);
-        \end{tikzpicture}
-        
-    \caption{Modify Folder}
-    \label{fig:modify-target}
+	\centering
+	%\includegraphics[width=0.8\linewidth]{name.ext}
+	\begin{tikzpicture}[scale=1, transform shape]
+		\node (img1) [yshift=0cm, xshift=0cm, rotate=0] {\includegraphics[width=0.7\linewidth]{folder_modify.png}};
+		\node [yshift=-20mm, xshift=-1cm,anchor=east] at (img1.north west) (Arrow1) {\parbox{8em}{Here is the filter that was generated with the original drop }};
+		\draw [->, line width=1mm] (Arrow1) edge  ([yshift=-20mm] img1.north west);
+	\end{tikzpicture}
+	
+	\caption{Modify Folder}
+	\label{fig:modify-target}
 \end{figure}
+
+\paragraph{Filters:} you do automatic populating using filters (Smart Bins mode). You set the values of the \texttt{Enabled}; \texttt{Target}; \texttt{Op} and \texttt{Value} fields to make up the required filtering. The folder will populate automatically by pulling from the \texttt{Media} master folder. The filter is the result of one row, but we can do more sophisticated filtering by adding more rows. The process will start from the first row propagating to subsequent rows always following the pattern from top to bottom. See figure~\ref{fig:modify_folder}.
+
+\begin{figure}[htpb]
+	\centering
+	%\includegraphics[width=0.8\linewidth]{name.ext}
+	\begin{tikzpicture}[scale=1, transform shape]
+		\node (img1) [yshift=0cm, xshift=0cm, rotate=0] {\includegraphics[width=0.8\linewidth]{modify_folder1.png}};
+		\node (img2) [yshift=-1cm, xshift=3.5cm, rotate=0] at (img1) {\includegraphics[width=0.8\linewidth]{modify_folder2.png}};
+		\node (img3) [yshift=-1cm, xshift=3cm, rotate=0] at (img2){\includegraphics[width=0.5\linewidth]{modify_folder3.png}};
+	\end{tikzpicture}
+	\caption{The available choices for each field. Value field missing.}
+	\label{fig:modify_folder}
+\end{figure}
+
+Let's look in detail at all the options of Modify Folder. 
+
+When you bring up the Modify folder window, if you already have files in that folder, you will see filters that were generated automatically when you did a Drag and Drop. See figure~\ref{fig:modify-target}.
 
 When you click on the \textit{Value} portion of that filter, the entire set of files that are covered by the filter rules pops up.   Now you can highlight a target filename that you would like to remove, and just erase that line and check the green checkmark for OK.
 
@@ -1683,20 +1703,6 @@ Modifications will not be in effect until you click on the green arrow \textit{O
 But once you hit Apply, clicking on the red X button will not undo your changes.  
 The filter/search rules are applied in the order listed in the Modify folder window.  
 You can change the order of the filter rules by highlighting the rule you want to move and then drag and drop to a new location.
-
-The figure~\ref{fig:modify_folder} below displays the available choices for each field.
-
-\begin{figure}[htpb]
-    \centering
-    %\includegraphics[width=0.8\linewidth]{name.ext}
-    \begin{tikzpicture}[scale=1, transform shape]
-        \node (img1) [yshift=0cm, xshift=0cm, rotate=0] {\includegraphics[width=0.8\linewidth]{modify_folder1.png}};
-        \node (img2) [yshift=-1cm, xshift=3.5cm, rotate=0] at (img1) {\includegraphics[width=0.8\linewidth]{modify_folder2.png}};
-        \node (img3) [yshift=-1cm, xshift=3cm, rotate=0] at (img2){\includegraphics[width=0.5\linewidth]{modify_folder3.png}};
-    \end{tikzpicture}
-    \caption{The available choices for each field. Value field missing.}
-    \label{fig:modify_folder}
-\end{figure}
 
 Information about the columns and rules for the search filters in the Modify folder window follows \index{folder add filter/search}.
 
@@ -1794,7 +1800,6 @@ Column headers:
 
 Table showing the allowed usage:
 
-%TODO create table for below code
 \begin{lstlisting}[numbers=none]
 target:    |  eq  ge  gt  ne  le  lt   matches  around
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1845,7 +1850,7 @@ And	&Duration&Eq	&01:00		& files included must have 60 secs. Duration\\
 Off	&Samplerate&Ne	&44000		& off for now, but may want to include later\\
 And	&Framerate&Around&24+1		& files included all have 24 to 25 framerate\\
 Or	&Patterns&Matches&[*.mp4]	& all files with the extension of mp4\\
-Or	&Time&	Around&2018/08/02 06:00:00 + 02:00:00  & files at 4AM to 8 AM\\\bottomrule
+Or	&Time&	Around&2018/08/02 06:00:00 + 02:00:00  & files at 6AM to 8 AM\\\bottomrule
     \end{tabular}
 \end{table}
 
