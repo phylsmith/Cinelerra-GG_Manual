@@ -840,9 +840,9 @@ provided below.
                                   ones that have the red lines
                                   around them.\\
                                   
-    Select Edits & Ctrl-Alt-' & Select all edits within a highlighted area of the timeline \\
+    Select Edits & Ctrl-Alt-' & Select all edits within a highlighted area of the timeline * \\
     
-    Deselect Edits & & Deselect all edits within a highlighted area of the timeline \\
+    Deselect Edits & & Deselect all edits within a highlighted area of the timeline * \\
 
     Copy & Ctrl-c & Copy the selected edits into the copy buffer.\\
 
@@ -889,6 +889,8 @@ provided below.
   \end{longtable}
 \end{center}
 \renewcommand{\arraystretch}{1}
+
+* \textit{If the selection area created is larger than the edits we want to act on and includes additional edits, those edits will be involved if "Select Edits" or "Deselect Edits" is used. Indeed, these options act on both the selected edits and those that are not selected but are included in the selection area created. In practice, edits that were selected are deselected, while unselected edits are selected}.
 
 The copy/paste behavior respects the armed/disarmed tracks
 state.  A paste of audio on a video track will fail and vice versa.
@@ -1136,7 +1138,9 @@ There is also a faster way:
 	\item Choose the \textit{Select or Deselect edits} option and the clips inside the highlight area will be selected or deselected.
 \end{enumerate}
 
-And there is a Drag mouse way (this requires that the cursor be on the first
+NOTE: \textit{Select Edits/Deselect Edits} option toggle between select and deselect edits. If you have selected an edit and you want to deselect it but select the edits near to it, you can highlight the area and using \textit{Deselect Edits} (or \textit{Select Edits}) the edits near to it will be selected while the edit selected before will be deselected. Of course it works for more edits selected before too. In practice, edits that were selected are deselected, while unselected edits (included in the selection area we created) are selected. If you want to deselect all the selected edits you must use \textit{Clear Select} option by MMB.
+
+There is a Drag mouse way (this requires that the cursor be on the first
 clip and from there you start the drag):
 \begin{enumerate}
 	\item To Drag Select edits, hold down Alt+Left Mouse Button (LMB) and drag over the selection area. Releasing the mouse results in selecting. 
