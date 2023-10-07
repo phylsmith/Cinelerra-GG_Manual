@@ -675,3 +675,144 @@ The Main window (also called the program window) consists of pulldown menus, but
   \bottomrule
 \end{longtable}
 
+\section{Alternative Shortcuts }%
+\label{sec:alternative_shortcuts}
+\index{shortcuts!alternative}
+
+The alternative shortcuts are changed from \CGGI{} default to what most other NLEs use as standard.
+For example:
+
+\texttt{J, K, L} (Play Normal Reverse, Stop, Play Normal Forward) and when pressed twice J and L will Play Fast and then if playing fast and pressed again, will go back to playing normal.
+
+\texttt{I, O} (set/unset InPoint, set/unset OutPoint)
+
+\texttt{A, S} (Jump backward next cut, Jump forward next cut)
+
+To use these alternative shortcuts you must use the appimage found \href{https://cinelerra-gg.org/download/images/CinGG-20230930-alternative_shortcuts.AppImage}{here} -- you may want to go up 1 directory level to get a more recent dated version -- or compile your own \CGG{} with the the patch and the instructions found here: \nameref{sub:notable_options_and_caveats}.
+
+These shortcuts will only display in the English version for the caption/hints and the
+included shortcuts.html file in the "Shell Cmds" of the program does not include them.
+The texts in the menu and the captions of the icons,
+written with the '-' character between the Special key and the key in the default set, for
+example \texttt{Shift-s}, have been replaced by the '+' character.  And the
+letters are always in capital letters although \textit{Shift} is not pressed. This notation is
+more consistent in what many, if not all, the other NLE programs use.   Some of the original default shortcuts like
+\texttt{BD Render... (Ctrl+Shift+d)} and \texttt{DVD Render... (Alt+d)} have been deleted
+because they are not used  frequently. If a shortcut in the After column as shown in the following table has a '+' symbol (for example: \texttt{+ 'I'}),
+it means that it is an additional shortcut added to the old shortcut/s in the Before column
+and also that that shortcut was confiscated from a default \CGGI{} shortcut where it had a different function.
+
+These shortcuts are very useful because the keys more frequently used have
+priority in editing, and are easy to use with the left hand on the keyboard and the right hand on the mouse.
+
+\begin{longtable}[h] { | p{6.4cm} | p{3.3cm} | p{3.3cm} | }
+	\toprule
+	\multicolumn{3}{|c|}	{\textcolor{CinRed}{\textbf{Alternative Shortcuts}}} \\
+	\midrule
+	\textbf{Description} & \textbf{Before} & \textbf{After}  \\
+	\midrule
+	\endhead
+	
+	 To clip & 'i' & Ctrl+I \\
+	\hline
+	 Scroll window timeline... left & LeftArrow, ',' & LeftArrow \\
+	\hline
+	Scroll window timeline... right & RightArrow, '.' & RightArrow \\
+	\hline
+	Label & 'l', ',' & ''' (single quote) \\
+	\hline
+	Go To & 'g' & Ctrl+G \\
+	\hline
+	Generate keyframes... tweeking & 'j' & 'G' \\
+	\hline
+	Jump forward... next Keyframe & 'k' & Shift+Right Arrow \\
+	\hline
+	Jump backward... next Keyframe & Shift+K & Shift+Left Arrow \\
+	\hline
+	New Project... & 'n' & Ctrl+N \\
+	\hline
+	Load files... &'o' & Ctrl+O \\
+	\hline
+	Save &'s' & Ctrl+S \\
+	\hline
+	Save as... & Shift+s & Ctrl+Shift+S \\
+	\hline
+	Save Session & Ctrl+S & no shortcut \\
+	\hline
+	Select All & 'a'& Ctrl+A \\
+	\hline
+	Deselect All & 'a' or cursor move & Ctrl+A, Ctrl+Shift+A \\
+	\hline
+	Select Edits & Ctrl+Alt+' & Ctrl+Alt+A \\
+	\hline
+	Undo & 'z', Ctrl+Z & Ctrl+Z \\
+	\hline
+	Redo & Shift+Z & Shift+Z \\
+	\hline
+	InPoint & '[', '<' & + 'I' \\
+	\hline
+	OutPoint & ']', '>' & + 'O' \\
+	\hline
+	Play Normal reverse & NumKP 6, Alt+O & + 'J' Normal\&Fast \\
+	\hline
+	Play Stop & NumKP 0, Alt+M & + 'K' \\
+	\hline
+	Play Normal forward & NumKP 3, Alt+L & + 'L' Normal\&Fast \\
+	\hline
+	One Frame back & NumKP 4, Alt+U & + ',' (comma) \\
+	\hline
+	One Frame forward & NumKP 1, Alt+J & + '.' (period) \\
+	\hline
+	Jump backward to the next cut & Alt+Left Arrow & + 'A' \\
+	\hline
+	Jump forward to the next cut & Alt+Right Arrow & + 'S' \\
+	\hline
+	Load window: Select All files & Ctrl+A & Ctrl+A \\
+	\hline
+	Load window: Deselect All files & Ctrl+Z & Ctrl+Shift+A \\
+	\hline
+	BD Render... & Ctrl+Shift+d & no shortcut \\
+	\hline
+	DVD Render... & Alt+d & no shortcut \\
+	\hline
+	Delete last track & 'd' & Ctrl+D \\
+	\hline
+	Quit & 'q' & Ctrl+Q \\
+	\hline
+	Settings $\rightarrow$ Save settings now & Ctrl+Shift+S & Shift+S \\
+	\hline
+	Settings $\rightarrow$ Align cursor on frames & Ctrl+A & Ctrl+F \\
+	
+	\bottomrule
+\end{longtable}
+
+A common practice in video editing is the ability to jump from one part of the timeline to another: jumping from one \textit{cut} to another or from one \textit{label} to another or even from one \textit{keyframe} to another. Using shortcuts in these cases is even more advantageous. In the next table we summarize these alternative shortcuts of the main jumps.
+
+\begin{longtable}[h] { | p{7cm} | p{6.5cm} | }
+	\toprule
+	\multicolumn{2}{|c|}	{\textcolor{CinRed}{\textbf{Alternatives - Some jumps backward and forward}}} \\
+	\midrule
+	\endhead
+	
+	Jump backward to the next cut & Alt+Left Arrow,  'A' \\
+	\hline
+	Jump forward to the next cut & Alt+RightArrow, 'S' \\
+	\hline
+	Jump backward to the next label & Ctrl+Left Arrow \\
+	\hline
+	Jump selecting forward label & Ctrl+Shift+Right Arrow \\
+	\hline
+	Jump selecting backward label & Ctrl+Shift+Left Arrow \\
+	\hline
+	Jump forward to the next label & Ctrl+Right Arrow \\
+	\hline
+	Jump backward... next Keyframes & Shift+Left Arrow \\
+	\hline
+	Jump forward... next Keyframes & Shift+Right Arrow \\
+	\hline
+	Jump backward to the next Auto & Ctrl+Shift+Alt+Left Arrow  (only works on UbuntuStudio) \\
+	\hline
+	Jump forward to the next Auto & Ctrl+Shift+Alt+Right Arrow (only works on UbuntuStudio) \\
+	
+	\bottomrule
+\end{longtable}
