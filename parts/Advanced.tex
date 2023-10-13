@@ -563,46 +563,42 @@ rest == p+=c: for rest of clips
 \end{lstlisting}
 
 \renewcommand{\arraystretch}{1.15}
-\begin{center}
-	%\caption{}
-	%\label{tab:}
-	% Tell table to adjust font to fix on the page using \resize	
-		\begin{longtable}{lllll}
-			\toprule
-			&  & \textbf{Drag Left} & \textbf{Drag Right} &\\
-			\midrule
-			\multicolumn{2}{l}{\textit{curr s += c, l -= c; + rest}} & $\leftarrow$ & $\rightarrow$ & \textit{rest}\\
-			abc12345xyz & \textbf{Ripple} left edge 11 $\rightarrow$ & abc012345xyz & abc2345xyz &\\
-			\midrule
-			\multicolumn{2}{l}{\textit{curr l += c; + rest}} & $\leftarrow$ & $\rightarrow$ & \textit{rest}\\
-			abc12345xyz & \textbf{Ripple} right edge 01 $\rightarrow$ & abc1234xyz & abc123456xyz &\\
-			\midrule
-			\multicolumn{2}{l}{\textit{prev l += c; curr ps+= c, l -= c}} & $\leftarrow$ & $\rightarrow$ &\\
-			abc12345xyz & \textbf{Roll} left edge 00 $\rightarrow$ & ab012345xyz & abcd2345xyz &\\
-			\midrule
-			\multicolumn{2}{l}{\textit{curr l += c; next ps+= c, l -= c}} & $\leftarrow$ & $\rightarrow$ &\\
-			abc12345xyz & \textbf{Roll} right edge 00 $\rightarrow$ & abc1234wxyz & abc123456yz &\\
-			\midrule
-			\multicolumn{2}{l}{\textit{s -= c}} & $\leftarrow$ & $\rightarrow$ &\\
-			abc12345xyz & \textbf{Slip} left edge 10 $\rightarrow$ & abc23456xyz & abc01234xyz &\\
-			\midrule
-			\multicolumn{2}{l}{\textit{s -= c}} & $\leftarrow$ & $\rightarrow$ &\\
-			abc12345xyz & \textbf{Slip} right edge 10 $\rightarrow$ & abc23456xyz & abc01234xyz &\\
-			\midrule
-			\multicolumn{2}{l}{\textit{prev l += c; curr p+= c; next ps += c, l -= c}} & $\leftarrow$ & $\rightarrow$ &\\
-			abc12345xyz & \textbf{Slide} left edge 10 $\rightarrow$ & ab012345wxyz & abcd12345yz &\\
-			\midrule
-			\multicolumn{2}{l}{\textit{prev l += c; curr p+= c; next ps += c, l -= c}} & $\leftarrow$ & $\rightarrow$ &\\
-			abc12345xyz & \textbf{Slide} right edge 10 $\rightarrow$ & ab12345wxyz & abcd12345yz &\\
-			\midrule
-			\multicolumn{2}{l}{\textit{curr s -+= c, l += c; + rest}} & $\leftarrow$ & $\rightarrow$ & \textit{rest}\\
-			abc12345xyz & \textbf{Edge} left edge 11 $\rightarrow$ & abc2345xyz & abc0123456xyz &\\
-			\midrule
-			\multicolumn{2}{l}{\textit{curr l -+= c; + rest}} & $\leftarrow$ & $\rightarrow$ & \textit{rest}\\
-			abc12345xyz & \textbf{Edge} right edge 01 $\rightarrow$ & abc1234xyz & abc123456xyz &\\
-			\bottomrule
-		\end{longtable}
-\end{center}
+
+\begin{longtable}{lllll}
+		\toprule
+		&  & \textbf{Drag Left} & \textbf{Drag Right} &\\
+		\midrule
+		\multicolumn{2}{l}{\textit{curr s += c, l -= c; + rest}} & $\leftarrow$ & $\rightarrow$ & \textit{rest}\\
+		abc12345xyz & \textbf{Ripple} left edge 11 $\rightarrow$ & abc012345xyz & abc2345xyz &\\
+		\midrule
+		\multicolumn{2}{l}{\textit{curr l += c; + rest}} & $\leftarrow$ & $\rightarrow$ & \textit{rest}\\
+		abc12345xyz & \textbf{Ripple} right edge 01 $\rightarrow$ & abc1234xyz & abc123456xyz &\\
+		\midrule
+		\multicolumn{2}{l}{\textit{prev l += c; curr ps+= c, l -= c}} & $\leftarrow$ & $\rightarrow$ &\\
+		abc12345xyz & \textbf{Roll} left edge 00 $\rightarrow$ & ab012345xyz & abcd2345xyz &\\
+		\midrule
+		\multicolumn{2}{l}{\textit{curr l += c; next ps+= c, l -= c}} & $\leftarrow$ & $\rightarrow$ &\\
+		abc12345xyz & \textbf{Roll} right edge 00 $\rightarrow$ & abc1234wxyz & abc123456yz &\\
+		\midrule
+		\multicolumn{2}{l}{\textit{s -= c}} & $\leftarrow$ & $\rightarrow$ &\\
+		abc12345xyz & \textbf{Slip} left edge 10 $\rightarrow$ & abc23456xyz & abc01234xyz &\\
+		\midrule
+		\multicolumn{2}{l}{\textit{s -= c}} & $\leftarrow$ & $\rightarrow$ &\\
+		abc12345xyz & \textbf{Slip} right edge 10 $\rightarrow$ & abc23456xyz & abc01234xyz &\\
+		\midrule
+		\multicolumn{2}{l}{\textit{prev l += c; curr p+= c; next ps += c, l -= c}} & $\leftarrow$ & $\rightarrow$ &\\
+		abc12345xyz & \textbf{Slide} left edge 10 $\rightarrow$ & ab012345wxyz & abcd12345yz &\\
+		\midrule
+		\multicolumn{2}{l}{\textit{prev l += c; curr p+= c; next ps += c, l -= c}} & $\leftarrow$ & $\rightarrow$ &\\
+		abc12345xyz & \textbf{Slide} right edge 10 $\rightarrow$ & ab12345wxyz & abcd12345yz &\\
+		\midrule
+		\multicolumn{2}{l}{\textit{curr s -+= c, l += c; + rest}} & $\leftarrow$ & $\rightarrow$ & \textit{rest}\\
+		abc12345xyz & \textbf{Edge} left edge 11 $\rightarrow$ & abc2345xyz & abc0123456xyz &\\
+		\midrule
+		\multicolumn{2}{l}{\textit{curr l -+= c; + rest}} & $\leftarrow$ & $\rightarrow$ & \textit{rest}\\
+		abc12345xyz & \textbf{Edge} right edge 01 $\rightarrow$ & abc1234xyz & abc123456xyz &\\
+		\bottomrule
+\end{longtable}
 \renewcommand{\arraystretch}{1}
 
 Next, a more immediate and colorful view shows these trimming
