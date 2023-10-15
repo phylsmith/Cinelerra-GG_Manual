@@ -334,12 +334,13 @@ Individual package libraries can be rebuilt, via:
 
 The rule targets create the set of thirdparty packages which are built from local source archive copies of thirdparty source code and patches, if needed.  The build rule set of dependencies allows for compiling multiple thirdparty programs simultaneously using maximum computer resources.  This parallel build speeds up the process considerably.  For example, these are full static build timings on the production build machine (full build includes building all thirdparty programs as well as all of \CGG{}):
 
-\hspace{2em}
-\begin{tabular}{@{}rcr}
-	1 cpu & = & 61 mins\\
-	12 cpus & = & 7.5 mins\\
-	24 cpus & = & 2 mins\\
-\end{tabular}
+\begin{center}
+	\begin{tabular}{@{}lcr}
+		1 cpu & = & 61 mins\\
+		12 cpus & = & 7.5 mins\\
+		24 cpus & = & 2 mins\\
+	\end{tabular}
+\end{center}
 
 \section{Using the very latest Libraries}
 \label{sec:latest_libraries}
