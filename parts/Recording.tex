@@ -17,6 +17,7 @@ Access the Record function via \texttt{File} $\rightarrow$ \texttt{Record}\dots 
 
 \vspace{2ex}
 \begin{tabular}{lll}
+	\hline
     Path: & output media file path & \\
     
     Start time: & weekday/time of day & to begin capture\\
@@ -27,7 +28,8 @@ Access the Record function via \texttt{File} $\rightarrow$ \texttt{Record}\dots 
     
     \multirow{2}*{Mode:} & timed & use start time/duration \\
     
-    & untimed & use transport controls\\       
+    & untimed & use transport controls\\
+    \hline       
 \end{tabular}
 
 \vspace{2ex}
@@ -448,8 +450,8 @@ Figure~\ref{fig:two-monitors04} shows 2 monitors with Compositor window on the 2
 Remote Control Keys (Application/Menu key toggle for ati-x10 remote)
 
 % Should find something so that the last column width automatically adapts to margin/font/pagesize.
-\begin{tabular}{lc p{12cm}}
-	\toprule
+\begin{tabular}{lcp{12cm}}
+	\hline
     up arrow&=&forward 1 minute\\
     
     down arrow&=&forward single frame\\
@@ -489,13 +491,13 @@ Remote Control Keys (Application/Menu key toggle for ati-x10 remote)
     book key&=&toggles channel scan (always available)\\
     
     hand key&=&terminates \CGG{} (always available)\\ 
-    \bottomrule 
+    \hline 
 \end{tabular}
 
 \noindent Plus usual Transport keys:
 
 \begin{tabular}{lcl}
-	\toprule
+	\hline
     e&=&??\\
     
     f&=&toggle full screen\\
@@ -511,7 +513,7 @@ Remote Control Keys (Application/Menu key toggle for ati-x10 remote)
     square&=&stop\\
     
     2 lines&=&fast reverse\\
-    \bottomrule   
+    \hline   
 \end{tabular}
 
 The Application/Menu key  \quad
@@ -744,8 +746,6 @@ Output from "dmesg" for EasyCap - Model \# DC60:
 [ 4007.355256] uvcvideo 3-1.2:1.0: Entity type for entity Camera 1 was not initialized!
 [ 4007.420828] hid-generic 0003:534D:0021.0009: hiddev97,hidraw0: USB HID v1.10 Device [MACROSILICON AV TO USB2.0] on usb-0000:16:00.3-1.2/input4
 \end{lstlisting}
-
-\newpage
 
 \subsection{Use Case \#2 – Hauppauge WinTV-HVR}
 \label{sub:use_case_wintv}

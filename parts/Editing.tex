@@ -814,7 +814,6 @@ you click on the middle mouse button.  An expanded explanation is
 provided below.
 
 \renewcommand{\arraystretch}{1.15}
-\begin{center}
   \begin{longtable}{p{0.3\textwidth-2\tabcolsep} p{0.7\textwidth-2\tabcolsep}}
     \toprule
     \textbf{Key} & \textbf{Operations}\\
@@ -827,22 +826,21 @@ provided below.
                         off if it is on.\\
     \bottomrule
   \end{longtable}
-\end{center}
 
-\begin{center}
   \begin{longtable}{p{0.2\textwidth-2\tabcolsep}
-    p{0.2\textwidth-2\tabcolsep} p{0.6\textwidth-2\tabcolsep}
-    }
+    p{0.2\textwidth-2\tabcolsep} p{0.6\textwidth-2\tabcolsep}}
     \toprule
     \textbf{Popup Label} & \textbf{Key} & \textbf{Operation}\\ \midrule
+    %begin{latexonly}
     \endhead
+    %end{latexonly}
     Clear Select & Ctrl-Shift-A & Deselect all selected edits --
                                   ones that have the red lines
                                   around them.\\
                                   
-    Select Edits & Ctrl-Alt-' & Select all edits within a highlighted area of the timeline * \\
+    Select Edits & Ctrl-Alt-' & Select all edits within a highlighted area of the timeline * (see note below) \\
     
-    Deselect Edits & & Deselect all edits within a highlighted area of the timeline * \\
+    Deselect Edits & & Deselect all edits within a highlighted area of the timeline * (see note below) \\
 
     Copy & Ctrl-c & Copy the selected edits into the copy buffer.\\
 
@@ -887,7 +885,6 @@ provided below.
                                clip. Plugins.\\
     \bottomrule
   \end{longtable}
-\end{center}
 \renewcommand{\arraystretch}{1}
 
 * \textit{If the selection area created is larger than the edits we want to act on and includes additional edits, those edits will be involved if "Select Edits" or "Deselect Edits" is used. Indeed, these options act on both the selected edits and those that are not selected but are included in the selection area created. In practice, edits that were selected are deselected, while unselected edits are selected}.
@@ -930,12 +927,12 @@ following keyboard shortcuts to perform the same functions:
 
 \begin{center}
 	\begin{tabular}{lll}
-		\toprule
+		\hline
 		snap\_right\_edit & ctrl+alt+ '.' &\\
 		snap\_left\_edit & ctrl+alt+ ',' &\\
 		snap\_right\_label & ctrl+alt +shift '.' & shift+period is the > sign on US keyboards\\
 		snap\_left\_label &  ctrl+alt +shift',' & shift+comma is the < sign on US keyboards\\
-		\bottomrule
+		\hline
 	\end{tabular}
 \end{center}
 

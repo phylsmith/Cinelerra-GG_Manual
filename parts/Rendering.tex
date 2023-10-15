@@ -513,10 +513,12 @@ There are currently 6 specific variations within the ffmpeg (file format) / yout
 The first 3 below, plus any of the VP9 files under the file type of \textit{webm} are the recommended options to use because they are freely usable in any circumstance.
 
 \begin{center}
-	\begin{tabular}{l p{8cm}}
+	\begin{tabular}{lp{8cm}}
+		\hline
 		sd.youtube & Standard Definition use with default audio/Opus stereo.youtube \\
 		hd.youtube & High Definition “ “ \\
 		uhd.youtube & Ultra High Definition “ “ \\
+		\hline
 	\end{tabular}
 \end{center}
 
@@ -525,10 +527,12 @@ For more details and options on VP9, see: {\small\url{https://developers.google.
 Alternatives based on h264 and for non-commercial use are listed below.  For Dailymotion, these must be renamed to have a different extension of .mp4 instead of .youtube before uploading.
 
 \begin{center}
-	\begin{tabular}{l p{8cm}}
+	\begin{tabular}{lp{8cm}}
+		\hline
 		sd\_h264.youtube & Standard Definition – must change to audio stereo\_with\_h264.youtube \\
 		hd\_h264.youtube & High Definition -          “ “ \\
 		uhd\_u264.youtube & Ultra High Definition - “ “ \\
+		\hline
 	\end{tabular}
 \end{center}
 
@@ -566,11 +570,13 @@ Bitrate (bit rate)
 
 \textit{mode:}
 
-\begin{tabular}{p{6cm} p{10cm}}
+\begin{tabular}{p{6cm}p{10cm}}
+	\hline
 	Constant Quantizer (Q) & Allows you to specify a fixed quantizer value; bitrate will vary \\
 	Constrained Quality (CQ) & Allows you to set a maximum quality level. Quality may vary within bitrate parameters\\
 	Variable Bitrate (VBR) & Balances quality and bitrate over time within constraints on bitrate\\
 	Constant Bitrate (CBR) & Attempts to keep the bitrate fairly constant while quality varies\\
+	\hline
 \end{tabular}
 
 CQ mode is recommended for file-based video (as opposed to streaming). The following FFMpeg command-line parameters are used for CQ mode:
@@ -578,11 +584,13 @@ CQ mode is recommended for file-based video (as opposed to streaming). The follo
 \textit{FFMpeg}:
 
 \begin{center}
-	\begin{tabular}{{p{4cm} p{10cm}}}
+	\begin{tabular}{p{4cm}p{10cm}}
+		\hline
 		-b:v <arg> & Sets target bitrate (e.g. 500k)\\
 		-minrate <arg> & Sets minimum bitrate.\\
 		-maxrate <arg> & Sets maximum bitrate.\\
 		-crf <arg> & sets maximum quality level. Valid values are 0-63, lower numbers are higher quality.\\
+		\hline
 	\end{tabular}
 \end{center}
 
@@ -1106,15 +1114,18 @@ Let's take the example of a network with 2 PCs: the master and the client. On th
     can use privileged ports) or $10650...$ for non-root and click on \textit{Add Nodes}. To find a range of free ports to use you can look at the file \texttt{/etc/services};
   \item you will see something like the following in the Nodes
     listbox to the right:\newline
-    \begin{tabular}{lllc} On & Hostname & Port & Framerate
-      \\\midrule
-      X & 192.168.1.12 & 10650 & 0.0 \\
-      X & 192.168.1.12 & 10651 & 0.0 \\
-      X & 192.168.1.12 & 10652 & 0.0 \\
-      X & 192.168.1.12 & 10653 & 0.0 \\
-      X & 192.168.1.12 & 10654 & 0.0 \\
-      X & localhost & 10655 & 0.0 \\
-      X & localhost & 10656 & 0.0 \\
+    \begin{tabular}{lllc}
+    	\hline
+    	On & Hostname & Port & Framerate\\
+        \hline
+        X & 192.168.1.12 & 10650 & 0.0 \\
+        X & 192.168.1.12 & 10651 & 0.0 \\
+        X & 192.168.1.12 & 10652 & 0.0 \\
+        X & 192.168.1.12 & 10653 & 0.0 \\
+        X & 192.168.1.12 & 10654 & 0.0 \\
+        X & localhost & 10655 & 0.0 \\
+        X & localhost & 10656 & 0.0 \\
+        \hline
     \end{tabular}
   \item set the Total number of jobs to create. This number only pertains to client nodes, so we do not need to consider the master node;
   \item click OK on the bottom of the Preferences window.

@@ -84,7 +84,7 @@ Each of the symbols has an associated tooltip as an easy reminder of its functio
 several is described in a little more detail in other areas of this manual. 
 
 \vspace{2ex}
-\begin{tabular}{ll}
+\begin{longtable}{ll}
    \hline
 	First set of 3 symbols & Move in the reverse direction on the timeline \\
         4th symbol & Stop play \\
@@ -105,7 +105,7 @@ several is described in a little more detail in other areas of this manual.
 	Set Timecode & Explained in \ref{sub:align_timecodes}  \\
 	Gang Modes & Explained in \ref{sub:displaying_tracks_ganged} \\
    \hline
-\end{tabular}
+\end{longtable}
 
 The \textit{Manual Go To} \index{goto} menu is quite versatile as you can see in figure~\ref{fig:goto_menu}.  The
 options of \textit{=} represents goto the position indicated in the textbox; \textit{+} indicates
@@ -1836,24 +1836,25 @@ Examples with some caveats first:
     \item   Sort is by filename base name (directory path not included automatically) except when the \textit{Around} operation is used and then it is sorted by that Target distance first and then filename.
 \end{enumerate}
 
-\begin{table}[htpb]
-    \centering
-    \caption{Examples}
-    \label{tab:label}
-    \small
-    \begin{tabular}{lllm{10em}m{10em}} \toprule
-        Enable&	Target&	Op&	Value&	meaning\\\midrule
-Or	&Patterns  &Matches   &*&	 all files from the Media folder are included\\
-And Not&Filesize&Lt	&160000000& no files that are less than 160MB in size \\
-Or Not&	Time	&Ge	&2018/07/30 06:13:00	& files not greater than or equal date\\
-And	&Duration&Eq	&01:00		& files included must have 60 secs. Duration\\
-Off	&Samplerate&Ne	&44000		& off for now, but may want to include later\\
-And	&Framerate&Around&24+1		& files included all have 24 to 25 framerate\\
-Or	&Patterns&Matches&[*.mp4]	& all files with the extension of mp4\\
-Or	&Time&	Around&2018/08/02 06:00:00 + 02:00:00  & files at 4 AM to 8 AM\\\bottomrule
-    \end{tabular}
-\end{table}
-
+\begin{longtable}{lllm{10em}m{10em}}
+	\caption{Examples}
+	\label{tab:label}\\
+	\toprule
+	\textbf{Enable} & \textbf{Target} & \textbf{OP} & \textbf{Value} & \textbf{meaning} \\
+	\hline
+	%begin{latexonly}
+	\endhead
+	%end{latexonly}
+	Or & Patterns & Matches & * & all files from the Media Folder are included \\
+	And Not & Filesize & Lt & 160000000 & no files that are less than 160MB in size \\
+	Or Not & Time & Ge & 2018/07/30 06:13:00 & files not greater than or equal date \\
+	And & Duration & Eq & 01:00 & files included must have 60 secs. Duration \\
+	Off & Samplerate & Ne & 44000 & off for now, but may want to include later \\
+	And & Framerate & Around & 24+1 & files included all have 24 to 25 framerate \\
+	Or & Patterns & Matches & [*.mp4] & all files with the extension of mp4 \\
+	Or & Time & Around & 2018/08/02 06:00:00 + 02:00:00 & files at 4 AM to 8 AM \\
+	\bottomrule
+\end{longtable}
 
 \subsection{Vicons \& Aicons – aka Video Icons / Audio Icons}%
 \label{sub:vicons_aicons_aka_video_icons_audio_icons}

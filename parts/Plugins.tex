@@ -724,7 +724,7 @@ Remove silent gap (below $DB$ threshold) which persist for more than the time li
 Allows you to convert an audio file from one sample rate to another. This effect works similarly to ReframeRT in videos.
 
 \begin{center}
-    \begin{tabular}{l l}
+    \begin{tabular}{ll}
         \toprule
         Input / output > 1 &	fast rate \\
         Input / output < 1 &	slow rate \\
@@ -1901,7 +1901,7 @@ the \textit{sum} of the accumulated counts for the bins reporting a pixel bar on
 graph. The effect of this is to do this:
 
 \begin{center}
-	\begin{tabular}{ l l c r r }
+	\begin{tabular}{llcrr}
 		\hline
 		1 &  & & & \\
 		1 &  & & 1 & \\
@@ -2197,7 +2197,7 @@ To save time the motion result can be saved in a file for later reuse, recalled 
 
 \begin{figure}[ht]
 	\centering
- 	\includegraphics[width=0.9\linewidth]{motion.png}
+ 	\includegraphics[width=0.99\linewidth]{motion.png}
  	\caption{Motion plugin GUI}
  	\label{fig:motion}
 \end{figure}
@@ -2603,13 +2603,13 @@ In (figure~\ref{fig:perspective}) you can see that there are four options for th
 
 Key Presses for using the Perspective plugin:
 
-\begin{tabular}{l l}
-    \toprule
+\begin{tabular}{ll}
+    \hline
     Left mouse button & drags the corner that is closest to current location \\
     Alt key + left mouse & translates the perspective; drags the whole image \\
     Shift key + left mouse & zooms the perspective \\
     Alt+Shift + left mouse & translates view but does not change output \\
-    \bottomrule
+    \hline
 \end{tabular}
 
 Note that the red color lines in the box show the composer boundary.
@@ -2956,8 +2956,6 @@ LMB click almost anywhere on the compositor screen will automatically show, in t
 
 There is no \textit{undo} recorded between gui updates. It is recommended that you use the option "b" to save a backup if you get to a place where you want to make sure you do not lose your sketch.
 
-\begin{center}
-	\small
 	\begin{longtable}{{m{12em}m{13em}m{12em}}}
 		\caption{Sketcher controls}
 		\label{tabular:sketcher_controls} \\ % note that double backslash is mandatory here
@@ -3006,7 +3004,6 @@ There is no \textit{undo} recorded between gui updates. It is recommended that y
 		Del button in Curve section \\
 		\bottomrule
 	\end{longtable}
-\end{center}
 
 \subsubsection*{Other Button and Label Descriptions}%
 \label{ssub:other_button_label_description}
@@ -3186,8 +3183,6 @@ To include graphical elements like \textit{logos}, you may want to import your t
     \item[Attributes] in the Text box where you type your Title information, you can now change several attributes to give you plenty of flexibility (figure~\ref{fig:title02}). Each of these special attributes begin with an open angle bracket < and ends with a closing angle bracket >. Until the closing angle bracket is keyed in, the actual characters you type, will be seen in the compositor window. In addition, if you do not use the exact syntax or you keyin a filename that is not available, all of the characters will continue to show up. This helps to see what needs to be fixed or is missing. The attributes usage is described in the table below.
 \end{description}
 
-\begin{center}
-    \small
     \begin{longtable}{{m{6em}m{14em}m{14em}}}
         \caption{Titler attributes}
         \label{tabular:titler_attributes} \\ % note that double backslash is mandatory here
@@ -3238,7 +3233,6 @@ To include graphical elements like \textit{logos}, you may want to import your t
         Turn off smooth for chroma key
         \\\bottomrule
     \end{longtable}
-\end{center}
 
 These attributes stay in effect until you change them or reset them. Additional cpu time is needed for the \textit{blink} attribute because it requires redrawing every frame and for the background option described below. Note that some Title window controls can not be set, such as Justify and Outline color. The lines below are examples for testing purposes. The accompanying screenshot displays the corresponding \CGG{} output.
 
