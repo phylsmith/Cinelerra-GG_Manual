@@ -1357,7 +1357,7 @@ Together with \textit{Histogram Bezier / Curves} Color 3 Way is the main tool of
     \item Allows you to automate the \textit{white balance} by simply choosing a neutral color in the output of the Compositing window using the Color Picker and pressing the corresponding button in the plugin.
     \item Allows you to vary the \textit{Saturation} with sliders in the same manner as contrast was varied by the Value slider. For istance, to decrease the incidence of color dominants present in the shadows or in the highlights, vary the Saturation.
     \item With the \textit{color wheels} you can make very sophisticated adjustments to the shades of the images, in each of the three main areas of shadows, midtones and highlights.
-    \item Allows you to copy exactly the setting of one zone to the other two zones using \textit{Copy to all} button.
+    \item Allows you to copy exactly the setting of one zone to the other two zones using \textit{Copy to all} button. With this option, it is like using a fourth wheel called \textit{OffSet} in other programs.
     \item In addition to the three reset buttons, each slider and each wheel has its own Clear button, to return it to the default value without affecting the others.
 \end{itemize}
 
@@ -1758,7 +1758,7 @@ The best use of the gamma is manually monitoring the waveform as shown in figure
 
 \begin{itemize}
     \item Look at the highest peak on the \textit{waveform} and measure it with the crosshair observing the numerical value at the top left.
-    \item Set this value with the \textit{maximum} slider.
+    \item Set this value with the \textit{maximum} slider or \textit{textbox}.
     \item Then adjust the slider of the \textit{gamma} to our liking, always checking the result on the waveform so to be sure never to exceed the values of clipping, $0 \div 1.0$.
 \end{itemize}
 
@@ -1809,7 +1809,8 @@ Remap colors using blended histogram weights. Figure~\ref{fig:histeq} shows the 
     \label{fig:histeq}
 \end{figure}
 
-Histeq equalizes the colorspace through use of a \textit{histogram equalization algorithm} -- a technique for adjusting image intensities to enhance contrast. Parameters are:
+If the histogram is as wide as the entire range ($0 - 1.0$), the image is high contrast. If the range is small (i.e., the values are close together) the contrast is small. In this case HistEQ is used to distribute the few clustered values across the entire range ($0 - 1.0$), increasing the contrast of the frame.
+In order to do this HistEQ equalizes the colorspace through use of a \textit{histogram equalization algorithm}. Parameters are:
 
 \begin{description}
     \item[Gain:] when set to $1$, the colorspace is best effort. If the gain is set to $0$, the result is the entire regression line of the color map.
@@ -1822,7 +1823,7 @@ Histeq equalizes the colorspace through use of a \textit{histogram equalization 
 \label{sub:histogram}
 \index{histogram}
 
-The histogram allows an immediate view of the contrast amplitude of an image with its distribution of \textit{luma} and \textit{colors} values. If the columns of values occupy the whole range $0-100\%$ then we have maximum contrast; if the range is smaller the contrast is smaller. If most of the values are on the right of the histogram you have an image with highlights at the limit with values clamped to $1.0$. This is called \textit{overexposure}. However, if most of the values are moved to the left, with the limit of the values clamped to $0$, we have a lowlight image and we talk about \textit{underexposure}. Histogram is keyframble (figure~\ref{fig:histogram}).
+The histogram allows an immediate view of the contrast amplitude of an image with its distribution of \textit{luma} and \textit{colors} values. If the columns of values occupy the whole range $0-1.0\%$ (also expressed as a percentage above the graph) then we have maximum contrast; if the range is smaller the contrast is smaller. In fact, contrast is mathematically given by the highest value of the abscissa minus the lowest value. If the values are similar and close together, the difference is smaller and the lower the contrast. If most of the values are on the right of the histogram you have an image with highlights at the limit with values clamped to $1.0$. This is called \textit{overexposure}. However, if most of the values are moved to the left, with the limit of the values clamped to $0$, we have a lowlight image and we talk about \textit{underexposure}. This plugin is a tool for Primary Color Correction, that is, affecting the entire frame. Histogram is keyframable (figure~\ref{fig:histogram}).
 
 \begin{figure}[htpb]
     \centering
@@ -1831,18 +1832,20 @@ The histogram allows an immediate view of the contrast amplitude of an image wit
     \label{fig:histogram}
 \end{figure}
 
-The Histogram is always performed in floating point RGB regardless of the project color space. The histogram has two sets of transfer parameters: the \textit{input transfer} and the \textit{output transfer}. The input transfer has value on the horizontal axis of $x$; it is a scale of values ranging from 0 to 255 in the case of an $8\,bit$ image, or it can have normalized values in the range ($0-1.0$) or even be a scale in percentage ($0-100\%$). In the output transfer (the $y\,axis$) is represented the number of times (that is, $y$) a given value $x$ appears. A higher column ($y$ greater) indicates that many pixels have the corresponding value $x$; a lower column indicates that fewer pixels have that value. On the left we have the minimum value $0$, which is the black point. On the right we have the maximum value $1.0$ which is the white point. The intermediate values pass smoothly from one extreme to the other. The three important points (including the midtones, i.e.\ the Master Offset) are indicated by cursors (small triangles) at the base of the histogram. You can adjust them to change the values of the three points if you want.
+The Histogram is always performed in floating point RGB regardless of the project color space. The histogram has two sets of transfer parameters: the \textit{input transfer} and the \textit{output transfer}. The input transfer has value on the horizontal axis of $x$; it is a normalized scale of values ranging from 0 - 1.0 (which for a depth color of 8 bits corresponds to the range 0 - 255, for 10 bits corresponds to 0 - 65536, etc). The output transfer (the $y\,axis$) represents the number of times (that is, $y$) a given value $x$ appears. A higher column ($y$ greater) indicates that many pixels have the corresponding value $x$; a lower column indicates that fewer pixels have that value. On the left we have the minimum value $0$, which is the black point. On the right we have the maximum value $1.0$ which is the white point. The intermediate values pass smoothly from one extreme to the other. The three important points (including the midtones) are indicated by cursors (small triangles) at the base of the histogram. You can adjust them to change the values of the three points if you want. Acting on the white or black point involves horizontal shifts only; acting on the midtones triangle also involves vertical movements leading to a "gamma" correction of the curve (Linear to Log or Reverse Log or vice versa). Further down is an additional bar with related cursors and textboxes. It is used to adjust input and output values (on the vertical).
 
-There are 4 possible histograms in the histogram viewer. The red, green, blue histograms show the input histograms for red, green, blue and multiply them by an input transfer to get the output red, green, blue. Then the output red, green, blue is scaled by an output transfer. The scaled red, green, blue is converted into a value and plotted on the value histogram. The value histogram thus changes depending on the settings for red, green, blue. The value transfers are applied uniformly to R, G, B after their color transfers are applied. Mathematically, it is said that the values of $x$ are linked to the values of $y$ by a transfer function. This function is represented by a line that leaves the values of $x$ and $y$ unchanged, but we can intervene by modifying this line with the cursors.
+There are 4 possible histograms in the histogram viewer. The red, green, blue histograms show the input histograms for red, green, blue and multiply them by an input transfer to get the output red, green, blue. Then the output red, green, blue is scaled by an output transfer. The scaled red, green, blue is converted into a value and plotted on the value histogram. The value histogram thus changes depending on the settings for red, green, blue. The value transfers are applied uniformly to R, G, B after their color transfers are applied. Mathematically, it is said that the values of $x$ are linked to the values of $y$ by a transfer function. This function, by default, is represented by a line that leaves the values of $x$ and $y$ unchanged, but we can intervene by modifying this line with the cursors or the textboxes.
 
 You need to select which transfer to view by selecting one of the channels on the top of the histogram. You can also choose whether to display the master, i.e.\ only the values of the \textit{luma}, or show the \textit{Parade}, i.e.\ the three RGB channels. You can switch from one to the other with the two buttons in the upper right corner. The input transfer is defined by a graph overlaid on the histogram; this is a straight line. Video entering the histogram is first plotted on the histogram plot, then it is translated so output values now equal the output values for each input value on the input graph.
 
-After the input transfer, the image is processed by the output transfer. The output transfer is simply a minimum and maximum to scale the input colors to. Input values of $100\%$ are scaled down to the output's maximum. Input values of $0\%$ are scaled up to the output minimum. Input values below $0$ are always clamped to $0$ and input values above $100\%$ are always clamped to $100\%$. Click and drag on the output gradient's triangles to change it. It also has textboxes to enter values into.
+After the input transfer, the image is processed by the output transfer. The output transfer is simply a minimum and maximum to scale the input colors to. Input values of $1.0$ are scaled down to the output's maximum. Input values of $0$ are scaled up to the output minimum. Input values below $0$ are always clamped to $0$ and input values above $1.0$ are always clamped to $1.0$. Click and drag on the output gradient's triangles to change it. It also has textboxes to enter values into.
 
-Enable the \textit{Automatic} toggle to have the histogram calculate an automatic input transfer for the red, green, and blue but not the value. It does this by scaling the middle $99\%$ of the pixels to take $100\%$ of the histogram width. The number of pixels permitted to pass through is set by the \textit{Threshold} textbox. A threshold of $0.99$ scales the input so $99\%$ of the pixels pass through. Smaller thresholds permit fewer pixels to pass through and make the output look more contrasty.
-\textit{Plot histogram} is a checkbox that enables plotting the histogram.
-\textit{Split output} is a checkbox that enables a diagonal split showing in the compositor.
+Enable the \textbf{Automatic} toggle to have the histogram calculate an automatic input transfer for the red, green, and blue but not the value. It does this by scaling the middle $99\%$ of the pixels to take $100\%$ of the histogram width. The number of pixels permitted to pass through is set by the \textit{Threshold} textbox. A threshold of $0.99$ scales the input so $99\%$ of the pixels pass through. Smaller thresholds permit fewer pixels to pass through and make the output look more contrasty.
+\textit{Plot histogram} is a checkbox that enables plotting the histogram. It can be useful because having a histogram that changes in real-time can use a lot of system resources for computation. In this case it is enabled only at times when it is needed.
+\textit{Split output} is a checkbox that enables a diagonal split showing in the compositor, so we can see the effects of the changes from the original frame.
 \textit{Reset} returns the four curves to their initial state (neutral) as well as the Value/RGB histogram buttons.
+
+\textbf{Linear to Log} slider: frequency in Linear range to Log range; default is 50\%, but if you want it to be the same as the Videoscope or Histogram Bezier, which are of type Log, set the slider all the way to Log.  The variation is by 10\% steps.  Linear generally represents what the eye sees in the real world.  Log is an exponential look where the small numbers are represented more - that is, the leading digit.
 
 The histogram plugin ordinarily applies a value for a single frame.  A
 new feature modifies histogram to show values for a selection of frames.
@@ -1855,74 +1858,112 @@ that set of frames instead of each frame.
 
 It works by selecting the area on the timeline for
 which you would like to see the Histogram averaged and then click on the
-\textit{Frames} button in the Histogram plugin.
-The parameters are:
-\textit{Linear to Log} slider: frequency in Linear range to Log range; default is 50\%, but if you want it to be the same as the Videoscope or Histogram Bezier, set the slider all the way to Log.  The variation is by 10\% steps.  Linear generally represents what the eye sees in the real world.  Log is an exponential look where the small numbers are represented more - that is, the leading digit.
-\textit{Frames} button: if a Selection is set on the timeline, the number of frames
-will be calculated and shown in the box next to it.
-\textit{Frame Count box}: type in the number of frames you want to be looked at
-starting at the insert marker or use the up/down counter.
-\textit{Clear Frames} icon: reset the frame count to the default value of 0.
+\textbf{sum frames} button in the Histogram plugin. If a Selection is set on the timeline, the number of frames will be calculated and equalized to the mean value.
 
 A side note: by using a number of frames, you can get a \textit{dissolve-like
 transition effect}.
 
 \paragraph{Theory:} 
 
-A histogram is a bunch of \textit{bins} (accumulators) that count the number of times a particular pixel channel intensity occurs in an image. Dim are on the left, bright on the right.
+A digital image is an matrix of ($N x N$) pixels. Each pixel can have a (integer) luminance or luma ($r$) value ranging from $0$ to $L-1$. Generally we have $L = 2^{m}$ values of r, with m = depth of color bit. $0 = r_{min}$ is the black point. $L-1 = r_{max}$ is the white point. Mathematically we can act on the values of r with various transformation functions. The generic formula is:
 
-The number of bins used depends on the color model bit depth:
+\qquad \( s = T(r) \)
+
+with:
+
+s = luma value after transformation
+r = initial luma value
+T = transformation operator
+
+The T function in the case of a histogram is:
+
+\qquad \( s = p(r_{k}) \)
+
+$T(r) = p(r_{k}$) is the transformation that expresses the probability of an image pixel to have a given luma value $r_{k}$. This is referred to as the frequency of the value or the number of occurrences of the value. The total probability of all pixels in the image is 1 (100\%):
+
+\qquad \( \sum_{r=0}^{L-1}{p(r_{k})} = 1 \)
+
+Trivially, the function $p(r_{k})$ can be thought of as counting the recurrences of the value $r_{k}$.
+The histogram is similar to a bar graph (not the same: the histogram uses continuous data, the bar graph uses discrete data) and on the abscissa it shows $r_{k}$ values and on the ordinate $p(r_{k})$. Each abscissa value is treated as independent of neighboring values so it is considered as an isolated unit called an "accumulator" or "bin." It is on the bins that we count the occurrence of the $r_{k}$ value (occurrences), which gives us precisely the value $p(r_{k})$. It is called a bar graph because a value of r is actually an interval between $r_{k}$ and the next value $(r_{k+\varepsilon})$. Because r has continuous values computed in floating point and normalized interval $0 - 1.0$ is used, there is no solution of continuity between one bin and another and the boundaries are decided a priori, usually based on bit depth color. The bin concept is fundamental because it is the basis on which we can do mathematical calculations. In fact, the height of the bin is the frequency (count) in which that value occurs; the width of the bin is the range of values within the range we consider. With 8 bits of depth color we have 256 bins; then we collect the values of r from the initial value 0 up to and including 1; then from 1 up to and including 2; and so on up to the last bin, which ranges from 254 to and including 255. It is clear, then, that the continuous luma values are bounded in a range and made to become discrete values on which it is easier to perform calculations. The width of a bin is given by the formula:
+
+$width = \dfrac{range}{\# bins}$
+
+For a depth color of 8 bits we have (normalized range $0 - 1.0$):
+
+$width = \dfrac{(1.0-0)}{256} = 1/256$
+
+For a depth color of 10 bits or more we have:
+
+$width = \dfrac{(1.0-0)}{65536} = 1/65536$
+
+Wider bins have a higher count (because they gather more $r_{k}$). Narrower bins have a lower count (because they contain less $r_{k}$; neighboring values ($r_{k+i}$) are distributed in neighboring bins).
+To recap: in \CGG{}  histogram is a bunch of \textit{bins} (accumulators) that count the number of times a particular pixel channel intensity (luma, $r_{k}$) occurs in an image. The plugin scans all the pixels in the frame, counting the occurrences in each given bin. Dim are on the left, bright on the right.
+You can have discordance of results, looking in the scopes, either by switching from Histogram to Histogram Bezier or after a conversion between color spaces (with associated change in depth color). The number of bins used depends on the color model bit depth:
 
 \begin{description}
-	\item[Histogram:] 256 for rgb8 and 65536 for all others.
-	\item[Bezier:] 256 for rgb8/yuv8 and 65536 for all others.
+	\item[Histogram:] 256 for rgb8 and 65536 for all others
+	\item[Bezier:] 256 for rgb8/yuv8 and 65536 for all others
 	\item[Scopes:] always uses 65536
 \end{description}
 
-All of the bins are scanned when the graph is plotted.  What is shown
-depends on which plugin is used:
+All of the bins are scanned when the graph is plotted.  What is shown on the graph, in the Compositor window, and finally on the scopes, depends on which plugin is used:
 
 \begin{description}
-	\item[Histogram:] was max of the bins in the pixel range, now is the sum
+	\item[Histogram:] was max of the bins in the pixel range, now is the sum (to make it congruent with Bezier and the Scopes)
 	\item[Bezier:] is the max of the bins in the pixel range
 	\item[Scopes:] is the max of the bins in the pixel range
 \end{description}
 
-When the color space and the bin size are the same, all of the values
-increment the indexed bins.  When the color is the result of yuv $\rightarrow$ rgb conversion, the results \textit{spread} if there are more bins than colors.  This is the same effect you see when you turn on \textit{smoothing} in the vectorscope histogram.
+Another difference in behavior is regarding the type of curve, whether Linear or Log:
 
-The \textit{total} pixels for each value is approximately the same, but the \textit{max} value depends on the color quantization.  More colors increment more bins.  Fewer colors increment fewer bins.  In both cases, the image size has the same
-number of pixels.  The fewer color case increments the used bins, and skips the
-unused bins.  This sums all of the pixels into fewer bins, and the bins have
-higher values. That is the \textit{rgb} vs \textit{yuv} case, fewer vs more bins are used.
+\begin{description}
+	\item[Histogram:] the curve is Linear, but it is editable with the Linear/Log slider
+	\item[Bezier:] the curve is Log
+	\item[Scopes:] the curve is Log
+\end{description}
 
-To report something more consistent, has been changed the reported value to
+This diversity also leads to different visual results from Histogram Bezier.
+
+When the color space and the bin size are the same, all of the values increment the indexed bins. But if we start from YUV type edits, the plugin will automatically do the conversion to RGB. When the color is the result of yuv $\rightarrow$ rgb float conversion, we go from 256 bins of YUV to 65536 bins of RGB Float and the results \textit{spread} if there are more bins than colors.  This is the same effect you see when you turn on \textit{smoothing} in the vectorscope histogram.
+
+The \textit{total} pixels for each value is approximately the same, but the \textit{max} value depends on the color quantization.  More colors increment more bins.  Fewer colors increment fewer bins.  In both cases, the image size has the same number of pixels. So the pixels will distribute into more bins if you go to a higher depth color; those bins will have a lower count.  The fewer color case increments the used bins, and skips the unused bins.  This sums all of the pixels into fewer bins, and the bins have higher values. That is the \textit{rgb} vs \textit{yuv} case, fewer vs more bins are used. To get more consistent visual feedback (and on scopes), the concept of sum was used instead of the maximum number of occurrences (max).
+
+To report something more consistent, the reported value has been changed from
+the original code to be
 the \textit{sum} of the accumulated counts for the bins reporting a pixel bar on the
 graph. The effect of this is to do this:
 
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.5\linewidth]{sum.png}
+	\caption{Sum bins Vs max bins}
+	\label{fig:sum}
+\end{figure}
+
 \begin{center}
-	\begin{tabular}{llcrr}
+	\begin{tabular}{clccr}
 		\hline
 		1 &  & & & \\
 		1 &  & & 1 & \\
-		000100 & 3 pixels & vs & 001000& 3 pixels \\
+		000100 & 3 pixels & vs & 0011000& 3 pixels \\
 		\hline
 	\end{tabular}
 \end{center}
 
-On the left, the course color model piles all 3 pixels into one bin.  max
-value 3
-
-On the right, the fine color model puts the counts into 2 bins, max 2, sum 3
+On the left, the course color model piles all 3 pixels into one bin, max
+value 3.
+On the right, the fine color model puts the counts into 2 bins, max 2, sum 3.
 
 So, by reporting the sum the shape of the results are more similar.
-
 
 \subsection{Histogram Bezier / Curves}%
 \label{sub:histogram_bezier_curves}
 \index{histogram Bezier}
 
-Histogram Bézier allows an immediate view of the contrast amplitude of an image with its distribution of luma and colors values using a piecewise linear method. In addition it uses a Bézier curve (parametric) on the histogram plot. When mapping color spaces, it has a variety of presentations to get smoother transitions and more pleasing output. It uses more general remapping, not just straight lines but more contour lines. Curves are perhaps the most powerful and sophisticated tool for color correction. For some repetitive details, see the previous description of the Histogram plugin. Histogram Bézier is keyframable.
+Histogram Bézier allows an immediate view of the contrast amplitude of an image with its distribution of luma and colors values using a piecewise linear method (bins). In addition it uses a Bézier curve (parametric) on the histogram plot. When mapping color spaces, it has a variety of presentations to get smoother transitions and more pleasing output. It uses more general remapping, not just straight lines but more contour lines. Curves are perhaps the most powerful and sophisticated tool for color correction. For some repetitive details, see the previous description of the Histogram plugin. Histogram Bézier is keyframable. The scale is given in percent ($0 - 100\% \pm 10\%$). The default curve is Log type and can use either RGB or YUV sources without implementing conversions.
+
+NOTE: Histogram Bezier may give results that are not congruent with Histogram plugin. To understand the difference in behavior see the Theory section in Histogram plugin.
 
 The input graph is edited by adding and removing any number of points. Click and drag anywhere in the input graph to create a point and move it. Click on an existing point to make it active and move it. The active point is always indicated by being filled in. The active point's input X and output Y values are given in textboxes on top of the window. The input and output color of the point can be changed through these textboxes. Points can be deleted by first selecting a point and then dragging it to the other side of an adjacent point. They can also be deleted by selecting them and hitting delete (figure~\ref{fig:bezier}).
 
