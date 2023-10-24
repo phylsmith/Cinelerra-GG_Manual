@@ -1823,7 +1823,7 @@ In order to do this HistEQ equalizes the colorspace through use of a \textit{his
 \label{sub:histogram}
 \index{histogram}
 
-The histogram allows an immediate view of the contrast amplitude of an image with its distribution of \textit{luma} and \textit{colors} values. If the columns of values occupy the whole range $0-1.0\%$ (also expressed as a percentage above the graph) then we have maximum contrast; if the range is smaller the contrast is smaller. In fact, contrast is mathematically given by the highest value of the abscissa minus the lowest value. If the values are similar and close together, the difference is smaller and the lower the contrast. If most of the values are on the right of the histogram you have an image with highlights at the limit with values clamped to $1.0$. This is called \textit{overexposure}. However, if most of the values are moved to the left, with the limit of the values clamped to $0$, we have a lowlight image and we talk about \textit{underexposure}. This plugin is a tool for Primary Color Correction, that is, affecting the entire frame. Histogram is keyframable (figure~\ref{fig:histogram}).
+The histogram allows an immediate view of the contrast amplitude of an image with its distribution of \textit{luma} and \textit{colors} values. If the columns of values occupy the whole range $0-1.0$ (also expressed as a percentage above the graph) then we have maximum contrast; if the range is smaller the contrast is smaller. In fact, contrast is mathematically given by the highest value of the abscissa minus the lowest value. If the values are similar and close together, the difference is smaller and the lower the contrast. If most of the values are on the right of the histogram you have an image with highlights at the limit with values clamped to $1.0$. This is called \textit{overexposure}. However, if most of the values are moved to the left, with the limit of the values clamped to $0$, we have a lowlight image and we talk about \textit{underexposure}. This plugin is a tool for Primary Color Correction, that is, affecting the entire frame. Histogram is keyframable (figure~\ref{fig:histogram}).
 
 \begin{figure}[htpb]
     \centering
@@ -1832,7 +1832,7 @@ The histogram allows an immediate view of the contrast amplitude of an image wit
     \label{fig:histogram}
 \end{figure}
 
-The Histogram is always performed in floating point RGB regardless of the project color space. The histogram has two sets of transfer parameters: the \textit{input transfer} and the \textit{output transfer}. The input transfer has value on the horizontal axis of $x$; it is a normalized scale of values ranging from 0 - 1.0 (which for a depth color of 8 bits corresponds to the range 0 - 255, for 10 bits corresponds to 0 - 65536, etc). The output transfer (the $y\,axis$) represents the number of times (that is, $y$) a given value $x$ appears. A higher column ($y$ greater) indicates that many pixels have the corresponding value $x$; a lower column indicates that fewer pixels have that value. On the left we have the minimum value $0$, which is the black point. On the right we have the maximum value $1.0$ which is the white point. The intermediate values pass smoothly from one extreme to the other. The three important points (including the midtones) are indicated by cursors (small triangles) at the base of the histogram. You can adjust them to change the values of the three points if you want. Acting on the white or black point involves horizontal shifts only; acting on the midtones triangle also involves vertical movements leading to a "gamma" correction of the curve (Linear to Log or Reverse Log or vice versa). Further down is an additional bar with related cursors and textboxes. It is used to adjust input and output values (on the vertical).
+The Histogram is always performed in floating point RGB regardless of the project color space. The histogram has two sets of transfer parameters: the \textit{input transfer} and the \textit{output transfer}. The input transfer has value on the horizontal axis of $x$; it is a normalized scale of values ranging from 0 - 1.0 (which for a depth color of 8 bits corresponds to the range 0 - 255, for 10 bits corresponds to 0 - 65536, etc). The output transfer (the $y axis$) represents the height of the column where a given value $x$ appears. A higher column ($y$ greater) indicates that many pixels have the corresponding value $x$; a lower column indicates that fewer pixels have that value. On the left we have the minimum value $0$, which is the black point. On the right we have the maximum value $1.0$ which is the white point. The intermediate values pass smoothly from one extreme to the other. The three important points (including the midtones) are indicated by cursors (small triangles) at the base of the histogram. You can adjust them to change the values of the three points if you want. Acting on the white or black point involves horizontal shifts only; acting on the midtones triangle also involves vertical movements leading to a "gamma" correction of the curve (Linear to Log or Reverse Log or vice versa). Further down is an additional bar with related cursors and textboxes. It is used to adjust input and output values (on the vertical).
 
 There are 4 possible histograms in the histogram viewer. The red, green, blue histograms show the input histograms for red, green, blue and multiply them by an input transfer to get the output red, green, blue. Then the output red, green, blue is scaled by an output transfer. The scaled red, green, blue is converted into a value and plotted on the value histogram. The value histogram thus changes depending on the settings for red, green, blue. The value transfers are applied uniformly to R, G, B after their color transfers are applied. Mathematically, it is said that the values of $x$ are linked to the values of $y$ by a transfer function. This function, by default, is represented by a line that leaves the values of $x$ and $y$ unchanged, but we can intervene by modifying this line with the cursors or the textboxes.
 
@@ -1854,8 +1854,7 @@ color to determine the color you want the rest of the video to be.  When
 there is a large light or color variation within a range of a few frames,
 you spend a lot of time correcting each frame when it would be better to
 just get an average value to use.  If you want, then you can make a LUT for
-that set of frames instead of each frame.
-
+that set of frames instead of each frame.\\
 It works by selecting the area on the timeline for
 which you would like to see the Histogram averaged and then click on the
 \textbf{sum frames} button in the Histogram plugin. If a Selection is set on the timeline, the number of frames will be calculated and equalized to the mean value.
@@ -1865,39 +1864,51 @@ transition effect}.
 
 \paragraph{Theory:} 
 
-A digital image is an matrix of ($N x N$) pixels. Each pixel can have a (integer) luminance or luma ($r$) value ranging from $0$ to $L-1$. Generally we have $L = 2^{m}$ values of r, with m = depth of color bit. $0 = r_{min}$ is the black point. $L-1 = r_{max}$ is the white point. Mathematically we can act on the values of r with various transformation functions. The generic formula is:
+A digital image is a matrix of ($N x N$) pixels. Each pixel can have a (integer) luminance or luma ($x_i$) value ranging from $0$ to $L-1$. Generally we have $L = 2^{m}$ values of x, with m = depth of color bit. $0 = x_{0}$ is the black point. $L-1 = x_{L-1}$ is the white point. Mathematically we can act on the values of x with various transformation functions. The generic formula is:
 
-\qquad \( s = T(r) \)
+\qquad \( y = T(x) \)
 
 with:
 
-s = luma value after transformation
-r = initial luma value
+y = luma value after transformation
+x = initial luma value
 T = transformation operator
 
 The T function in the case of a histogram is:
 
-\qquad \( s = p(r_{k}) \)
+\qquad \( y = \dfrac{p(x_{i})}{width} = \dfrac{max_i}{a} \)
 
-$T(r) = p(r_{k}$) is the transformation that expresses the probability of an image pixel to have a given luma value $r_{k}$. This is referred to as the frequency of the value or the number of occurrences of the value. The total probability of all pixels in the image is 1 (100\%):
+$p(x_{i}$ is the transformation that expresses the probability of an image pixel to have a given luma value $x_{i}$. This is referred to as the frequency of the value or the number of occurrences of the value (count = $max_i = bin_{i}$ area $A_i$); y is the height of the bin.  The total probability of all pixels in the image is 1 (100\%):
 
-\qquad \( \sum_{r=0}^{L-1}{p(r_{k})} = 1 \)
+\qquad \( \sum_{i=0}^{L-1}{p(x_{i})} = 1 \)
 
-Trivially, the function $p(r_{k})$ can be thought of as counting the recurrences of the value $r_{k}$.
-The histogram is similar to a bar graph (not the same: the histogram uses continuous data, the bar graph uses discrete data) and on the abscissa it shows $r_{k}$ values and on the ordinate $p(r_{k})$. Each abscissa value is treated as independent of neighboring values so it is considered as an isolated unit called an "accumulator" or "bin." It is on the bins that we count the occurrence of the $r_{k}$ value (occurrences), which gives us precisely the value $p(r_{k})$. It is called a bar graph because a value of r is actually an interval between $r_{k}$ and the next value $(r_{k+\varepsilon})$. Because r has continuous values computed in floating point and normalized interval $0 - 1.0$ is used, there is no solution of continuity between one bin and another and the boundaries are decided a priori, usually based on bit depth color. The bin concept is fundamental because it is the basis on which we can do mathematical calculations. In fact, the height of the bin is the frequency (count) in which that value occurs; the width of the bin is the range of values within the range we consider. With 8 bits of depth color we have 256 bins; then we collect the values of r from the initial value 0 up to and including 1; then from 1 up to and including 2; and so on up to the last bin, which ranges from 254 to and including 255. It is clear, then, that the continuous luma values are bounded in a range and made to become discrete values on which it is easier to perform calculations. The width of a bin is given by the formula:
+Trivially, the function $p(x_{i})$ can be thought of as counting the recurrences of the value $x_{i}$ in the $bin_i$.
+The histogram is similar to a bar graph (not the same: the histogram uses continuous data, the bar graph uses discrete data) and on the abscissa it shows $x_{i}$ values and on the ordinate $y_{i}$. Each x in a range value is treated as independent of neighboring values so it is considered as an isolated unit called an "accumulator" or "bin." It is on the bins that we count the occurrence of the $x_{i}$ value ($max_i$), which gives us precisely the value $p(x_{i})$. The Histogram is called a bar graph because a value of x is actually an interval between $x_{i}$ and the next value $(x_{i+\varepsilon})$. Because x has continuous values computed in floating point and normalized interval $0 - 1.0$ is used, there is no solution of continuity between one bin and another and the boundaries are decided a priori, usually based on bit depth color. The bin concept is fundamental because it is the basis on which we can do mathematical calculations. In fact, the area of the bin is the frequency (count or $max_i$) in which that value occurs; the width of the bin is the different values within the range we consider. With 8 bits of depth color we have 256 bins; then we collect the values of x from the initial value 0 up to and including 1; then from 1 up to and including 2; and so on up to the last bin, which ranges from 254 to and including 255. It is clear, then, that the continuous luma values are bounded in a range and made to become discrete values on which it is easier to perform calculations. The width of a bin is given by the formula:
 
-$width = \dfrac{range}{\# bins}$
+$width = a_i = x_{max_i} - x_{min_i}$
+
+Having established the depth color, the bin width is always the same (a) for every $bin_i$:
+
+$a_i = a = \dfrac{range}{\# bins}$
 
 For a depth color of 8 bits we have (normalized range $0 - 1.0$):
 
-$width = \dfrac{(1.0-0)}{256} = 1/256$
+$a_{8bit} = \dfrac{(1.0-0)}{256} = 1/256$
 
 For a depth color of 10 bits or more we have:
 
-$width = \dfrac{(1.0-0)}{65536} = 1/65536$
+$a_{10bit} = \dfrac{(1.0-0)}{65536} = 1/65536$
 
-Wider bins have a higher count (because they gather more $r_{k}$). Narrower bins have a lower count (because they contain less $r_{k}$; neighboring values ($r_{k+i}$) are distributed in neighboring bins).
-To recap: in \CGG{}  histogram is a bunch of \textit{bins} (accumulators) that count the number of times a particular pixel channel intensity (luma, $r_{k}$) occurs in an image. The plugin scans all the pixels in the frame, counting the occurrences in each given bin. Dim are on the left, bright on the right.
+Wider bins have a higher count (because they gather more $x_{i}$). Narrower bins have a lower $max_i$ (because they contain less $x_{i}$; neighboring values ($x_{i+\varepsilon}$) are distributed in neighboring bins).
+To recap: in \CGG{}  histogram is a bunch of \textit{bins} (accumulators) that count the number of times a particular pixel channel intensity (luma, $x_{i}$) occurs in an image. The plugin scans all the pixels in the frame, counting the frequencies in each given bin ($max_i$). Knowing the width of the bins (a) then it is easy to get the height of $bin_i$ (y). In fact, the bins are rectangles, and you can apply the area formula from which to derive the height:
+
+$A_i = max_i = Base \times High = a \times y_i$
+
+Hence:
+
+$y_i = \dfrac{max_i}{a}$
+
+Dim bins are on the left, bright bins on the right.
 You can have discordance of results, looking in the scopes, either by switching from Histogram to Histogram Bezier or after a conversion between color spaces (with associated change in depth color). The number of bins used depends on the color model bit depth:
 
 \begin{description}
@@ -1928,18 +1939,7 @@ When the color space and the bin size are the same, all of the values increment 
 
 The \textit{total} pixels for each value is approximately the same, but the \textit{max} value depends on the color quantization.  More colors increment more bins.  Fewer colors increment fewer bins.  In both cases, the image size has the same number of pixels. So the pixels will distribute into more bins if you go to a higher depth color; those bins will have a lower count.  The fewer color case increments the used bins, and skips the unused bins.  This sums all of the pixels into fewer bins, and the bins have higher values. That is the \textit{rgb} vs \textit{yuv} case, fewer vs more bins are used. To get more consistent visual feedback (and on scopes), the concept of sum was used instead of the maximum number of occurrences (max).
 
-To report something more consistent, the reported value has been changed from
-the original code to be
-the \textit{sum} of the accumulated counts for the bins reporting a pixel bar on the
-graph. The effect of this is to do this:
-
-
-\begin{figure}[htpb]
-	\centering
-	\includegraphics[width=0.5\linewidth]{sum.png}
-	\caption{Sum bins Vs max bins}
-	\label{fig:sum}
-\end{figure}
+To report something more consistent, the reported value has been changed from the original code to be the \textit{sum} of the accumulated counts for the bins reporting a pixel bar on the
 
 \begin{center}
 	\begin{tabular}{clccr}
@@ -1955,7 +1955,14 @@ On the left, the course color model piles all 3 pixels into one bin, max
 value 3.
 On the right, the fine color model puts the counts into 2 bins, max 2, sum 3.
 
-So, by reporting the sum the shape of the results are more similar.
+So, by reporting the sum the shape of the results are more similar to graph.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.5\linewidth]{sum.png}
+	\caption{Sum count Vs max count}
+	\label{fig:sum}
+\end{figure}
 
 \subsection{Histogram Bezier / Curves}%
 \label{sub:histogram_bezier_curves}
@@ -2027,16 +2034,17 @@ Some examples of the use of curves to demonstrate the variety of possible interv
 \label{sub:holographictv}
 \index{holographicTV}
 
-Incoming objects are projected like holovision seen in the movie Stars Wars as in R2-D2's video message projector of the Princess Leia. You need a movie or background image and above it a track containing the figure on which to apply the effect. This must have a transparent background. There are no configuration parameters; it only has to be applied to the upper track (figure~\ref{fig:holographictv}).
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.55\linewidth]{holographictv.png}
+	\caption{Holographic messages in CinGG!}
+	\label{fig:holographictv}
+\end{figure}
+
+Incoming objects are projected like holovision seen in the movie Stars Wars as in R2-D2's video message projector of the Princess Leia (figure~\ref{fig:holographictv}). You need a movie or background image and above it a track containing the figure on which to apply the effect. This must have a transparent background. There are no configuration parameters; it only has to be applied to the upper track.
 
 This effect originated from {\small \url{https://effectv.com}}.
 
-\begin{figure}[htpb]
-    \centering
-    \includegraphics[width=0.8\linewidth]{holographictv.png}
-    \caption{Holographic messages in CinGG!}
-    \label{fig:holographictv}
-\end{figure}
 
 \subsection{Hue saturation}%
 \label{sub:hue_saturation}
