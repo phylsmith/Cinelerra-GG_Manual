@@ -955,12 +955,12 @@ Automatically scale to a specified size.
 \label{sub:blue_banana}
 \index{blue banana}
 
-Blue Banana\protect\footnote{credit to Monty Montgomery programmer} is an \textit{HSL Qualifier} \index{HSL Qualifier} (HSL= hue, saturation, lightness), one of the basic tools of any grading software that are based on circumscribing a zone of the frame by extracting a chromatic key and producing a \textit{matte} in the alpha channel (Secondary Color Correction). Blue Banana differs not by creating a real matte, but by creating a \textit{selection mask} exclusively for use within the plugin. The BlueBanana plugin has a couple of useful purposes. It can be used for color transformation or remapping -- by isolating a specific color and then performing color change/correction on only that color (or color ranges). Another useful purpose is for chroma-key filtering, using multiple BlueBanana plugins on the same track. Also, it can be used in conjunction with the mask operation of the Compositor. Usage of BlueBanana may seem complicated at first, but it is necessarily so in order to get enough control to produce the desired effect simply and quickly. Just changing a single color is actually quite easy. BlueBanana is keyframable (figure~\ref{fig:bluebanana}).
+Blue Banana\protect\footnote{credit to Monty Montgomery programmer} is an \textit{HSL Qualifier} \index{HSL Qualifier} (HSL= hue, saturation, luminance), one of the basic tools of any grading software that are based on circumscribing a zone of the frame by extracting a chromatic key and producing a \textit{matte} in the alpha channel (Secondary Color Correction). Blue Banana differs not by creating a real matte, but by creating a \textit{selection mask} exclusively for use within the plugin. The BlueBanana plugin has a couple of useful purposes. It can be used for color transformation or remapping -- by isolating a specific color and then performing color change/correction on only that color (or color ranges). Another useful purpose is for chroma-key filtering, using multiple BlueBanana plugins on the same track. Also, it can be used in conjunction with the mask operation of the Compositor. Usage of BlueBanana may seem complicated at first, but it is necessarily so in order to get enough control to produce the desired effect simply and quickly. Just changing a single color is actually quite easy. BlueBanana is keyframable (figure~\ref{fig:bluebanana}).
 
 The basic strategy for BlueBanana is to:
 
 \begin{itemize}
-    \item Select a specific target color.
+    \item Select a specific target color with the eyedropper tool.
     \item Create a selection region by expanding color ranges around that color.
     \item Optionally reduce or expand the alpha plane as a regional selection mask.
     \item Optionally apply a color remapping or transformation to the selection.
@@ -1282,7 +1282,7 @@ This effect erases pixels which match the selected color. They are replaced with
     \label{fig:chroma-key}
 \end{figure}
 
-Chroma key uses either the \textit{lightness} or the \textit{hue} to determine what is erased. Use value singles out only the lightness to determine transparency.
+Chroma key uses either the \textit{lightness} or the \textit{hue} to determine what is erased. Use value singles out only the lightness to determine transparency (Luma Key).
 Select a center color to erase using the \textit{Color} button. Alternatively a color can be picked directly from the output frame by first using the \textit{color picker} in the compositor window and then selecting the \textit{Use color picker} button. This sets the chroma key color to the current color picker color.
 
 Be aware that the output of the chroma key is fed back to the compositor, so selecting a color again from the compositor will use the output of the chroma key effect. The chroma key should be disabled when selecting colors with the color picker.
@@ -1307,7 +1307,7 @@ Chroma Key (HSV)\protect\footnote{Credit for Plugin by Jerome Cornet \url{http:/
 \subsubsection*{Requirements}
 \label{ssub:requirements}
 
-The subject in the movie should have a good background. The lighting is crucial and good lighting during production will save you time with much less effort than in post-production.
+The subject in the movie should have a good background. The lighting is crucial and good lighting during production will save you time with much less effort than in post-production. Another tip is to use a low-compressed, intraframe codec with as high a color depth as possible. In case of YUV-type source signal, it is better to have subsampling $4:4.4$ or $4:2:2$.
 Here we assume that we have a good video, filmed on green (or blue) screen that we want to use. Important: Make sure you are using a color model that has an alpha channel, such as \textit{RGBA8}, \textit{RGBAFloat}, \textit{YUVA8}. To change color model, go to \texttt{Settings $\rightarrow$ Format $\rightarrow$ Color Model}.
 
 \subsubsection*{Usage}
@@ -1728,7 +1728,7 @@ In its simplest form, highlight a region of the track to freeze, drop the \textt
 
 Mathematically, the gamma function is exponential
 ($output = input^{\gamma}$) and therefore the inverse of the
-logarithmic function [$output = \log(input)$]. Actually the formula
+logarithmic function [$\gamma = \log_{input}{(output)}$]. Actually the formula
 used by the \CGG{} plugin is: $output = input^{\frac{1}{\gamma}}$
 which allows for a range of values $0 \div 1.0$. The gamma effect
 converts the logarithmic colors to linear colors through a
@@ -1736,7 +1736,7 @@ converts the logarithmic colors to linear colors through a
 determines how steep the output curve is (i.e.\ the value of the
 gamma parameter; for color space Rec709 is $2.4$
 ($\frac{1}{\gamma} =0.41\dots$), for sRGB is $2.2$
-($\frac{1}{\gamma} =0.45\dots$), etc.). The maximum value is where
+($\frac{1}{\gamma} =0.45\dots$), etc.). We use $ \dfrac{1}{\gamma}$ because with $\gamma < 1$ there is gamma compression of the curve, increasing the output values relative to the linear (see figure~\ref{fig:gamma02}.). With $\gamma > 1$ we have gamma expansion, typically used to linearize a compressed gamma curve (\textit{Log}). The maximum value is where
 $1.0$ in the output corresponds to maximum brightness in the
 input. It serves to avoid clipped values because it allows you to
 set the maximum value of the output, $1.0$, whenever range
@@ -1747,7 +1747,7 @@ incorrect linearization, etc.
 
 \begin{figure}[htpb]
     \centering
-    \includegraphics[width=1.0\linewidth]{gamma01.png}
+    \includegraphics[width=0.8\linewidth]{gamma01.png}
     \caption{settting \textit{Maximun} to $0.6900$}
     \label{fig:gamma01}
 \end{figure}
@@ -1764,7 +1764,7 @@ The best use of the gamma is manually monitoring the waveform as shown in figure
 
 \begin{figure}[htpb]
     \centering
-    \includegraphics[width=1.0\linewidth]{gamma02.png}
+    \includegraphics[width=0.8\linewidth]{gamma02.png}
     \caption{Setting \textit{Maximun} to $0.6100$ and \textit{Gamma} to $0.3300$}
     \label{fig:gamma02}
 \end{figure}
@@ -1863,7 +1863,6 @@ A side note: by using a number of frames, you can get a \textit{dissolve-like
 transition effect}.
 
 \paragraph{Theory:} 
-
 A digital image is a matrix of ($N x N$) pixels. Each pixel can have a (integer) luminance or luma ($x_i$) value ranging from $0$ to $L-1$. Generally we have $L = 2^{m}$ values of x, with m = depth of color bit. $0 = x_{0}$ is the black point. $L-1 = x_{L-1}$ is the white point. Mathematically we can act on the values of x with various transformation functions. The generic formula is:
 
 \qquad \( y = T(x) \)
@@ -1955,14 +1954,7 @@ On the left, the course color model piles all 3 pixels into one bin, max
 value 3.
 On the right, the fine color model puts the counts into 2 bins, max 2, sum 3.
 
-So, by reporting the sum the shape of the results are more similar to graph.
-
-\begin{figure}[htpb]
-	\centering
-	\includegraphics[width=0.5\linewidth]{sum.png}
-	\caption{Sum count Vs max count}
-	\label{fig:sum}
-\end{figure}
+So, by reporting the sum the shape of the results are more similar to Bezier.
 
 \subsection{Histogram Bezier / Curves}%
 \label{sub:histogram_bezier_curves}
