@@ -955,7 +955,7 @@ Automatically scale to a specified size.
 \label{sub:blue_banana}
 \index{blue banana}
 
-Blue Banana\protect\footnote{credit to Monty Montgomery programmer} is an \textit{HSL Qualifier} \index{HSL Qualifier} (HSL= hue, saturation, luminance), one of the basic tools of any grading software that are based on circumscribing a zone of the frame by extracting a chromatic key and producing a \textit{matte} in the alpha channel (Secondary Color Correction). Blue Banana differs not by creating a real matte, but by creating a \textit{selection mask} exclusively for use within the plugin. The BlueBanana plugin has a couple of useful purposes. It can be used for color transformation or remapping -- by isolating a specific color and then performing color change/correction on only that color (or color ranges). Another useful purpose is for chroma-key filtering, using multiple BlueBanana plugins on the same track. Also, it can be used in conjunction with the mask operation of the Compositor. Usage of BlueBanana may seem complicated at first, but it is necessarily so in order to get enough control to produce the desired effect simply and quickly. Just changing a single color is actually quite easy. BlueBanana is keyframable (figure~\ref{fig:bluebanana}).
+Blue Banana\protect\footnote{credit to Monty Montgomery programmer} is an \textit{HSL Qualifier} \index{HSL Qualifier} (HSL= Hue, Saturation, Luminance; HSV in our plugin, with V = Value), one of the basic tools of any grading software that are based on circumscribing a zone of the frame by extracting a chromatic key and producing a \textit{matte} in the alpha channel (Secondary Color Correction). Blue Banana differs not by creating a real matte, but by creating a \textit{selection mask} exclusively for use within the plugin. The three H, S and V sliders are called \textit{qualifiers}. The BlueBanana plugin has a couple of useful purposes. It can be used for color transformation or remapping -- by isolating a specific color and then performing color change/correction on only that color (or color ranges). Another useful purpose is for chroma-key filtering, using multiple BlueBanana plugins on the same track. Also, it can be used in conjunction with the mask operation of the Compositor. Usage of BlueBanana may seem complicated at first, but it is necessarily so in order to get enough control to produce the desired effect simply and quickly. Just changing a single color is actually quite easy. BlueBanana is keyframable (figure~\ref{fig:bluebanana}).
 
 The basic strategy for BlueBanana is to:
 
@@ -1002,19 +1002,20 @@ If you just want to try this, follow these steps.
 
 Definition of Wording/Checkboxes/Buttons/Operators are being described next. Some of the commentary was adopted from information provided by \textit{Monty Montgomery} and from questions and answers from email by \textit{Igor Ubuntu}, who did extensive testing.
 
-\subsubsection*{Operational characteristics for the \textbf{color-related adjusters}:}
+\subsubsection*{Operational characteristics for the color-related adjusters:}
 \label{ssub:operational_characteristic_color}
 
 \begin{description}
-        \item[left arrow slider] operates the range minimum; the numerical value shows in the left-most textbox.
-        \item[right arrow slider] operates the range maximum; resulting numerical value is in the middle textbox.
+        \item[left arrow slider] operates the range minimum (left edge); the numerical value shows in the left-most textbox.
+        \item[right arrow slider] operates the range maximum (right edge); resulting numerical value is in the middle textbox.
         \item[middle circle slider below] can move the current range up or down and the numerical results will show in the left and middle textbox. Move the dot and you move the range.
-        \item[top pad slider] operates the edge slopes (selection attack/decay) and the value will be displayed in the
-        rightmost textbox. Sharp edges are represented by 0; 100 represents smooth edges.
-        \item[top arrow] affects the distribution skew.
+        \item[top pad slider] operates the edge slopes (selection attack/decay) and the value will be displayed in the rightmost textbox. Sharp edges are represented by 0; 100 represents smooth edges. It is only for "Mask Selection" (Pane 1). It applies simultaneously to the left and right edges (symmetric).
+        \item[top arrow] affects the distribution skew. It is the equivalent of Top Pad Slider for Pane 2 ("Color Adjusting").
 \end{description}
 
-\subsubsection*{Operational characteristics for \textbf{Fill}:}
+\textit{Left/Right Arrow} determine the edges of the color range. They are precise edges independent of each other, so we can get asymmetrical ranges with respect to the center of the interval indicated by \textit{middle circle slider below}.
+
+\subsubsection*{Operational characteristics for Fill:}
 \label{ssub:operational_characteristic_fill}
 
 \begin{description}
@@ -1072,10 +1073,12 @@ Let us now examine the instruments in \textbf{pane 1}:
     \item[Hue] select a hue domain; click on the Pick button to select or check the box to the left of hue or uncheck to ignore.
     \item[Saturation] select a saturation domain; click on the Pick button to select or check the box to the left.
     \item[Value] select a value domain; click on the Pick button to select or check the box to the left.
-    \item[Fill] will fill more area or less area of your selected region. This describes how it works. Fill control is an automated way of doing grow and shrink on the selected area, to fill in small holes, or get rid of scattered speckles. If none of the Hue, Saturation, or Value sliders are active -- meaning that the whole frame is selected -- the Fill slider will have no effect even when enabled. The word fill will appear ghosted to indicate this.
+    \item[Fill] will fill more area or less area of your selected region. This describes how it works. Fill control is an automated way of doing grow and shrink on the selected area, to fill in small holes in the middle of the selection, or to eliminate spurious pixels that are on the outer or inner edge of the selection.  Be careful how much you shrink, because it can lead to edge segmentation with visible and annoying blocks of pixels. This is where Blur plugin can help. Blur should not be overdone so as not to create unsightly halos.
+    
+    If none of the Hue, Saturation, or Value sliders are active -- meaning that the whole frame is selected -- the Fill slider will have no effect even when enabled. The word Fill will appear ghosted to indicate this.
 
     The three lower handles in the fill slider correspond to \textit{Shrink} (the left hand slider), \textit{Final} (the middle slider), and \textit{Grow} (the right hand slider). These are used in combination to alter the selection by first growing it by the amount specified by the right hand Grow slider, shrinking it to the amount specified by the left hand Shrink slider, and then growing it again to the final size specified by the middle Final slider. The top slider then feathers the resulting selection.
-    Growing the selection and then shrinking it has the effect of filling small holes in the selected area. Similarly, shrinking and then growing tends to remove small flecks of unwanted selection. The Final slider specifies the overall desired shrinkage or growth of the selection when finished. To specify a pure Grow or Shrink operation, set the Final slider and the Grow/Shrink slider to the same value and leave the other slider at zero.
+    Growing the selection it has the effect of filling small holes in the selected area. Similarly, shrinking and then growing tends to remove small flecks of unwanted selection. The Final slider specifies the overall desired shrinkage or growth of the selection when finished. To specify a pure Grow or Shrink operation, set the Final slider and the Grow/Shrink slider to the same value and leave the other slider at zero.
     \item[Pre-erode] this control reverses the order of operation to Shrink, then Grow, then Final. The change is subtle on most images, but overall removes more small features because it first removes flecks before filling in holes.
 \end{description}
 
@@ -1104,8 +1107,17 @@ This section is used to modify the color of your selection. Descriptive commenta
     \item[Alpha] controls the output alpha (this is not available when End Mask is set); click the Reset button to revert to default. Result is reflected in the numerical textboxes on the right-hand side.
 \end{description}
 
-Let's see two examples of HowTo:
+\subsubsection*{Tips}
 
+\begin{enumerate}
+	\item In Pane 1, for mask selection creation, you can also use only one or two (checked or Pick button) of the three qualifiers Hue/Saturation/Value. With Hue alone you get a precise range of hues. With Saturation you select those saturation values for all hues, and with Value you do a "Luma Key," that is, you isolate only certain gray values. It may be useful to start with only one qualifier, and then gradually activate the others; but there are important cases that require all three bars. For example, skin tones, which are always characterized by a mixture of shadows, highlights, and different levels of saturation.
+	\item Hue and Saturation Qualifiers can be inaccurate if the file is highly compressed and with Subsampling type $4:2:0$. There are indeed blocks and macroblocks of pixels, visible especially along the edges, that disturb the creation of the selection mask. Better to use high quality files at least $4:2:2$, better still $4:4:4$. The brightness Y channel, on the other hand, is always at the highest quality (4). The presence of color noise can also be a problem because it creates spurious pixels. A tip may be to work on and enhance the clip before applying Blue Banana.
+	\item If there are unwanted (spurious) selections in the frame that are small and far from the main selection, they can be eliminated or minimized with some Blur. Larger spurious selections can be eliminated by masking them (with the \texttt{Mask selection} option enabled in Blue Banana and with the \texttt{Apply mask before plugins} option in Mask tool). This is an action analogous to \textit{garbage matte} in Chroma Key. If there are many spurious areas, perhaps with complex motions, it is best to mask only the selection we are interested in and then bring the \texttt{Fade} slider to $-100$ to reverse the mask.
+	\item To select multiple colors in the same clip we can use multiple instances of Blue Banana.
+	\item Once a satisfactory selection mask has been created, scroll through the entire clip to see the presence of artifacts, defects, or spurious areas in the other frames.
+\end{enumerate}
+
+Let's see two examples of HowTo:
 
 \subsubsection*{BlueBanana Use Case \#1: (Color Transform/Remapping)}
 \label{ssub:bb_use_case_1}
