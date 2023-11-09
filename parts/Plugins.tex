@@ -1074,7 +1074,7 @@ Let us now examine the instruments in \textbf{pane 1}:
     \item[Saturation] select a saturation domain; click on the Pick button to select or check the box to the left.
     \item[Value] select a value domain; click on the Pick button to select or check the box to the left.
     \item[Fill] will fill more area or less area of your selected region. This describes how it works. Fill control is an automated way of doing grow and shrink on the selected area, to fill in small holes in the middle of the selection, or to eliminate spurious pixels that are on the outer or inner edge of the selection.  Be careful how much you shrink, because it can lead to edge segmentation with visible and annoying blocks of pixels. This is where Blur plugin can help. Blur should not be overdone so as not to create unsightly halos.
-    
+   
     If none of the Hue, Saturation, or Value sliders are active -- meaning that the whole frame is selected -- the Fill slider will have no effect even when enabled. The word Fill will appear ghosted to indicate this.
 
     The three lower handles in the fill slider correspond to \textit{Shrink} (the left hand slider), \textit{Final} (the middle slider), and \textit{Grow} (the right hand slider). These are used in combination to alter the selection by first growing it by the amount specified by the right hand Grow slider, shrinking it to the amount specified by the left hand Shrink slider, and then growing it again to the final size specified by the middle Final slider. The top slider then feathers the resulting selection.
@@ -1115,6 +1115,7 @@ This section is used to modify the color of your selection. Descriptive commenta
 	\item If there are unwanted (spurious) selections in the frame that are small and far from the main selection, they can be eliminated or minimized with some Blur. Larger spurious selections can be eliminated by masking them (with the \texttt{Mask selection} option enabled in Blue Banana and with the \texttt{Apply mask before plugins} option in Mask tool). This is an action analogous to \textit{garbage matte} in Chroma Key. If there are many spurious areas, perhaps with complex motions, it is best to mask only the selection we are interested in and then bring the \texttt{Fade} slider to $-100$ to reverse the mask.
 	\item To select multiple colors in the same clip we can use multiple instances of Blue Banana.
 	\item Once a satisfactory selection mask has been created, scroll through the entire clip to see the presence of artifacts, defects, or spurious areas in the other frames.
+	\item  It is known that primary Color Correction precedes secondary CC. However, if we use primary CC tools that cause the highlights and deep blacks to clip, for example the histogram, we will get clipped areas that then, in secondary CC, cannot be recovered. We can then first do a secondary CC for the areas near the white point and the black point using Blue Banana which works at 32bit Float.  For example, we can turn down the highlights so as to reveal details and the same can be done in the shadows. Once we have worked in these details without causing clipping (that is, reported within the standard range) we can switch to primary CC.
 \end{enumerate}
 
 Let's see two examples of HowTo:
@@ -1852,7 +1853,7 @@ You need to select which transfer to view by selecting one of the channels on th
 
 After the input transfer, the image is processed by the output transfer. The output transfer is simply a minimum and maximum to scale the input colors to. Input values of $1.0$ are scaled down to the output's maximum. Input values of $0$ are scaled up to the output minimum. Input values below $0$ are always clamped to $0$ and input values above $1.0$ are always clamped to $1.0$. Click and drag on the output gradient's triangles to change it. It also has textboxes to enter values into.
 
-Enable the \textbf{Automatic} toggle to have the histogram calculate an automatic input transfer for the red, green, and blue but not the value. It does this by scaling the middle $99\%$ of the pixels to take $100\%$ of the histogram width. The number of pixels permitted to pass through is set by the \textit{Threshold} textbox. A threshold of $0.99$ scales the input so $99\%$ of the pixels pass through. Smaller thresholds permit fewer pixels to pass through and make the output look more contrasty.
+Enable the \textbf{Automatic} toggle to have the histogram calculate an automatic input transfer for the red, green, and blue but not the value. It does this by scaling the middle $99\%$ of the pixels to take $100\%$ of the histogram width. The number of pixels permitted to pass through is set by the Threshold \textbf{textbox}. A threshold of $0.99$ scales the input so $99\%$ of the pixels pass through. Smaller thresholds permit fewer pixels to pass through and make the output look more contrasty.
 \textit{Plot histogram} is a checkbox that enables plotting the histogram. It can be useful because having a histogram that changes in real-time can use a lot of system resources for computation. In this case it is enabled only at times when it is needed.
 \textit{Split output} is a checkbox that enables a diagonal split showing in the compositor, so we can see the effects of the changes from the original frame.
 \textit{Reset} returns the four curves to their initial state (neutral) as well as the Value/RGB histogram buttons.
@@ -1875,49 +1876,24 @@ A side note: by using a number of frames, you can get a \textit{dissolve-like
 transition effect}.
 
 \paragraph{Theory:} 
-A digital image is a matrix of ($N x N$) pixels. Each pixel can have a (integer) luminance or luma ($x_i$) value ranging from $0$ to $L-1$. Generally we have $L = 2^{m}$ values of x, with m = depth of color bit. $0 = x_{0}$ is the black point. $L-1 = x_{L-1}$ is the white point. Mathematically we can act on the values of x with various transformation functions. The generic formula is:
 
-\qquad \( y = T(x) \)
+For more on the mathematical aspect see here:
 
-with:
+{\small \url{https://thirdspacelearning.com/gcse-maths/statistics/histogram/}}
 
-y = luma value after transformation
-x = initial luma value
-T = transformation operator
+For our discussion, it is enough to understand a few concepts. Each vertical line we see in the histogram is not a simple line, but a rectangle having a certain base. This base is given by the values of $x_i$ present at the edges of the rectangle \textit{i} (pixel range, $x_{max_i} - x_{min_i}$). Rectangles are called \textit{Bins} or Accumulators. The bin's number is of fixed and known size because it depends on the color depth. The bin height is our output $y$ and the bin area ($A_i = f(x_i)$) is known because it represents the \textit{number of occurrences} that are read in bin, also called \textit{frequency ($f_x$)}. The plugin scans the entire range of $x_i$, from 0 to 1.0, and records all the occurrences within each bin. The value of $f_x$ for each bin is the \textit{max} value. At this point knowing base and area, we can obtain the value of $y$ axis that is reported in the histogram.
 
-The T function in the case of a histogram is:
+$width = b_i = x_{max_i} - x_{min_i}$
 
-\qquad \( y = \dfrac{p(x_{i})}{width} = \dfrac{max_i}{a} \)
+Having established the depth color, the bin width is always the same (b) for every $bin_i$:
 
-$p(x_{i}$ is the transformation that expresses the probability of an image pixel to have a given luma value $x_{i}$. This is referred to as the frequency of the value or the number of occurrences of the value (count = $max_i = bin_{i}$ area $A_i$); y is the height of the bin.  The total probability of all pixels in the image is 1 (100\%):
+$b_i = b = \dfrac{range(1.0-0)}{\# bins}$
 
-\qquad \( \sum_{i=0}^{L-1}{p(x_{i})} = 1 \)
-
-Trivially, the function $p(x_{i})$ can be thought of as counting the recurrences of the value $x_{i}$ in the $bin_i$.
-The histogram is similar to a bar graph (not the same: the histogram uses continuous data, the bar graph uses discrete data) and on the abscissa it shows $x_{i}$ values and on the ordinate $y_{i}$. Each x in a range value is treated as independent of neighboring values so it is considered as an isolated unit called an "accumulator" or "bin." It is on the bins that we count the occurrence of the $x_{i}$ value ($max_i$), which gives us precisely the value $p(x_{i})$. The Histogram is called a bar graph because a value of x is actually an interval between $x_{i}$ and the next value $(x_{i+\varepsilon})$. Because x has continuous values computed in floating point and normalized interval $0 - 1.0$ is used, there is no solution of continuity between one bin and another and the boundaries are decided a priori, usually based on bit depth color. The bin concept is fundamental because it is the basis on which we can do mathematical calculations. In fact, the area of the bin is the frequency (count or $max_i$) in which that value occurs; the width of the bin is the different values within the range we consider. With 8 bits of depth color we have 256 bins; then we collect the values of x from the initial value 0 up to and including 1; then from 1 up to and including 2; and so on up to the last bin, which ranges from 254 to and including 255. It is clear, then, that the continuous luma values are bounded in a range and made to become discrete values on which it is easier to perform calculations. The width of a bin is given by the formula:
-
-$width = a_i = x_{max_i} - x_{min_i}$
-
-Having established the depth color, the bin width is always the same (a) for every $bin_i$:
-
-$a_i = a = \dfrac{range}{\# bins}$
-
-For a depth color of 8 bits we have (normalized range $0 - 1.0$):
-
-$a_{8bit} = \dfrac{(1.0-0)}{256} = 1/256$
-
-For a depth color of 10 bits or more we have:
-
-$a_{10bit} = \dfrac{(1.0-0)}{65536} = 1/65536$
-
-Wider bins have a higher count (because they gather more $x_{i}$). Narrower bins have a lower $max_i$ (because they contain less $x_{i}$; neighboring values ($x_{i+\varepsilon}$) are distributed in neighboring bins).
-To recap: in \CGG{}  histogram is a bunch of \textit{bins} (accumulators) that count the number of times a particular pixel channel intensity (luma, $x_{i}$) occurs in an image. The plugin scans all the pixels in the frame, counting the frequencies in each given bin ($max_i$). Knowing the width of the bins (a) then it is easy to get the height of $bin_i$ (y). In fact, the bins are rectangles, and you can apply the area formula from which to derive the height:
-
-$A_i = max_i = Base \times High = a \times y_i$
+$A_i = f(x_i) = max_i = Base \times High = b \times y_i$
 
 Hence:
 
-$y_i = \dfrac{max_i}{a}$
+$y_i = \dfrac{f(x_i)}{b}$
 
 Dim bins are on the left, bright bins on the right.
 You can have discordance of results, looking in the scopes, either by switching from Histogram to Histogram Bezier or after a conversion between color spaces (with associated change in depth color). The number of bins used depends on the color model bit depth:
@@ -1944,11 +1920,11 @@ Another difference in behavior is regarding the type of curve, whether Linear or
 	\item[Scopes:] the curve is Log
 \end{description}
 
-This diversity also leads to different visual results from Histogram Bezier.
+This diversity also leads to different visual results from Histogram Bezier or Videoscope.
 
 When the color space and the bin size are the same, all of the values increment the indexed bins. But if we start from YUV type edits, the plugin will automatically do the conversion to RGB. When the color is the result of yuv $\rightarrow$ rgb float conversion, we go from 256 bins of YUV to 65536 bins of RGB Float and the results \textit{spread} if there are more bins than colors.  This is the same effect you see when you turn on \textit{smoothing} in the vectorscope histogram.
 
-The \textit{total} pixels for each value is approximately the same, but the \textit{max} value depends on the color quantization.  More colors increment more bins.  Fewer colors increment fewer bins.  In both cases, the image size has the same number of pixels. So the pixels will distribute into more bins if you go to a higher depth color; those bins will have a lower count.  The fewer color case increments the used bins, and skips the unused bins.  This sums all of the pixels into fewer bins, and the bins have higher values. That is the \textit{rgb} vs \textit{yuv} case, fewer vs more bins are used. To get more consistent visual feedback (and on scopes), the concept of sum was used instead of the maximum number of occurrences (max).
+The \textit{total} pixels for each value is approximately the same, but the \textit{max} value depends on the color quantization.  More colors increment more bins.  Fewer colors increment fewer bins.  In both cases, the image size has the same number of pixels. So the pixels will distribute into more bins if you go to a higher depth color; those bins will have a lower count.  The fewer color case increments the used bins, and skips the unused bins.  This sums all of the pixels into fewer bins, and the bins have higher values. That is the \textit{rgb} vs \textit{yuv} case, fewer vs more bins are used. To get more consistent visual feedback (and on scopes), the concept of \textit{sum} was used instead of the maximum number of occurrences (max).
 
 To report something more consistent, the reported value has been changed from the original code to be the \textit{sum} of the accumulated counts for the bins reporting a pixel bar on the
 
@@ -3522,7 +3498,7 @@ and two vectorscopes:
 \paragraph*{Settings:} It is divided into two sections. The upper section contains two items:
 
 \begin{description}
-	\item[Smooth:] serves to make the graph more homogeneous, improving its visualization.
+	\item[Smooth:] serves to make the graph more homogeneous, improving its visualization. However, it has a side effect: in case of frames that have data in the range of 100-110\% (i.e., outside the normal range of 0-100\%, also called super-white), it causes a clip by cutting off this data and reporting only of normal data. If we don't want this clip disable Smooth.
 	\item[Refresh on Stop ON:] [checked -- only for Transport buttons] scopes are updated when you stop playback at a given location. Instead, they are locked at the start position while you playback. This saves system resources and makes playback smoother. By dragging the cursor the scopes are updated in realtime.
 	\item[Refresh on Stop OFF:] [unchecked -- for Transport buttons and dragging cursor] the display of the scopes is synchronized with the playback. Every variation of the graphs is in realtime. There may be some decrease in fps during playback.
 	\item[Refresh on Release:] This works for the Viewer and Compositor windows. Scopes are not updated during playback. The update occurs only when you stop playback, that is at the final position (either by dragging the cursor or using the Transport buttons). When in the timeline, if you drag on the TimeBar or reposition in the TimeBar in either Drag and Drop or Cut and Paste mode, the release of the button also will update the Scopes.  This saves system resources and makes playback smoother.  Because there is no update when playing in the main window, you can still easily get a videoscope update simply by moving the mouse to the Compositor and a single click there will update the scopes without changing the frame (as long as Click to Play is not enabled).

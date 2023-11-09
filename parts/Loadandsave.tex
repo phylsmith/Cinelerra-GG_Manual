@@ -39,7 +39,7 @@ Microsoft WAV,
 Raw DV and PCM,
 MPEG Audio and Video.
 
-\paragraph{Still Images:}  JPEG/EXR/GIF/PNG/PPM/TGA/TIFF
+\paragraph{Still Images:}  JPEG/EXR/GIF/PNG/PPM/TGA/TIFF. Note: even if \CGG{} outputs fp32, exr/tiff values there are normalized to 0-1.0f.
 
 \paragraph{MPEG Files:} 
 What is an MPEG file?  A very common file format is MPEG because it works with many cameras and televisions.  Mpeg2 video, an elementary codec stream for mpeg files, is the most common format.  To read this format you need to decode the mpeg stream.  You can read and write mpeg natively.  Mpeg video encoding is done separately from mpeg audio encoding when using the native file format, meaning that 2 passes are required and then they have to be muxed together.  However, if using ffmpeg it is rendered in only 1 pass.  DVD uses MPEG as does NTSC and Pal.

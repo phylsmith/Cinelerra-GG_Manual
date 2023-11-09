@@ -158,7 +158,7 @@ processing with no transparency.
 RGB-Float. It is used for high dynamic range processing with
 transparency. Or when we don't want to lose data during workflow,
 for example in color correction, key extraction and motion
-tracking.
+tracking. Note: even if \CGG{} outputs fp32, exr/tiff values there are normalized to 0-1.0f.
   \item[YUV-8 bit] Allocates 8\,bits for Y, U, and V. This is used
 for low dynamic range operations in which the media is compressed in
 the YUV color space. Most compressed media is in YUV and this

@@ -389,7 +389,7 @@ To find a solution you can use MKVToolNix ({\small\url{https://mkvtoolnix.downlo
 \subsubsection{Image Sequences}
 \label{ssub:ffmpeg_image_sequences}
 
-The image sequences can be uncompressed, with lossy or lossless compression but always Intraframe. They are suitable for post-processing that is compositing (VFX) and color correction.
+The image sequences can be uncompressed, with lossy or lossless compression but always Intraframe. They are suitable for post-processing that is compositing (VFX) and color correction. Note: even if \CGG{} outputs fp32, exr/tiff values there are normalized to 0-1.0f.
 
 \begin{description}
 	\item[DPX] Film standard; uncompressed; high quality. \textit{Log} type.
@@ -468,7 +468,7 @@ FFmpeg is the default engine, but you can also use its internal engine, which is
 \subsubsection{Image Sequences}
 \label{sub:internal_image_sequences}
 
-There are quite a few formats available.
+There are quite a few formats available. Note: even if \CGG{} outputs fp32, exr/tiff values there are normalized to 0-1.0f.
 
 \begin{description}
 	\item[EXR Sequence] OpenEXR (Open Standard) is a competing film standard to DPX, but \textit{Linear} type.
@@ -511,7 +511,7 @@ A color space is a subspace of the absolute CIE XYZ color space that includes al
 \begin{description}
 	\item[Color primaries]: the gamut of the color space associated with the media, sensor, or device (display, for example).
 	\item[Transfer characteristic function]: converts linear values to non-linear values (e.g. logarithmic). It is also called Gamma correction.
-	\item[Color matrix function] (scaler): converts from one color model to another. $RGB \leftrightarrow YUV$; $RGB \leftrightarrow YCbCr$; etc. 
+	\item[Color matrix function] (scaler): converts from one color model to another. $RGB \leftrightarrow YUV$; $RGB \leftrightarrow Y'CbCr$; etc. 
 \end{description}
 
 The camera sensors are always RGB and linear. Generally, those values get converted to YUV in the files that are produced, because it is a more efficient format thanks to chroma subsampling, and produces smaller files (even if of lower quality, i.e. you lose part of the colors data). The conversion is nonlinear and so it concerns the "transfer characteristic" or gamma. The encoder gets input YUV and compresses that. It stores the transfer function as metadata if provided.
