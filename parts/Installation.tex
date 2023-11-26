@@ -1146,11 +1146,17 @@ capabilities as well as some pre-built packages in a build farm.
 
 \subsection{Build Farm pre-built Deb and RPM packages}
 \label{sec:packages}
-A build farm for \CGG{} deb and rpm packages that is in development is at this location \url{https://github.com/einhander/cin-gg-packages/releases}.
-It can build packages on every git change in the main repo with  
+Especially advantageous to the way some users prefer to keep CinelerraGG updated
+is the build farm for \CGG{} deb and rpm packages that is maintained regularly
+at this location \url{https://github.com/einhander/cin-gg-packages/releases}.
+It will build packages on every git change in the main repo with  
 releases corresponding to a build date, not a git commit date.
-Current build hosts are \textbf{debian 12}, \textbf{alma linux 8},
-\textbf{Suse Leap 15.5}, \textbf{Fedora 38}, and \textbf{Ubuntu 22.04}. 
+Current build hosts are \textbf{Debian 12}, \textbf{Debian 11},
+\textbf{Suse Leap 15.5}, \textbf{Fedora 38}, and \textbf{Ubuntu 22.04}.
+This build farm creates packages for the latest current versions of these
+distros with the potential for additional distros to be added in the future. 
+In addition, packages for some previously built dates will still be available
+in case you want to revert to a specific package date.
 
 \subsection{AV Linux}
 \label{sec:AV_Linux}
