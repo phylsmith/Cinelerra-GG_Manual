@@ -296,3 +296,35 @@ If you want to move the PiP to another position you have to go back to \textit{C
 
 Finally, you can animate the position of the PiP as well as the thickness and color of the frame throughout the video using the keyframes (see \nameref{cha:keyframes}).
 
+\section{Using Screen Capture on slower CPUs}%
+\label{sec:using_screencapture}
+
+Some results with different settings when working on slower CPUs follow:
+\begin{itemize}
+\item You can enable "loopback mode" in alsamixer, set xmms (with ALSA output) to play
+(any alsa-enabled app should work), and then you can record both video and audio. If
+your motherboard has no loopback switch for its integrated audio, you can use a
+specialized .asoundrc file set up as an alsa loopback instead -- reference 
+{\small \url{https://bbs.archlinux.org/viewtopic.php?id=147852}} for usage.
+\item If you leave recording settings to their default value of input frequency = 48000, you
+may get strange one-core cpu overload in kernel space. This will show up in the color
+orange if using the system monitor software, gkrellm (GNU Krell Monitors). So you most
+likley will want to set the input frequency to 44100 and then everything should work
+smoothly.
+\item Attempting to record 1440*900*24bit*30fps with cpu (AMD FX 430) set to its lowest
+frequency of 1.4Ghz, usually results in video being shorter than audio, so try slowing
+video down to different values, such as 0.68 or so via speed curve, and then just clip
+the few last silent frames.
+\item If you set the CPU up for performance and if you can rev it up to 4Ghz, then audio and
+video tend to be much more aligned in terms of their length.  In one particular case with
+generally good results, the codec was mjpeg444 / s16le into a mov container on tmpfs.
+\item Specifically for screencapture on slow CPU, running short pre-session capture will be
+useful to see if you can get same length tracks with given resolution/fps/codec. And if
+not, either drop down recording fps or try to speed up encoder settings.
+\item In trying other positioning methods, apart from software timings, such as check/uncheck
+add/drop frames checkboxes and setting different number of audio samples ... , there seems
+to be no algorithm/code to intellectually duplicate frames that are too late in their
+encoding. And setting buffered frames in the device to absurdly high value like 50, was 
+also not working for screencapture driver and short recordings like 20-25 seconds long.
+In conclusion, no amount of buffering will save you if you are chronically late.
+\end{itemize}

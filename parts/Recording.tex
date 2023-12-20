@@ -39,7 +39,7 @@ The media file will be written using the format and codec specified in the \text
 \label{sec:record_web_media_rt}
 \index{recording!web media in real time}
 
-Below describes the necessary steps for recording freely available media from the internet for your own personal use.  You have to be on a system using pulseaudio, such as ubuntu, fedora, centos.
+Below describes the necessary steps for recording freely available media from the internet for your own personal use.  You have to be on a system using pulseaudio, such as ubuntu, fedora, or centos.
 
 \begin{enumerate}
     \item Start \CGG{} and select \texttt{Settings $\rightarrow$ Preferences $\rightarrow$  Recording} From a terminal (with a wide text window) run: \texttt{pactl list}. You will see all of the audio sources and sinks on your system. Identify the source associated with the normal output your system uses. Example: \textit{Source $\#1$}. Locate the source which monitors your normal audio output.  For example: \textit{front stereo}.        
@@ -129,10 +129,10 @@ The algorithm for determining how many frames to drop is as follows:
 \paragraph{Transport controls} these control buttons mimic the functions of tape recorders from the old days.
 
 \begin{itemize}
-    \item \textit{Reverse button/left arrow} --remnant from the past; does the same as the Start button really.
-    \item \textit{Red round button} --this is the Start button to start recording.
-    \item \textit{White square} --this is the Stop button to stop recording.
-    \item \textit{Red round button with white line} --start recording in single frame mode.  The way this works is to just \textit{take a picture now, take a picture now\dots}  The reason to use this mode is to get a still shot like you would with a camera.  Sometimes input is continuous, for example looking at stars with a telescope -- surveillance goes on for hours, but you just want to take a picture now when something of significance interest comes up
+    \item \textit{Reverse button/left arrow} -- remnant from the past; does the same as the Start button really.
+    \item \textit{Red round button} -- this is the Start button to start recording.
+    \item \textit{White square} -- this is the Stop button to stop recording.
+    \item \textit{Red round button with white line} -- start recording in single frame mode.  The way this works is to just \textit{take a picture now, take a picture now\dots}  The reason to use this mode is to get a still shot like you would with a camera.  Sometimes input is continuous, for example looking at stars with a telescope -- surveillance goes on for hours, but you just want to take a picture now when something of significance interest comes up
 \end{itemize}
 \paragraph{Cron} The batch recording watcher, cron, is either \textit{Idle} or \textit{Active}.  When you start or stop batch recording at specific times, there is a cron thread watching timers to perform the timed action.  Idle/Active indicates whether the timers are running.
 \paragraph{Position} this is a timebase which tracks frames/samples when obeying frame/sample rate.  When a recording starts, it resets to 0.  Timing is against audio (when available).  Audio time and video time are based on position.
@@ -143,10 +143,10 @@ You can select synchronization time source \textit{Positioning} in:
 \noindent Possible choices for time base are:
 
 \begin{itemize}
-    \item \textit{Presentation Timestamps} --use time code which is in both the audio and video media input stream. Uses these timestamps to sync the 2 streams.
-    \item \textit{Device Position} --this is the device hardware position of where you are.  It is usually only on the audio side.
-    \item \textit{Sample Position} --Sample $\#$ or frame $\#$ divided by frame rate tells you where you are.
-    \item \textit{Software Timing} --usually used for things like YouTube; it just will \textit{take a picture now} \dots \textit{take a picture now} \dots over and over again until you tell it to stop.    
+    \item \textit{Presentation Timestamps} -- use time code which is in both the audio and video media input stream. Uses these timestamps to sync the 2 streams.
+    \item \textit{Device Position} -- this is the device hardware position of where you are.  It is usually only on the audio side.
+    \item \textit{Sample Position} -- Sample $\#$ or frame $\#$ divided by frame rate tells you where you are.
+    \item \textit{Software Timing} -- usually used for things like YouTube; it just will \textit{take a picture now} \dots \textit{take a picture now} \dots over and over again until you tell it to stop.    
 \end{itemize}
 
 Positioning \& Timing needs more detailed explanation for complete understanding and application.  The overall goal is to maintain media stream timeline synchronization.  The reason for providing different \textit{Positioning} options is that different input media may have different timebase standards.  Additionally, the input may be damaged.  Damaged data can skew the timeline during presentation.  The timebase standards make it possible to correctly resynchronize the media presentation to the original time position.  For example, the transport layer may have timestamps provided in it.  These timestamps record \textit{audio time} and  \textit{video time} and are called \textit{presentation timestamps}.
@@ -178,6 +178,9 @@ One other noted new feature is a new choice for recording -  \texttt{V4L2 MPEG}.
     \caption{new feature V4L2 mpeg}
     \label{fig:recording02}
 \end{figure}
+
+Some notes for usage on slower CPUs are outlined at appendix \nameref{sec:using_screencapture}
+as discovered in actual usage.
 
 \section{Digital Video Broadcasting (DVB)}%
 \label{sec:digital_video_broadcasting}
