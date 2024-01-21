@@ -884,42 +884,22 @@ If we load a media (M) into Resources and adjust the size of the project to the 
 \index{aspect ratio}
 \index{PAR, DAR, SAR}
 
-The aspect ratio is the ratio of the sides of the frame (\textit{Width} and \textit{Height}). For example, classically broadcast TV was 4:3 (= 1.33), whereas today it has changed to 16:9 (= 1.85); in cinema we use the 35 mm aspect ratio of 1.37 (Academic aperture), but even more so the super 35 mm (2.35). There are also anamorphic formats, i.e. that have no square pixels, like Cinemascope (2.35). The projection must be \textit{normalized} to have an undistorted view.
+The aspect ratio is the ratio of the sides of the frame (\textit{Width} and \textit{Height}). For example, classically broadcast TV was 4:3 (= 1.33), whereas today it has changed to 16:9 (= 1.78); in cinema we use the 35 mm aspect ratio of 1.375 (Academy aperture), academy flat (1.85 or widescreen) but even more so the super 35 mm (from 1.33 to 2.39). There are also anamorphic formats, i.e. that have no square pixels, like Cinemascope (2.39). The projection must be normalized to have an undistorted view.
 
 
-From the film or digital sensors of the cameras, we can extract any frame size we want. We are talking about \textit{viewports}, which we will examine shortly. Also important is the output of the film that will be rendered, because it is what we will see at the cinema, or on TV, or on the monitor of the PC, tablet or smartphone. Referring to figure~\ref{fig:temporary-01}, you can see these two possibilities: with the Camera you choose the size and aspect ratio of the source file (regardless of the original size); while with the Projector you choose the size and aspect ratio of the output.
+From the film or digital sensors of the cameras, we can extract any frame size we want. We are talking about \textit{viewports}, which we will examine shortly. Also important is the output of the video that will be rendered, because it is what we will see at the cinema, or on TV, or on the monitor of the PC, tablet or smartphone. Referring to figure~\ref{fig:temporary-01}, you can see these two possibilities: with the \textit{Camera} tool you choose the size and aspect ratio of the source file (regardless of the original size); while with the \textit{Projector} tool you choose the size and aspect ratio of the output. Other ways of changing the aspect ratio of assets or tracks we have seen previously (\texttt{Resize track}; \texttt{Match Output Size}; \texttt{Resize asset}). A method of changing the size of the entire project (canvas) is via the \texttt{Set Format} window. The following formula is used to vary the aspect ratio:
 
-The following formula is used to vary the aspect ratio:
+\qquad $\frac{W}{H} =$ frame aspect ratio ($\frac{pixels}{pixels}$)
 
-\qquad $\frac{W}{H} =$ aspect ratio ($\frac{pixels}{pixels}$)
-
-For example to obtain an aspect ratio of Super 35 mmm (2.35) starting from a FullHD file (1920x1080) whose base extension (1920) we want to keep:
+For example to obtain an aspect ratio of Super 35 mm (2.35) starting from a FullHD file (1920x1080) whose base extension (1920) we want to keep:
 
 \qquad $\frac{1920}{H} = 2.35$
 
-from which: $H = 817$ pixels
+from which: $H = 816$ pixels
 
-\CGG{} allows you to vary the input and output aspect ratio in the ways indicated in the previous section: by varying the pixels of the sides or by setting a multiplication coefficient.
+At the same time as changing the \textit{Height} parameter we also need to set \texttt{Display Aspect rati}o to 2.35. In fact, the parameters in Canvas Size are not related to those in Display Aspect ratio, unless we keep the \texttt{Auto} option checked, and we need to set both before we click on the \texttt{Apply} button. To set the aspect ratio to 2.35:1 we can choose from the drop-down menu the value 2.35 or set the value directly in the two input fields. Or again, it can be done automatically via the Auto option. Finally we can click on the Apply button to complete the calculations. Now we have arrived at the desired result: typical Super 35 mm dimensions and aspect ratio, although starting from a 16:9 FullHD. The new canvas, however, lost the pixels of a part of the initial video (crop), to be precise $1080 - 816 = 264$ lines of pixels from top and bottom.
 
-In \texttt{Settings $\rightarrow$ Format} there is the additional possibility to vary the shape of the pixels from 1:1 (square) to handle anamorphic formats. In such cases we use:
-
-\qquad $PAR=\frac{DAR}{SAR}$
-
-where:
-
-\textit{DAR}= Display Aspect Ratio
-
-\textit{PAR}= Pixel Aspect Ratio (1 or 1:1 is square)
-
-\textit{SAR}= Storage Aspect Ratio (i.e media file aspect ratio)
-
-In practice, there can be a problem with anamorphic format rendering as desired because it does
-not use square pixels.  So, for example, FFV1 format in the mkv container will ignore the DAR
-(Display Aspect Ratio).  You can check if your media is anamorphic format using the \textit{Mediainfo}
-program.  If the Width/Height is 720/576 (=1.25) and DAR is 16/9 (=1.777) then you have non-square
-pixels.  SAR (Storage Aspect Ratio) is different from DAR and you have to use a workaround as 
-described at the "Cinelerra for Grandma" site by Raffaella Traniello:
-{\small\url{http://www.g-raffa.eu/Cinelerra/HOWTO/anamorphic.html}} . 
+\CGG{} allows you to vary the input and output aspect ratio in the ways indicated in the previous section: by varying the pixels of the sides (Width/Height) or by setting a multiplication coefficient (W/H Ratio; in this example: placing $H Ratio = 816 : 1080 = 0.7556$) which performs the calculation automatically. If you set \textit{W Ratio} and \textit{H Ratio} at the same time with the same values, they work as multipliers and you get a resizing of the canvas, without altering the initial aspect ratio. If you change them to two different values or change only one of the two parameters, leaving the other at 1, you get an anamorphic video, with the pixels no longer being square (1:1) but becoming rectangular, deforming the image. To avoid anamorphosis, the \texttt{Display Aspect ratio} must also be adjusted at the same time, for example, with the Auto option. \textit{Anamorphic} format is a complex field that is discussed in the Raffaella Traniello's guide: {\small \url{http://www.g-raffa.eu/Cinelerra/HOWTO/anamorphic.html}}.
 
 
 \subsection{Camera and Projector}%
@@ -994,7 +974,7 @@ with the mouse.  The viewport moves in the same manner.
 
 Select the camera button to enable camera editing mode. 
 In this mode, the guide box shows where the camera position is in relation to past and future camera positions but not where it is in relation to the source video. 
-The green box is the Viewport; at the beginning it coincides with the size of the source frame. If we move the viewport by dragging it with LMB (moving it in $x/y$), the green box remains fixed to the original size but the frame is moved to the new position.  A yellow frame will appear along the edges of the frame to indicate the displacement with respect to the green box; this behavior differs from that seen for the Projector. Even if we act on the $z-axis$ (SHIFT + Drag, equivalent to the zoom), the frame narrows or widens, moving behind the yellow frame.
+The green box is the Viewport; at the beginning it coincides with the size of the source frame. If we move the viewport by dragging it with LMB (moving it in $x/y$), the green box remains fixed to the original size but the frame is moved to the new position.  A yellow frame will appear along the edges of the frame to indicate the displacement with respect to the green box; this behavior differs from that seen for the Projector. Even if we click on the $z-axis$ (SHIFT + Drag, equivalent to the zoom), the frame narrows or widens, moving behind the yellow frame.
 
 \subsubsection*{Camera and Projector Menu}%
 \label{ssub:camera_and_projector_menu}
@@ -1013,7 +993,7 @@ Most operations in the Compositor window have a tool window which is enabled by 
 	\label{fig:camera_tool}
 \end{figure}
 
-In the \textit{Position} section you can act on the $X$, $Y$ and $Z$ coordinates. By either tumbling or entering text directly or by using the slider, the camera and projector can be precisely positioned. There is also a reference to the color of the curve as we see it on the timeline. You can also define the \textit{range} of action which by default is [-100 to 100]. By pressing the Reset button for each coordinate, or the global Reset button, the range is automatically brought to the project size value (HD; 4k; etc), which are usually the most useful limits. Note that the range can also be changed in the \textit{Program} window, in the \textit{zoom bar}, where there are similar input fields to enter the chosen limits.
+In the \textit{Position} section you can change the $X$, $Y$ and $Z$ coordinates. By either tumbling or entering text directly or by using the slider, the camera and projector can be precisely positioned. There is also a reference to the color of the curve as we see it on the timeline. You can also define the \textit{range} of action which by default is [-100 to 100]. By pressing the Reset button for each coordinate, or the global Reset button, the range is automatically brought to the project size value (HD; 4k; etc), which are usually the most useful limits. Note that the range can also be changed in the \textit{Program} window, in the \textit{zoom bar}, where there are similar input fields to enter the chosen limits.
 
 In the \textit{Justify} section we can use automatic positioning in the 6 standard coordinates: Left, Horizontal, Right, Top, Center and Bottom.
 

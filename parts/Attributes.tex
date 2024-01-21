@@ -31,7 +31,7 @@ from this point uses the same settings.
 In addition to the standard settings for sample rate, frame rate,
 and frame size (canvas size), \CGG{} uses some less traditional settings like
 channel positions, color model, and aspect ratio.  The aspect ratio
-refers to the screen aspect ratio (SAR).
+refers to the display aspect ratio (DAR).
 
 Edit decision lists , the EDL \index{EDL} stored in XML, save the project
 settings.  Formats which contain media but no edit decisions just
@@ -122,11 +122,19 @@ frame rate that you load.  Media is reframed to match the project
 framerate.
 
 \item[Canvas size:] \index{canvas size} sets the size of the video output \index{output size}. In addition,
-each track also has its own frame size.  Initially, the New Project dialog creates video tracks whose size match the video output.  The video track sizes can be changed later without changing the video output. We have: Project size = $W \times H$ pixels = canvas size = output size
+each track also has its own frame size.  Initially, the New Project dialog creates video tracks whose size matches the video output.  The video track sizes can be changed later without changing the video output. We have: Project size = $Width \times Height$, pixels = canvas size = output size .
 
-\item[Aspect ratio:] \index{aspect ratio} sets the aspect ratio; this aspect ratio refers to the screen aspect ratio.  The aspect ratio is applied to the video output (canvas). It can be convenient to vary the size of the canvas in percentage terms, instead of having to calculate the number of W x H pixels. The aspect ratio can be different than the ratio that results from the formula: $\dfrac{h}{v}$ (the number of horizontal pixels divided into the number of vertical pixels).  If the aspect ratio differs from the results of the formula above, your output will be in non-square pixels.
+\item[W/H Ratio] Sets the ratio of the new canvas size (Width, Height) from the old (previous) canvas size (Width, Height).
 
-\item[Auto aspect ratio:] if this option is checked, the Set Format
+\qquad W Ratio = $\frac{W_f}{W_i}$ \qquad H Ratio = $\frac{H_f}{H_i}$
+
+with $W_f$/$H_f$: final Width and Height; $W_i$/$H_i$: initial Width and Height.
+
+The new canvas size is recalculated based upon a certain factor in the \texttt{W Ratio}, \texttt{H Ratio} fields. A practical use-case: the current resolution is $640 \times 480$, and for some reason you want Width to be 1.33 times bigger. You don't have to calculate what $640 \times1.33$ is; you type 1.33 into the \texttt{Width} input instead, and \CGG{} calculates it for you. W/H Ratio works as a local calculator. Warning: if you vary W/H Ratio without adjusting Display aspect ratio, we may get non-square pixels resulting in anamorphic frame distortion.
+
+\item[Display aspect ratio:] \index{aspect ratio} sets the aspect ratio; this aspect ratio refers to the display aspect ratio (DAR).  The aspect ratio is applied to the video output (canvas). It can be convenient to vary the size of the canvas in percentage terms, instead of having to calculate the number of Width x Height pixels. The aspect ratio can be different than the ratio that results from the formula: $\dfrac{h}{v}$ (the number of horizontal pixels divided into the number of vertical pixels).  If the aspect ratio differs from the results of the formula above, your output will be in non-square pixels.
+
+\item[Auto aspect ratio:] if this option is checked, the \texttt{Set Format}
 dialog always recalculates the Aspect ratio setting based upon the
 given Canvas size. This ensures pixels are always square.
 
