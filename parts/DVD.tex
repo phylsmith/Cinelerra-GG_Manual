@@ -504,10 +504,10 @@ because the upsampling of interlaced chroma fields is normally done using a prog
 With this mode enabled, the MPEG decoder uses a different algorithm for interlaced frames so that the
 4:2:0 format chroma interlacing is preserved.
 
-\section{DVD with LPCM audio}%
+\section{DVD with LPCM or MP2 audio}%
 \label{sec:dvd_lpcm_audio}
 
-By default, the audio when creating a DVD is always \textit{AC3}. However you can switch to \textit{PCM} (Pulse Code Modulator) with just a few additional steps as outlined below.
+By default, the audio when creating a DVD is always \textit{AC3}. However you can switch to \textit{PCM} (Pulse Code Modulator) or MP2 with just a few additional steps as outlined below.
 Note that Audio must be $48Khz$ or $96Khz$, nothing else is supported, even by ffmpeg's dvd pcm encoder.
 
 \begin{enumerate}
@@ -516,11 +516,12 @@ DVD media writer, requires privileges of either root or the system has
 granted the user this privilege.
 	\item Make sure you have your video with audio loaded and edited to your satisfaction and you are positioned at the start of the video.
 	\item Use the \texttt{File} pulldown and select the \textit{DVD Render} option.
-	\item In the\textit{Create DVD} window, accept the defaults or select different values and then click \texttt{OK}.  Do not check "Use FFMPEG" as that will not work.
+	\item In the\textit{Create DVD} window, accept the defaults or select different values and then click \texttt{OK}.  Do not check "Use FFMPEG" as that may not work.
 	\item When the \textit{Batch Render} window pops up, in the big box towards the bottom will be 2 lines with the first line for \textit{Video} already highlighted.  Instead, click on the second line, which is for \textit{Audio}, so that it is highlighted.
-	\item On the top left, you will see the \textit{File Format} set as AC3.  Use the down arrow next to	the box and change it to \textit{Raw PCM} by clicking on it.
-	\item When you switch to Raw PCM, you see the extension in the \texttt{Output path} above change to pcm
-	instead of ac3.  Now just reset the extension from pcm to lpcm as	that is required. In most cases if you click on the \texttt{Audio} wrench to see the settings, you will find that the standard settings of 16 bit Linear / Signed / Hi Lo work.  If not, experiment for alternatives.
+	\item On the top left, you will see the \textit{File Format} set as AC3.  Use the down arrow next to	the box and change it to \textit{Raw PCM} or \textit{MPEG Audio} by clicking on it.
+	\item When you switch to Raw PCM or MPEG Audio, you see the extension in the \texttt{Output path} above change to pcm or mp3
+	instead of ac3.  Now just reset the extension from pcm to lpcm or mp2 as that is required. In most cases if you click on the \texttt{Audio} wrench to see the settings, you will find that the standard settings of 16 bit Linear / Signed / Hi Lo work for Raw PCM.  For mp2, you will have to click
+on the Audio wrench and change the default Layer III to Layer II.
 	\item Now click on the \texttt{Start} box in the bottom left hand corner and \CGG{}	will process what it can of the job and put you back at your terminal startup window.
 	\item You will see a few lines of output, some of which are shown below, to include the ERROR:
 	\begin{lstlisting}[style=sh]
@@ -530,7 +531,7 @@ granted the user this privilege.
 		/dev/shm/dvd_20240116-182336/dvd.ac3 for reading.
 	\end{lstlisting}
 	\item Change directory to the location as shown on the terminal window of \texttt{dvd.sh}.
-	\item Using an editor, modify the line in dvd.sh to change \texttt{dvd.ac3} to \texttt{dvd.lpcm} and change the mplex parameter to include:
+	\item Using an editor, modify the line in dvd.sh to change \texttt{dvd.ac3} to \texttt{dvd.lpcm} or to \texttt{dvd.mp2} for mp2.  In addition ONLY for Raw PCM you have to change the mplex parameter to include:
 	\begin{lstlisting}[style=sh]
 		-L  48000:2:16
 	\end{lstlisting}
