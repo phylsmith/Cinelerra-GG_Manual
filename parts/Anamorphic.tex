@@ -1,0 +1,132 @@
+\chapter{Overview}%
+\label{cha:anamorphic}
+
+\section{\textbf{HDV, anamorphic and non-square pixels}}%
+\label{sec:hdv}
+
+A guide on how to handle anamorphic formats in \CGG{}.
+For a detailed discussion see: {\small \url{https://lurkertech.com/lg/pixelaspect/}}
+
+\subsection{\textbf{Theory}}%
+\label{sub:theory}
+
+There are two aspect ratios: the \textit{Pixel Aspect Ratio} and the \textit{Frame Aspect Ratio}. See Figure~\ref{fig:DAR} (from {\small \url{https://stackoverflow.com/questions/18877243/why-ffmpeg-print-sar-instead-of-par}}):
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.85\linewidth]{DAR.png}
+	\caption{DAR and SAR compared}
+	\label{fig:DAR}
+\end{figure}
+
+Unfortunately, there are two opposing schools of thought in describing various aspect ratios:
+
+\begin{enumerate}
+	\item PAR = Pixel (\textit{pixel}) aspect ratio and SAR = Storage (\textit{frame}) aspect ratio.
+	\item PAR = Picture (\textit{frame}) aspect ratio and SAR = Sample (\textit{pixel}) aspect ratio.
+\end{enumerate}
+
+Ffmpeg follows this second way, and in addition the total absence of PAR replaced by W/H of the input frame. \CGG{} uses ffmpeg to show the results in the Resources window, Media Folder, \texttt{Asset/RMB $\rightarrow$ Info $\rightarrow$ Detail}, which indicates S(ample)AR.
+
+For practical purposes the concepts are the same and only the definitions change. The important thing is to understand that the pixel aspect ratio, whether called PAR or SAR, is the conversion factor that, in the case of non-squared pixels, brings the aspect ratio of the input frame to that of the output frame. The basic formula for understanding the various aspect ratios is as follows:
+
+\qquad $DAR = SAR \times PAR(=W/H)$
+
+with:
+
+\textbf{DAR} = Display Aspect Ratio. It is the aspect ratio of the frame on the screen. In \CGG{} is the shape of canvas (or project or output). It is a \textit{frame} aspect ratio.
+
+\textbf{PAR} = \textbf{W/H} = Picture Aspect Ratio. It is the initial aspect ratio (input), for example of the source media file. It is also, the number of pixel (Width and Height) used to memorize the asset. It is a \textit{frame} aspect ratio. To avoid confusion with the other definition of PAR (that is: Pixel aspect ratio) we will use W/H ratio more.
+
+\textbf{SAR} = Sample Aspect Ratio. It is the ratio of the sides of the single pixel. It is a correction factor for the recordered frame format resolution, to get the desired output display resolution at a given DAR. It is a \textit{pixel} aspect ratio.
+
+Monitors and modern HD+ TVs have square pixels. Since most formats, sensors, digital video signals and displays have square pixels, then the reproduction will always be correct.
+Older NTSC and PAL TVs do not have pixels but scan frequencies that support both anamorphic and non-anamorphic signals. For an overview on older PAL/NTSC TVs, see wikipedia: {\small \url{https://en.wikipedia.org/wiki/Pixel_aspect_ratio#Pixel_aspect_ratios_of_common_video_formats}}.
+
+SAR being the ratio of single pixel sizes, is 1 (or 1:1) for square pixels while it is different from 1 for rectangular pixels. We have the following values for the formats DV and HDV (from: {\small \url{https://www.mail-archive.com/ffmpeg-user@ffmpeg.org/msg27522.html}}, with further variations):
+
+\begin{center}
+\renewcommand\arraystretch{1.3}
+\begin{tabular}{|c||c|c||c|c||c|}
+	\hline
+	\multirow{2}{*}{\textbf{DV; HDV}} & \textbf{Display} & \textbf{DAR} & \textbf{Picture} & \textbf{PAR} & \textbf{SAR =} \\
+	 & \textbf{(Output)} & \textbf{(W/H)} & \textbf{(Input)} & \textbf{(W/H)} & \textbf{DAR $\times$ W/H} \\
+	\hline
+	16:9-2160 & 3840 x 2160 & 16:9 & 3840 x 2160 & 16:9 & 1:1 \\
+	4:3-2160 & 2880 x 2160 &  4:3  &  2880 x 2160 &  4:3  &   1:1 \\
+	16:9-1080 & 1920 x 1080 & 16:9  &  1920 x 1080 & 16:9 & 1:1 \\
+	16:9-1080 & 1920 X 1080 & 16:9  &  1440 x 1080 &  4:3  & 1:1 \\
+	16:9-720 &  1280 x 720 &  16:9 &  1280 x 720 & 16:9 &  1:1 \\
+	16:9-1080 &  1920 X 1080 & 16:9 & 1440 x 1080 &  4:3 & 4:3 \\
+	16:9-576 &  1024 x 576 &  16:9  & 720 x 576  &  5:4& 64:45 \\
+	4:3-576 &   768 x 576  &  4:3 & 720 x 576  &  5:4& 16:15 \\
+	16:9-480 &   853 x 480 &  16:9 & 720 x 480 &   3:2& 32:27 \\
+	4:3-480 &  640 x 480 &  4:3 & 720 x 480  &  3:2 &  8:9 \\
+\hline
+\end{tabular}
+\end{center}
+
+To summarize: in the digital domain, one can use the concept of SAR (\textit{pixel} aspect ratio) when dealing with anamorphic digital formats (for example, when transcoding to a format that has a different WxH). Similarly, in the context of \textit{Standard-definition television} or with \textit{DV}, \textit{HDV} and a few other formats, SAR uses the formula DAR = SAR x (W/H), where SAR is the conversion factor between Input and the Output aspect ratio.
+
+\subsection{\textbf{How \CGG{} works}}%
+\label{sub:how_cgg_works}
+
+What has been said so far is to clarify the theoretical framework; if users want to go deeper into the subject, they will certainly be dealing with these formulas and definitions. However, \CGG{} does not require knowledge of the formula or the definitions of PAR and SAR. The \texttt{Format} window in the \texttt{Settings} pulldown, is used to set the Width/Height and DAR; PAR and SAR are used in a hidden way.
+
+So:
+
+\begin{itemize}
+	\item SAR\textit{source} is shown in \texttt{Asset/RMB $\rightarrow$ Info $\rightarrow$ Detail}; The  SAR\textit{project} is not shown in the \texttt{Settings $\rightarrow$ Format} window and cannot be set directly. It can be calculated from: SAR\textit{project}=DAR/(W/H).
+	\item DAR is shown in \texttt{Display Aspect Ratio}. It determines the shape of the frame. It is the factor that adapts the WxH\textit{source} to the WxH\textit{project}. Its value allows you to vary the frame aspect ratio by involving the shape of the pixels as well. \texttt{Auto} changes the DAR to always have square pixels. If the asset has rectangular pixels the Auto setting will result in a distorted (vertically stretched) frame.
+	\item W/H is calculated from the \texttt{Width} and \texttt{Height} values of the canvas. \texttt{W/H Ratio} can also be used to automate calculations. We have:
+	
+	WxH\textit{source} = WxH\textit{project} $\rightarrowtail$ Correct display.
+	
+	WxH\textit{source} < WxH\textit{project} $\rightarrowtail$ pad (letterbox, pillarbox).
+	
+	WxH\textit{source} > WxH\textit{project} $\rightarrowtail$ crop.
+	
+	To avoid cropping/padding we can use a scaling step via \texttt{Asset/RMB $\rightarrow$ Info $\rightarrow$ Resize} or with the \texttt{Scale} plugin. The scaling process does not alter the image because it maintains the pixel form factor by simply varying the resolution.
+\end{itemize}
+
+From \texttt{Settings --> Format} window you set the format (Width, Height and DAR) or you apply a preset, at this point the sources will have to adapt to this format.
+
+To see some useful examples, see Raffaella Traniello: {\small \url{http://www.g-raffa.eu/Cinelerra/HOWTO/anamorphic.html}}
+
+\subsection{\textbf{Use Case}}%
+\label{sub:use_case}
+
+For a video tutorial, see \href{https://youtu.be/JyIkdX3q_Ho}{HDV, anamorphic and non-square pixels}.
+
+How to downconvert/scale between two standard 16:9 anamorphic video formats. From \textbf{HDV 1080i} (called \textit{16:9-1080}, PAR 4:3, in the table) to \textbf{DV 16:9}, preset\textit{ PAL 576i (16:9) -DV(D)} (called \textit{16:9-576} in the table).
+
+Source: HDV (mpegts); WxH=1440x1080; SAR=4:3; DAR=16:9. The format is anamorphic with rectangular pixels stretched horizontally. For the formula seen above we have:
+
+$DAR (16:9) = 1440/1080 \times SAR (4:3) = 1.3333 \times 1.3333 = 1.777$
+
+\paragraph{Step 1:} As we go from a project size of 1440x1080 to a size of 720x576, we have to choose whether we want to crop or downscale the source. In the first case we continue with \textit{step 2}; in the second case we must first downscale, for example, using the \texttt{Resize} command found in the \texttt{Resource} window; \texttt{RMB} on source \texttt{$\rightarrow$ Info $\rightarrow$ Resize}. This way we vary the initial W/H preparing it for the preset we will use in \textit{step 2}.
+
+\paragraph{Step 2:} We change the project from the initial one (of the source) to the preset \textit{PAL 576i (16:9) -DV(D)}.
+
+Now we have:
+
+720$\times$576; W Ratio=0.5000; H Ratio=0.5333; DAR 16:9
+
+from which:
+
+SAR = DAR / (720/576) = 1.7778 / 1.25 = 1.4222 = 64:45
+
+Note that the video is cropped if we did not downscale in \textit{step1}.
+
+\paragraph{Step3:} Render with \textit{dv\_pal.avi} or \textit{dv\_pal.qt} preset. Now we have:
+
+720$\times$576; SAR = 64:45 (=1.4222); DAR = 16:9
+
+The difference between the new SAR (1.4222) versus the initial SAR (1.3333) of the source can be explained by taking into account that when Height=576 pixels, the width needs to be displayed horizontal (unsqeezed) with W=576$\times$16/9=1024 pixels (square). But the width needs to be stored (compressed, squeezed) within SD-DV(D)'s format W=720 pixels; therefore:
+
+SAR=(576$\times$16/9)/720=64/45=1.4222 \\
+PAR = W/H = 720/576 = 1.25 \\
+DAR = 16:9 (unchanged) \\
+
+\paragraph{NOTE:} the \textit{dv\_pal-avi} render preset provides interlaced video, consistent with the chosen project preset (576i). However, the avi format used does not provide this information in \texttt{RMB $\rightarrow$ Info $\rightarrow$ Asset Interlacing} or even in ffprobe. If the \textit{dv\_pal.qt} render preset is used, it provides the correct information (\textit{Top Fields First}, the standard for SD PAL).
+
