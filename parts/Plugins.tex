@@ -1387,7 +1387,7 @@ The most common use cases (but can be adapted to virtually any situation) of the
     \item Create a Stylized look.
 \end{itemize}
 
-When using the X11 graphics driver and RGBA-FLOAT color model, this plugin allows for greater than (0 - 1.0f) values. This does not work when using X11-OpenGL because it is an 8-bit limited driver. Both the Color wheels and the Saturation and Value sliders will make it possible to work with HDR video.
+When using the X11 graphics driver and RGBA-FLOAT color model, this plugin allows for greater than (0 - 1.0f) values (HDR). This does not work when using X11-OpenGL because it is an 8-bit limited driver. HDR values will only work for the color wheel, while the Value and Saturation sliders are always clipped to 1.0.
 
 \subsection{Color Balance}%
 \label{sub:color_balance}
