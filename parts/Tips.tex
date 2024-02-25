@@ -587,13 +587,13 @@ A LUT, acronym for Look-Up Table, is a mathematically precise way of taking spec
 
 \begin{description}
 	\item[F\_lut:] Compute and apply a lookup table to the RGB/YUV input video.
-	\item[F\_lut1d:] Adjust colors using a 1D LUT.
-	\item[F\_lut3d:] Apply a 3D LUT to an input video.
+	\item[F\_lut1d:] Adjust colors using a 1D LUT "file" input.
+	\item[F\_lut3d:] Apply a 3D LUT "file" to an input video.
 	\item[F\_lutrgb:] Compute and apply a lookup table to the RGB input video.
 	\item[F\_lutyuv:] Compute and apply a lookup table to the YUV input video.
 \end{description}
 
-For example, to use a 3dlut simply load your video, drop the F\_lut3d plugin on that track, and bring up the lut3d controls window, highlight the \textit{file} option, key in your file name (whit path), and hit apply to have the lut take effect.  To easily adjust, move the \textit{fader} slider in the patchbay for that video track.
+For example, to use a 3dlut simply load your video, drop the F\_lut3d plugin on that track, and bring up the lut3d controls window, highlight the \textit{file} option, key in your file name (with path), and hit Apply to have the lut take effect.  To easily adjust, move the \textit{fader} slider in the patchbay for that video track. Only F\_lut1d and F\_lut3d allow for a file input and these usually are files with the .cube extension.
 
 \subsection{Encoding into Dolby Pro Logic}%
 \label{sub:encoding_dolby_pro_logic}
