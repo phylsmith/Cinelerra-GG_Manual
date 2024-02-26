@@ -1167,7 +1167,27 @@ This is a Gaussian type blur. Other blur plugins -- \textit{Linear}, \textit{Mot
     \item[Alpha determines radius] use alpha to define the amount of blur to apply. (radius=gray value of alpha)
     \item[Blur alpha, red, green, blue] specifies which color channels is to be blurred.
 \end{description}
-If you are getting confusing results, please click on the \textit{Reset} button in the dialogue/controls popup box and re-enter your desired values.
+If you are getting confusing results with old projects it may be a
+result of the discontinued parameter \textit{alpha determines radius}.
+For compatibility reasons and for possible future development it
+has been left in the code but hidden in the plugin's GUI.
+The parameter for \textit{alpha determines radius} is
+\texttt{A\_KEY}, which can be 0 or 1. When you press the
+\texttt{Reset} button in the Blur plugin window \texttt{A\_KEY=0}.
+
+Old projects may have saved that parameter (A\_KEY) to 1 instead 
+of 0 and that may present a problem so you should do one of
+the following workarounds to change it to 0.  Then be sure to save
+your project with these changes applied.
+\begin{enumerate}
+    \item Click on the \textit{Reset} button in the dialogue/controls popup box and re-enter any of your other parameter desired values.
+    \item OR in the \CGG{} program, open the project. Click on the cog icon
+(\textit{Preset edit}) of the Blur effect bar and the \textit{Keyframe
+parameters} window is open. There, you can see the A\_KEY parameter
+and change it: select the \texttt{A\_KEY} parameter and in the
+\texttt{Edit value} box, change it from 1 to 0, then press the \texttt{OK}
+button.
+\end{enumerate}
 
 \subsection{BoxBlur}%
 \label{sub:boxblur}
