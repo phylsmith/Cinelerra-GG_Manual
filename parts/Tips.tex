@@ -770,3 +770,49 @@ not affect the rendered media in that the Audio and Video will be correctly sync
 the original media, you can alleviate the lag between the Audio and Video by disabling
 \textit{Play every frame} in \texttt{Settings $\rightarrow$ Preferences, Playback A} tab.  Now frames
 will be skipped in order to keep the audio/video in synch.
+
+\subsection{How to remove letterbox/pillarbox bands}%
+\label{sub:remove_letterbox}
+
+To remove the horizontal black bands of the letterbox or the vertical
+black bands of the pillarbox we need to change the \textit{size} and
+\textit{aspect ratio} of the source by cropping.
+For example, if we want to remove the letterbox from a $4:3$ frame to
+leave only the content with aspect ratio $3:2$, We have to change the
+project format by doing the following steps:
+
+\begin{enumerate}
+    \item Check the size of the base W of the original frame in pixels:
+
+    \texttt{Resource} window $\rightarrow$ \texttt{RMB} on Asset
+$\rightarrow$ \texttt{Info} $\rightarrow$ \texttt{Detail}; e.g. W =
+768 px
+    \item Obtain the height of the figure in $3:2$, i.e., without the
+black bands; H can be obtained from the formula:
+
+    $\frac{3}{2} = \frac{W}{H}$ \quad from which $H = \frac{768 \times
+2}{3}$ \qquad e.g., H = 512 px
+    \item Note that $W \times H = 768 \times 512$ is just the crop we
+are looking for to switch from $4:3$ frame to $3:2$ frame without
+letterbox.
+    \item Open \textit{Set Format} window: \texttt{Settings
+$\rightarrow$ Format}
+    \item Change $H = 512$ and set \textit{Display Aspect Ratio} to
+$3:2$; press \texttt{Apply} and \texttt{OK}. Note that we leave W
+unchanged, since the frame width does not change.
+    \item If needed, use the \textit{Camera} tool to get the
+desired viewport.
+\end{enumerate}
+
+\paragraph{Note:} in complex situations, with multiple sources of
+different sizes, it may be appropriate to perform an additional
+step first: change the size of the track on the Timeline via
+\texttt{RMB $\rightarrow$ Resize track}.
+In this way we crop the track to match it to the project format that
+we will change in the next step. Thus we avoid possible unwanted
+distortions.
+
+In the case of the pillarbox, we will leave H unchanged while
+calculating the new value of W. The formula $\frac{x}{y} =
+\frac{W}{H}$ is valid for any aspect ratio ($4:3; 16:9; 2.35:1$; etc).
+
