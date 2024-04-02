@@ -996,7 +996,7 @@ If you just want to try this, follow these steps.
     \begin{enumerate}
         \item There are color strips under color Adjustment which will show color changes as you modify values.
         \item Uncheck Mark Selected Areas and check the Filter Active box to the right of Color Adjustment.
-        \item As needed, you can individually check and uncheck all the various parameters using the boxes to the left of each line. Again, these are intuitive and broadly similar to the above. The arrows at the bottom widen the range, the circle at the bottom moves the range, and the top slider, which is an arrow this time, affects distribution. It provides a little histogram effect to give you an idea of what you're changing. The fade adjusts the level of color blending. The alpha is basically the opacity of your changes.
+        \item As needed, you can individually check and uncheck all the various parameters using the boxes to the left of each line. Again, these are intuitive and broadly similar to the above. The arrows at the bottom widen the range, the circle at the bottom moves the range, and the top slider, which is an arrow this time, affects distribution. It provides a little histogram effect to give you an idea of what you are changing. The fade adjusts the level of color blending. The alpha is basically the opacity of your changes.
     \end{enumerate}
 \end{description}
 
@@ -1037,9 +1037,10 @@ This section is used to select the target color domain. First, a short explanati
 RGBA = red/green/blue color planes, alpha data plane.
 YUVA = luma/Cb/Cr color values, alpha data plane.
 
-The alpha data normally is input to the blending operations in the patchbay overlay mode. The alpha data usually creates the appearance of stacking order, and determines which color planes are visible in the rendered result. When BlueBanana is used, the meaning of the alpha data is changed to the selection. It is useful to think of the alpha data as more solid when it is transparency in blending, and more selected when it is used in BlueBanana. In both cases, the greater the alpha value, the more the effect is expressed.
+The alpha data normally is input to the blending operations in the patchbay overlay mode. The alpha data usually creates the appearance of stacking order, and determines which color planes are visible in the rendered result. When BlueBanana is used, the meaning of the alpha data is changed to the selection. It is useful to think of the alpha data as more solid then it is transparency in blending, and more selected when it is used in BlueBanana. In both cases, the greater the alpha value, the more the effect is expressed.
 
-Usually, alpha is normalized to a range from $0$ to $1$, zero = no effect, $1$ = total effect, $0.5$ = partial effect. In both cases, alpha is what math people call an auxiliary variable. It is needed, but is not part of the answer. In this case, the answer is the visible rendered result. Alpha is like meta-data.
+Usually, alpha is normalized to a range from $0$ to $1$, zero = no effect, $1$ = total effect, $0.5$ = partial effect. In both cases, alpha is what math people call an auxiliary variable. It is needed, but is not part of the answer. In this case, the answer is the visible rendered result. Alpha is like meta-data.  Note that the "alpha" slider works with both "Filter Active" and "Mask Selection" checkboxes
+checked.  The "Filter Active" checkbox enables the options: red, green, blue, hue, saturation, value, fade, alpha.  If "Mask Selection" is not checked "alpha" will not work.
 
 Let us now examine the instruments in \textbf{pane 1}:
 
