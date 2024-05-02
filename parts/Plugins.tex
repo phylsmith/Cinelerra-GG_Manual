@@ -7,7 +7,8 @@ The rendered effects are discussed separately in the \nameref{sec:rendered_effec
 Effects that begin with the characters F\_ are effects that are part of the FFmpeg software
 as opposed to those coded within the \CGG{} program.  These are discussed separately in
 \nameref{sec:ffmpeg_audio_video_plugins}.
-Effect plugins modify the track when played, according to how they are set, with no permanent storage of the output except when the project is rendered. There are many Plugins in \CGG{} Infinity which are actually quite easy to use just by experimenting with them. The plugins are shown and selected from the \textit{Resources window} (figure~\ref{fig:video-plugins}). They are described in more detail later.
+Effect plugins modify the track when played, according to how they are set, with no permanent storage of the output except when the project is rendered. There are many Plugins in \CGG{} Infinity which are actually quite easy to use just by experimenting with them. 
+The plugins are shown and selected from the \textit{Resources window} (figure~\ref{fig:video-plugins}). They are described in more detail later.
 
 \begin{figure}[htpb]
     \centering
@@ -20,14 +21,14 @@ There is a choice of plugin icons \index{plugins!icons} which can be displayed.
 
 In \texttt{Settings$\rightarrow$ Preferences$\rightarrow$ Appearance} tab, there is a pulldown for \textit{Plugin icons} where the user can choose between the \textit{original} icons, \textit{regular} or \textit{smoother}, \textit{cinfinity}\protect\footnote{Cinfinity /2 icon set is credited to Sam - Creative Common By -- \url{https://creativhecommons.org/licenses/by/3.0/}} -- the default modernized set, or \textit{cinfinity2} (figure~\ref{fig:audio-plugins}).
 
-Note that when you change the plugin icons, your session will automatically save the backup, stop, restart, and reload (figure~\ref{fig:plugin-icons}).
-
 \begin{figure}[htpb]
     \centering
     \includegraphics[width=0.6\linewidth]{audio-plugins.png}
     \caption{Cinfinity2 audio plugins}
     \label{fig:audio-plugins}
 \end{figure}
+
+Note that when you change the plugin icons, your session will automatically save the backup, stop, restart, and reload (figure~\ref{fig:plugin-icons}).
 
 \begin{figure}[htpb]
     \centering
@@ -49,11 +50,12 @@ Note that when you change the plugin icons, your session will automatically save
 
 \textit{Realtime} effect plugins are listed in the Resources window as \textit{Audio} Effects and \textit{Video} Effects. Effect plugins are used by dragging them from the Resources window onto an audio track if it is an audio effect or video track if it is a video effect. You will see a colored bar \index{plugins!toolbar} appear beneath the track with the plugin name on it. If there is data on the destination track, the effect is applied to the entire track, unless a edit or a region of the track is selected (wipe selection or In/Out points) in which case the effect is pasted into that region only. If there is no data on the track or no selected region set, the effect is not added.
 
-Plugins are layered under the track they apply to. When dragging more than one effect onto an armed track, you will see the effects layering from \textit{top to bottom}, on the bottom of that track. When the track is played back, effects are processed from \textit{top to bottom}. The output of the top effect becomes the input of the bottom effect and so on. "The pipeline in Cinelerra's\protect\footnote{credit to Original Creator} plugin design is the \textit{pull} method. The rendering pipeline starts at the final output and the final steps in the rendering pipeline are reading the data from disk. Every step in the rendering chain involves requesting data from the previous step. When the rendering pipeline eventually requests data from a plugin chain, each plugin requests data from the plugin before it. This is less intuitive than the push method but is much more powerful. Realtime plugins written using the pull method can change the rate data is presented to the viewer and the direction of playback. The pull method allows plugins to take in data at a higher rate than they send it out."  Side note: if you want to avoid the automatic \textit{top to bottom} application of plugins, you can take advantage of \textit{nested assets} to manipulate the order the plugins are applied (see  \ref{sec:nesting_clips_and_assets}).
+Plugins are layered under the track they apply to in what is referred to as the effect bar.  Do a double click on the effect bar to select the effect region.  When dragging more than one effect onto an armed track, you will see the effects layering from \textit{top to bottom}, on the bottom of that track. When the track is played back, effects are processed from \textit{top to bottom}. The output of the top effect becomes the input of the bottom effect and so on. "The pipeline in Cinelerra's\protect\footnote{credit to Original Creator} plugin design is the \textit{pull} method. The rendering pipeline starts at the final output and the final steps in the rendering pipeline are reading the data from disk. Every step in the rendering chain involves requesting data from the previous step. When the rendering pipeline eventually requests data from a plugin chain, each plugin requests data from the plugin before it. This is less intuitive than the push method but is much more powerful. Realtime plugins written using the pull method can change the rate data is presented to the viewer and the direction of playback. The pull method allows plugins to take in data at a higher rate than they send it out."  Side note: if you want to avoid the automatic \textit{top to bottom} application of plugins, you can take advantage of \textit{nested assets} to manipulate the order the plugins are applied (see  \ref{sec:nesting_clips_and_assets}).
 
 Instead of dragging from the Resources window, effects may be applied to a single armed track or a region via a popup menu. On the entire track or on a region determined by a selection wipe or by the In/Out points, right click and select \textit{Attach effect} \index{plugins!attch effect} from the popup. The attach effect dialog gives you more capability than just dragging and dropping. For example, the attach effect dialog lets you attach two more types of effects: \textit{shared effects} and \textit{shared tracks} which are explained in a later section. Select a plugin from the Plugins column and hit the green colored checkmark under the plugins column to attach it. The result is the same as if the effect was dragged from the Resources window.
  
 One more method to apply an effect on all armed tracks of the same type (video or audio) is to use the \textit{Video} or \textit{Audio} pulldown \textit{Attach Effect} option. This brings up a menu which has a useful checkbox to \textit{Attach single standalone and share others} (see \ref{sec:shared_effect_tracks}). The default setting is checked on.
+
 
 After attaching an effect to a track, it often needs to be configured. There are two ways to get to the configuration controls. Click on the magnifying glass \index{plugins!show controls} symbol on the right side of the effect bar -- this is the middle symbol on the bar as you can see in the picture below. Alternatively, you can right click on the effect bar to bring up the effect popup which has a \textit{Show} option. Either method causes the GUI for the effect to appear in a separate window. There will not be a popup if the plugin has no GUI.
 
@@ -354,8 +356,6 @@ To accentuate a set of common plugins, there are \textit{expander} arrows on the
 \CGG{}’s default setup is in the file \texttt{\$CIN\_DAT/expan\-ders.txt} but if the user wants their own specific setup and if the file in \texttt{\$HOME/.\\bcast5/expanders.txt} exists, it will take precedence.
 If there are recommendations for other relevant categories, they can be added. The subtree structure is applicable to any of the \textit{Video Effects/Transitions} or \textit{Audio Effects/Transitions}. You can not sort once an expansion is in effect (figure~\ref{fig:expander}).
 
-The \texttt{expanders.txt} file has very specific requirements. The most specific is that there are no blanks -- you must use tabs only. A \# (pound sign) can be used in column 1 to indicate a comment. A short example of what the txt file looks like is shown below.
-
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.8\linewidth]{expander.png}
@@ -364,6 +364,8 @@ The \texttt{expanders.txt} file has very specific requirements. The most specifi
 %	\caption{$\triangledown$,$\triangleright$ = expander; "-" = options}
 	\label{fig:expander}
 \end{figure}
+
+The \texttt{expanders.txt} file has very specific requirements. The most specific is that there are no blanks -- you must use tabs only. A \# (pound sign) can be used in column 1 to indicate a comment. A short example of what the txt file looks like is shown below.
 
 \begin{lstlisting}[style=sh]
 Video Effects
@@ -689,7 +691,7 @@ Reverses the numerical sign of the digital audio. There are no controls.
 \label{sub:live_audio}
 \index{live audio}
 
-The Live Audio effect reads audio directly from the sound card input. It replaces any audio on the track so it is normally applied to an empty track. To use Live Audio, highlight a horizontal region of an audio track or define In and Out points. Then drop the Live Audio effect into it. Create extra tracks and attach shared copies of the first Live Audio effect to the other tracks to have extra channels recorded. Live Audio uses the sound driver selected in \texttt{Settings $\rightarrow$ Preferences $\rightarrow$ Playback A $\rightarrow$ Audio Out for recording}, but unlike recording it uses the playback buffer size as the recording buffer size and it uses the project sample rate as the sampling rate. These settings are critical since some sound drivers can not record in the same sized buffer they play back in.
+The Live Audio effect reads audio directly from the sound card input in real time. It replaces any audio on the track so it is normally applied to an empty track. To use Live Audio, highlight a horizontal region of an audio track or define In and Out points. Then drop the Live Audio effect into it. Create extra tracks and attach shared copies of the first Live Audio effect to the other tracks to have extra channels recorded. Live Audio uses the sound driver selected in \texttt{Settings $\rightarrow$ Preferences $\rightarrow$ Playback A $\rightarrow$ Audio Out for recording}, but unlike recording it uses the playback buffer size as the recording buffer size and it uses the project sample rate as the sampling rate. These settings are critical since some sound drivers can not record in the same sized buffer they play back in.
 
 Live audio has been most reliable when ALSA is the recording driver and the playback fragment size is $2048$. Drop other effects after Live Audio to process sound card input in realtime. With live audio there is no read-ahead, so effects like compressor will either delay if they have read-ahead enabled or playback will under-run. A potential problem is that sometimes the recording clock on the sound card is slightly slower than the playback clock. The recording eventually falls behind and playback sounds choppy. Live Audio does not work in reverse.
 
@@ -1308,7 +1310,7 @@ Figure~\ref{fig:c41} shows the C41 controls on the left and part of the Composit
 \label{sub:chroma_key}
 \index{chroma key}
 
-This effect erases pixels which match the selected color. They are replaced with black if there is no alpha channel and transparency if there is an alpha channel. In this case, you create a matte in the alpha channel, which is not visible to us. The selection of color model is important to determine the behavior (figure~\ref{fig:chroma-key}).
+This effect erases pixels which match the selected color.  They are replaced with black if there is no alpha channel and transparency if there is an alpha channel. In this case, you create a matte in the alpha channel, which is not visible to us. The selection of color model is important to determine the behavior (figure~\ref{fig:chroma-key}).
 
 \begin{figure}[htpb]
     \centering
@@ -1330,33 +1332,56 @@ Normally threshold is very low when using a high slope. The two parameters tend 
 \label{sub:chroma_key_hsv}
 \index{chroma key HSV}
 
-Chroma Key (HSV)\protect\footnote{Credit for Plugin by Jerome Cornet \url{http://jcornet.free.fr/linux/chromakey.html}} (figure~\ref{fig:chroma-key-hsv}) replaces a color with another color or transparency using HSV variables; it is frequently used to remove a color from a video to composite with another image. This process is generally referred to as green screen or blue screen process (because of the color that is keyed out). More information: {\small \url{http://en.wikipedia.org/wiki/Chromakey}}
+Chroma Key (HSV)\protect\footnote{Credit for Plugin by Jerome Cornet \url{http://jcornet.free.fr/linux/chromakey.html}} (figure~\ref{fig:chroma-key-hsv}) replaces a color with another color or transparency using HSV variables; it is frequently used to remove a color from a video to composite with another image. This process is generally referred to as green screen or blue screen process (because of the background color that is keyed out). More information: {\small \url{http://en.wikipedia.org/wiki/Chromakey}}
 
 \begin{figure}[htpb]
-    \centering
-    \includegraphics[width=0.55\linewidth]{chroma-key-hsv.png}
-    \caption{Keying a green screen with Chroma Key (HSV)}
-    \label{fig:chroma-key-hsv}
+	\centering
+	\includegraphics[width=0.55\linewidth]{chroma-key-hsv.png}
+	\caption{Windows config for Chroma Key (HSV)}
+	\label{fig:chroma-key-hsv}
 \end{figure}
 
 \subsubsection*{Requirements}
 \label{ssub:requirements}
 
 The subject in the movie should have a good background. The lighting is crucial and good lighting during production will save you time with much less effort than in post-production. Another tip is to use a low-compressed, intraframe codec with as high a color depth as possible. In case of YUV-type source signal, it is better to have subsampling $4:4.4$ or $4:2:2$.
-Here we assume that we have a good video, filmed on green (or blue) screen that we want to use. Important: Make sure you are using a color model that has an alpha channel, such as \textit{RGBA8}, \textit{RGBAFloat}, \textit{YUVA8}. To change color model, go to \texttt{Settings $\rightarrow$ Format $\rightarrow$ Color Model}.
+Here we assume that we have a good video, filmed on green (or blue) screen that we want to use. Important: make sure you are using a color model that has an alpha channel, such as \textit{RGBA8}, \textit{RGBAFloat}, \textit{YUVA8}. To change color model, go to \texttt{Settings $\rightarrow$ Format $\rightarrow$ Color Model}.
 
 \subsubsection*{Usage}
 \label{ssub:usage}
 
 As in any other effect, add it to the timeline in the main window. You can tweak each parameter in order to improve the keying.
 
+To understand how the plugin parameters work, we need to refer to the HSV color wheel (foreground color) in figure~\ref{fig:hsv_color_wheel}. Coinsider that this is an abstract example; in the real world we will be dealing with much more complicated masks.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.9\linewidth]{hsv_color_wheel.png}
+	\caption{Various parameters in the 'Color' and 'Key Parameters' sections.}
+	\label{fig:hsv_color_wheel}
+\end{figure}
+
+The left half has Saturation from 0 (in the center) to 100 on the edges. An example of a green screen is shown here. The right half has brightness from 0 (center) to 100 on the edges. The example of a blue screen is given here. The key color is the radius of the wheel, and its angle determines the hue. The Hue Tolerance is the arc of a circle (a wedge) that includes the radius. The wedge is the color range (mask) that we want to eliminate by keying, its shape is precise and easy to understand. The Brightness are the inner/outer extremes of the wedge; if the inner value (Min) is 0, then it coincides with the center point, if the outer value (max) is 100 then it coincides with the arc on the circumference. With intermediate values we will have masks similar to the one shown in the figure. Min Saturation is the distance from the center, along the Hue radius, from which we want to impose saturation with the value 0. It will be the value from which keying starts. Saturation Offset is an additional cut we make to the inner part of the wedge from the Min Saturation value. All of these adjustments allow us to establish a range of colors (Mask) that perfectly matches the background (the wedge in the example in the figure) that we want to eliminate. This is a precision operation, and it is not rare to return to the parameter combination several times to refine the mask.
+
 Start with \textit{Hue Tolerance} at $10\%$, \textit{Min Bright\-ness} at $0$, \textit{Max bright\-ness} at $100\%$, \textit{Saturation offset} at $0$, \textit{Min Saturation} at $0$, \textit{In Slope} at $0$, \textit{Out Slope} at $0$, \textit{Alpha Offset} at $0$ (that’s mid-way through), \textit{Spill Threshold} at $0$, \textit{Spill Compensation} at $100\%$. At any time, you can check what the Mask looks like by clicking on \textit{Show Mask}. This will output a black and white image of the mask (\textit{matte}).
 
+\qquad \textit{Color section}
+
+In this section of the configuration window, you choose the key color and have the ability to see the mask created.
+
 \begin{description}
-    \item[Key color:] Select the key color (green, blue, etc) using the color wheel or the color picker. Remember, only the Hue matters, not Saturation or Value. To use the color picker, click on the \textit{color picker} icon in the Compositor window, then click on the color you want in the Compositor window. Finally  in the Chromakey (HSV) parameters window, click on \textit{Use Color Picker}.
-    \item[Hue Tolerance:] Because there are slight variations in lighting, the background will not be in a uniform key color hue. Increase or decrease the Hue tolerance to mask out the background. If there are dark spots that are keyed out that shouldn’t be, it can be corrected later.
-    \item[Brightness:] ncrease \textit{Min Brightness} so that only the background is masked out, and not parts of the foreground. You can also reduce \textit{Max Brightness} if some clear areas are keyed out (useful for very dark backgrounds).
-    \item[Saturation:] Increase \textit{Min Saturation} so that only the background is masked out, and not parts of the foreground. \textit{Saturation Offset} can be used to change this, but for now leave it set to $0$.
+	\item[Color...] Select the key color (green, blue, etc) using the color wheel or the color picker. Remember, only the Hue matters, not Saturation or Value. To use the color picker, click on the \textit{color picker} icon in the Compositor window, then click on the color you want in the Compositor window. Finally  in the Chromakey (HSV) parameters window, click on \textit{Use Color Picker}. Remember to disable ChromaKey (HSV) plugin when using the Color Picker on the Compositor window.
+	\item[Show Mask] The plugin does not create a true matte in the alpha channel, but creates a mask. Activating this option will show the foreground as a white (opaque) shape while the background in black (transparency). You will be able to control the extent of the mask, any jagged edges, small black areas within the mask or small white areas within the foreground, which are to be removed, etc.
+\end{description}
+
+\qquad \textit{Key parameters section}
+
+In this section we expand the mask to a range of colors close to color key and refine the selection by also taking advantage of brightness and saturation.
+
+\begin{description}
+	\item[Hue Tolerance:] Because there are slight variations in lighting in real cases, the background will not be in a uniform key color hue. Increase or decrease the Hue tolerance to mask out the background. If there are dark spots that are keyed out that shouldn’t be, it can be corrected later (With the \texttt{Mask} tool, this operation is called the \textit{Garbage Matte}).
+	\item[Brightness:] It allows the color range (Mask) to be better defined by exploiting the differences in brightness between background and foreground. This could be referred to as a Luma Key within the Chroma Key. Increase \textit{Min Brightness} so that only the background is masked out, and not parts of the foreground. You can also reduce \textit{Max Brightness} if some clear areas are keyed out (useful for very dark backgrounds).
+	\item[Saturation:] It allows the color range (Mask) to be better defined by exploiting the differences in saturation between background and foreground. Since the best results are obtained by keying pure colors, it may come in handy to eliminate the less saturated colors (proper to the foreground) while leaving the more saturated colors (proper to the background, i.e. Green/Blue Screen) to the keying action. Increase \textit{Min Saturation} so that only the background is masked out, and not parts of the foreground. \textit{Saturation Offset} can be used to change this, because it acts similarly to Min Brightness. It could be said that Min Saturation concerns only the key color, while Saturation Offset concerns the range of Hue tolerance. But it is best to start by leaving it at $0$.
 \end{description}
 
 Check what it looks like at this stage, your mask should be pretty
@@ -1366,10 +1391,21 @@ key. The rest of the controls are useful to smear the mask to help
 compositing later on. They will help you to make your key look much
 cleaner.
 
+\qquad \textit{Mask tweaking section}
+
+In this section you intervene on the already created mask with edge smoothing and transparencies.
+
 \begin{description}
-    \item[Slope:] For now, the mask is a full on/ full off mask that can be really harsh and not necessarily what you are looking for. \textit{In Slope} and \textit{Out Slope} will help you to smooth that key. In Slope leaves more colors in the mask, Out Slope takes more colors out of the mask. The colors that are borderline in the mask will see their alpha channel reduced by half instead of being completely on or off.
-    \item[Alpha Offset] This control offsets the whole alpha channel by some amount. Be sure to know what you are doing if you change it from the default value of $0$.
-    \item[spill light control:] This step helps you remove the green or blue halo around the edges of the mask. It does so by removing the saturation of pixels that have a similar hue to the key color (turning them into grey instead of green or blue). \textit{Spill Compensation} controls the amount of de-saturation. If you start with Spill Compensation at $100\%$, slowly increase the \textit{Spill Threshold} until the remaining green or blue areas turn grey. Then reduce Spill Compensation until the image looks good.
+	\item[Slope:] For now, the mask is a full on/ full off mask that can be really harsh on the edges and not necessarily what you are looking for. \textit{In Slope} and \textit{Out Slope} will help you to smooth that key. In Slope it acts on the inner side of the edges by grading them with keying (background) colors. It leaves more colors in the mask. Out Slope acts on the outer side of the edges by grading them with the foreground colors. It takes more colors out of the mask. Basically, the colors that are borderline in the mask will see their alpha channel reduced by half instead of being completely on or off.
+	\item[Alpha Offset:] This control offsets the whole alpha channel by some amount (from -100=full opacity to +100=full transparency). Be sure to know what you are doing if you change it from the default value of $0$.
+\end{description}
+
+\qquad \textit{Spill light control section}
+
+In this section we try to make halos, reflections and parasitic lights present on the foreground less noticeable.
+
+\begin{description}
+	\item[spill light control:] This step helps you remove the green or blue halo around the edges of the mask. It does so by removing the saturation of pixels of the foreground that have a similar hue to the key color (turning them into grey instead of green or blue). The hues to be desaturated are set with \textit{Spill Threshold}, the degree of desaturation is set with \textit{Spill Compensation}. In order for Spill compensation to work, Spill Threshold must be > 0. If you start with Spill Compensation at $100\%$, slowly increase the \textit{Spill Threshold} until the remaining green or blue areas turn grey. Then reduce Spill Compensation until the image looks good.
 \end{description}
 
 Now the mask is probably still very harsh, so just below the Chromakey (HSV) plugin, add a \textit{Blur} effect, and select only the \textit{Alpha channel}, with a radius of $2$ or $3$ (more if you really want to soften the edges). This will significantly help the keying.
@@ -2156,13 +2192,15 @@ Figure~\ref{fig:linear} shown here has the parameters: $Length=19$, $Angle=25$, 
 \label{sub:live_video}
 \index{live video}
 
-This effect reads video directly from the capture card input. It replaces any video on the track so it is normally applied to an empty track. Only one \textit{Live Video} effect can exist at any time on the timeline. It can not be shared by more than one track. The configuration for the capture card is taken from the recording preferences. Go to \texttt{Settings $\rightarrow$ Preferences $\rightarrow$ Recording} to set up the capture card.
+This effect reads video directly from the capture card input. It replaces any video on the track so it is normally applied to an empty track. Only one \textit{Live Video} effect can exist at any time on the timeline. It can not be shared by more than one track. 
+The configuration for the capture card is taken from the recording preferences. Go to \texttt{Settings $\rightarrow$ Preferences $\rightarrow$ Recording} to set up the capture card.
+There is a limitation when both Audio and Video use DV, in that you can not use this plugin at the same time as \textit{Live Audio}. 
 
 In the \textit{Video In} section where it says \textit{Record driver}, it should be set to either \textit{Video4Linux2} or \textit{IEC 61883}. Other video drivers have not been tested with Live Video and probably will not work. For live video, the selection for \textit{File} Format and \textit{Video} needs to be set to a format the timeline can use. The file format must be Quicktime for Linux and video recording must be enabled for it. Click on the wrench to set the video compression.
 
 The video compression depends on the recording driver. For the \textit{Video4Linux2} recording driver, the compression must be \textit{Motion JPEG A}. For the \textit{IEC 61883} driver, the compression must be \textit{DV}. This gets the driver to generate output in a color model that the timeline can use. Some cards provide color and channel settings. Live video takes the color settings from the values set in the Video In window. Go to \texttt{File $\rightarrow$ Record} to bring up the recording interface and the Video In window. Values set in the Video in window are used by Live Video. Any channels the capture card supports need to be configured in the Video In interface since the same channels are used by the Live Video effect.
 
-With the video recording configured, highlight a horizontal region of a video track or define in and out points. Then drop the Live Video effect into it. Drop other effects after Live Video to process the live video in realtime. For best results, you should use OpenGL and a video card which supports GL shading language. Go to \texttt{Settings $\rightarrow$ Preferences $\rightarrow$ Playback $\rightarrow$ Video Out} to enable the OpenGL driver.
+With the video recording configured, highlight a horizontal region of a video track or define in and out points. Then drop the Live Video effect into it. Drop other effects after Live Video to process the live video in realtime. For best results, you should use OpenGL and a video card which supports GL shading language.  Go to \texttt{Settings $\rightarrow$ Preferences $\rightarrow$ Playback $\rightarrow$ Video Out} to enable the OpenGL driver which will make it possible to process video input in real time.
 
 \subsection{Loop video}%
 \label{sub:loop_video}
@@ -2828,7 +2866,12 @@ The \textit{Reroute} plugin\protect\footnote{By Hermann Vosseler} enables you to
 
 \begin{description}
 	\item[Target Track:] you can choose between \textit{Top} and \textit{Bottom}.
-	\item[Operation:] you can choose between \textit{Replace Target} (component + alpha channels); \textit{Components Only} (color channels only) and \textit{Alpha Replace} (alpha channel only)
+	\item[Operation:] you can choose between \textit{Replace Target},  \textit{Components Only} and \textit{Alpha Replace}.
+	\begin{itemize}
+		\item \textit{replace Target} (component + alpha channels), this allows you to have the ability to overwrite everything on the target track with the source track where the the plugins are inserted.
+		\item \textit{Components only} (color channels only), replace the RGB or YUV components of the target track by the RGB or YUV components of the source track. The Alpha of the target track does not change.
+		\item \textit{Alpha replace} (alpha channel only), only the Alpha of the target track is changed but the components are not. This makes it easy to create an alphs channel on a track and then use that to apply it easily to another track.
+	\end{itemize}   
 \end{description}
 
 It works as a shared plugin. The typical usage scenario is to build up a possibly animated Mask in one track and then to transfer the Alpha channel to another target track.
@@ -3121,7 +3164,7 @@ Swap the position of two consecutive frames. There are two modes of exchange:
 \label{sub:swap_channels}
 \index{swap channels}
 
-Swap R G, B, Alpha with another color channel.
+Swap color, R G B, and Alpha channels with another channel or even turn channels off completely.
 
 \subsection{Threshold}%
 \label{sub:threshold}
