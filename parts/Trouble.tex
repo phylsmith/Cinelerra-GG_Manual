@@ -322,6 +322,11 @@ This indicates that there is something wrong with the audio. Some reasons for th
 \end{itemize}
 \bigskip
 
+\textit{void AssetPicon::create\_objects():}
+
+While rendering, you may see this in the Message log window as well as in your terminal startup window. Your render will be incomplete. This indicates that \CGG{} is unable to update the image of the asset picon either on the Timeline or in the Compositor. Usually not a problem unless rendering large media such as 4K.  Because this is just for displaying approximately where you are in the render process, turn off "Draw media" in the patchbay for the video tracks (3rd icon from the left).  You can still see how far along the render is by checking the progress bar which shows the percent complete in the bottom right corner of the main program window.
+\bigskip
+
 \textit{Playback does not keep up so you hear the audio ahead of the video.}
 
 When this occurs, it most likely means that there is not enough CPU power to keep up. You can go into \texttt{Settings $\rightarrow$ Preferences, Playback} tab and uncheck \textit{Play every frame}. Not playing every frame means that as it plays, if it can not keep up with doing all it has to do to change the frame into a vframe and then draw it, the program just notes that it is falling behind so skips frames to catch back up. This does not affect rendering. A different solution is to use Background Rendering as described in section \ref{sec:background_rendering}.
