@@ -2,6 +2,16 @@
 \label{cha:rendering}
 \index{rendering}
 
+To configure the render according to your needs and to obtain the desired output, you will need to check on what your settings are for these three items:
+
+\begin{enumerate}
+	\item \textbf{Timeline:} is the main starting point because, in addition to determining the range of frames that will be rendered, it is on the timeline that plugins and other editing/compositing features are applied, which will then be included in the rendered file. While the rendering is in progress some frames from the timeline are displayed in the Compositor window, but it has no bearing on the
+actual rendering process.
+	\item \textbf{Set Format:} is used to configure the fps, aspect ratio and frame size of the project	(= output). This can be found in the pulldown: \texttt{Settings $\rightarrow$ Format... (Shift + F)}.
+	See: \nameref{cha:project_and_media_attributes}.
+	\item \textbf{Render dialog:} this is under: \texttt{File $\rightarrow$ Render... (Shift + R)}. It contains all the rendering options that are documented in this chapter.
+\end{enumerate}
+
 Rendering takes a section of the timeline, \index{active region} performs all the editing,
 effects and compositing, and creates a new media file.  You can then
 delete all the source assets, play the rendered file, or bring it
