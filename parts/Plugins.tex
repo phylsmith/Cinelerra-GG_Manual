@@ -1319,12 +1319,17 @@ This effect erases pixels which match the selected color.  They are replaced wit
     \label{fig:chroma-key}
 \end{figure}
 
-Chroma key uses either the \textit{lightness} or the \textit{hue} to determine what is erased. Use value singles out only the lightness to determine transparency (Luma Key).
-Select a center color to erase using the \textit{Color} button. Alternatively a color can be picked directly from the output frame by first using the \textit{color picker} in the compositor window and then selecting the \textit{Use color picker} button. This sets the chroma key color to the current color picker color.
+Chroma key uses either the lightness or the hue to determine what is erased. \textit{Use value} singles out only the lightness to determine transparency (Luma Key).
+
+\textit{Color section}
+
+Select a key color to erase using the \textit{Color} button. Alternatively a color can be picked directly from the output frame by first using the \textit{color picker} in the compositor window and then selecting the \textit{Use color picker} button. This sets the chroma key color to the current color picker color.
 
 Be aware that the output of the chroma key is fed back to the compositor, so selecting a color again from the compositor will use the output of the chroma key effect. The chroma key should be disabled when selecting colors with the color picker.
 
-If the lightness or hue is within a certain \textit{threshold} it is erased. Increasing the threshold determines the range of colors to be erased. It is not a simple on/off switch. As the color approaches the edge of the threshold, it gradually gets erased if the \textit{slope} is high or is rapidly erased if the slope is low. The slope as defined here is the number of extra values flanking the threshold required to go from opaque to transparent.
+\textit{Key parameters section}
+
+If the lightness or hue is within a certain \textit{threshold} it is erased. Increasing the threshold determines the range of colors to be erased. It is not a simple on/off switch; it'a a range color. As the color approaches the edge of the threshold, it gradually gets erased if the \textit{slope} is high or is rapidly erased if the slope is low. The slope as defined here is the number of extra values flanking the threshold required to go from opaque to transparent. The \textit{Default} button returns Threshold to the value $10.0$; Slope to the value $0.0$; and Color to black (\#ff000000). The \textit{Reset} button and the \textit{reset} icons next to the sliders always return to the value $0.0$. Before the sliders are the \textit{input boxes} so that the precise numerical values can be written.
 
 Normally threshold is very low when using a high slope. The two parameters tend to be exclusive because slope fills in extra threshold. The slope tries to soften the edges of the chroma key but it does not work well for compressed sources. A popular softening technique is to use a maximum slope and chain a blur effect below the chroma key effect to blur just the alpha.
 
