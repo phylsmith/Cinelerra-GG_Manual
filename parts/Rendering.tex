@@ -1118,7 +1118,7 @@ Let's take the example of a network with 2 PCs: the master and the client. On th
   \begin{itemize}
   \item check the \textit{Use render farm} box;
   \item in the \textit{Hostname} box, keyin your hostname or ip
-    address such as 192.168.1.12 or \textit{localhost};
+    address such as 192.168.1.12 or \textit{localhost} when using a single computer with a multicore CPU;
   \item enter in a port number such as 401--405 (only a root user
     can use privileged ports) or $10650...$ for non-root and click on \textit{Add Nodes}. To find a range of free ports to use you can look at the file \texttt{/etc/services};
   \item you will see something like the following in the Nodes
@@ -1142,7 +1142,8 @@ Let's take the example of a network with 2 PCs: the master and the client. On th
 \item For external network nodes, now we must join the nodes created to instances of \CGG{}. On the client computers ($192.168.1.12$), on the terminal, start 5 background  \CGG{} tasks via:
 \begin{lstlisting}[style=sh]
 cd {path_to_cinelerra}
-cin -d 10650 cin -d 10651
+cin -d 10650 
+cin -d 10651
 ...
 cin -d 10654
 \end{lstlisting}
@@ -1156,7 +1157,11 @@ cin -d 10656
 Similar to the previous point, the cursor positions itself in a new line ready to enter the next command, without exiting the task.
 \item When your video is ready, setup a render job via \texttt{File
     $\rightarrow$ Render} or \texttt{File $\rightarrow$ Batch Render}
-  and check OK.
+  and check OK. You should check "Project" for the "Render range", but if
+you check "Selection" or "In/Out points" instead, although rendering will
+always start at the beginning of the timeline, it will end at the Out Point
+or the end of the Selection thereby saving some time.  In this case, the
+first render file created will usually be empty.
 \item The results will be in the shared file \texttt{path/filename}
   that you selected in the render menu with the additional numbered
   job section on the end as $001, 002, 003, \dots 099$ (example,
@@ -1266,6 +1271,21 @@ render farm session to restart with a good balance.
 {path_to_cinelerra}/cin -h  # displays some of the options.
 \end{lstlisting}
 
+\subsection{Multi-core CPU Setup (Localhost)}%
+\label{sub:multi_core_render_farm_setup}
+\index{render farm!multi core CPU}
+
+If you are lucky enough to have a computer with a large cpu core
+count, setting up a render farm can really take advantage of using
+all of the cores at 100\%. This is much faster than the default automatic
+threading capability. Since you don’t need to communicate with other
+computers, you will not have to be concerned about TCP communication
+or shared disks/files; only localhost nodes. On the terminal you will need to open many instances of \CGG{} by connecting them to the jobs created. The number of such jobs can be the total number of CPU threads (-1) or not. When you are going to be doing other work
+simultaneously while rendering a large job, you will want to leave
+some of the cpus available for that.  Be sure to set \textit{Project SMP cpus} in the \texttt{Settings $\rightarrow$ Preferences, Performance} tab to your CPU
+count.  Follow the steps outlined in ~\ref{sub:basic_steps_start_render_farm}
+but skip the step "For external network nodes".
+
 \subsection{Detailed Setup Description}%
 \label{sub:detailed_setup_description}
 \index{render farm!setup}
@@ -1292,7 +1312,7 @@ line before using.
   the location of your project on the master computer can be done with
   NFS as described next.  Alternatively, you can look up on the
   internet how to use Samba to share a directory.
-\item[Create a shared filesystem and mount using NFS] All nodes in
+\item[Create a shared filesystem and mount using NFS] (only for Network) All nodes in
   the render farm should use the same filesystem with the same paths
   to the project files on all of the master and client nodes.  This is
   easiest to do by setting up an NFS shared disk system.
@@ -1521,20 +1541,6 @@ want to bother setting up NFS for a shared disk.
   node or use RenderMux shell script.
 \end{enumerate}
 
-\subsection{Multi-core Computers Render Farm Setup}%
-\label{sub:multi_core_render_farm_setup}
-\index{render farm!multi core CPU}
-
-If you are lucky enough to have a computer with a large cpu core
-count, setting up a render farm can really take advantage of using
-all of the cores at 100\%. This is much faster than the default automatic
-threading capability. Since you don’t need to communicate with other
-computers, you will not have to be concerned about TCP communication
-or shared disks/files; only localhost nodes. On the terminal we will open many instances of \CGG{} by connecting them to the jobs created. The number of such jobs can be the total number of CPU threads (-1) or not. When you are going to be doing other work
-simultaneously while rendering a large job, you will want to leave
-some of the cpus available for that.  Be sure to set \textit{Project SMP
-cpus} in the \texttt{Settings $\rightarrow$ Preferences, Performance} tab to your CPU
-count.
 
 \subsection{Troubleshooting Tips and Warnings}%
 \label{sub:troubleshhoting_tips_warnings}
