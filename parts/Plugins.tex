@@ -1291,6 +1291,13 @@ It is important to note as you play or change the frame, the plugin re-computes 
     \end{description}
 \paragraph{Shading box:} The boxing option allows for calculating the inversion of the digital negatives in a given area of the frame as opposed to the entire frame. The program will automatically calculate the columns and rows to shave from the frame when compute negfix values is checked. A default box area is initially calculated, called the shaving box, based on where the min/max difference in a row/column is less than the program defined tolerance. This row/column minimum and maximum difference must be greater than 0.05. The effect is to cut away the border areas with constant color. If you check the Show active area, you can see the box in the compositor window. The boundary search is constrained to a range of 0.1 to 0.9 times the frame dimensions, to create a 10 percent shaved margin to avoid over-scan and negative edge bleeding. Manual adjustment of the shaving box is controlled via the four sliders on the bottom right which move each of the left, right, top and bottom shaving margins. The slider bar new values automatically take effect as you move the box and you will see the right-hand side applied values change. When you have either the rows or the columns where the minimum slider is greater than or equal to the maximum slider, the default box will be in effect instead.
 
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=0.9\linewidth]{c41.png}
+    \caption{C41 - Control window and compositor window in action}
+    \label{fig:c41}
+\end{figure}
+
 \paragraph{Optional postprocessing:} in order to have the values of Contrast and Brightness take effect, you must check the Postprocess checkbox.
 \begin{description}
     \item[Contrast] is the difference in brightness between objects or regions.
@@ -1298,13 +1305,6 @@ It is important to note as you play or change the frame, the plugin re-computes 
 \end{description}
 
 Figure~\ref{fig:c41} shows the C41 controls on the left and part of the Compositor window with grid lines showing the default shading box since the Show active area box is checked. Changes have been made to the left-hand side original computed values as seen in the right-hand side such as Gamma G which contains the hairline cursor and has a partial red outline value box.
-
-\begin{figure}[htpb]
-    \centering
-    \includegraphics[width=0.9\linewidth]{c41.png}
-    \caption{C41 - Control window and compositor window in action}
-    \label{fig:c41}
-\end{figure}
 
 \subsection{Chroma Key}%
 \label{sub:chroma_key}
@@ -1337,7 +1337,7 @@ Normally threshold is very low when using a high slope. The two parameters tend 
 \label{sub:chroma_key_avid}
 \index{chroma key Avid}
 
-Chroma Key (Avid)\protect\footnote{Credit for Plugin by Jerome Cornet \url{http://jcornet.free.fr/linux/chromakey.html} and credit to original creator for upgrade.} (figure~\ref{fig:chroma-key-hsv-avid}) replaces a color with another color or transparency using HSV variables. It is frequently used to remove a color from a video to composite with another image. This process is generally referred to as green screen or blue screen process because of the background color that is keyed out. More information is at: {\small \url{http://en.wikipedia.org/wiki/Chromakey}}.  
+Chroma Key (Avid)\protect\footnote{Credit for Plugin by Jerome Cornet; credit to original creator for major upgrade and credit to SGE for adaption and imrovements.} (figure~\ref{fig:chroma-key-hsv-avid}) replaces a color with another color or transparency using HSV variables. It is frequently used to remove a color from a video to composite with another image. This process is generally referred to as green screen or blue screen process because of the background color that is keyed out. More information is at: {\small \url{http://en.wikipedia.org/wiki/Chromakey}}.  
 
 \begin{figure}[htpb]
 	\centering
@@ -1367,8 +1367,6 @@ To understand how the plugin parameters work, we need to refer to the HSV color 
 \end{figure}
 
 The left half has Saturation from 0 in the center to 100 on the edges. An example of a green screen is shown here. The right half has brightness from 0 (center) to 100 on the edges. The example of a blue screen is given here. The key color is the radius of the wheel, and its angle determines the hue. The Hue Tolerance is the arc of a circle (a wedge) that includes the radius. The wedge is the color range (mask) that we want to eliminate by keying, its shape is precise and easy to understand. The Brightness are the inner/outer extremes of the wedge; if the inner value (Min) is 0, then it coincides with the center point, if the outer value (max) is 100 then it coincides with the arc on the circumference. With intermediate values we will have masks similar to the one shown in the figure. Min Saturation is the distance from the center, along the Hue radius, from which we want to impose saturation with the value 0. It will be the value from which keying starts. Saturation Offset is an additional cut we make to the inner part of the wedge from the Min Saturation value. All of these adjustments allow us to establish a range of colors (Mask) that perfectly matches the background (the wedge in the example in the figure~\ref{fig:hsv_color_wheel}) that we want to eliminate. This is a precision operation, and it is not rare to return to the parameter combination several times to refine the mask.
-
-Start with \textit{Hue Tolerance} at $10\%$, \textit{Min Bright\-ness} at $0$, \textit{Max bright\-ness} at $100\%$, \textit{Saturation offset} at $0$, \textit{Min Saturation} at $0$, \textit{In Slope} at $0$, \textit{Out Slope} at $0$, \textit{Alpha Offset} at $0$ (that is mid-way through), \textit{Spill Threshold} at $0$, \textit{Spill Compensation} at $100\%$. At any time, you can check what the Mask looks like by clicking on \textit{Show Mask}. This will output a black and white image of the mask (\textit{matte}).
 
 \qquad \textit{Color section}
 
@@ -1412,7 +1410,7 @@ In this section we try to make halos, reflections and parasitic lights present o
 \begin{description}
 	\item[Spill saturation:] Similar to Saturation Start, indicates the starting point from which spill suppression begins. It works if Saturation Start is > 0 because it acts only from that value, with the effect of retracting the starting point moving away from the Saturation Start value toward the center of the color wheel (white). This has the consequence of creating a small area beyond the edge of the wedge where spill suppression acts. Generally you set it with a small random value > 0 and then return to it after setting Spill Angle.
 	\item[Spill Angle:] Spill Angle is the main parameter of spill suppression because it causes a very noticeable effect.  Basically, it is an area that extends beyond the edge of the mask, increasing its angle and thus its size. In this area (which is a gradient) pixels of the reflections of the key color (green, for example) are mixed with pixels of the adjacent color (cyan on one side and yellow on the other, because we always refer to the HSV color wheel). The suppression effect replaces green pixels with adjacent ones, taking into account the gradient. This parameter, in addition to the spill saturation, softens the edges of the mask without resorting to desaturation to gray or white of the green pixels, which create a more visible detachment. It should not be overdone so as not to compromise the color balance of the entire figure.
-	\item[Desature Only:]
+	\item[Desature Only:] It takes the parameters of Spill Saturation and Spill Angle but instead of copying the neighboring colors over the green pixels, it applies a simple desaturation of the green pixels that become gray and then totally white. The effect is more noticeable and noisy because it creates a halo around the figure.
 \end{description}
 
 In the lower part we find various buttons:
