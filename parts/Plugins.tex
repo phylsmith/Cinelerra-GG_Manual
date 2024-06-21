@@ -1291,7 +1291,7 @@ It is important to note as you play or change the frame, the plugin re-computes 
     \end{description}
 \paragraph{Shading box:} The boxing option allows for calculating the inversion of the digital negatives in a given area of the frame as opposed to the entire frame. The program will automatically calculate the columns and rows to shave from the frame when compute negfix values is checked. A default box area is initially calculated, called the shaving box, based on where the min/max difference in a row/column is less than the program defined tolerance. This row/column minimum and maximum difference must be greater than 0.05. The effect is to cut away the border areas with constant color. If you check the Show active area, you can see the box in the compositor window. The boundary search is constrained to a range of 0.1 to 0.9 times the frame dimensions, to create a 10 percent shaved margin to avoid over-scan and negative edge bleeding. Manual adjustment of the shaving box is controlled via the four sliders on the bottom right which move each of the left, right, top and bottom shaving margins. The slider bar new values automatically take effect as you move the box and you will see the right-hand side applied values change. When you have either the rows or the columns where the minimum slider is greater than or equal to the maximum slider, the default box will be in effect instead.
 
-\paragraph{Optional postprocessing:} In order to have the values of Contrast and Brightness take effect, you must check the Postprocess checkbox.
+\paragraph{Optional postprocessing:} in order to have the values of Contrast and Brightness take effect, you must check the Postprocess checkbox.
 \begin{description}
     \item[Contrast] is the difference in brightness between objects or regions.
     \item[Brightness] refers to the overall lightness or darkness of the image.
@@ -1329,35 +1329,35 @@ Be aware that the output of the chroma key is fed back to the compositor, so sel
 
 \textit{Key parameters section}
 
-If the lightness or hue is within a certain \textit{threshold} it is erased. Increasing the threshold determines the range of colors to be erased. It is not a simple on/off switch; it'a a range color. As the color approaches the edge of the threshold, it gradually gets erased if the \textit{slope} is high or is rapidly erased if the slope is low. The slope as defined here is the number of extra values flanking the threshold required to go from opaque to transparent. The \textit{Default} button returns Threshold to the value $10.0$; Slope to the value $0.0$; and Color to black (\#ff000000). The \textit{Reset} button and the \textit{reset} icons next to the sliders always return to the value $0.0$. Before the sliders are the \textit{input boxes} so that the precise numerical values can be written.
+If the lightness or hue is within a certain \textit{threshold} it is erased. Increasing the threshold determines the range of colors to be erased. It is not a simple on/off switch; it's a range color. As the color approaches the edge of the threshold, it gradually gets erased if the \textit{slope} is high or is rapidly erased if the slope is low. The slope as defined here is the number of extra values flanking the threshold required to go from opaque to transparent. The \textit{Default} button returns Threshold to the value $10.0$; Slope to the value $0.0$; and Color to black (\#ff000000). The \textit{Reset} button and the \textit{reset} icons next to the sliders always return to the value $0.0$. Before the sliders are the \textit{input boxes} so that the precise numerical values can be written.
 
 Normally threshold is very low when using a high slope. The two parameters tend to be exclusive because slope fills in extra threshold. The slope tries to soften the edges of the chroma key but it does not work well for compressed sources. A popular softening technique is to use a maximum slope and chain a blur effect below the chroma key effect to blur just the alpha.
 
-\subsection[Chroma Key (HSV)]{Chroma Key (HSV)}%
-\label{sub:chroma_key_hsv}
-\index{chroma key HSV}
+\subsection[Chroma Key (Avid)]{Chroma Key (Avid)}%
+\label{sub:chroma_key_avid}
+\index{chroma key Avid}
 
-Chroma Key (HSV)\protect\footnote{Credit for Plugin by Jerome Cornet \url{http://jcornet.free.fr/linux/chromakey.html}} (figure~\ref{fig:chroma-key-hsv}) replaces a color with another color or transparency using HSV variables; it is frequently used to remove a color from a video to composite with another image. This process is generally referred to as green screen or blue screen process (because of the background color that is keyed out). More information: {\small \url{http://en.wikipedia.org/wiki/Chromakey}}
+Chroma Key (Avid)\protect\footnote{Credit for Plugin by Jerome Cornet \url{http://jcornet.free.fr/linux/chromakey.html} and credit to original creator for upgrade.} (figure~\ref{fig:chroma-key-hsv-avid}) replaces a color with another color or transparency using HSV variables. It is frequently used to remove a color from a video to composite with another image. This process is generally referred to as green screen or blue screen process because of the background color that is keyed out. More information is at: {\small \url{http://en.wikipedia.org/wiki/Chromakey}}.  
 
 \begin{figure}[htpb]
 	\centering
-	\includegraphics[width=0.55\linewidth]{chroma-key-hsv.png}
-	\caption{Windows config for Chroma Key (HSV)}
-	\label{fig:chroma-key-hsv}
+	\includegraphics[width=0.55\linewidth]{chroma_key_avid.png}
+	\caption{Windows config for Chroma Key (Avid/HSV)}
+	\label{fig:chroma-key-hsv-avid}
 \end{figure}
 
 \subsubsection*{Requirements}
 \label{ssub:requirements}
 
-The subject in the movie should have a good background. The lighting is crucial and good lighting during production will save you time with much less effort than in post-production. Another tip is to use a low-compressed, intraframe codec with as high a color depth as possible. In case of YUV-type source signal, it is better to have subsampling $4:4:4$ or $4:2:2$.
-Here we assume that we have a good video, filmed on green (or blue) screen that we want to use. Important: make sure you are using a color model that has an alpha channel, such as \textit{RGBA8}, \textit{RGBAFloat}, \textit{YUVA8}. To change color model, go to \texttt{Settings $\rightarrow$ Format $\rightarrow$ Color Model}.
+The subject in the timeline video should have a good background. The lighting is crucial and good lighting during production will save you time with much less effort than in post-production. Another tip is to use a low-compressed, intraframe codec with as high a color depth as possible. In case of YUV-type source, it is better to have subsampling $4:4:4$ or $4:2:2$.
+Here we assume that we have a good video, filmed on green or blue screen that we want to use. Important: make sure you are using a color model that has an alpha channel, such as \textit{RGBA8}, \textit{RGBAFloat}, \textit{YUVA8}. To change color model, go to \texttt{Settings $\rightarrow$ Format $\rightarrow$ Color Model}. Any manipulations with alpha masks in \CGG{} require a bottom track with some opaque background, otherwise the transparent holes are displayed as if the same track without transparency is located under it.
 
 \subsubsection*{Usage}
 \label{ssub:usage}
 
-As in any other effect, add it to the timeline in the main window. You can tweak each parameter in order to improve the keying.
+As in any other effect, drag it to the timeline in the main window. You can tweak each parameter in order to improve the keying.
 
-To understand how the plugin parameters work, we need to refer to the HSV color wheel (foreground color) in figure~\ref{fig:hsv_color_wheel}. Coinsider that this is an abstract example; in the real world we will be dealing with much more complicated masks.
+To understand how the plugin parameters work, we need to refer to the HSV color wheel (foreground color) in figure~\ref{fig:hsv_color_wheel}. You may want to first apply the \nameref{sub:color_swatch} plugin which is very helpful in determining which variables should be modified. Consider that this is an abstract example; in the real world we will be dealing with much more complicated masks.
 
 \begin{figure}[htpb]
 	\centering
@@ -1366,17 +1366,17 @@ To understand how the plugin parameters work, we need to refer to the HSV color 
 	\label{fig:hsv_color_wheel}
 \end{figure}
 
-The left half has Saturation from 0 (in the center) to 100 on the edges. An example of a green screen is shown here. The right half has brightness from 0 (center) to 100 on the edges. The example of a blue screen is given here. The key color is the radius of the wheel, and its angle determines the hue. The Hue Tolerance is the arc of a circle (a wedge) that includes the radius. The wedge is the color range (mask) that we want to eliminate by keying, its shape is precise and easy to understand. The Brightness are the inner/outer extremes of the wedge; if the inner value (Min) is 0, then it coincides with the center point, if the outer value (max) is 100 then it coincides with the arc on the circumference. With intermediate values we will have masks similar to the one shown in the figure. Min Saturation is the distance from the center, along the Hue radius, from which we want to impose saturation with the value 0. It will be the value from which keying starts. Saturation Offset is an additional cut we make to the inner part of the wedge from the Min Saturation value. All of these adjustments allow us to establish a range of colors (Mask) that perfectly matches the background (the wedge in the example in the figure) that we want to eliminate. This is a precision operation, and it is not rare to return to the parameter combination several times to refine the mask.
+The left half has Saturation from 0 in the center to 100 on the edges. An example of a green screen is shown here. The right half has brightness from 0 (center) to 100 on the edges. The example of a blue screen is given here. The key color is the radius of the wheel, and its angle determines the hue. The Hue Tolerance is the arc of a circle (a wedge) that includes the radius. The wedge is the color range (mask) that we want to eliminate by keying, its shape is precise and easy to understand. The Brightness are the inner/outer extremes of the wedge; if the inner value (Min) is 0, then it coincides with the center point, if the outer value (max) is 100 then it coincides with the arc on the circumference. With intermediate values we will have masks similar to the one shown in the figure. Min Saturation is the distance from the center, along the Hue radius, from which we want to impose saturation with the value 0. It will be the value from which keying starts. Saturation Offset is an additional cut we make to the inner part of the wedge from the Min Saturation value. All of these adjustments allow us to establish a range of colors (Mask) that perfectly matches the background (the wedge in the example in the figure~\ref{fig:hsv_color_wheel}) that we want to eliminate. This is a precision operation, and it is not rare to return to the parameter combination several times to refine the mask.
 
-Start with \textit{Hue Tolerance} at $10\%$, \textit{Min Bright\-ness} at $0$, \textit{Max bright\-ness} at $100\%$, \textit{Saturation offset} at $0$, \textit{Min Saturation} at $0$, \textit{In Slope} at $0$, \textit{Out Slope} at $0$, \textit{Alpha Offset} at $0$ (that’s mid-way through), \textit{Spill Threshold} at $0$, \textit{Spill Compensation} at $100\%$. At any time, you can check what the Mask looks like by clicking on \textit{Show Mask}. This will output a black and white image of the mask (\textit{matte}).
+Start with \textit{Hue Tolerance} at $10\%$, \textit{Min Bright\-ness} at $0$, \textit{Max bright\-ness} at $100\%$, \textit{Saturation offset} at $0$, \textit{Min Saturation} at $0$, \textit{In Slope} at $0$, \textit{Out Slope} at $0$, \textit{Alpha Offset} at $0$ (that is mid-way through), \textit{Spill Threshold} at $0$, \textit{Spill Compensation} at $100\%$. At any time, you can check what the Mask looks like by clicking on \textit{Show Mask}. This will output a black and white image of the mask (\textit{matte}).
 
 \qquad \textit{Color section}
 
 In this section of the configuration window, you choose the key color and have the ability to see the mask created.
 
 \begin{description}
-	\item[Color...] Select the key color (green, blue, etc) using the color wheel or the color picker. Remember, only the Hue matters, not Saturation or Value. To use the color picker, click on the \textit{color picker} icon in the Compositor window, then click on the color you want in the Compositor window. Finally  in the Chromakey (HSV) parameters window, click on \textit{Use Color Picker}. Remember to disable ChromaKey (HSV) plugin when using the Color Picker on the Compositor window.
-	\item[Show Mask] The plugin does not create a true matte in the alpha channel, but creates a mask. Activating this option will show the foreground as a white (opaque) shape while the background in black (transparency). You will be able to control the extent of the mask, any jagged edges, small black areas within the mask or small white areas within the foreground, which are to be removed, etc.
+	\item[Color...] Select the key color (green, blue, or whatever) using the color wheel or the color picker. Only the Hue matters, not Saturation or Value. To use the color picker, click on the \textit{color picker} icon in the Compositor window, then click on the color you want in the Compositor window. Finally  in the Chromakey (Avid) parameters window, click on \textit{Use Color Picker}. You will need to disable ChromaKey (Avid) plugin when using the Color Picker on the Compositor window.
+	\item[Show Mask] The plugin does not create a true matte in the alpha channel, but creates a mask. Activating this option will show the foreground as a white (opaque) shape while the background in transparency. You will be able to control the extent of the mask, any jagged edges, small white areas within the mask or small transparency areas within the foreground, which are to be removed.
 \end{description}
 
 \qquad \textit{Key parameters section}
@@ -1384,14 +1384,14 @@ In this section of the configuration window, you choose the key color and have t
 In this section we expand the mask to a range of colors close to color key and refine the selection by also taking advantage of brightness and saturation.
 
 \begin{description}
-	\item[Hue Tolerance:] Because there are slight variations in lighting in real cases, the background will not be in a uniform key color hue. Increase or decrease the Hue tolerance to mask out the background. If there are dark spots that are keyed out that shouldn’t be, it can be corrected later (With the \texttt{Mask} tool, this operation is called the \textit{Garbage Matte}).
+	\item[Hue Tolerance:] Because there are slight variations in lighting in real cases, the background will not be in a uniform key color hue. Increase or decrease the Hue tolerance to mask out the background.  In determining the hue range, it is useful to use the Color Swatch plugin in \textit{constant brightness} mode and with \textit{Draw Source} active, which allows us to see the pixels of the figure, making us choose which ones to let into the mask (keying out) and which ones not. If there are dark spots that are keyed out that shouldn’t be, it can be corrected later (With the \texttt{Mask} tool; this operation is called the \textit{Garbage Matte}).
 	\item[Brightness:] It allows the color range (Mask) to be better defined by exploiting the differences in brightness between background and foreground. This could be referred to as a Luma Key within the Chroma Key. Increase \textit{Min Brightness} so that only the background is masked out, and not parts of the foreground. You can also reduce \textit{Max Brightness} if some clear areas are keyed out (useful for very dark backgrounds).
-	\item[Saturation:] It allows the color range (Mask) to be better defined by exploiting the differences in saturation between background and foreground. Since the best results are obtained by keying pure colors, it may come in handy to eliminate the less saturated colors (proper to the foreground) while leaving the more saturated colors (proper to the background, i.e. Green/Blue Screen) to the keying action. Increase \textit{Min Saturation} so that only the background is masked out, and not parts of the foreground. \textit{Saturation Offset} can be used to change this, because it acts similarly to Min Brightness. It could be said that Min Saturation concerns only the key color, while Saturation Offset concerns the range of Hue tolerance. But it is best to start by leaving it at $0$.
+	\item[Saturation:] Saturation allows the color range (Mask) to be better defined by exploiting the differences in saturation between background and foreground. Since the best results are obtained by keying pure colors, it may come in handy to eliminate the less saturated colors (proper to the foreground) while leaving the more saturated colors (proper to the background, i.e. Green/Blue Screen) to the keying action. Increase \textit{Saturation Start} so that only the background is masked out, and not parts of the foreground. \textit{Saturation Line} can be used to change this, because it acts similarly to Min Brightness. It could be said that Saturation Start concerns only the key color (wedge's vertex), while Saturation Line concerns the range of Hue tolerance. But it is best to start by leaving it at $0$.
 \end{description}
 
 Check what it looks like at this stage, your mask should be pretty
 clean. Toggle \textit{Show Mask} to check what it looks like, it
-should be OK\@. If not, repeat steps $1 to 4$ to get a better
+should be OK\@. If not, repeat steps in the Key parameters section to get a better
 key. The rest of the controls are useful to smear the mask to help
 compositing later on. They will help you to make your key look much
 cleaner.
@@ -1401,19 +1401,55 @@ cleaner.
 In this section you intervene on the already created mask with edge smoothing and transparencies.
 
 \begin{description}
-	\item[Slope:] For now, the mask is a full on/ full off mask that can be really harsh on the edges and not necessarily what you are looking for. \textit{In Slope} and \textit{Out Slope} will help you to smooth that key. In Slope it acts on the inner side of the edges by grading them with keying (background) colors. It leaves more colors in the mask. Out Slope acts on the outer side of the edges by grading them with the foreground colors. It takes more colors out of the mask. Basically, the colors that are borderline in the mask will see their alpha channel reduced by half instead of being completely on or off.
-	\item[Alpha Offset:] This control offsets the whole alpha channel by some amount (from -100=full opacity to +100=full transparency). Be sure to know what you are doing if you change it from the default value of $0$.
+	\item[Slope:] For now, the mask is a full on/full off mask that can be really harsh on the edges and not necessarily what you are looking for. \textit{In Slope} and \textit{Out Slope} will help you to smooth that key. In Slope acts on the inner side of the edges by grading them with keying (background) colors. It leaves more colors in the mask. Out Slope acts on the outer side of the edges by grading them with the foreground colors. It takes more colors out of the mask. Basically, the colors that are borderline in the mask will see their alpha channel reduced by half instead of being completely on or off.
+	\item[Alpha Offset:] This control offsets the whole alpha channel by some amount, from -100=full opacity to +100=full transparency. Be sure to know what you are doing if you change it from the default value of $0$.
 \end{description}
+
+\qquad \textit{Spill light control section}
+
+In this section we try to make halos, reflections and parasitic lights present on the foreground less noticeable via spill suppression.
+
+\begin{description}
+	\item[Spill saturation:] Similar to Saturation Start, indicates the starting point from which spill suppression begins. It works if Saturation Start is > 0 because it acts only from that value, with the effect of retracting the starting point moving away from the Saturation Start value toward the center of the color wheel (white). This has the consequence of creating a small area beyond the edge of the wedge where spill suppression acts. Generally you set it with a small random value > 0 and then return to it after setting Spill Angle.
+	\item[Spill Angle:] Spill Angle is the main parameter of spill suppression because it causes a very noticeable effect.  Basically, it is an area that extends beyond the edge of the mask, increasing its angle and thus its size. In this area (which is a gradient) pixels of the reflections of the key color (green, for example) are mixed with pixels of the adjacent color (cyan on one side and yellow on the other, because we always refer to the HSV color wheel). The suppression effect replaces green pixels with adjacent ones, taking into account the gradient. This parameter, in addition to the spill saturation, softens the edges of the mask without resorting to desaturation to gray or white of the green pixels, which create a more visible detachment. It should not be overdone so as not to compromise the color balance of the entire figure.
+	\item[Desature Only:]
+\end{description}
+
+In the lower part we find various buttons:
+
+\begin{description}
+	\item[Store:] Stores the complete current parameter set in memory.
+	\item[Recall:] Sets all the parameters to the values, memorized previously by Store.
+	\item[Exchange:] Swaps current values and Store'd values of the parameters.
+	\item[Undo:] Restores all the parameters to the undo'ed values.
+	\item[Reset:] Reset to default values.
+\end{description}
+
+All buttons work globally on the whole parameter set. Each time the ChromaKey dialog is opened, the \textit{Store} values are cleared and reset to default. Therefore, if you press \textit{Recall} having not pressed Store beforehand, it will do the same as \textit{Reset}. Each time the dialog is closed, the Store values are forgotten (reset to defaults). As long as the dialog remains opened, Store values remain intact, even if the current timeline position changes. The operations on distinct parameters (turning sliders etc.) do not update the \textit{Undo} values. The following operations update values for subsequent Undo: Global Recall, Exchange, Reset buttons (but not the buttons which reset individual parameters), opening the dialog, and moving current position in the timeline.
+
+Now the mask is probably still very harsh, so just below the Chromakey (Avid) plugin, add a \textit{Blur} effect, and select only the \textit{Alpha channel}, with a radius of $2$ or $3$ (more if you really want to soften the edges). This will significantly help the keying.
+
+\subsection[Chroma Key (HSV)]{Chroma Key (HSV)}%
+\label{sub:chroma_key_hsv}
+\index{chroma key HSV}
+
+Chroma Key (HSV)\protect\footnote{Credit for Plugin by Jerome Cornet \url{http://jcornet.free.fr/linux/chromakey.html}} (figure~\ref{fig:chroma-key-hsv}) replaces a color with another color or transparency using HSV variables. This plugin is replaced by the better Chroma Key (Avid) and is maintained only for reasons of compatibility with old projects.
+Refer to Chroma Key (Avid) for theory and parameter descriptions, which are quite similar, except the description of spill suppression, which differs considerably.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.55\linewidth]{chroma-key-hsv.png}
+	\caption{Windows config for Chroma Key (HSV)}
+	\label{fig:chroma-key-hsv}
+\end{figure}
 
 \qquad \textit{Spill light control section}
 
 In this section we try to make halos, reflections and parasitic lights present on the foreground less noticeable.
 
 \begin{description}
-	\item[spill light control:] This step helps you remove the green or blue halo around the edges of the mask. It does so by removing the saturation of pixels of the foreground that have a similar hue to the key color (turning them into grey instead of green or blue). The hues to be desaturated are set with \textit{Spill Threshold}, the degree of desaturation is set with \textit{Spill Compensation}. In order for Spill compensation to work, Spill Threshold must be > 0. If you start with Spill Compensation at $100\%$, slowly increase the \textit{Spill Threshold} until the remaining green or blue areas turn grey. Then reduce Spill Compensation until the image looks good.
+	\item[Spill light control:] This step helps you remove the green or blue halo around the edges of the mask. It does so by removing the saturation of pixels of the foreground that have a similar hue to the key color, turning them into gray instead of green or blue. The hues to be desaturated are set with \textit{Spill Threshold}, the degree of desaturation is set with \textit{Spill Compensation}. In order for Spill compensation to work, Spill Threshold must be > 0. If you start with Spill Compensation at $100\%$, slowly increase the \textit{Spill Threshold} until the remaining green or blue areas turn gray. Then reduce Spill Compensation until the image looks good.
 \end{description}
-
-Now the mask is probably still very harsh, so just below the Chromakey (HSV) plugin, add a \textit{Blur} effect, and select only the \textit{Alpha channel}, with a radius of $2$ or $3$ (more if you really want to soften the edges). This will significantly help the keying.
 
 \subsection{Color 3 Way}%
 \label{sub:color_3_way}
@@ -1494,6 +1530,17 @@ color space  or range so that you can fix it.
     \label{fig:colorspace}
 \end{figure}
 
+\subsection[Color Swatch]{Color Swatch}%
+\label{sub:color_swatch}
+
+Color Swatch is mainly used together with the two chroma key plugins. It should be applied first so that its output becomes the input for the chroma key.
+
+\begin{description}
+	\item[Constant Brightness:] creates the HSV color wheel in which the brightness is constant and you can only move the Brightness slider.
+	\item[Costant Saturation:] creates the HSV color wheel in which saturation is constant and you can only move the Saturation slider.
+	\item[Angle:] turns the HSV color wheel by a certain angle.
+	\item[Draw Source:] is analogous to vectorscope; shows the pixels of the upper track (figure + background = source) superimposed on the HSV color wheel. It basically displays the source colors that are also present in the color wheel, but not the others. You can easily see which colors fall within the wedge (mask) and are therefore extracted, while those outside make up the unextracted figure. This makes it easier to adjust the key color and the hue range according to our needs.
+\end{description}
 
 \subsection{CriKey}%
 \label{sub:crikey}
