@@ -1408,7 +1408,7 @@ The next sections describe capabilities that are available in both the Composito
 
 In both the Viewer and Compositor windows, there is an arrow on the right hand side of the other
 buttons in the edit panel as shown in figure~\ref{fig:viewer_window}.  The "play" button can be
-toggled on/off via this arrow, which has a tooltip of \textit{Click to play} \index{click to play}.  When enabled
+toggled on/off via this arrow, which has the tooltip of \textit{Click to play} \index{click to play}.  When enabled
 the arrow is white surrounded by green and when disabled the arrow is red.\protect\footnote{the color and the look will be different for themes other than the default theme of Cakewalk}
 The purpose of enabling this capability is to make it really easy to play the media in the window
 by just using the left mouse button to start or stop the play.  The entire main canvas surface
@@ -1653,7 +1653,7 @@ We start by creating one or more new folders (MediaUserBin). These will be empty
 	\label{fig:modify-target}
 \end{figure}
 
-\paragraph{Filters:} you do automatic populating using filters (Smart Bins mode). You set the values of the \texttt{Enabled}; \texttt{Target}; \texttt{Op} and \texttt{Value} fields to make up the required filtering. The folder will populate automatically by pulling from the \texttt{Media} master folder. The filter is the result of one row, but we can do more sophisticated filtering by adding more rows. The process will start from the first row propagating to subsequent rows always following the pattern from top to bottom. See figure~\ref{fig:modify_folder}.
+\paragraph{Filters:} you do automatic populating using filters (Smart Bins mode). You set the values of the \texttt{Enable}; \texttt{Target}; \texttt{Op} and \texttt{Value} fields to make up the required filtering. The folder will populate automatically by pulling from the \texttt{Media} master folder. The filter is the result of one row, but we can do more sophisticated filtering by adding more rows. The process will start from the first row propagating to subsequent rows always following the pattern from top to bottom. See figure~\ref{fig:modify_folder}.
 
 \begin{figure}[htpb]
 	\centering
@@ -1671,7 +1671,7 @@ Let's look in detail at all the options of Modify Folder.
 
 When you bring up the Modify folder window, if you already have files in that folder, you will see filters that were generated automatically when you did a Drag and Drop. See figure~\ref{fig:modify-target}.
 
-When you click on the \textit{Value} portion of that filter, the entire set of files that are covered by the filter rules pops up.   Now you can highlight a target filename that you would like to remove, and just erase that line and check the green checkmark for OK.
+If you click on the \textit{Value} portion of that filter when it contains filenames that were dragged over, the entire set of files that are covered by the filter rules pops up.   Now you can highlight a target filename that you would like to remove, and just erase that line and check the green checkmark for OK in that window plus OK in the "Modify folder" window (or click Apply there).
 
 To delete the entire set of files listed on the filter rule, highlight the rule line and hit the \textit{Del} button. 
 
@@ -1684,7 +1684,7 @@ But once you hit Apply, clicking on the red X button will not undo your changes.
 The filter/search rules are applied in the order listed in the Modify folder window.  
 You can change the order of the filter rules by highlighting the rule you want to move and then drag and drop to a new location.
 
-Information about the columns and rules for the search filters in the Modify folder window follows \index{folder add filter/search}.
+Information about the columns and rules for the search filters in the Modify folder window follows. \index{folder add filter/search}
 
 Column headers:
 
@@ -1918,9 +1918,9 @@ There are 4 options for the preview mode.
     After the initial click to pop media in this mode, you also have the \emph{Mouse over} feature.
 \end{enumerate}
 
-For any of the options, but not \emph{No Play}, you can temporarily turn off that option by clicking on the button using the middle mouse button.  
+For any of the options, but not \emph{No Play}, you can temporarily turn off that option by clicking on the top "Preview mode" option selected button using the middle mouse.  
 This helps to avoid having the thumbnail get in the way of dragging or other functions.  
-When you do, a line will be drawn through the current preview mode so that you are aware that it is in \emph{No Play} mode until click it again.
+When you do, a line will be drawn through the current preview mode so that you are aware that it is in \emph{No Play} mode until you click it again.
 
 Note that if in \texttt{Settings $\rightarrow$ Preferences} under the Appearance tab, you have unchecked \textit{Use thumbnails in resource window} you will only have default icons and no active previews.
 
@@ -1962,7 +1962,7 @@ Copy or paste a list of files in the Media Resources window:
     \item    the status bar of the main window will be updated as the file list is loaded to the media folder (the purpose of displaying the status is simply to show that the load is progressing normally).
 \end{enumerate}
 
-Obviously this \textit{Paste file list} feature means you can create a list of files outside of \CGG{} using an editor, wipe the names, and then use \textit{Paste file list} to load them into the media Resources window.  
+Obviously this \textit{Paste file list} feature means you can create a list of files outside of \CGG{} using an editor, highlight the names using your mouse, and then use \textit{Paste file list} to load them into the media Resources window.  
 
 It is important to note that in the steps above, the Operating System cut and paste capabilities are in use for steps 4 and 6 as opposed to \CGG{}’s c/v shortcuts.  
 Since the procedure varies among the distros, you will have to adapt to your specific one.  For example, a usage for ubuntu consists of:
@@ -1991,7 +1991,7 @@ Since the procedure varies among the distros, you will have to adapt to your spe
 In the Figure~\ref{fig:copy_files1}, one instance of \CGG{} has 3 items in the Media area highlighted that were copied to the file list.  
 Note how it includes the full pathname.
 
-In this screenshot on another instance of \CGG{}, there are only 2 items in the media but the \textit{Paste file list} box is ready to have the items inserted via the standard text box paste method.  When that is done, the additional 6 media files will be available on this other instance too.
+In this screenshot on another instance of \CGG{}, there are only 2 items in the media but the \textit{Paste file list} box is ready to have the items inserted via the standard text box paste method.  When that is done, the additional 3 media files will be available on this other instance too.
 
 
 Another possible usage of this capability:
@@ -2030,7 +2030,7 @@ To take a snapshot, perform the following steps:
 
 \begin{enumerate}
     \item set your timeline insert marker where you want the snapshot -- this frame shows in the compositor
-    \item  right click in an empty spot in the media folder and the popup shows snapshot as the $5^{th}$ item down
+    \item  right click in an empty spot in the media folder and the popup shows snapshot as the $7^{th}$ item down
     \item  highlight that and the submenu comes up allowing you to choose png, jpg, ppm or tiff
 \end{enumerate}
 
@@ -2039,7 +2039,7 @@ It is saved by default in \texttt{/tmp} as
 
 \texttt{snap\_date-time.ext} BUT you can change the default directory path in \texttt{Settings $\rightarrow$ Preferences $\rightarrow$ Interface tab} in the right hand side of the Editing section.
 
-Grabshot is the $6^{th}$ menu item.  
+Grabshot is the last menu item.  
 A red circle reticle can be moved to the area to grab; use left mouse drag to surround an area; and right click to grab.
 
 
