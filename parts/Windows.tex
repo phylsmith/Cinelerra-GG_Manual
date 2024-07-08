@@ -2066,8 +2066,9 @@ If it is backward the end position is the start of the selected region.
 The insertion point moves to track playback. 
 When playback stops, the insertion point stays where playback stopped. 
 Thus, by playing back you change the position of the insertion point. 
-The keyboard interface of either the numeric pad or alternative keys has more speeds with the addition of \emph{Forward Slow}(2) and \emph{Reverse Slow} (5).  
-Hitting any key on the keyboard twice pauses it. 
+The keyboard interface of either the numeric pad or alternative keys has more speeds with the addition of \emph{Forward Slow} (2) and \emph{Reverse Slow} (5).  
+Hitting one of the programmed numeric keys, 2 for example, starts playback.
+Hitting that same key a second time, stops it.
 The shortcuts section of this manual as well as a Shell Command available from the \CGG{} main window has a listing of each of the keys.
 
 When using frame advance functions the behavior may seem odd. 
@@ -2093,11 +2094,11 @@ When set to Auto the video is zoomed to match the compositor window size as clos
 When the video is zoomed bigger than the window size,  you can use scrollbars to scan around or if the zoom icon is enabled, the middle mouse button can be used to zoom in or out the video.
 
 The zoom toggle also causes the Compositor window to enter zoom mode. 
-In zoom mode, clicking in the video output zooms in while a Ctrl-click in the video output zooms out. 
+In zoom mode, clicking in the video output zooms in while shift-click in the video output zooms out. 
 If you have a wheel mouse, rotating the wheel zooms in or out too. 
 Zooming in or out with the zoom tool does not change the rendered output. 
 It is merely for scrutinizing video or fitting it in the desktop. Playing video on the compositor when zoomed to any size other that 100\%, the original size, requires \CGG{} to do extra processing steps. 
-This could affect performance on slower systems
+This could affect performance on slower systems.
 
 \subsection{Show Overlays}%
 \label{sub:show_overlays}
@@ -2110,7 +2111,7 @@ By clicking LMB on the \textit{Color Ball} to the right of any keyframe type in 
 The color ball changes made will be retained across sessions.
 
 There is a line separating the first 4 items, which are just non-automation type settable values as opposed to \textit{auto} keyframe types.  
-The color is not changeable for the 3 items of Mode, Pan, and Mask which simply display their symbol icon.
+The color is not changeable for the 4 items of Mode, Pan, Mask, and Hard edges which simply display their symbol icon.
 
 Figure~\ref{fig:overlays_window} displays the Show overlays popup with all of its options and color coded types such as yellow for Speed and blue for Camera Z.  
 Upon clicking on the associated \textit{color ball} to the right of any keyframe type, for example \textit{Fade} in this screenshot, the color wheel palette window pops up so that you can manipulate the color as desired.
