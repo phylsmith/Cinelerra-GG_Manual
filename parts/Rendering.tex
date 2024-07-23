@@ -222,8 +222,13 @@ used.\\ Example: \textit{cin\_sample\_fmt=s16}
 \textit{wrench} in addition to the \textit{View} button, which
 allows more global options and changes to the formats, there is an
 additional \textit{Format} button that allows you to modify the
-Private Options, i.e.\ relating to specific muxing formats. More
-information on all these options can be found at
+Private Options, i.e.\ relating to specific muxing formats. You can list private options available in a encoder with:
+
+\begin{lstlisting}[style=sh]
+	$ /path/to/cin/thirdparty/ffmpeg-X.Y/ffmpeg -h encoder='libcodec' (i.e. libx265)
+\end{lstlisting}
+
+More information on all these options can be found at
 \href{https://ffmpeg.org/ffmpeg-all.html#Format-Options}{ffmpeg.org}
 sections 19 and 21. See also \nameref{sub:modifying_ffmpeg_cinelerra}.
 
@@ -233,7 +238,7 @@ Render presets in \CGG{} should work Out Of the Box. You can still configure the
 \label{sec:some_specific_rendering}
 
 \noindent The next few pages relate to rendering for specific common
-cases.
+cases. Also see: \small\url{https://gist.github.com/dexeonify/ed31c7d85fcf7297719e2ec4740fafda})
 
 \subsection{FFmpeg Common H.264 Rendering}%
 \label{sub:ffmpeg_h264_rendering}
@@ -561,9 +566,9 @@ considered open source,
 the \textsc{Webm} container is based on \textsc{Matroska} for video
 and \textsc{Opus} for audio. There are some common \textsc{VP9} rendering
 options files that support creation of video for YouTube,
-Dailymotion, and other online video services.
+Dailymotion, and other online video services. YouTube easy startup steps are documented above.
 
-YouTube easy startup steps are documented above.
+Note: For VP9 and AV1 presets, two pass rendering is recommended, which provides higher quality.
 
 Below is one of the \textsc{VP9} rendering options file with documentation for specifics:
 

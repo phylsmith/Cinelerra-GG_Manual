@@ -328,9 +328,9 @@ These are also called Delivery codecs. They are the most used and widespread bei
 	\item[MP4] The most popular. Many other formats belong to this family (MPEG);
 	\newline    h264 is actually x264, open, highly configurable and documented; h265/HEVC is actually x265, open, highly configurable and documented. x264-5 is for encoding only.
 	\newline Presets: \textit{h265, h265, mjpeg, mpeg2, obs2youtube}
-	\item[WEBM] Open; similar to mp4 but not as widespread (it is used by YouTube). It belongs to the Matroska family. In \CGG{} there are specific Presets with \texttt{.youtube} extension, but they are still webm.
+	\item[WEBM] Open; similar to mp4 but not as widespread (it is used by YouTube). It belongs to the Matroska family. In \CGG{} there are specific Presets with \texttt{.youtube} extension, but they are still webm. For VP9 and AV1 presets, two pass rendering is recommended, which provides higher quality.
 	\newline Presets:  \textit{VP8, VP9, AV1}
-	\item[MKV] Open, highly configurable and widely documented. It might have seeking problems. It belongs to the Matroska family.
+	\item[MKV] Open, highly configurable and widely documented. It might have seeking problems. It belongs to the Matroska family. For VP9 presets, two pass rendering is recommended, which provides higher quality.
 	\newline Presets:  \textit{Theora, VP8, VP9}
 	\item[AVI] Old and limited format (no multistreams, no subtitles, limited metadata) but with high compatibility.
 	\newline Presets:  \textit{asv, DV, mjpeg, xvid}
