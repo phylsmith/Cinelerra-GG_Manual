@@ -7,50 +7,44 @@
 \index{appimage}
 
 The main way to install \CGG{} is to use the AppImage. This is updated regularly and works for every distro, since it already contains the necessary dependencies. 
-A big advantage of using the AppImage format is that it is only 1/3 the size of the normal install,
-and since each release is named differently, you can keep a number of versions in a directory,
-and when testing from a terminal you just have to type CinGG, then hit tab, and complete it to
-the desired date release.  A small disadvantage of using the AppImage format is that some
-of the options to make minor text type changes are not available and any graphics board
-speedups most likely will not work.
-For 64-bit systems you can choose between an image with up-to-date libraries or one that supports older libraries, which you should use only if the first image gives you problems with unsupported libs. 
+A big advantage of using the AppImage format is that it is only 1/3 the size of the normal install, and since each release is named differently, you can keep a number of versions in a directory, and when testing from a terminal you just have to type CinGG, then hit tab, and complete it to the desired date release.  A small disadvantage of using the AppImage format is that some of the options to make minor text type changes are not available and any graphics board speedups most likely will not work.
 
-There is also a 32-bit older distro available that has \textit{i686} as part of the filename that currently works on older distros but may not work on the newest distros
-(most of the popular Linux distributions such as Arch, Ubuntu, and Fedora have dropped support for this older architecture). In any case, if you are using a 32-bit Linux distro, you should compile your sources from git or use a precompiled binary\protect\footnote{Remember that a 32-bit distro does not address more than 4GB of memory, so you may have stability and performance problems with large, high-resolution mediafiles.}. And there is a 8/10/12 bit newer distro that handles 8 or 10 or 12 bits that has \textit{multibit} as part of the filename.  Installing the appimage is simple:
+For 64-bit systems you can choose between an image with up-to-date libraries or one that supports older libraries (named \textit{older-distro}), which you should use only if the first image gives you problems with unsupported libs.  
 
-Download the file from:
+There are also 32-bit distros available that have \textit{i386} as part of the filename that currently works on older distros but may not work on the newest distros
+(most of the popular Linux distributions such as Arch, Ubuntu, and Fedora have dropped support for this older architecture). In any case, if you are using a 32-bit Linux distro, you might want to compile your sources from git or use a precompiled binary\protect\footnote{Remember that a 32-bit distro does not address more than 4GB of memory, so you may have stability and performance problems with large, high-resolution mediafiles.}.
+
+Installing the appimage is simple, download the file from:
 
 \url{https://cinelerra-gg.org/download/images/}
 
-Some example file names are as follows - where 8 digits represent yyyymmdd:
+Some example file names are as follows - where 8 digits represent yyyymmdd and i386 are 32-bit:
 
 \begin{lstlisting}[style=sh]
-	CinGG-20230131-x86_64.AppImage
+	CinGG-20240630-x86_64.AppImage
 	  (currently based on Fedora 32, linux kernel 5.8.15, libc version 2.31)
-	CinGG-20230131-x86_64-older-distros.AppImage
+	CinGG-20240630-x86_64-older-distros.AppImage
 	  (currently based on Ubuntu 16.04, libc version 2.23)
-	CinGG-20230131-i686.AppImage
-	  (currently based on Debian 9, linux kernel 4.9, use "newer" for Debian 11.0)
-	CinGG-20230131-i686-newer-distros.AppImage
-	  (currently based on Debian 11, linux kernel 5.10)
-	CinGG-20230131-x86_64-multibit.AppImage
-	  (currently based on Fedora 32, libc version 2.31)
-	CinGG-20230131-x86_64-older-distros-multibit.AppImage
+	CinGG-20240630-x86_64-older-distros-multibit.AppImage
 	  (currently based on Fedora 29 - runs on RHEL8 - linux kernel 4.19.9, libc version 2.28)
-	CinGG-20230930-alternative_shortcuts.AppImage
+	CinGG-20240630-alternative_shortcuts.AppImage
 	  (currently based on Ubuntu 16.04, libc version 2.23)
+	CinGG-20240630-i386.AppImage
+	  (currently based on Debian 9, linux kernel 4.9, use "newer" for Debian 11.0)
+	CinGG-20240630-i386-newer-distros.AppImage
+	  (currently based on Debian 11, linux kernel 5.10)
 \end{lstlisting}
 
 Make the file executable with the proper execute permissions either from the GUI of the Desktop Environment used (link to the file) or from a terminal window.  Make sure you are already in the directory containing the appimage:
 
 \begin{lstlisting}[style=sh]
-	$ chmod u+x CinGG-yyyymmdd.AppImage
+	\$ chmod u+x CinGG-yyyymmdd.AppImage
 \end{lstlisting}
 
 Finally start the program from a window in the directory where the image is stored:
 
 \begin{lstlisting}[style=sh]
-	$ ./CinGG-yyyymmdd.AppImpage
+	\$ ./CinGG-yyyymmdd.AppImpage
 \end{lstlisting}
 
 or create a convenient desktop icon with a link to the run action, or do a \textit{Desktop Integration} manually or with external programs.  There is a 
@@ -74,7 +68,7 @@ In addition, if you are using the OpenGL video driver, you will need to install 
 drivers for your Operating System graphics board because libGLU.so and other OpenGL libraries are
 not included in the AppImage.
 
-Using AppImage means you can't have the installation folder and work on the files. To unpack the AppImage and get its structure in folders and files see \nameref{sub:managing_appimage} To create, edit and manage appimages see \nameref{sub:built_appimage_scratch}.
+Using AppImage means you do not have the installation folder and work on the files. To unpack the AppImage and get its structure in folders and files see \nameref{sub:managing_appimage} To create, edit and manage appimages see \nameref{sub:built_appimage_scratch}.
 
 \subsection{AppImage with Standard Shortcuts}
 \label{sec:appimage_standard_shortcuts}
@@ -244,7 +238,7 @@ To do a system build \index{build} , you should read the file
 \begin{lstlisting}[style=sh]
 # This is where you need the 6.0GB of disk space:
 cd /<build_path>/
-git clone --depth 1 "git://git.cinelerra-gg.org/goodguy/cinelerra.git" cinelerra5
+git clone --depth 1 git://git.cinelerra-gg.org/goodguy/cinelerra.git cinelerra5
 # Change to the cloned directory:
 cd cinelerra5/cinelerra-5.1
 \end{lstlisting}
@@ -261,6 +255,8 @@ cd cinelerra5/cinelerra-5.1
 make 2>&1 | tee log        # make and log the build
 \end{lstlisting}
 
+Where <os> represents the Operating System supported by \CGG{}, such
+as centos, fedora, suse, ubuntu, mint, or debian.
 \texttt{bld\_prepare.sh} works for Arch and Gentoo with some additional information. For Arch linux, a README file containing many more dependencies is maintained. For Gentoo, a README file lists other dependencies that have to be installed manually.
 \begin{list}{}{}
   \item \href{https://cinelerra-gg.org/download/README.arch}{https://cinelerra-gg.org/download/README.arch}
@@ -285,8 +281,6 @@ grep "\*\*\*.*error" -ai log
 \begin{lstlisting}[style=sh]
 make install
 \end{lstlisting}
-Where <os> represents the Operating System supported by \CGG{}, such
-as centos, fedora, suse, ubuntu, mint, or debian.
 The ``with-single-user'' parameter makes it so.
 % Make and log build (
 Check for errors before proceeding.
@@ -317,7 +311,7 @@ the top level after you get the source.
 \begin{lstlisting}[style=sh]
 # This is where you need the 6GB of disk space
 cd /<build_path>/
-git clone --depth 1 "git://git.cinelerra-gg.org/goodguy/cinelerra.git" cinelerra5
+git clone --depth 1 git://git.cinelerra-gg.org/goodguy/cinelerra.git cinelerra5
 # Toplevel directory:
 cd cinelerra5/cinelerra-5.1
 \end{lstlisting}
@@ -366,13 +360,34 @@ the \texttt{Exec=cin} line to be
 A working example of how to build in Arch as a normal user:
 
 \begin{lstlisting}[style=sh]
-$ git clone --depth 1 "git://git.cinelerra-gg.org/goodguy/cinelerra.git" cinelerra5
-$ cd /home/USER/cinelerra5/cinelerra-5.1
-$ ./autogen.sh
-$ ./configure --with-single-user --with-booby
-$ make 2>&1 | tee /tmp/cin5.log &&  make install
-$ mv Makefile Makefile.cfg
-$ cp Makefile.devel Makefile
+\$ git clone --depth 1 git://git.cinelerra-gg.org/goodguy/cinelerra.git cinelerra5
+\$ cd /home/USER/cinelerra5/cinelerra-5.1
+\$ ./autogen.sh
+\$ ./configure --with-single-user --with-booby
+\$ make 2>&1 | tee /tmp/cin5.log &&  make install
+\$ mv Makefile Makefile.cfg
+\$ cp Makefile.devel Makefile
+\end{lstlisting}
+
+\subsection{8-bit build for x265 encoding}%
+\label{sub:8_bit_build}
+
+The standard versions of AppImage, the pre-compiled binary and any build you do yourself, is the \textit{multibit} version by default, which allows rendering of the x265 codec at all supported bit-depths. If instead you prefer to compile the 8-bit only version, there is the option to do so. The 8-bit version does not have 10/12-bit encoding of x265; the 8-bit version works on 8-bit bytes which is the standard word size for computers, while the multibit version has to use 2 words to contain all 10/12 bits so you might expect rendering to be slower. Various tests show that there is little or no difference in performance between the two versions, especially on modern systems, so the standard multibit version is the recommended one. If you have a need to compile the 8-bit version first perform the following steps:
+
+\begin{enumerate}
+\item Move to the thirdparty directory: cd /path\_to/cinelerra-5.1/thirdparty 
+\item Edit the file "Makefile" by changing these 3 lines to switch the \# comment character like this:\\
+  \begin{tabular}{ll}
+	\#x265.cfg\_vars?=chmod +x ./configure; chmod +x ./multilib.sh;\\
+	x265.cfg\_vars?=\$(call cmake\_config,source)\\
+	x265.cfg\_params?= -DENABLE\_SHARED=no -DENABLE\_CLI=no\\
+  \end{tabular}
+\item Then delete or rename the 3 patch files in thirdparty/src with names of x265-xxxxx.patchx.
+\end{enumerate}
+
+Using the 8-bit version will result in an error if you use the Render formats \textit{h265-10bit} and \textit{h265-12bit}.  Error message on the startup window is something like this:
+\begin{lstlisting}[style=sh]
+[libx265 @ 0x7fa00e643880] Specified pixel format yuv422p1xle is not supported by the libx265 encoder.
 \end{lstlisting}
 
 \subsection{Notable Options and Caveats}%
@@ -617,7 +632,7 @@ because this will clone faster and is smaller, but has no history.
 
 \begin{lstlisting}[style=sh]
 cd /<repo\_path>/
-git clone "git://git.cinelerra-gg.org/goodguy/cinelerra" cin5
+git clone git://git.cinelerra-gg.org/goodguy/cinelerra cin5
 
 Cloning into "cin5"...
 remote: Counting objects: 20032, done.
@@ -644,7 +659,7 @@ git pull
 Some other commands that are useful.
 
 \begin{lstlisting}[style=sh]
-git clone "git://git.cinelerra-gg.org/goodguy/cinelerra.git" cin5
+git clone git://git.cinelerra-gg.org/goodguy/cinelerra.git cin5
 git pull         # pull remote changes to the local version
 git status       # shows changed files
 git clean -i     # interactive clean, use answer 1 to "clean"
@@ -732,7 +747,7 @@ keep it.
 
 \begin{lstlisting}[style=sh]
 cd /<repo_path>/
-git clone --depth 1 "git://git.cinelerra-gg.org/goodguy/cinelerra.git" cinelerra5 
+git clone --depth 1 git://git.cinelerra-gg.org/goodguy/cinelerra.git cinelerra5 
 cp -a /<repo_path>/cinelerra-5.1 /tmp/
 cd /tmp/cinelerra-5.1
 ./bld.sh
@@ -814,7 +829,7 @@ The steps are as follows:
 	\item Download the manual in LaTeX:
 
 \begin{lstlisting}[style=sh]
-git clone "git://git.cinelerra-gg.org/goodguy/cin-manual-latex.git" master
+git clone git://git.cinelerra-gg.org/goodguy/cin-manual-latex.git master
 \end{lstlisting}
 
 	\item Included in the download is the \texttt{translate\_manual} script. After modifying this file to have execute permission, run this script from a terminal window in the \textit{master} directory where it was downloaded (be aware that this script includes several \textit{rm} commands):
@@ -1034,7 +1049,7 @@ make install
 \item Download cinelerra-gg:
 \begin{lstlisting}[style=sh]
 cd /build_path/
-git clone "git://git.cinelerra-gg.org/goodguy/cinelerra.git"
+git clone git://git.cinelerra-gg.org/goodguy/cinelerra.git
 cd cinelerra-gg/cinelerra-5.1
 \end{lstlisting}
 \item Apply cygwin patch:
@@ -1160,7 +1175,10 @@ Current build hosts are \textbf{Debian 12}, \textbf{Debian 11},
 This build farm creates packages for the latest current versions of these
 distros with the potential for additional distros to be added in the future. 
 In addition, packages for some previously built dates will still be available
-in case you want to revert to a specific package date.
+in case you want to revert to a specific package date.  You might have to 
+install libsuil-0-0 (library for loading and wrapping LV2 plugin UIs) but
+you will be informed by the installation process if so.
+
 
 \subsection{AV Linux}
 \label{sec:AV_Linux}
@@ -1204,49 +1222,3 @@ and the manual are in the direcotry at
 \href{http://repo.buster.elive.elivecd.org/pool/multimedia/c/}{Buster version 10} - just download 
 the .deb files inside that directory and install via “dpkg -i “.
 
-\section{Cinx and a “Bit” of Confusion}%
-\label{sec:cinx_and_a_bit_of_confusion}
-\index{cinx}
-
-Cinx is the exact same program as Cin.  The X (x) represents the
-roman numeral 10 for 10-bit as opposed to 8-bit standard.  The
-third-party library used for x265 must be specially compiled with
-\texttt{--bit-depth=10} in order to produce 10-bit rendered
-output.  A cinx version can be built for most other distros if 
-rendering at 10-bit is desirable instead of 8-bit.
-%
-This build will not be able to output 8-bit depth which means you
-have to retain the Cin version also.
-%
-Whatever build ffmpeg is linked to will determine what bit depth
-it can output.  This is why there have to be separate builds.  If
-you install both packages, Cin and CinX, you may get \textit{file
-  conflicts of same file name} --- just continue.
-
-Keep in mind that the regular 8-bit version works on 8-bit bytes
---- the standard word size for computers, but the 10-bit version
-has to use 2 words to contain all 10 bits so you can expect
-rendering to be as much as twice as slow.
-%
-There is also a 12-bit version for consideration but currently the
-results are simply the same as 10-bit with padding to make 12-bit
-so it is of no value.
-
-\section{Multibit build for x265-8/10/12-bit}%
-\label{sec:multibit_build}
-\index{multibit}
-
-To build a version that can handle 8 bit, or 10 bit, or 12 bit videos, a patch is provided in the \texttt{thirdparty} subdirectory that needs to be applied to do so.  Be aware that the compile may take more time and seems to be about twice as long. To apply the required patch:
-
-\begin{lstlisting}[style=sh]
-cd /path/to/cinelerra-5.1/thirdparty
-patch < compile_multibit_X265.txt
-mv x265_3.5.patch* src/.
-\end{lstlisting}
-Render formats \textit{h265-10bit} and \textit{h265-12bit} have been provided and will
-be operational after the applied patch is compiled in.
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../CinelerraGG_Manual"
-%%% End:
