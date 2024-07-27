@@ -52,6 +52,22 @@ the plugin in the same track without an alpha channel but not if there is no cli
 And the Transition effect works fine when there is a transition between two clips/images without
 an alpha channel.
 
+\textit{Detailed explanation:}\protect\footnote{Thanks to sge}
+
+If we apply the \texttt{Dissolve} transition, what should actually happen mathematically? For channels r, g, b the contribution of the 1-st clip should gradually fall from 100\% to 0\%, and the contribution of the 2-nd rise from 0\% to 100\%. If we have no alpha channel, this is quite simple. If we have, perhaps the alpha channel should gradually change from the a-value of the 1-st clip $\alpha_{1}$ to the $\alpha$-value of the second ($\alpha_{2}$). For example, if the 1-st clip is a PNG image with opaque letter over some considered pixel, and the 2-nd clip is a PNG with a completely transparent background, the $\alpha$-value should gradually fall from 100\% to 0\% for that pixel.
+
+We can easily look with our eyes which color has an area with complete opacity ($\alpha=100\%$). r=g=b=100\% is white, 0\% is black, 100/0/0\% is red, etc. But what color is hindered under complete transparency? When $\alpha=0\%$, we will always see black. But actually it could be red, or even bright white, but completely masked out by 0\% alpha.
+
+Now let's apply our mathematics with channels. Somewhere in the middle of the Dissolve transition we should get about 50\% of alpha, if $\alpha_{1}=100\%$ and $\alpha_{2}=0\%$. But what for rgb?
+
+If $rgb_{1}$ was 100/100/100\% (white), and $rgb_{2}$ was also 100/100/100\% (fully transparent white), then we will have rgb=100/100/100\%, $\alpha=50\%$. This will look as medium grey, 50\% of white.
+
+If $rgb_{1}$ was 100/100/100\% (white), but $rgb_{2}$ was 0/0/0\% (fully transparent black), then we will have rgb=50/50/50\%, $\alpha=50\%$. This will look as rather dark grey, only 25\% of white.
+
+If $rgb_{1}$ was 100/100/100\% (white), but $rgb_{2}$ was 100/0/0\% (fully transparent red, but visually still looking as black on black background), then we will have rgb=100/50/50\%, $\alpha=50\%$. This will look not as grey anymore, but a bit reddish.
+
+So, the 0\% alpha channel can hinder any actual color of the masked picture, which can become visible if alpha rises above 0\% due to applying some transition of effect.
+
 \paragraph{Do not change Color Model Format in session just before loading backup.}
 Under certain circumstance if you change the Color Model in Settings->Format, quit the session,
 and then "Load backup" when you start again, it will crash.  Workaround is to avoid this scenario.
