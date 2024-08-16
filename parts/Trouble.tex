@@ -348,7 +348,7 @@ There can be various reasons that \CGG{} does not come up. Some of the recent re
 You can usually install the required library to fix the problem. A temporary fix may be to create a symlink but this must be done with extreme caution as it may create an unstable condition. A better workaround is to use a tarball to install the software instead of the package build until the libraries are in sync between the build and your Operating System install.
 \bigskip
 
-\textit{ Loading a very large number of media files, for example 500 clips, crashes \CGG{} with messages similar to the following that are displayed in the window from where you started \CGG{}:}
+\textit{Loading a very large number of media files, for example 500 clips, crashes \CGG{} with messages similar to the following that are displayed in the window from where you started \CGG{}:}
 
 \begin{lstlisting}[numbers=none,xleftmargin=10mm]
 
@@ -365,7 +365,7 @@ This usually indicates that you are out of Operating System file descriptors.  Y
 
 \bigskip
 
-\textit{Using a non-supported locale could cause a failure in starting \CGG{} with the following error.}
+\textit{Using a non-supported locale could cause a failure in starting \CGG{} with the following error:}
 
 \begin{lstlisting}[numbers=none,xleftmargin=10mm]
 
@@ -409,6 +409,11 @@ main000();
 \end{lstlisting}
 
 In the mask window, check the box \textit{Disable OpenGL masking} to use software instead of OpenGL.
+
+\bigskip
+\textit{Stack smashing detected error message.}
+
+In at least one scenario, the fix for this is to go to Settings -> Performance and set "Use HW Device" to "none".
 
 \section{Menu Bar Shell Commands}%
 \label{sec:menu_bar_shell_commands}
