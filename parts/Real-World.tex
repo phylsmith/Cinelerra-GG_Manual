@@ -328,3 +328,40 @@ encoding. And setting buffered frames in the device to absurdly high value like 
 also not working for screencapture driver and short recordings like 20-25 seconds long.
 In conclusion, no amount of buffering will save you if you are chronically late.
 \end{itemize}
+
+\section{Workflow for render yuvj (color range: jpeg) to yuv (color range:mpeg)}%
+\label{sec: yuvj_to_yuv}
+
+For historical reasons, almost every piece of video software uses \textit{limited} (mpeg or TV) range. But sometimes you have to deal with files encoded utilizing the \textit{full} (jpeg) range. For example, some video cameras encode full range files. The simplest way to deal with them is just to re-encode in limited range\protect\footnote{credit to Tarantas.}:
+
+\qquad \texttt{ffmpeg -i input.mp4 -c:v libx264 -preset fast -crf 19 \\
+-c:a copy -pix\_fmt yuv420p output.mp4}
+
+However, this is not an option for you if you're either a perfectionist or trying to fight color banding. Color banding is a video artifact that could be visible in smooth areas of the video.
+
+Here's an example: {\small \url{https://youtu.be/KL8CIZej19o}}
+
+If you don't see the ugly background, then you don't need to worry about the whole issue. Color banding is different from compression artifacts. You can't fix it just by increasing the bitrate of your video. Color banding comes from color correction performed too much or in inaccurate way. And it accumulates, so if you have it, then you should get rid of dynamic range compression every step of the way.
+
+\CGG{} has a native full color range support, and you can enable it via:
+
+\texttt{Settings $\rightarrow$ Preferences $\rightarrow$ Appearance $\rightarrow$ YUV color range: JPEG}
+
+Also see: \nameref{sub:color_section} and \nameref{sec:color_space_range_playback}.
+
+Note how everything will lose contrast in the Compositor window and become grey-ish. But, in this mode, \CGG{} will also render full range video files. There are two reasons why it could be a bad thing:
+
+\begin{itemize}
+	\item Some video players don't understand what full range is and will play these resulting videos with the increased contrast.
+	\item Some image processing software (like YouTube) will re-encode full	range videos into limited range by compressing the dynamic range and making the color banding issue even worse.
+\end{itemize}
+
+That's why you should make a couple of corrections:
+
+\begin{itemize}
+	\item First, after your project is done, apply \textit{F\_colorspace} filter at the end
+	(bottom) of the stack with these options: \texttt{range: 1} and \texttt{irange: 2}.
+	\item Second, in \texttt{File $\rightarrow$ Render $\rightarrow$ Video wrench}, add this line at the end of the big textfield: \texttt{color\_range=mpeg}
+\end{itemize}
+
+Since you're already fighting color banding, you should choose 32-bit colors via \texttt{Settings $\rightarrow$ Format $\rightarrow$ Color model}, the \texttt{RGB(A)-FLOAT option}. Note this could slow down your playback and rendering.
