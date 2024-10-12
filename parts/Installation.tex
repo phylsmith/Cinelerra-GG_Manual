@@ -585,8 +585,16 @@ built because \texttt{a52dec} is built, so if your system has
 \texttt{a52dec}, set \texttt{a52dec} to auto and see if that
 problem is solved by retrying the build with:
 \begin{lstlisting}[style=sh]
-./confgure --with-single-user -enable-a52dec=auto .
+./confgure --with-single-user -enable-a52dec=auto
 \end{lstlisting}
+
+If you have a problem with libdpx (a wrapper of VPixx low-level library for Python), resolve that by changing the configure line as shown: 
+\begin{lstlisting}[style=sh]
+./confgure --with-single-user -without-libdpx
+\end{lstlisting}
+
+If you have some of your thirdparty libraries installed in non-standard
+locations or if you want to use a specific version, consider setting CFLAGS=-I/<path> to pass that location to the compiler so it knows where to find it.
 
 With persistence, you can get results, but it may take several tries
 to stabilize the build.  If you need help, email the \texttt{log}
