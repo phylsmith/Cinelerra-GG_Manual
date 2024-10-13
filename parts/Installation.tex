@@ -588,9 +588,9 @@ problem is solved by retrying the build with:
 ./confgure --with-single-user -enable-a52dec=auto
 \end{lstlisting}
 
-If you have a problem with libdpx (a wrapper of VPixx low-level library for Python), resolve that by changing the configure line as shown: 
+If you have a problem with libdpx (a wrapper of VPixx low-level library for Python), resolve that by changing the configure line as shown to build without it: 
 \begin{lstlisting}[style=sh]
-./confgure --with-single-user -without-libdpx
+./confgure --with-single-user --without-libdpx
 \end{lstlisting}
 
 If you have some of your thirdparty libraries installed in non-standard
