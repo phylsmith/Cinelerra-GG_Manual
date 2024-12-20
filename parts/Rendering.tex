@@ -72,8 +72,14 @@ Use the \textit{File} pulldown and select Render to start the render dialog
   video the compression parameters will be blank.  If \textit{Render
     audio tracks} or \textit{Render video tracks} is selected and the
   file format does not support it, trying to render will result in an
-  error message. More details in the section:
-  \nameref{sub:extra_cin_option_ffmpeg}
+  error message. There are several hardware related formats that will
+  only work on specific computers that support that hardware/software
+  implementation and will result in an error message if not available.
+  Pick a different one.  This is especially relevant if using an AppImage
+  which is generated on a computer with few extra hardware implemented
+  features.
+More details on differing parameters of the format in the section:
+  \nameref{sub:extra_cin_option_ffmpeg}.
 \item[Create new file at each label] the option causes a new file to
   be created when every label in the timeline is encountered – a
   separate file for each.  This is useful for dividing long audio
