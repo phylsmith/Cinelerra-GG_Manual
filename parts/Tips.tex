@@ -368,10 +368,11 @@ using \texttt{ydiff} as described in the Appendix (\ref{sec:ydiff_check_results}
 To use hardware acceleration for rendering (that is, encoding) you do not have to set a preference or an environment variable, as was required for decoding.  To use this feature you use an ffmpeg render options file which specifies the nvenc codec, either \texttt{h264\_nvenc.mp4}, \texttt{h265\_nvenc.mp4}, or \texttt{h264\_nvenc.qt}.  There are several requirements in order for this to work on your computer as listed here:
 
 \begin{enumerate}
-	\item Nvidia graphics board at or above a certain hardware level.  For h265, newer boards are required.
+	\item Nvidia graphics board at or above a certain hardware level.  For h265, newer boards are required.  Check this support matrix to determine if your board will work:
+        \small \url{https://developer.nvidia.com/video-encode-and-decode-gpu-support-matrix-new}
 	\item Software drivers for your graphics board must be installed on your computer.
-	\item The driver must support at least API version 9.0 -- minimum required Nvidia driver for nvenc is
-	390.25 or newer.  You will see error messages on the startup window if you are on lower versions.
+	\item The driver must support at least API version 12.0.16 -- minimum required Nvidia driver for nvenc is
+	550.54.14.  You will see error messages on the startup window if you are on lower versions.
 \end{enumerate}
 
 If you try to render using\texttt{ h264/h265\_nvenc} formats and do not have an Nvidia graphics card or this feature was not built in, you will see in the window from where you started \CGG{}, the error message: \qquad \textit{Cannot load libcuda.so.1}
