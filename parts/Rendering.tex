@@ -1236,7 +1236,9 @@ Below we describe the Performance tab for configuring a render farm
   job into that specified number of tasks.  Each background job is
   assigned a timeline segment to process.  The render farm software
   tries to process all of the rendering in parallel so that several
-  computers can be used to render the results.
+  computers can be used to render the results.  You should adjust
+  this for each different video if your work varies considerably in
+  time so that each task time is not too small.
 
   To start, if you have computers of similar speed, a good number
   for \textit{Total jobs to create} is the number of computers
@@ -1594,6 +1596,9 @@ list of items to check.
   \textit{reset rates} to start over for new framerates.
 \item If jobs are split in a key section on the timeline, you may
   wish to \textit{use labels} to prevent this.
+\item Adjust the \textit{Total jobs to create} for different videos that
+  are considerably different in size.  You should not create so 
+  many jobs that each one is very small.
 \item For testing purposes, you may want to start a client in the
   foreground using \texttt{-f} instead of \texttt{-d}.
 \item If one of the client computers is unavailable, check to see if
