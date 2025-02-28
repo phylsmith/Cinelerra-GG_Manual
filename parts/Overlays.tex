@@ -227,37 +227,63 @@ After that the Porter Duff overlays are shown using the same source videos but
 with each of the Source videos offset in a different direction so that the
 generated output is more obvious.
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=1.0\linewidth]{normal2.png}
     \caption{Normal and Arithmetic overlays}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=1.0\linewidth]{logical2.png}
     \caption{Logical overlays}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=1.0\linewidth]{graphic-art2.png}
     \caption{Graphic Art overlays}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=1.0\linewidth]{porter-duff2.png}
     \caption{Offset source videos to illustrate Porter Duff overlays}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=1.0\linewidth]{porter-duff3.png}
     \caption{Porter Duff overlays}
 \end{figure}
 
+\section{Problems with transparencies}%
+\label{sec:transparencies}
 
+Often in applying overlays, or some other type of blend, we get unexpected results that can look wrong. Sometimes the cause may be the different formula used by CGG compared to those in Gimp or other software. Other times they are a result of setup or order as listed next.
+Keep in mind that blends can be applied not only from the Patchbay but also as an Overlay plugin (see \nameref{sub:overlay}) and the \textit{Blend Algebra} plugin see \nameref{sub:blend_algebra}.
+Here are some factors that can lead to unexpected results:
+
+\begin{enumerate}
+	\item The colors of the 2 tracks that will be blended; we often consider only these channels to guess the final result.
+	\item The Alpha channel of the 2 tracks that can interact with each other in ways that are intuitively (but not mathematically) unexpected.
+	\item The choice of Source track and Destination track (\textit{top} or \textit{bottom}).
+	\item Overlays effect generally depends on the \textit{colorspace} of the project - YUV can differ from RGB. With the \textit{Blend Algebra} plugin this dependency is addressed; the necessary colorspace conversion can be done automatically.
+	\item Overlays can depend on implicit clipping. In \texttt{RGBA-FLOAT} no clipping is done; in \texttt{RGBA8888} clipping to 8-bit unsigned cannot be avoided per definition. The \textit{Blend Algebra} plugin addresses this dependency also, clipping for float colorspace can be switched on explicitly, and then the results for float and RGBA8888 should be identical.
+	\item Unclipped overlays can be displayed differently depending on the graphic driver (\textit{X11}, \textit{X11-Xv}, \textit{X11-OpenGL}, etc.). The OpenGL driver could be more robust in these cases; it runs perhaps under control of some {\CGG} shader and seems to clip the bounds correctly. However, all rendering is done in software without the use of OpenGL so be sure to check results without OpenGL.
+	\item The presence of a third black background track, (or even the color of the \texttt{Composer Background Color}, which in {\CGG} is black by default but whose color can be varied manually) which can interfere with viewing the blend in the Compositor and show unexpected results (see \href{https://www.cinelerra-gg.org/bugtracker/view.php?id=559}{MantisBT \#559}).
+	\item If the footage material in a track has transparency by itself, it might be modified by overlay formula and develop some color hidden by transparency before overlay was applied.
+	\item Overlays can be applied at two places: via the \textit{Overlay} plugin or the \textit{Blend Algebra} plugin
+	in which sequence in the video processing pipeline plugins are processed, is defined; and in the \texttt{Patchbay} in which sequence in the video processing pipeline plugins are processed, is not defined.
+	\item There may be \textit{masks}. The mask can be applied either after plugins, or before them. Results of the \textit{Overlay} plugin depend on it.
+	\item There is \texttt{fader} control. Probably, fader is applied after all plugins and overlays, but this order has not been verified.
+	\item There are two buttons in the patchbay, \texttt{Play track} (can be switched off) and \texttt{Don't send to output} (can be switched on). In both cases video from the affected track disappears, but the background left is different in both cases.
+	\item Effects from some other plugins can have transparent parts (\textit{Titler}, for example).
+\end{enumerate}
+
+Ultimately, if we get a result that looks wrong to us, we need to look at the formula for that blend and calculate our mathematical result. Then compare our calculation with the result we see on the screen. 
+In principle, you could attach \textit{Blend Algebra} in addition to \textit{Overlay} plugin, switch one of them on, another off, change the formula in \textit{Blend Algebra} and see how the modifications affect the result, and even print and analyze the intermediate color values. This can be most helpful if you use some specially drawn regular color patterns instead of your working footage.
+Another possibility is to attach the \textit{Blend Program} plugin which modifies any given tracks directly.
 
 %%% Local Variables:
 %%% mode: latex
