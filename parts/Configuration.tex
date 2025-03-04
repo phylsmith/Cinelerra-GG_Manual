@@ -419,19 +419,24 @@ This section gives you information about the \CGG{} program and version you are 
 
 Environment variables are global variables in the shell which all applications can read. They are set with a command like \texttt{set VARIABLE=value} or \texttt{export VARIABLE=value}. Environment variables can be viewed with a command like \texttt{env}.   The values set can be removed with \texttt{unset VARIABLE}.
 
-The following exported variables can be set to customize your environment. \\ The \texttt{CIN\_CONFIG} variable could be extremely useful for testing purposes or for multiple users sharing the same home directory who would like different default preference settings.
+The following exported variables can be set to customize your environment. The \texttt{CIN\_CONFIG} variable could be extremely useful for testing purposes or for multiple users sharing the same home directory who would like different default preference settings.
 
 \begin{description}
-    \item[{\small CIN\_BROWSER}] name of browser to use by \textit{Shell Cmds} options
-    \item[{\small CIN\_CONFIG}] configuration data; defaults to \texttt{\$HOME/.bcast5}
-    \item[{\small CIN\_DAT}] location of data files, such as documentation, models, tip of the day
+    \item[{\small CIN\_BROWSER}] name of browser to use by \textit{Shell Cmds} options.
+    \item[{\small CIN\_CC}] currently used by \textit{Blend Algebra/BlendProgram} plugins' C compiler executablewith default of gcc; may be used in the future for other purposes.
+    \item[{\small CIN\_CONFIG}] configuration data; defaults to \texttt{\$HOME/.bcast5}.
+    \item[{\small CIN\_DAT}] location of data files, such as documentation, models, tip of the day; also for \textit{Blend Algebra/Blend Program} plugins' system library with scripts, headers, and
+functions that are distributed with Cinelerra reside in subdirectory \texttt{\$CIN\_DAT/dlfcn}.
+
+    \item[{\small CIN\_EDITOR}] \textit{BlendAlgebra/BlendProgram} plugins' C text editor with default of emacs; may be used in the future for other purposes.
     \item[{\small CIN\_LADSPA}] LADSPA directory path; use colons to separate multiple paths; this is convenient to define an alternate directory if you share the same executable directory among computers via NFS.
-    \item[{\small CIN\_LIB}] location of library programs, such as bdwrite
-    \item[{\small CIN\_LOCALE}] locale text domain path to use for translating text
-    \item[{\small CIN\_PLUGIN}] plugin directory path
-    \item[{\small CIN\_RENDER}] complete filename with path, that was used for \textit{select file to render} to in the current session’s last successful Render job; this is used in the \texttt{RenderMux} defined \textit{Shell Cmds} and is available for any user-defined script inside \CGG{}
-    \item[{\small CIN\_PKG}] used to set your text domain, that is the locale path pointing to the cin.mo language file
-    \item[{\small CIN\_XSYNCH}] (for Developers only) set to 1 helps debugging for windows primitives to execute immediately and not be buffered up so you can see what is happening
+    \item[{\small CIN\_LIB}] location of library programs, such as bdwrite.
+    \item[{\small CIN\_LOCALE}] locale text domain path to use for translating text.
+    \item[{\small CIN\_PLUGIN}] plugin directory path.
+    \item[{\small CIN\_RENDER}] complete filename with path, that was used for \textit{select file to render} to in the current session’s last successful Render job; this is used in the \texttt{RenderMux} defined \textit{Shell Cmds} and is available for any user-defined script inside \CGG{}.
+    \item[{\small CIN\_PKG}] used to set your text domain, that is the locale path pointing to the cin.mo language file.
+    \item[{\small CIN\_USERLIB}] for use by \textit{BlendAlgebra/BlendProgram} plugins for user's library,  default is \texttt{\$HOME/.bcast5lib}).  User's functions reside in subdirectory \texttt{\$CIN\_USERLIB/dlfcn}; may be used in the future for other purposes.
+    \item[{\small CIN\_XSYNCH}] (for Developers only) set to 1 helps debugging for windows primitives to execute immediately and not be buffered up so you can see what is happening.
 \end{description}
 
 One example:
