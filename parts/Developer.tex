@@ -1055,3 +1055,73 @@ upgraded containing a newer, not 100\% compatible version of ContextManual.pl sc
 structure of the HTML manual itself, the new system-wide version of the script will be copied into .bcast5
 again to ensure context help functionality. The older version of the script will be backed up (with the .bak
 suffix) as a reference of the modifications done by the user.
+
+\section{Unique Blend plugins workflow}
+\label{sec:ba_bp_workflow}
+
+The uniqueness of the Blend Algebra/Blend Program plugins, different then most of the other plugins, provides a universal tool for creating new effects and may be handy in unexpected cases. It allows the programmer to more quickly test different combinations without spending time to restart \CGG{}, recompile it, reload your project, reattach plugins, and so on.
+Because of this uniqueness, the Blend Algebra and Blend Program plugins workflow is documented here to explain how they work. Additional helpful information for developers can be found in the section on the Blend Algebra/Blend Program plugins themselves at \nameref{sub:blend_algebra}. You will most likely need to read parts to get a better understanding.
+
+\subsection{Preparation phase}%
+\label{preparatio_phase}
+
+As in any realtime plugin, the \texttt{process\_buffer()} method in Blend Algebra/Blend Program gets a set of frames from the tracks the plugin is attached to. Then the following events take place. It is checked if the configuration (the parameters) got changed. There is one parameter which requires special treatment, the \textit{user function name}.
+
+In order to prevent resource consuming recompilation of the functions on each new frame, the plugin maintains the successfully compiled and attached functions in cache. If at some keyframe the function name gets changed, the plugin searches if this function is already known and cached. In addition to important function related objects such as entry points, there is a timestamp representing  when this function was last checked to be up to date.
+
+If the current function name is empty, it means a function is not used. Nothing else has to be done; all tracks are fetched and passed along in the processing pipeline unchanged. If the function is not empty and seen for the first time, or its timestamp is older than the global timestamp, it is checked as follows.
+
+\begin{enumerate}
+\item File lock is placed on the function source file to prevent concurrent modification of object files in case of several simultaneous compilations.
+\item Compilation script \texttt{BlendAlgebraCompile.pl}/\texttt{BlendProgramCompile.pl} is started. The script checks if the resulting shared object file exists and is newer than the source and recompiles it if not.
+\item The plugin checks if the shared object timestamp became newer than the timestamp of this function in cache (if any). If the cached version of the function in memory is up to date, it stays there. If not, the outdated function is detached from the plugin, the updated one is reattached, and its entry points are fetched and put into cache. The function's timestamp in cache is set to the current time since the function has just been checked.
+\end{enumerate}
+
+While recompiling or dynamic linking, various things may go wrong.
+\begin{enumerate}
+\item If in the unlikely scenario where the given function file does not exist, the program does nothing, same as for an empty function. No error message is shown in this case in order to prevent a possible deadlock. 
+\item If recompilation was unsuccessful because of a syntax error, the error message is shown. More detailed diagnostics from the compiler can be seen in the terminal window in which \CGG{} was started. 
+\item If compilation succeeded, but dynamic linking did not, the error message is shown. In case of any error, the failed function is marked with the current timestamp in cache so that the error messages appear only once before the global timestamp gets updated.
+\end{enumerate}
+
+Updating global timestamp forces all cached functions to be checked for recompilation when first accessed. The global timestamp is updated when the following events occur: changing function name, pressing \texttt{Edit...} or \texttt{Refresh} button, or exiting the \texttt{Attach...} dialog with the \texttt{OK} button.
+
+If the current active function is up to date and attached, the plugin fetches video frames from all of the affected tracks with the important parameters like frame width and height. Then the \texttt{INIT} phase of the function is executed (once for each frame). Several important parameters are requested as defined by the function. They are:
+
+\begin{itemize}
+	\item Working color space needed inside the function. If it is not the same as the color space of the project, then color space conversions have to be done.
+	\item The required number of tracks the function works on. If less than the required number of tracks is available, an error message is shown and the function is not executed.
+	\item Whether the function supports parallelizing or not. If the function does not claim parallelizing support, it will be executed sequentially even if the \textit{PARALLE\_REQUEST} checkbox is ON in the plugin GUI.
+\end{itemize}
+
+\subsection{Processing phase}%
+\label{processing_phase}
+
+After the preparation phase, the processing itself takes place. If running sequentially instead of parallel, the following is done for each frame pixel individually.
+
+For each input track, the corresponding pixel is split into color components according to the actual color space of the project. All color components are converted to float (type of the C language) in the ranges $[0.0 .. 1.0]$ for R, G, B, A, Y or $[-0.5 .. +0.5]$ for U, V. If the project color space has no alpha channel, the alpha component is set to A=1.0.
+
+If the function uses a different color space than the project uses, the required conversions are performed. The key color components (selected in the plugin GUI) are also converted to the function color space in the same manner.
+
+For Blend Algebra, the values for output are preinitialized from the track which the output is to go to. All the other tracks are cleared if the corresponding checkbox in the plugin GUI is checked. For Blend Program, this step is not needed.
+
+\subsection{User function phase}%
+\label{user_function_phase}
+
+The user function is called with the parameters: actual \textit{number of tracks}, \textit{4 arrays for the 4 color components} (dimensions are equal to the number of tracks), \textit{4 key color components}, \textit{current pixel coordinates} (x, y: upper left frame corner is (0,0), lower right is (width-1,height-1)), and \textit{width and height}. In addition for Blend Algebra, there ae \textit{placeholders} for the result.
+
+The user function returns. First of all, the color components of the relevant pixels are clipped to range if the corresponding checkbox in the plugin GUI is on. Relevant for Blend Program are pixels of all the tracks (all tracks can be modified); for Blend Algebra the result only.
+
+After optional clipping, the color components are checked for not being NaNs.
+If so, the pixel is replaced with the substitution color, then backconversion to the project color space is performed.
+
+If the project has no alpha channel, but the function returned something not equal to 1.0, alpha channel is simulated as if an opaque black background were used.
+
+If the project color space is not FLOAT, unconditional clipping followed by 8-bit transformation takes place.
+
+For Blend Algebra, the result is placed in the right output track. For Blend Program, this step is unnecessary since all tracks are modified in place.
+
+Then the loop is repeated for the next pixel in a row, next row in a frame, next frame in the whole sequence, and so on.
+
+If the function is to be run parallelized, the necessary number of threads is created (as defined in \texttt{Settings $\rightarrow$ Preferences $\rightarrow$ Performance; Project SMP cpus}). Running parallel on 1 cpu is not exactly the same as running sequential because an extra processing thread is created, while sequential execution takes place inside the main plugin thread. This could induce some subtle differences if the function uses static variables inside or something else which is thread unsafe.
+
