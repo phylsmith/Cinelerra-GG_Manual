@@ -967,6 +967,8 @@ Automatically scale to a specified size.
 \label{sub:blend_algebra}
 \index{blend algebra}
 
+The Blend Algebra/Blend Program plugins provide the advanced feature of combining and modifying color pixels and transparencies of several tracks according to a mathematic algorithm written entirely by the user in the form of compact and simple piece of code. Such user defined algorithms (blend functions) are compiled, dynamically linked and immediately executed inside \CGG{} on the fly without the need to restart the application, reload the project, reattach plugins, and so on.
+
 The following description is based on the \texttt{~/cinelerra-5.1/doc/README.blendalg} that accompanies the code by the author of both the code and the document.  It is the authoriative documentation; the most detailed/original source and has additional commentary and programming information. If you encounter problems or confusion when using these plugins, always refer directly to that document \href{https://cinelerra-gg.org/download/testing/BlendPluginExamples/README.blendalg}{here}.  If running \CGG{} from an \textit{AppImage}, testing has shown that it should work  as well as if run from a build - just be aware of filename extensions that appear by default in the input field for the funtion name and change them accordingly.
 
 The idea behind these plugins\protect\footnote{credit to Georgy} is that the user can program sufficiently short and simple blending algorithms, called \textit{Functions}, by following detailed instructions with very little programming skills required.
@@ -1329,6 +1331,7 @@ Debugging printout inside the \texttt{PROC} phase, although possible, would seem
 The current implementation should be portable as long as you have a working C compiler such as gcc, the default to compile \CGG{}, or clang which has been known to work; but other compilers may be compatible as well.  Portability to other architectures that are Unix-like and ELF based should work, but not Windows.
 
 NOTE: For developers who want to take advantage of creating a plugin to generate an effect in the same manner as Blend Algebra/Blend Program, please reference \nameref{sec:ba_bp_workflow}. This methodology makes it easier for the programmer to more quickly test different combinations without spending time to restart \CGG{}, recompile it, reload your project, reattach plugins, and so on.
+
 
 \subsection{Blue Banana}%
 \label{sub:blue_banana}

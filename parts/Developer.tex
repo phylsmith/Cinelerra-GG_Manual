@@ -1059,7 +1059,8 @@ suffix) as a reference of the modifications done by the user.
 \section{Unique Blend plugins workflow}
 \label{sec:ba_bp_workflow}
 
-The uniqueness of the Blend Algebra/Blend Program plugins, different then most of the other plugins, provides a universal tool for creating new effects and may be handy in unexpected cases. It allows the programmer to more quickly test different combinations without spending time to restart \CGG{}, recompile it, reload your project, reattach plugins, and so on.
+The uniqueness of the Blend Algebra/Blend Program plugins, different then most of the other plugins, provides a universal tool for creating new effects and may be handy in unexpected cases.
+These 2 plugins provide the advanced feature of combining and modifying color pixels and transparencies of several tracks according to a mathematic algorithm written entirely by the user in the form of compact and simple piece of code. Such user defined algorithms (blend functions) are compiled, dynamically linked and immediately executed inside \CGG{} on the fly without the need to restart the application, reload the project, reattach plugins, and so on.
 Because of this uniqueness, the Blend Algebra and Blend Program plugins workflow is documented here to explain how they work. Additional helpful information for developers can be found in the section on the Blend Algebra/Blend Program plugins themselves at \nameref{sub:blend_algebra}. You will most likely need to read parts to get a better understanding.
 
 \subsection{Preparation phase}%
