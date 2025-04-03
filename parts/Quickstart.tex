@@ -516,6 +516,12 @@ A color space is a subspace of the absolute CIE XYZ color space that includes al
 
 The camera sensors are always RGB and linear. Generally, those values get converted to YUV in the files that are produced, because it is a more efficient format thanks to chroma subsampling, and produces smaller files (even if of lower quality, i.e. you lose part of the colors data). The conversion is nonlinear and so it concerns the "transfer characteristic" or gamma. The encoder gets input YUV and compresses that. It stores the transfer function as metadata if provided.
 
+\subsection{HDR}%
+\label{sub:hdr}
+
+\CGG{} runs internally in 32-bit floating-point and thus can read and process HDR media. However, there are plugins and tools that can introduce clipping that must be taken into account to keep the whole pipeline in HDR. The manual indicates which plugins limit pixel values in the range $(0, 1.0)$. The easiest way to see if a media is HDR is to use the \texttt{eyedroppe}r tool (Get Color) in the Compositor window.
+If we use HDR media and need to do a Tone Mapping to make the pixel values fall within the range $(0, 1.0)$, we can use the \texttt{Blender Program} plugin and, inside it, load the function (found in \texttt{=>Syslib}) \textit{tone\_mapping.bp}. Instructions for using this function can be found \href{https://cinelerra-gg.org/download/testing/BlendPluginExamples/Examples.txt}{here} at example 6.
+
 \subsection{CMS}%
 \label{sub:cms}
 
