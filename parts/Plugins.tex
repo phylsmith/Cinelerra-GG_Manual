@@ -422,10 +422,10 @@ ffmpeg -i /tmp/filename.mpeg -threads 15 -vf format=rgb24,xxxxxxs=threads=8 -aco
 
 This converts the input to rgb before xxxxxx runs, and so it too is slower (because there is more color data). You would ordinarily avoid this conversion by omitting the \texttt{format=rgb24} parameter. An example ffmpeg plugin that could easily take advantage of an auxilliary opts file is \textit{nlmeans}.
 
-\subsection{Pipeline HDR and plugins}%
-\label{sub:pipeline_hdr_plugins}
+\subsection{Floating-point pipeline and plugins}%
+\label{sub:pipeline_fp_plugins}
 
-\CGG{} runs internally in 32-bit floating-point and thus can read and process HDR media. However, there are plugins and tools that can introduce clipping that must be taken into account to keep the whole pipeline in HDR. The limited plugins are: \textit{Blur; Color 3 Way} (partially); \textit{Color Space; Foreground; Histogram} (partially); \textit{Histogram Bezier; Title; Videoscope} (partially).
+\CGG{} runs internally in 32-bit floating-point and thus can read and process values outside the range $(0 - 1.0f)$ (\textit{illegal} values, they need the final \textit{conforming} step to comply with the \textit{legal} values). However, there are plugins and tools that can introduce clipping that must be taken into account to keep the whole pipeline which preserves the original values. The limited plugins are: \textit{Blur; Color 3 Way} (partially); \textit{Color Space; Foreground; Histogram} (partially); \textit{Histogram Bezier; Title; Videoscope} (partially).
 
 \section{Audio Effects - Native}%
 \label{sec:audio_effects_native}
@@ -1548,7 +1548,7 @@ If you are building an alpha selection mask by first intersection and then union
 \label{sub:blur}
 \index{blur}
 
-This is a Gaussian type blur. Other blur plugins -- \textit{Linear}, \textit{Motion}, \textit{Radial}, and \textit{Zoom} --are described later. This plugin is keyframable. Blur is used to blur a video track via the following parameters:
+This is a Gaussian type blur. Other blur plugins -- \textit{Linear}, \textit{Motion}, \textit{Radial}, and \textit{Zoom} --are described later. This plugin is keyframable. If the original source has values outside the range $(0 -1.0f)$, the plugin will always produce clipping. Blur is used to blur a video track via the following parameters:
 \begin{description}
     \item[Horizontal and vertical] values are used to tell which one of the fields blurring affects; can be both.
     \item[Radius] use this dial to define the amount of blur to apply.
@@ -1869,7 +1869,7 @@ The most common use cases (but can be adapted to virtually any situation) of the
     \item Create a Stylized look.
 \end{itemize}
 
-When using the X11 graphics driver and RGBA-FLOAT color model, this plugin allows for greater than (0 - 1.0f) values (HDR). This does not work when using X11-OpenGL because it is an 8-bit limited driver. HDR values will only work for the color wheel, while the Value and Saturation sliders are always clipped to 1.0.
+When using the X11 graphics driver and RGBA-FLOAT color model, this plugin allows for greater than (0 - 1.0f) values (\textit{illegal} values). This does not work when using X11-OpenGL because it is an 8-bit limited driver. Illegal values will only work for the color wheel, while the Value and Saturation sliders are always clipped to 1.0f.
 
 \subsection{Color Balance}%
 \label{sub:color_balance}
@@ -1894,7 +1894,7 @@ This plugin is a tool that can be used to convert your input media, such as a re
 from one color space/range to another.  It works for both RGB and YUV as set by your project format.
 Options are BT601, BT709, or BT2020 for Color Space input and output and JPEG or MPEG for Color Range
 input and output.  The Inverse option checkbox is available in case your media was rendered in the wrong
-color space  or range so that you can fix it.
+color space  or range so that you can fix it. By its nature, this plugin will always cause clipping on values above 1.0f.
 
 \begin{figure}[H]
 	\centering
@@ -2162,8 +2162,7 @@ This effect flips a video track either vertically or horizontally.
 \label{sub:foreground}
 \index{foreground}
 
-Whatever the visual content of the frame, the Foreground plugin application applies a uniform color that can be chosen by color picker, color wheel, color presets, or by entering the hexadecimal value.
-In addition there are HSV, RGB, YUV, and alpha sliders to vary the color accordingly.
+Whatever the visual content of the frame, the Foreground plugin application applies a uniform color that can be chosen by color picker, color wheel, color presets, or by entering the hexadecimal value. In addition there are HSV, RGB, YUV, and alpha sliders to vary the color accordingly. If the original source has values outside the range $(0 -1.0f)$, the plugin will always produce clipping.
 
 \subsection{Frames to fields}%
 \label{sub:frames_to_fields}
@@ -2452,7 +2451,7 @@ So, by reporting the sum the shape of the results are more similar to Bezier.
 \label{sub:histogram_bezier_curves}
 \index{histogram Bezier}
 
-Histogram Bézier allows an immediate view of the contrast amplitude of an image with its distribution of luma and colors values using a piecewise linear method (bins). In addition it uses a Bézier curve (parametric) on the histogram plot. When mapping color spaces, it has a variety of presentations to get smoother transitions and more pleasing output. It uses more general remapping, not just straight lines but more contour lines. Curves are perhaps the most powerful and sophisticated tool for color correction. For some repetitive details, see the previous description of the Histogram plugin. Histogram Bézier is keyframable. The scale is given in percent ($0 - 100\% \pm 10\%$). The default curve is Log type and can use either RGB or YUV sources without implementing conversions.
+Histogram Bézier allows an immediate view of the contrast amplitude of an image with its distribution of luma and colors values using a piecewise linear method (bins). In addition it uses a Bézier curve (parametric) on the histogram plot. When mapping color spaces, it has a variety of presentations to get smoother transitions and more pleasing output. It uses more general remapping, not just straight lines but more contour lines. Curves are perhaps the most powerful and sophisticated tool for color correction. For some repetitive details, see the previous description of the Histogram plugin. Histogram Bézier is keyframable. The scale is given in percent ($0 - 100\% \pm 10\%$). The default curve is Log type and can use either RGB or YUV sources without implementing conversions. If the original source has values outside the range $(0 -1.0f)$, the plugin will always produce clipping.
 
 NOTE: Histogram Bezier may give results that are not congruent with Histogram plugin. To understand the difference in behavior see the Theory section in Histogram plugin.
 
@@ -3673,7 +3672,7 @@ It is used to get a timelapse quickly and easily. It sets the number of frames t
 \label{sub:title}
 \index{title}
 
-The \textit{Titler} allows you to add text from within \CGG{}. It has many configuration capabilities. Often it is convenient to apply the plugin on a separate track (shared or not), in order to make it independent from the video track and have more freedom in editing and configuration. For example, you can apply the \textit{Rotation} plugin to rotate the title without rotating the underlying video. Another thing to keep in mind when using the Titler plugin is that it works on the \textit{temporary} and therefore it is not affected by Camera movements (curves), but only by Projector movements.
+The \textit{Titler} allows you to add text from within \CGG{}. It has many configuration capabilities. Often it is convenient to apply the plugin on a separate track (shared or not), in order to make it independent from the video track and have more freedom in editing and configuration. For example, you can apply the \textit{Rotation} plugin to rotate the title without rotating the underlying video. Another thing to keep in mind when using the Titler plugin is that it works on the \textit{temporary} and therefore it is not affected by Camera movements (curves), but only by Projector movements. If the original source has values outside the range $(0 -1.0f)$, the plugin will always produce clipping.
 
 The titler has standard options for font, size, and style plus many options as described next (figure~\ref{fig:title01})
 
@@ -3986,7 +3985,7 @@ Videoscope summarizes intensity and color on a calibrated display. The Videoscop
 	\label{fig:videoscope01}
 \end{figure}
 
-When using the X11 graphics driver and RGBA-FLOAT color model, Videoscope allows you to display greater than (0 - 1.0f) values  to accomodate HDR. This does not work when using X11-OpenGL because it is an 8-bit limited driver. The display will stop at -10\% or +110\%, but there is no clipping.  For example, by varying the brightness all out-of-range values become visible on Waveform, even over 110\%. However you must disable the "smooth" option which always causes clipping.
+If the original source has values outside the range $(0 -1.0f)$, the plugin will always produce clipping. The display will stop at -10\% or +110\%, but there is no clipping.  For example, by varying the brightness all out-of-range values become visible on Waveform, even over 110\%. However you must disable the "smooth" option which always causes clipping.
 
 The Videoscope menu window has many options.
 
