@@ -317,6 +317,26 @@ video, the new track is put on the top of the timeline. This way,
 video has a natural compositing order. New video tracks are overlaid
 on top of old tracks.
 
+\subsection{Adjacent Edits in timeline}%
+\label{sub:adjacent_edit_timeline}
+
+In \CGG{}, sometimes there might be two consecutive pieces of footage (edits) in a video track that are not exactly adjacent to each other in the timeline. There is a tiny empty segment in between the two that is narrower than one single frame in the track where there is no video at all. This happens when the next edit is attached to the preceding one in which the lengths of audio (quantified in units of audio samples, for example $48000 Hz$) is slightly more than the length of video (quantified in frames, for example $30 Hz$). If this is the case, the playback can blink with a black frame at this position.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.99\linewidth]{AV_sync.png}
+	\caption{Black frame between two edits}
+	\label{fig:AV_sync}
+\end{figure}
+
+The figure~\ref{fig:AV_sync} shows that edit 2 (audio and video) should be placed next to edit 1 (audio and video) at position \textbf{A}, so that they are adjacent. Instead, edit 2 is positioned at position \textbf{C}, which is the next frame. This is because the audio 1 samples are longer than determined by the fps of video 1. Edit 2 cannot even be placed next to position \textbf{B}, i.e., at the end of audio edit 1, because this is within a single frame and the program only works discretely from frame to frame. This difference can appear at any stage: reading source, editing/compositing, or rendering the result. The desynchronization can even accumulate and become worse.
+
+The cause is probably the way in which \CGG{} internally \textit{resamples} the media to conform it to the project settings. The source media are allowed to be in different formats, have different framerates/samplerates from that of the project. If this is the case, \CGG{} tries to resample them, this is resource consuming and not very accurate, leading to desync and black blinking frames. For example, if the source media has VFR (variable frame rate) formats, the program will definitely perform its own internal resampling. The rendering phase can also be affected by desync, as can \textit{cutting}, \textit{splicing} and \textit{overwriting}. Usually desynchonization does not occur, but if it does occur (and worse still, propagate during the editing phases), the cause is probably due to internal resampling. Codecs and formats can also affect desync or the functionality of \CGG{} for audio/video synchronization via waveform \texttt{GoTo} or Trimming.
+
+The easiest solution is to prevent the problem by using source media with settings identical to those of the project, or transcoded externally to the project values before being imported into \CGG{}.
+
+If, on the other hand, we notice blinking black frames during editing or in the final rendering, cut away the excess samples from audio edit 1 (\textbf{A-B} region) to allow for precise alignment of audio/video edits 2 at point A. If the user sets \texttt{Settings $\rightarrow$ Align cursor on frames} in the Program window menu and manually cuts out this tiny empty segment, the two edit segments become exactly adjacent and black blinking disappears.
+
 \subsection{Displaying tracks: Ganged mode}%
 \label{sub:displaying_tracks_ganged}
 \index{track!ganged mode}
@@ -325,15 +345,15 @@ Often users working on media where Audio is the main focus, want all of a media'
 
 To get this capability, there is a \textit{Gang Tracks} \index{gang tracks toggle} toggle button on the main timeline controls to switch between 3 modes of working with multiple channels so that the tracks are automatically edited as a single unit. Operations affected include edits such as cuts, moving sections, and adding plugins. In addition to letting you work on the tracks of a group as one, you also get a saving of space on the timeline that makes it easier to view and edit the tracks. Group masters are marked by the \textit{Master Track} \index{master track} toggle in the patchbays \index{patchbay}. A track gang group begins on a master track, and extends to, but not including, the next master track. The 3 \textit{Gang Tracks} modes are:
 
-\begin{enumerate}
-	\item \textbf{Gang None:} this is the default mode and is the traditional way Cinelerra operates. If you never toggle the "Gang Tracks" button, everything operates normally as it always has. In this mode, the button icon looks like 3 tracks with $\dots$ on the end and all tracks are visible on the timeline. See figure~\ref{fig:gang-track-01}
-
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.99\linewidth]{gang-track-01.png}
 	\caption{Gang None: only the video track is master. We see all tracks both master and non-master (default)}
 	\label{fig:gang-track-01}
 \end{figure}
+
+\begin{enumerate}
+	\item \textbf{Gang None:} this is the default mode and is the traditional way Cinelerra operates. If you never toggle the "Gang Tracks" button, everything operates normally as it always has. In this mode, the button icon looks like 3 tracks with $\dots$ on the end and all tracks are visible on the timeline. See figure~\ref{fig:gang-track-01}
 	\item \textbf{Gang Channels:} in this mode, all \textit{Master Tracks} are shown. The exception is when there is no Master video, no Master audio or no Master subtitle track, in which case for each the first track of video, audio, and subtitle will be shown. For users who routinely switch the track order frequently, the patchbay has the \textit{Master Track} icon to set your own preference. Stereo tracks, or 5:1 channels/any number of audio tracks, are drawn as 1 audio track for the purpose of making changes on that single track which are propagated to all of its other channel tracks automatically. This is the DAW-like mode. The \textit{Gang Tracks} button icon looks like 2 tracks and only the first video and first audio tracks will be shown. See figure~\ref{fig:gang-track-02}
 
 \begin{figure}[htpb]

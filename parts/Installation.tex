@@ -16,43 +16,39 @@ There are also 32-bit distros available that have \textit{i386} as part of the f
 
 Installing the appimage is simple, download the file from:
 
-\url{https://cinelerra-gg.org/download/images/}
+\url{https://download.cinelerra-gg.org/?path=\%2Fimages} and look for the latest release in that folder.
 
 Some example file names are as follows - where 8 digits represent yyyymmdd and i386 are 32-bit:
 
 \begin{lstlisting}[style=sh]
-	CinGG-20241231-x86_64.AppImage
+	CinGG-20251121-x86_64.AppImage
 	  (currently based on Fedora 32, linux kernel 5.8.15, libc version 2.31)
-	CinGG-20241231-x86_64-older-distros.AppImage
+	CinGG-20251121-x86_64-older-distros.AppImage
 	  (currently based on Ubuntu 16.04, libc version 2.23)
-	CinGG-20240731-x86_64-older-distros-multibit.AppImage
-	  (currently based on Fedora 29 - runs on RHEL8 - linux kernel 4.19.9, libc version 2.28)
-	CinGG-20241231-alternative_shortcuts.AppImage
+	CinGG-20251121-alternative_shortcuts.AppImage
 	  (currently based on Ubuntu 16.04, libc version 2.23)
-	CinGG-20241231-i386.AppImage
+	CinGG-20251121-i386.AppImage
 	  (currently based on Debian 9, linux kernel 4.9, use "newer" for Debian 11.0)
-	CinGG-20241231-i386-newer-distros.AppImage
+	CinGG-20251121-i386-newer-distros.AppImage
 	  (currently based on Debian 11, linux kernel 5.10)
-	CinGG-20241120-x86_64-IntelHW.AppImage 
-	  (currently hardware bells and whistles for Intel to include QSV/AV1/oneVPL)
 \end{lstlisting}
 
 Make the file executable with the proper execute permissions either from the GUI of the Desktop Environment used (link to the file) or from a terminal window.  Make sure you are already in the directory containing the appimage:
 
 \begin{lstlisting}[style=sh]
-	\$ chmod u+x CinGG-yyyymmdd.AppImage
+	chmod u+x CinGG-yyyymmdd.AppImage
 \end{lstlisting}
 
 Finally start the program from a window in the directory where the image is stored:
 
 \begin{lstlisting}[style=sh]
-	\$ ./CinGG-yyyymmdd.AppImpage
+	./CinGG-yyyymmdd.AppImage
 \end{lstlisting}
 
 or create a convenient desktop icon with a link to the run action, or do a \textit{Desktop Integration} manually or with external programs.  There is a 
-description of a GUI methodology for doing so in this file on the webiste:
+description of a GUI methodology for doing so in the file README\_appimage at:
 
-\url{https://cinelerra-gg.org/download/images/README\_appimage.txt}
+\url{https://download.cinelerra-gg.org/?path=\%2Fimages}
 
 Most distros already have the libraries to run the appimage, but if not you may need an additional installation. For example Arch Linux needs the \texttt{libappimage} package.
 
@@ -70,7 +66,7 @@ In addition, if you are using the OpenGL video driver, you will need to install 
 drivers for your Operating System graphics board because libGLU.so and other OpenGL libraries are
 not included in the AppImage.
 
-Using AppImage means you do not have the installation folder and work on the files. To unpack the AppImage and get its structure in folders and files see \nameref{sub:managing_appimage} To create, edit and manage appimages see \nameref{sub:built_appimage_scratch}.
+Using AppImage means you do not have the installation folder and work on the files. To unpack the AppImage and get its structure in folders and files see \nameref{sub:managing_appimage}. To create, edit and manage appimages see \nameref{sub:built_appimage_scratch}.
 
 \subsection{AppImage with Standard Shortcuts}
 \label{sec:appimage_standard_shortcuts}
@@ -104,8 +100,8 @@ and Slackware versions available\protect\footnote{Remember that a 32-bit distro 
 They are in subdirectories of:
 
 \begin{list}{}{}
-	\item \href{https://cinelerra-gg.org/download/tars}{https://cinelerra-gg.org/download/tars}
-	\item \href{https://cinelerra-gg.org/download/pkgs}{https://cinelerra-gg.org/download/pkgs}
+	\item \href{https://download.cinelerra-gg.org/?path=\%2Ftars}{https://download.cinelerra-gg.org/?path=\%2Ftars}
+	\item \href{https://download.cinelerra-gg.org/?path=\%2Fpkgs}{https://cinelerra-gg.org/download/?path=\%2Fpkgs}
 \end{list}
 
 The \textbf{tars} \index{tars} directory contains single-user static builds for
@@ -126,10 +122,6 @@ from the \texttt{./tars} subdirectory and unpack as indicated below:
 	tar -xJf /src/path/cinelerra-5.1-*.txz  # for the *, substitute your distro tarball name
 \end{lstlisting}
 
-\emph{Do not download the LEAP 10-bit version unless you specifically want to
-use h265 rendering to 10-bit instead of the more standard 8-bit.} For more
-information see ~\ref{sec:cinx_and_a_bit_of_confusion}.
-
 The \textbf{pkgs} \index{pkgs} directory contains the standard packaged
 application for various distros.  This will install a dynamic
 system version for users who prefer to have the binaries in the
@@ -138,7 +130,7 @@ system area and for multi-user systems.
 In addition, performing the package install checks the md5sum in
 the file \texttt{md5sum.txt} to ensure the channel correctly
 transmits the package.  There is a
-\href{https://cinelerra-gg.org/download/README.pkgs}{README.pkgs}
+\href{https://download.cinelerra-gg.org/}{README.pkgs}
 file in the \texttt{download} directory with instructions so you
 can \textit{cut and paste} and avoid typos; it is also shown
 next.
@@ -169,18 +161,20 @@ have to create new patches for arising problems on later GITs.
 NOTE: as of May 31, 2021 when Context Help was added, to include
 this Context Help you will need to download the corresponding
 tgz file containing the HTML manual sections referenced for the
-Help pages.  The file to download is:
-\url{https://cinelerra-gg.org/download/images/HTML_Manual-20220131.tgz}
-substituting for "20220131" the "yyyymmdd" representing latest release date.
-Then unpack to your Cinelerra/bin/doc directory so it is included in
+Help pages.  The file to download is at:
+\url{https://download.cinelerra-gg.org/?path=\%2Fimages}
+and will have the name of HTML\_Manual-20251121.tgz substituting for
+"20251121" the "yyyymmdd" representing latest release date.
+Then unpack to your cinelerra/bin/doc directory so it is included in
 your built system.
-NOTE End
+
+\url{https://download.cinelerra-gg.org/?path=\%2Fimages} and look for the latest release in that folder.
 
 Alternatively, there are some pre-built dynamic or static binaries
-which are updated on a fairly regular basis (as long as code changes
-have been made) available at the link below.
+in the \textit{images} folder which are updated on a fairly regular
+basis (as long as code changes have been made) available at this link.
 \begin{center}
-  \href{https://cinelerra-gg.org/download/}{https://cinelerra-gg.org/download/}
+  \href{https://download.cinelerra-gg.org/?path=\%2Fimages}{https://download.cinelerra-gg.org/?path=\%2Fimages}
 \end{center}
 
 There are 2 kinds of builds, the default system-build and a
@@ -231,7 +225,7 @@ To do a system build \index{build} , you should read the file
 
 \item You do not need to be \textbf{root} (or \textit{sudo} ...) to install, except to run \texttt{bld\_prepare.sh} which calls in the distro's package manager. However if there are problems with permissions you can try to compile as root.
 
-\item The \textit{git:} step has to download many files (approx
+\item The \textit{git} step has to download many files (approx
   130\,MB) so allow time. When decompressed this will expand to
   about 530 MB.
 
@@ -240,9 +234,9 @@ To do a system build \index{build} , you should read the file
 \begin{lstlisting}[style=sh]
 # This is where you need the 6.0GB of disk space:
 cd /<build_path>/
-git clone --depth 1 git://git.cinelerra-gg.org/goodguy/cinelerra.git cinelerra5
+git clone --depth 1 https://git.cinelerra-gg.org/goodguy/cinelerra.git
 # Change to the cloned directory:
-cd cinelerra5/cinelerra-5.1
+cd cinelerra/cinelerra-5.1
 \end{lstlisting}
   NOTE: if your system has never had \CGG{} Infinity installed, you
   will have to make sure you have all of the compilers and libraries
@@ -261,8 +255,7 @@ Where <os> represents the Operating System supported by \CGG{}, such
 as centos, fedora, suse, ubuntu, mint, or debian.
 \texttt{bld\_prepare.sh} works for Arch and Gentoo with some additional information. For Arch linux, a README file containing many more dependencies is maintained. For Gentoo, a README file lists other dependencies that have to be installed manually.
 \begin{list}{}{}
-  \item \href{https://cinelerra-gg.org/download/README.arch}{https://cinelerra-gg.org/download/README.arch}
-  \item \href{https://cinelerra-gg.org/download/README.gentoo}{https://cinelerra-gg.org/download/README.gentoo}
+  \item \href{https://download.cinelerra-gg.org/}{https://download.cinelerra-gg.org/} file README.arch or README.gentoo
 \end{list}
 
   \texttt{bld\_prepare.sh} option of debian-older and ubuntu-older is currently for older operating system versions since before about 06/2022.
@@ -276,7 +269,7 @@ grep "\*\*\*.*error" -ai log
   listed below to:
   \href{mailto:cin@lists.cinelerra-gg.org}{cin@lists.cinelerra-gg.org}
 \begin{lstlisting}[style=sh]
-/<build_path>/cinelerra5/cinelerra-5.1/log
+/<build_path>/cinelerra/cinelerra-5.1/log
 \end{lstlisting}
 
 \item If there are no build errors, finally just run:
@@ -313,9 +306,9 @@ the top level after you get the source.
 \begin{lstlisting}[style=sh]
 # This is where you need the 6GB of disk space
 cd /<build_path>/
-git clone --depth 1 git://git.cinelerra-gg.org/goodguy/cinelerra.git cinelerra5
+git clone --depth 1 https://git.cinelerra-gg.org/goodguy/cinelerra.git
 # Toplevel directory:
-cd cinelerra5/cinelerra-5.1
+cd cinelerra/cinelerra-5.1
 \end{lstlisting}
 \end{enumerate}
 
@@ -362,11 +355,11 @@ the \texttt{Exec=cin} line to be
 A working example of how to build in Arch as a normal user:
 
 \begin{lstlisting}[style=sh]
-\$ git clone --depth 1 git://git.cinelerra-gg.org/goodguy/cinelerra.git cinelerra5
-\$ cd /home/USER/cinelerra5/cinelerra-5.1
+\$ git clone --depth 1 https://git.cinelerra-gg.org/goodguy/cinelerra.git cinelerra
+\$ cd /home/USER/cinelerra/cinelerra-5.1
 \$ ./autogen.sh
 \$ ./configure --with-single-user --with-booby
-\$ make 2>&1 | tee /tmp/cin5.log &&  make install
+\$ make 2>&1 | tee /tmp/cin.log &&  make install
 \$ mv Makefile Makefile.cfg
 \$ cp Makefile.devel Makefile
 \end{lstlisting}
@@ -498,9 +491,9 @@ NOTE: as of May 31, 2021 when Context Help was added, to include
 this Context Help you will need to download the corresponding
 tgz file containing the HTML manual sections referenced for the
 Help pages.  The file to download is:
-\url{https://cinelerra-gg.org/download/images/HTML_Manual-20220131.tgz}
-substituting for "20220131" the "yyyymmdd" representing latest release date.
-Then unpack to your Cinelerra/bin/doc directory so it is included in
+\url{https://download.cinelerra-gg.org/?path=\%2Fimages} look for HTML\_Manual-20251121.tgz
+substituting for "20251121" the "yyyymmdd" representing latest release date.
+Then unpack to your cinelerra/bin/doc directory so it is included in
 your built system.  The reason for not including the HTML manual in 
 the source code so that it would already be there, is because it is
 very large and has its own GIT base.
@@ -612,7 +605,7 @@ alternative operational. The libfdk\_aac library is not a part of
 export FFMPEG_EXTRA_CFG=" --enable-libfdk-aac --enable-nonfree"
 export EXTRA_LIBS=" -lfdk-aac"
 for f in `grep -lw aac cinelerra-5.1/ffmpeg/audio/*`; do
-  sed -e 's/\<aac\>/libfdk_aac/' -i $f
+  sed -e 's/\<aac\>/libfdk_aac/' -i \$f
 done
 \end{lstlisting}
 
@@ -627,23 +620,22 @@ is available you need to create a local ``repository'' or repo.  The
 repo is a directory where you first do a \texttt{git clone}.  For
 the initial git clone, set up a local area for the repository
 storage, referred to as \texttt{<repo\_path>}.  The \texttt{git
-  clone} creates a repo named \texttt{cin5} in the
+  clone} creates a repo named \texttt{cin} in the
 \texttt{/<repo\_path>/} directory.  This accesses about 530\,MB of
 repo data, so the device has to have at least that available.  The
 repo path is always a perfect clone of the main repo.
 
-
 \paragraph{Setting up the initial clone}%
 \label{par:setting_up_the_initial_clone}
 
-You may want to add ``\verb|--depth 1|'' before \texttt{cin5}
+You may want to add ``\verb|--depth 1|'' before \texttt{cinelerra}
 because this will clone faster and is smaller, but has no history.
 
 \begin{lstlisting}[style=sh]
-cd /<repo\_path>/
-git clone git://git.cinelerra-gg.org/goodguy/cinelerra cin5
+cd /<repo_path>/
+git clone https://git.cinelerra-gg.org/goodguy/cinelerra.git cinelerra
 
-Cloning into "cin5"...
+Cloning into "cinelerra"...
 remote: Counting objects: 20032, done.
 remote: Compressing objects: 100% (11647/11647), done.
 remote: Total 20032 (delta 11333), reused 16632 (delta 8189)
@@ -658,7 +650,7 @@ Checking connectivity... done.
 The below shows how you can get updates.
 
 \begin{lstlisting}[style=sh]
-cd /<repo home>/cin5
+cd /<repo home>/cinelerra
 git pull
 \end{lstlisting}
 
@@ -668,7 +660,7 @@ git pull
 Some other commands that are useful.
 
 \begin{lstlisting}[style=sh]
-git clone git://git.cinelerra-gg.org/goodguy/cinelerra.git cin5
+git clone https://git.cinelerra-gg.org/goodguy/cinelerra.git cinelerra
 git pull         # pull remote changes to the local version
 git status       # shows changed files
 git clean -i     # interactive clean, use answer 1 to "clean"
@@ -689,7 +681,7 @@ parameter on your GIT.
 \strut
  
 \begin{lstlisting}[style=sh]
-cd /<path>/cin5  # substitute your repo path name for cin5
+cd /<path>/cinelerra  # substitute your repo path name for cinelerra
 git log		 # shows a list of versions depending on history depth specification
 git checkout <version> # choose a version number as listed
 \end{lstlisting}
@@ -756,7 +748,7 @@ keep it.
 
 \begin{lstlisting}[style=sh]
 cd /<repo_path>/
-git clone --depth 1 git://git.cinelerra-gg.org/goodguy/cinelerra.git cinelerra5 
+git clone --depth 1 https://git.cinelerra-gg.org/goodguy/cinelerra.git 
 cp -a /<repo_path>/cinelerra-5.1 /tmp/
 cd /tmp/cinelerra-5.1
 ./bld.sh
@@ -838,17 +830,17 @@ The steps are as follows:
 	\item Download the manual in LaTeX:
 
 \begin{lstlisting}[style=sh]
-git clone git://git.cinelerra-gg.org/goodguy/cin-manual-latex.git master
+git clone https://git.cinelerra-gg.org/goodguy/cin-manual-latex.git
 \end{lstlisting}
 
-	\item Included in the download is the \texttt{translate\_manual} script. After modifying this file to have execute permission, run this script from a terminal window in the \textit{master} directory where it was downloaded (be aware that this script includes several \textit{rm} commands):
+	\item Included in the download is the \texttt{translate\_manual} script. After modifying this file to have execute permission, run this script from a terminal window in the \textit{cin-manual-latex} directory where it was downloaded (be aware that this script includes several \textit{rm} commands):
 \begin{lstlisting}[style=sh]
 ./translate_manual
 \end{lstlisting}
 
 	The steps that this script performs are as follows:
 	\begin{itemize}
-		\item PDF production. The PDF document will be produced from the latex source in the \textit{master} directory. Since the glossary and index are also present, it has to run the pdf build several times. The following commands in the \texttt{translate\_manual} script produce the PDF document from latex source which includes invoking makeindex for the Index and Glossary.
+		\item PDF production. The PDF document will be produced from the latex source in the \textit{cin-manual-latex} directory. Since the glossary and index are also present, it has to run the pdf build several times. The following commands in the \texttt{translate\_manual} script produce the PDF document from latex source which includes invoking makeindex for the Index and Glossary.
 		
 		\begin{lstlisting}[style=sh]
 			pdflatex CinelerraGG_Manual.tex
@@ -960,8 +952,8 @@ Terminal
 \label{sec:installing_cinelerra}
 
 \begin{enumerate}
-\item Download the tar file
-  \href{https://cinelerra-gg.org/download/testing/libxcb-bld.tar.bz2}{libxcb-bld.tar.bz2}.
+\item Download the libxcb-bld-tar.bz2 tar file at:
+  \href{https://download.cinelerra-gg.org/?path=\%2Ftesting}{libxcb-bld.tar.bz2}.
 
 \item Install libxcb from the tar file -- installs into
   \texttt{/usr/local} and requires approximately 21MB storage.
@@ -971,8 +963,8 @@ tar -C /usr/local -xJf /path/libxcb-bld.tar.bz2
   The libxcb patch repairs an error (XIOError), which stops
   Cinelerra.
 
-\item Download the tar file
-  \href{https://cinelerra-gg.org/download/testing/cygcin-bld.tar.bz2}{cygcin-bld.tar.bz2}.
+\item Download the cygcin-bld.tar.bz2 file at:
+  \href{https://download.cinelerra-gg.org/?path=\%2Ftesting}{cygcin-bld.tar.bz2}.
 
 \item Install cygcin from the tar file - this installs into home
   directory.  Note this is cygcin \emph{not} cygwin. You must change the
@@ -1058,8 +1050,8 @@ make install
 \item Download cinelerra-gg:
 \begin{lstlisting}[style=sh]
 cd /build_path/
-git clone git://git.cinelerra-gg.org/goodguy/cinelerra.git
-cd cinelerra-gg/cinelerra-5.1
+git clone https://git.cinelerra-gg.org/goodguy/cinelerra.git
+cd cinelerra/cinelerra-5.1
 \end{lstlisting}
 \item Apply cygwin patch:
 \begin{lstlisting}[style=sh]
