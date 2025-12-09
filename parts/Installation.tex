@@ -223,7 +223,7 @@ To do a system build \index{build} , you should read the file
 \item You need about 6.0 \,GB of disk storage to operate a build and
   you need to have \textit{git} installed.
 
-\item You do not need to be \textbf{root} (or \textit{sudo} ...) to install, except to run \texttt{bld\_prepare.sh} which calls in the distro's package manager. However if there are problems with permissions you can try to compile as root.
+\item You do not need to be \textbf{root} (or \textit{sudo} ...) to install, except to run \textit{bld\_prepare.sh} which calls in the distro's package manager. However if there are problems with permissions you can try to compile as root.
 
 \item The \textit{git} step has to download many files (approx
   130\,MB) so allow time. When decompressed this will expand to
@@ -245,20 +245,20 @@ cd cinelerra/cinelerra-5.1
 \begin{lstlisting}[style=sh]
 ./blds/bld_prepare.sh <os> # where <os> represents the
                            # Operating System of
-                           # centos, fedora, suse, ubuntu, mint, debian, arch, debian-older, ubuntu-older.
+                           # centos, fedora, suse, ubuntu, ubuntu24, mint, debian, arch, debian-older, ubuntu-older.
 ./autogen.sh
 ./configure --prefix=/usr  # optional parameters can be added here
 make 2>&1 | tee log        # make and log the build
 \end{lstlisting}
 
-Where <os> represents the Operating System supported by \CGG{}, such
-as centos, fedora, suse, ubuntu, mint, or debian.
-\texttt{bld\_prepare.sh} works for Arch and Gentoo with some additional information. For Arch linux, a README file containing many more dependencies is maintained. For Gentoo, a README file lists other dependencies that have to be installed manually.
+You may want to review the \textit{bld\_prepare.sh} script before running it since the version of the
+Operating System you are using may require some tweaks to the list of packages to install.
+The script works for Arch with some additional information as shown in a README file containing many more dependencies. For Gentoo, only the README file lists the known dependencies that have to be installed manually.
 \begin{list}{}{}
   \item \href{https://download.cinelerra-gg.org/}{https://download.cinelerra-gg.org/} file README.arch or README.gentoo
 \end{list}
 
-  \texttt{bld\_prepare.sh} option of debian-older and ubuntu-older is currently for older operating system versions since before about 06/2022.
+  Options in \textit{bld\_prepare.sh} of debian-older and ubuntu-older are currently for older operating system versions since before about 06/2022. The ubuntu24 option is for Ubuntu version 24 and newer ubuntu distros.
 
 \item Check for obvious build errors:
 \begin{lstlisting}[style=sh]
