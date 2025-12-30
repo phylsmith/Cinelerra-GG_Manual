@@ -19,7 +19,7 @@ The plugins are shown and selected from the \textit{Resources window} (figure~\r
 
 There is a choice of plugin icons \index{plugins!icons} which can be displayed.
 
-In \texttt{Settings$\rightarrow$ Preferences$\rightarrow$ Appearance} tab, there is a pulldown for \textit{Plugin icons} where the user can choose between the \textit{original} icons, \textit{regular} or \textit{smoother}, \textit{cinfinity}\protect\footnote{Cinfinity /2 icon set is credited to Sam - Creative Common By -- \url{https://creativhecommons.org/licenses/by/3.0/}} -- the default modernized set, or \textit{cinfinity2} (figure~\ref{fig:audio-plugins}).
+In \texttt{Settings$\rightarrow$ Preferences$\rightarrow$ Appearance} tab, there is a pulldown for \textit{Plugin icons} where the user can choose between the \textit{original} icons, \textit{regular} or \textit{smoother}, \textit{cinfinity}\protect\footnote{Cinfinity /2 icon set is credited to Sam - Creative Common By -- \url{https://creativecommons.org/licenses/by/3.0/}} -- the default modernized set, or \textit{cinfinity2} (figure~\ref{fig:audio-plugins}).
 
 \begin{figure}[H]
     \centering
@@ -389,8 +389,8 @@ NOTE: The capability to put the expanders.txt file in \texttt{./bcast5} (see \na
 For users running \CGG{} using the AppImage, to make an initial copy of expanders.txt, execute the
 following lines on /tmp:
 \begin{lstlisting}[numbers=none]
-        git clone --depth 1 git://git.cinelerra-gg.org/goodguy/cinelerra.git cinelerra5
-        cp /tmp/cinelerra5/cinelerra-5.1/expanders.txt $HOME/.bcast5/expanders.txt
+	git clone --depth 1 https://git.cinelerra-gg.org/goodguy/cinelerra.git cinelerra
+        cp /tmp/cinelerra5/cinelerra-5.1/expanders.txt \$HOME/.bcast5/expanders.txt
 \end{lstlisting}
 
 \subsection{Speed-up of Ffmpeg plugin usage with OPTS files}%
@@ -974,13 +974,13 @@ Automatically scale to a specified size.
 
 The Blend Algebra/Blend Program plugins provide the advanced feature of combining and modifying color pixels and transparencies of several tracks according to a mathematic algorithm written entirely by the user in the form of compact and simple piece of code. Such user defined algorithms (blend functions) are compiled, dynamically linked and immediately executed inside \CGG{} on the fly without the need to restart the application, reload the project, reattach plugins, and so on.
 
-The following description is based on the \texttt{~/cinelerra-5.1/doc/README.blendalg} that accompanies the code by the author of both the code and the document.  It is the authoriative documentation; the most detailed/original source and has additional commentary and programming information. If you encounter problems or confusion when using these plugins, always refer directly to that document \href{https://cinelerra-gg.org/download/testing/BlendPluginExamples/README.blendalg}{here}.  If running \CGG{} from an \textit{AppImage}, testing has shown that it should work  as well as if run from a build - just be aware of filename extensions that appear by default in the input field for the funtion name and change them accordingly.
+The following description is based on the \texttt{~/cinelerra-5.1/doc/README.blendalg} that accompanies the code by the author of both the code and the document.  It is the authoriative documentation; the most detailed/original source and has additional commentary and programming information. If you encounter problems or confusion when using these plugins, always refer directly to that document \href{https://download.cinelerra-gg.org/download.php?file=testing\%2FBlendPluginExamples/README.blendalg}{here}.  If running \CGG{} from an \textit{AppImage}, testing has shown that it should work  as well as if run from a build - just be aware of filename extensions that appear by default in the input field for the funtion name and change them accordingly.
 
 The idea behind these plugins\protect\footnote{credit to Georgy} is that the user can program sufficiently short and simple blending algorithms, called \textit{Functions}, by following detailed instructions with very little programming skills required.
 Blend Algebra and Blend Program come with a library of Functions (\textit{System Library}) that mimic the 30 overlay effects found in the Patchbay or Overlay plugins. The user can modify these Functions as needed or create new ones.
 To look at these example functions, there is an \texttt{Edit...} button in the respective plugin dialog. You will need a text editor to do so, which by default is \textit{emacs} if it is installed. If not, you can set your favorite editor via the corresponding environment variable in a terminal (\texttt{export CIN\_EDITOR='name editor'}) and then start \CGG{} from that same terminal.
 
-If you can not wait to get started, checkout these examples \href{https://cinelerra-gg.org/download/testing/BlendPluginExamples/Examples.txt}{here}. You will also find test projects to \href{https://cinelerra-gg.org/download/testing/BlendPluginExamples}{download} to learn more about the plugins and to see the various ways they can be used to create your own functions.
+If you can not wait to get started, checkout these examples \href{https://download.cinelerra-gg.org/download.php?file=testing\%2FBlendPluginExamples/Examples.txt}{here}. You will also find test projects to \href{https://download.cinelerra-gg.org/download.php?file=testing\%2FBlendPluginExamples}{download} to learn more about the plugins and to see the various ways they can be used to create your own functions.
 
 Both plugins, Blend Algebra and Blend Program, are similar. They are described together along with their differences. The main difference between the two plugins is that Blend Algebra is like a function; it combines its arguments (tracks) and yields the result which is placed into the single track configured for output. However, Blend Program does not produce a function result, but instead directly modifies its arguments. If more than one track is to be modified, Blend Program is the only choice. If a single track is to be processed, Blend Program is the best choice and might run slightly faster. Any Blend Algebra function can be rewritten to become a Blend Program function. But if a function processes several tracks and modifies only one, it will run faster in Blend Algebra which has more controls in its plugin dialog.
 
@@ -1289,7 +1289,7 @@ In the distribution 30 Blend Algebra functions are provided for all the 30 \CGG{
 	\item Overlayer always clears its input frames. In Blend Algebra the user has a choice, either to clear them, or to leave them intact.
 \end{itemize}
 
-There are several example functions from totally different areas of application: a user programmable plugin is a really universal tool and can be handy in unexpected cases. A programmer can sometimes make use of this plugin when creating new effects. It has the big advantage that you can more quickly test different combinations without spending time to restart \CGG{}, recompile it, reload project, and reattach plugins, etc.  See the examples \href{https://cinelerra-gg.org/download/testing/BlendPluginExamples/Examples.txt}{here}. 
+There are several example functions from totally different areas of application: a user programmable plugin is a really universal tool and can be handy in unexpected cases. A programmer can sometimes make use of this plugin when creating new effects. It has the big advantage that you can more quickly test different combinations without spending time to restart \CGG{}, recompile it, reload project, and reattach plugins, etc.  See the examples \href{https://download.cinelerra-gg.org/download.php?file=testing\%2FBlendPluginExamples/Examples.txt}{here}. 
 
 There is the \texttt{ydiff.ba} function, actually representing the complete \textit{ydiff} application running inside a plugin. 
 In addition, there is a Transition example,
@@ -3361,8 +3361,7 @@ Plugin variables:
 \label{sub:svg_via_inkscape}
 \index{SVG via Inkscape}
 
-This plugin allows the user to manipulate an SVG (scalable vector graphics) image with \textit{Inkscape} without having to leave the program. The associated \CGG{} window provides the ability to change the DPI, the Out $x/y$ coordinates, and the Out w/h values. For more information on use of inkscape, refer to: {\small \url{https://inkscape.org/develop/about-svg/}}
-
+This plugin allows the user to manipulate an SVG (scalable vector graphics) image with \textit{Inkscape} without having to leave the program. The associated \CGG{} window provides the ability to change the DPI, the Out $x/y$ coordinates, and the Out w/h values. For more information on use of inkscape, refer to: {\small \url{https://wiki.inkscape.org/wiki/Inkscape}}
 \begin{description}
     \item[DPI] is Dots per inch and it represents the resolution of the SVG image. Since the image is scaled with interpolation mode linear, the edges will look blurry when the input resolution is lower than the output resolution. You can either set the desired \textit{DPI value} in the window or use the tumbler on the integer text box, then use the \textit{update dpi} button to have the change take effect. Changing DPI causes the entire image to be re-exported via inkscape. DPI changes cause adjustments in the resolution, speed of re-import, and storage needed for the image data.
     \item[Out\_x/Out\_y] allow for changing the location of the SVG via the $x$ or $y$ coordinates.
@@ -4298,12 +4297,12 @@ cin/plugins/opencv/stylizeobj.plugin
 
 \begin{enumerate}
     \item do your package install of the current build for your distro as usual
-    \item look in {\small \url{https://cinelerra-gg.org/download/tars}} to see your distro name's static tar
+    \item look in {\small \url{https://download.cinelerra-gg.org/?path=\%2Ftars}} to see your distro name's static tar
     \item download the corresponding distro static tarball;
     for example for arch:
 \end{enumerate}
 
-    {\small \url{https://cinelerra-gg.org/download/tars/cinelerra-5.1-arch-{date}-x86_64-static.txz}}
+    {\small \url{https://download.cinelerra-gg.org/download.php?file=tars\%2Fcinelerra-5.1-arch-20201031.x86_64-static.txz}}
 
 \begin{enumerate}[resume]
     \item create a temporary directory on your computer
@@ -4345,9 +4344,9 @@ that is considered to be more stable.  A build using the tarball requires that y
 system have \textit{wget} already installed to initially download the prepared source tar. 
 There are currently 2 tarballs of stable versions on the website used for user builds.
 The 20180401 version:\newline
-{\small \url{ https://cinelerra-gg.org/download/opencv/opencv-20180401.tgz}}\newline
+{\small \url{https://download.cinelerra-gg.org/download.php?file=opencv\%2Fopencv-20180401.tgz}}\newline 
 works with older version of cmake, and 20200308 is the current 4.2 release:\newline
-{\small \url{https://cinelerra-gg.org/download/opencv/opencv-20200306.tgz}}
+{\small \url{https://download.cinelerra-gg.org/download.php?file=opencv\%2Fopencv-20200306.tgz}}
 
 To build using the tarballs on the website, use this bld.sh procedure (you may want to run "make
 clean" first):
@@ -4355,7 +4354,7 @@ clean" first):
 #!/bin/bash
 ( ./autogen.sh
   ./configure --with-single-user --with-booby \
-    --with-opencv=sta,tar=http://cinelerra-gg.org/download/opencv/opencv-20200306.tgz
+    --with-opencv=sta,tar=https://download.cinelerra-gg.org/download.php?file=opencv\%2Fopencv-20200306.tgz
   make && make install ) 2>&1 | tee log
 mv Makefile Makefile.cfg
 cp Makefile.devel Makefile
@@ -4367,13 +4366,12 @@ cp Makefile.devel Makefile
 To build findobject and the other plugins using OpenCV, access the src using git:
 
 \begin{lstlisting}[style=sh]
-git clone --depth 1 git://git.cinelerra-gg.org/goodguy/cinelerra.git cinelerra5
+git clone --depth 1 https://git.cinelerra-gg.org/goodguy/cinelerra.git cinelerra
 \end{lstlisting}
 To use the latest version, the method for creating a tarball is:
- 
 \begin{enumerate}
-     \item download both opencv and opencv\_contrib source tarballs from the web:
-       {\small \url{https://sourceforge.net/projects/opencvlibrary/files/4.2.0/}}
+     \item download both opencv and opencv\_contrib source tarballs from the web:\newline
+       {\small \url{https://sourceforge.net/projects/opencvlibrary/files/4.2.0/}}\newline
        {\small \url{https://github.com/opencv/opencv\_contrib/archive/4.2.0.tar.gz}}
      \item create a temporary directory opencv\_src and unpack the tarballs into the src directory
      \item rename these sources to opencv and opencv\_contrib
@@ -4381,20 +4379,20 @@ To use the latest version, the method for creating a tarball is:
 \end{enumerate}
 
 \begin{lstlisting}[style=sh]
-cd opencv\_src
+cd opencv_src
 mkdir build
 cd build && cmake \
-  -DCMAKE\_BUILD\_TYPE=RELEASE \
-  -DWITH\_IPP=OFF \
-  -DWITH\_LAPACK=OFF \
-  -DWITH\_GPHOTO2=OFF \
-  -DBUILD\_SHARED\_LIBS=ON \ 
-  -DINSTALL\_C\_EXAMPLES=ON \
-  -DINSTALL\_PYTHON\_EXAMPLES=ON \
-  -DBUILD\_EXAMPLES=ON .. \
-  -DBUILD\_opencv\_python3=no \
-  -DCMAKE\_INSTALL\_PREFIX=/usr/local \
-  -DOPENCV\_EXTRA\_MODULES\_PATH="\$(opencv)\_contrib/modules/"
+  -DCMAKE_BUILD_TYPE=RELEASE \
+  -DWITH_IPP=OFF \
+  -DWITH_LAPACK=OFF \
+  -DWITH_GPHOTO2=OFF \
+  -DBUILD_SHARED_LIBS=ON \ 
+  -DINSTALL_C_EXAMPLES=ON \
+  -DINSTALL_PYTHON_EXAMPLES=ON \
+  -DBUILD_EXAMPLES=ON .. \
+  -DBUILD_opencv\_python3=no \
+  -DCMAKE_INSTALL_PREFIX=/usr/local \
+  -DOPENCV_EXTRA_MODULES_PATH="\$(opencv)_contrib/modules/"
 \end{lstlisting}
 
 Next configure the build, but add the \texttt{-{}-with-opencv} configure parameter. An example

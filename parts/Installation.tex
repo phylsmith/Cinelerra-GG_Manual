@@ -46,9 +46,9 @@ Finally start the program from a window in the directory where the image is stor
 \end{lstlisting}
 
 or create a convenient desktop icon with a link to the run action, or do a \textit{Desktop Integration} manually or with external programs.  There is a 
-description of a GUI methodology for doing so in the file README\_appimage at:
+description of a GUI methodology for doing so in the file to download at:
 
-\url{https://download.cinelerra-gg.org/?path=\%2Fimages}
+\url{https://download.cinelerra-gg.org/download.php?file=images\%2FREADME_appimage.txt}
 
 Most distros already have the libraries to run the appimage, but if not you may need an additional installation. For example Arch Linux needs the \texttt{libappimage} package.
 
@@ -72,7 +72,7 @@ Using AppImage means you do not have the installation folder and work on the fil
 \label{sec:appimage_standard_shortcuts}
 
 In video editing it is important to learn how to use shortcuts to speed up your work. \CGG{} uses shortcuts different from those considered standard in both the Linux world and video editing. For example, \texttt{"s"} is used instead of \texttt{Ctrl+S}, \texttt{"q"} instead of \texttt{Ctrl+Q}, and even the classic editing keys \texttt{J, K, L} are different.
-In addition, in \CGG{} the keys are fixed and not customizable. A new user may have a hard time getting used to a new combination of shortcuts. To make it a little easier, an appimage containing a patch that makes use of some of the more frequently used classic key combinations is available. It can be downloaded \href{https://cinelerra-gg.org/download/images/CinGG-20230930-alternative_shortcuts.AppImage}{here} (note that the file contains the month and last day of the month, but you will want to go up a directory and download the latest date instead to include the current changes). A table showing the changes from \CGG{} mode to standard mode can be found here: \nameref{sec:alternative_shortcuts}.
+In addition, in \CGG{} the keys are fixed and not customizable. A new user may have a hard time getting used to a new combination of shortcuts. To make it a little easier, an appimage containing a patch that makes use of some of the more frequently used classic key combinations is available. It can be downloaded \href{https://download.cinelerra-gg.org/download.php?file=images\%2F/CinGG-20251121-alternative_shortcuts.AppImage}{here} (note that the file contains the month and last day of the month, but you will want to go up a directory and download the latest date instead to include the current changes). A table showing the changes from \CGG{} mode to standard mode can be found here: \nameref{sec:alternative_shortcuts}.
 
 \section{Download Already Built \CGG{}}%
 \label{sec:download_already_built_cinelerra_gg}
@@ -130,7 +130,7 @@ system area and for multi-user systems.
 In addition, performing the package install checks the md5sum in
 the file \texttt{md5sum.txt} to ensure the channel correctly
 transmits the package.  There is a
-\href{https://download.cinelerra-gg.org/}{README.pkgs}
+\href{https://download.cinelerra-gg.org/download.php?file=\%2FREADME.pkgs}
 file in the \texttt{download} directory with instructions so you
 can \textit{cut and paste} and avoid typos; it is also shown
 next.
@@ -167,8 +167,6 @@ and will have the name of HTML\_Manual-20251121.tgz substituting for
 "20251121" the "yyyymmdd" representing latest release date.
 Then unpack to your cinelerra/bin/doc directory so it is included in
 your built system.
-
-\url{https://download.cinelerra-gg.org/?path=\%2Fimages} and look for the latest release in that folder.
 
 Alternatively, there are some pre-built dynamic or static binaries
 in the \textit{images} folder which are updated on a fairly regular
@@ -234,7 +232,7 @@ To do a system build \index{build} , you should read the file
 \begin{lstlisting}[style=sh]
 # This is where you need the 6.0GB of disk space:
 cd /<build_path>/
-git clone --depth 1 https://git.cinelerra-gg.org/goodguy/cinelerra.git
+git clone --depth 1 https://git.cinelerra-gg.org/goodguy/cinelerra.git cinelerra
 # Change to the cloned directory:
 cd cinelerra/cinelerra-5.1
 \end{lstlisting}
@@ -306,7 +304,7 @@ the top level after you get the source.
 \begin{lstlisting}[style=sh]
 # This is where you need the 6GB of disk space
 cd /<build_path>/
-git clone --depth 1 https://git.cinelerra-gg.org/goodguy/cinelerra.git
+git clone --depth 1 https://git.cinelerra-gg.org/goodguy/cinelerra.git cinelerra
 # Toplevel directory:
 cd cinelerra/cinelerra-5.1
 \end{lstlisting}
@@ -748,7 +746,7 @@ keep it.
 
 \begin{lstlisting}[style=sh]
 cd /<repo_path>/
-git clone --depth 1 https://git.cinelerra-gg.org/goodguy/cinelerra.git 
+git clone --depth 1 https://git.cinelerra-gg.org/goodguy/cinelerra.git cinelerra
 cp -a /<repo_path>/cinelerra-5.1 /tmp/
 cd /tmp/cinelerra-5.1
 ./bld.sh
@@ -953,7 +951,7 @@ Terminal
 
 \begin{enumerate}
 \item Download the libxcb-bld-tar.bz2 tar file at:
-  \href{https://download.cinelerra-gg.org/?path=\%2Ftesting}{libxcb-bld.tar.bz2}.
+  \href{https://download.cinelerra-gg.org/download.php?file=testing\%2Flibxcb-bld.tar.bz2}.
 
 \item Install libxcb from the tar file -- installs into
   \texttt{/usr/local} and requires approximately 21MB storage.
@@ -964,7 +962,7 @@ tar -C /usr/local -xJf /path/libxcb-bld.tar.bz2
   Cinelerra.
 
 \item Download the cygcin-bld.tar.bz2 file at:
-  \href{https://download.cinelerra-gg.org/?path=\%2Ftesting}{cygcin-bld.tar.bz2}.
+  \href{https://download.cinelerra-gg.org/download.php?file=testing\%2Fcygcin-bld.tar.bz2}.
 
 \item Install cygcin from the tar file - this installs into home
   directory.  Note this is cygcin \emph{not} cygwin. You must change the
@@ -1050,7 +1048,7 @@ make install
 \item Download cinelerra-gg:
 \begin{lstlisting}[style=sh]
 cd /build_path/
-git clone https://git.cinelerra-gg.org/goodguy/cinelerra.git
+git clone https://git.cinelerra-gg.org/goodguy/cinelerra.git cinelerra
 cd cinelerra/cinelerra-5.1
 \end{lstlisting}
 \item Apply cygwin patch:
@@ -1171,7 +1169,7 @@ is the build farm for \CGG{} deb and rpm packages that is maintained regularly
 at this location \url{https://github.com/einhander/cin-gg-packages/releases}.
 It will build packages on every git change in the main repo with  
 releases corresponding to a build date, not a git commit date.
-Current build hosts are \textbf{Debian 12}, \textbf{Debian 11},
+Current build hosts are \textbf{Debian 13},\textbf{Debian 12}, \textbf{Debian 11},
 \textbf{Suse Leap 15.5}, \textbf{Fedora 38}, and \textbf{Ubuntu 22.04}.
 This build farm creates packages for the latest current versions of these
 distros with the potential for additional distros to be added in the future. 
