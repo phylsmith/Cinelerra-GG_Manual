@@ -954,7 +954,7 @@ Extracts two $1920\times540$ fields from $1920\times1080$ image, resizes them se
 \label{sub:aging_tv}
 \index{Aging TV}
 
-This effect is the one to use if you want to achieve an old movie or TV show look. It will put moving lines up and down the movie as well as putting snow on the video. Use it along with \textit{Brightness/Contrast} and \textit{Color Balance} to make your movie look like a really old black and white movie. This came from \url{https://effectv.com}.
+This effect is the one to use if you want to achieve an old movie or TV show look. It will put moving lines up and down the movie as well as putting snow on the video. Use it along with \textit{Brightness/Contrast} and \textit{Color Balance} to make your movie look like a really old black and white movie. This came from \url{https://github.com/fukuchi/EffecTV}.
 
 \subsection{Alpha}%
 \label{sub:alpha}
@@ -1629,7 +1629,7 @@ Use the effect along with keyframing to brighten a long shot that is dark at the
 \label{sub:burningtv}
 \index{burning TV}
 
-Makes your video burn where there are small light colored patches of video. This came from \url{https://effectv.com}.
+Makes your video burn where there are small light colored patches of video. This came from \url{https://github.com/fukuchi/EffecTV}.
 
 \subsection[C41]{C41}%
 \label{sub:c41}
@@ -2130,7 +2130,7 @@ Pixels which are different between the background and action track are treated a
 \label{sub:dottv}
 \index{dotTV}
 
-Puts various size dots over the picture to simulate TV effect. This came from: {\small \url{https://effectv.com}}.
+Puts various size dots over the picture to simulate TV effect. This came from: {\small \url{https://github.com/fukuchi/EffecTV}}.
 
 \subsection{Downsample}%
 \label{sub:downsample}
@@ -2526,7 +2526,7 @@ Some examples of the use of curves to demonstrate the variety of possible interv
 
 Incoming objects are projected like holovision seen in the movie Stars Wars as in R2-D2's video message projector of the Princess Leia (figure~\ref{fig:holographictv}). You need a movie or background image and above it a track containing the figure on which to apply the effect. This must have a transparent background. There are no configuration parameters; it only has to be applied to the upper track.
 
-This effect originated from {\small \url{https://effectv.com}}.
+This effect originated from {\small \url{https://github.com/fukuchi/EffecTV}}.
 
 
 \subsection{Hue saturation}%
@@ -4390,7 +4390,7 @@ cd build && cmake \
   -DINSTALL_C_EXAMPLES=ON \
   -DINSTALL_PYTHON_EXAMPLES=ON \
   -DBUILD_EXAMPLES=ON .. \
-  -DBUILD_opencv\_python3=no \
+  -DBUILD_opencv_python3=no \
   -DCMAKE_INSTALL_PREFIX=/usr/local \
   -DOPENCV_EXTRA_MODULES_PATH="\$(opencv)_contrib/modules/"
 \end{lstlisting}
@@ -4409,7 +4409,7 @@ src=typ git,tar,git=url,tar=url: git (default git\_url), tar (default: tar\_url)
 # Use one of the following:
 --with-opencv=sta
 --with-opencv=dyn
---with-opencv=sta,tar=https://cinelerra-gg.org/download/opencv/opencv-20180401.tgz
+--with-opencv=sta,tar=https://download.cinelerra-gg.org/download.php?file=opencv%2Fopencv-20200306.tgz
 
 # For example: ./configure <params> --with-opencv=sta,git
 \end{lstlisting}
