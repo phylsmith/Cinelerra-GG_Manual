@@ -5,41 +5,35 @@
 \label{sec:cin_quick_start_guide}
 \index{quickstart guide}
 
-\CGG{} is a software program NLE, Non-Linear Editor, that provides a way to edit, record, and play audio or video media on Linux.   It can also be used to color correction, retouch photos, motion tracking, watch TV, and create DVDs.
+\CGG{} is a software program NLE, Non-Linear Editor, that provides a way to edit, record, and play audio or video media on Linux.   It can also be used for color correction, to retouch photos, do motion tracking, watch TV, or to create DVDs.
 
 \subsection{Install the Software}%
 \label{sub:install_software}
 
 On the internet, click on the Download page at:
 \begin{center}
-	{\small \url{https://cinelerra-gg.org/downloads/}}
+	{\small \url{https://download.cinelerra-gg.org/?path=\%2Fimages}}
 \end{center}
-Here you will see several Operating System distro packages that are already built for you to download.  Click on your preference and read the specific instructions for usage.
+Here you will see several AppImage files already built for you to download, with different dates that will work on most any Linux
+Operating System. Click on the one with the newest date
+which will be in most cases similar to CinGG-2025xxxx-x86\_64.AppImage where 2025xxxx is
+the latest creation date. The designation, x86\_64, is for the usual 64 bit systems.
 
-\begin{figure}[htpb]
-	\centering
-	\includegraphics[width=1.0\linewidth]{packages.png}		
-\end{figure}
+Make the file executable with the proper execute permissions either from the GUI of the Desktop Environment used (link to the file) or from a terminal window.  Make sure you are already in the directory containing the appimage and then execute something like the following but substituting the exact name:
 
-However, if you want to get going as quickly as possible, just do this so that everything is in 1 place:
+\begin{lstlisting}[style=sh]
+        chmod u+x CinGG-yyyymmdd-xxxxxx.AppImage
+\end{lstlisting}
 
-\begin{itemize}[noitemsep]
-	\item Download your Operating System’s tar file from {\small \url{https://cinelerra-gg.org/download/tars/}} to \texttt{/tmp}.
-	\item Key in:  cd /name-of-directory-where-you-want-the-software (for example, \texttt{cd /software})
-	\item Key in:  \texttt{mkdir cin}
-	\item Key in:  \texttt{cd cin}
-	\item Key in:  \texttt{tar -xJf /tmp/cinelerra-5.1-*.txz}   (if you put the tar in \texttt{/tmp} AND replace * with full name)
-\end{itemize}
 
 \subsection{Start \CGG{}}%
 \label{sub:start_cinelerra_gg}
 
-Depending on how you installed the software, you can log in as root or as a user if you used a package.
+Finally start the program from a window in the directory where the image is stored (again, substituting the file date for yyymmdd):
 
-\begin{itemize}[noitemsep]
-	\item Key in:  \texttt{/your-software-directory-path/bin/cin}
-	\item Or if you installed using the pkg method, click on the \textit{Cin icon}.
-\end{itemize}
+\begin{lstlisting}[style=sh]
+        ./CinGG-yyyymmdd-x86_64.AppImage
+\end{lstlisting}
 
 \begin{figure}[htpb]
 	\centering
@@ -53,9 +47,9 @@ Any of these windows can be resized to better suit your needs.  Note that if you
 
 It is important to know that \CGG{} does not directly change your media.  It writes all changes to what is called the EDL, Edit Decision List.  This way you original media remains completely intact.
 
-Before you get startedi here is a note about \textit{Context Help}. If you need more
+Before you get started here is a note about \textit{Context Help}. If you need more
 detailed information on a window, menu, button or other particular GUI element than
-is shown in the tooltip, press Alt/h hotkey and the HTML page in your configured web
+is shown in the tooltip, press the Alt/h hotkey and the HTML page in your configured web
 browser will display the documentation for the item currently under the mouse.
 
 \subsection{Load Media}%
@@ -79,16 +73,17 @@ On the main timeline program window are many pulldowns, the first of which is \t
 	\item Scroll to the media file you would like to work on and highlight that file.  When you do, you will
 	see that filename also appear in the textbox below the listing of files.  You could have directly
 	keyed in that file in that textbox instead.
-	\item On the bottom of the Load menu, is a box called \textit{Insertion strategy}.  For getting started the
-	default of \textit{Replace current project} is sufficient.  But you can click on the down arrow to see what
+	\item On the bottom of the Load menu, is a box called \textit{Load strategy}.  For getting started the
+	default of \textit{Create new resources only} should probably be switched to the
+first option of \textit{Replace current project}.  But you can click on the down arrow to see what
 	is available for future use.
-	\item Now click on the green colored checkmark on the bottom left hand side to actually load the file
+	\item Now click on the green colored plus sign in the circle on the bottom left hand side to actually load the file
 	and see it appear on the timeline in \CGG{}’s main window and a single frame in the Compositor.
 	The first track will most likely be video thumbnails and the next tracks may be audio waveforms.
 	\item Press the space bar in the main Program window and your video will start playing and press the
 	space bar again to stop the play.  While playing, you should see the video in the Compositor
 	window in the upper right hand side of your screen and if you have your audio hooked up, you
-	will hear the sound.  To get back to the beginning of the video, hit the home key on your keyboard.
+	will hear the sound.  To get back to the beginning of the video, hit the \textit{home} key on your keyboard.
 \end{enumerate}
 
 \subsection{Choose Output Format}%
@@ -100,7 +95,7 @@ You can skip this step if you want the format of your output to be the same as y
 	\item On the main timeline, use the \textit{Settings} pulldown (about the $7^{th}$ pulldown from the left side top) and
 	click on \textit{Format} which is the first option in that list.
 	\item A \textit{Set Format} menu will appear that shows what the current format is for your loaded media in an
-	Audio and a Video tab.  In the United States, the Video Frame rate is usually expected to be 29.970	and usually the Color model is only changed if you have a personal preference.
+	Audio and a Video tab.  In the United States, the Video Frame rate is usually expected to be 29.970. The Color model can also be changed if you have a personal preference.
 	\item The \textit{Canvas size} is probably the only thing you will want to change here in order to get to the
 	most commonly viewable settings.  On the right hand side of the Width parameter is a down arrow. 
 	Left click the down arrow to see your options.
@@ -123,10 +118,10 @@ You can skip this step if you want the format of your output to be the same as y
 	\item Mouse over the \textit{Auto Scale} icon, left click to highlight the words underneath the icon, and mouse
 	drag the icon to the timeline video track.  When you see a white colored outline show on that track,
 	drop the Auto Scale icon there and you will see that the video may now automatically scale to a
-	new value.  Click on the magnifying glass icon on the brown colored line beneath the main timeline
+	new value in the Compositor window.  Click on the magnifying glass icon on the blue colored line beneath the main timeline
 	video which opens a new window.  In that window, again use the down arrow to choose $1280\times720$
 	HD, then dismiss this window.
-	\item If not needed, to remove the Auto Scale plugin, right mouse on the brown line and choose \textit{Detach}.
+	\item If no auto scaling is needed, to remove the Auto Scale plugin right mouse on the blue line and choose \textit{Detach}.
 \end{enumerate}
 
 \begin{figure}[htpb]
@@ -141,15 +136,15 @@ You can skip this step if you want the format of your output to be the same as y
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=1.0\linewidth]{pulldown_button.png}
-	\caption{Menu pulldowns at the top with Transport buttons below.  Note the colored tooltips too.}	
+	\caption{Menu pulldowns at the top with Transport buttons below.  Note the highlighted tooltips too.}	
 \end{figure}
 
 \begin{enumerate}
 	\item On the second line, below the pulldowns, are transport buttons to move back and forth on the
 	timeline and play forward or reverse, fast or slow, or a single frame.  When you mouse over one of
-	these buttons, a colored tooltip appears to tell you its function along with a key shortcut
+	these buttons, a highlighted tooltip appears to tell you its function along with a key shortcut
 	inside of parenthesis.  When you left click the mouse on the transport button it starts the play and 
-	click again to stop it.  As you use these buttons, watch the Compositor to watch your video.
+	you click again to stop it.  As you use these buttons, look in the Compositor window to watch your video.
 	\item On the timeline, you only see thumbnails and not every single picture.  You may want to
 	use your keyboard’s \textit{down arrow} to expand the thumbnails and the \textit{up arrow} to unexpand them -- on
 	United States keyboard, the arrow keys are generally together on the lower right hand side of the
@@ -157,15 +152,15 @@ You can skip this step if you want the format of your output to be the same as y
 	large video can be time-consuming.
 \end{enumerate}
 
-If you need more detailed information on a button or other particular GUI
-element than is shown in the tooltip, press Alt/h hotkey and the HTML page
+Again, if you need more detailed information on a button or other particular GUI
+element than is shown in the tooltip, press the Alt/h hotkey and the HTML page
 in your configured web browser will display the documentation for the item
 currently under the mouse.
 
 \subsection{Edit/Compose}%
 \label{sub:edit_compose}
 
-There may be sections of your media that you want to delete, or audio that is hard to hear and needs to be enhanced, or there is a need for a descriptive title that you want to add.  Here are a few basics.  But first be sure that you are in \textit{cut and paste} mode (this is the default) by checking to verify that you see a gold color around the “I” i-beam mode icon as in the figure above.  If the arrow to the left is gold, you are in \textit{drag and drop} mode so switch to \textit{cut and paste} by clicking on the “I” instead.
+There may be sections of your media that you want to delete, or audio that is hard to hear and needs to be enhanced, or there is a need for a descriptive title that you want to add.  Here are a few basics.  But first be sure that you are in \textit{cut and paste} mode (this is the default) by checking to verify that you see a green color around the “I” i-beam mode icon as in the figure shown.  If the arrow to the left is green, you are in \textit{drag and drop} mode so switch to \textit{cut and paste} mode by clicking on the “I” instead.
 
 \begin{figure}[htpb]
 	\centering
@@ -178,41 +173,41 @@ There may be sections of your media that you want to delete, or audio that is ha
 	most common options to use.  The first option in the list is \texttt{Undo} followed by a terse comment of  
 	the last operation that you performed that can be undone.
 	\item To delete a section of video/audio is described next.  Various ways to do that are available but the
-	easiest is to move your mouse and left click at the beginning of the section you want to delete on the
+	easiest is to move your mouse and left click at the beginning of the video or audio track section you want to delete on the
 	timeline and while holding down the left mouse button, drag to the end of the section to be deleted. 
 	When you do this, a white colored highlighted section becomes visible.  Use the \textit{Edit} pulldown and
-	choose the \textit{split/cut} option to cut out the highlighted area (note the shortcut of "x").  Remember if you
+	choose the \textit{split|cut} option to cut out the highlighted area (note the shortcut of "x").  Remember if you
 	cut the wrong thing out you can always use the Edit pulldown to Undo that.
-	\item To add a transition where there is deleted section which may make your video look disjointed, do
+	\item To add a transition where there is a deleted section which may make your video look disjointed, do
 	the following.   Go back to the Resources window in the bottom right hand corner.  Change to
 	\textit{Video Transitions} by highlighting that underneath the word \textit{Visibility}.  Highlight a transition like
-	\textit{BandSlide} with the left button mouse click, hold down and drag to the video track and when you see
+	\textit{BandSlide} with the left button mouse click, hold down and drag that to the video track and when you see
 	a white colored box around the area that you deleted above, drop the icon.  Right mouse click the
-	icon on the track to vary some parameters like length.
+	icon on the track to vary some parameters, like length.
 	\item  To insert another clip from a different video, first you have to load the other video on another track.
 	Go to \textit{File} pulldown again and choose the \textit{Load files} option.  Type in a directory at the top again and
 	erase any specific file that you may have chosen previously in the bottom 2 textboxes.  It is very
-	important to now change the Insertion strategy to \textit{Append in new tracks} or you will write over
+	important to now change the Load strategy to \textit{Append in new tracks} or you will write over
 	your current work.  But if you make this mistake, you can use the Edit pulldown and Undo that!
 	\begin{enumerate}
 		\item Once the new video is on the track below your current work, you want to work with only this new 
 		track, so disarm your other tracks by looking to the left of each track’s timeline and click the $2^{nd}$ 
 		button beneath the track name, for example Video 1 or Audio 1.  The track name textbox will turn
-		red to remind you that the track has been disarmed.  The boxed area is called the patchbay.
+		red to remind you that the track has been disarmed.  The left side boxed area is called the patchbay.
 		\item Move to the area you want to make a clip of on your newly loaded track, hold down the left mouse
-		button and drag the area to be made into a clip which will turn the color white.  Remember, you
-		disarmed the other tracks so only this track is relevant at this time.  On the second line of the main
+		button and drag the area to be made into a clip which will turn the color white.  Since you
+		disarmed the other tracks only this track is relevant at this time.  On the second line of the main
 		window to the right of the transport buttons, are action buttons and as you mouse over them a
-		colored tooltip explains its purpose.  Find the one that says \textit{To clip} which is on the right
+		highlighted tooltip explains its purpose.  Find the one that says \textit{To clip} which is on the right
 		hand side of the right bracket symbol.
-		\item Click on \textit{To clip} and a small window comes up which you can comment in, but you do not have
-		to, so just click on the green checkmark and now you will have a clip.
+		\item Click on \textit{To clip} and a small window comes up which you can add a comment in, but you do not have
+		to, so just click on the green plus sign and now you will have a clip.
 		\item Disarm that new track and re-arm your original tracks so you can go back to working on them
 		\item Move your cursor to the spot in your original video where you want to insert the clip.   Make a
-		\textit{Split} with the \textit{Split | Cut} option.
+		\textit{Split} with the \textit{Split|Cut} option.
 		\item Go to the Resources window and under the word Visibility, highlight \textit{Clips} so you can see your
 		recently created clip in the box to the right.  Highlight that clip and drag it to where you did the
-		blade cut and drop it in.
+		cut, and drop it in.
 	\end{enumerate}
 \end{enumerate}
 
@@ -226,17 +221,17 @@ There may be sections of your media that you want to delete, or audio that is ha
 	\item To add a Title or any wording you will use the \textit{Title} plugin.  In the Resources window, under the
 	word \textit{Visibility}, highlight \textit{Video Effects}.  In the box to the right, many plugin icons appear.   Scroll
 	to the right using the scroll bar at the bottom of the Resources window to locate Title.  Highlight the
-	\textit{Title} icon and drag/drop to your video track.  By now your video track may be in sections as you
-	deleted, added blade cuts, and inserts so where you drop the Title icon will be surrounded with a
+	\textit{Title} icon and drag and drop to your video track.  By now your video track may be in sections as you
+	deleted, added cuts, and inserts so where you drop the Title icon will be surrounded with a
 	white colored box.  It will take effect in that entire area so you may want to highlight a section as
 	usual with left mouse click on the timeline and drag to the end of the desired area.
 	\begin{enumerate}
-		\item Right click on the brown colored bar that appeared below your video track to get to options and
+		\item Right click on the blue colored bar that appeared below your video track to get to options and
 		then left click on \textit{Show} to get the Title window to appear.
 		\item Now for the fun part.  First type in some words in the bottom large text box just to see what it
 		does.  There are so many variable parameters here and they are a lot of fun to play around with.
-		\item You can dismiss the Title window when finished BUT be sure to leave the brown colored Title bar
-		on the track.  And if you enabled the \textit{drag} feature, you should disable it so you do not forget.
+		\item You can dismiss the Title window when finished BUT be sure to leave the blue colored Title bar
+		on the track.  And if you enabled the \textit{drag} feature in the Title menu, you should disable it so you do not forget.
 		\item Right mouse click on the bottom Text box to see many more interesting parameters.
 	\end{enumerate}
 \end{enumerate}
@@ -244,14 +239,14 @@ There may be sections of your media that you want to delete, or audio that is ha
 \subsection{Back up your work}%
 \label{sub:backup_your_work}
 
-At this time, or even earlier if you think you might make a mistake or if you are concerned about computer crashes, you should save your work.  Use the \textit{File} pulldown, and you can use \textit{Save as} to designate a directory and filename.  Then click the green checkmark.  You are saving the EDL which is the set of changes that you have made -- this file is separate from your original media.
+At this time, or even earlier if you think you might make a mistake or if you are concerned about computer crashes, you should save your work.  Use the \textit{File} pulldown, and you can use \textit{Save as} to designate a directory and filename.  Then click the green plus sign.  You are saving the EDL which is the set of changes that you have made -- this file is separate from your original media.
 
 \subsection{Create your new media}%
 \label{sub:create_new_media}
 
 \begin{enumerate}
-	\item Once again in the main Program window, click on the \textit{File} pulldown and highlight/click the \texttt{Render}
-	option which is about the $9^{th}$ option down from the top of the list.  A \CGG{} Render menu will
+	\item Once again in the main Program window, click on the \textit{File} pulldown and highlight then click the \texttt{Render}
+	option which is about the $11^{th}$ option down from the top of the list.  A \CGG{} Render menu will
 	appear.
 	\item First key in the first textbox the file to render to under \textit{Select a file to render to}.
 	\item For the \textit{File Format}, click on the down arrow and select FFMPEG (because this is the most
@@ -259,23 +254,23 @@ At this time, or even earlier if you think you might make a mistake or if you ar
 	click on the down arrow and highlight \texttt{mp4} -- again because this is common.  When you click on 
 	mp4, notice that if there is an extension to your filename in the \textit{file to render to} above, it may
 	change it to mp4 and if there is none, it will add \texttt{.mp4} because that is what is expected.
-	\item Make sure there is a red colored checkmark next to the words Audio and Video right below if you
-	have/want both audio and video.  To the left of that checkmark box, is a symbol that looks like a
+	\item Make sure the box is highlighted with green next to the words Audio and Video right below if you
+	want both audio and video to be rendered/created.  To the left of that square box, is a symbol that looks like a
 	wrench.  Click on this for Audio just to see the default Preset options which are just fine so dismiss
 	the menu.  Then click on the wrench for Video and check Pixels by using the down arrow to the
-	right to be yuv420p -- this is most commonly usable option.  And click on the green checkmark.
-	\item Check the Insertion Strategy in the Render Menu window.  You might want to change that to
+	right to be yuv420p -- this is most commonly usable option.  And click on the green plus sign to dismiss this window.
+	\item Check the Load Strategy in the Render Menu window.  You might want to change that to
 	a different strategy than the default of \textit{Append in new tracks}.  If not, then when the Render is done,
 	your new video will automatically be loaded in another set of tracks below your work tracks.  Click
-	on the green checkmark in the lower left corner to start the render.
-	\item As the render is running, you will see the video play by in the Compositor.  Rendering is usually
+	on the green plus sign in the lower left corner to start the render.
+	\item As the render is running, you will see some sections of the video play in the Compositor.  Rendering is usually
 	slow, especially with plugins added.
 \end{enumerate}
 
 \subsection{Play your new media}%
 \label{sub:play_your_new_media}
 
-The file you created in the Render step should now be playable.  You can test this in \CGG{} most easily by going to the Resource window in the lower right corner, clicking on the Media folder, and dragging and dropping the last video to the Viewer window.  There is a separate set of transport buttons on the bottom on that screen to use for playing.
+The file you created in the Render step should now be playable.  You can test this in \CGG{} most easily by going to the Resources window in the lower right corner, clicking on the Media folder, and dragging and dropping the last video to the Viewer window.  There is a separate set of transport buttons on the bottom on that screen to use for playing.
 
 \section{Overview on Formats and Codecs}%
 \label{sec:overview_formats}
