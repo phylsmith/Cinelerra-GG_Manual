@@ -6,19 +6,24 @@
 \label{sec:cin_gg_appimage}
 \index{appimage}
 
-The main way to install \CGG{} is to use the AppImage. This is updated regularly and works for many Operating Systems and versions since it already contains the necessary dependencies. 
-A big advantage of using the AppImage format is that it is only 1/3 the size of the normal install, and since each release is named differently, you can keep a number of versions in a directory, and when testing from a terminal you just have to type CinGG, then hit tab, and complete it to the desired date release.  A small disadvantage of using the AppImage format is that some of the options to make minor text type changes are not available and any graphics board speedups most likely will not work.  In many cases, rendering has been found to take a small percentage longer than if you do your own build or use a package RPM as documented at \nameref{sec:distro_with_cinelerra_included}. It is assumed that general processing will be slightly slower also.
+For users that have a newer version of any of the most popular Linux Operating Systems,
+your best option is to install the \CGG{} package (see \ref{sec:packages} for details) at:
+
+  {\small \url{https://github.com/einhander/cin-gg-packages/releases}}
+
+However, for just about everyone else the easiest way to install \CGG{} is to use the AppImage. This is updated regularly and works for many Linux Operating Systems and versions since it already contains the necessary dependencies. 
+A big advantage of using the AppImage format is that it is only 1/3 the size of the normal install, and since each release is named differently, you can keep a number of versions in a directory, and when testing from a terminal you just have to type CinGG, then hit tab, and complete it to the desired date release.  A small disadvantage of using the AppImage format is that some of the options to make minor text type changes are not available and any graphics board speedups most likely will not work.  In many cases, rendering has been found to take a small percentage longer than if you do your own build or use a package RPM as documented here \nameref{sec:distro_with_cinelerra_included}. It is assumed that general processing will be slightly slower also.
 
 For 64-bit systems you can choose between an image with up-to-date libraries or one that supports older libraries (named \textit{older-distro}), which you should use only if the first image gives you problems with unsupported libs.  
 
 There are also 32-bit distros available that have \textit{i386} as part of the filename that currently works on older distros but may not work on the newest distros
-(most of the popular Linux distributions such as Arch, Ubuntu, and Fedora have dropped support for this older architecture). In any case, if you are using a 32-bit Linux distro, you might want to compile your sources from git or use a precompiled binary\protect\footnote{Remember that a 32-bit distro does not address more than 4GB of memory, so you may have stability and performance problems with large, high-resolution mediafiles.}.
+(most of the popular Linux distributions such as Arch, Ubuntu, and Fedora have dropped support for this older architecture). In any case, if you are using a 32-bit Linux distro, you might want to compile your sources from git\protect\footnote{Remember that a 32-bit distro does not address more than 4GB of memory, so you may have stability and performance problems with large, high-resolution mediafiles.}.
 
-Installing the appimage is simple, download the file from:
+Installing the appimage is simple, download the latest release from:
 
-\url{https://download.cinelerra-gg.org/?path=\%2Fimages} and look for the latest release in that folder.
+{\small \url{https://download.cinelerra-gg.org/?path=\%2Fimages}}
 
-Some example file names are as follows - where 8 digits represent yyyymmdd and i386 are 32-bit:
+Some example file names are as follows - where 8 digits represent yyyymmdd, x86\_64 are the standard 64-bit systems, and i386 are 32-bit:
 
 \begin{lstlisting}[style=sh]
 	CinGG-20251231-x86_64.AppImage
@@ -46,9 +51,9 @@ Finally start the program from a window in the directory where the image is stor
 \end{lstlisting}
 
 or create a convenient desktop icon with a link to the run action, or do a \textit{Desktop Integration} manually or with external programs.  There is a 
-description of a GUI methodology for doing so in the file to download at:
+description of a GUI methodology for doing so in the file at:
 
-\url{https://download.cinelerra-gg.org/download.php?file=images\%2FREADME_appimage.txt}
+{\small \url{https://download.cinelerra-gg.org/download.php?file=images\%2FREADME_appimage.txt}}
 
 Most distros already have the libraries to run the appimage, but if not you may need an additional installation. For example Arch Linux needs the \texttt{libappimage} package.
 
@@ -77,70 +82,57 @@ In addition, in \CGG{} the keys are fixed and not customizable. A new user may h
 \section{Download Already Built \CGG{}}%
 \label{sec:download_already_built_cinelerra_gg}
 
-\begin{figure}[htpb]
-	\centering
-	\includegraphics[width=1.0\linewidth]{download-distros.png}
-	\caption{Screencast of the website Download page for installing \CGG{} for various O/S.}
-	\label{fig:download-distros}
-\end{figure}
+Many distros have repositories of pre-built packages that include \CGG{}.
+An excellent release distribution can be found at: 
 
-All of these images are dated 10/31/2020 and are no longer being maintained.  They
-will still work on the version of the O/S in use at that time but will have none of
-the latest features.  You should use the simpler AppImage instead as described previously.
+   \url{https://github.com/einhander/cin-gg-packages/releases}.
 
-If you prefer to not have to take the time to build \CGG{} Infinity
-yourself, there are pre-built dynamic or static binaries for various
-versions of Ubuntu, Mint, Suse, Fedora, Debian, Centos, Arch, and
-Slackware linux as well as Gentoo and FreeBSD.  If you do want to build it yourself so that
-you get the added benefit of the latest checked in changes, please reference
-~\ref{sec:How_to_build}.
-%
-A Windows 10 version installation is described in~\ref{sec:ms_windows10}.  There are also 32-bit i686 Ubuntu, Debian,
-and Slackware versions available\protect\footnote{Remember that a 32-bit distro does not address more than 4GB of memory, so you may have stability and performance problems with large, high-resolution mediafiles.}. \textbf{These binaries are no longer being updated; they are stable and working but without future functionality}.
+This is especially advantageous to the way some users prefer to keep CinelerraGG
+updated as it uses the standard deb and rpm packages methodology.
+It automatically builds packages on every git change in the main repo with  
+releases corresponding to a build date, not a git commit date.
+Current build hosts are:
+
+\begin{lstlisting}[style=sh]
+	Debian 13 
+	Debian 12 
+	Debian 11 
+	Suse Leap 15.5
+	Suse Tumbleweed 
+	Fedora 38
+	Ubuntu 22.04
+\end{lstlisting}
+
+This build farm creates packages for the latest current versions of these
+distros with the potential for additional distros to be added in the future. 
+There are also packages for some previously built dates
+in case you want to revert to a specific package date.  You might have to 
+install libsuil-0-0 (library for loading and wrapping LV2 plugin UIs) but
+you will be informed by the installation process if so.
+
+In addition there are older pre-built dynamic/static binaries that are
+ \textbf{no longer being updated; they are stable and working but without any new functionality since 10/31/2020}.
+You should use the simpler AppImage instead as described previously.
+They include Arch(10/31/2020), Centos7.6.1810, Centos8,0.1905, Debian9, Debian10, Fedora30,
+Fedora31, Fedora32, Leap15.1, Leap15.2,Mint18.2, Mint19, Mint20, Slk32-14.2 (slackware 32-bit), 
+Slk64-14.2 (slackware 64-bit), Ubuntu14.04.1, Ubuntu16.04, Ubuntu18.04, Ubuntu20.04,
 They are in subdirectories of:
-
 \begin{list}{}{}
 	\item \href{https://download.cinelerra-gg.org/?path=\%2Ftars}{https://download.cinelerra-gg.org/?path=\%2Ftars}
 	\item \href{https://download.cinelerra-gg.org/?path=\%2Fpkgs}{https://cinelerra-gg.org/download/?path=\%2Fpkgs}
 \end{list}
-
-The \textbf{tars} \index{tars} directory contains single-user static builds for
+The \textit{tars} \index{tars} directory contains single-user static builds for
 different distros.
 %
-This is the recommended usage of \CGG{} because all of the files
-will exist in a single directory.  Generally all of the necessary
-libraries are built into the static build, but in some cases you may
-have to install another library that is being called for.
-%
-To install the single user builds, download the designated tarball
-from the \texttt{./tars} subdirectory and unpack as indicated below:
-
-\begin{lstlisting}[style=sh]
-	cd /path
-	mkdir cin
-	cd cin
-	tar -xJf /src/path/cinelerra-5.1-*.txz  # for the *, substitute your distro tarball name
-\end{lstlisting}
-
-The \textbf{pkgs} \index{pkgs} directory contains the standard packaged
-application for various distros.  This will install a dynamic
-system version for users who prefer to have the binaries in the
-system area and for multi-user systems.
-%
-In addition, performing the package install checks the md5sum in
-the file \texttt{md5sum.txt} to ensure the channel correctly
-transmits the package.  There is a
+The \textit{pkgs} \index{pkgs} directory contains the standard packaged
+application for various distros.  There is a
 \href{https://download.cinelerra-gg.org/download.php?file=\%2FREADME.pkgs}
 file in the \texttt{download} directory with instructions so you
-can \textit{cut and paste} and avoid typos; it is also shown
-next.
+can \textit{cut and paste} and avoid typos.
 
-\lstset{inputpath=extra/}
-\lstinputlisting[
-style=nil,
-basicstyle=\footnotesize,
-caption={README.pkgs}
-]{README.pkgs}
+Other Operating Systems with available packages are often posted in various
+places on the internet; this includes Gentoo, FreeBSD, Rosa, Sparc32, xxxx.  
+A Windows 10 version installation is described in~\ref{sec:ms_windows10}.
 
 \section{How to Build \CGG{} from Developer's Git Repository}%
 \label{sec:How_to_build}
@@ -148,8 +140,8 @@ caption={README.pkgs}
 \index{git}
 
 These are generic build instructions for building \CGG{} Infinity.
-Known to work on Ubuntu, Mint, OpenSuse, Fedora, Debian, Centos,
-Arch, Slackware, Gentoo, many more less used distros and variations. 
+Known to work on Ubuntu, Mint, OpenSuse/Leap/Tumbleweed, Fedora, Debian,
+Centos, Arch, Slackware, Gentoo, and many more less used distros and variations. 
 Compiling from git is perhaps the best way to get \CGG{} on 32-bit systems although
 you may have to make use of older thirdparty libraries than the current one in use\protect\footnote{Remember that a 32-bit distro does not address more than 4GB of memory, so you may have stability and performance problems with large, high-resolution mediafiles.}. For example,
 if building a 32-bit version on Debian 9.1, you will have to revert to the R3106 version
@@ -173,13 +165,6 @@ and will have the name of HTML\_Manual-20251231.tgz substituting for
 "20251231" the "yyyymmdd" representing latest release date.
 Then unpack to your cinelerra/bin/doc directory so it is included in
 your built system.
-
-Alternatively, there are some pre-built dynamic or static binaries
-in the \textit{images} folder which are updated on a fairly regular
-basis (as long as code changes have been made) available at this link.
-\begin{center}
-  \href{https://download.cinelerra-gg.org/?path=\%2Fimages}{https://download.cinelerra-gg.org/?path=\%2Fimages}
-\end{center}
 
 There are 2 kinds of builds, the default system-build and a
 single-user build.  A system build has results which are installed
@@ -209,10 +194,10 @@ it possible to have several different versions installed without
 having them interfere with each other.
 
 \begin{enumerate}
-\item application name can be set during a build but defaults
-  to: \texttt{cin}
-\item the home configuration directory can also be set and
-  traditionally defaults to: \texttt{\$HOME/.bcast5}
+\item Application name can be set during a build but defaults
+  to: \texttt{cin}.
+\item The home configuration directory can also be set and
+  traditionally defaults to: \texttt{\$HOME/.bcast5}.
 \end{enumerate}
 
 
@@ -366,27 +351,6 @@ A working example of how to build in Arch as a normal user:
 \$ make 2>&1 | tee /tmp/cin.log &&  make install
 \$ mv Makefile Makefile.cfg
 \$ cp Makefile.devel Makefile
-\end{lstlisting}
-
-\subsection{8-bit build for x265 encoding}%
-\label{sub:8_bit_build}
-
-The standard versions of AppImage, the pre-compiled binary and any build you do yourself, is the \textit{multibit} version by default, which allows rendering of the x265 codec at all supported bit-depths. If instead you prefer to compile the 8-bit only version, there is the option to do so. The 8-bit version does not have 10/12-bit encoding of x265; the 8-bit version works on 8-bit bytes which is the standard word size for computers, while the multibit version has to use 2 words to contain all 10/12 bits so you might expect rendering to be slower. Various tests show that there is little or no difference in performance between the two versions, especially on modern systems, so the standard multibit version is the recommended one. If you have a need to compile the 8-bit version first perform the following steps:
-
-\begin{enumerate}
-\item Move to the thirdparty directory: cd /path\_to/cinelerra-5.1/thirdparty 
-\item Edit the file "Makefile" by changing these 3 lines to switch the \# comment character like this:\\
-  \begin{tabular}{ll}
-	\#x265.cfg\_vars?=chmod +x ./configure; chmod +x ./multilib.sh;\\
-	x265.cfg\_vars?=\$(call cmake\_config,source)\\
-	x265.cfg\_params?= -DENABLE\_SHARED=no -DENABLE\_CLI=no\\
-  \end{tabular}
-\item Then delete or rename the 3 patch files in thirdparty/src with names of x265-xxxxx.patchx.
-\end{enumerate}
-
-Using the 8-bit version will result in an error if you use the Render formats \textit{h265-10bit} and \textit{h265-12bit}.  Error message on the startup window is something like this:
-\begin{lstlisting}[style=sh]
-[libx265 @ 0x7fa00e643880] Specified pixel format yuv422p1xle is not supported by the libx265 encoder.
 \end{lstlisting}
 
 \subsection{Notable Options and Caveats}%
@@ -1080,14 +1044,13 @@ must run from an external console window to avoid this issue.
 \label{sec:android_termux}
 \index{Android}
 
-\CGG{} can be run on Android (without audio), a non-x86 mostly posix system,
+\CGG{} can be run on Android, a non-x86 mostly posix system,
 tablet or phone after installing TERMUX, the \textit{terminal emulator}.
 You will have to do your own build using the file in Cinelerra's
 \texttt{blds} subdirectory, \texttt{termux.bld}.
 Because this is a relatively new capability and of lesser use, some
 additional effort may have to be exerted on your part to get it going
 but it is easy to get help by contacting the mailing list.
-In addition, there is currently no known procedure for hearing audio.
 
 \begin{figure}[htpb]
 	\centering
@@ -1108,15 +1071,27 @@ inside termux (it will prompt you to give access to sdcard graphically the first
 \newline you will have to request non-empty versions via the mailing list.
 \item Some helpful information on installing the X environment is at:
  \url{https://wiki.termux.com/wiki/Graphical\_Environment}
-\item To prevent crashing when loading a video file that has audio, use the guide
- \url{https://www.reddit.com/r/termux/comments/bpa8jz/pulseaudio\_streaming\_client/}
- which explains vnc/pulseaudio setup.
+\item Audio for newer Termux versions \textit{with Alsa} support should automatically work as the default.
+\item Audio for Termux \textit{without Alsa} support, works when remote DISPLAY is pointing to your desktop.
+
+  \begin{tabular}{ll}
+Launch \CGG{} via: DISPLAY="ip\_of\_my\_desktop:1.0". \\
+Video will be displayed in the Xephyr window with e16 WM; \\
+ - does not quite fit into 640x480. \\
+Launch Xephyr via: " -ac -listen tcp" parameters; \\
+ - in order to connect from another computer. \\
+  \end{tabular}
+
+\item Audio fails if using vnc connection to realvnc but a workaround is explained next to prevent video from crashing. 
 \end{enumerate} 
 
-A little more about Audio is presented next because you will need to have this running
-in order to prevent a crash (even though you still will not be able to hear audio) -- there does not seem to be a simple PA client in termux itself.
-Some information is available at:
- \url{https://android.stackexchange.com/questions/205576/how-to-play-sound-from-termux-when-using-linux} .
+If using the vnc connection to realvnc on the tablet with Audio failing, the workarouond to prevent
+a crash so you can still work on the video is explained in the guide: \\
+{\small \url{https://www.reddit.com/r/termux/comments/bpa8jz/pulseaudio\_streaming\_client/}.
+This guide explains the vnc/pulseaudio setup which will prevent a crash but you still
+will not be able to hear audio.
+Other pertinent information is available at: \\
+{\small \url{https://android.stackexchange.com/questions/205576/how-to-play-sound-from-termux-when-using-linux}}.
 
 The next few lines show a successful setup/usage.
 \begin{lstlisting}[style=sh]
@@ -1172,7 +1147,10 @@ capabilities as well as some pre-built packages in a build farm.
 \label{sec:packages}
 Especially advantageous to the way some users prefer to keep CinelerraGG updated
 is the build farm for \CGG{} deb and rpm packages that is maintained regularly
-at this location \url{https://github.com/einhander/cin-gg-packages/releases}.
+at:
+
+\url{https://github.com/einhander/cin-gg-packages/releases}.
+
 It will build packages on every git change in the main repo with  
 releases corresponding to a build date, not a git commit date.
 Current build hosts are \textbf{Debian 13}, \textbf{Debian 12}, \textbf{Debian 11}, 
