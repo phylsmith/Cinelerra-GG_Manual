@@ -174,11 +174,13 @@ derivative allows video to be processed fast with the least color
 degradation.
   \item[YUVA-8 bit] Allocates an alpha channel to the 8\,bit YUV
 colormodel for transparency.
+  \item[YUV-16 bit] Allocates 16\,bits for Y, U, and V. This is used for standard dynamic range and high dynamic range operations in which the media is compressed in the YUV color space. It uses more CPU than YUV-8 bit but has greater color accuracy. To activate this feature you will have to set the ALLOW\_OLD\_16BPC environment variable to any value. It is still in the experimental phase. For example, the Titler plugin does not work.
+\item[YUVA-16 bit] Allocates an alpha channel to the 16\,bit YUV colormodel for transparency. It is still in the experimental phase. Reference YUV-16 bit for further details.
   \end{description}
 
 In order to do effects which involve alpha
 channels \index{alpha channel}, a colormodel with an alpha channel must be selected.
-These are RGBA-8 bit, YUVA-8 bit, and RGBA-Float.  The 4 channel
+These are RGBA-8 bit, YUVA-8 bit, YUVA-16 bit (experimental), and RGBA-Float. The 4 channel
 colormodels are slower than 3\,channel colormodels, with the slowest
 being RGBA-Float.  Some effects, like fade, work around the need for
 alpha channels while other effects, like chromakey, require an alpha
