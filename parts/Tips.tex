@@ -24,13 +24,21 @@ Besides the above hardware recommendations, this section covers tips for perform
 \label{sec:hardware_video_acceleration}
 \index{hardware!acceleration}
 
-With certain newer, more powerful graphics boards and newer device drivers, there is the potential for enhanced \textit{decode} and \textit{encode} performance.   Decode refers to loading and playing video in \CGG{}. The GPU, Graphics Processing Unit, on the graphics board is accessed via one of the following libraries: vdpau or vaapi. The hardware acceleration done by the graphics card increases performance by activating certain functions in connection with a few of the FFmpeg decoders. This use makes it possible for the graphics card to decode video, thus offloading the CPU.  Decode operations are described here next.  
+With certain newer, more powerful graphics boards and newer device drivers, there is the potential for enhanced \textit{decode} and \textit{encode} performance.   Decode refers to loading and playing video in \CGG{}. The GPU, Graphics Processing Unit, on the graphics board is accessed via one of the following libraries: vdpau or vaapi. The hardware acceleration done by the graphics card increases performance by activating certain functions in connection with a few of the FFmpeg decoders. This use makes it possible for the graphics card to decode video, thus offloading the CPU.
+
+NOTE: Hardware acceleration in Linux is constantly evolving and causes numerous problems (but if it doesn't work, it automatically reverts in \CGG{} to software mode with the CPU). It depends on the generation and brand of the video card; on proprietary or open source drivers and on mesa user space drivers. Drivers change constantly, especially with the succession of new graphics card models, and what worked before may no longer work afterwards, or vice versa. Furthermore, being able to take advantage of hardware acceleration could mean having to compile \CGG{} yourself by activating specific flags that are necessary (for example: having hardware acceleration in decoding and encoding the \textit{ffv1} codec requires compiling with the \texttt{libplacebo} library). Another case is having to start the program with environment variables (for example, for older AMD cards, before RDNA, use \texttt{RADV\_PERFTEST="video\_decode,video\_encode"} to get hardware acceleration via Vulkan. Or use \texttt{ANV\_DEBUG="video-decode,\\video-encode"} for acceleration via Intel, etc.). It should also be noted that sometimes software decoding can be more efficient than hardware acceleration. You need to experiment to see what works best for your use case.
+
+Decode operations are described here next. They are located in: \texttt{Settings $\rightarrow$ Preferences... $\rightarrow$ Tab Performance $\rightarrow$ Use HW Device}. 
+
 Encode refers to rendering video and is described at the end of this section
 under \hyperref[sub:gpu_hardware_encoding]{GPU hardware encoding}.
 
 VDPAU, Video Decode and Presentation API for Unix, is an open source library to offload portions of the video decoding process and video post-processing to the GPU of graphics boards, such as Nvidia.  It may also apply to Nouveau and Amdgpu boards (by wrapper), but that has not been verified.
 
-VA-API, Video Acceleration API, is an open source library which provides both hardware accelerated video encoding and decoding for use mostly with Intel (and AMD) graphics boards. 
+VA-API, Video Acceleration API, is an open source library which provides both hardware accelerated video encoding and decoding for use mostly with Intel (and AMD) graphics boards.
+
+VULKAN (experimental) Vulkan, like OpenGL and unlike Vdpau and Vaapi, is hardware agnostic and could work for any type and brand of video card. Vulkan is direct GPU access, with better performance, efficient multithreading, and reduced driver overhead compared to the older OpenGL standard, It emulates OpenGL functionality. 
+Vulkan requires initialization of its device type. This is done automatically by \CGG{} for decoding but still needs to be made explicit in the encoding presets. (\texttt{CIN\_HW\_DEV=vulkan}).
 
 AppImage will probably not allow for either VDPAU or VA-API hardware acceleration because the
 computer where AppImage is created will not have the same graphics card and/or vaapi/vdpau
@@ -818,4 +826,3 @@ distortions.
 In the case of the pillarbox, we will leave H unchanged while
 calculating the new value of W. The formula $\frac{x}{y} =
 \frac{W}{H}$ is valid for any aspect ratio ($4:3; 16:9; 2.35:1$; etc).
-
