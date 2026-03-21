@@ -674,19 +674,114 @@ The summary line above in Bold represents the User time, System time, Real time 
 
 So why use a Profiler? Because it is the ``ls'' for executable functions!!
 
-\section{Working on AppImage}
-\label{sec:working_on_appimage}
+\section{Details about AppImage}%
+\label{sec:appimage_details}
+\index{AppImage}
 
-You can work on the appimage file to make changes and fix errors, or you can create a new appimage from scratch containing customizations. For example, you can add new rendering presets, update the Context-Help, change libraries that are no longer supported by the current distro, or make other modifications.
+The AppImage as provided on the \CGG{} website has \textbf{all of the 
+capabilities and features} of a standard original "single user" build based on 
+the cinelerra-5.1/bld.sh script with additions to suit the operating system
+level on which the binary is built. For example, currently the 
+CinGG-yyyymmdd-x86\_64.AppImage is created from the binary built to include the
+opencv plugins and the library libsvtav1 (SVT-AV1 encoder). Whereas the 32-bit 
+older AppImage, CinGG-yyyymmdd-i386.AppImage, does not have those extras added
+when its binary is built so that the resulting AppImage does not include those
+specific features. In addition, the website AppImage includes the graphics 
+hardware/software capabilities of the computer where the binary is built. This
+means that specific graphics hardware/software capabilities that exactly match your
+computer's will not be included in the AppImage unless your computer graphics
+exactly matches the computer where it was created; in terms of capabilites this 
+refers to graphics software such as vaapi/vdpau/onevpl, etc.
+
+Since it is possible that a .deb, .rpm, or any release available from the internet
+is built in a method that differs from the standard or recommended way, such as
+enabling or disabling libraries, then their capabilities/features could be
+different than the \CGG{} website AppImage.
+
+Briefly stated, the AppImage has the exact same FFmpeg version, codecs, encoders,
+windows, formats, tools, navigation methodologies, editing functions, effects,
+shortcuts, etc. and everything works the exact same way as the binary from which it
+is derived.
+
+There is one different capability that is notable, although not necessary if you
+only use the X11 video driver instead of the optional X11-OpenGL driver. The OpenGL
+libraries, for example libGLU.so, are not included in the AppImage but are expected
+to already be installed on the user's computer. So if using an AppImage with the
+OpenGL video driver, you will need to install the appropriate OpenGL drivers for your
+Operating System graphics board. This should not be an issue because usually OpenGL
+is already installed. In practice to date, no problems have been reported with the 
+OpenGL main libraries/drivers compatibility between the AppImage build computer and
+the user computer.
+
+AppImage uses a mix of statically-added thirdparty libraries embedded in the "cin"
+binary and the system's dynamic libraries put into a self-extracting squashfs 
+archive. This means that the system's dynamic libraries in the AppImage are
+picked up from the build computer.  By contrast, an rpm package depends on those
+dynamic libraries from the system to be present and compatible between the build
+system and the system that the rpm is installed on.
+
+In the case of FFmpeg, AppImage as well as any standard built package, uses the
+thirdparty version included with the \CGG{} source code because there are currently
+a set of 13 required patches specific to this usage.  This is due to the fact that
+these patches would not be present in the system's installed FFmpeg version so that
+some esoteric things might not work correctly, like creating a bluray disc.
+With the AppImage or a package build, the \CGG{} FFmpeg binary is never installed
+in the user's system.  You do not have access in the AppImage to the actual FFmpeg
+binary but in a build system the FFmpeg binary would be found in
+your build subdirectory of cinelerra-5.1/thirdparty/ffmpeg-version. FFmpeg is
+built for CinGG without all possible options included as they are not needed and
+this is standard for the way it is built as a package or for an AppImage. A team
+of quasi-developers and quasi-moderators work to keep FFmpeg version updated with
+the released version, ensure the patches work as designed, and add minor changes.
+
+AppImages on the website are usually updated at the end of the month in order
+to ensure that the latest changes, fixes, and library updates are available to the
+user. The user can continue to use their current version, but it is recommended to
+update the AppImage at their convenience - at least every six months.
+
+Because the AppImage does not give you direct access to any of the specific \CGG{}
+files, customization involving those files is not possible directly.  Here is a
+list of the specific customization you can not do with an AppImage. However, by
+unpacking the AppImage and getting its structure into folders and files you still
+can do almost all customizations as documented in various sections of this manual.
+See the section \nameref{sub:managing_appimage} on how to do this. 
+
+\begin{itemize}[nosep]
+\item There are several graphics hardware related formats that will only work on
+specific computers that support that hardware/software implementation and will 
+result in an error message if not available. An AppImage generated on a computer
+with few, if any, extra hardware implemented features is such a case.
+\item You can not directly personalize your own set of options files as described in
+\nameref{sec:create_ffmpeg_options_files} since there is no direct file access.
+\item There is no access to FFmpeg's .opts files which means you can not change the
+decoder and encoder options that is useful for debugging formats.
+\item The \%d trick for image2 streams which uses the ffmpeg muxer image2 and a
+filename template to create a series of image files of a given type (as described
+here \nameref{sec:ffmpeg_image2_streams}) is not available.
+\item You can not take advantage of deleting plugins you do not want to see, or to
+save space, or to make finding the ones you use frequently easier to find. For
+a description of this feature, see \nameref{sub:delete_plugin_resources_unavailable}.
+\item Using your own personalized icon images is not available. See \nameref{sub:updatable_icon_image_support}.
+\item Modifying expanders.txt to specify your own preferences is not initially there
+but see \nameref{sub:expanders_plugin_subtrees} for how to do this.
+\item You will not be able to add your own preferred true type fonts as described here
+\nameref{ssub:font_addition_subtraction}.
+\item The ability to add your own images to the Shape Wipe transition is not
+possible. This feature is documented at \nameref{sub:shape_wipe}.
+\item Without unpacking and extracting the bdwrite program, you can not create the
+udfs file. To do this refer to \ref{sub:managing_appimage}.
+\end{itemize}
 
 \subsection{Managing AppImage}
 \label{sub:managing_appimage}
 \index{appimage!management}
 
+You can work on the appimage file to make changes and fix errors, or you can create a new appimage from scratch containing customizations. For example, you can add new rendering presets, update the Context-Help, change libraries that are no longer supported by the current distro, or make other modifications.
+
 A limitation of using AppImage instead of installing the binary or compiling from git, is that there is only a single file without the ability to browse the directory structure or to look for files to edit or check. So if using \CGG{} leads to some errors, it is not possible to investigate and fix the problem. Which means if you want to add the most up-to-date Context-Help or want to introduce some custom presets, that can not be done.
 
 Because the appimage file is nothing more than a compressed file containing the same structure as the installed program plus other libraries that allow the program to run independently from the system, the content can be extracted so that you can work on it as you would have on the normally installed program.  To do this you will need the appimage management program.
-Many Linux distros come with this managment program by default, but others may not. For instance in the case of Arch Linux the \texttt{appimagetool-bin} package from AUR needs to be installed. 
+Many Linux distros come with this management program by default, but others may not. For instance in the case of Arch Linux the \texttt{appimagetool-bin} package from AUR needs to be installed. 
 
 To work on the appimage, first unpack it using the command\protect\footnote{Example provided by Glitterball3} (note that you do not have to be root to do any of the following):
 
@@ -735,7 +830,7 @@ this command in the window first:
 export LD_LIBRARY_PATH=/{put your copied usr/lib path here}:$LD_LIBRARY_PATH
 \end{lstlisting}
 
-\subsection{Build the CinGG.AppImage from scratch}
+\subsection{Build the CinGG.AppImage from scratch}%
 \label{sub:built_appimage_scratch}
 \index{appimage!creating}
 

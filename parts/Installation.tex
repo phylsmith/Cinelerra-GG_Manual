@@ -71,7 +71,10 @@ In addition, if you are using the OpenGL video driver, you will need to install 
 drivers for your Operating System graphics board because libGLU.so and other OpenGL libraries are
 not included in the AppImage.
 
-Using AppImage means you do not have the installation folder and can not work directly on the files. To unpack the AppImage and get its structure in folders and files see \nameref{sub:managing_appimage}. To create, edit and manage appimages see \nameref{sub:built_appimage_scratch}.
+For more information, see \nameref{sec:appimage_details}. This includes
+information on unpacking the AppImage to get access to certain files for customization
+purposes since you do not have the installation folder (\nameref{sub:managing_appimage})
+and how to create your own appimages (\nameref{sub:built_appimage_scratch}).
 
 \subsection{AppImage with Standard Shortcuts}
 \label{sec:appimage_standard_shortcuts}
@@ -143,7 +146,7 @@ These are generic build instructions for building \CGG{} Infinity.
 Known to work on Ubuntu, Mint, OpenSuse/Leap/Tumbleweed, Fedora, Debian,
 Centos, Arch, Slackware, Gentoo, and many more less used distros and variations. 
 Compiling from git is perhaps the best way to get \CGG{} on 32-bit systems although
-you may have to make use of older thirdparty libraries than the current one in use\protect\footnote{Remember that a 32-bit distro does not address more than 4GB of memory, so you may have stability and performance problems with large, high-resolution mediafiles.}. For example,
+you may have to make use of older thirdparty libraries than the current one in use\protect\footnote{Remember that a 32-bit distro does not address more than 4GB of memory, so you may have stability and performance problems with large, high-resolution media files.}. For example,
 if building a 32-bit version on Debian 9.1, you will have to revert to the R3106 version
 of the x264 library instead of the current version or upgrade to NASM 2.15.05.
 
@@ -1087,7 +1090,7 @@ Launch Xephyr via: " -ac -listen tcp" parameters; \\
 
 If using the vnc connection to realvnc on the tablet with Audio failing, the workarouond to prevent
 a crash so you can still work on the video is explained in the guide: \\
-{\small \url{https://www.reddit.com/r/termux/comments/bpa8jz/pulseaudio\_streaming\_client/}.
+{\small \url{https://www.reddit.com/r/termux/comments/bpa8jz/pulseaudio\_streaming\_client/}}.
 This guide explains the vnc/pulseaudio setup which will prevent a crash but you still
 will not be able to hear audio.
 Other pertinent information is available at: \\

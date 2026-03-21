@@ -209,7 +209,7 @@ ways using the Alt/h hotkey combination.
 \end{enumerate}
 
 \subsection{Delete Plugins to save Resources Space or make them Unavailable}%
-\label{sub:delete_plugin_resouces_unavaible}
+\label{sub:delete_plugin_resources_unavailable}
 
 Maybe you just don't ever use certain plugins or would prefer to only find the ones that are useful to you. To save space in the Resources Window so you don't have to scroll to find the plugins you want as much, a feature to delete others is available. If you have a System install, you will have to be root for this function to be usable. The plugins will be permanently deleted, but only until you rebuild or download a new set of \CGG{} binaries. To delete a plugin, highlight the plugin you no longer want in the Resources window then press Ctrl-Shift-delete. A small window will come up allowing you to change your mind and red-X out or check-OK to remove plugin. 
 AppImage does not provide this capability unless you use the workaround as described in the Appendix \nameref{cha:faq_problems_workarounds}.
@@ -302,7 +302,6 @@ Keep in mind these points for newly created plugin icons:
 \label{sub:example_plugin_icon_testing}
 
 For a simple test just copy an existing \texttt{<plugin\_name>.png} file into the cinfinity directory with the name \texttt{bluebanana.png} to write over the existing file. This icon will now show up in \CGG{} and still execute the Blue Banana function.
-AppImage does not provide this capability unless you use the workaround as described in the Appendix \nameref{cha:faq_problems_workarounds}.
 
 For an ffmpeg plugin, create \texttt{ff\_loop.png} and copy it to: \\
 \texttt{<cinlib\_path>/plugins/picon/original}. This icon will show up in \CGG{} if original is selected and execute the \textit{F\_loop} function.
@@ -3843,7 +3842,7 @@ Also of note, if the video is displayed on a consumer TV, the outer border is go
 \subsubsection*{Font Addition / Font Subtraction}%
 \label{ssub:font_addition_subtraction}
 
-If using a compiled build (that is, NOT an AppImage) to add true type fonts, copy the \texttt{.TTF} files to the fonts directory at \texttt{/usr/lib/cinelerra/fonts}
+If using a compiled build to add true type fonts, copy the \texttt{.TTF} files to the fonts directory at \texttt{/usr/lib/cinelerra/fonts}
 or if not system installed, at \texttt{<cinelerra\_install\_path>/bin/plug\-ins/fonts}. In that directory run
 \vspace{1ex}
 \begin{lstlisting}[style=sh]
