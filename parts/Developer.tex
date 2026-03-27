@@ -369,20 +369,21 @@ developer's feedback and experimentation.
 
 \textbf{dav1d} 
 \begin{description}[noitemsep]
-     \item Status - currently \CGG{} is staying at 0.5.1.  This is disappointing because there
-may be speed gains in later versions that would be beneficial. However, it is usable for decoding
-whereas libaom is a lot slower.  Unfortunately, it has no effective encoder.
-     \item Problem - 0.6 dav1d requires NASM 2.14 (and later versions of dav1d use even later versions of NASM) and uses instructions like vgf2p8affineqb,
+     \item Status - currently \CGG{} is at 1.3.5. It is usable for decoding and much
+faster than libaom.  Unfortunately, it has no encoder.
+     \item Problem - dav1d versions later than 0.6 require NASM 2.14 (and subsequent
+versions may need even later versions of NASM) and uses instructions like vgf2p8affineqb,
 not exactly an "add" instruction. It also uses meson which is not widely available on all
 distros.  The more recent NASM requirement apparently provides for using AVX-512 
 instructions (like vgf2p8affineqb, which is more like a whole routine than a simple instruction).
-     \item Workaround already in use by \CGG{} - a Makefile was generated to replace Meson usage
-but has to be continuously updated for new releases. Dav1d 0.5.1 requires NASM 2.13 so at this level
-the newer distros will work.  The availability of meson and nasm are a significant problem on
+     \item Workaround in use by \CGG{} - a Makefile was generated to replace Meson usage
+but has to be continuously updated for new releases to include a patch for updates. 
+The availability of meson and nasm are a significant problem on
 many systems which are still in wide use.
      \item Your workaround - Because a request to dav1d developers to consider changes to
 ensure their library is more widely usable does not appear to be in their future, since it works
-for them, you can upgrade NASM to 2.14 to stay up to date.  Even then, you will have to build using meson and incorporate it into \CGG{}.
+for them, you can upgrade NASM to the version dav1d needs.  Even then, you will have to
+make sure the accompanying patch is up to date.
 \end{description}
 
 \textbf{OpenExr} 

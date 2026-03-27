@@ -26,15 +26,15 @@ Installing the appimage is simple, download the latest release from:
 Some example file names are as follows - where 8 digits represent yyyymmdd, x86\_64 are the standard 64-bit systems, and i386 are 32-bit:
 
 \begin{lstlisting}[style=sh]
-	CinGG-20251231-x86_64.AppImage
+	CinGG-202602301x86_64.AppImage
 	  (currently based on Fedora 32, linux kernel 5.8.15, libc version 2.31)
-	CinGG-20251231-x86_64-older-distros.AppImage, but with libaom version 3.4.0.
+	CinGG-20260301-x86_64-older-distros.AppImage, but with libaom version 3.4.0.
 	  (currently based on Ubuntu 16.04, libc version 2.23)
-	CinGG-20251231-alternative_shortcuts.AppImage, but with libaom version 3.4.0.
+	CinGG-20260301-alternative_shortcuts.AppImage, but with libaom version 3.4.0.
 	  (currently based on Ubuntu 16.04, libc version 2.23)
-	CinGG-20251231-i386.AppImage, but with version R3106 for the x264 library,
+	CinGG-20260301-i386.AppImage,
 	  (currently based on Debian 9, linux kernel 4.9, use "newer" for Debian 11.0)
-	CinGG-20251231-i386-newer-distros.AppImage
+	CinGG-20260301-i386-newer-distros.AppImage
 	  (currently based on Debian 11, linux kernel 5.10)
 \end{lstlisting}
 
@@ -144,7 +144,10 @@ A Windows 10 version installation is described in~\ref{sec:ms_windows10}.
 
 These are generic build instructions for building \CGG{} Infinity.
 Known to work on Ubuntu, Mint, OpenSuse/Leap/Tumbleweed, Fedora, Debian,
-Centos, Arch, Slackware, Gentoo, and many more less used distros and variations. 
+Centos, Arch, Slackware, Gentoo, Rosa 2016, and many more less used distros
+and variations.  With the upgrade to FFmpeg 8.1, \textit{nasm} should be
+at version 2.15.05 and some thirdparty packages will require \textit{cmake} to be
+at a certain level.
 Compiling from git is perhaps the best way to get \CGG{} on 32-bit systems although
 you may have to make use of older thirdparty libraries than the current one in use\protect\footnote{Remember that a 32-bit distro does not address more than 4GB of memory, so you may have stability and performance problems with large, high-resolution media files.}. For example,
 if building a 32-bit version on Debian 9.1, you will have to revert to the R3106 version
